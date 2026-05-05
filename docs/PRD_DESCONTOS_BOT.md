@@ -1,0 +1,611 @@
+# PRD — descontos.bot
+
+## 1. Visão Geral do Produto
+
+O `descontos.bot` é uma plataforma local para coletar, normalizar, selecionar e distribuir ofertas de marketplaces brasileiros com monetização por links de afiliados.
+
+O produto deve iniciar com operação local, baixo custo e fluxo ponta a ponta funcional:
+
+```text
+coletar ofertas -> normalizar -> persistir -> selecionar -> gerar mensagem -> enviar no WhatsApp -> registrar histórico
+```
+
+O backend principal será Django. O serviço auxiliar Node.js existente em `wa_service/` deve ser preservado e usado para envio no WhatsApp via Baileys. O banco obrigatório é SQLite em `data/descontos_bot.db`, com WAL e `foreign_keys=ON`.
+
+## 2. Objetivos de Negócio
+
+### Objetivo principal
+
+Automatizar a curadoria e distribuição de ofertas para gerar receita recorrente por afiliados, começando por Amazon e Mercado Livre.
+
+### Objetivos específicos
+
+- Reduzir trabalho manual na busca e publicação de promoções.
+- Evitar repostagens duplicadas no WhatsApp.
+- Criar base histórica de ofertas, preços, execuções e envios.
+- Operar localmente sem Docker e sem infraestrutura cloud no MVP.
+- Preparar a arquitetura para novos marketplaces, painel operacional e IA.
+
+## 3. Escopo
+
+### MVP
+
+- Scraping de Mercado Livre e Amazon usando os scrapers existentes em `scrapers/`.
+- Coleta de até 5 páginas por marketplace.
+- Normalização de título, preço atual, preço original, desconto, URL, marketplace, imagem e identificador externo.
+- Persistência em SQLite.
+- Seleção de ofertas ainda não enviadas, priorizadas por maior desconto.
+- Envio de até 10 ofertas por ciclo para WhatsApp.
+- Integração com `wa_service/`.
+- Scheduler local com intervalo randômico entre 90 e 180 minutos.
+- Bloqueio obrigatório de distribuição entre 00:00 e 06:00 BRT.
+- Modo `dry_run`.
+- Django Admin mínimo para operação.
+
+### Fora do MVP
+
+- Docker, Docker Compose ou runtime equivalente.
+- FastAPI, Uvicorn, SQLAlchemy e Jinja2.
+- Banco diferente de SQLite.
+- Suíte de testes automatizados como entregável.
+- Deploy em produção.
+- Instagram, Telegram e multiusuário.
+- IA para recomendação ou geração avançada.
+- Painel customizado completo.
+
+### Futuro
+
+- Shopee, Netshoes e Centauro.
+- Dashboard operacional com base em `design_system/refs/design_system.html`.
+- Geração e validação de links de afiliado por marketplace.
+- Histórico de preço.
+- Score de qualidade com IA.
+- Segmentação por categoria e canal.
+- Métricas de clique, conversão e receita.
+
+## 4. Personas e Casos de Uso
+
+### Persona principal — Operador afiliado
+
+Administra grupos de ofertas e precisa publicar promoções com consistência sem gastar horas procurando produtos.
+
+Necessidades:
+
+- Encontrar boas ofertas.
+- Evitar duplicidade.
+- Manter grupos ativos.
+- Usar links monetizáveis.
+- Auditar o que foi enviado.
+
+### Persona futura — Administrador de campanhas
+
+Configura marketplaces, canais, limites, horários, categorias e regras de monetização.
+
+### Casos de uso
+
+- UC01: coletar ofertas automaticamente.
+- UC02: selecionar ofertas com maior desconto.
+- UC03: impedir reenvio de ofertas já entregues.
+- UC04: enviar até 10 ofertas por ciclo no WhatsApp.
+- UC05: registrar histórico de scraping e distribuição.
+- UC06: operar em `dry_run` antes de ativar envios reais.
+- UC07: evoluir score e copy com IA futuramente.
+
+## 5. Arquitetura do Sistema
+
+### Alto nível
+
+```text
+Scheduler local
+  -> Orquestração Django
+    -> Scrapers Mercado Livre/Amazon
+    -> Normalização
+    -> SQLite
+    -> Seleção e ranking
+    -> Geração de conteúdo
+    -> wa_service Node.js
+    -> WhatsApp
+```
+
+### Estrutura alvo
+
+```text
+apps/
+  _base/
+    models.py
+  marketplaces/
+    models.py
+    admin.py
+  offers/
+    models.py
+    admin.py
+    services/
+      normalizer.py
+      repository.py
+  scraping/
+    management/commands/scrape_marketplace.py
+    services/
+      runner.py
+      adapters.py
+  curation/
+    services/
+      selector.py
+      message_builder.py
+  distribution/
+    models.py
+    admin.py
+    services/
+      whatsapp_client.py
+  orchestration/
+    management/commands/run_bot.py
+    services/
+      scheduler.py
+      execution_window.py
+```
+
+O serviço `wa_service/` permanece como processo Node.js auxiliar. O Django não deve portar a lógica interna do Baileys; deve apenas chamar um contrato HTTP/local bem definido.
+
+## 6. Domínios e Responsabilidades
+
+### Scraping
+
+Coleta dados dos marketplaces, usa sessão HTTP persistente, headers realistas, delays conservadores e detecção de CAPTCHA.
+
+Não decide envio, não monta mensagem e não grava regras de distribuição.
+
+### Offers
+
+Normaliza, persiste, atualiza e deduplica ofertas. Mantém `first_seen_at`, `last_seen_at`, hash estável e payload bruto.
+
+### Curation
+
+Filtra ofertas elegíveis e calcula ranking inicial por desconto.
+
+### Content
+
+Gera mensagens em pt-BR para WhatsApp com preço, desconto e link final.
+
+### Distribution
+
+Envia mensagens via `wa_service/`, registra sucesso/falha e preserva a mensagem enviada.
+
+### Orchestration
+
+Coordena o ciclo completo, respeita janela de silêncio, registra execução e aplica intervalos randômicos.
+
+## 7. Fluxos Funcionais
+
+### Ciclo completo
+
+```text
+Início
+  -> Verificar horário BRT
+  -> Se 00:00-06:00, dormir até a janela permitida
+  -> Criar execução
+  -> Executar scrapers ativos
+  -> Normalizar ofertas
+  -> Salvar ou atualizar ofertas
+  -> Selecionar ofertas elegíveis
+  -> Gerar mensagens
+  -> Enviar via WhatsApp ou simular em dry_run
+  -> Registrar entregas
+  -> Fechar execução
+  -> Dormir 90-180 minutos
+```
+
+### Seleção
+
+```text
+Ofertas ativas
+  -> remover já entregues no canal
+  -> remover inválidas
+  -> aplicar desconto mínimo
+  -> ordenar por desconto desc
+  -> limitar a 10
+```
+
+### Envio
+
+```text
+Oferta selecionada
+  -> montar mensagem
+  -> escolher affiliate_url ou product_url
+  -> enviar para wa_service
+  -> registrar Delivery sent/failed/skipped
+  -> aguardar intervalo entre mensagens
+```
+
+## 8. Modelagem de Dados
+
+Todas as tabelas de domínio devem herdar `apps._base.models.TimestampedModel`.
+
+### Marketplace
+
+- `id`
+- `name`
+- `code`
+- `base_url`
+- `is_active`
+- `affiliate_enabled`
+- `created_at`
+- `updated_at`
+
+### Offer
+
+- `id`
+- `marketplace_id`
+- `external_id`
+- `title`
+- `normalized_title`
+- `offer_hash`
+- `current_price`
+- `original_price`
+- `discount_pct`
+- `product_url`
+- `affiliate_url`
+- `image_url`
+- `is_active`
+- `raw_payload`
+- `first_seen_at`
+- `last_seen_at`
+- `created_at`
+- `updated_at`
+
+### SocialChannel
+
+- `id`
+- `name`
+- `code`
+- `channel_type`
+- `target`
+- `is_enabled`
+- `created_at`
+- `updated_at`
+
+### Delivery
+
+- `id`
+- `offer_id`
+- `social_channel_id`
+- `message`
+- `delivery_status`
+- `external_message_id`
+- `error_message`
+- `sent_at`
+- `created_at`
+- `updated_at`
+
+Regra obrigatória futura/imediata:
+
+```text
+UNIQUE (offer_id, social_channel_id)
+```
+
+### ScrapingRun
+
+- `id`
+- `marketplace_id`
+- `started_at`
+- `finished_at`
+- `status`
+- `total_collected`
+- `total_valid`
+- `error_message`
+- `created_at`
+- `updated_at`
+
+### Setting
+
+- `id`
+- `key`
+- `value`
+- `description`
+- `created_at`
+- `updated_at`
+
+## 9. Estratégia de Scraping
+
+### Regras gerais
+
+- Usar `requests.Session`.
+- Usar headers compatíveis com navegador real.
+- Aplicar delay conservador entre páginas.
+- Coletar no máximo 5 páginas por ciclo.
+- Detectar CAPTCHA, bloqueio ou HTML vazio e registrar falha.
+- Não executar concorrência agressiva.
+
+### Mercado Livre
+
+Usar `scrapers/mercado_livre.py` como ativo inicial. Deve extrair título, preço atual, preço original, desconto, link, imagem e identificador do produto quando possível.
+
+### Amazon
+
+Usar `scrapers/amazon.py` como ativo inicial. Deve ser mais conservador por risco maior de anti-bot. ASIN deve ser usado como `external_id` quando disponível.
+
+### Marketplaces futuros
+
+Shopee, Netshoes e Centauro entram somente após o MVP, cada um com adapter e normalizador próprio.
+
+## 10. Algoritmo de Seleção de Ofertas
+
+### MVP
+
+```text
+score = discount_pct
+```
+
+Critérios obrigatórios:
+
+- Oferta ativa.
+- Marketplace ativo.
+- Título preenchido.
+- URL preenchida.
+- `current_price > 0`.
+- `discount_pct > 0`.
+- Oferta ainda sem `Delivery` bem-sucedido no canal.
+- Limite de 10 ofertas por ciclo.
+
+Regra recomendada para qualidade mínima:
+
+```text
+discount_pct >= 20 OR absolute_saving >= 50.00
+```
+
+## 11. Geração de Conteúdo
+
+Mensagem padrão:
+
+```text
+Achei essa oferta aqui:
+
+{title}
+
+De: R$ {original_price}
+Por: R$ {current_price}
+Desconto: {discount_pct}%
+
+Link:
+{final_url}
+```
+
+Regras:
+
+- Texto em pt-BR.
+- Sem caixa alta exagerada.
+- Uso moderado de emojis.
+- Link final deve ser `affiliate_url` quando existir; caso contrário, `product_url`.
+- Mensagem enviada deve ser preservada em `Delivery.message`.
+
+## 12. Integração com Redes Sociais
+
+### WhatsApp
+
+Canal único do MVP. O Django chama `wa_service/` e recebe status estruturado.
+
+Contrato mínimo:
+
+```json
+{
+  "destination": "grupo-ou-jid",
+  "message": "texto da mensagem"
+}
+```
+
+Resposta:
+
+```json
+{
+  "success": true,
+  "message_id": "abc123",
+  "sent_at": "2026-04-29T10:30:00-03:00"
+}
+```
+
+## 13. Orquestração e Agendamento
+
+Regras:
+
+- Intervalo randômico entre 90 e 180 minutos.
+- Nenhuma distribuição entre 00:00 e 06:00 BRT.
+- Scraping pode ser bloqueado junto com distribuição para reduzir risco operacional.
+- Falha em um scraper não derruba o ciclo.
+- Falha crítica no WhatsApp interrompe apenas a etapa de envio.
+
+## 14. Regras de Negócio
+
+- Oferta repetida atualiza `last_seen_at`.
+- Oferta enviada com sucesso não é reenviada para o mesmo canal.
+- Envio com erro não conta como envio bem-sucedido.
+- Credenciais ficam em `.env`.
+- Sessões WhatsApp, bancos SQLite e logs locais não devem ser versionados.
+- `dry_run` coleta, seleciona e monta mensagens, mas não envia.
+
+## 15. Requisitos Não Funcionais
+
+- Python 3.11+ e Django 6.0.4.
+- Node.js 20 LTS.
+- SQLite exclusivamente em `data/descontos_bot.db`.
+- WAL e `foreign_keys=ON`.
+- Logs operacionais suficientes para auditar ciclos.
+- Código em inglês; UI, verbose names e documentação operacional em pt-BR.
+- Sem testes automatizados como entregável do MVP, mas com verificação manual e comandos Django.
+
+## 16. Estratégia Anti-Bloqueio
+
+- Execução local em rede residencial.
+- Delays entre páginas.
+- Retry com backoff.
+- Baixa frequência.
+- Limite de páginas.
+- Headers realistas.
+- Detecção de CAPTCHA.
+- Registro de falhas por marketplace.
+
+## 17. Roadmap Evolutivo
+
+### Fase 1 — Estabilização técnica
+
+Alinhar Django, banco, apps, settings e orquestrador ao padrão alvo.
+
+### Fase 2 — MVP local
+
+Scraping, normalização, seleção, WhatsApp, histórico e scheduler.
+
+### Fase 3 — Operação mínima
+
+Django Admin, configurações, dry_run, checklist e logs.
+
+### Fase 4 — Afiliados
+
+Geração de links finais e validação por marketplace.
+
+### Fase 5 — Novos marketplaces
+
+Shopee, Netshoes e Centauro.
+
+### Fase 6 — Inteligência
+
+Score avançado, histórico de preço e IA.
+
+## 18. Riscos e Mitigações
+
+- Bloqueio de marketplace: reduzir frequência, detectar CAPTCHA e usar delays.
+- Bloqueio WhatsApp: limitar mensagens, evitar spam e respeitar janela de silêncio.
+- Divergência entre PRD e código atual: sprint inicial de estabilização.
+- SQLite crescer demais: manter modelagem simples e índices úteis.
+- Links de afiliado ausentes: permitir envio de link original por configuração explícita.
+
+## 19. Métricas de Sucesso
+
+### MVP
+
+- 50+ ofertas coletadas por ciclo quando os marketplaces responderem.
+- 30+ ofertas válidas por ciclo.
+- Até 10 ofertas enviadas por ciclo.
+- 0 duplicidades de envio por canal.
+- Taxa de falha de scraping abaixo de 20%.
+- Erros de envio WhatsApp abaixo de 10% por ciclo.
+
+### Futuro
+
+- CTR por oferta.
+- Conversão por marketplace.
+- Receita por grupo.
+- Receita por categoria.
+- Melhor horário de envio.
+
+## 20. Melhorias Propostas
+
+- Criar `offer_hash` para deduplicação estável.
+- Criar blacklist de termos como usado, reembalado, avariado e sem garantia.
+- Criar histórico de preço após MVP.
+- Criar painel customizado somente depois do Admin validar a operação.
+- Criar score mínimo antes de aumentar volume.
+- Adicionar checklist operacional por sprint.
+
+## 21. Programa Amazon Associates — Compliance e Aprovação
+
+### 21.1. Contexto
+
+A conta Amazon Associates do projeto foi reprovada em revisão anterior. Esta seção cobre o trabalho contínuo de adequação às regras do programa para destravar a aprovação. A tag oficial de afiliado é `descontosbot-20`.
+
+A diretiva guia desta seção é: **o projeto está em produção e não pode parar de funcionar em nenhum momento**. Toda mudança aqui descrita é aditiva e respeita a operação atual (scraping ativo, ciclo de envio WhatsApp, ofertas no banco SQLite).
+
+### 21.2. Política Amazon — regras invioláveis
+
+Cada regra abaixo é tratada como invariante do sistema. Violação derruba a Fase 7 (compliance check) e bloqueia release.
+
+1. **Disclosure obrigatório**: toda página com link de afiliado exibe *"Como Associado da Amazon, ganho por compras qualificadas"* próximo ao primeiro link e no rodapé.
+2. **URL canônica**: `amazon.com.br/dp/<ASIN>?tag=descontosbot-20`. Nunca URLs de busca, nunca sem tag, nunca tag de outra conta.
+3. **Preço com timestamp**: todo preço exibido tem rótulo "Preço coletado em DD/MM/AAAA HH:mm".
+4. **Sem mimetismo**: site não usa cor laranja Amazon, não usa logo Amazon como decoração, não imita layout. Apenas imagens dos produtos vindas do scraping.
+5. **Conteúdo original**: cada `/oferta/<slug>` tem texto descritivo escrito por nós em pt-BR. Nunca copiar literal da Amazon.
+6. **Grupo fechado nunca recebe afiliado direto**: apenas `bridge_url`.
+7. **Linguagem proibida em qualquer canal**: "compre aqui e ganhe desconto exclusivo", "cashback", "doação por compra", "favorite este link", "cupom exclusivo Amazon", "imitação", "réplica".
+8. **Categoria perigosa**: o site não pode parecer um "site só de cupons". Cada página de oferta precisa de conteúdo real, não apenas card + botão.
+
+### 21.3. Modelo de canais e roteamento de link
+
+Canais sociais ganham um campo `link_strategy` com dois valores:
+
+- `affiliate_direct`: canais aprovados pela Amazon (site público, Instagram, Canal WhatsApp registrado no portal). Recebem `affiliate_link` direto.
+- `bridge_only`: canais privados (grupos de WhatsApp, e-mail, qualquer canal não cadastrado no portal). Recebem `bridge_url` (link público para `/oferta/<slug>` no site).
+
+Canal WhatsApp grupo é sempre `bridge_only`. O default seguro do campo é `bridge_only`.
+
+`SocialChannel.channel_type` ganha duas variantes adicionais (`whatsapp_group`, `whatsapp_channel`) preservando o valor atual `whatsapp` para compatibilidade durante a migração.
+
+### 21.4. Site público como funil rastreável
+
+`https://descontos-bot.vercel.app` deixa de ser um redirecionador opcional e passa a ser o funil oficial de tráfego rastreável. Repo do site: `https://github.com/marcelopio10/bot-monitor-ml` (clone local em `descontos.bot-v0`).
+
+Fluxo de publicação (Padrão A — git push):
+
+1. Django gera `offers.json` em `apps/offers/services/site_publisher.py`.
+2. Comando `python manage.py publish_offers --push` faz commit + push no repo do site.
+3. Vercel detecta o push e auto-deploya.
+
+Estrutura de páginas:
+
+| Rota | Conteúdo |
+|---|---|
+| `/` | Home com cards de oferta consumindo `offers.json`. |
+| `/oferta?slug=<slug>` | Página individual com 8 elementos obrigatórios (título, imagem, disclosure, preço com timestamp, desconto, descrição original, CTA com `rel="sponsored nofollow noopener"`, disclosure rodapé). Implementação inicial via query string para reduzir custo de SEO antes da aprovação. |
+| `/links` | Linktree próprio para a bio do Instagram, consome `links.json`. |
+| `/sobre` | Sobre o projeto. |
+| `/disclosure` | Texto completo do disclosure. |
+
+### 21.5. Engine de posts Instagram
+
+Novo app `apps/social_posts` com modelo `InstagramPost` e geradores para os 4 formatos do Instagram (feed, carousel, story, reel). Cada gerador produz assets (Pillow) e caption em pt-BR; postagem é manual para evitar derrubada da conta.
+
+Links de UTM padronizado a partir de `apps/social_posts/services/link_builder.py`:
+
+```
+?utm_source=instagram&utm_medium={bio|story|reel|carousel_link}&utm_campaign=offer_<id>
+```
+
+Bio aponta para `descontos-bot.vercel.app/links` (linktree próprio). Stories levam a `/oferta/<slug>` específica via sticker de link. A geração é automática; a postagem fica manual.
+
+### 21.6. Compliance check automatizado
+
+`scripts/amazon_compliance_check.py` valida em runtime:
+
+- Home tem disclosure visível e nenhum texto proibido.
+- `offers.json` tem disclosure, lista de ofertas e cada link Amazon contém `tag=descontosbot-20` (ou é `amzn.to`/`amzlink.to`).
+- `/oferta?slug=<slug>` tem disclosure e timestamp de preço.
+- `/links.json` tem disclosure, mínimo de 5 itens, todos com UTM rastreável.
+
+O script é o gate da Fase 7 do plano de execução. Em vez de suíte de testes automatizados (proibida pelo `AGENTS.md`), o compliance check cumpre o papel de invariante verificável.
+
+### 21.7. Tag de afiliado e variáveis
+
+Variável canônica em `.env`: `AMAZON_ASSOCIATE_TAG=descontosbot-20` (preservada — o scraper atual já depende dela). Em `core/settings.py`:
+
+```python
+PUBLIC_SITE_BASE_URL = os.environ.get("PUBLIC_SITE_BASE_URL", "https://descontos-bot.vercel.app")
+AMAZON_AFFILIATE_TAG = os.environ.get("AMAZON_ASSOCIATE_TAG", "descontosbot-20")
+```
+
+Toda construção de URL Amazon passa por `Offer.affiliate_link`. Hierarquia: `affiliate_url_override` (manual `amzlink.to`/`amzn.to`) > `affiliate_url` existente (formato `sl2` populado pelo scraper) > URL `?tag=` montada a partir do ASIN > `product_url`.
+
+### 21.8. Mitigação imediata de violação
+
+`apps/curation/services/message_builder.py` envia hoje `affiliate_url` direto para o grupo de WhatsApp e usa template com linguagem de pressão de venda. Esses dois fatos violam as regras 6 e 7 da seção 21.2. A Fase Mitigação (entre Fase 1 e Fase 2 do plano) corrige ambos:
+
+- Template volta ao formato neutro descrito na seção 11 do PRD.
+- Roteamento passa a respeitar `link_strategy` de cada canal — grupo recebe `bridge_url`, nunca afiliado.
+
+A mitigação só é ativada após o site público passar a renderizar `/oferta?slug=…` lendo `offers.json`, para evitar janela em que o grupo recebe link válido para uma página inexistente.
+
+## 22. Changelog — Amazon Compliance
+
+Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-DD) com: o que foi adicionado, qual regra Amazon endereça, como verificar.
+
+### 2026-05-05 · Pré-Fase 0 — git init + branch + abertura desta seção
+
+- **O quê**: repositório git inicializado em `descontos.bot/`. Remote `origin` configurado para `github.com/marcelopio10/descontos_bot.git` (sem push). Branch `feat/amazon-compliance` criada a partir de `main`. Seções 21 e 22 adicionadas ao PRD.
+- **Por quê**: regra de execução do plano exige rastreabilidade por commits atômicos por sub-passo. Sem git, sustentar gates por fase fica frágil.
+- **Endereça**: nenhuma regra Amazon diretamente — fundação operacional do trabalho subsequente.
+- **Como verificar**: `git status` vazio; `git log --oneline` mostra `baseline` + `docs(prd): add Amazon compliance sections`; `git branch --show-current` retorna `feat/amazon-compliance`.
+

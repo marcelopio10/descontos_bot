@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Identidade Visual — descontos.bot</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --cyan:#00C9B1;
+  --cyan-dim:#009E8D;
+  --yellow:#FFE14D;
+  --dark:#0D0F14;
+  --dark2:#161A22;
+  --dark3:#1E2330;
+  --white:#F4F7FF;
+  --muted:#8A93A8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Space Grotesk',sans-serif;color:#1A1A1A;background:#f5f5f5;padding:2rem 1rem}
+.kit{max-width:720px;margin:0 auto;padding-bottom:3rem}
+.sec{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#999;margin:2rem 0 0.9rem}
+.kit-title{font-family:'Space Mono',monospace;font-size:22px;font-weight:700;color:#1A1A1A;margin-bottom:0.25rem}
+.kit-sub{font-size:13px;color:#666;margin-bottom:0.5rem}
+
+/* AVATAR */
+.avatar-wrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:0.5rem;background:#fff;border-radius:16px;padding:1.25rem;border:0.5px solid #e5e5e5}
+.av-ring{border-radius:50%;border:3px solid var(--cyan);display:flex;align-items:center;justify-content:center;background:var(--dark)}
+.av-inner{border-radius:50%;background:var(--dark2);display:flex;align-items:center;justify-content:center}
+
+/* PROFILE CARD */
+.profile-card{background:#fff;border:0.5px solid #e5e5e5;border-radius:16px;overflow:hidden}
+.profile-top{background:var(--dark);padding:1.25rem;display:flex;gap:1rem;align-items:flex-start}
+.profile-name{font-family:'Space Mono',monospace;font-size:15px;font-weight:700;color:var(--cyan);letter-spacing:-0.02em}
+.profile-handle{font-size:12px;color:var(--muted);margin-bottom:0.5rem;font-family:'Space Mono',monospace}
+.profile-bio{font-size:12.5px;color:var(--white);line-height:1.7}
+.profile-link{font-size:12px;color:var(--cyan);margin-top:0.5rem;font-weight:500}
+.profile-bottom{padding:0.9rem 1.25rem;display:flex;justify-content:space-around;border-top:0.5px solid #e5e5e5}
+.stat-n{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:#1A1A1A;text-align:center}
+.stat-l{font-size:11px;color:#888;text-align:center;margin-top:2px}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;padding:0 1.25rem 1rem}
+.ptag{background:var(--dark3);color:var(--cyan);font-size:10px;padding:3px 10px;border-radius:20px;font-weight:600;font-family:'Space Mono',monospace}
+
+/* PALETTE */
+.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.sw{border-radius:10px;padding:0.8rem 0.6rem}
+.sw-name{font-size:10px;font-weight:700;margin-top:0.4rem}
+.sw-hex{font-size:10px;opacity:0.65;font-family:'Space Mono',monospace}
+
+/* LOGOS */
+.logos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.lbox{border-radius:12px;padding:1.1rem 0.75rem;display:flex;flex-direction:column;align-items:center;gap:8px;border:0.5px solid #e5e5e5}
+.lbox-dark{background:var(--dark);border-color:var(--dark)}
+.lbox-cyan{background:var(--cyan);border-color:var(--cyan)}
+.lbox-light{background:#fff}
+.logo-text{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;text-align:center}
+
+/* POSTS */
+.posts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.post{border-radius:14px;aspect-ratio:1;padding:1rem;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
+.p-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:6px}
+.p-title{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;line-height:1.2;color:#fff}
+.p-price{font-family:'Space Mono',monospace;font-size:26px;font-weight:700;color:var(--yellow)}
+.p-old{font-size:11px;color:rgba(255,255,255,0.45);text-decoration:line-through;margin-bottom:2px}
+.p-cta{font-size:10px;color:rgba(255,255,255,0.55);font-weight:500;margin-top:4px}
+.p-corner{position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,0.05)}
+
+/* STORIES */
+.stories{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px}
+.story{min-width:95px;height:168px;border-radius:16px;padding:0.7rem;display:flex;flex-direction:column;justify-content:space-between;flex-shrink:0}
+.s-top{font-family:'Space Mono',monospace;font-size:8px;font-weight:700;letter-spacing:0.06em}
+.s-main{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;line-height:1.25}
+.s-btn{font-family:'Space Mono',monospace;font-size:8px;font-weight:700;padding:5px;border-radius:8px;text-align:center}
+
+/* BIO */
+.bio-box{background:var(--dark);border-radius:12px;padding:1.1rem 1.25rem}
+.bio-line{font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--white);line-height:2}
+.bio-mono{font-family:'Space Mono',monospace;color:var(--cyan);font-size:12px;margin-top:0.5rem}
+
+/* HOOKS */
+.hooks{display:flex;flex-direction:column;gap:8px}
+.hook{background:#fff;border:0.5px solid #e5e5e5;border-radius:10px;padding:0.75rem 1rem;display:flex;gap:10px;align-items:flex-start}
+.hook-num{font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--cyan);min-width:22px}
+.hook-text{font-size:13px;color:#1A1A1A;font-weight:500}
+.hook-sub{font-size:11px;color:#888;margin-top:2px}
+
+/* HASHTAGS */
+.htags{display:flex;flex-wrap:wrap;gap:6px}
+.ht{background:#fff;border:0.5px solid #e5e5e5;border-radius:20px;padding:4px 12px;font-family:'Space Mono',monospace;font-size:11px;color:#888}
+</style>
+</head>
+<body>
+<div class="kit">
+
+<div style="margin-bottom:1.5rem">
+  <div class="kit-title">descontos<span style="color:var(--cyan)">.bot</span></div>
+  <div class="kit-sub">Kit de Identidade Visual Completo</div>
+</div>
+
+<div class="sec">Avatar principal</div>
+<div class="avatar-wrap">
+  <div class="av-ring" style="width:80px;height:80px;min-width:80px">
+    <div class="av-inner" style="width:62px;height:62px">
+      <svg width="36" height="36" viewBox="0 0 140 140" fill="none">
+        <rect x="30" y="46" width="80" height="58" rx="14" fill="#1E2330"/>
+        <rect x="30" y="46" width="80" height="58" rx="14" stroke="#00C9B1" stroke-width="2"/>
+        <rect x="38" y="30" width="64" height="26" rx="10" fill="#1E2330" stroke="#00C9B1" stroke-width="2"/>
+        <line x1="70" y1="30" x2="70" y2="24" stroke="#00C9B1" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="70" cy="20" r="5" fill="#FFE14D"/>
+        <circle cx="52" cy="62" r="10" fill="#0D0F14" stroke="#00C9B1" stroke-width="2"/>
+        <circle cx="52" cy="62" r="5" fill="#00C9B1"/>
+        <circle cx="54" cy="60" r="2" fill="#161A22"/>
+        <circle cx="88" cy="62" r="10" fill="#0D0F14" stroke="#00C9B1" stroke-width="2"/>
+        <circle cx="88" cy="62" r="5" fill="#00C9B1"/>
+        <circle cx="90" cy="60" r="2" fill="#161A22"/>
+        <rect x="38" y="79" width="64" height="18" rx="6" fill="#0D0F14"/>
+        <text x="70" y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#FFE14D">% DESCONTO</text>
+        <rect x="24" y="58" width="8" height="20" rx="4" fill="#00C9B1"/>
+        <rect x="108" y="58" width="8" height="20" rx="4" fill="#00C9B1"/>
+        <rect x="44" y="104" width="16" height="12" rx="4" fill="#00C9B1"/>
+        <rect x="80" y="104" width="16" height="12" rx="4" fill="#00C9B1"/>
+        <circle cx="108" cy="36" r="12" fill="#FFE14D"/>
+        <text x="108" y="40" text-anchor="middle" font-family="monospace" font-size="13" font-weight="700" fill="#0D0F14">%</text>
+      </svg>
+    </div>
+  </div>
+  <div style="flex:1">
+    <div style="font-family:'Space Mono',monospace;font-size:18px;font-weight:700;color:#1A1A1A">descontos<span style="color:#00C9B1">.bot</span></div>
+    <div style="font-size:12px;color:#666;margin-top:4px">Seu robô de descontos — 24h online, 0% de preço alto</div>
+    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+      <div style="background:#00C9B1;color:#0D0F14;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px">Tech</div>
+      <div style="background:#f0f0f0;color:#666;font-size:10px;font-weight:600;padding:4px 12px;border-radius:20px">Automação</div>
+      <div style="background:#FFE14D;color:#0D0F14;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px">Economia</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">Perfil otimizado do Instagram</div>
+<div class="profile-card">
+  <div class="profile-top">
+    <div class="av-ring" style="width:64px;height:64px;min-width:64px">
+      <div class="av-inner" style="width:48px;height:48px">
+        <svg width="28" height="28" viewBox="0 0 140 140" fill="none">
+          <rect x="30" y="46" width="80" height="58" rx="14" fill="#1E2330"/>
+          <rect x="30" y="46" width="80" height="58" rx="14" stroke="#00C9B1" stroke-width="2"/>
+          <rect x="38" y="30" width="64" height="26" rx="10" fill="#1E2330" stroke="#00C9B1" stroke-width="2"/>
+          <line x1="70" y1="30" x2="70" y2="24" stroke="#00C9B1" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="70" cy="20" r="5" fill="#FFE14D"/>
+          <circle cx="52" cy="62" r="10" fill="#0D0F14" stroke="#00C9B1" stroke-width="2"/>
+          <circle cx="52" cy="62" r="5" fill="#00C9B1"/>
+          <circle cx="88" cy="62" r="10" fill="#0D0F14" stroke="#00C9B1" stroke-width="2"/>
+          <circle cx="88" cy="62" r="5" fill="#00C9B1"/>
+          <rect x="38" y="79" width="64" height="18" rx="6" fill="#0D0F14"/>
+          <text x="70" y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#FFE14D">% DESCONTO</text>
+        </svg>
+      </div>
+    </div>
+    <div style="flex:1">
+      <div class="profile-name">descontos.bot</div>
+      <div class="profile-handle">@descontos.bot</div>
+      <div class="profile-bio">
+        🤖 Seu robô de descontos — sempre ligado<br>
+        ⚡ Alertas em tempo real das melhores ofertas<br>
+        💰 Monitoramos. Você economiza.<br>
+        🔗 Todas as ofertas no link abaixo
+      </div>
+      <div class="profile-link">linktree.com/descontos.bot</div>
+    </div>
+  </div>
+  <div class="tag-row">
+    <span class="ptag">ofertas 24h</span>
+    <span class="ptag">cupons</span>
+    <span class="ptag">tech deals</span>
+    <span class="ptag">frete grátis</span>
+  </div>
+  <div class="profile-bottom">
+    <div><div class="stat-n">3–5x</div><div class="stat-l">posts/dia</div></div>
+    <div><div class="stat-n">18–21h</div><div class="stat-l">pico de alcance</div></div>
+    <div><div class="stat-n">100%</div><div class="stat-l">gratuito</div></div>
+  </div>
+</div>
+
+<div class="sec">Paleta de cores</div>
+<div class="palette">
+  <div class="sw" style="background:#0D0F14">
+    <div class="sw-name" style="color:#8A93A8">Preto Bot</div>
+    <div class="sw-hex" style="color:#555">#0D0F14</div>
+  </div>
+  <div class="sw" style="background:#00C9B1">
+    <div class="sw-name" style="color:#004F47">Cyan Elétrico</div>
+    <div class="sw-hex" style="color:#005c54">#00C9B1</div>
+  </div>
+  <div class="sw" style="background:#FFE14D;border:0.5px solid #ddd">
+    <div class="sw-name" style="color:#7A6600">Amarelo Preço</div>
+    <div class="sw-hex" style="color:#8a7300">#FFE14D</div>
+  </div>
+  <div class="sw" style="background:#1E2330">
+    <div class="sw-name" style="color:#8A93A8">Cinza Escuro</div>
+    <div class="sw-hex" style="color:#555">#1E2330</div>
+  </div>
+</div>
+
+<div class="sec">Variações do logo</div>
+<div class="logos">
+  <div class="lbox lbox-dark">
+    <div class="av-ring" style="width:52px;height:52px">
+      <div class="av-inner" style="width:40px;height:40px">
+        <svg width="22" height="22" viewBox="0 0 140 140" fill="none">
+          <rect x="30" y="46" width="80" height="58" rx="14" fill="#1E2330"/>
+          <rect x="30" y="46" width="80" height="58" rx="14" stroke="#00C9B1" stroke-width="2"/>
+          <rect x="38" y="30" width="64" height="26" rx="10" fill="#1E2330" stroke="#00C9B1" stroke-width="2"/>
+          <circle cx="52" cy="62" r="5" fill="#00C9B1"/>
+          <circle cx="88" cy="62" r="5" fill="#00C9B1"/>
+          <rect x="38" y="79" width="64" height="18" rx="6" fill="#0D0F14"/>
+          <text x="70" y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#FFE14D">% DESCONTO</text>
+        </svg>
+      </div>
+    </div>
+    <div class="logo-text" style="color:#00C9B1">descontos<br>.bot</div>
+    <div style="font-size:10px;color:#555">Principal</div>
+  </div>
+  <div class="lbox lbox-cyan">
+    <div style="width:52px;height:52px;border-radius:50%;background:#0D0F14;display:flex;align-items:center;justify-content:center">
+      <svg width="22" height="22" viewBox="0 0 140 140" fill="none">
+        <rect x="30" y="46" width="80" height="58" rx="14" fill="#1E2330"/>
+        <rect x="38" y="30" width="64" height="26" rx="10" fill="#1E2330"/>
+        <circle cx="52" cy="62" r="5" fill="#00C9B1"/>
+        <circle cx="88" cy="62" r="5" fill="#00C9B1"/>
+        <rect x="38" y="79" width="64" height="18" rx="6" fill="#0D0F14"/>
+        <text x="70" y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#FFE14D">%</text>
+      </svg>
+    </div>
+    <div class="logo-text" style="color:#004F47">descontos<br>.bot</div>
+    <div style="font-size:10px;color:#006b60">Fundo cyan</div>
+  </div>
+  <div class="lbox lbox-light">
+    <div style="width:52px;height:52px;border-radius:50%;background:#0D0F14;display:flex;align-items:center;justify-content:center">
+      <svg width="22" height="22" viewBox="0 0 140 140" fill="none">
+        <rect x="30" y="46" width="80" height="58" rx="14" fill="#1E2330"/>
+        <rect x="38" y="30" width="64" height="26" rx="10" fill="#1E2330"/>
+        <circle cx="52" cy="62" r="5" fill="#00C9B1"/>
+        <circle cx="88" cy="62" r="5" fill="#00C9B1"/>
+        <rect x="38" y="79" width="64" height="18" rx="6" fill="#0D0F14"/>
+        <text x="70" y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#FFE14D">%</text>
+      </svg>
+    </div>
+    <div class="logo-text" style="color:#1A1A1A">descontos<br>.bot</div>
+    <div style="font-size:10px;color:#888">Fundo claro</div>
+  </div>
+</div>
+
+<div class="sec">Templates de post (feed 1:1)</div>
+<div class="posts">
+  <div class="post" style="background:#0D0F14">
+    <div class="p-corner"></div>
+    <div>
+      <div class="p-badge" style="background:#00C9B1;color:#0D0F14">ALERTA DO BOT</div>
+      <div class="p-title">Fone JBL<br>Tune 520</div>
+    </div>
+    <div>
+      <div class="p-old">De R$ 349</div>
+      <div class="p-price">R$ 179</div>
+      <div class="p-cta">Link na bio — Amazon Prime</div>
+    </div>
+  </div>
+  <div class="post" style="background:#161A22">
+    <div class="p-corner"></div>
+    <div>
+      <div class="p-badge" style="background:#FFE14D;color:#0D0F14">MENOR PRECO HOJE</div>
+      <div class="p-title" style="color:#00C9B1">Smartwatch<br>Xiaomi</div>
+    </div>
+    <div>
+      <div class="p-old">De R$ 520</div>
+      <div class="p-price">R$ 249</div>
+      <div class="p-cta">Link na bio — Shopee</div>
+    </div>
+  </div>
+  <div class="post" style="background:#00C9B1">
+    <div style="position:absolute;bottom:-30px;left:-10px;width:90px;height:90px;border-radius:50%;background:rgba(0,0,0,0.08)"></div>
+    <div>
+      <div class="p-badge" style="background:#0D0F14;color:#00C9B1">CUPOM EXCLUSIVO</div>
+      <div class="p-title" style="color:#0D0F14">Tênis Nike<br>Revolution</div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:rgba(0,0,0,0.4);text-decoration:line-through;margin-bottom:2px">De R$ 399</div>
+      <div style="font-family:'Space Mono',monospace;font-size:26px;font-weight:700;color:#0D0F14">R$ 189</div>
+      <div style="font-size:10px;color:rgba(0,0,0,0.5);font-weight:500;margin-top:4px">Link na bio — Netshoes</div>
+    </div>
+  </div>
+  <div class="post" style="background:#FFE14D">
+    <div style="position:absolute;bottom:-30px;left:-10px;width:90px;height:90px;border-radius:50%;background:rgba(0,0,0,0.08)"></div>
+    <div>
+      <div class="p-badge" style="background:#0D0F14;color:#FFE14D">TOP 5 DA SEMANA</div>
+      <div class="p-title" style="color:#0D0F14;font-size:13px;line-height:1.5">As 5 melhores<br>ofertas que o<br>bot encontrou</div>
+    </div>
+    <div>
+      <div style="font-size:9px;color:rgba(0,0,0,0.55);line-height:1.9">01 Fone JBL — R$179<br>02 Smartwatch — R$249<br>03 Tênis Nike — R$189</div>
+      <div style="font-size:10px;color:rgba(0,0,0,0.5);font-weight:500;margin-top:4px">Todos na bio</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">Templates de stories</div>
+<div class="stories">
+  <div class="story" style="background:#0D0F14">
+    <div class="s-top" style="color:rgba(255,255,255,0.5)">BOT ALERTA</div>
+    <div>
+      <div class="s-main" style="color:#fff">O bot achou desconto!</div>
+      <div style="font-size:9px;color:rgba(255,255,255,0.55);margin-top:3px">Estoque limitado</div>
+    </div>
+    <div class="s-btn" style="background:#00C9B1;color:#0D0F14">Ver oferta ↗</div>
+  </div>
+  <div class="story" style="background:#00C9B1">
+    <div class="s-top" style="color:rgba(0,0,0,0.5)">PRECO CAIU</div>
+    <div>
+      <div class="s-main" style="color:#0D0F14">Menor preco do ano!</div>
+      <div style="font-size:9px;color:rgba(0,0,0,0.55);margin-top:3px">Amazon Prime</div>
+    </div>
+    <div class="s-btn" style="background:#0D0F14;color:#00C9B1">Comprar ↗</div>
+  </div>
+  <div class="story" style="background:#161A22">
+    <div class="s-top" style="color:rgba(255,255,255,0.5)">CUPOM GRATIS</div>
+    <div>
+      <div class="s-main" style="color:#FFE14D">Codigo exclusivo para voce</div>
+    </div>
+    <div class="s-btn" style="background:#FFE14D;color:#0D0F14">Copiar codigo ↗</div>
+  </div>
+  <div class="story" style="background:#FFE14D">
+    <div class="s-top" style="color:rgba(0,0,0,0.5)">FRETE GRATIS</div>
+    <div>
+      <div class="s-main" style="color:#0D0F14">Hoje sem frete em tudo!</div>
+      <div style="font-size:9px;color:rgba(0,0,0,0.5);margin-top:3px">So ate meia-noite</div>
+    </div>
+    <div class="s-btn" style="background:#0D0F14;color:#FFE14D">Aproveitar ↗</div>
+  </div>
+</div>
+
+<div class="sec">Bio pronta para copiar</div>
+<div class="bio-box">
+  <div class="bio-line">🤖 Seu robô de descontos — sempre ligado</div>
+  <div class="bio-line">⚡ Alertas em tempo real das melhores ofertas</div>
+  <div class="bio-line">💰 Monitoramos. Você economiza.</div>
+  <div class="bio-line">🔗 Todas as ofertas no link abaixo</div>
+  <div class="bio-mono">@ descontos.bot</div>
+</div>
+
+<div class="sec">Ganchos de marketing</div>
+<div class="hooks">
+  <div class="hook">
+    <div class="hook-num">01</div>
+    <div><div class="hook-text">O bot nunca dorme. Você nunca paga caro.</div><div class="hook-sub">Urgência + personificação do bot</div></div>
+  </div>
+  <div class="hook">
+    <div class="hook-num">02</div>
+    <div><div class="hook-text">Enquanto você dormia, o bot achou R$ 200 de desconto.</div><div class="hook-sub">Storytelling de madrugada — alto engajamento</div></div>
+  </div>
+  <div class="hook">
+    <div class="hook-num">03</div>
+    <div><div class="hook-text">Ativa o sino. Quando o preço cair, você será o primeiro a saber.</div><div class="hook-sub">CTA de notificação — aumenta alcance orgânico</div></div>
+  </div>
+  <div class="hook">
+    <div class="hook-num">04</div>
+    <div><div class="hook-text">Só hoje. Só aqui. O bot confirmou: esse é o menor preço do ano.</div><div class="hook-sub">Escassez + autoridade</div></div>
+  </div>
+  <div class="hook">
+    <div class="hook-num">05</div>
+    <div><div class="hook-text">Salva esse post. Daqui a pouco some.</div><div class="hook-sub">Micro-CTA que aumenta salvamentos e alcance</div></div>
+  </div>
+</div>
+
+<div class="sec">Hashtags estratégicas</div>
+<div class="htags">
+  <span class="ht">#descontosbot</span>
+  <span class="ht">#ofertabot</span>
+  <span class="ht">#descontos</span>
+  <span class="ht">#cupom</span>
+  <span class="ht">#ofertadodia</span>
+  <span class="ht">#compraonline</span>
+  <span class="ht">#promoção</span>
+  <span class="ht">#economize</span>
+  <span class="ht">#alertadepreço</span>
+  <span class="ht">#menorpreço</span>
+  <span class="ht">#fretegratis</span>
+  <span class="ht">#afiliado</span>
+</div>
+
+</div>
+</body>
+</html>

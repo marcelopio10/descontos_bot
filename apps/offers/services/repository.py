@@ -16,6 +16,8 @@ def save_normalized_offer(normalized_offer: NormalizedOffer) -> tuple[Offer, boo
         'discount_pct': normalized_offer.discount_pct,
         'product_url': normalized_offer.product_url,
         'affiliate_url': normalized_offer.affiliate_url,
+        'asin': normalized_offer.asin,
+        'price_collected_at': normalized_offer.price_collected_at or now,
         'image_url': normalized_offer.image_url,
         'is_active': True,
         'raw_payload': normalized_offer.raw_payload,

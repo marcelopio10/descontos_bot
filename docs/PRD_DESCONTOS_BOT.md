@@ -636,3 +636,17 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
 - **Por quê**: a Fase 1 corrigiu a base existente por backfill, mas a ingestão futura precisa nascer compliance. Sem ASIN não há URL canônica `amazon.com.br/dp/<ASIN>?tag=descontosbot-20`.
 - **Endereça**: regra 2 da seção 21.2 e prepara a regra 3 para o `offers.json`/site.
 - **Como verificar**: `python3 manage.py check`; `python3 manage.py scrape_marketplace amazon --max-pages 1`; shell assert de que não existem ofertas Amazon persistidas com `asin=''`.
+
+### 2026-05-05 · Fase 3 — geração de `offers.json`
+
+- **O quê**: a Fase 3 cria `apps/offers/services/site_publisher.py` e o comando `python3 manage.py publish_offers`, que gera `offers.json` versão `2.0` com disclosure, ofertas publicáveis, links afiliados canônicos, `detail_url` por `/oferta?slug=...` e timestamp de preço.
+- **Por quê**: o site Vercel precisa de um payload estático e verificável antes da Fase 4 renderizar home e páginas de oferta. O modo padrão grava localmente em `data/exports/offers.json`; `--push` fica explícito para evitar deploy acidental.
+- **Endereça**: regras 1, 2 e 3 da seção 21.2 no payload publicado, preparando a renderização das regras 4, 5, 7 e 8 no site.
+- **Como verificar**: `python3 manage.py publish_offers --output=/tmp/offers.json`; shell assert da Fase 3 em `docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md`; `python3 manage.py check`; `python3 manage.py makemigrations --dry-run`.
+
+### 2026-05-05 · Fase 4 — site Vercel consumindo `offers.json`
+
+- **O quê**: a Fase 4 substitui a home promocional do repo Vercel por site estático HTML/CSS/JS baseado no design system oficial (`design_system/refs/design_system.html`), consome `offers.json`, cria `/oferta.html?slug=...`, `/links.html`, `/sobre.html` e `/disclosure.html`, exibe disclosure na home, na página de oferta e no rodapé, e usa CTAs com `rel="sponsored nofollow noopener"`. Na home, cada card oferece dois caminhos: ver detalhes no site ou ir direto ao marketplace.
+- **Por quê**: canais privados só podem ser roteados para `bridge_url` depois que a página pública de oferta existir e carregar os dados da oferta com preço, timestamp e disclosure.
+- **Endereça**: regras 1, 2, 3, 4, 7 e 8 da seção 21.2; prepara a regra 6 para a Fase 5. A regra 5 usa fallback neutro quando `short_description` ainda está vazio.
+- **Como verificar**: servir o repo Vercel localmente; abrir `/`, `/oferta.html?slug=<slug>`, `/links.html`, `/sobre.html` e `/disclosure.html`; confirmar cards, disclosure, timestamp, CTA patrocinado e ausência de linguagem proibida.

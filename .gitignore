@@ -15,6 +15,7 @@ db.sqlite3
 data/*.db
 data/*.db-*
 data/*.sqlite3
+data/exports/
 data/logs/
 logs/
 *.log

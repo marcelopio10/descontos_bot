@@ -42,6 +42,15 @@ AMAZON_AFFILIATE_TAG = os.environ.get(
     'AMAZON_AFFILIATE_TAG',
     os.environ.get('AMAZON_ASSOCIATE_TAG', 'descontosbot-20'),
 )
+OFFERS_EXPORT_PATH = os.environ.get(
+    'OFFERS_EXPORT_PATH',
+    str(DATA_DIR / 'exports' / 'offers.json'),
+)
+SITE_REPO_LOCAL_PATH = os.environ.get(
+    'SITE_REPO_LOCAL_PATH',
+    str(BASE_DIR.parent / 'descontos.bot-v0'),
+)
+SITE_REPO_BRANCH = os.environ.get('SITE_REPO_BRANCH', 'main')
 
 
 # Application definition

@@ -44,7 +44,10 @@ def run_marketplace_scraping(marketplace: Marketplace, max_pages: int) -> Scrapi
                 normalized_offer = normalize_offer(marketplace, payload)
             except OfferNormalizationError as exc:
                 errors.append(str(exc))
-                log.debug('Oferta ignorada em %s: %s', marketplace.code, exc)
+                if marketplace.code == 'amazon' and 'ASIN não encontrado' in str(exc):
+                    log.warning('%s', exc)
+                else:
+                    log.debug('Oferta ignorada em %s: %s', marketplace.code, exc)
                 continue
 
             with transaction.atomic():

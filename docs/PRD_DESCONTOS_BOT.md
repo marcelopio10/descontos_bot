@@ -616,3 +616,16 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
 - **Endereça**: regras 1, 4 e 7 da seção 21.2 (mapa de violações atuais a corrigir na Fase 4). Não corrige nada por si só — habilita as próximas fases.
 - **Como verificar**: `test -f docs/SITE_ARCHITECTURE.md`; `git log --oneline` mostra commit `docs(arch): document Vercel site state and gap analysis`.
 
+### 2026-05-05 · Plano separado — `docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md`
+
+- **O quê**: criado plano operacional separado para executar o compliance Amazon em fases bloqueantes. O documento consolida a diretiva de produção viva, a sequência Fase 0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 7, a Fase 6 como paralela após Fase 1, os gates de aceite e a decisão MVP por `/oferta?slug=...`.
+- **Por quê**: o prompt original enviado ao agente anterior não gerou um artefato separado. Sem esse roteiro, a Fase 1 ficaria ambígua e poderia ser confundida com o roadmap antigo do MVP.
+- **Endereça**: rastreabilidade operacional das regras 1 a 8 da seção 21.2. Não altera runtime.
+- **Como verificar**: `test -f docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md`; `rg -n "Fase 1|Caminho crítico" docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md`.
+
+### 2026-05-05 · Fase 1 — modelagem de dados para compliance
+
+- **O quê**: a Fase 1 adiciona suporte de banco para `slug`, `asin`, `affiliate_url_override`, `short_description`, `price_collected_at`, `link_strategy`, `affiliate_tag`, `PUBLIC_SITE_BASE_URL` e `AMAZON_AFFILIATE_TAG`. As mudanças são aditivas e não ativam o roteamento por `bridge_url` no envio.
+- **Por quê**: o banco precisa carregar os dados necessários para URL canônica, página pública de oferta, descrição original e estratégia de canal antes de publicar `offers.json` ou alterar mensagens.
+- **Endereça**: regras 2, 3, 5 e 6 da seção 21.2. Regras 1, 4, 7 e 8 serão efetivadas no site e no compliance check das fases seguintes.
+- **Como verificar**: `python3 manage.py check`; `python3 manage.py makemigrations --dry-run`; shell assert da Fase 1 em `docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md`.

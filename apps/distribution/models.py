@@ -7,6 +7,12 @@ from apps.offers.models import Offer
 class SocialChannel(TimestampedModel):
     class ChannelType(models.TextChoices):
         WHATSAPP = 'whatsapp', 'WhatsApp'
+        WHATSAPP_GROUP = 'whatsapp_group', 'Grupo de WhatsApp'
+        WHATSAPP_CHANNEL = 'whatsapp_channel', 'Canal do WhatsApp'
+
+    class LinkStrategy(models.TextChoices):
+        AFFILIATE_DIRECT = 'affiliate_direct', 'Afiliado direto'
+        BRIDGE_ONLY = 'bridge_only', 'Página pública'
 
     name = models.CharField(
         'nome',
@@ -31,6 +37,13 @@ class SocialChannel(TimestampedModel):
     is_enabled = models.BooleanField(
         'habilitado',
         default=True,
+    )
+    link_strategy = models.CharField(
+        'estratégia de link',
+        max_length=20,
+        choices=LinkStrategy.choices,
+        default=LinkStrategy.BRIDGE_ONLY,
+        help_text='Use página pública para canais privados. Afiliado direto somente para fontes cadastradas na Amazon.',
     )
 
     class Meta:

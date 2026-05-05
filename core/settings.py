@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 from django.db.backends.signals import connection_created
@@ -32,6 +33,15 @@ SECRET_KEY = 'django-insecure-$k5_iwy1)-(2)&p0*w5qx9p2mz(npagl(eo9j*xinhlk&kn9u2
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+PUBLIC_SITE_BASE_URL = os.environ.get(
+    'PUBLIC_SITE_BASE_URL',
+    'https://descontos-bot.vercel.app',
+)
+AMAZON_AFFILIATE_TAG = os.environ.get(
+    'AMAZON_AFFILIATE_TAG',
+    os.environ.get('AMAZON_ASSOCIATE_TAG', 'descontosbot-20'),
+)
 
 
 # Application definition

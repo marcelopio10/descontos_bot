@@ -25,6 +25,12 @@ class Marketplace(TimestampedModel):
         'afiliado habilitado',
         default=False,
     )
+    affiliate_tag = models.CharField(
+        'tag de afiliado',
+        max_length=50,
+        blank=True,
+        help_text='Tag usada para montar links canônicos de afiliado quando aplicável.',
+    )
 
     class Meta:
         ordering = ['name']

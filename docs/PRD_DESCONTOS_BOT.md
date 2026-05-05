@@ -629,3 +629,10 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
 - **Por quê**: o banco precisa carregar os dados necessários para URL canônica, página pública de oferta, descrição original e estratégia de canal antes de publicar `offers.json` ou alterar mensagens.
 - **Endereça**: regras 2, 3, 5 e 6 da seção 21.2. Regras 1, 4, 7 e 8 serão efetivadas no site e no compliance check das fases seguintes.
 - **Como verificar**: `python3 manage.py check`; `python3 manage.py makemigrations --dry-run`; shell assert da Fase 1 em `docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md`.
+
+### 2026-05-05 · Fase 2 — ASIN no scraper e normalização Amazon
+
+- **O quê**: a Fase 2 garante que novas ofertas Amazon sejam normalizadas com `asin`, `external_id` canônico igual ao ASIN e `price_collected_at`. Ofertas Amazon sem ASIN passam a ser rejeitadas no pipeline com log operacional claro, sem derrubar o ciclo.
+- **Por quê**: a Fase 1 corrigiu a base existente por backfill, mas a ingestão futura precisa nascer compliance. Sem ASIN não há URL canônica `amazon.com.br/dp/<ASIN>?tag=descontosbot-20`.
+- **Endereça**: regra 2 da seção 21.2 e prepara a regra 3 para o `offers.json`/site.
+- **Como verificar**: `python3 manage.py check`; `python3 manage.py scrape_marketplace amazon --max-pages 1`; shell assert de que não existem ofertas Amazon persistidas com `asin=''`.

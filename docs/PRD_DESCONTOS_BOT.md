@@ -609,3 +609,10 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
 - **Endereça**: nenhuma regra Amazon diretamente — fundação operacional do trabalho subsequente.
 - **Como verificar**: `git status` vazio; `git log --oneline` mostra `baseline` + `docs(prd): add Amazon compliance sections`; `git branch --show-current` retorna `feat/amazon-compliance`.
 
+### 2026-05-05 · Fase 0 — `docs/SITE_ARCHITECTURE.md`
+
+- **O quê**: inspecionado o repositório do site Vercel (`descontos.bot-v0`) e documentado o estado em `docs/SITE_ARCHITECTURE.md`. Confirmado que o site é HTML/CSS/JS puro, **não consome JSON dinâmico hoje**, não tem `vercel.json` nem GitHub Actions. Mapeados textos proibidos pela regra 7 da seção 21.2 ("cupons exclusivos", "🔔 CADASTRE-SE GRÁTIS", "💰 ECONOMIZE AGORA", "Frete grátis"). Inconsistência identificada entre remote local (`descontos.bot.git`) e URL fornecida pelo PO (`bot-monitor-ml`) — pendente de resolução antes da Fase 3.
+- **Por quê**: o plano Fase 0.2 exige localizar a "rotina antiga de push para Vercel". A inspeção mostrou que essa rotina **não existe** — site nunca foi alimentado por JSON. Logo, a Fase 3 desenha do zero, sem necessidade de manter compatibilidade com formato anterior. Documentar isso evita retrabalho e suposições erradas.
+- **Endereça**: regras 1, 4 e 7 da seção 21.2 (mapa de violações atuais a corrigir na Fase 4). Não corrige nada por si só — habilita as próximas fases.
+- **Como verificar**: `test -f docs/SITE_ARCHITECTURE.md`; `git log --oneline` mostra commit `docs(arch): document Vercel site state and gap analysis`.
+

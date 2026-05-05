@@ -11,7 +11,7 @@
 - Branch ativa: `main`.
 - Últimos commits: `1a93a67 Ajuste sessão ofertas com dados ML`, `1128496 Pacote monitoramento Vercel`, `5fcb811 Comentando a sesão Oferta de Hoje`.
 
-> **Pendência:** o PO mencionou `https://github.com/marcelopio10/bot-monitor-ml` como URL do repo. O remote local diverge. Antes da Fase 3 (`publish_offers --push`) implementar, é preciso confirmar qual repo é a fonte de deploy ativa do Vercel.
+> **Resolvido (2026-05-05):** PO confirmou que `descontos.bot.git` é o repo ativo do site Vercel (o que está aqui no clone local). `bot-monitor-ml` era o repo antigo, citado apenas para contexto histórico — não usar. Logo, a Fase 3 publica em `descontos.bot.git` na branch `main`.
 
 ### 1.2. Estrutura do site
 

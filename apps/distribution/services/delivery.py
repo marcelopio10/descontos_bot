@@ -24,7 +24,7 @@ def deliver_offer_to_channel(
     channel: SocialChannel,
     client: WhatsAppClient | None = None,
 ) -> DeliveryResult:
-    message = build_offer_message(offer)
+    message = build_offer_message(offer, channel)
 
     existing_delivery = Delivery.objects.filter(
         offer=offer,

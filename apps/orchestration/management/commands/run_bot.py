@@ -141,11 +141,11 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING(get_silence_error_message()))
 
         for index, offer in enumerate(offers, start=1):
-            message = build_offer_message(offer)
+            message = build_offer_message(offer, channel)
             self.stdout.write('')
             self.stdout.write(self.style.SUCCESS(f'Oferta {index}/{len(offers)}'))
             self.stdout.write(f'Marketplace: {offer.marketplace.name}')
-            self.stdout.write(f'Link final: {get_final_url(offer)}')
+            self.stdout.write(f'Link final: {get_final_url(offer, channel)}')
             self.stdout.write('Mensagem:')
             self.stdout.write(message)
 

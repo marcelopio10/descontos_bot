@@ -102,20 +102,27 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
 
 
 def _push_to_site_repo(source_path: Path) -> tuple[bool, bool]:
-    repo_path = Path(settings.SITE_REPO_LOCAL_PATH)
+    repo_path = Path(settings.SITE_REPO_LOCAL_PATH).resolve()
     if not repo_path.exists():
-        raise FileNotFoundError(f'Repositório do site não encontrado: {repo_path}')
+        raise FileNotFoundError(f'Repositório integrado não encontrado: {repo_path}')
 
-    target_path = repo_path / 'offers.json'
+    public_dir = Path(settings.SITE_PUBLIC_DIR)
+    if not public_dir.is_absolute():
+        public_dir = repo_path / public_dir
+    target_path = public_dir / 'offers.json'
+    target_path.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(source_path, target_path)
 
     branch = settings.SITE_REPO_BRANCH
     _run_git(repo_path, 'pull', '--ff-only')
 
-    if not _has_diff(repo_path, 'offers.json'):
+    relative_path = target_path.relative_to(repo_path)
+    git_path = relative_path.as_posix()
+
+    if not _has_diff(repo_path, git_path):
         return True, False
 
-    _run_git(repo_path, 'add', 'offers.json')
+    _run_git(repo_path, 'add', git_path)
     _run_git(
         repo_path,
         '-c',

@@ -4,6 +4,8 @@
 
 ## 1. Estado atual
 
+> **Atualização (2026-05-05):** por decisão operacional, o site estático foi integrado ao repo principal `descontos_bot.git` no diretório `site/`. As seções abaixo preservam o diagnóstico histórico do clone separado `descontos.bot-v0`, mas o fluxo vivo passa a usar `SITE_PUBLIC_DIR=site` e `SITE_REPO_LOCAL_PATH=.`. No Vercel, configurar Root Directory como `site/`; `site/vercel.json` mantém as rotas limpas `/oferta`, `/links`, `/sobre` e `/disclosure`.
+
 ### 1.1. Repositório local e remote
 
 - Path local: `C:\Users\marce\Documents\Projetos\descontos.bot-v0` (acessado via WSL em `/mnt/c/Users/marce/Documents/Projetos/descontos.bot-v0`).
@@ -69,9 +71,9 @@ Mapeamento direto da tabela 4.4 do plano + regras 1, 4, 7 da seção 21.2 do PRD
 
 `apps/orchestration/management/commands/publish_offers.py --push` fará:
 
-1. `cd $SITE_REPO_LOCAL_PATH` (default: `/mnt/c/Users/marce/Documents/Projetos/descontos.bot-v0`).
+1. `cd $SITE_REPO_LOCAL_PATH` (default: repo principal `descontos_bot.git`).
 2. `git pull --ff-only` para garantir base atualizada.
-3. Copiar `offers.json` (e na Fase 6, `links.json`) para a raiz do site.
+3. Copiar `offers.json` (e na Fase 6, `links.json`) para `SITE_PUBLIC_DIR` (default: `site/`).
 4. `git add` + `git commit -m "data: refresh offers.json (<count> offers)"` apenas se houver diff.
 5. `git push origin main`.
 6. Vercel detecta o push e auto-deploya.
@@ -79,7 +81,8 @@ Mapeamento direto da tabela 4.4 do plano + regras 1, 4, 7 da seção 21.2 do PRD
 Variáveis de ambiente a adicionar em `.env`:
 
 ```
-SITE_REPO_LOCAL_PATH=/mnt/c/Users/marce/Documents/Projetos/descontos.bot-v0
+SITE_PUBLIC_DIR=site
+SITE_REPO_LOCAL_PATH=.
 SITE_REPO_BRANCH=main
 ```
 
@@ -106,7 +109,7 @@ Não há legado a manter. Formato canônico:
       "original_price": 349.00,
       "discount_pct": 43.0,
       "image_url": "https://m.media-amazon.com/images/I/71xxxxxxx.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B08PZHYWJS?tag=descontosbot-20",
+      "affiliate_link": "https://www.amazon.com.br/dp/B08PZHYWJS?tag=descontos.bot-20",
       "detail_url": "/oferta?slug=fone-bluetooth-jbl-tune-510bt-azul-123",
       "price_collected_at": "2026-05-05T13:20:00-03:00"
     }
@@ -136,5 +139,5 @@ O novo desenho do site é puramente informacional. Sem forms, sem newsletter, se
 |---|---|
 | Push para `main` quebra deploy ativo | Antes do primeiro `--push`, rodar `--dry-run` (apenas grava o JSON local em `data/exports/offers.json`) e revisar diff. |
 | Site recém-deployado quebrado, grupo já redirecionado para `bridge_url` | Sequência de execução: site reformado MVP (Fase 4 mínima) → push do primeiro `offers.json` → Fase Mitigação ativa o `bridge_only` no grupo. Nunca o inverso. |
-| Vercel está conectado a outro repo (`bot-monitor-ml`) | Resolver inconsistência de remote (seção 1.1) antes da Fase 3 implementar. |
+| Vercel está conectado a outro repo | Ajustar o projeto Vercel para apontar para `descontos_bot.git` antes do próximo deploy. |
 | Conflito de merge com mudanças manuais no site | `publish_offers --push` faz `git pull --ff-only` primeiro; se falhar, aborta sem commit e loga para revisão humana. |

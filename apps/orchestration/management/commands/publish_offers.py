@@ -15,7 +15,7 @@ class Command(BaseCommand):
         parser.add_argument(
             '--push',
             action='store_true',
-            help='Copia offers.json para o repositório do site, commita e faz push se houver diff.',
+            help='Copia offers.json para site/, commita e faz push se houver diff.',
         )
 
     def handle(self, *args, **options):
@@ -34,6 +34,6 @@ class Command(BaseCommand):
         )
         if result.pushed:
             if result.committed:
-                self.stdout.write(self.style.SUCCESS('offers.json publicado no repositório do site.'))
+                self.stdout.write(self.style.SUCCESS('offers.json publicado no repositório integrado.'))
             else:
-                self.stdout.write('Sem alterações para publicar no repositório do site.')
+                self.stdout.write('Sem alterações para publicar no repositório integrado.')

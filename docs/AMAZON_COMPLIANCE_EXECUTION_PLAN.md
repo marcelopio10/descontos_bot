@@ -24,7 +24,7 @@ Em qualquer conflito entre seguir este plano literalmente e preservar a operaç�
 - Branch única: `feat/amazon-compliance`.
 - Commits atômicos: um commit por sub-passo numerado.
 - Código, identificadores, comentários e commits em inglês. Conteúdo visível ao operador e público em pt-BR.
-- Tag oficial: `descontosbot-20`, exposta via `settings.py` / `.env`, sem espalhar hardcode.
+- Tag oficial: `descontos.bot-20`, exposta via `settings.py` / `.env`, sem espalhar hardcode.
 - Toda URL Amazon canônica deve passar por `Offer.affiliate_link`.
 - WhatsApp grupo fechado nunca recebe afiliado direto; recebe somente `Offer.bridge_url`.
 - Não criar Docker, FastAPI, Uvicorn, SQLAlchemy, Jinja2, outro banco, nem suíte automatizada como entregável do MVP.
@@ -35,7 +35,7 @@ Em qualquer conflito entre seguir este plano literalmente e preservar a operaç�
 - Seções de Amazon Compliance já adicionadas ao PRD: `21` e `22`.
 - Documento de arquitetura do site já criado em `docs/SITE_ARCHITECTURE.md`.
 - Branch ativa esperada: `feat/amazon-compliance`.
-- Repo Vercel ativo confirmado pelo PO: `/mnt/c/Users/marce/Documents/Projetos/descontos.bot-v0`, remote `https://github.com/marcelopio10/descontos.bot.git`, branch `main`.
+- Site Vercel integrado por decisão posterior em `site/` no repo principal `https://github.com/marcelopio10/descontos_bot.git`.
 - Repo antigo `bot-monitor-ml` não deve ser usado.
 - A rotina antiga de `offers.json` não foi encontrada neste repositório nem no site atual; o site atual não consome JSON dinâmico.
 - Formato canônico novo: `offers.json` versão `2.0`.
@@ -45,7 +45,7 @@ Em qualquer conflito entre seguir este plano literalmente e preservar a operaç�
 Cada regra abaixo deve ter código, conteúdo, script de compliance, verificação manual ou combinação deles.
 
 1. Disclosure obrigatório: toda página com link afiliado exibe "Como Associado da Amazon, ganho por compras qualificadas." próximo ao primeiro link e no rodapé.
-2. URL canônica: `https://www.amazon.com.br/dp/<ASIN>?tag=descontosbot-20`. Nunca URL de busca, nunca sem tag, nunca tag de outra conta.
+2. URL canônica: `https://www.amazon.com.br/dp/<ASIN>?tag=descontos.bot-20`. Nunca URL de busca, nunca sem tag, nunca tag de outra conta.
 3. Preço com timestamp: todo preço exibido tem "Preço coletado em DD/MM/AAAA HH:mm. O valor pode variar."
 4. Sem mimetismo: site não usa cor laranja Amazon, logo Amazon decorativo ou layout que imite Amazon.
 5. Conteúdo original: cada página de oferta tem descrição própria em pt-BR; nunca copiar texto literal da Amazon.
@@ -68,7 +68,7 @@ Cada regra abaixo deve ter código, conteúdo, script de compliance, verificaç�
 - [x] Branch `feat/amazon-compliance` criada.
 - [x] Site Vercel inspecionado e documentado.
 - [x] Rotina antiga de `offers.json` buscada; não encontrada.
-- [x] Repo correto do Vercel resolvido: `descontos.bot.git`.
+- [x] Repo correto do Vercel resolvido: integrado em `descontos_bot.git` no diretório `site/`.
 
 **Comandos de verificação:**
 
@@ -79,6 +79,8 @@ git log --oneline -6
 ```
 
 ## 6. Fase 1 — Modelagem de Dados para Compliance
+
+**Status:** concluída e documentada no PRD.
 
 **Objetivo:** schema suporta slug público, ASIN, override manual, conteúdo original, timestamp de preço e estratégia de canal.
 
@@ -137,7 +139,7 @@ git log --oneline -6
 
 ```python
 PUBLIC_SITE_BASE_URL = os.environ.get('PUBLIC_SITE_BASE_URL', 'https://descontos-bot.vercel.app')
-AMAZON_AFFILIATE_TAG = os.environ.get('AMAZON_AFFILIATE_TAG', 'descontosbot-20')
+AMAZON_AFFILIATE_TAG = os.environ.get('AMAZON_AFFILIATE_TAG', 'descontos.bot-20')
 ```
 
 **Compatibilidade:** preservar `AMAZON_ASSOCIATE_TAG` se já for usado por scraper, aceitando fallback para não quebrar o fluxo atual.
@@ -172,13 +174,15 @@ o = Offer.objects.filter(marketplace__code='amazon', asin__gt='').first()
 assert o, 'no amazon offer with ASIN found'
 assert o.slug, f'slug empty for {o.id}'
 assert o.affiliate_link.startswith('https://www.amazon.com.br/dp/'), o.affiliate_link
-assert 'tag=descontosbot-20' in o.affiliate_link, o.affiliate_link
+assert 'tag=descontos.bot-20' in o.affiliate_link, o.affiliate_link
 assert '/oferta' in o.bridge_url and 'slug=' in o.bridge_url, o.bridge_url
 print('PASS', o.affiliate_link, '|', o.bridge_url)
 "
 ```
 
 ## 7. Fase 2 — Scraper Amazon e Normalização com ASIN
+
+**Status:** concluída e documentada no PRD.
 
 **Objetivo:** ofertas Amazon novas entram com ASIN preenchido e ofertas sem ASIN são rejeitadas no pipeline.
 
@@ -210,9 +214,11 @@ assert qs.count() == 0
 
 ## 8. Fase 3 — Geração de `offers.json` para o Site
 
+**Status:** concluída e documentada no PRD.
+
 **Objetivo:** Django gera `offers.json` versão `2.0` para o site estático.
 
-**Impacto em produção:** sem `--push`, impacto zero. Com `--push`, pode alterar deploy Vercel; usar `--dry-run`/`--output` antes.
+**Impacto em produção:** sem `--push`, impacto zero. Com `--push`, pode alterar deploy Vercel conectado ao repo principal; usar `--dry-run`/`--output` antes.
 
 **Arquivos:**
 - Criar: `apps/offers/services/site_publisher.py`
@@ -230,7 +236,7 @@ assert qs.count() == 0
 
 **Publicação:**
 - Default seguro: escrever em `data/exports/offers.json`.
-- `--push`: copiar para `SITE_REPO_LOCAL_PATH`, fazer `git pull --ff-only`, commit apenas se houver diff, push para `SITE_REPO_BRANCH`.
+- `--push`: copiar para `SITE_PUBLIC_DIR/offers.json`, fazer `git pull --ff-only` em `SITE_REPO_LOCAL_PATH`, commit apenas se houver diff, push para `SITE_REPO_BRANCH`.
 - Não usar `git config user.*` global; usar `git -c user.name=... -c user.email=... commit`.
 
 **Integração com scheduler:** somente após Fase 4 verde. Até lá, não chamar `publish_offers --push` automaticamente.
@@ -246,7 +252,7 @@ assert data['version'] == '2.0'
 assert data['disclosure'].startswith('Como Associado')
 assert len(data['offers']) > 0
 o = data['offers'][0]
-assert 'tag=descontosbot-20' in o['affiliate_link'] or 'amzlink.to' in o['affiliate_link'] or 'amzn.to' in o['affiliate_link']
+assert 'tag=descontos.bot-20' in o['affiliate_link'] or 'amzlink.to' in o['affiliate_link'] or 'amzn.to' in o['affiliate_link']
 assert o['detail_url'].startswith('/oferta?slug=')
 print('PASS')
 "
@@ -254,11 +260,13 @@ print('PASS')
 
 ## 9. Fase 4 — Site Vercel HTML/CSS/JS
 
+**Status:** concluída e documentada no PRD.
+
 **Objetivo:** site consome `offers.json`, mostra home, página de oferta, `/links`, `/sobre` e `/disclosure` com regras Amazon.
 
-**Impacto em produção:** alto, porque altera repo Vercel. Rollback: reverter commit do site ou não fazer push até validação local.
+**Impacto em produção:** alto, porque altera o site Vercel dentro do repo principal. Rollback: reverter commit do site ou não fazer push até validação local.
 
-**Repositório:** `/mnt/c/Users/marce/Documents/Projetos/descontos.bot-v0`
+**Repositório:** `https://github.com/marcelopio10/descontos_bot.git`, diretório `site/`.
 
 **Arquivos esperados no site:**
 - Modificar: `index.html`
@@ -291,11 +299,13 @@ print('PASS')
 - [ ] Home consome `offers.json` e renderiza cards.
 - [ ] Página de oferta tem os 8 elementos obrigatórios.
 - [ ] Disclosure aparece em home, página de oferta, rodapé global e `/disclosure.html`.
-- [ ] Link Amazon contém `tag=descontosbot-20` ou usa `amzlink.to`/`amzn.to`.
+- [ ] Link Amazon contém `tag=descontos.bot-20` ou usa `amzlink.to`/`amzn.to`.
 - [ ] Textos proibidos foram removidos.
 - [ ] Validação manual no navegador local antes do push.
 
 ## 10. Fase 5 — Roteamento por Canal
+
+**Status:** concluída e documentada no PRD.
 
 **Objetivo:** `message_builder` escolhe `affiliate_link` para canais aprovados e `bridge_url` para canais privados.
 
@@ -306,7 +316,9 @@ print('PASS')
 - Modificar ou criar migration/data command para canais em `apps/distribution/`
 - Modificar: `docs/PRD_DESCONTOS_BOT.md`
 
-**Template neutro:**
+**Template neutro de referência:**
+
+O template abaixo é o formato operacional para canais privados. A Fase 5 altera o link final conforme `link_strategy` e remove linguagem de pressão de venda no WhatsApp.
 
 ```text
 Achei essa oferta aqui:
@@ -339,18 +351,20 @@ assert ch_group, 'no WhatsApp group/legacy channel found'
 assert o, 'no Amazon offer found'
 msg_group = build_message(o, ch_group)
 assert '/oferta' in msg_group, 'group must use bridge_url'
-assert 'tag=descontosbot' not in msg_group, 'group must NEVER carry affiliate tag'
+assert 'tag=descontos.bot' not in msg_group, 'group must NEVER carry affiliate tag'
 print('group OK')
 "
 ```
 
 ## 11. Fase 6 — Engine de Posts Instagram
 
-**Objetivo:** gerar tráfego rastreável Instagram -> site -> Amazon, com postagem manual.
+**Objetivo:** gerar tráfego rastreável Instagram -> Amazon, com link afiliado direto e postagem manual.
 
 **Sequência:** pode iniciar depois da Fase 1 verde, mas só publicar de verdade após Fase 4 verde.
 
-**Impacto em produção:** baixo se apenas gerar assets. Não automatizar postagem no Instagram.
+**Impacto em produção:** baixo se apenas gerar assets PNG. Não automatizar postagem no Instagram.
+
+**Identidade visual:** assets gerados devem respeitar `design_system/refs/design_system.html` como padrão visual oficial, incluindo paleta, tipografia declarada e linguagem de post/story.
 
 **Arquivos:**
 - Criar app: `apps/social_posts/`
@@ -358,7 +372,7 @@ print('group OK')
 - Criar: `apps/social_posts/admin.py`
 - Criar serviços: `image_renderer.py`, `caption_builder.py`, `link_builder.py`, `bio_link_publisher.py`
 - Criar commands: `generate_instagram_post.py`, `generate_instagram_carousel.py`, `generate_instagram_story.py`, `publish_bio_link.py`
-- Criar assets estáticos e diretório de saída em `media/instagram_posts/`
+- Criar assets PNG estáticos e diretório de saída em `media/instagram_posts/`
 
 **Modelo:** `InstagramPost` herda `TimestampedModel`, com formato (`feed`, `carousel`, `story`, `reel`), status (`draft`, `ready`, `posted`, `rejected`), `primary_offer`, `related_offers`, `asset_paths`, `caption`, `sticker_target_url`, `posted_at`.
 
@@ -367,6 +381,8 @@ print('group OK')
 - `utm_medium=bio|story|reel|carousel_link`
 - `utm_campaign=offer_<id>`
 - `utm_content` opcional.
+
+**Link padrão:** Instagram é fonte aprovada e usa `Offer.affiliate_link` direto com UTMs. `Offer.bridge_url` fica restrito a canais privados como grupos de WhatsApp.
 
 **Critério de aceite Fase 6:**
 
@@ -394,6 +410,8 @@ print('links OK')
 
 ## 12. Fase 7 — Compliance Final
 
+**Status:** concluída e documentada no PRD.
+
 **Objetivo:** validar tudo antes de solicitar nova revisão Amazon.
 
 **Arquivos:**
@@ -407,6 +425,8 @@ print('links OK')
 - `oferta.html?slug=<slug>` com disclosure e timestamp.
 - `links.json` com disclosure, mínimo 5 itens e UTM de bio.
 - `/links` ou `/links.html` existe e mostra disclosure.
+
+**Execução local:** o script sobe um servidor HTTP temporário apontando para `site/` para validar status 200 e conteúdo sem depender de deploy externo.
 
 **Critério de aceite Fase 7:**
 
@@ -438,7 +458,7 @@ ALL COMPLIANCE CHECKS PASSED
 
 **Ações imediatas:**
 - Setar todos os canais não cadastrados para `bridge_only`.
-- Auditar entregas dos últimos 30 dias procurando `tag=descontosbot` em mensagens para grupo.
+- Auditar entregas dos últimos 30 dias procurando `tag=descontos.bot` em mensagens para grupo.
 - Se houver histórico ruim, documentar como bug corrigido pela Fase 5.
 - Reforçar tráfego via site, Instagram e canal público.
 
@@ -452,7 +472,7 @@ from django.utils import timezone
 bad = Delivery.objects.filter(
     sent_at__gte=timezone.now() - timedelta(days=30),
     social_channel__channel_type='whatsapp_group',
-    message__icontains='tag=descontosbot'
+    message__icontains='tag=descontos.bot'
 )
 print(f'Suspect deliveries: {bad.count()} (must be 0)')
 "
@@ -474,13 +494,13 @@ Antes de executar qualquer fase:
 | # | Fase | Bloqueia próxima? | Status |
 |---|---|---|---|
 | 0 | Reconhecimento + site architecture | Sim | Concluída |
-| 1 | Modelagem de dados | Sim | Pendente |
-| 2 | ASIN no scraper/normalizer | Sim | Pendente |
-| 3 | `offers.json` v2 + publisher | Sim | Pendente |
-| 4 | Site Vercel compliance | Sim | Pendente |
-| 5 | Roteamento por canal | Sim | Pendente |
-| 6 | Instagram posts + `/links` | Não no caminho crítico | Pendente |
-| 7 | Compliance final | Sim | Pendente |
+| 1 | Modelagem de dados | Sim | Concluída |
+| 2 | ASIN no scraper/normalizer | Sim | Concluída |
+| 3 | `offers.json` v2 + publisher | Sim | Concluída |
+| 4 | Site Vercel compliance | Sim | Concluída |
+| 5 | Roteamento por canal | Sim | Concluída |
+| 6 | Instagram posts + `/links` | Não no caminho crítico | Concluída |
+| 7 | Compliance final | Sim | Concluída |
 | 8 | Contingência | Sob demanda | Pendente |
 
 **Caminho crítico:** Fase 0 -> Fase 1 -> Fase 2 -> Fase 3 -> Fase 4 -> Fase 5 -> Fase 7.

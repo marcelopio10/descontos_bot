@@ -40,17 +40,23 @@ PUBLIC_SITE_BASE_URL = os.environ.get(
 )
 AMAZON_AFFILIATE_TAG = os.environ.get(
     'AMAZON_AFFILIATE_TAG',
-    os.environ.get('AMAZON_ASSOCIATE_TAG', 'descontosbot-20'),
+    os.environ.get('AMAZON_ASSOCIATE_TAG', 'descontos.bot-20'),
 )
 OFFERS_EXPORT_PATH = os.environ.get(
     'OFFERS_EXPORT_PATH',
     str(DATA_DIR / 'exports' / 'offers.json'),
 )
+SITE_PUBLIC_DIR = os.environ.get(
+    'SITE_PUBLIC_DIR',
+    str(BASE_DIR / 'site'),
+)
 SITE_REPO_LOCAL_PATH = os.environ.get(
     'SITE_REPO_LOCAL_PATH',
-    str(BASE_DIR.parent / 'descontos.bot-v0'),
+    str(BASE_DIR),
 )
 SITE_REPO_BRANCH = os.environ.get('SITE_REPO_BRANCH', 'main')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Application definition
@@ -69,6 +75,7 @@ INSTALLED_APPS = [
     'apps.panel',
     'apps.curation',
     'apps.orchestration',
+    'apps.social_posts',
 ]
 
 MIDDLEWARE = [

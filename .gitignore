@@ -28,3 +28,5 @@ node_modules/
 # Gerador de Posts — arquivos locais
 output/
 assets/fonts/
+media/instagram_posts/*
+!media/instagram_posts/.gitkeep

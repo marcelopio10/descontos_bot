@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>descontos.bot</title>
+  <meta name="description" content="Curadoria de ofertas com páginas públicas, preço com horário de coleta e transparência sobre links de afiliado.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">descontos<span>.bot</span></a>
+    <nav class="navlinks" aria-label="Navegação principal">
+      <a href="/">Ofertas</a>
+      <a href="/links">Links</a>
+      <a href="/sobre">Sobre</a>
+      <a href="/disclosure">Disclosure</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card">
+        <p class="eyebrow">Curadoria pública de ofertas</p>
+        <h1>descontos<span class="brand-dot">.bot</span></h1>
+        <p class="lead">Seu robô de descontos organiza ofertas com preço, horário de coleta e caminho claro para ver detalhes ou seguir direto para a loja.</p>
+        <p class="disclosure-inline">Como Associado da Amazon, ganho por compras qualificadas.</p>
+      </div>
+      <aside class="status-card" aria-label="Status do catálogo">
+        <div class="bot-mark">
+          <div class="bot-face">
+            <svg width="54" height="54" viewBox="0 0 140 140" fill="none" aria-hidden="true">
+              <rect x="30" y="46" width="80" height="58" rx="14" fill="#1E2330" stroke="#00C9B1" stroke-width="2"/>
+              <rect x="38" y="30" width="64" height="26" rx="10" fill="#1E2330" stroke="#00C9B1" stroke-width="2"/>
+              <line x1="70" y1="30" x2="70" y2="24" stroke="#00C9B1" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="70" cy="20" r="5" fill="#FFE14D"/>
+              <circle cx="52" cy="62" r="10" fill="#0D0F14" stroke="#00C9B1" stroke-width="2"/>
+              <circle cx="52" cy="62" r="5" fill="#00C9B1"/>
+              <circle cx="88" cy="62" r="10" fill="#0D0F14" stroke="#00C9B1" stroke-width="2"/>
+              <circle cx="88" cy="62" r="5" fill="#00C9B1"/>
+              <rect x="38" y="79" width="64" height="18" rx="6" fill="#0D0F14"/>
+              <text x="70" y="92" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#FFE14D">% DESCONTO</text>
+            </svg>
+          </div>
+        </div>
+        <span class="panel-label">Catálogo</span>
+        <strong id="offerCount">Carregando</strong>
+        <span id="generatedAt">Sincronizando ofertas</span>
+      </aside>
+    </section>
+
+    <section class="offers-section" aria-labelledby="offersTitle">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Atualizadas pelo bot</p>
+          <h2 id="offersTitle">Ofertas disponíveis</h2>
+        </div>
+        <div class="filters" role="tablist" aria-label="Filtro de marketplace">
+          <button class="filter is-active" type="button" data-marketplace="all">Todas</button>
+          <button class="filter" type="button" data-marketplace="amazon">Amazon</button>
+          <button class="filter" type="button" data-marketplace="mercadolivre">Mercado Livre</button>
+        </div>
+      </div>
+      <div id="offersGrid" class="offers-grid" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Como Associado da Amazon, ganho por compras qualificadas.</p>
+    <p>Os preços podem mudar depois do horário de coleta. Consulte a loja antes de finalizar a compra.</p>
+  </footer>
+
+  <script src="assets/site.js"></script>
+  <script>window.DescontosBot.initHome();</script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

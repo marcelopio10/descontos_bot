@@ -46,6 +46,10 @@ OFFERS_EXPORT_PATH = os.environ.get(
     'OFFERS_EXPORT_PATH',
     str(DATA_DIR / 'exports' / 'offers.json'),
 )
+OFFERS_JSON_OUTPUT_PATH = os.environ.get(
+    'OFFERS_JSON_OUTPUT_PATH',
+    str(BASE_DIR / 'site' / 'offers.json'),
+)
 SITE_PUBLIC_DIR = os.environ.get(
     'SITE_PUBLIC_DIR',
     str(BASE_DIR / 'site'),
@@ -54,7 +58,19 @@ SITE_REPO_LOCAL_PATH = os.environ.get(
     'SITE_REPO_LOCAL_PATH',
     str(BASE_DIR),
 )
-SITE_REPO_BRANCH = os.environ.get('SITE_REPO_BRANCH', 'main')
+PUBLISH_OFFERS_AFTER_CAPTURE = os.environ.get(
+    'PUBLISH_OFFERS_AFTER_CAPTURE',
+    'true',
+).lower() in ('1', 'true', 'yes', 'on')
+PUBLISH_OFFERS_PUSH = os.environ.get(
+    'PUBLISH_OFFERS_PUSH',
+    'true',
+).lower() in ('1', 'true', 'yes', 'on')
+PUBLISH_OFFERS_BRANCH = os.environ.get(
+    'PUBLISH_OFFERS_BRANCH',
+    os.environ.get('SITE_REPO_BRANCH', 'main'),
+)
+SITE_REPO_BRANCH = PUBLISH_OFFERS_BRANCH
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

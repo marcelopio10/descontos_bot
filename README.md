@@ -20,6 +20,7 @@ Docker, FastAPI, Uvicorn, SQLAlchemy, Jinja2 e bancos externos não fazem parte 
 scrapers Mercado Livre/Amazon
   -> normalização Django
   -> SQLite local
+  -> publicação automática de site/offers.json quando houver diff real
   -> curadoria por desconto
   -> mensagem pt-BR
   -> wa_service
@@ -85,6 +86,27 @@ Para conferir o intervalo configurado sem dormir:
 
 ```bash
 python3 manage.py run_bot --dry-run --once --skip-scraping --show-next-interval
+```
+
+## Publicação do Site
+
+Ao final de cada captura executada por `run_bot` ou `scrape_marketplace`, o projeto chama o publisher automaticamente quando `PUBLISH_OFFERS_AFTER_CAPTURE=true`. O serviço gera o payload a partir do SQLite, compara os dados reais com `site/offers.json` ignorando apenas o timestamp `generated_at`, e só atualiza o arquivo quando há mudança nas ofertas publicáveis.
+
+Com `PUBLISH_OFFERS_PUSH=true`, uma alteração real gera commit `chore: publish offers json` e executa `git push origin <branch>`, disparando o deploy da Vercel pelo Git. Sem diff real, não há commit nem push. Em `--dry-run`, a publicação automática é ignorada.
+
+Controle por ambiente:
+
+```env
+PUBLISH_OFFERS_AFTER_CAPTURE=true
+PUBLISH_OFFERS_PUSH=true
+PUBLISH_OFFERS_BRANCH=main
+OFFERS_JSON_OUTPUT_PATH=site/offers.json
+```
+
+Para publicar manualmente, o comando continua disponível:
+
+```bash
+python3 manage.py publish_offers --push
 ```
 
 ## WhatsApp

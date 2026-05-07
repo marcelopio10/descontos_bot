@@ -12,6 +12,10 @@ WA_TARGET=grupo-ofertas-homologacao
 ML_AFFILIATE_ID=
 AMAZON_AFFILIATE_TAG=
 DRY_RUN=true
+PUBLISH_OFFERS_AFTER_CAPTURE=true
+PUBLISH_OFFERS_PUSH=true
+PUBLISH_OFFERS_BRANCH=main
+OFFERS_JSON_OUTPUT_PATH=site/offers.json
 ```
 
 ## Dados iniciais
@@ -32,5 +36,9 @@ python3 manage.py seed_initial_data
 
 - `WA_TARGET` deve corresponder ao nome exato do grupo que o `wa_service` consegue resolver.
 - `DRY_RUN=true` deve ser mantido até o PO autorizar envio real.
+- `PUBLISH_OFFERS_AFTER_CAPTURE=false` desativa a publicação automática após captura.
+- `PUBLISH_OFFERS_PUSH=false` atualiza `site/offers.json` localmente quando houver diff, sem commit nem push.
+- `PUBLISH_OFFERS_BRANCH` define a branch usada no `git push`; o padrão é `main`.
+- `OFFERS_JSON_OUTPUT_PATH` define o `offers.json` consumido pelo site estático.
 - Sessões do WhatsApp ficam em `wa_service/auth_state/` e são ignoradas pelo git.
 - A prévia operacional está documentada em `docs/DRY_RUN.md`.

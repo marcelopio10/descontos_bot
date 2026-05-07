@@ -17,23 +17,32 @@ class Command(BaseCommand):
             action='store_true',
             help='Copia offers.json para site/, commita e faz push se houver diff.',
         )
+        parser.add_argument(
+            '--branch',
+            default=None,
+            help='Branch de destino do push. Padrão: PUBLISH_OFFERS_BRANCH ou main.',
+        )
 
     def handle(self, *args, **options):
-        try:
-            result = publish_offers(
-                output_path=options['output'],
-                push=options['push'],
-            )
-        except Exception as exc:
-            raise CommandError(str(exc)) from exc
+        result = publish_offers(
+            output_path=options['output'],
+            push=options['push'],
+            branch=options['branch'],
+        )
+        if result['error']:
+            raise CommandError(result['error'])
 
         self.stdout.write(
             self.style.SUCCESS(
-                f'offers.json gerado em {result.output_path} com {result.offers_count} ofertas.',
+                f'offers.json gerado em {result["output_path"]} com {result["offers_count"]} ofertas.',
             ),
         )
-        if result.pushed:
-            if result.committed:
-                self.stdout.write(self.style.SUCCESS('offers.json publicado no repositório integrado.'))
-            else:
-                self.stdout.write('Sem alterações para publicar no repositório integrado.')
+        if result['changed']:
+            self.stdout.write(self.style.SUCCESS('Diff real detectado em offers.json.'))
+        else:
+            self.stdout.write('Sem alterações reais para publicar no repositório integrado.')
+
+        if result['committed']:
+            self.stdout.write(self.style.SUCCESS('Commit criado: chore: publish offers json'))
+        if result['pushed']:
+            self.stdout.write(self.style.SUCCESS('Push executado no repositório integrado.'))

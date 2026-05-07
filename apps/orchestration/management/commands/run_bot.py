@@ -11,6 +11,10 @@ from apps.distribution.services.execution_window import (
     is_distribution_silenced,
 )
 from apps.marketplaces.models import Marketplace
+from apps.orchestration.services.offer_publication import (
+    get_auto_publish_skip_reason,
+    publish_offers_after_capture,
+)
 from apps.orchestration.services.scheduler import (
     calculate_next_sleep_seconds,
     get_scheduler_config,
@@ -114,8 +118,13 @@ class Command(BaseCommand):
 
         if skip_scraping:
             self.stdout.write('Scraping ignorado por opção do operador.')
+            scraping_summary = None
         else:
-            self._run_scraping(max_pages=max_pages)
+            scraping_summary = self._run_scraping(max_pages=max_pages)
+            self._publish_after_capture(
+                scraping_summary=scraping_summary,
+                dry_run=dry_run,
+            )
 
         config = get_selection_config()
         offers = select_offers_for_channel(channel=channel, config=config)
@@ -168,25 +177,46 @@ class Command(BaseCommand):
             )
         log.info('Ciclo finalizado. ofertas_selecionadas=%s', len(offers))
 
-    def _run_scraping(self, max_pages: int) -> None:
+    def _run_scraping(self, max_pages: int) -> dict[str, int]:
+        self.stdout.write('Início da captura de ofertas nos marketplaces.')
+        log.info('Captura iniciada. max_pages=%s', max_pages)
+        summary = {
+            'marketplaces': 0,
+            'failed': 0,
+            'partial_failed': 0,
+            'total_collected': 0,
+            'total_valid': 0,
+            'total_created': 0,
+            'total_updated': 0,
+        }
         marketplaces = Marketplace.objects.filter(is_active=True).order_by('name')
         if not marketplaces.exists():
             self.stdout.write(self.style.WARNING('Nenhum marketplace ativo para coleta.'))
-            return
+            log.warning('Captura ignorada: nenhum marketplace ativo.')
+            return summary
 
         for marketplace in marketplaces:
+            summary['marketplaces'] += 1
             self.stdout.write(f'Coletando ofertas de {marketplace.name}...')
             result = run_marketplace_scraping(
                 marketplace=marketplace,
                 max_pages=max_pages,
             )
             run = result.run
+            summary['total_collected'] += result.total_collected
+            summary['total_valid'] += result.total_valid
+            summary['total_created'] += result.total_created
+            summary['total_updated'] += result.total_updated
             level = self.style.SUCCESS
             if run.status in (
                 ScrapingRun.RunStatus.FAILED,
                 ScrapingRun.RunStatus.PARTIAL_FAILED,
             ):
                 level = self.style.WARNING
+            if run.status == ScrapingRun.RunStatus.FAILED:
+                summary['failed'] += 1
+            if run.status == ScrapingRun.RunStatus.PARTIAL_FAILED:
+                summary['partial_failed'] += 1
 
             self.stdout.write(
                 level(
@@ -201,6 +231,58 @@ class Command(BaseCommand):
             )
             if run.error_message:
                 self.stdout.write(self.style.WARNING(f'Aviso: {run.error_message}'))
+
+        self.stdout.write(
+            (
+                'Captura finalizada: '
+                f'processadas={summary["total_valid"]}; '
+                f'novas={summary["total_created"]}; '
+                f'atualizadas={summary["total_updated"]}; '
+                f'coletadas={summary["total_collected"]}'
+            ),
+        )
+        log.info(
+            (
+                'Captura finalizada. marketplaces=%s coletadas=%s validas=%s '
+                'criadas=%s atualizadas=%s falhas=%s falhas_parciais=%s'
+            ),
+            summary['marketplaces'],
+            summary['total_collected'],
+            summary['total_valid'],
+            summary['total_created'],
+            summary['total_updated'],
+            summary['failed'],
+            summary['partial_failed'],
+        )
+        return summary
+
+    def _publish_after_capture(self, scraping_summary: dict[str, int], dry_run: bool) -> None:
+        skip_reason = get_auto_publish_skip_reason(
+            total_valid=scraping_summary['total_valid'],
+            dry_run=dry_run,
+        )
+        if skip_reason:
+            self.stdout.write(self.style.WARNING(skip_reason))
+            log.info(skip_reason)
+            return
+
+        self.stdout.write('Início da publicação automática do offers.json.')
+        result = publish_offers_after_capture()
+        if result['error']:
+            self.stdout.write(self.style.WARNING(f'Erro na publicação automática: {result["error"]}'))
+            log.error('Erro na publicação automática: %s', result)
+            return
+
+        self.stdout.write(
+            (
+                'Publicação automática finalizada: '
+                f'ofertas={result["offers_count"]}; '
+                f'diff={result["changed"]}; '
+                f'commit={result["committed"]}; '
+                f'push={result["pushed"]}'
+            ),
+        )
+        log.info('Publicação automática finalizada. resultado=%s', result)
 
     def _write_next_interval(self) -> None:
         config = get_scheduler_config()

@@ -1,4 +1,5 @@
 import json
+import logging
 import shutil
 import subprocess
 from dataclasses import dataclass
@@ -13,14 +14,44 @@ from apps.offers.models import Offer
 
 
 DISCLOSURE = 'Como Associado da Amazon, ganho por compras qualificadas.'
+DEFAULT_COMMIT_MESSAGE = 'chore: publish offers json'
+GENERATED_AT_FIELD = 'generated_at'
+log = logging.getLogger(__name__)
 
 
 @dataclass(frozen=True)
 class PublishResult:
-    output_path: Path
+    generated: bool
+    changed: bool
+    output_path: str
     offers_count: int
-    pushed: bool = False
     committed: bool = False
+    pushed: bool = False
+    message: str = ''
+    error: str = ''
+    git_stdout: str = ''
+    git_stderr: str = ''
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            'generated': self.generated,
+            'changed': self.changed,
+            'committed': self.committed,
+            'pushed': self.pushed,
+            'offers_count': self.offers_count,
+            'output_path': self.output_path,
+            'message': self.message,
+            'error': self.error,
+            'git_stdout': self.git_stdout,
+            'git_stderr': self.git_stderr,
+        }
+
+
+class GitCommandError(RuntimeError):
+    def __init__(self, message: str, stdout: str = '', stderr: str = ''):
+        super().__init__(message)
+        self.stdout = stdout
+        self.stderr = stderr
 
 
 def build_offers_payload() -> dict[str, Any]:
@@ -38,22 +69,96 @@ def build_offers_payload() -> dict[str, Any]:
     }
 
 
-def publish_offers(output_path: str | Path | None = None, push: bool = False) -> PublishResult:
-    payload = build_offers_payload()
-    target_path = Path(output_path or settings.OFFERS_EXPORT_PATH)
-    _write_json(target_path, payload)
+def publish_offers(
+    output_path: str | Path | None = None,
+    push: bool = True,
+    branch: str | None = None,
+) -> dict[str, Any]:
+    export_path = Path(output_path or settings.OFFERS_EXPORT_PATH)
+    public_path = Path(settings.OFFERS_JSON_OUTPUT_PATH)
+    if not public_path.is_absolute():
+        public_path = Path(settings.BASE_DIR) / public_path
+    generated = False
+    changed = False
+    offers_count = 0
 
-    pushed = False
-    committed = False
-    if push:
-        pushed, committed = _push_to_site_repo(target_path)
+    try:
+        payload = build_offers_payload()
+        generated = True
+        offers_count = len(payload['offers'])
+        changed = _has_real_payload_change(public_path, payload)
 
-    return PublishResult(
-        output_path=target_path,
-        offers_count=len(payload['offers']),
-        pushed=pushed,
-        committed=committed,
-    )
+        if export_path.resolve() != public_path.resolve():
+            _write_json(export_path, payload)
+
+        if not changed:
+            message = 'Sem alteração real nas ofertas; commit e push ignorados.'
+            log.info(message)
+            return PublishResult(
+                generated=True,
+                changed=False,
+                output_path=str(public_path),
+                offers_count=offers_count,
+                message=message,
+            ).as_dict()
+
+        _write_json(public_path, payload)
+        message = 'offers.json atualizado com alteração real nas ofertas.'
+        log.info('%s ofertas=%s caminho=%s', message, offers_count, public_path)
+
+        if not push:
+            return PublishResult(
+                generated=True,
+                changed=True,
+                output_path=str(public_path),
+                offers_count=offers_count,
+                message='offers.json atualizado localmente; push desabilitado.',
+            ).as_dict()
+
+        pushed, committed = _commit_and_push(public_path, branch=branch)
+        if not committed:
+            message = 'Sem diff rastreável no Git após atualizar offers.json.'
+        elif pushed:
+            message = 'offers.json commitado e enviado ao repositório remoto.'
+        else:
+            message = 'offers.json commitado; push não executado.'
+
+        return PublishResult(
+            generated=True,
+            changed=True,
+            output_path=str(public_path),
+            offers_count=offers_count,
+            committed=committed,
+            pushed=pushed,
+            message=message,
+        ).as_dict()
+    except GitCommandError as exc:
+        log.error(
+            'Falha de Git ao publicar offers.json: %s stdout=%s stderr=%s',
+            exc,
+            exc.stdout,
+            exc.stderr,
+        )
+        return PublishResult(
+            generated=generated,
+            changed=changed,
+            output_path=str(public_path),
+            offers_count=offers_count,
+            message='Falha de Git ao publicar offers.json.',
+            error=str(exc),
+            git_stdout=exc.stdout,
+            git_stderr=exc.stderr,
+        ).as_dict()
+    except Exception as exc:
+        log.exception('Falha ao gerar ou gravar offers.json.')
+        return PublishResult(
+            generated=generated,
+            changed=changed,
+            output_path=str(public_path),
+            offers_count=offers_count,
+            message='Falha ao gerar ou gravar offers.json.',
+            error=str(exc),
+        ).as_dict()
 
 
 def _get_publishable_offers():
@@ -101,26 +206,47 @@ def _write_json(path: Path, payload: dict[str, Any]) -> None:
     )
 
 
-def _push_to_site_repo(source_path: Path) -> tuple[bool, bool]:
+def _has_real_payload_change(path: Path, payload: dict[str, Any]) -> bool:
+    if not path.exists():
+        return True
+
+    try:
+        current_payload = json.loads(path.read_text(encoding='utf-8'))
+    except (OSError, json.JSONDecodeError):
+        log.warning('offers.json atual não pôde ser lido; será regenerado: %s', path)
+        return True
+
+    return _stable_payload(current_payload) != _stable_payload(payload)
+
+
+def _stable_payload(payload: dict[str, Any]) -> dict[str, Any]:
+    stable = dict(payload)
+    stable.pop(GENERATED_AT_FIELD, None)
+    return stable
+
+
+def _commit_and_push(public_path: Path, branch: str | None = None) -> tuple[bool, bool]:
     repo_path = Path(settings.SITE_REPO_LOCAL_PATH).resolve()
     if not repo_path.exists():
-        raise FileNotFoundError(f'Repositório integrado não encontrado: {repo_path}')
+        raise GitCommandError(f'Repositório integrado não encontrado: {repo_path}')
 
-    public_dir = Path(settings.SITE_PUBLIC_DIR)
-    if not public_dir.is_absolute():
-        public_dir = repo_path / public_dir
-    target_path = public_dir / 'offers.json'
-    target_path.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(source_path, target_path)
+    target_path = public_path.resolve()
+    if not _is_relative_to(target_path, repo_path):
+        public_dir = Path(settings.SITE_PUBLIC_DIR)
+        if not public_dir.is_absolute():
+            public_dir = repo_path / public_dir
+        target_path = public_dir / 'offers.json'
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(public_path, target_path)
 
-    branch = settings.SITE_REPO_BRANCH
+    branch = branch or settings.PUBLISH_OFFERS_BRANCH
     _run_git(repo_path, 'pull', '--ff-only')
 
     relative_path = target_path.relative_to(repo_path)
     git_path = relative_path.as_posix()
 
     if not _has_diff(repo_path, git_path):
-        return True, False
+        return False, False
 
     _run_git(repo_path, 'add', git_path)
     _run_git(
@@ -131,7 +257,7 @@ def _push_to_site_repo(source_path: Path) -> tuple[bool, bool]:
         'user.email=bot@descontos.bot',
         'commit',
         '-m',
-        'chore: publish offers json',
+        DEFAULT_COMMIT_MESSAGE,
     )
     _run_git(repo_path, 'push', 'origin', branch)
     return True, True
@@ -149,8 +275,25 @@ def _has_diff(repo_path: Path, relative_path: str) -> bool:
 
 
 def _run_git(repo_path: Path, *args: str) -> None:
-    subprocess.run(
+    result = subprocess.run(
         ['git', *args],
         cwd=repo_path,
-        check=True,
+        check=False,
+        capture_output=True,
+        text=True,
     )
+    if result.returncode:
+        command = ' '.join(['git', *args])
+        raise GitCommandError(
+            f'Comando Git falhou ({result.returncode}): {command}',
+            stdout=result.stdout,
+            stderr=result.stderr,
+        )
+
+
+def _is_relative_to(path: Path, parent: Path) -> bool:
+    try:
+        path.relative_to(parent)
+    except ValueError:
+        return False
+    return True

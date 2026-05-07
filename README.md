@@ -113,4 +113,4 @@ python3 manage.py check
 python3 manage.py makemigrations --dry-run
 ```
 
-Consulte também `docs/CHECKLIST_PRE_MERGE.md`.
+Consulte também `docs/CHECKLIST_PRE_MERGE.md`. 

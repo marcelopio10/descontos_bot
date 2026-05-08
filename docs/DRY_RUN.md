@@ -22,15 +22,15 @@ python3 manage.py run_bot --dry-run --once
 - Remove ofertas que já têm `Delivery` com status `sent` no canal escolhido.
 - Ordena por maior desconto.
 - Aplica `offer_limit_per_marketplace` e `offer_limit_global`.
-- Monta mensagens em pt-BR seguindo o padrão do `WhatsAppPostGenerator` em `post_generator.py`.
-- Usa `affiliate_url` quando existir; caso contrário, usa `product_url`.
+- Monta mensagens em pt-BR seguindo o template oficial da seção 11 do PRD, derivado de `post_generator.py`.
+- Respeita a estratégia do canal: grupos privados usam `bridge_url`; canais aprovados usam `affiliate_link`.
 - Não chama o `wa_service/`.
 - Não grava `Delivery`, para não bloquear um envio real futuro pela regra única de oferta por canal.
 
 O formato de mensagem inclui:
 
 ```text
-📦 *Produto*
+📦 *Produto monitorado*
 
 🔥 *ALERTA DO BOT* 🔥
 ━━━━━━━━━━━━━━━━━━━━━
@@ -40,7 +40,7 @@ O formato de mensagem inclui:
 🏷️ *35% OFF*
 
 🛒 Compre aqui 👇
-https://...
+https://descontos-bot.vercel.app/oferta?slug=produto-monitorado-1
 
 ⏰ Oferta por tempo limitado!
 ━━━━━━━━━━━━━━━━━━━━━
@@ -63,11 +63,15 @@ Chaves usadas na Sprint 3:
 
 ## Canal
 
-O canal padrão é `whatsapp_principal`. Para usar outro canal habilitado:
+O canal padrão é `whatsapp_main`, apontado para o grupo `descontos.bot - Homologação`.
+Para usar outro canal habilitado:
 
 ```bash
 python3 manage.py run_bot --dry-run --once --channel outro_codigo
 ```
+
+Em envio real, canais apontando para o grupo de produção `descontos.bot` ficam bloqueados
+enquanto `ALLOW_PRODUCTION_WHATSAPP_SEND=false`.
 
 ## Envio real em ciclo único
 

@@ -294,9 +294,9 @@ Enviar mensagens reais via `wa_service/` com controle de falhas e histórico.
 
 ### Tarefas do PO
 
-- [ ] Conectar sessão WhatsApp.
-- [ ] Validar envio para grupo de homologação.
-- [ ] Autorizar ou bloquear envio real para grupo principal.
+- [x] Conectar sessão WhatsApp.
+- [x] Validar envio para grupo de homologação.
+- [x] Autorizar ou bloquear envio real para grupo principal.
 
 ### Tarefas do Agente IA 1
 
@@ -338,7 +338,7 @@ python3 manage.py run_bot --once
 
 ## Sprint 5 — Scheduler Local e Operação
 
-Status: planejada.
+Status: concluída.
 
 ### Objetivo
 

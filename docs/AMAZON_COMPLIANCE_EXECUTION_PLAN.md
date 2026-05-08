@@ -316,22 +316,29 @@ print('PASS')
 - Modificar ou criar migration/data command para canais em `apps/distribution/`
 - Modificar: `docs/PRD_DESCONTOS_BOT.md`
 
-**Template neutro de referência:**
+**Template oficial de referência:**
 
-O template abaixo é o formato operacional para canais privados. A Fase 5 altera o link final conforme `link_strategy` e remove linguagem de pressão de venda no WhatsApp.
+O template abaixo, derivado de `post_generator.py`, é o formato operacional para canais privados. A Fase 5 altera o link final conforme `link_strategy` e mantém a redação dentro das frases permitidas pela regra 7 da seção 21.2 do PRD.
 
 ```text
-Achei essa oferta aqui:
+📦 *{title}*
 
-{title}
+{badge}
+━━━━━━━━━━━━━━━━━━━━━
 
-De: R$ {original_price}
-Por: R$ {current_price}
-Desconto: {discount_pct}%
+💰 ~De {original_price}~
+✅ *Por apenas {current_price}*
+🏷️ *{discount_pct}% OFF*
 
-Link:
+🛒 Compre aqui 👇
 {link}
+
+⏰ Oferta por tempo limitado!
+━━━━━━━━━━━━━━━━━━━━━
+🤖 @descontos.bot
 ```
+
+`badge` é escolhido por intensidade do desconto: `🚨 *OFERTA IMPERDÍVEL* 🚨` em `>= 50%`, `🔥 *ALERTA DO BOT* 🔥` em `>= 30%`, `⚡ *BOT ACHOU DESCONTO* ⚡` no demais.
 
 **Regra:**
 - `channel.link_strategy == 'affiliate_direct'`: usar `offer.affiliate_link`.

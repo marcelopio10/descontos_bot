@@ -353,27 +353,33 @@ discount_pct >= 20 OR absolute_saving >= 50.00
 
 ## 11. Geração de Conteúdo
 
-Mensagem padrão:
+Mensagem oficial enviada para canais privados de WhatsApp, herdada de `post_generator.py` e implementada em `apps/curation/services/message_builder.py`:
 
 ```text
-Achei essa oferta aqui:
+📦 *{title}*
 
-{title}
+{badge}
+━━━━━━━━━━━━━━━━━━━━━
 
-De: R$ {original_price}
-Por: R$ {current_price}
-Desconto: {discount_pct}%
+💰 ~De {original_price}~
+✅ *Por apenas {current_price}*
+🏷️ *{discount_pct}% OFF*
 
-Link:
+🛒 Compre aqui 👇
 {final_url}
+
+⏰ Oferta por tempo limitado!
+━━━━━━━━━━━━━━━━━━━━━
+🤖 @descontos.bot
 ```
 
 Regras:
 
 - Texto em pt-BR.
-- Sem caixa alta exagerada.
-- Uso moderado de emojis.
-- Link final deve ser `affiliate_url` quando existir; caso contrário, `product_url`.
+- Badge variável por intensidade do desconto: `🚨 *OFERTA IMPERDÍVEL* 🚨` quando `discount_pct >= 50`; `🔥 *ALERTA DO BOT* 🔥` quando `discount_pct >= 30`; `⚡ *BOT ACHOU DESCONTO* ⚡` no demais.
+- Título encurtado para 80 caracteres com `textwrap.shorten`.
+- `final_url` segue `link_strategy` do canal: `bridge_url` para grupos privados (Amazon), `affiliate_link` direto para canais aprovados (Instagram, canal público de WhatsApp, site).
+- Linguagem proibida da seção 21.2.7 deve ser respeitada em qualquer canal.
 - Mensagem enviada deve ser preservada em `Delivery.message`.
 
 ## 12. Integração com Redes Sociais
@@ -592,12 +598,12 @@ Toda construção de URL Amazon passa por `Offer.affiliate_link`. Hierarquia: `a
 
 ### 21.8. Mitigação imediata de violação
 
-`apps/curation/services/message_builder.py` envia hoje `affiliate_url` direto para o grupo de WhatsApp e usa template com linguagem de pressão de venda. Esses dois fatos violam as regras 6 e 7 da seção 21.2. A Fase Mitigação (entre Fase 1 e Fase 2 do plano) corrige ambos:
+`apps/curation/services/message_builder.py` enviava `affiliate_url` direto para o grupo de WhatsApp, violando a regra 6 da seção 21.2. A mitigação reativa o roteamento por canal e mantém o template oficial documentado na seção 11:
 
-- Template volta ao formato neutro descrito na seção 11 do PRD.
-- Roteamento passa a respeitar `link_strategy` de cada canal — grupo recebe `bridge_url`, nunca afiliado.
+- Template oficial (seção 11) é o herdado de `post_generator.py`. Ele usa emojis, badge por intensidade e separador visual; não inclui nenhuma das frases proibidas pela regra 7 da seção 21.2.
+- Roteamento passa a respeitar `link_strategy` de cada canal — grupo privado recebe `bridge_url`, nunca afiliado direto.
 
-A mitigação só é ativada após o site público passar a renderizar `/oferta?slug=…` lendo `offers.json`, para evitar janela em que o grupo recebe link válido para uma página inexistente.
+A mitigação só foi ativada após o site público passar a renderizar `/oferta?slug=…` lendo `offers.json`, para evitar janela em que o grupo recebesse link válido para uma página inexistente.
 
 ## 22. Changelog — Amazon Compliance
 
@@ -695,3 +701,19 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
 - **Por quê**: alinhar o gate automatizado ao critério da Fase 7, que exige verificação de rotas públicas e não apenas leitura direta de arquivos.
 - **Endereça**: regras 1, 2, 3 e 7 da seção 21.2 com checagens reprodutíveis antes de nova revisão Amazon.
 - **Como verificar**: `python3 scripts/amazon_compliance_check.py`; saída esperada `ALL COMPLIANCE CHECKS PASSED`.
+
+### 2026-05-08 · Fechamento de MVP — template oficial, slug universal e canal de homologação
+
+- **O quê**:
+  - Seção 11 do PRD e a Fase 5 do plano de execução adotam o template enriquecido derivado de `post_generator.py` como mensagem oficial. O template não contém nenhuma das frases proibidas pela regra 7 da seção 21.2.
+  - `apps/offers/services/repository.py` passa a gerar `slug` automaticamente para toda oferta capturada, não apenas Amazon. `apps/curation/services/selector.py` exclui de canais `bridge_only` qualquer oferta sem `slug` para impedir bridge URL inválida.
+  - `apps/offers/models.py` refina `affiliate_link`: respeita `affiliate_url` existente para Mercado Livre e para Amazon quando a URL já é compliance (`tag=descontos.bot-20`, `amzn.to`, `amzlink.to`). Sem cobertura, cai para a URL canônica por ASIN ou para `product_url`.
+  - Novo canal `whatsapp_main` (homologação `descontos.bot - Homologação`) substitui `whatsapp_principal` como destino padrão de envio. Settings ganha `ALLOW_PRODUCTION_WHATSAPP_SEND` (default `false`); `run_bot` bloqueia envio real para o target de produção `descontos.bot` enquanto a flag estiver desligada.
+  - `apps/offers/services/site_publisher.py` agora faz `git pull --ff-only origin <branch>` explícito antes de commitar para evitar fast-forward errado em branch não rastreada.
+- **Por quê**: alinhar a documentação à decisão do PO de manter o template enriquecido (já validado em homologação) e fechar arestas operacionais antes de encerrar o MVP — slug universal viabiliza `bridge_url` para qualquer marketplace futuro, e o lock de produção evita envio acidental antes da liberação formal.
+- **Endereça**: regras 2, 6 e 7 da seção 21.2 (template respeita linguagem proibida; `bridge_only` continua roteando para `bridge_url` válido; `affiliate_link` honra `tag=descontos.bot-20`).
+- **Como verificar**:
+  - `python3 manage.py check`
+  - `python3 manage.py makemigrations --dry-run`
+  - `python3 manage.py run_bot --dry-run --once --skip-scraping`
+  - `python3 scripts/amazon_compliance_check.py`

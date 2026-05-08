@@ -1,8 +1,11 @@
 from decimal import Decimal
+import logging
 import textwrap
 
 from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
+
+logger = logging.getLogger(__name__)
 
 SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━'
 PUBLIC_PAGE_MARKETPLACES = {'amazon'}
@@ -47,13 +50,31 @@ def build_offer_message(offer: Offer, channel: SocialChannel) -> str:
 
 
 def get_final_url(offer: Offer, channel: SocialChannel) -> str:
+    final_url, route = _resolve_final_url(offer, channel)
+    logger.info(
+        'whatsapp_link_resolved',
+        extra={
+            'offer_id': offer.id,
+            'offer_slug': offer.slug,
+            'marketplace': offer.marketplace.code,
+            'channel_code': channel.code,
+            'link_strategy': channel.link_strategy,
+            'route': route,
+            'final_url': final_url,
+            'has_affiliate_tag': 'tag=' in (offer.affiliate_link or ''),
+        },
+    )
+    return final_url
+
+
+def _resolve_final_url(offer: Offer, channel: SocialChannel) -> tuple[str, str]:
     if channel.link_strategy == SocialChannel.LinkStrategy.AFFILIATE_DIRECT:
-        return offer.affiliate_link
+        return offer.affiliate_link, 'affiliate_direct'
     if offer.marketplace.code not in PUBLIC_PAGE_MARKETPLACES:
-        return offer.affiliate_link
+        return offer.affiliate_link, 'affiliate_direct_non_public'
     if not offer.slug:
         raise ValueError('Oferta sem slug público não pode usar página pública.')
-    return offer.bridge_url
+    return offer.bridge_url, 'bridge_redirect'
 
 
 def _format_brl(value: Decimal) -> str:

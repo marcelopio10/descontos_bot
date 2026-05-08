@@ -36,6 +36,7 @@ def main() -> int:
             check_home(base_url)
             offers = check_offers_json(base_url)
             check_offer_page(base_url, offers)
+            check_redirect_page(base_url, offers)
             check_links_json(base_url)
             check_links_page(base_url)
     except ComplianceError as exc:
@@ -95,6 +96,24 @@ def check_offer_page(base_url: str, offers: list[dict]) -> None:
         javascript,
         'Preço coletado em',
         'oferta.html sem timestamp de preço renderizado.',
+    )
+
+
+def check_redirect_page(base_url: str, offers: list[dict]) -> None:
+    first_offer = offers[0]
+    slug = quote(first_offer['slug'])
+    try:
+        html = fetch_text(base_url, f'/r?slug={slug}')
+    except ComplianceError:
+        html = fetch_text(base_url, f'/r.html?slug={slug}')
+    assert_contains(html, DISCLOSURE, '/r sem disclosure Amazon.')
+    assert_no_prohibited_text(html, '/r')
+    assert_contains(html, 'window.location.replace', '/r sem JS de redirect.')
+    assert_contains(html, 'affiliate_link', '/r não referencia affiliate_link.')
+    assert_contains(
+        html,
+        '<meta http-equiv="refresh"',
+        '/r sem fallback meta refresh.',
     )
 
 

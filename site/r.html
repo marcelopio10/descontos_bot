@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecionando | descontos.bot</title>
+  <meta name="description" content="Redirecionamento para a oferta na loja parceira.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="refresh" content="2; url=/" id="refreshMeta">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    .redirect-shell {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 72px 16px 96px;
+      text-align: center;
+    }
+    .redirect-shell h1 {
+      margin: 14px 0 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .redirect-shell .state-message {
+      margin: 22px auto 0;
+    }
+    .redirect-shell .btn {
+      margin-top: 26px;
+    }
+    .redirect-shell .disclosure-inline {
+      margin-top: 22px;
+    }
+    .redirect-shell .fallback-note {
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">descontos<span>.bot</span></a>
+  </header>
+
+  <main>
+    <section class="redirect-shell" aria-live="polite">
+      <p class="eyebrow" id="status">Saindo do descontos.bot</p>
+      <h1 id="message">Redirecionando para a oferta na loja…</h1>
+      <p class="disclosure-inline">Como Associado da Amazon, ganho por compras qualificadas.</p>
+      <p class="fallback-note">
+        <a id="directLink" class="btn btn-primary" href="" target="_blank" rel="sponsored nofollow noopener">
+          Se a página não redirecionar em 2 segundos, clique aqui.
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Como Associado da Amazon, ganho por compras qualificadas.</p>
+    <p>Os preços podem mudar depois do horário de coleta. Consulte a loja antes de finalizar a compra.</p>
+  </footer>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var slug = params.get('slug');
+      var statusEl = document.getElementById('status');
+      var messageEl = document.getElementById('message');
+      var directLink = document.getElementById('directLink');
+      var refreshMeta = document.getElementById('refreshMeta');
+
+      function showError(label, detail) {
+        if (statusEl) statusEl.textContent = label;
+        if (messageEl) messageEl.textContent = detail;
+        if (directLink) {
+          directLink.textContent = 'Voltar para o início';
+          directLink.setAttribute('href', '/');
+          directLink.setAttribute('rel', 'noopener');
+          directLink.removeAttribute('target');
+        }
+      }
+
+      if (!slug) {
+        showError('Erro', 'Oferta não informada.');
+        return;
+      }
+
+      fetch('offers.json', { cache: 'no-store' })
+        .then(function (response) {
+          if (!response.ok) throw new Error('fetch_failed');
+          return response.json();
+        })
+        .then(function (payload) {
+          var offers = (payload && payload.offers) || [];
+          var offer = offers.find(function (o) { return o.slug === slug; });
+          if (!offer || !offer.affiliate_link) {
+            showError('Erro', 'Oferta não encontrada.');
+            return;
+          }
+          var target = offer.affiliate_link;
+          if (refreshMeta) refreshMeta.setAttribute('content', '0; url=' + target);
+          if (directLink) directLink.setAttribute('href', target);
+          window.location.replace(target);
+        })
+        .catch(function () {
+          if (statusEl) statusEl.textContent = 'Falha ao carregar';
+          if (messageEl) messageEl.textContent = 'Não foi possível abrir a oferta automaticamente.';
+        });
+    })();
+  </script>
+</body>
+</html>

@@ -157,7 +157,7 @@ class Offer(TimestampedModel):
     @property
     def bridge_url(self) -> str:
         base_url = settings.PUBLIC_SITE_BASE_URL.rstrip('/')
-        return f'{base_url}/oferta?slug={self.slug}'
+        return f'{base_url}/r?slug={self.slug}'
 
     @property
     def absolute_saving(self) -> float:

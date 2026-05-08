@@ -557,6 +557,7 @@ Estrutura de páginas:
 |---|---|
 | `/` | Home com cards de oferta consumindo `offers.json`. |
 | `/oferta?slug=<slug>` | Página individual com 8 elementos obrigatórios (título, imagem, disclosure, preço com timestamp, desconto, descrição original, CTA com `rel="sponsored nofollow noopener"`, disclosure rodapé). Implementação inicial via query string para reduzir custo de SEO antes da aprovação. |
+| `/r?slug=<slug>` | Bridge de redirect automático para grupos privados (Amazon). Resolve a oferta em `offers.json`, exibe disclosure brevemente e redireciona via `window.location.replace` para `affiliate_link`. Fallback `<meta http-equiv="refresh">`. NÃO substitui `/oferta` — esta é exclusiva do funil WhatsApp privado. |
 | `/links` | Linktree próprio para a bio do Instagram, consome `links.json`. |
 | `/sobre` | Sobre o projeto. |
 | `/disclosure` | Texto completo do disclosure. |
@@ -717,3 +718,18 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
   - `python3 manage.py makemigrations --dry-run`
   - `python3 manage.py run_bot --dry-run --once --skip-scraping`
   - `python3 scripts/amazon_compliance_check.py`
+
+### 2026-05-08 · Bridge auto-redirect para grupos WhatsApp
+
+- **O quê**:
+  - `Offer.bridge_url` passa a apontar para `/r?slug=<slug>` em vez de `/oferta?slug=<slug>`. A página `/oferta` segue intacta para navegação interna do site (cards do home).
+  - Nova rota estática `site/r.html` (rewrite `/r` no `vercel.json`): lê `offers.json`, mostra disclosure por instantes e redireciona via `window.location.replace(affiliate_link)`. Fallback por `<meta http-equiv="refresh">` para navegadores sem JS.
+  - `apps/curation/services/message_builder.py` ganha log estruturado `whatsapp_link_resolved` em `get_final_url`, com `route ∈ {affiliate_direct, affiliate_direct_non_public, bridge_redirect}` e `has_affiliate_tag` para auditoria.
+  - `scripts/amazon_compliance_check.py` ganha `check_redirect_page` validando HTTP 200, disclosure visível, ausência de texto proibido, presença de `window.location.replace`, referência a `affiliate_link` e fallback `<meta http-equiv="refresh">`.
+- **Por quê**: o usuário do grupo de WhatsApp clicava no link, abria a página `/oferta` e precisava clicar de novo no botão "Ver na loja" — segundo clique evitável que reduzia conversão. A bridge `/r` mantém compliance Amazon (página HTML real, com disclosure visível antes do redirect, link patrocinado preserva `tag=descontos.bot-20`) e elimina o atrito.
+- **Endereça**: regras 2, 4, 6 e 7 da seção 21.2 (preserva tag canônica, não imita layout Amazon, segue `bridge_only` para grupos privados, mantém linguagem permitida).
+- **Como verificar**:
+  - `python3 manage.py check`
+  - `python3 manage.py shell -c "from apps.offers.models import Offer; o = Offer.objects.exclude(slug='').first(); print(o.bridge_url)"` deve imprimir `https://descontos-bot.vercel.app/r?slug=<slug>`.
+  - `python3 manage.py run_bot --dry-run --once --skip-scraping` — log `whatsapp_link_resolved` deve mostrar `route=bridge_redirect` para Amazon em canal `bridge_only`.
+  - `python3 scripts/amazon_compliance_check.py` — deve passar com `ALL COMPLIANCE CHECKS PASSED`.

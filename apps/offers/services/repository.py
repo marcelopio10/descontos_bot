@@ -1,7 +1,12 @@
 from django.utils import timezone
+from django.utils.text import slugify
 
 from apps.offers.models import Offer
 from apps.offers.services.normalizer import NormalizedOffer
+
+
+MAX_SLUG_LENGTH = 220
+MAX_SLUG_BASE_LENGTH = 200
 
 
 def save_normalized_offer(normalized_offer: NormalizedOffer) -> tuple[Offer, bool]:
@@ -31,9 +36,45 @@ def save_normalized_offer(normalized_offer: NormalizedOffer) -> tuple[Offer, boo
         },
     )
     if created:
+        _ensure_public_slug(offer)
         return offer, created
 
+    update_fields = [*defaults.keys(), 'updated_at']
     for field, value in defaults.items():
         setattr(offer, field, value)
-    offer.save(update_fields=[*defaults.keys(), 'updated_at'])
+    if _ensure_public_slug(offer):
+        update_fields.append('slug')
+
+    offer.save(update_fields=update_fields)
     return offer, created
+
+
+def _ensure_public_slug(offer: Offer) -> bool:
+    if offer.slug:
+        return False
+
+    offer.slug = _build_unique_slug(offer)
+    offer.save(update_fields=['slug', 'updated_at'])
+    return True
+
+
+def _build_unique_slug(offer: Offer) -> str:
+    base = slugify(offer.normalized_title or offer.title or 'oferta')
+    base = (base[:MAX_SLUG_BASE_LENGTH] or 'oferta').strip('-')
+    suffix = f'-{offer.id}'
+    candidate = f'{base[:MAX_SLUG_LENGTH - len(suffix)]}{suffix}'
+
+    if not _slug_exists(candidate, offer):
+        return candidate
+
+    counter = 2
+    while True:
+        suffix = f'-{offer.id}-{counter}'
+        candidate = f'{base[:MAX_SLUG_LENGTH - len(suffix)]}{suffix}'
+        if not _slug_exists(candidate, offer):
+            return candidate
+        counter += 1
+
+
+def _slug_exists(slug: str, offer: Offer) -> bool:
+    return Offer.objects.filter(slug=slug).exclude(id=offer.id).exists()

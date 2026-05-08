@@ -1,3 +1,5 @@
+from urllib.parse import parse_qs, urlparse
+
 from django.conf import settings
 from django.db import models
 
@@ -130,11 +132,27 @@ class Offer(TimestampedModel):
         if self.affiliate_url_override:
             return self.affiliate_url_override
 
+        if self.affiliate_url and self.marketplace.code != 'amazon':
+            return self.affiliate_url
+
+        if self.affiliate_url and self._has_compliant_amazon_affiliate_url():
+            return self.affiliate_url
+
         if self.marketplace.code == 'amazon' and self.asin:
             tag = self.marketplace.affiliate_tag or settings.AMAZON_AFFILIATE_TAG
             return f'https://www.amazon.com.br/dp/{self.asin}?tag={tag}'
 
-        return self.affiliate_url or self.product_url
+        return self.product_url
+
+    def _has_compliant_amazon_affiliate_url(self) -> bool:
+        parsed_url = urlparse(self.affiliate_url)
+        host = parsed_url.netloc.lower()
+        if host.endswith('amzn.to') or host.endswith('amzlink.to'):
+            return True
+
+        tag = self.marketplace.affiliate_tag or settings.AMAZON_AFFILIATE_TAG
+        query = parse_qs(parsed_url.query)
+        return query.get('tag') == [tag]
 
     @property
     def bridge_url(self) -> str:

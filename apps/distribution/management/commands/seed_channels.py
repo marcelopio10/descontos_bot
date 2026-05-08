@@ -4,23 +4,24 @@ from apps.distribution.models import SocialChannel
 
 
 class Command(BaseCommand):
-    help = 'Cria ou atualiza o canal WhatsApp principal.'
+    help = 'Cria ou atualiza o canal WhatsApp de homologação.'
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--target',
-            default='grupo-ofertas-homologacao',
+            default='descontos.bot - Homologação',
             help='Nome exato do grupo WhatsApp usado pelo wa_service.',
         )
 
     def handle(self, *args, **options):
         channel, created = SocialChannel.objects.update_or_create(
-            code='whatsapp_principal',
+            code='whatsapp_main',
             defaults={
-                'name': 'WhatsApp principal',
-                'channel_type': SocialChannel.ChannelType.WHATSAPP,
+                'name': 'WhatsApp homologação',
+                'channel_type': SocialChannel.ChannelType.WHATSAPP_GROUP,
                 'target': options['target'],
                 'is_enabled': True,
+                'link_strategy': SocialChannel.LinkStrategy.BRIDGE_ONLY,
             },
         )
         action = 'criado' if created else 'atualizado'

@@ -8,8 +8,8 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(
             '--target',
-            default='grupo-ofertas-homologacao',
-            help='Nome exato do grupo WhatsApp usado pelo canal principal.',
+            default='descontos.bot - Homologação',
+            help='Nome exato do grupo WhatsApp usado pelo canal de homologação.',
         )
 
     def handle(self, *args, **options):

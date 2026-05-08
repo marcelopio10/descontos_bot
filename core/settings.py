@@ -71,6 +71,10 @@ PUBLISH_OFFERS_BRANCH = os.environ.get(
     os.environ.get('SITE_REPO_BRANCH', 'main'),
 )
 SITE_REPO_BRANCH = PUBLISH_OFFERS_BRANCH
+ALLOW_PRODUCTION_WHATSAPP_SEND = os.environ.get(
+    'ALLOW_PRODUCTION_WHATSAPP_SEND',
+    'false',
+).lower() in ('1', 'true', 'yes', 'on')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

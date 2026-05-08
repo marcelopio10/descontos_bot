@@ -1,5 +1,6 @@
 import logging
 
+from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 from apps.curation.services.message_builder import build_offer_message, get_final_url
@@ -26,6 +27,8 @@ from apps.scraping.services.runner import run_marketplace_scraping
 
 
 log = logging.getLogger(__name__)
+DEFAULT_CHANNEL_CODE = 'whatsapp_main'
+PRODUCTION_WHATSAPP_TARGET = 'descontos.bot'
 
 
 class Command(BaseCommand):
@@ -44,8 +47,8 @@ class Command(BaseCommand):
         )
         parser.add_argument(
             '--channel',
-            default='whatsapp_principal',
-            help='Código do canal social usado na seleção.',
+            default=DEFAULT_CHANNEL_CODE,
+            help='Código do canal social usado na seleção. Padrão: homologação WhatsApp.',
         )
         parser.add_argument(
             '--max-pages',
@@ -69,8 +72,10 @@ class Command(BaseCommand):
         if max_pages < 1 or max_pages > 5:
             raise CommandError('--max-pages deve ficar entre 1 e 5.')
 
-        channel = self._get_channel(options['channel'])
         dry_run = options['dry_run']
+        channel = self._get_channel(options['channel'])
+        if not dry_run:
+            self._validate_channel_for_real_delivery(channel)
 
         if options['once']:
             self._run_cycle(
@@ -300,3 +305,18 @@ class Command(BaseCommand):
             return SocialChannel.objects.get(code=code, is_enabled=True)
         except SocialChannel.DoesNotExist as exc:
             raise CommandError(f'Canal ativo "{code}" não encontrado.') from exc
+
+    def _validate_channel_for_real_delivery(self, channel: SocialChannel) -> None:
+        if settings.ALLOW_PRODUCTION_WHATSAPP_SEND:
+            return
+
+        if channel.target.strip().lower() != PRODUCTION_WHATSAPP_TARGET:
+            return
+
+        raise CommandError(
+            (
+                'Envio real para o grupo de produção "descontos.bot" está bloqueado. '
+                f'Use o canal "{DEFAULT_CHANNEL_CODE}" para homologação ou defina '
+                'ALLOW_PRODUCTION_WHATSAPP_SEND=true quando produção for liberada.'
+            ),
+        )

@@ -4,26 +4,42 @@ import textwrap
 from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
 
+SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━'
+PUBLIC_PAGE_MARKETPLACES = {'amazon'}
+
 
 def build_message(offer: Offer, channel: SocialChannel) -> str:
     final_url = get_final_url(offer, channel)
     original_price = offer.original_price or offer.current_price
     discount_pct = _format_percent_as_integer(offer.discount_pct)
     short_title = textwrap.shorten(
-        offer.title.strip() or 'Produto',
+        (offer.title or '').strip() or 'Produto',
         width=80,
         placeholder='...',
     )
+    badge = _build_badge(discount_pct)
 
     return (
-        f'Achei essa oferta aqui:\n\n'
-        f'{short_title}\n\n'
-        f'De: {_format_brl(original_price)}\n'
-        f'Por: {_format_brl(offer.current_price)}\n'
-        f'Desconto: {discount_pct}%\n\n'
-        f'Link:\n'
-        f'{final_url}'
+        f'📦 *{short_title}*\n\n'
+        f'{badge}\n'
+        f'{SEPARATOR}\n\n'
+        f'💰 ~De {_format_brl(original_price)}~\n'
+        f'✅ *Por apenas {_format_brl(offer.current_price)}*\n'
+        f'🏷️ *{discount_pct}% OFF*\n\n'
+        f'🛒 Compre aqui 👇\n'
+        f'{final_url}\n\n'
+        f'⏰ Oferta por tempo limitado!\n'
+        f'{SEPARATOR}\n'
+        f'🤖 @descontos.bot'
     )
+
+
+def _build_badge(discount_pct: int) -> str:
+    if discount_pct >= 50:
+        return '🚨 *OFERTA IMPERDÍVEL* 🚨'
+    if discount_pct >= 30:
+        return '🔥 *ALERTA DO BOT* 🔥'
+    return '⚡ *BOT ACHOU DESCONTO* ⚡'
 
 
 def build_offer_message(offer: Offer, channel: SocialChannel) -> str:
@@ -33,6 +49,10 @@ def build_offer_message(offer: Offer, channel: SocialChannel) -> str:
 def get_final_url(offer: Offer, channel: SocialChannel) -> str:
     if channel.link_strategy == SocialChannel.LinkStrategy.AFFILIATE_DIRECT:
         return offer.affiliate_link
+    if offer.marketplace.code not in PUBLIC_PAGE_MARKETPLACES:
+        return offer.affiliate_link
+    if not offer.slug:
+        raise ValueError('Oferta sem slug público não pode usar página pública.')
     return offer.bridge_url
 
 

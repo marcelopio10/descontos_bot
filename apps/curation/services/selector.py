@@ -67,7 +67,7 @@ def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySe
         deliveries__delivery_status=Delivery.DeliveryStatus.SENT,
     )
 
-    return (
+    queryset = (
         Offer.objects.select_related('marketplace')
         .filter(
             is_active=True,
@@ -80,3 +80,8 @@ def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySe
         .exclude(sent_delivery_filter)
         .order_by('-discount_pct', '-current_price', 'title')
     )
+
+    if channel.link_strategy == SocialChannel.LinkStrategy.BRIDGE_ONLY:
+        queryset = queryset.filter(slug__isnull=False).exclude(slug='')
+
+    return queryset

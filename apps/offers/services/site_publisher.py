@@ -240,7 +240,7 @@ def _commit_and_push(public_path: Path, branch: str | None = None) -> tuple[bool
         shutil.copyfile(public_path, target_path)
 
     branch = branch or settings.PUBLISH_OFFERS_BRANCH
-    _run_git(repo_path, 'pull', '--ff-only')
+    _run_git(repo_path, 'pull', '--ff-only', 'origin', branch)
 
     relative_path = target_path.relative_to(repo_path)
     git_path = relative_path.as_posix()

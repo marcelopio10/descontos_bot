@@ -6,6 +6,7 @@ from django.db.models import Q, QuerySet
 from apps.curation.services.settings import get_decimal_setting, get_integer_setting
 from apps.distribution.models import Delivery, SocialChannel
 from apps.offers.models import Offer
+from apps.offers.services.freshness import get_freshness_cutoff
 
 
 DEFAULT_GLOBAL_LIMIT = 20
@@ -76,6 +77,7 @@ def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySe
             product_url__gt='',
             current_price__gt=0,
             discount_pct__gte=config.min_discount_percentage,
+            last_seen_at__gte=get_freshness_cutoff(),
         )
         .exclude(sent_delivery_filter)
         .order_by('-discount_pct', '-current_price', 'title')

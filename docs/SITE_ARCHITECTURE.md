@@ -133,6 +133,15 @@ Para MVP **fica em Opção A** (query string em `oferta.html?slug=…`). SEO nã
 
 O novo desenho do site é puramente informacional. Sem forms, sem newsletter, sem "cadastre-se grátis". Isso elimina automaticamente os textos da regra 7 da seção 21.2 que sugerem benefício pessoal para o usuário ao clicar no link.
 
+### 3.5. Janela de validade e ordenação no `offers.json`
+
+`apps/offers/services/site_publisher.py::_get_publishable_offers()` é o único ponto que monta a lista pública. Ele aplica:
+
+1. **Filtro de recência** — `last_seen_at >= now() - SITE_OFFER_MAX_AGE_HOURS`. O default é 36 horas; `SITE_OFFER_MAX_AGE_HOURS` em `.env` permite ajustar sem deploy. Valores ausentes, vazios ou inválidos caem no default. `last_seen_at` é atualizado a cada confirmação do scraper (ver `apps/offers/services/repository.py`), portanto representa "última coleta" — se o scraper não reencontrou a oferta nas últimas 36 horas, ela sai do site.
+2. **Ordenação determinística** — `-last_seen_at, -discount_pct, title, id`. A ordenação acontece no banco; duas execuções com os mesmos dados produzem o mesmo `offers.json` (e o `_has_real_payload_change` continua detectando diff sem ruído).
+3. **Preservação no banco** — registros fora da janela continuam persistidos. A regra é exclusivamente de exibição; nada é deletado.
+4. **Logs** — cada publicação loga `cutoff`, `total_antes`, `elegiveis` e `ignoradas_por_expiracao` em `apps.offers.services.site_publisher`.
+
 ## 4. Riscos e mitigações
 
 | Risco | Mitigação |

@@ -38,6 +38,20 @@ PUBLIC_SITE_BASE_URL = os.environ.get(
     'PUBLIC_SITE_BASE_URL',
     'https://descontos-bot.vercel.app',
 )
+
+
+def _resolve_site_offer_max_age_hours(default: int = 36) -> int:
+    raw = os.environ.get('SITE_OFFER_MAX_AGE_HOURS')
+    if raw is None or str(raw).strip() == '':
+        return default
+    try:
+        parsed = int(str(raw).strip())
+    except (TypeError, ValueError):
+        return default
+    return parsed if parsed > 0 else default
+
+
+SITE_OFFER_MAX_AGE_HOURS = _resolve_site_offer_max_age_hours()
 AMAZON_AFFILIATE_TAG = os.environ.get(
     'AMAZON_AFFILIATE_TAG',
     os.environ.get('AMAZON_ASSOCIATE_TAG', 'descontos.bot-20'),
@@ -209,6 +223,11 @@ LOGGING = {
     },
     'loggers': {
         'apps': {
+            'handlers': ['console', 'bot_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'scrapers': {
             'handlers': ['console', 'bot_file'],
             'level': 'INFO',
             'propagate': False,

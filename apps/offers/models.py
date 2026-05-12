@@ -1,4 +1,5 @@
-from urllib.parse import parse_qs, urlparse
+import hashlib
+from urllib.parse import parse_qs, parse_qsl, urlencode, urlparse, urlsplit, urlunsplit
 
 from django.conf import settings
 from django.db import models
@@ -136,11 +137,12 @@ class Offer(TimestampedModel):
             return self.affiliate_url
 
         if self.affiliate_url and self._has_compliant_amazon_affiliate_url():
-            return self.affiliate_url
+            return self._with_amazon_sitestripe_anatomy(self.affiliate_url)
 
         if self.marketplace.code == 'amazon' and self.asin:
             tag = self.marketplace.affiliate_tag or settings.AMAZON_AFFILIATE_TAG
-            return f'https://www.amazon.com.br/dp/{self.asin}?tag={tag}'
+            canonical = f'https://www.amazon.com.br/dp/{self.asin}'
+            return self._with_amazon_sitestripe_anatomy(canonical, tag=tag)
 
         return self.product_url
 
@@ -153,6 +155,31 @@ class Offer(TimestampedModel):
         tag = self.marketplace.affiliate_tag or settings.AMAZON_AFFILIATE_TAG
         query = parse_qs(parsed_url.query)
         return query.get('tag') == [tag]
+
+    def _with_amazon_sitestripe_anatomy(self, url: str, tag: str | None = None) -> str:
+        parts = urlsplit(url)
+        host = parts.netloc.lower()
+        if host.endswith('amzn.to') or host.endswith('amzlink.to'):
+            return url
+
+        resolved_tag = tag or self.marketplace.affiliate_tag or settings.AMAZON_AFFILIATE_TAG
+        existing = dict(parse_qsl(parts.query, keep_blank_values=True))
+        link_code = existing.pop('linkCode', 'sl2')
+        link_id = existing.pop('linkId', self._amazon_link_id(resolved_tag))
+        existing.pop('tag', None)
+        ordered = [
+            ('linkCode', link_code),
+            ('tag', resolved_tag),
+            ('linkId', link_id),
+            *existing.items(),
+        ]
+        return urlunsplit(
+            (parts.scheme, parts.netloc, parts.path, urlencode(ordered), parts.fragment),
+        )
+
+    def _amazon_link_id(self, tag: str) -> str:
+        seed = f'{tag}:{(self.asin or self.external_id or "").strip()}'
+        return hashlib.md5(seed.encode('utf-8')).hexdigest()
 
     @property
     def bridge_url(self) -> str:

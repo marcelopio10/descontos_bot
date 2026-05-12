@@ -11,6 +11,7 @@ from django.conf import settings
 from django.utils import timezone
 
 from apps.offers.models import Offer
+from apps.offers.services.freshness import get_freshness_cutoff, resolve_max_age_hours
 
 
 DISCLOSURE = 'Como Associado da Amazon, ganho por compras qualificadas.'
@@ -162,14 +163,44 @@ def publish_offers(
 
 
 def _get_publishable_offers():
-    return (
+    """Ofertas exibíveis no site público.
+
+    Aplica corte de recência (`last_seen_at`) e ordenação determinística:
+    `last_seen_at` desc, `discount_pct` desc, `title` asc. Ofertas fora da
+    janela permanecem persistidas; só são omitidas da publicação.
+    """
+    max_age_hours = resolve_max_age_hours()
+    cutoff = get_freshness_cutoff()
+
+    base_qs = (
         Offer.objects
         .select_related('marketplace')
         .filter(is_active=True, slug__isnull=False)
         .exclude(slug='')
         .exclude(marketplace__code='amazon', asin='')
-        .order_by('marketplace__code', '-discount_pct', 'title')
     )
+    total_before = base_qs.count()
+
+    eligible_qs = base_qs.filter(last_seen_at__gte=cutoff).order_by(
+        '-last_seen_at',
+        '-discount_pct',
+        'title',
+        'id',
+    )
+    total_eligible = eligible_qs.count()
+    skipped = total_before - total_eligible
+
+    log.info(
+        'Publicação offers.json: cutoff=%s janela_horas=%s total_antes=%s '
+        'elegiveis=%s ignoradas_por_expiracao=%s (registros antigos preservados no banco).',
+        cutoff.isoformat(),
+        max_age_hours,
+        total_before,
+        total_eligible,
+        skipped,
+    )
+
+    return eligible_qs
 
 
 def _serialize_offer(offer: Offer) -> dict[str, Any]:

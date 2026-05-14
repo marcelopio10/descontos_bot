@@ -64,7 +64,7 @@ def select_offers_for_channel(
 
 def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySet[Offer]:
     sent_delivery_filter = Q(
-        deliveries__social_channel__channel_type=channel.channel_type,
+        deliveries__social_channel=channel,
         deliveries__delivery_status=Delivery.DeliveryStatus.SENT,
     )
 

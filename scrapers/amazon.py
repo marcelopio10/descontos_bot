@@ -32,13 +32,23 @@ DELAY_MAX = 6.0
 
 ASIN_RE = re.compile(r'/dp/([A-Z0-9]{10})')
 
-# Páginas de ofertas da Amazon — scrapeadas em ordem até max_pages
-DEAL_URLS = [
-    'https://www.amazon.com.br/events/ofertasmensais?ref_=nav_cs_gb',
-    'https://www.amazon.com.br/deals',
-    'https://www.amazon.com.br/gp/goldbox',
-    'https://www.amazon.com.br/s?i=aps&deal-type=eligible&rh=n%3A1229514011',   # Eletrônicos
-    'https://www.amazon.com.br/s?i=aps&deal-type=eligible&rh=n%3A14617390011',  # Esporte e lazer
+# Páginas de ofertas da Amazon, identificadas por categoria.
+# Cada entrada é uma fonte distinta — todas são raspadas no mesmo ciclo
+# (max_pages é ignorado neste scraper; ver scrape_daily_deals).
+DEAL_URLS: list[tuple[str, str]] = [
+    ('Ofertas do Dia',  'https://www.amazon.com.br/deals'),
+    ('Goldbox',         'https://www.amazon.com.br/gp/goldbox'),
+    ('Eletrônicos',     'https://www.amazon.com.br/s?i=aps&deal-type=eligible&rh=n%3A1229514011'),
+    ('Esporte e Lazer', 'https://www.amazon.com.br/s?i=aps&deal-type=eligible&rh=n%3A14617390011'),
+    ('Moda',            'https://www.amazon.com.br/s?k=moda&i=apparel&deal-type=eligible'),
+    ('Casa e Cozinha',  'https://www.amazon.com.br/s?k=casa&i=kitchen&deal-type=eligible'),
+    ('Beleza',          'https://www.amazon.com.br/s?k=beleza&i=beauty&deal-type=eligible'),
+    ('Brinquedos',      'https://www.amazon.com.br/s?k=brinquedos&i=toys&deal-type=eligible'),
+    ('Supermercado',    'https://www.amazon.com.br/s?k=mercado&i=grocery&deal-type=eligible'),
+    ('Bebidas Alcoólicas', 'https://www.amazon.com.br/s?k=bebidas+alcoolicas&deal-type=eligible'),
+    ('Vinhos',          'https://www.amazon.com.br/s?k=vinho&deal-type=eligible'),
+    ('Mais Vendidos',   'https://www.amazon.com.br/gp/bestsellers/?ref_=nav_em_cs_bestsellers_0_1_1_2'),
+    ('Maiores Altas',   'https://www.amazon.com.br/gp/movers-and-shakers/?ref_=nav_em_ms_0_1_1_4'),
 ]
 
 
@@ -134,38 +144,48 @@ class AmazonScraper:
         return ''
 
     def scrape_daily_deals(self, max_pages: int = 5) -> list[dict]:
+        # max_pages é mantido por compatibilidade de API, mas Amazon raspa todas as
+        # categorias em DEAL_URLS por ciclo (cada URL é uma categoria, não paginação).
+        del max_pages
         all_offers: list[dict] = []
         seen_ids: set[str] = set()
-        urls = DEAL_URLS[:max_pages]
+        total = len(DEAL_URLS)
 
-        for idx, url in enumerate(urls):
+        for idx, (label, url) in enumerate(DEAL_URLS):
             if self.blocked:
                 break
 
-            log.info('Buscando ofertas Amazon (%d/%d): %s', idx + 1, len(urls), url)
+            log.info('Buscando ofertas Amazon [%s] (%d/%d): %s', label, idx + 1, total, url)
             html = self.get_html(url)
             if not html:
+                log.warning('[%s] sem HTML — categoria ignorada', label)
                 continue
 
             if self.is_blocked(html):
                 self.blocked = True
                 self.error_message = f'CAPTCHA detectado em {url}'
-                log.error('CAPTCHA detectado em %s.', url)
+                log.error('CAPTCHA detectado em %s (categoria %s).', url, label)
                 break
 
             self.pages_scraped += 1
             page_offers = self._extract_cards(html)
-            new_on_page = 0
+            captured: list[tuple[str, int, float]] = []
             for offer in page_offers:
                 data = offer.to_dict()
-                if data['id'] not in seen_ids:
-                    seen_ids.add(data['id'])
-                    all_offers.append(data)
-                    new_on_page += 1
+                if data['id'] in seen_ids:
+                    continue
+                seen_ids.add(data['id'])
+                all_offers.append(data)
+                captured.append((data['nome'], data['desconto_pct'], data['preco']))
 
-            log.info('Página %d: %d novas | total acumulado: %d', idx + 1, new_on_page, len(all_offers))
+            log.info(
+                '[%s] %d cards | %d novas no ciclo | total acumulado: %d',
+                label, len(page_offers), len(captured), len(all_offers),
+            )
+            for nome, desc, preco in captured:
+                log.info('  • [%s] %d%% — R$ %.2f — %s', label, desc, preco, nome[:90])
 
-            if idx < len(urls) - 1:
+            if idx < total - 1:
                 time.sleep(round(random.uniform(DELAY_MIN, DELAY_MAX), 2))
 
         return all_offers
@@ -241,20 +261,37 @@ class AmazonScraper:
             if not title:
                 return None
 
-            # Preço atual — 3 níveis de fallback
-            # fallback 1: span.dcl-product-price-new .a-offscreen (ofertasmensais)
+            # Preço atual — fallbacks por especificidade.
+            # Atenção: em resultados de busca, .a-price aparece também no preço
+            # por unidade (ex.: "R$ 149,50/L"). Por isso preferimos sempre o
+            # elemento com data-a-color="base" e ignoramos data-a-strike="true".
             price = 0.0
+            # fallback 1: span.dcl-product-price-new (ofertasmensais)
             price_el = card.select_one('span.dcl-product-price-new .a-offscreen')
             if price_el:
                 price = self._parse_brl(price_el.get_text(strip=True))
 
-            # fallback 2: qualquer .a-price .a-offscreen no card
+            # fallback 2: preço marcado como base (search/goldbox/deals)
             if price <= 0:
-                price_el = card.select_one('.a-price .a-offscreen')
+                price_el = card.select_one('span.a-price[data-a-color="base"] .a-offscreen')
                 if price_el:
                     price = self._parse_brl(price_el.get_text(strip=True))
 
-            # fallback 3: inteiro + fração separados
+            # fallback 3: primeiro .a-price que NÃO é strike (sem data-a-color)
+            if price <= 0:
+                for el in card.select('span.a-price'):
+                    if el.get('data-a-strike') == 'true':
+                        continue
+                    if el.get('data-a-color') == 'secondary':
+                        continue
+                    off = el.select_one('.a-offscreen')
+                    if off:
+                        candidate = self._parse_brl(off.get_text(strip=True))
+                        if candidate > 0:
+                            price = candidate
+                            break
+
+            # fallback 4: inteiro + fração separados
             if price <= 0:
                 whole = card.select_one('.a-price-whole')
                 frac = card.select_one('.a-price-fraction')
@@ -269,23 +306,26 @@ class AmazonScraper:
             if price <= 0:
                 return None
 
-            # Preço original — 3 níveis de fallback
+            # Preço original — só aceitamos quando há sinal explícito de
+            # strikethrough. data-a-color="secondary" sozinho é ambíguo:
+            # casa também preço por unidade (R$/Kg, R$/L), o que gera
+            # descontos fantasma (ex.: banana 180g → R$66/Kg → "82% off").
             original_price = price
-            # fallback 1: span.dcl-product-price-old .a-offscreen (ofertasmensais)
+            # fallback 1: span.dcl-product-price-old (ofertasmensais)
             orig_el = card.select_one('span.dcl-product-price-old .a-offscreen')
+            # fallback 2: preço com strikethrough explícito (search/goldbox/deals)
             if not orig_el:
-                # fallback 2: .a-text-price .a-offscreen (goldbox/deals)
-                orig_el = card.select_one('.a-text-price .a-offscreen')
+                orig_el = card.select_one('span.a-price[data-a-strike="true"] .a-offscreen')
+            # fallback 3: classes legadas de preço riscado
             if not orig_el:
-                # fallback 3: qualquer preço riscado
-                orig_el = card.select_one('.a-text-strike, [class*="was-price"] .a-offscreen')
+                orig_el = card.select_one('.a-text-strike .a-offscreen, [class*="was-price"] .a-offscreen')
 
             if orig_el:
                 parsed = self._parse_brl(orig_el.get_text(strip=True))
                 if parsed > price:
                     original_price = parsed
 
-            # Percentual de desconto — 3 níveis de fallback
+            # Percentual de desconto — preferimos o badge da página em vez de calcular.
             discount_pct = 0
             # fallback 1: badge dcl (ofertasmensais) — e.g. "19% off"
             badge_el = card.select_one('div.dcl-badge span.a-size-mini, ._badgeLabel_f6hz5_1 span')
@@ -294,7 +334,15 @@ class AmazonScraper:
                 if m:
                     discount_pct = int(m.group(1))
 
-            # fallback 2: badge genérico de desconto
+            # fallback 2: badge "-13%" do search Amazon (savingsPercentage)
+            if discount_pct == 0:
+                badge_el = card.select_one('span.savingsPercentage, span[class*="savingsPercentage"]')
+                if badge_el:
+                    m = re.search(r'(\d+)', badge_el.get_text())
+                    if m:
+                        discount_pct = int(m.group(1))
+
+            # fallback 3: badge genérico de desconto
             if discount_pct == 0:
                 badge_el = card.select_one('.a-badge-text, [class*="discount-badge"]')
                 if badge_el:
@@ -302,9 +350,15 @@ class AmazonScraper:
                     if m:
                         discount_pct = int(m.group(1))
 
-            # fallback 3: cálculo a partir dos preços
+            # fallback 4: cálculo a partir dos preços (último recurso)
             if discount_pct == 0 and original_price > price:
                 discount_pct = round((original_price - price) / original_price * 100)
+
+            # Guarda anti-fantasma: badges como "savingsPercentage" podem
+            # aparecer em variantes/promos que não se refletem no preço avulso.
+            # Sem um preço riscado para sustentar o desconto, descartamos.
+            if discount_pct > 0 and original_price <= price:
+                discount_pct = 0
 
             if discount_pct < MIN_DISCOUNT:
                 return None

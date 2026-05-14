@@ -14,10 +14,13 @@ import os
 from pathlib import Path
 
 from django.db.backends.signals import connection_created
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / 'data'
+
+load_dotenv(BASE_DIR / '.env')
 DATA_DIR.mkdir(exist_ok=True)
 LOG_DIR = BASE_DIR / 'logs'
 LOG_DIR.mkdir(exist_ok=True)

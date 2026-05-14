@@ -20,13 +20,13 @@ data/logs/
 logs/
 *.log
 wa_service/auth_state/
+wa_service/auth_state.bak.*/
 wa_service/dist/
 wa_session/
-assets/ig_session.json
 node_modules/
 
-# Gerador de Posts — arquivos locais
-output/
-assets/fonts/
-media/instagram_posts/*
-!media/instagram_posts/.gitkeep
+# Posts gerados localmente para publicação manual no Instagram
+media/instagram/**
+!media/instagram/
+!media/instagram/*/
+!media/instagram/**/.gitkeep

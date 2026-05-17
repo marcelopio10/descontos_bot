@@ -25,7 +25,7 @@ def build_message(offer: Offer, channel: SocialChannel) -> str:
     return (
         f'📦 *{short_title}*\n\n'
         f'{badge}\n'
-        f'{SEPARATOR}\n\n'
+        #f'{SEPARATOR}\n\n'
         f'💰 ~De {_format_brl(original_price)}~\n'
         f'✅ *Por apenas {_format_brl(offer.current_price)}*\n'
         f'🏷️ *{discount_pct}% OFF*\n\n'

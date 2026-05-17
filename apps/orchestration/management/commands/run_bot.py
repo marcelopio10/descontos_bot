@@ -1,7 +1,9 @@
 import logging
+from datetime import timedelta
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.utils import timezone
 
 from apps.curation.services.message_builder import build_offer_message, get_final_url
 from apps.curation.services.selector import get_selection_config, select_offers_for_channel
@@ -12,6 +14,7 @@ from apps.distribution.services.execution_window import (
     is_distribution_silenced,
 )
 from apps.marketplaces.models import Marketplace
+from apps.offers.models import Offer
 from apps.orchestration.services.offer_publication import (
     get_auto_publish_skip_reason,
     publish_offers_after_capture,
@@ -24,11 +27,14 @@ from apps.orchestration.services.scheduler import (
 )
 from apps.scraping.models import ScrapingRun
 from apps.scraping.services.runner import run_marketplace_scraping
+from apps.social_posts.models import InstagramPost
+from apps.social_posts.services.post_generator import generate_story_for_offer
 
 
 log = logging.getLogger(__name__)
 DEFAULT_CHANNEL_CODE = 'whatsapp_main'
 PRODUCTION_WHATSAPP_TARGET = 'descontos.bot'
+INSTAGRAM_GENERATION_WINDOW_HOURS = 36
 
 
 class Command(BaseCommand):
@@ -130,6 +136,7 @@ class Command(BaseCommand):
                 scraping_summary=scraping_summary,
                 dry_run=dry_run,
             )
+            self._generate_instagram_posts_for_new_offers()
 
         config = get_selection_config()
         offers = select_offers_for_channel(channel=channel, config=config)
@@ -172,6 +179,8 @@ class Command(BaseCommand):
                 )
                 if delivery.error_message:
                     self.stdout.write(self.style.WARNING(delivery.error_message))
+                if result.sent:
+                    self._generate_instagram_story(offer)
 
         self.stdout.write('')
         if dry_run:
@@ -260,6 +269,91 @@ class Command(BaseCommand):
             summary['partial_failed'],
         )
         return summary
+
+    def _generate_instagram_posts_for_new_offers(self) -> None:
+        cutoff = timezone.now() - timedelta(hours=INSTAGRAM_GENERATION_WINDOW_HOURS)
+        posted_offer_ids = set(
+            InstagramPost.objects
+            .filter(format=InstagramPost.Format.STORY)
+            .values_list('primary_offer_id', flat=True),
+        )
+        offers = list(
+            Offer.objects
+            .select_related('marketplace')
+            .filter(is_active=True, last_seen_at__gte=cutoff)
+            .exclude(id__in=posted_offer_ids)
+            .order_by('-discount_pct', 'current_price', 'title'),
+        )
+        if not offers:
+            self.stdout.write(
+                f'Nenhuma oferta nova (últimas {INSTAGRAM_GENERATION_WINDOW_HOURS}h) '
+                'para gerar post no Instagram.',
+            )
+            log.info(
+                'instagram_posts.generation_skipped reason=no_new_offers window_hours=%s',
+                INSTAGRAM_GENERATION_WINDOW_HOURS,
+            )
+            return
+
+        self.stdout.write(
+            f'Geração de posts Instagram (janela {INSTAGRAM_GENERATION_WINDOW_HOURS}h): '
+            f'{len(offers)} oferta(s) candidata(s).',
+        )
+        log.info(
+            'instagram_posts.generation_started total_candidates=%s window_hours=%s',
+            len(offers), INSTAGRAM_GENERATION_WINDOW_HOURS,
+        )
+
+        generated = 0
+        skipped = 0
+        for offer in offers:
+            try:
+                post = generate_story_for_offer(offer)
+            except Exception as exc:
+                skipped += 1
+                self.stdout.write(
+                    self.style.WARNING(
+                        f'Oferta #{offer.id} ({offer.marketplace.code}) pulada: {exc}',
+                    ),
+                )
+                log.warning(
+                    'instagram_posts.generation_failed offer_id=%s marketplace=%s erro=%s',
+                    offer.id, offer.marketplace.code, exc,
+                )
+                continue
+            generated += 1
+            log.info(
+                'instagram_posts.generated offer_id=%s post_id=%s',
+                offer.id, post.id,
+            )
+
+        self.stdout.write(
+            f'Posts Instagram: gerados={generated}; pulados={skipped}.',
+        )
+        log.info(
+            'instagram_posts.generation_finished gerados=%s pulados=%s',
+            generated, skipped,
+        )
+
+    def _generate_instagram_story(self, offer) -> None:
+        try:
+            post = generate_story_for_offer(offer)
+        except Exception as exc:
+            self.stdout.write(
+                self.style.WARNING(f'Story Instagram não gerado: {exc}'),
+            )
+            log.warning(
+                'instagram_story.generation_failed offer_id=%s erro=%s',
+                offer.id, exc,
+            )
+            return
+
+        image_path = post.asset_paths[0] if post.asset_paths else ''
+        self.stdout.write(self.style.SUCCESS(f'Story Instagram pronto (id={post.id}).'))
+        if image_path:
+            self.stdout.write(f'Imagem: {image_path}')
+        if post.sticker_target_url:
+            self.stdout.write(f'Link do sticker: {post.sticker_target_url}')
 
     def _publish_after_capture(self, scraping_summary: dict[str, int], dry_run: bool) -> None:
         skip_reason = get_auto_publish_skip_reason(

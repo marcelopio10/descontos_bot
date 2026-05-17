@@ -36,8 +36,8 @@ ASIN_RE = re.compile(r'/dp/([A-Z0-9]{10})')
 # Cada entrada é uma fonte distinta — todas são raspadas no mesmo ciclo
 # (max_pages é ignorado neste scraper; ver scrape_daily_deals).
 DEAL_URLS: list[tuple[str, str]] = [
-    ('Ofertas do Dia',  'https://www.amazon.com.br/deals'),
-    ('Goldbox',         'https://www.amazon.com.br/gp/goldbox'),
+    #('Ofertas do Dia',  'https://www.amazon.com.br/deals'),
+    #('Goldbox',         'https://www.amazon.com.br/gp/goldbox'),
     ('Eletrônicos',     'https://www.amazon.com.br/s?i=aps&deal-type=eligible&rh=n%3A1229514011'),
     ('Esporte e Lazer', 'https://www.amazon.com.br/s?i=aps&deal-type=eligible&rh=n%3A14617390011'),
     ('Moda',            'https://www.amazon.com.br/s?k=moda&i=apparel&deal-type=eligible'),

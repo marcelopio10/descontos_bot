@@ -25,6 +25,19 @@ def generate_feed_post(top: int = 1) -> InstagramPost:
 
 def generate_story(top: int = 1) -> InstagramPost:
     offer = _get_offer_by_rank(top)
+    return generate_story_for_offer(offer)
+
+
+def generate_story_for_offer(offer: Offer) -> InstagramPost:
+    existing = (
+        InstagramPost.objects
+        .filter(format=InstagramPost.Format.STORY, primary_offer=offer)
+        .order_by('-created_at')
+        .first()
+    )
+    if existing:
+        return existing
+
     asset = render_story_asset(offer)
     return _create_post(
         post_format=InstagramPost.Format.STORY,

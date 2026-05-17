@@ -4,7 +4,7 @@ from django.utils import timezone
 
 
 SILENCE_START = time(0, 0)
-SILENCE_END = time(6, 0)
+SILENCE_END = time(8, 0)
 
 
 def is_distribution_silenced() -> bool:
@@ -13,4 +13,4 @@ def is_distribution_silenced() -> bool:
 
 
 def get_silence_error_message() -> str:
-    return 'Distribuição bloqueada pela janela de silêncio 00:00-06:00 BRT.'
+    return 'Distribuição bloqueada pela janela de silêncio 00:00-08:00 BRT.'

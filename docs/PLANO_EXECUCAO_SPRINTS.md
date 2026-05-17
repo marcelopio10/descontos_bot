@@ -386,6 +386,8 @@ python3 manage.py run_bot --dry-run --once
 
 ## Sprint 6 — Hardening do MVP
 
+Status: adiada para pós-MVP em 2026-05-17 por decisão do PO. O MVP entrou em operação real em 2026-05-15 com WhatsApp validado, compliance Amazon coberta tecnicamente (Fases 0-7 do `docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md`) e tarefas operacionais Amazon (cadastro no portal e posts manuais Instagram) já executadas ou em execução constante. Hardening adicional (blacklist de termos, score mínimo configurável, revisão extra de logs e segurança) entra no backlog pós-MVP.
+
 ### Objetivo
 
 Reduzir risco operacional antes de uso recorrente.
@@ -431,6 +433,7 @@ python3 manage.py run_bot --dry-run --once
 
 ## Backlog Pós-MVP
 
+- Hardening da Sprint 6: blacklist de termos, score mínimo por desconto/economia absoluta, melhorias de logs, revisão de arquivos sensíveis no git, revisão extra de anti-bot dos scrapers.
 - Painel customizado baseado em `design_system/refs/design_system.html`.
 - Shopee, Netshoes e Centauro.
 - Links afiliados por marketplace.

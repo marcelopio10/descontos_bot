@@ -508,7 +508,7 @@ Antes de executar qualquer fase:
 | 5 | Roteamento por canal | Sim | Concluída |
 | 6 | Instagram posts + `/links` | Não no caminho crítico | Concluída |
 | 7 | Compliance final | Sim | Concluída |
-| 8 | Contingência | Sob demanda | Pendente |
+| 8 | Contingência | Sob demanda | Pós-MVP (backlog) |
 
 **Caminho crítico:** Fase 0 -> Fase 1 -> Fase 2 -> Fase 3 -> Fase 4 -> Fase 5 -> Fase 7.
 

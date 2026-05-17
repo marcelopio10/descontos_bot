@@ -610,7 +610,7 @@ A mitigação só foi ativada após o site público passar a renderizar `/oferta
 
 Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-DD) com: o que foi adicionado, qual regra Amazon endereça, como verificar.
 
-**Estado documentado:** Fases 0, 1, 2, 3, 4 e 5 concluídas em 2026-05-05. Fases 6 e 7 concluídas em 2026-05-06.
+**Estado documentado:** Fases 0, 1, 2, 3, 4 e 5 concluídas em 2026-05-05. Fases 6 e 7 concluídas em 2026-05-06. MVP fechado operacionalmente em 2026-05-17 com Sprint 6 (hardening) e Fase 8 (contingência) movidas para backlog pós-MVP.
 
 ### 2026-05-05 · Pré-Fase 0 — git init + branch + abertura desta seção
 
@@ -733,3 +733,14 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
   - `python3 manage.py shell -c "from apps.offers.models import Offer; o = Offer.objects.exclude(slug='').first(); print(o.bridge_url)"` deve imprimir `https://descontos-bot.vercel.app/r?slug=<slug>`.
   - `python3 manage.py run_bot --dry-run --once --skip-scraping` — log `whatsapp_link_resolved` deve mostrar `route=bridge_redirect` para Amazon em canal `bridge_only`.
   - `python3 scripts/amazon_compliance_check.py` — deve passar com `ALL COMPLIANCE CHECKS PASSED`.
+
+### 2026-05-17 · Fechamento operacional do MVP
+
+- **O quê**: MVP do `descontos.bot` declarado finalizado pelo PO. Cobertura técnica de Sprints 0 a 5 do `docs/PLANO_EXECUCAO_SPRINTS.md` e Fases 0 a 7 do `docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md` está completa. Geração automática de stories Instagram durante `run_bot` ativa (commit `19e2748`). Operação real em produção desde 2026-05-15 com WhatsApp validado (envio para `descontos.bot - Homologação` e, sob `ALLOW_PRODUCTION_WHATSAPP_SEND=true`, para `descontos.bot`).
+- **Por quê**: o restante do escopo da Sprint 6 (hardening de filtros, blacklist de termos, score mínimo, revisão extra de logs e segurança) e da Fase 8 do plano Amazon (contingência por rejeição) não trava operação atual. Tarefas operacionais Amazon (cadastro do site, Instagram e canal público no portal Associates; posts manuais regulares) já foram executadas ou estão em execução contínua. Documentar o fechamento evita confusão sobre o que ainda é entregável de MVP versus backlog.
+- **Endereça**: marco operacional — todas as regras 1 a 8 da seção 21.2 permanecem cobertas pelas fases anteriores e pelo `scripts/amazon_compliance_check.py`.
+- **Status pós-MVP no backlog**: Sprint 6 (hardening), Fase 8 (contingência sob demanda), painel customizado, novos marketplaces, histórico de preço, score avançado, IA para qualidade/copy, métricas de CTR/conversão/receita.
+- **Como verificar**:
+  - `python3 manage.py check`
+  - `python3 manage.py run_bot --dry-run --once --skip-scraping`
+  - `python3 scripts/amazon_compliance_check.py` — `ALL COMPLIANCE CHECKS PASSED`.

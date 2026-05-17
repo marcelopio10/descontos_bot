@@ -2,6 +2,10 @@
 
 Plataforma local em Django para coletar, normalizar, selecionar e distribuir ofertas de marketplaces brasileiros no WhatsApp.
 
+## Status
+
+MVP fechado em 2026-05-17. Operação real em produção desde 2026-05-15 (WhatsApp validado, compliance Amazon Associates coberta tecnicamente nas Fases 0-7 — ver `docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md`). Sprint 6 (hardening: blacklist de termos, score mínimo, revisão extra de logs e segurança) e Fase 8 do plano Amazon (contingência por rejeição) ficam no backlog pós-MVP — ver `docs/PLANO_EXECUCAO_SPRINTS.md` seção "Backlog Pós-MVP".
+
 ## Stack
 
 | Componente | Tecnologia |

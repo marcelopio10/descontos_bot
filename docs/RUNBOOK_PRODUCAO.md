@@ -81,7 +81,7 @@ Se aparecer `rate-overlimit` em cascata (vários failed seguidos), interromper o
 No grupo `descontos.bot`:
 
 - [ ] Mensagens chegaram com template oficial.
-- [ ] Links Amazon `/r?slug=...` mostram disclosure e redirecionam para Amazon mantendo `tag=descontos.bot-20`.
+- [ ] Links Amazon `/r?slug=...` mostram disclosure e redirecionam para Amazon mantendo `tag=desconto.bot-20`.
 - [ ] Links Mercado Livre abrem direto na loja.
 - [ ] Sem duplicatas, sem texto proibido.
 

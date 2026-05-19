@@ -59,12 +59,12 @@ Se houve conflito de nome, aparecem variações sufixadas: `..._story-2.png`,
 ```
 Produto: Moda vintage: Manual prático para selecionar e confeccionar roupas no estilo...
 Marketplace: Amazon
-Link: https://www.amazon.com.br/dp/8520438091?linkCode=sl2&tag=descontos.bot-20&linkId=...&utm_source=instagram&utm_medium=story&utm_campaign=offer_2526
+Link: https://www.amazon.com.br/dp/8520438091?linkCode=sl2&tag=desconto.bot-20&linkId=...&utm_source=instagram&utm_medium=story&utm_campaign=offer_2526
 Gerado em: 2026-05-14 17:14
 ```
 
 - **Link** é sempre o link de afiliado direto. Para Amazon vem com o
-  `tag=descontos.bot-20` e parâmetros UTM `utm_source=instagram` e
+  `tag=desconto.bot-20` e parâmetros UTM `utm_source=instagram` e
   `utm_medium=story`. Esse é o link que **deve ir no sticker** do Story.
 - **Nunca use** o link de redirecionamento via site (`/r?slug=...`) no
   Instagram. Esse formato é exclusivo do canal WhatsApp.

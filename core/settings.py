@@ -57,7 +57,7 @@ def _resolve_site_offer_max_age_hours(default: int = 36) -> int:
 SITE_OFFER_MAX_AGE_HOURS = _resolve_site_offer_max_age_hours()
 AMAZON_AFFILIATE_TAG = os.environ.get(
     'AMAZON_AFFILIATE_TAG',
-    os.environ.get('AMAZON_ASSOCIATE_TAG', 'descontos.bot-20'),
+    os.environ.get('AMAZON_ASSOCIATE_TAG', 'desconto.bot-20'),
 )
 OFFERS_EXPORT_PATH = os.environ.get(
     'OFFERS_EXPORT_PATH',

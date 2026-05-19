@@ -57,7 +57,7 @@ O script sobe um servidor HTTP local temporário para validar as rotas públicas
 ## Amazon Associates
 
 - [ ] Home pública responde HTTP 200, exibe disclosure Amazon e não contém linguagem proibida.
-- [ ] `site/offers.json` contém disclosure e links Amazon com `tag=descontos.bot-20`.
+- [ ] `site/offers.json` contém disclosure e links Amazon com `tag=desconto.bot-20`.
 - [ ] Página de oferta responde HTTP 200 e exibe disclosure, preço com timestamp e CTA patrocinado.
 - [ ] `site/links.json` contém disclosure, 5+ itens e UTM `utm_source=instagram&utm_medium=bio`.
 - [ ] `/links` ou `/links.html` responde HTTP 200 e exibe disclosure Amazon.

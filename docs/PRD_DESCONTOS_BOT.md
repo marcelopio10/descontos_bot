@@ -513,7 +513,7 @@ Score avançado, histórico de preço e IA.
 
 ### 21.1. Contexto
 
-A conta Amazon Associates do projeto foi reprovada em revisão anterior. Esta seção cobre o trabalho contínuo de adequação às regras do programa para destravar a aprovação. A tag oficial de afiliado é `descontos.bot-20`.
+A conta Amazon Associates do projeto foi reprovada em revisão anterior. Esta seção cobre o trabalho contínuo de adequação às regras do programa para destravar a aprovação. A tag oficial de afiliado é `desconto.bot-20`.
 
 A diretiva guia desta seção é: **o projeto está em produção e não pode parar de funcionar em nenhum momento**. Toda mudança aqui descrita é aditiva e respeita a operação atual (scraping ativo, ciclo de envio WhatsApp, ofertas no banco SQLite).
 
@@ -522,7 +522,7 @@ A diretiva guia desta seção é: **o projeto está em produção e não pode pa
 Cada regra abaixo é tratada como invariante do sistema. Violação derruba a Fase 7 (compliance check) e bloqueia release.
 
 1. **Disclosure obrigatório**: toda página com link de afiliado exibe *"Como Associado da Amazon, ganho por compras qualificadas"* próximo ao primeiro link e no rodapé.
-2. **URL canônica**: `amazon.com.br/dp/<ASIN>?tag=descontos.bot-20`. Nunca URLs de busca, nunca sem tag, nunca tag de outra conta.
+2. **URL canônica**: `amazon.com.br/dp/<ASIN>?tag=desconto.bot-20`. Nunca URLs de busca, nunca sem tag, nunca tag de outra conta.
 3. **Preço com timestamp**: todo preço exibido tem rótulo "Preço coletado em DD/MM/AAAA HH:mm".
 4. **Sem mimetismo**: site não usa cor laranja Amazon, não usa logo Amazon como decoração, não imita layout. Apenas imagens dos produtos vindas do scraping.
 5. **Conteúdo original**: cada `/oferta/<slug>` tem texto descritivo escrito por nós em pt-BR. Nunca copiar literal da Amazon.
@@ -579,7 +579,7 @@ Instagram é canal aprovado para afiliado direto. Bio e stories usam links gerad
 `scripts/amazon_compliance_check.py` valida em runtime:
 
 - Home responde HTTP 200, tem disclosure visível e nenhum texto proibido.
-- `offers.json` responde HTTP 200, tem disclosure, lista de ofertas e cada link Amazon contém `tag=descontos.bot-20` (ou é `amzn.to`/`amzlink.to`).
+- `offers.json` responde HTTP 200, tem disclosure, lista de ofertas e cada link Amazon contém `tag=desconto.bot-20` (ou é `amzn.to`/`amzlink.to`).
 - `/oferta.html?slug=<slug>` responde HTTP 200, tem disclosure e timestamp de preço renderizado pelo JavaScript do site.
 - `/links.json` responde HTTP 200, tem disclosure, mínimo de 5 itens, todos com UTM rastreável.
 - `/links` ou `/links.html` responde HTTP 200 e mostra disclosure.
@@ -588,11 +588,11 @@ O script é o gate da Fase 7 do plano de execução. Em vez de suíte de testes 
 
 ### 21.7. Tag de afiliado e variáveis
 
-Variável canônica em `.env`: `AMAZON_ASSOCIATE_TAG=descontos.bot-20` (preservada — o scraper atual já depende dela). Em `core/settings.py`:
+Variável canônica em `.env`: `AMAZON_ASSOCIATE_TAG=desconto.bot-20` (preservada — o scraper atual já depende dela). Em `core/settings.py`:
 
 ```python
 PUBLIC_SITE_BASE_URL = os.environ.get("PUBLIC_SITE_BASE_URL", "https://descontos-bot.vercel.app")
-AMAZON_AFFILIATE_TAG = os.environ.get("AMAZON_ASSOCIATE_TAG", "descontos.bot-20")
+AMAZON_AFFILIATE_TAG = os.environ.get("AMAZON_ASSOCIATE_TAG", "desconto.bot-20")
 ```
 
 Toda construção de URL Amazon passa por `Offer.affiliate_link`. Hierarquia: `affiliate_url_override` (manual `amzlink.to`/`amzn.to`) > `affiliate_url` existente (formato `sl2` populado pelo scraper) > URL `?tag=` montada a partir do ASIN > `product_url`.
@@ -643,7 +643,7 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
 ### 2026-05-05 · Fase 2 — ASIN no scraper e normalização Amazon
 
 - **O quê**: a Fase 2 garante que novas ofertas Amazon sejam normalizadas com `asin`, `external_id` canônico igual ao ASIN e `price_collected_at`. Ofertas Amazon sem ASIN passam a ser rejeitadas no pipeline com log operacional claro, sem derrubar o ciclo.
-- **Por quê**: a Fase 1 corrigiu a base existente por backfill, mas a ingestão futura precisa nascer compliance. Sem ASIN não há URL canônica `amazon.com.br/dp/<ASIN>?tag=descontos.bot-20`.
+- **Por quê**: a Fase 1 corrigiu a base existente por backfill, mas a ingestão futura precisa nascer compliance. Sem ASIN não há URL canônica `amazon.com.br/dp/<ASIN>?tag=desconto.bot-20`.
 - **Endereça**: regra 2 da seção 21.2 e prepara a regra 3 para o `offers.json`/site.
 - **Como verificar**: `python3 manage.py check`; `python3 manage.py scrape_marketplace amazon --max-pages 1`; shell assert de que não existem ofertas Amazon persistidas com `asin=''`.
 
@@ -691,8 +691,8 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
 
 ### 2026-05-07 · Ajuste final das Fases 5 e 6
 
-- **O quê**: confirmada a tag canônica `descontos.bot-20`; defaults, documentação, checklist e exports do site foram alinhados. O builder de mensagens passou a usar o template neutro do PRD para canais privados e a engine Instagram passou a gerar posts e links de bio apenas com ofertas Amazon publicáveis.
-- **Por quê**: finalizar o roteamento seguro por canal e garantir que Instagram gere tráfego rastreável `instagram -> Amazon` com `tag=descontos.bot-20`.
+- **O quê**: confirmada a tag canônica `desconto.bot-20`; defaults, documentação, checklist e exports do site foram alinhados. O builder de mensagens passou a usar o template neutro do PRD para canais privados e a engine Instagram passou a gerar posts e links de bio apenas com ofertas Amazon publicáveis.
+- **Por quê**: finalizar o roteamento seguro por canal e garantir que Instagram gere tráfego rastreável `instagram -> Amazon` com `tag=desconto.bot-20`.
 - **Endereça**: regras 2, 6 e 7 da seção 21.2 e o critério de aceite da Fase 6.
 - **Como verificar**: gates das Fases 5 e 6 em `docs/AMAZON_COMPLIANCE_EXECUTION_PLAN.md`; `python3 scripts/amazon_compliance_check.py`; `python3 manage.py check`; `python3 manage.py makemigrations --dry-run`.
 
@@ -708,11 +708,11 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
 - **O quê**:
   - Seção 11 do PRD e a Fase 5 do plano de execução adotam o template enriquecido derivado de `post_generator.py` como mensagem oficial. O template não contém nenhuma das frases proibidas pela regra 7 da seção 21.2.
   - `apps/offers/services/repository.py` passa a gerar `slug` automaticamente para toda oferta capturada, não apenas Amazon. `apps/curation/services/selector.py` exclui de canais `bridge_only` qualquer oferta sem `slug` para impedir bridge URL inválida.
-  - `apps/offers/models.py` refina `affiliate_link`: respeita `affiliate_url` existente para Mercado Livre e para Amazon quando a URL já é compliance (`tag=descontos.bot-20`, `amzn.to`, `amzlink.to`). Sem cobertura, cai para a URL canônica por ASIN ou para `product_url`.
+  - `apps/offers/models.py` refina `affiliate_link`: respeita `affiliate_url` existente para Mercado Livre e para Amazon quando a URL já é compliance (`tag=desconto.bot-20`, `amzn.to`, `amzlink.to`). Sem cobertura, cai para a URL canônica por ASIN ou para `product_url`.
   - Novo canal `whatsapp_main` (homologação `descontos.bot - Homologação`) substitui `whatsapp_principal` como destino padrão de envio. Settings ganha `ALLOW_PRODUCTION_WHATSAPP_SEND` (default `false`); `run_bot` bloqueia envio real para o target de produção `descontos.bot` enquanto a flag estiver desligada.
   - `apps/offers/services/site_publisher.py` agora faz `git pull --ff-only origin <branch>` explícito antes de commitar para evitar fast-forward errado em branch não rastreada.
 - **Por quê**: alinhar a documentação à decisão do PO de manter o template enriquecido (já validado em homologação) e fechar arestas operacionais antes de encerrar o MVP — slug universal viabiliza `bridge_url` para qualquer marketplace futuro, e o lock de produção evita envio acidental antes da liberação formal.
-- **Endereça**: regras 2, 6 e 7 da seção 21.2 (template respeita linguagem proibida; `bridge_only` continua roteando para `bridge_url` válido; `affiliate_link` honra `tag=descontos.bot-20`).
+- **Endereça**: regras 2, 6 e 7 da seção 21.2 (template respeita linguagem proibida; `bridge_only` continua roteando para `bridge_url` válido; `affiliate_link` honra `tag=desconto.bot-20`).
 - **Como verificar**:
   - `python3 manage.py check`
   - `python3 manage.py makemigrations --dry-run`
@@ -726,7 +726,7 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
   - Nova rota estática `site/r.html` (rewrite `/r` no `vercel.json`): lê `offers.json`, mostra disclosure por instantes e redireciona via `window.location.replace(affiliate_link)`. Fallback por `<meta http-equiv="refresh">` para navegadores sem JS.
   - `apps/curation/services/message_builder.py` ganha log estruturado `whatsapp_link_resolved` em `get_final_url`, com `route ∈ {affiliate_direct, affiliate_direct_non_public, bridge_redirect}` e `has_affiliate_tag` para auditoria.
   - `scripts/amazon_compliance_check.py` ganha `check_redirect_page` validando HTTP 200, disclosure visível, ausência de texto proibido, presença de `window.location.replace`, referência a `affiliate_link` e fallback `<meta http-equiv="refresh">`.
-- **Por quê**: o usuário do grupo de WhatsApp clicava no link, abria a página `/oferta` e precisava clicar de novo no botão "Ver na loja" — segundo clique evitável que reduzia conversão. A bridge `/r` mantém compliance Amazon (página HTML real, com disclosure visível antes do redirect, link patrocinado preserva `tag=descontos.bot-20`) e elimina o atrito.
+- **Por quê**: o usuário do grupo de WhatsApp clicava no link, abria a página `/oferta` e precisava clicar de novo no botão "Ver na loja" — segundo clique evitável que reduzia conversão. A bridge `/r` mantém compliance Amazon (página HTML real, com disclosure visível antes do redirect, link patrocinado preserva `tag=desconto.bot-20`) e elimina o atrito.
 - **Endereça**: regras 2, 4, 6 e 7 da seção 21.2 (preserva tag canônica, não imita layout Amazon, segue `bridge_only` para grupos privados, mantém linguagem permitida).
 - **Como verificar**:
   - `python3 manage.py check`

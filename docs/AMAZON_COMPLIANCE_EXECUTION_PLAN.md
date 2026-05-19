@@ -24,7 +24,7 @@ Em qualquer conflito entre seguir este plano literalmente e preservar a operaç�
 - Branch única: `feat/amazon-compliance`.
 - Commits atômicos: um commit por sub-passo numerado.
 - Código, identificadores, comentários e commits em inglês. Conteúdo visível ao operador e público em pt-BR.
-- Tag oficial: `descontos.bot-20`, exposta via `settings.py` / `.env`, sem espalhar hardcode.
+- Tag oficial: `desconto.bot-20`, exposta via `settings.py` / `.env`, sem espalhar hardcode.
 - Toda URL Amazon canônica deve passar por `Offer.affiliate_link`.
 - WhatsApp grupo fechado nunca recebe afiliado direto; recebe somente `Offer.bridge_url`.
 - Não criar Docker, FastAPI, Uvicorn, SQLAlchemy, Jinja2, outro banco, nem suíte automatizada como entregável do MVP.
@@ -45,7 +45,7 @@ Em qualquer conflito entre seguir este plano literalmente e preservar a operaç�
 Cada regra abaixo deve ter código, conteúdo, script de compliance, verificação manual ou combinação deles.
 
 1. Disclosure obrigatório: toda página com link afiliado exibe "Como Associado da Amazon, ganho por compras qualificadas." próximo ao primeiro link e no rodapé.
-2. URL canônica: `https://www.amazon.com.br/dp/<ASIN>?tag=descontos.bot-20`. Nunca URL de busca, nunca sem tag, nunca tag de outra conta.
+2. URL canônica: `https://www.amazon.com.br/dp/<ASIN>?tag=desconto.bot-20`. Nunca URL de busca, nunca sem tag, nunca tag de outra conta.
 3. Preço com timestamp: todo preço exibido tem "Preço coletado em DD/MM/AAAA HH:mm. O valor pode variar."
 4. Sem mimetismo: site não usa cor laranja Amazon, logo Amazon decorativo ou layout que imite Amazon.
 5. Conteúdo original: cada página de oferta tem descrição própria em pt-BR; nunca copiar texto literal da Amazon.
@@ -139,7 +139,7 @@ git log --oneline -6
 
 ```python
 PUBLIC_SITE_BASE_URL = os.environ.get('PUBLIC_SITE_BASE_URL', 'https://descontos-bot.vercel.app')
-AMAZON_AFFILIATE_TAG = os.environ.get('AMAZON_AFFILIATE_TAG', 'descontos.bot-20')
+AMAZON_AFFILIATE_TAG = os.environ.get('AMAZON_AFFILIATE_TAG', 'desconto.bot-20')
 ```
 
 **Compatibilidade:** preservar `AMAZON_ASSOCIATE_TAG` se já for usado por scraper, aceitando fallback para não quebrar o fluxo atual.
@@ -174,7 +174,7 @@ o = Offer.objects.filter(marketplace__code='amazon', asin__gt='').first()
 assert o, 'no amazon offer with ASIN found'
 assert o.slug, f'slug empty for {o.id}'
 assert o.affiliate_link.startswith('https://www.amazon.com.br/dp/'), o.affiliate_link
-assert 'tag=descontos.bot-20' in o.affiliate_link, o.affiliate_link
+assert 'tag=desconto.bot-20' in o.affiliate_link, o.affiliate_link
 assert '/oferta' in o.bridge_url and 'slug=' in o.bridge_url, o.bridge_url
 print('PASS', o.affiliate_link, '|', o.bridge_url)
 "
@@ -252,7 +252,7 @@ assert data['version'] == '2.0'
 assert data['disclosure'].startswith('Como Associado')
 assert len(data['offers']) > 0
 o = data['offers'][0]
-assert 'tag=descontos.bot-20' in o['affiliate_link'] or 'amzlink.to' in o['affiliate_link'] or 'amzn.to' in o['affiliate_link']
+assert 'tag=desconto.bot-20' in o['affiliate_link'] or 'amzlink.to' in o['affiliate_link'] or 'amzn.to' in o['affiliate_link']
 assert o['detail_url'].startswith('/oferta?slug=')
 print('PASS')
 "
@@ -299,7 +299,7 @@ print('PASS')
 - [ ] Home consome `offers.json` e renderiza cards.
 - [ ] Página de oferta tem os 8 elementos obrigatórios.
 - [ ] Disclosure aparece em home, página de oferta, rodapé global e `/disclosure.html`.
-- [ ] Link Amazon contém `tag=descontos.bot-20` ou usa `amzlink.to`/`amzn.to`.
+- [ ] Link Amazon contém `tag=desconto.bot-20` ou usa `amzlink.to`/`amzn.to`.
 - [ ] Textos proibidos foram removidos.
 - [ ] Validação manual no navegador local antes do push.
 

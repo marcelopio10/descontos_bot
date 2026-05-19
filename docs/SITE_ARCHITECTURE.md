@@ -109,7 +109,7 @@ Não há legado a manter. Formato canônico:
       "original_price": 349.00,
       "discount_pct": 43.0,
       "image_url": "https://m.media-amazon.com/images/I/71xxxxxxx.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B08PZHYWJS?tag=descontos.bot-20",
+      "affiliate_link": "https://www.amazon.com.br/dp/B08PZHYWJS?tag=desconto.bot-20",
       "detail_url": "/oferta?slug=fone-bluetooth-jbl-tune-510bt-azul-123",
       "price_collected_at": "2026-05-05T13:20:00-03:00"
     }

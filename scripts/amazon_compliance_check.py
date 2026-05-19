@@ -14,7 +14,7 @@ from urllib.request import urlopen
 ROOT = Path(__file__).resolve().parents[1]
 SITE_DIR = ROOT / 'site'
 DISCLOSURE = 'Como Associado da Amazon, ganho por compras qualificadas.'
-AMAZON_TAG = 'descontos.bot-20'
+AMAZON_TAG = 'desconto.bot-20'
 PROHIBITED_TEXTS = [
     'compre aqui e ganhe desconto exclusivo',
     'cashback',

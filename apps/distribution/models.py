@@ -9,6 +9,7 @@ class SocialChannel(TimestampedModel):
         WHATSAPP = 'whatsapp', 'WhatsApp'
         WHATSAPP_GROUP = 'whatsapp_group', 'Grupo de WhatsApp'
         WHATSAPP_CHANNEL = 'whatsapp_channel', 'Canal do WhatsApp'
+        TELEGRAM_CHANNEL = 'telegram_channel', 'Canal do Telegram'
 
     class LinkStrategy(models.TextChoices):
         AFFILIATE_DIRECT = 'affiliate_direct', 'Afiliado direto'

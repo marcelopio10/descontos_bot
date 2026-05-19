@@ -10,6 +10,10 @@ from apps.curation.services.selector import (
 from apps.curation.services.telegram_message_builder import build_telegram_payload
 from apps.distribution.models import SocialChannel
 from apps.distribution.services.telegram_delivery import deliver_offer_to_telegram
+from apps.orchestration.services.scheduler import (
+    sleep_between_cycles,
+    wait_until_distribution_window,
+)
 
 
 HOMOLOG_CODE = 'telegram_homolog'
@@ -42,12 +46,13 @@ class Command(BaseCommand):
         parser.add_argument(
             '--once',
             action='store_true',
-            help='Executa 1 ciclo e sai (loop infinito é responsabilidade do operador).',
+            help='Executa 1 ciclo e sai. Sem este flag, entra em loop contínuo (estilo run_bot).',
         )
 
     def handle(self, *args, **options):
         channel_code = options['channel']
         dry_run = options['dry_run']
+        limit = options['limit']
 
         if channel_code == MAIN_CODE and not settings.ALLOW_PRODUCTION_TELEGRAM_SEND:
             raise CommandError(
@@ -65,11 +70,30 @@ class Command(BaseCommand):
         if not channel.is_enabled:
             raise CommandError(f'Canal {channel_code} desabilitado.')
 
-        offers = select_offers_for_channel(channel, get_selection_config())
-        if options['limit'] is not None:
-            offers = offers[: max(0, options['limit'])]
+        if options['once']:
+            self._run_cycle(channel=channel, dry_run=dry_run, limit=limit)
+            return
 
-        self.stdout.write(f'Selecionadas {len(offers)} oferta(s) para {channel_code}.')
+        self.stdout.write('Scheduler Telegram iniciado. Use Ctrl+C para parar.')
+        logger.info('Scheduler Telegram iniciado. dry_run=%s canal=%s', dry_run, channel.code)
+        try:
+            while True:
+                if not dry_run:
+                    wait_until_distribution_window()
+                self._run_cycle(channel=channel, dry_run=dry_run, limit=limit)
+                seconds = sleep_between_cycles()
+                self.stdout.write(f'Próximo ciclo em {seconds // 60} minutos.')
+        except KeyboardInterrupt:
+            self.stdout.write('')
+            self.stdout.write(self.style.WARNING('Scheduler Telegram interrompido pelo operador.'))
+            logger.info('Scheduler Telegram interrompido pelo operador.')
+
+    def _run_cycle(self, channel: SocialChannel, dry_run: bool, limit: int | None) -> None:
+        offers = select_offers_for_channel(channel, get_selection_config())
+        if limit is not None:
+            offers = offers[: max(0, limit)]
+
+        self.stdout.write(f'Selecionadas {len(offers)} oferta(s) para {channel.code}.')
 
         if not offers:
             return
@@ -95,6 +119,6 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS(
                 f'Ciclo concluído. Enviadas {sent_count}/{len(offers)} '
-                f'no canal {channel_code}.',
+                f'no canal {channel.code}.',
             ),
         )

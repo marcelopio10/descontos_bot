@@ -407,6 +407,41 @@ Resposta:
 }
 ```
 
+### Telegram
+
+Canal complementar pós-MVP. Dois `SocialChannel` distintos:
+
+- `telegram_homolog` → `@descontosbothmg` (homologação, envio livre).
+- `telegram_main` → `@descontosbotlgm` (produção, gate `ALLOW_PRODUCTION_TELEGRAM_SEND`).
+
+Ambos com `channel_type=telegram_channel` e `link_strategy=affiliate_direct`
+(canal Telegram é fonte aprovada pela Amazon, recebe link com `tag=desconto.bot-20`
+direto). Não usa o redirect público.
+
+Caminho técnico:
+- `TelegramClient` (`apps/distribution/services/telegram_client.py`) chama
+  `https://api.telegram.org/bot<token>/<method>` via `urllib`. Retry 5xx
+  com backoff exponencial; 429 respeita `parameters.retry_after`.
+- `TelegramRateLimiter` enforce 1 msg/seg por chat + 30/seg global em processo
+  único.
+- Mensagem em HTML (`sendPhoto` com `caption` se houver `image_url` HTTPS,
+  senão `sendMessage`). Botão inline "🛒 Comprar agora" → `offer.affiliate_link`.
+- Disclosure obrigatório:
+  - por post: linha em itálico no rodapé (`TELEGRAM_DISCLOSURE_MESSAGE`).
+  - pinned permanente: comando `pin_telegram_disclosure`.
+- Reuso total do `Delivery` (UNIQUE `(offer, social_channel)` isola WhatsApp,
+  Telegram homolog e Telegram prod).
+
+Comandos operacionais:
+
+```bash
+python3 manage.py seed_telegram_channel
+python3 manage.py pin_telegram_disclosure --channel telegram_homolog
+python3 manage.py publish_telegram --once --channel telegram_homolog
+```
+
+Runbook completo: `docs/HOWTO_PUBLICAR_OFERTAS_TELEGRAM.md`.
+
 ## 13. Orquestração e Agendamento
 
 Regras:
@@ -743,4 +778,35 @@ Cada fase de implementação registra aqui uma entrada datada (formato AAAA-MM-D
 - **Como verificar**:
   - `python3 manage.py check`
   - `python3 manage.py run_bot --dry-run --once --skip-scraping`
+  - `python3 scripts/amazon_compliance_check.py` — `ALL COMPLIANCE CHECKS PASSED`.
+
+### 2026-05-19 · Pós-MVP — poster Telegram (@descontosbotlgm)
+
+- **O quê**: novo poster paralelo ao WhatsApp publica as mesmas ofertas
+  elegíveis no Telegram em dois canais: `telegram_homolog`
+  (`@descontosbothmg`) e `telegram_main` (`@descontosbotlgm`). Sem qualquer
+  alteração em `run_bot`, `whatsapp_client`, `delivery` ou
+  `message_builder`. Novos arquivos:
+  - `apps/distribution/services/telegram_client.py`,
+    `telegram_delivery.py`, `telegram_rate_limiter.py`.
+  - `apps/curation/services/telegram_message_builder.py` (HTML, badge por
+    intensidade, botão inline "🛒 Comprar agora").
+  - Commands: `seed_telegram_channel`, `publish_telegram`,
+    `pin_telegram_disclosure`.
+  - Migration `0004_alter_socialchannel_channel_type` (adiciona choice
+    `telegram_channel`).
+- **Por quê**: ampliar alcance além do WhatsApp mantendo 100% da pipeline
+  WhatsApp intocada. Telegram é fonte aprovada Amazon e aceita
+  `tag=desconto.bot-20` direto (`link_strategy=affiliate_direct`).
+- **Endereça**: regras 1 (disclosure por post + pinned permanente),
+  2 (`tag=desconto.bot-20` em `affiliate_link`), 7 (canal cadastrado e
+  permanente) da seção 21.2.
+- **Gates de produção**: `ALLOW_PRODUCTION_TELEGRAM_SEND=true` exigido
+  para `telegram_main`. Homolog permanece livre.
+- **Como verificar**:
+  - `python3 manage.py check`
+  - `python3 manage.py seed_telegram_channel`
+  - `python3 manage.py publish_telegram --dry-run --once --channel telegram_homolog`
+  - `python3 manage.py publish_telegram --once --limit 1 --channel telegram_homolog`
+  - `python3 manage.py pin_telegram_disclosure --channel telegram_homolog`
   - `python3 scripts/amazon_compliance_check.py` — `ALL COMPLIANCE CHECKS PASSED`.

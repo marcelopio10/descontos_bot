@@ -92,6 +92,27 @@ ALLOW_PRODUCTION_WHATSAPP_SEND = os.environ.get(
     'ALLOW_PRODUCTION_WHATSAPP_SEND',
     'false',
 ).lower() in ('1', 'true', 'yes', 'on')
+
+TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+TELEGRAM_CHANNEL_ID_HOMOLOG = os.environ.get(
+    'TELEGRAM_CHANNEL_ID_HOMOLOG',
+    '@descontosbothmg',
+)
+TELEGRAM_CHANNEL_ID_MAIN = os.environ.get(
+    'TELEGRAM_CHANNEL_ID_MAIN',
+    '@descontosbotlgm',
+)
+TELEGRAM_RATE_LIMIT_SECONDS = float(
+    os.environ.get('TELEGRAM_RATE_LIMIT_SECONDS', '1.1'),
+)
+TELEGRAM_DISCLOSURE_MESSAGE = os.environ.get(
+    'TELEGRAM_DISCLOSURE_MESSAGE',
+    'Como Associado da Amazon, ganho por compras qualificadas.',
+)
+ALLOW_PRODUCTION_TELEGRAM_SEND = os.environ.get(
+    'ALLOW_PRODUCTION_TELEGRAM_SEND',
+    'false',
+).lower() in ('1', 'true', 'yes', 'on')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -231,6 +252,11 @@ LOGGING = {
             'propagate': False,
         },
         'scrapers': {
+            'handlers': ['console', 'bot_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'apps.distribution.telegram': {
             'handlers': ['console', 'bot_file'],
             'level': 'INFO',
             'propagate': False,

@@ -8,7 +8,7 @@ from apps.offers.models import Offer
 
 logger = logging.getLogger(__name__)
 
-SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━'
+SEPARATOR = '············'
 PUBLIC_PAGE_MARKETPLACES = {'amazon'}
 SPONSORED_PREFIX_RE = re.compile(
     r'^\s*an[uú]ncio\s+patrocinado\s*[\-–—:]\s*',

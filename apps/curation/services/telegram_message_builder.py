@@ -10,7 +10,7 @@ from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
 
 
-SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━'
+SEPARATOR = '············'
 CAPTION_MAX = 1024
 MESSAGE_MAX = 4096
 MIN_TITLE_WIDTH = 30

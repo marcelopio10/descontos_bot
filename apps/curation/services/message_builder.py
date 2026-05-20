@@ -1,5 +1,6 @@
 from decimal import Decimal
 import logging
+import re
 import textwrap
 
 from apps.distribution.models import SocialChannel
@@ -9,6 +10,15 @@ logger = logging.getLogger(__name__)
 
 SEPARATOR = '━━━━━━━━━━━━━━━━━━━━━'
 PUBLIC_PAGE_MARKETPLACES = {'amazon'}
+SPONSORED_PREFIX_RE = re.compile(
+    r'^\s*an[uú]ncio\s+patrocinado\s*[\-–—:]\s*',
+    flags=re.IGNORECASE,
+)
+
+
+def sanitize_offer_title(raw: str | None) -> str:
+    cleaned = SPONSORED_PREFIX_RE.sub('', raw or '')
+    return cleaned.strip()
 
 
 def build_message(offer: Offer, channel: SocialChannel) -> str:
@@ -16,7 +26,7 @@ def build_message(offer: Offer, channel: SocialChannel) -> str:
     original_price = offer.original_price or offer.current_price
     discount_pct = _format_percent_as_integer(offer.discount_pct)
     short_title = textwrap.shorten(
-        (offer.title or '').strip() or 'Produto',
+        sanitize_offer_title(offer.title) or 'Produto',
         width=80,
         placeholder='...',
     )

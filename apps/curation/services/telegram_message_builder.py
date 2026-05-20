@@ -5,7 +5,7 @@ import textwrap
 
 from django.conf import settings
 
-from apps.curation.services.message_builder import get_final_url
+from apps.curation.services.message_builder import get_final_url, sanitize_offer_title
 from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
 
@@ -62,7 +62,7 @@ def _build_caption(offer: Offer, max_len: int) -> str:
 
 def _render(offer: Offer, title_width: int) -> str:
     short_title = textwrap.shorten(
-        (offer.title or '').strip() or 'Produto',
+        sanitize_offer_title(offer.title) or 'Produto',
         width=max(title_width, MIN_TITLE_WIDTH),
         placeholder='...',
     )

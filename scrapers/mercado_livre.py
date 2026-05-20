@@ -170,6 +170,12 @@ class MercadoLivreScraper(BaseScraper):
                 return None
 
             title = title_el.get_text(strip=True)
+            title = re.sub(
+                r'^\s*an[uú]ncio\s+patrocinado\s*[\-–—:]\s*',
+                '',
+                title,
+                flags=re.IGNORECASE,
+            ).strip()
             permalink = title_el.get('href', '')
             if 'click1.mercadolivre' in permalink or 'mclics' in permalink:
                 parsed = urllib.parse.urlparse(permalink)

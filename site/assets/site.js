@@ -100,7 +100,9 @@
     grid.innerHTML = '<div class="state-message">Carregando ofertas...</div>';
     loadPayload()
       .then((payload) => {
-        offers = payload.offers || [];
+        offers = (payload.offers || []).slice().sort(
+          (a, b) => Number(b.discount_pct || 0) - Number(a.discount_pct || 0),
+        );
         count.textContent = offers.length;
         generated.textContent = payload.generated_at
           ? `Atualizado em ${new Date(payload.generated_at).toLocaleString('pt-BR')}`

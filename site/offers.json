@@ -1,9 +1,740 @@
 {
   "version": "2.0",
-  "generated_at": "2026-05-24T11:03:03.328258+00:00",
+  "generated_at": "2026-05-24T11:03:41.492847+00:00",
   "site_base_url": "https://descontos-bot.vercel.app",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "offers": [
+    {
+      "id": 184,
+      "slug": "creatina-monohidratada-pura-500g-dark-lab-unidade-sem-sabor-184",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Creatina Monohidratada Pura 500g Dark Lab Unidade Sem Sabor",
+      "short_description": "",
+      "current_price": "44.00",
+      "original_price": "129.00",
+      "discount_pct": "65.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_942122-MLA99923169249_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1W7k642",
+      "detail_url": "/oferta?slug=creatina-monohidratada-pura-500g-dark-lab-unidade-sem-sabor-184",
+      "price_collected_at": "2026-05-24T11:03:40.670320+00:00"
+    },
+    {
+      "id": 55,
+      "slug": "mini-projetor-davely-hy300-4k-android-com-wi-fi-e-bluetooth-branco-127220v-55",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluetooth Branco 127/220v",
+      "short_description": "",
+      "current_price": "189.00",
+      "original_price": "299.00",
+      "discount_pct": "36.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_902043-MLA96988011016_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1odVwvL",
+      "detail_url": "/oferta?slug=mini-projetor-davely-hy300-4k-android-com-wi-fi-e-bluetooth-branco-127220v-55",
+      "price_collected_at": "2026-05-24T11:03:40.662012+00:00"
+    },
+    {
+      "id": 752,
+      "slug": "kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original-752",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 6 Pares Meias Puma Cano Médio Alto Atoalhada Original",
+      "short_description": "",
+      "current_price": "62.00",
+      "original_price": "199.00",
+      "discount_pct": "68.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_617361-MLB54128842596_032023-AB-kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original.webp",
+      "affiliate_link": "https://meli.la/1Z9dVvj",
+      "detail_url": "/oferta?slug=kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original-752",
+      "price_collected_at": "2026-05-24T11:03:40.654200+00:00"
+    },
+    {
+      "id": 3853,
+      "slug": "smart-tv-philco-40-p40vik-led-roku-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v-3853",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
+      "short_description": "",
+      "current_price": "1299.00",
+      "original_price": "2099.00",
+      "discount_pct": "38.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_797485-MLA109558284021_032026-AB.webp",
+      "affiliate_link": "https://meli.la/1GS8Qd8",
+      "detail_url": "/oferta?slug=smart-tv-philco-40-p40vik-led-roku-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v-3853",
+      "price_collected_at": "2026-05-24T11:03:40.646796+00:00"
+    },
+    {
+      "id": 3546,
+      "slug": "kit-2-camera-wifi-externa-a28-app-icsee-dupla-visao-3mp-prova-dagua-cor-branco-3546",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 2 Câmera Wifi Externa A28 App Icsee Dupla Visão 3mp Prova Dágua Cor Branco",
+      "short_description": "",
+      "current_price": "179.00",
+      "original_price": "499.00",
+      "discount_pct": "63.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_783554-MLA95668214622_102025-AB.webp",
+      "affiliate_link": "https://meli.la/1fDAJ58",
+      "detail_url": "/oferta?slug=kit-2-camera-wifi-externa-a28-app-icsee-dupla-visao-3mp-prova-dagua-cor-branco-3546",
+      "price_collected_at": "2026-05-24T11:03:40.639962+00:00"
+    },
+    {
+      "id": 234,
+      "slug": "cadeira-escritorio-ergonomica-genebra-g500-luvinco-cor-cinza-com-suporte-lombar-estofado-mesh-malha-234",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira Escritório Ergonômica Genebra G500 Luvinco Cor Cinza Com Suporte Lombar Estofado Mesh Malha",
+      "short_description": "",
+      "current_price": "499.00",
+      "original_price": "705.00",
+      "discount_pct": "29.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_980291-MLA97021306639_112025-AB.webp",
+      "affiliate_link": "https://meli.la/22J7dRv",
+      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-g500-luvinco-cor-cinza-com-suporte-lombar-estofado-mesh-malha-234",
+      "price_collected_at": "2026-05-24T11:03:40.632613+00:00"
+    },
+    {
+      "id": 82,
+      "slug": "creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor-82",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem Sabor",
+      "short_description": "",
+      "current_price": "69.00",
+      "original_price": "159.00",
+      "discount_pct": "56.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2gafvyH",
+      "detail_url": "/oferta?slug=creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor-82",
+      "price_collected_at": "2026-05-24T11:03:40.625518+00:00"
+    },
+    {
+      "id": 3078,
+      "slug": "projetor-hy320-davely-smart-tv-android-wifi-6-390-ansi-lumens-full-hd-suporte-4k-hdmi-bluetooth-85-200-polegadas-alto-falante-com-controle-remoto-bivolt-portatil-preto-127220v-3078",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi Lumens Full Hd Suporte 4k Hdmi Bluetooth 85-200 Polegadas Alto Falante Com Controle Remoto Bivolt Portátil Preto 127/220v",
+      "short_description": "",
+      "current_price": "209.00",
+      "original_price": "299.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_747790-MLA99938308215_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2cdSReT",
+      "detail_url": "/oferta?slug=projetor-hy320-davely-smart-tv-android-wifi-6-390-ansi-lumens-full-hd-suporte-4k-hdmi-bluetooth-85-200-polegadas-alto-falante-com-controle-remoto-bivolt-portatil-preto-127220v-3078",
+      "price_collected_at": "2026-05-24T11:03:40.618313+00:00"
+    },
+    {
+      "id": 2175,
+      "slug": "kit-70-figurinhas-copa-do-mundo-2026-10-envelopes-da-panini-copa-do-mundo-2026-10-2175",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 70 Figurinhas Copa Do Mundo 2026 10 Envelopes Da Panini Copa Do Mundo 2026 10",
+      "short_description": "",
+      "current_price": "74.00",
+      "original_price": "140.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_904712-MLB111294752681_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2UNh3Gv",
+      "detail_url": "/oferta?slug=kit-70-figurinhas-copa-do-mundo-2026-10-envelopes-da-panini-copa-do-mundo-2026-10-2175",
+      "price_collected_at": "2026-05-24T11:03:40.611707+00:00"
+    },
+    {
+      "id": 3807,
+      "slug": "samsung-smart-tv-50-crystal-uhd-4k-soundbar-hw-b400fzd-3807",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Samsung Smart Tv 50 Crystal Uhd 4k + Soundbar Hw-b400f/zd",
+      "short_description": "",
+      "current_price": "2369.00",
+      "original_price": "2499.00",
+      "discount_pct": "5.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_747536-MLA99450286608_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1bYYEGi",
+      "detail_url": "/oferta?slug=samsung-smart-tv-50-crystal-uhd-4k-soundbar-hw-b400fzd-3807",
+      "price_collected_at": "2026-05-24T11:03:40.603557+00:00"
+    },
+    {
+      "id": 92,
+      "slug": "kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 2 Câmera Segurança Ip Interna Externa Wifi Icsee Infravermelho Prova Dágua - Hw Branco",
+      "short_description": "",
+      "current_price": "189.00",
+      "original_price": "339.00",
+      "discount_pct": "43.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_901090-MLA99414404486_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2CTJTHC",
+      "detail_url": "/oferta?slug=kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
+      "price_collected_at": "2026-05-24T11:03:40.596901+00:00"
+    },
+    {
+      "id": 151,
+      "slug": "bicicleta-ergometrica-fitness-para-cardio-e-musculacao-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit-151",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Vermelho 6kg Inercia Marca Sevenfit",
+      "short_description": "",
+      "current_price": "588.00",
+      "original_price": "1094.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_679526-MLA100501405537_122025-AB.webp",
+      "affiliate_link": "https://meli.la/2qukXcP",
+      "detail_url": "/oferta?slug=bicicleta-ergometrica-fitness-para-cardio-e-musculacao-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit-151",
+      "price_collected_at": "2026-05-24T11:03:40.589714+00:00"
+    },
+    {
+      "id": 850,
+      "slug": "kit-280-figurinhas-do-album-copa-do-mundo-2026-40-envelopes-850",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 280 Figurinhas Do Álbum Copa Do Mundo 2026- 40 Envelopes",
+      "short_description": "",
+      "current_price": "280.00",
+      "original_price": "400.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_833274-MLB110799343465_042026-AB.webp",
+      "affiliate_link": "https://meli.la/2E6Gh8N",
+      "detail_url": "/oferta?slug=kit-280-figurinhas-do-album-copa-do-mundo-2026-40-envelopes-850",
+      "price_collected_at": "2026-05-24T11:03:40.582452+00:00"
+    },
+    {
+      "id": 1938,
+      "slug": "impressora-3x1-multifuncional-epson-ecotank-l3250-wifi-biv-cor-preto-100v240v-1938",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Impressora 3x1 Multifuncional Epson Ecotank L3250 Wifi Biv Cor Preto 100v/240v",
+      "short_description": "",
+      "current_price": "1149.00",
+      "original_price": "1526.00",
+      "discount_pct": "24.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_809374-MLA99896103433_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1nKRPua",
+      "detail_url": "/oferta?slug=impressora-3x1-multifuncional-epson-ecotank-l3250-wifi-biv-cor-preto-100v240v-1938",
+      "price_collected_at": "2026-05-24T11:03:40.575799+00:00"
+    },
+    {
+      "id": 4033,
+      "slug": "cadeira-ergonomica-home-office-giratoria-mesh-executiva-suporte-lombar-reclinavel-regulaveis-confortavel-presidente-preto-4033",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira Ergonômica Home Office Giratória Mesh Executiva Suporte Lombar Reclinável Reguláveis Confortável Presidente Preto",
+      "short_description": "",
+      "current_price": "283.00",
+      "original_price": "405.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_610249-MLA110033515626_042026-AB.webp",
+      "affiliate_link": "https://meli.la/22zeqEw",
+      "detail_url": "/oferta?slug=cadeira-ergonomica-home-office-giratoria-mesh-executiva-suporte-lombar-reclinavel-regulaveis-confortavel-presidente-preto-4033",
+      "price_collected_at": "2026-05-24T11:03:40.569018+00:00"
+    },
+    {
+      "id": 2284,
+      "slug": "testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-precursor-da-testosterona-60-capsulas-sem-sabor-2284",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Testo Essencial - Fórmula Exclusiva Com Feno Grego + Boro + Arginina + Zma - Precursor Da Testosterona - 60 Cápsulas Sem Sabor",
+      "short_description": "",
+      "current_price": "57.00",
+      "original_price": "77.00",
+      "discount_pct": "25.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_991094-MLA97048061291_112025-AB.webp",
+      "affiliate_link": "https://meli.la/27pzNAU",
+      "detail_url": "/oferta?slug=testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-precursor-da-testosterona-60-capsulas-sem-sabor-2284",
+      "price_collected_at": "2026-05-24T11:03:40.562366+00:00"
+    },
+    {
+      "id": 2414,
+      "slug": "samsung-smart-tv-58-crystal-uhd-4k-u8500f-2025-2414",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Samsung Smart Tv 58 Crystal Uhd 4k U8500f 2025",
+      "short_description": "",
+      "current_price": "2679.00",
+      "original_price": "2841.00",
+      "discount_pct": "5.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_983598-MLA109776068834_042026-AB.webp",
+      "affiliate_link": "https://meli.la/2Eh7SWQ",
+      "detail_url": "/oferta?slug=samsung-smart-tv-58-crystal-uhd-4k-u8500f-2025-2414",
+      "price_collected_at": "2026-05-24T11:03:40.554994+00:00"
+    },
+    {
+      "id": 178,
+      "slug": "kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Rishon Azul-escuro",
+      "short_description": "",
+      "current_price": "97.00",
+      "original_price": "199.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_830343-MLA104536987832_012026-AB.webp",
+      "affiliate_link": "https://meli.la/15a74wK",
+      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
+      "price_collected_at": "2026-05-24T11:03:40.548191+00:00"
+    },
+    {
+      "id": 155,
+      "slug": "800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "800mlgarrafa Térmica Água Squeeze Inox Academiaquente E Frio",
+      "short_description": "",
+      "current_price": "32.00",
+      "original_price": "59.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_963485-MLB94579785063_102025-AB-800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio.webp",
+      "affiliate_link": "https://meli.la/19NZft3",
+      "detail_url": "/oferta?slug=800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
+      "price_collected_at": "2026-05-24T11:03:40.541131+00:00"
+    },
+    {
+      "id": 1283,
+      "slug": "secador-de-cabelo-gd031-com-5-em-1-escova-hot-air-styler-1283",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Secador De Cabelo Gd031 Com 5 Em 1 Escova Hot Air Styler",
+      "short_description": "",
+      "current_price": "358.00",
+      "original_price": "554.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_837908-MLB110568254938_052026-AB-secador-de-cabelo-gd031-com-5-em-1-escova-hot-air-styler.webp",
+      "affiliate_link": "https://meli.la/1CRpvoc",
+      "detail_url": "/oferta?slug=secador-de-cabelo-gd031-com-5-em-1-escova-hot-air-styler-1283",
+      "price_collected_at": "2026-05-24T11:03:40.534040+00:00"
+    },
+    {
+      "id": 568,
+      "slug": "perfume-masculino-arabe-salvo-intense-100ml-original-c-nf-568",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Masculino Arabe Salvo Intense 100ml Original C/ Nf",
+      "short_description": "",
+      "current_price": "149.00",
+      "original_price": "277.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_674365-MLB91144003669_082025-AB.webp",
+      "affiliate_link": "https://meli.la/11T7C3E",
+      "detail_url": "/oferta?slug=perfume-masculino-arabe-salvo-intense-100ml-original-c-nf-568",
+      "price_collected_at": "2026-05-24T11:03:40.527002+00:00"
+    },
+    {
+      "id": 75,
+      "slug": "creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po-75",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Creatina Monohidratada 250g Growth Supplements - Sem Sabor Em Pó",
+      "short_description": "",
+      "current_price": "39.00",
+      "original_price": "64.00",
+      "discount_pct": "38.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_662415-MLA97812910758_112025-AB.webp",
+      "affiliate_link": "https://meli.la/33X5Qda",
+      "detail_url": "/oferta?slug=creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po-75",
+      "price_collected_at": "2026-05-24T11:03:40.520386+00:00"
+    },
+    {
+      "id": 182,
+      "slug": "smart-tv-43-aoc-led-roku-full-hd-wi-fi-60hz-hdmi-usb-43s515578g-182",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Smart Tv 43 Aoc Led Roku Full Hd Wi-fi 60hz Hdmi Usb 43s5155/78g",
+      "short_description": "",
+      "current_price": "1304.00",
+      "original_price": "2499.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_935991-MLA99489146286_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1twzhcP",
+      "detail_url": "/oferta?slug=smart-tv-43-aoc-led-roku-full-hd-wi-fi-60hz-hdmi-usb-43s515578g-182",
+      "price_collected_at": "2026-05-24T11:03:40.513194+00:00"
+    },
+    {
+      "id": 1735,
+      "slug": "camiseta-light-t-shirt-insider-masculino-1735",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Camiseta Light T-shirt Insider Masculino",
+      "short_description": "",
+      "current_price": "69.00",
+      "original_price": "189.00",
+      "discount_pct": "63.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_988229-MLB90126926385_082025-AB-camiseta-light-t-shirt-insider-masculino.webp",
+      "affiliate_link": "https://meli.la/1BCCPZR",
+      "detail_url": "/oferta?slug=camiseta-light-t-shirt-insider-masculino-1735",
+      "price_collected_at": "2026-05-24T11:03:40.504344+00:00"
+    },
+    {
+      "id": 3013,
+      "slug": "celular-samsung-galaxy-s25-fe-5g-128gb-8gb-ram-camera-tripla-de-50128-tela-grande-de-67-azul-marinho-3013",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Celular Samsung Galaxy S25 Fe 5g, 128gb, 8gb Ram, Câmera Tripla De 50+12+8, Tela Grande De 6.7 Azul Marinho",
+      "short_description": "",
+      "current_price": "2499.00",
+      "original_price": "4499.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_993303-MLA96666133268_112025-AB.webp",
+      "affiliate_link": "https://meli.la/14H1BZT",
+      "detail_url": "/oferta?slug=celular-samsung-galaxy-s25-fe-5g-128gb-8gb-ram-camera-tripla-de-50128-tela-grande-de-67-azul-marinho-3013",
+      "price_collected_at": "2026-05-24T11:03:40.497634+00:00"
+    },
+    {
+      "id": 337,
+      "slug": "kit-700-figurinha-do-album-copa-do-mundo-2026-100-envelopes-337",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 700 Figurinha Do Álbum Copa Do Mundo 2026- 100 Envelopes",
+      "short_description": "",
+      "current_price": "624.00",
+      "original_price": "1000.00",
+      "discount_pct": "37.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_719889-MLB110799756479_042026-AB.webp",
+      "affiliate_link": "https://meli.la/129Uh3e",
+      "detail_url": "/oferta?slug=kit-700-figurinha-do-album-copa-do-mundo-2026-100-envelopes-337",
+      "price_collected_at": "2026-05-24T11:03:40.489913+00:00"
+    },
+    {
+      "id": 1774,
+      "slug": "wella-professionals-oil-reflections-mascara-capilar-500ml-1774",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Wella Professionals Oil Reflections - Máscara Capilar 500ml",
+      "short_description": "",
+      "current_price": "175.00",
+      "original_price": "304.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_970236-MLA99818626779_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2qxUBUb",
+      "detail_url": "/oferta?slug=wella-professionals-oil-reflections-mascara-capilar-500ml-1774",
+      "price_collected_at": "2026-05-24T11:03:40.482744+00:00"
+    },
+    {
+      "id": 314,
+      "slug": "secador-de-cabelos-philco-psc3500-4-em-1-dobravel-motor-bldc-prateado-bege-127v-314",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Secador De Cabelos Philco psc3500 4 Em 1 dobrável motor bldc Prateado Bege 127v",
+      "short_description": "",
+      "current_price": "425.00",
+      "original_price": "599.00",
+      "discount_pct": "29.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_871708-MLA100016593317_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1tRZ8f8",
+      "detail_url": "/oferta?slug=secador-de-cabelos-philco-psc3500-4-em-1-dobravel-motor-bldc-prateado-bege-127v-314",
+      "price_collected_at": "2026-05-24T11:03:40.475716+00:00"
+    },
+    {
+      "id": 489,
+      "slug": "kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-489",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Potes Herméticos Vidro 640ml Starhouse Marmita Forno Micro-ondas",
+      "short_description": "",
+      "current_price": "97.00",
+      "original_price": "189.00",
+      "discount_pct": "48.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_851388-MLA99988740405_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1AnMgMd",
+      "detail_url": "/oferta?slug=kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-489",
+      "price_collected_at": "2026-05-24T11:03:40.468511+00:00"
+    },
+    {
+      "id": 49,
+      "slug": "celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto-49",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
+      "short_description": "",
+      "current_price": "848.00",
+      "original_price": "1855.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1aGSJ1z",
+      "detail_url": "/oferta?slug=celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto-49",
+      "price_collected_at": "2026-05-24T11:03:40.462070+00:00"
+    },
+    {
+      "id": 158,
+      "slug": "kit-70-figurinhas-do-album-copa-do-mundo-2026-pronta-entrega-158",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 70 Figurinhas Do Álbum Copa Do Mundo 2026 Pronta Entrega",
+      "short_description": "",
+      "current_price": "70.00",
+      "original_price": "100.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_876614-MLB110800889269_042026-AB.webp",
+      "affiliate_link": "https://meli.la/12qTdXG",
+      "detail_url": "/oferta?slug=kit-70-figurinhas-do-album-copa-do-mundo-2026-pronta-entrega-158",
+      "price_collected_at": "2026-05-24T11:03:40.454592+00:00"
+    },
+    {
+      "id": 50,
+      "slug": "tenis-masculino-feminino-kappa-park-20-original-50",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Masculino Feminino Kappa Park 2.0 Original",
+      "short_description": "",
+      "current_price": "85.00",
+      "original_price": "169.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_905047-MLB101577234808_122025-AB-tnis-masculino-feminino-kappa-park-20-original.webp",
+      "affiliate_link": "https://meli.la/1rJLrgP",
+      "detail_url": "/oferta?slug=tenis-masculino-feminino-kappa-park-20-original-50",
+      "price_collected_at": "2026-05-24T11:03:40.446227+00:00"
+    },
+    {
+      "id": 68,
+      "slug": "perfume-sedutor-arabe-sabah-100ml-original-feminino-68",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
+      "short_description": "",
+      "current_price": "112.00",
+      "original_price": "230.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_753960-MLB78002610612_082024-AB.webp",
+      "affiliate_link": "https://meli.la/317ndVc",
+      "detail_url": "/oferta?slug=perfume-sedutor-arabe-sabah-100ml-original-feminino-68",
+      "price_collected_at": "2026-05-24T11:03:40.438001+00:00"
+    },
+    {
+      "id": 2026,
+      "slug": "copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas-copa-do-mundo-100-2026",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Copa Do Mundo Fifa 2026 Kit 100 Envelopes 700 Figurinhas Copa Do Mundo 2026 100",
+      "short_description": "",
+      "current_price": "624.00",
+      "original_price": "1299.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_641811-MLB111349001101_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2YdjGoS",
+      "detail_url": "/oferta?slug=copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas-copa-do-mundo-100-2026",
+      "price_collected_at": "2026-05-24T11:03:40.430719+00:00"
+    },
+    {
+      "id": 4141,
+      "slug": "fritadeira-eletrica-air-fryer-wap-cozinha-barbecue-com-painel-digital-e-12-funcoes-preto-e-cinza-127v-4141",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Fritadeira Elétrica Air Fryer Wap Cozinha Barbecue Com Painel Digital E 12 Funções Preto E Cinza 127v",
+      "short_description": "",
+      "current_price": "930.00",
+      "original_price": "1571.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_614829-MLA110791527994_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2ahqgR3",
+      "detail_url": "/oferta?slug=fritadeira-eletrica-air-fryer-wap-cozinha-barbecue-com-painel-digital-e-12-funcoes-preto-e-cinza-127v-4141",
+      "price_collected_at": "2026-05-24T11:03:40.423413+00:00"
+    },
+    {
+      "id": 4155,
+      "slug": "jogo-de-panelas-ceramico-triplo-inducao-vitrex-ecoglid-5-pecas-cor-baunilha-4155",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Panelas Cerâmico Triplo Indução Vitrex Ecoglid 5 Peças Cor Baunilha",
+      "short_description": "",
+      "current_price": "265.00",
+      "original_price": "599.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_975753-MLA108966986996_032026-AB.webp",
+      "affiliate_link": "https://meli.la/2Fwx4ws",
+      "detail_url": "/oferta?slug=jogo-de-panelas-ceramico-triplo-inducao-vitrex-ecoglid-5-pecas-cor-baunilha-4155",
+      "price_collected_at": "2026-05-24T11:03:40.416371+00:00"
+    },
+    {
+      "id": 165,
+      "slug": "celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-cinza-165",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Cinza",
+      "short_description": "",
+      "current_price": "864.00",
+      "original_price": "1855.00",
+      "discount_pct": "53.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_873869-MLA92299394919_092025-AB.webp",
+      "affiliate_link": "https://meli.la/2ET5d1X",
+      "detail_url": "/oferta?slug=celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-cinza-165",
+      "price_collected_at": "2026-05-24T11:03:40.409702+00:00"
+    },
+    {
+      "id": 2423,
+      "slug": "chuveiro-eletrico-de-parede-lorenzetti-acqua-ultra-storm-preto-7800w-220v-78-kw-2423",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Chuveiro Elétrico De Parede Lorenzetti Acqua Ultra Storm Preto 7800w 220v 7.8 Kw",
+      "short_description": "",
+      "current_price": "394.00",
+      "original_price": "488.00",
+      "discount_pct": "19.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_657298-MLU77323369647_062024-AB.webp",
+      "affiliate_link": "https://meli.la/1PFVZEW",
+      "detail_url": "/oferta?slug=chuveiro-eletrico-de-parede-lorenzetti-acqua-ultra-storm-preto-7800w-220v-78-kw-2423",
+      "price_collected_at": "2026-05-24T11:03:40.402176+00:00"
+    },
+    {
+      "id": 1232,
+      "slug": "colchao-casal-cbp-inducol-molas-ensacadas-pillow-top-138x188x27cm-branco-1232",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Colchão Casal Cbp Inducol Molas Ensacadas Pillow Top 138x188x27cm Branco",
+      "short_description": "",
+      "current_price": "810.00",
+      "original_price": "1310.00",
+      "discount_pct": "38.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_650732-MLA99929694211_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1AVT2of",
+      "detail_url": "/oferta?slug=colchao-casal-cbp-inducol-molas-ensacadas-pillow-top-138x188x27cm-branco-1232",
+      "price_collected_at": "2026-05-24T11:03:40.393484+00:00"
+    },
+    {
+      "id": 4154,
+      "slug": "smart-tv-24-led-hd-weyon-android-tv-hdmi-usb-wifi-100240v-4154",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Smart Tv 24 Led Hd Weyon Android Tv Hdmi Usb Wifi 100/240v",
+      "short_description": "",
+      "current_price": "634.00",
+      "original_price": "1299.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_946588-MLA111698961525_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1r2YWdK",
+      "detail_url": "/oferta?slug=smart-tv-24-led-hd-weyon-android-tv-hdmi-usb-wifi-100240v-4154",
+      "price_collected_at": "2026-05-24T11:03:40.386179+00:00"
+    },
+    {
+      "id": 4026,
+      "slug": "fio-eletrico-cabo-flexivel-antichamas-750v-25mm2-100m-4026",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Fio Eletrico Cabo Flexível Antichamas 750v 2,5mm² 100m",
+      "short_description": "",
+      "current_price": "223.00",
+      "original_price": "337.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_991566-MLB91106442164_092025-AB-fio-eletrico-cabo-flexivel-antichamas-750v-25mm-100m.webp",
+      "affiliate_link": "https://meli.la/1yFB9sM",
+      "detail_url": "/oferta?slug=fio-eletrico-cabo-flexivel-antichamas-750v-25mm2-100m-4026",
+      "price_collected_at": "2026-05-24T11:03:40.377078+00:00"
+    },
+    {
+      "id": 2753,
+      "slug": "multigroom-philips-mg392115-inclui-12-acessorios-preto-2753",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Multigroom Philips Mg3921/15 Inclui 12 Acessórios Preto",
+      "short_description": "",
+      "current_price": "134.00",
+      "original_price": "249.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_973475-MLA99413507292_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1584beB",
+      "detail_url": "/oferta?slug=multigroom-philips-mg392115-inclui-12-acessorios-preto-2753",
+      "price_collected_at": "2026-05-24T11:03:40.368351+00:00"
+    },
+    {
+      "id": 60,
+      "slug": "celular-samsung-galaxy-a07-256gb-8gb-camera-50mp-verde-60",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde",
+      "short_description": "",
+      "current_price": "759.00",
+      "original_price": "1142.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_778917-MLA91526601104_092025-AB.webp",
+      "affiliate_link": "https://meli.la/1rdGuwh",
+      "detail_url": "/oferta?slug=celular-samsung-galaxy-a07-256gb-8gb-camera-50mp-verde-60",
+      "price_collected_at": "2026-05-24T11:03:40.338832+00:00"
+    },
     {
       "id": 4136,
       "slug": "notebook-positivo-vision-c15m-intel-celeron-n4500-windows-11-home-8gb-ram-128gb-emmc-tela-15-full-hd-ips-antirreflexo-minitela-e-tecla-copilot-permite-upgrade-de-memoria-ssd-cinza-4136",
@@ -3335,703 +4066,6 @@
       "affiliate_link": "https://meli.la/1wrjhqz",
       "detail_url": "/oferta?slug=kit-350-figurinhas-do-album-copa-do-mundo-2026-50-envelopes-153",
       "price_collected_at": "2026-05-24T11:03:01.196199+00:00"
-    },
-    {
-      "id": 184,
-      "slug": "creatina-monohidratada-pura-500g-dark-lab-unidade-sem-sabor-184",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Creatina Monohidratada Pura 500g Dark Lab Unidade Sem Sabor",
-      "short_description": "",
-      "current_price": "44.00",
-      "original_price": "129.00",
-      "discount_pct": "65.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_942122-MLA99923169249_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1W7k642",
-      "detail_url": "/oferta?slug=creatina-monohidratada-pura-500g-dark-lab-unidade-sem-sabor-184",
-      "price_collected_at": "2026-05-24T11:03:01.189467+00:00"
-    },
-    {
-      "id": 55,
-      "slug": "mini-projetor-davely-hy300-4k-android-com-wi-fi-e-bluetooth-branco-127220v-55",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mini Projetor Davely Hy300 4k Android Com Wi-fi E Bluetooth Branco 127/220v",
-      "short_description": "",
-      "current_price": "189.00",
-      "original_price": "299.00",
-      "discount_pct": "36.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_902043-MLA96988011016_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1odVwvL",
-      "detail_url": "/oferta?slug=mini-projetor-davely-hy300-4k-android-com-wi-fi-e-bluetooth-branco-127220v-55",
-      "price_collected_at": "2026-05-24T11:03:01.182882+00:00"
-    },
-    {
-      "id": 752,
-      "slug": "kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original-752",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 6 Pares Meias Puma Cano Médio Alto Atoalhada Original",
-      "short_description": "",
-      "current_price": "62.00",
-      "original_price": "199.00",
-      "discount_pct": "68.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_617361-MLB54128842596_032023-AB-kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original.webp",
-      "affiliate_link": "https://meli.la/1Z9dVvj",
-      "detail_url": "/oferta?slug=kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original-752",
-      "price_collected_at": "2026-05-24T11:03:01.175108+00:00"
-    },
-    {
-      "id": 3853,
-      "slug": "smart-tv-philco-40-p40vik-led-roku-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v-3853",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Smart Tv Philco 40 P40vik Led Roku Dolby Audio Wi-fi Hdmi Hdr Full Hd 110/220v",
-      "short_description": "",
-      "current_price": "1299.00",
-      "original_price": "2099.00",
-      "discount_pct": "38.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_797485-MLA109558284021_032026-AB.webp",
-      "affiliate_link": "https://meli.la/1GS8Qd8",
-      "detail_url": "/oferta?slug=smart-tv-philco-40-p40vik-led-roku-dolby-audio-wi-fi-hdmi-hdr-full-hd-110220v-3853",
-      "price_collected_at": "2026-05-24T11:03:01.168137+00:00"
-    },
-    {
-      "id": 3546,
-      "slug": "kit-2-camera-wifi-externa-a28-app-icsee-dupla-visao-3mp-prova-dagua-cor-branco-3546",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 2 Câmera Wifi Externa A28 App Icsee Dupla Visão 3mp Prova Dágua Cor Branco",
-      "short_description": "",
-      "current_price": "179.00",
-      "original_price": "499.00",
-      "discount_pct": "63.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_783554-MLA95668214622_102025-AB.webp",
-      "affiliate_link": "https://meli.la/1fDAJ58",
-      "detail_url": "/oferta?slug=kit-2-camera-wifi-externa-a28-app-icsee-dupla-visao-3mp-prova-dagua-cor-branco-3546",
-      "price_collected_at": "2026-05-24T11:03:01.160527+00:00"
-    },
-    {
-      "id": 234,
-      "slug": "cadeira-escritorio-ergonomica-genebra-g500-luvinco-cor-cinza-com-suporte-lombar-estofado-mesh-malha-234",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira Escritório Ergonômica Genebra G500 Luvinco Cor Cinza Com Suporte Lombar Estofado Mesh Malha",
-      "short_description": "",
-      "current_price": "499.00",
-      "original_price": "705.00",
-      "discount_pct": "29.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_980291-MLA97021306639_112025-AB.webp",
-      "affiliate_link": "https://meli.la/22J7dRv",
-      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-g500-luvinco-cor-cinza-com-suporte-lombar-estofado-mesh-malha-234",
-      "price_collected_at": "2026-05-24T11:03:01.153060+00:00"
-    },
-    {
-      "id": 82,
-      "slug": "creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor-82",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem Sabor",
-      "short_description": "",
-      "current_price": "69.00",
-      "original_price": "159.00",
-      "discount_pct": "56.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2gafvyH",
-      "detail_url": "/oferta?slug=creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor-82",
-      "price_collected_at": "2026-05-24T11:03:01.146192+00:00"
-    },
-    {
-      "id": 3078,
-      "slug": "projetor-hy320-davely-smart-tv-android-wifi-6-390-ansi-lumens-full-hd-suporte-4k-hdmi-bluetooth-85-200-polegadas-alto-falante-com-controle-remoto-bivolt-portatil-preto-127220v-3078",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi Lumens Full Hd Suporte 4k Hdmi Bluetooth 85-200 Polegadas Alto Falante Com Controle Remoto Bivolt Portátil Preto 127/220v",
-      "short_description": "",
-      "current_price": "209.00",
-      "original_price": "299.00",
-      "discount_pct": "30.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_747790-MLA99938308215_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2cdSReT",
-      "detail_url": "/oferta?slug=projetor-hy320-davely-smart-tv-android-wifi-6-390-ansi-lumens-full-hd-suporte-4k-hdmi-bluetooth-85-200-polegadas-alto-falante-com-controle-remoto-bivolt-portatil-preto-127220v-3078",
-      "price_collected_at": "2026-05-24T11:03:01.139276+00:00"
-    },
-    {
-      "id": 2175,
-      "slug": "kit-70-figurinhas-copa-do-mundo-2026-10-envelopes-da-panini-copa-do-mundo-2026-10-2175",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 70 Figurinhas Copa Do Mundo 2026 10 Envelopes Da Panini Copa Do Mundo 2026 10",
-      "short_description": "",
-      "current_price": "74.00",
-      "original_price": "140.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_904712-MLB111294752681_052026-AB.webp",
-      "affiliate_link": "https://meli.la/2UNh3Gv",
-      "detail_url": "/oferta?slug=kit-70-figurinhas-copa-do-mundo-2026-10-envelopes-da-panini-copa-do-mundo-2026-10-2175",
-      "price_collected_at": "2026-05-24T11:03:01.131499+00:00"
-    },
-    {
-      "id": 92,
-      "slug": "kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 2 Câmera Segurança Ip Interna Externa Wifi Icsee Infravermelho Prova Dágua - Hw Branco",
-      "short_description": "",
-      "current_price": "189.00",
-      "original_price": "339.00",
-      "discount_pct": "43.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_901090-MLA99414404486_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2CTJTHC",
-      "detail_url": "/oferta?slug=kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
-      "price_collected_at": "2026-05-24T11:03:01.122974+00:00"
-    },
-    {
-      "id": 151,
-      "slug": "bicicleta-ergometrica-fitness-para-cardio-e-musculacao-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit-151",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Vermelho 6kg Inercia Marca Sevenfit",
-      "short_description": "",
-      "current_price": "588.00",
-      "original_price": "1094.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_679526-MLA100501405537_122025-AB.webp",
-      "affiliate_link": "https://meli.la/2qukXcP",
-      "detail_url": "/oferta?slug=bicicleta-ergometrica-fitness-para-cardio-e-musculacao-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit-151",
-      "price_collected_at": "2026-05-24T11:03:01.114701+00:00"
-    },
-    {
-      "id": 850,
-      "slug": "kit-280-figurinhas-do-album-copa-do-mundo-2026-40-envelopes-850",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 280 Figurinhas Do Álbum Copa Do Mundo 2026- 40 Envelopes",
-      "short_description": "",
-      "current_price": "280.00",
-      "original_price": "400.00",
-      "discount_pct": "30.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_833274-MLB110799343465_042026-AB.webp",
-      "affiliate_link": "https://meli.la/2E6Gh8N",
-      "detail_url": "/oferta?slug=kit-280-figurinhas-do-album-copa-do-mundo-2026-40-envelopes-850",
-      "price_collected_at": "2026-05-24T11:03:01.107841+00:00"
-    },
-    {
-      "id": 1938,
-      "slug": "impressora-3x1-multifuncional-epson-ecotank-l3250-wifi-biv-cor-preto-100v240v-1938",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Impressora 3x1 Multifuncional Epson Ecotank L3250 Wifi Biv Cor Preto 100v/240v",
-      "short_description": "",
-      "current_price": "1149.00",
-      "original_price": "1526.00",
-      "discount_pct": "24.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_809374-MLA99896103433_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1nKRPua",
-      "detail_url": "/oferta?slug=impressora-3x1-multifuncional-epson-ecotank-l3250-wifi-biv-cor-preto-100v240v-1938",
-      "price_collected_at": "2026-05-24T11:03:01.100316+00:00"
-    },
-    {
-      "id": 4033,
-      "slug": "cadeira-ergonomica-home-office-giratoria-mesh-executiva-suporte-lombar-reclinavel-regulaveis-confortavel-presidente-preto-4033",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira Ergonômica Home Office Giratória Mesh Executiva Suporte Lombar Reclinável Reguláveis Confortável Presidente Preto",
-      "short_description": "",
-      "current_price": "283.00",
-      "original_price": "405.00",
-      "discount_pct": "30.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_610249-MLA110033515626_042026-AB.webp",
-      "affiliate_link": "https://meli.la/22zeqEw",
-      "detail_url": "/oferta?slug=cadeira-ergonomica-home-office-giratoria-mesh-executiva-suporte-lombar-reclinavel-regulaveis-confortavel-presidente-preto-4033",
-      "price_collected_at": "2026-05-24T11:03:01.093037+00:00"
-    },
-    {
-      "id": 2284,
-      "slug": "testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-precursor-da-testosterona-60-capsulas-sem-sabor-2284",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Testo Essencial - Fórmula Exclusiva Com Feno Grego + Boro + Arginina + Zma - Precursor Da Testosterona - 60 Cápsulas Sem Sabor",
-      "short_description": "",
-      "current_price": "57.00",
-      "original_price": "77.00",
-      "discount_pct": "25.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_991094-MLA97048061291_112025-AB.webp",
-      "affiliate_link": "https://meli.la/27pzNAU",
-      "detail_url": "/oferta?slug=testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-precursor-da-testosterona-60-capsulas-sem-sabor-2284",
-      "price_collected_at": "2026-05-24T11:03:01.084636+00:00"
-    },
-    {
-      "id": 178,
-      "slug": "kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Rishon Azul-escuro",
-      "short_description": "",
-      "current_price": "97.00",
-      "original_price": "199.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_830343-MLA104536987832_012026-AB.webp",
-      "affiliate_link": "https://meli.la/15a74wK",
-      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
-      "price_collected_at": "2026-05-24T11:03:01.077510+00:00"
-    },
-    {
-      "id": 155,
-      "slug": "800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "800mlgarrafa Térmica Água Squeeze Inox Academiaquente E Frio",
-      "short_description": "",
-      "current_price": "32.00",
-      "original_price": "59.00",
-      "discount_pct": "44.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_963485-MLB94579785063_102025-AB-800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio.webp",
-      "affiliate_link": "https://meli.la/19NZft3",
-      "detail_url": "/oferta?slug=800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
-      "price_collected_at": "2026-05-24T11:03:01.070343+00:00"
-    },
-    {
-      "id": 1283,
-      "slug": "secador-de-cabelo-gd031-com-5-em-1-escova-hot-air-styler-1283",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Secador De Cabelo Gd031 Com 5 Em 1 Escova Hot Air Styler",
-      "short_description": "",
-      "current_price": "358.00",
-      "original_price": "554.00",
-      "discount_pct": "35.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_837908-MLB110568254938_052026-AB-secador-de-cabelo-gd031-com-5-em-1-escova-hot-air-styler.webp",
-      "affiliate_link": "https://meli.la/1CRpvoc",
-      "detail_url": "/oferta?slug=secador-de-cabelo-gd031-com-5-em-1-escova-hot-air-styler-1283",
-      "price_collected_at": "2026-05-24T11:03:01.063642+00:00"
-    },
-    {
-      "id": 568,
-      "slug": "perfume-masculino-arabe-salvo-intense-100ml-original-c-nf-568",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Perfume Masculino Arabe Salvo Intense 100ml Original C/ Nf",
-      "short_description": "",
-      "current_price": "149.00",
-      "original_price": "277.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_674365-MLB91144003669_082025-AB.webp",
-      "affiliate_link": "https://meli.la/11T7C3E",
-      "detail_url": "/oferta?slug=perfume-masculino-arabe-salvo-intense-100ml-original-c-nf-568",
-      "price_collected_at": "2026-05-24T11:03:01.056673+00:00"
-    },
-    {
-      "id": 75,
-      "slug": "creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po-75",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Creatina Monohidratada 250g Growth Supplements - Sem Sabor Em Pó",
-      "short_description": "",
-      "current_price": "39.00",
-      "original_price": "64.00",
-      "discount_pct": "38.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_662415-MLA97812910758_112025-AB.webp",
-      "affiliate_link": "https://meli.la/33X5Qda",
-      "detail_url": "/oferta?slug=creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po-75",
-      "price_collected_at": "2026-05-24T11:03:01.049863+00:00"
-    },
-    {
-      "id": 182,
-      "slug": "smart-tv-43-aoc-led-roku-full-hd-wi-fi-60hz-hdmi-usb-43s515578g-182",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Smart Tv 43 Aoc Led Roku Full Hd Wi-fi 60hz Hdmi Usb 43s5155/78g",
-      "short_description": "",
-      "current_price": "1304.00",
-      "original_price": "2499.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_935991-MLA99489146286_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1twzhcP",
-      "detail_url": "/oferta?slug=smart-tv-43-aoc-led-roku-full-hd-wi-fi-60hz-hdmi-usb-43s515578g-182",
-      "price_collected_at": "2026-05-24T11:03:01.042707+00:00"
-    },
-    {
-      "id": 1735,
-      "slug": "camiseta-light-t-shirt-insider-masculino-1735",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Camiseta Light T-shirt Insider Masculino",
-      "short_description": "",
-      "current_price": "69.00",
-      "original_price": "189.00",
-      "discount_pct": "63.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_988229-MLB90126926385_082025-AB-camiseta-light-t-shirt-insider-masculino.webp",
-      "affiliate_link": "https://meli.la/1BCCPZR",
-      "detail_url": "/oferta?slug=camiseta-light-t-shirt-insider-masculino-1735",
-      "price_collected_at": "2026-05-24T11:03:01.035818+00:00"
-    },
-    {
-      "id": 3013,
-      "slug": "celular-samsung-galaxy-s25-fe-5g-128gb-8gb-ram-camera-tripla-de-50128-tela-grande-de-67-azul-marinho-3013",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Celular Samsung Galaxy S25 Fe 5g, 128gb, 8gb Ram, Câmera Tripla De 50+12+8, Tela Grande De 6.7 Azul Marinho",
-      "short_description": "",
-      "current_price": "2499.00",
-      "original_price": "4499.00",
-      "discount_pct": "44.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_993303-MLA96666133268_112025-AB.webp",
-      "affiliate_link": "https://meli.la/14H1BZT",
-      "detail_url": "/oferta?slug=celular-samsung-galaxy-s25-fe-5g-128gb-8gb-ram-camera-tripla-de-50128-tela-grande-de-67-azul-marinho-3013",
-      "price_collected_at": "2026-05-24T11:03:01.028145+00:00"
-    },
-    {
-      "id": 337,
-      "slug": "kit-700-figurinha-do-album-copa-do-mundo-2026-100-envelopes-337",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 700 Figurinha Do Álbum Copa Do Mundo 2026- 100 Envelopes",
-      "short_description": "",
-      "current_price": "624.00",
-      "original_price": "1000.00",
-      "discount_pct": "37.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_719889-MLB110799756479_042026-AB.webp",
-      "affiliate_link": "https://meli.la/129Uh3e",
-      "detail_url": "/oferta?slug=kit-700-figurinha-do-album-copa-do-mundo-2026-100-envelopes-337",
-      "price_collected_at": "2026-05-24T11:03:01.020119+00:00"
-    },
-    {
-      "id": 1774,
-      "slug": "wella-professionals-oil-reflections-mascara-capilar-500ml-1774",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Wella Professionals Oil Reflections - Máscara Capilar 500ml",
-      "short_description": "",
-      "current_price": "175.00",
-      "original_price": "304.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_970236-MLA99818626779_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2qxUBUb",
-      "detail_url": "/oferta?slug=wella-professionals-oil-reflections-mascara-capilar-500ml-1774",
-      "price_collected_at": "2026-05-24T11:03:01.011992+00:00"
-    },
-    {
-      "id": 314,
-      "slug": "secador-de-cabelos-philco-psc3500-4-em-1-dobravel-motor-bldc-prateado-bege-127v-314",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Secador De Cabelos Philco psc3500 4 Em 1 dobrável motor bldc Prateado Bege 127v",
-      "short_description": "",
-      "current_price": "425.00",
-      "original_price": "599.00",
-      "discount_pct": "29.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_871708-MLA100016593317_122025-AB.webp",
-      "affiliate_link": "https://meli.la/1tRZ8f8",
-      "detail_url": "/oferta?slug=secador-de-cabelos-philco-psc3500-4-em-1-dobravel-motor-bldc-prateado-bege-127v-314",
-      "price_collected_at": "2026-05-24T11:03:01.004630+00:00"
-    },
-    {
-      "id": 489,
-      "slug": "kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-489",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 10 Potes Herméticos Vidro 640ml Starhouse Marmita Forno Micro-ondas",
-      "short_description": "",
-      "current_price": "97.00",
-      "original_price": "189.00",
-      "discount_pct": "48.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_851388-MLA99988740405_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1AnMgMd",
-      "detail_url": "/oferta?slug=kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-489",
-      "price_collected_at": "2026-05-24T11:03:00.997771+00:00"
-    },
-    {
-      "id": 49,
-      "slug": "celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto-49",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Preto",
-      "short_description": "",
-      "current_price": "848.00",
-      "original_price": "1855.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_755351-MLA99597188918_122025-AB.webp",
-      "affiliate_link": "https://meli.la/1aGSJ1z",
-      "detail_url": "/oferta?slug=celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-preto-49",
-      "price_collected_at": "2026-05-24T11:03:00.991090+00:00"
-    },
-    {
-      "id": 158,
-      "slug": "kit-70-figurinhas-do-album-copa-do-mundo-2026-pronta-entrega-158",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 70 Figurinhas Do Álbum Copa Do Mundo 2026 Pronta Entrega",
-      "short_description": "",
-      "current_price": "70.00",
-      "original_price": "100.00",
-      "discount_pct": "30.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_876614-MLB110800889269_042026-AB.webp",
-      "affiliate_link": "https://meli.la/12qTdXG",
-      "detail_url": "/oferta?slug=kit-70-figurinhas-do-album-copa-do-mundo-2026-pronta-entrega-158",
-      "price_collected_at": "2026-05-24T11:03:00.982768+00:00"
-    },
-    {
-      "id": 50,
-      "slug": "tenis-masculino-feminino-kappa-park-20-original-50",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis Masculino Feminino Kappa Park 2.0 Original",
-      "short_description": "",
-      "current_price": "85.00",
-      "original_price": "169.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_905047-MLB101577234808_122025-AB-tnis-masculino-feminino-kappa-park-20-original.webp",
-      "affiliate_link": "https://meli.la/1rJLrgP",
-      "detail_url": "/oferta?slug=tenis-masculino-feminino-kappa-park-20-original-50",
-      "price_collected_at": "2026-05-24T11:03:00.974886+00:00"
-    },
-    {
-      "id": 68,
-      "slug": "perfume-sedutor-arabe-sabah-100ml-original-feminino-68",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
-      "short_description": "",
-      "current_price": "112.00",
-      "original_price": "230.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_753960-MLB78002610612_082024-AB.webp",
-      "affiliate_link": "https://meli.la/317ndVc",
-      "detail_url": "/oferta?slug=perfume-sedutor-arabe-sabah-100ml-original-feminino-68",
-      "price_collected_at": "2026-05-24T11:03:00.966977+00:00"
-    },
-    {
-      "id": 2026,
-      "slug": "copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas-copa-do-mundo-100-2026",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Copa Do Mundo Fifa 2026 Kit 100 Envelopes 700 Figurinhas Copa Do Mundo 2026 100",
-      "short_description": "",
-      "current_price": "624.00",
-      "original_price": "1299.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_641811-MLB111349001101_052026-AB.webp",
-      "affiliate_link": "https://meli.la/2YdjGoS",
-      "detail_url": "/oferta?slug=copa-do-mundo-fifa-2026-kit-100-envelopes-700-figurinhas-copa-do-mundo-100-2026",
-      "price_collected_at": "2026-05-24T11:03:00.957495+00:00"
-    },
-    {
-      "id": 4141,
-      "slug": "fritadeira-eletrica-air-fryer-wap-cozinha-barbecue-com-painel-digital-e-12-funcoes-preto-e-cinza-127v-4141",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Fritadeira Elétrica Air Fryer Wap Cozinha Barbecue Com Painel Digital E 12 Funções Preto E Cinza 127v",
-      "short_description": "",
-      "current_price": "930.00",
-      "original_price": "1571.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_614829-MLA110791527994_052026-AB.webp",
-      "affiliate_link": "https://meli.la/2ahqgR3",
-      "detail_url": "/oferta?slug=fritadeira-eletrica-air-fryer-wap-cozinha-barbecue-com-painel-digital-e-12-funcoes-preto-e-cinza-127v-4141",
-      "price_collected_at": "2026-05-24T11:03:00.948746+00:00"
-    },
-    {
-      "id": 4155,
-      "slug": "jogo-de-panelas-ceramico-triplo-inducao-vitrex-ecoglid-5-pecas-cor-baunilha-4155",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Panelas Cerâmico Triplo Indução Vitrex Ecoglid 5 Peças Cor Baunilha",
-      "short_description": "",
-      "current_price": "265.00",
-      "original_price": "599.00",
-      "discount_pct": "55.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_975753-MLA108966986996_032026-AB.webp",
-      "affiliate_link": "https://meli.la/2Fwx4ws",
-      "detail_url": "/oferta?slug=jogo-de-panelas-ceramico-triplo-inducao-vitrex-ecoglid-5-pecas-cor-baunilha-4155",
-      "price_collected_at": "2026-05-24T11:03:00.934816+00:00"
-    },
-    {
-      "id": 165,
-      "slug": "celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-cinza-165",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Celular Samsung Galaxy A17 5g Com Ia, 128gb, 4gb Ram, Câm De 50mp, Tela De 6.7 , Nfc, Ip54 - Cinza",
-      "short_description": "",
-      "current_price": "864.00",
-      "original_price": "1855.00",
-      "discount_pct": "53.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_873869-MLA92299394919_092025-AB.webp",
-      "affiliate_link": "https://meli.la/2ET5d1X",
-      "detail_url": "/oferta?slug=celular-samsung-galaxy-a17-5g-com-ia-128gb-4gb-ram-cam-de-50mp-tela-de-67-nfc-ip54-cinza-165",
-      "price_collected_at": "2026-05-24T11:03:00.853525+00:00"
-    },
-    {
-      "id": 2423,
-      "slug": "chuveiro-eletrico-de-parede-lorenzetti-acqua-ultra-storm-preto-7800w-220v-78-kw-2423",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Chuveiro Elétrico De Parede Lorenzetti Acqua Ultra Storm Preto 7800w 220v 7.8 Kw",
-      "short_description": "",
-      "current_price": "394.00",
-      "original_price": "488.00",
-      "discount_pct": "19.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_657298-MLU77323369647_062024-AB.webp",
-      "affiliate_link": "https://meli.la/1PFVZEW",
-      "detail_url": "/oferta?slug=chuveiro-eletrico-de-parede-lorenzetti-acqua-ultra-storm-preto-7800w-220v-78-kw-2423",
-      "price_collected_at": "2026-05-24T11:03:00.845370+00:00"
-    },
-    {
-      "id": 1232,
-      "slug": "colchao-casal-cbp-inducol-molas-ensacadas-pillow-top-138x188x27cm-branco-1232",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Colchão Casal Cbp Inducol Molas Ensacadas Pillow Top 138x188x27cm Branco",
-      "short_description": "",
-      "current_price": "810.00",
-      "original_price": "1310.00",
-      "discount_pct": "38.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_650732-MLA99929694211_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1AVT2of",
-      "detail_url": "/oferta?slug=colchao-casal-cbp-inducol-molas-ensacadas-pillow-top-138x188x27cm-branco-1232",
-      "price_collected_at": "2026-05-24T11:03:00.835954+00:00"
-    },
-    {
-      "id": 4154,
-      "slug": "smart-tv-24-led-hd-weyon-android-tv-hdmi-usb-wifi-100240v-4154",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Smart Tv 24 Led Hd Weyon Android Tv Hdmi Usb Wifi 100/240v",
-      "short_description": "",
-      "current_price": "634.00",
-      "original_price": "1299.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_946588-MLA111698961525_052026-AB.webp",
-      "affiliate_link": "https://meli.la/1r2YWdK",
-      "detail_url": "/oferta?slug=smart-tv-24-led-hd-weyon-android-tv-hdmi-usb-wifi-100240v-4154",
-      "price_collected_at": "2026-05-24T11:03:00.823700+00:00"
-    },
-    {
-      "id": 4026,
-      "slug": "fio-eletrico-cabo-flexivel-antichamas-750v-25mm2-100m-4026",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Fio Eletrico Cabo Flexível Antichamas 750v 2,5mm² 100m",
-      "short_description": "",
-      "current_price": "223.00",
-      "original_price": "337.00",
-      "discount_pct": "33.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_991566-MLB91106442164_092025-AB-fio-eletrico-cabo-flexivel-antichamas-750v-25mm-100m.webp",
-      "affiliate_link": "https://meli.la/1yFB9sM",
-      "detail_url": "/oferta?slug=fio-eletrico-cabo-flexivel-antichamas-750v-25mm2-100m-4026",
-      "price_collected_at": "2026-05-24T11:03:00.815684+00:00"
-    },
-    {
-      "id": 2753,
-      "slug": "multigroom-philips-mg392115-inclui-12-acessorios-preto-2753",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Multigroom Philips Mg3921/15 Inclui 12 Acessórios Preto",
-      "short_description": "",
-      "current_price": "134.00",
-      "original_price": "249.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_973475-MLA99413507292_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1584beB",
-      "detail_url": "/oferta?slug=multigroom-philips-mg392115-inclui-12-acessorios-preto-2753",
-      "price_collected_at": "2026-05-24T11:03:00.804218+00:00"
-    },
-    {
-      "id": 60,
-      "slug": "celular-samsung-galaxy-a07-256gb-8gb-camera-50mp-verde-60",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Celular Samsung Galaxy A07 256gb 8gb Câmera 50mp Verde",
-      "short_description": "",
-      "current_price": "759.00",
-      "original_price": "1142.00",
-      "discount_pct": "33.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_778917-MLA91526601104_092025-AB.webp",
-      "affiliate_link": "https://meli.la/1rdGuwh",
-      "detail_url": "/oferta?slug=celular-samsung-galaxy-a07-256gb-8gb-camera-50mp-verde-60",
-      "price_collected_at": "2026-05-24T11:03:00.774928+00:00"
     },
     {
       "id": 4018,
@@ -8709,23 +8743,6 @@
       "price_collected_at": "2026-05-24T03:00:31.539712+00:00"
     },
     {
-      "id": 2414,
-      "slug": "samsung-smart-tv-58-crystal-uhd-4k-u8500f-2025-2414",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Samsung Smart Tv 58 Crystal Uhd 4k U8500f 2025",
-      "short_description": "",
-      "current_price": "2679.00",
-      "original_price": "2841.00",
-      "discount_pct": "5.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_983598-MLA109776068834_042026-AB.webp",
-      "affiliate_link": "https://meli.la/2Eh7SWQ",
-      "detail_url": "/oferta?slug=samsung-smart-tv-58-crystal-uhd-4k-u8500f-2025-2414",
-      "price_collected_at": "2026-05-24T03:00:31.519363+00:00"
-    },
-    {
       "id": 4139,
       "slug": "jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno-4139",
       "marketplace": {
@@ -8741,23 +8758,6 @@
       "affiliate_link": "https://meli.la/28Wzh3a",
       "detail_url": "/oferta?slug=jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno-4139",
       "price_collected_at": "2026-05-24T03:00:31.461039+00:00"
-    },
-    {
-      "id": 3807,
-      "slug": "samsung-smart-tv-50-crystal-uhd-4k-soundbar-hw-b400fzd-3807",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Samsung Smart Tv 50 Crystal Uhd 4k + Soundbar Hw-b400f/zd",
-      "short_description": "",
-      "current_price": "2369.00",
-      "original_price": "2499.00",
-      "discount_pct": "5.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_747536-MLA99450286608_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1bYYEGi",
-      "detail_url": "/oferta?slug=samsung-smart-tv-50-crystal-uhd-4k-soundbar-hw-b400fzd-3807",
-      "price_collected_at": "2026-05-24T03:00:31.441771+00:00"
     },
     {
       "id": 3455,

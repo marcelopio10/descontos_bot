@@ -1,0 +1,11 @@
+[Unit]
+Description=descontos.bot - Disparo periódico de fetch_clicks
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=30min
+Persistent=true
+Unit=fetch-clicks.service
+
+[Install]
+WantedBy=timers.target

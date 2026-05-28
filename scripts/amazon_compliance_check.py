@@ -116,6 +116,42 @@ def check_redirect_page(base_url: str, offers: list[dict]) -> None:
         '/r sem fallback meta refresh.',
     )
 
+    # Validar /r com UTMs anexadas (Sprint 2 — tracking)
+    utm_url = (
+        f'/r?slug={slug}'
+        f'&utm_source=whatsapp'
+        f'&utm_medium=social'
+        f'&utm_campaign=offer_1'
+        f'&utm_content=compliance_test'
+    )
+    try:
+        html_utm = fetch_text(base_url, utm_url)
+    except ComplianceError:
+        html_utm = fetch_text(
+            base_url,
+            utm_url.replace('/r?', '/r.html?'),
+        )
+    assert_contains(
+        html_utm,
+        'sendBeacon',
+        '/r com UTMs não contém beacon de tracking.',
+    )
+    assert_contains(
+        html_utm,
+        'utm_source',
+        '/r com UTMs não referencia utm_source no beacon.',
+    )
+    assert_contains(
+        html_utm,
+        DISCLOSURE,
+        '/r com UTMs sem disclosure Amazon.',
+    )
+    assert_contains(
+        html_utm,
+        'window.location.replace',
+        '/r com UTMs sem JS de redirect.',
+    )
+
 
 def check_links_json(base_url: str) -> None:
     payload = fetch_json(base_url, '/links.json')

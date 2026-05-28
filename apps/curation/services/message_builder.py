@@ -3,13 +3,13 @@ import logging
 import re
 import textwrap
 
-from apps.distribution.models import SocialChannel
+from apps.analytics.services.link_builder import build_referral_suffix, build_tracked_url
 from apps.offers.models import Offer
+from apps.distribution.models import SocialChannel
 
 logger = logging.getLogger(__name__)
 
 SEPARATOR = '············'
-PUBLIC_PAGE_MARKETPLACES = {'amazon'}
 SPONSORED_PREFIX_RE = re.compile(
     r'^\s*an[uú]ncio\s+patrocinado\s*[\-–—:]\s*',
     flags=re.IGNORECASE,
@@ -32,6 +32,7 @@ def build_message(offer: Offer, channel: SocialChannel) -> str:
     )
     badge = _build_badge(discount_pct)
 
+    referral_suffix = build_referral_suffix(offer, channel)
     return (
         f'📦 *{short_title}*\n\n'
         f'{badge}\n'
@@ -44,6 +45,7 @@ def build_message(offer: Offer, channel: SocialChannel) -> str:
         f'⏰ Oferta por tempo limitado!\n'
         f'{SEPARATOR}\n'
         f'🤖 @descontos.bot'
+        f'{referral_suffix}'
     )
 
 
@@ -60,7 +62,7 @@ def build_offer_message(offer: Offer, channel: SocialChannel) -> str:
 
 
 def get_final_url(offer: Offer, channel: SocialChannel) -> str:
-    final_url, route = _resolve_final_url(offer, channel)
+    final_url = build_tracked_url(offer, channel)
     logger.info(
         'whatsapp_link_resolved',
         extra={
@@ -69,22 +71,12 @@ def get_final_url(offer: Offer, channel: SocialChannel) -> str:
             'marketplace': offer.marketplace.code,
             'channel_code': channel.code,
             'link_strategy': channel.link_strategy,
-            'route': route,
+            'route': 'tracked',
             'final_url': final_url,
             'has_affiliate_tag': 'tag=' in (offer.affiliate_link or ''),
         },
     )
     return final_url
-
-
-def _resolve_final_url(offer: Offer, channel: SocialChannel) -> tuple[str, str]:
-    if channel.link_strategy == SocialChannel.LinkStrategy.AFFILIATE_DIRECT:
-        return offer.affiliate_link, 'affiliate_direct'
-    if offer.marketplace.code not in PUBLIC_PAGE_MARKETPLACES:
-        return offer.affiliate_link, 'affiliate_direct_non_public'
-    if not offer.slug:
-        raise ValueError('Oferta sem slug público não pode usar página pública.')
-    return offer.bridge_url, 'bridge_redirect'
 
 
 def _format_brl(value: Decimal) -> str:

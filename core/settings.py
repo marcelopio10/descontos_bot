@@ -134,6 +134,7 @@ INSTALLED_APPS = [
     'apps.curation',
     'apps.orchestration',
     'apps.social_posts',
+    'apps.analytics',
 ]
 
 MIDDLEWARE = [

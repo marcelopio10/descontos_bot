@@ -17,13 +17,16 @@ data/*.db-*
 data/*.sqlite3
 data/exports/
 data/logs/
+data/last_cycle.txt
 logs/
 *.log
 wa_service/auth_state/
 wa_service/auth_state.bak.*/
+wa_service/wa_session/
 wa_service/dist/
 wa_session/
 node_modules/
+/.publish-worktree/
 
 # Posts gerados localmente para publicação manual no Instagram
 media/instagram/**

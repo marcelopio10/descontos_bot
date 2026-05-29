@@ -17,6 +17,7 @@ from apps.offers.services.freshness import get_freshness_cutoff, resolve_max_age
 DISCLOSURE = 'Como Associado da Amazon, ganho por compras qualificadas.'
 DEFAULT_COMMIT_MESSAGE = 'chore: publish offers json'
 GENERATED_AT_FIELD = 'generated_at'
+PUBLISH_WORKTREE_DIRNAME = '.publish-worktree'
 log = logging.getLogger(__name__)
 
 
@@ -261,6 +262,8 @@ def _commit_and_push(public_path: Path, branch: str | None = None) -> tuple[bool
     if not repo_path.exists():
         raise GitCommandError(f'Repositório integrado não encontrado: {repo_path}')
 
+    branch = branch or settings.PUBLISH_OFFERS_BRANCH
+
     target_path = public_path.resolve()
     if not _is_relative_to(target_path, repo_path):
         public_dir = Path(settings.SITE_PUBLIC_DIR)
@@ -270,18 +273,26 @@ def _commit_and_push(public_path: Path, branch: str | None = None) -> tuple[bool
         target_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(public_path, target_path)
 
-    branch = branch or settings.PUBLISH_OFFERS_BRANCH
-    _run_git(repo_path, 'pull', '--ff-only', 'origin', branch)
-
     relative_path = target_path.relative_to(repo_path)
     git_path = relative_path.as_posix()
 
-    if not _has_diff(repo_path, git_path):
+    # Worktree dedicado em PUBLISH_OFFERS_BRANCH desacopla o publish do branch
+    # checado no working tree principal. Sem isso, se o operador trocar de
+    # branch (ex.: trabalhar numa feature), o commit do offers.json cai no
+    # branch errado e o `push origin <branch>` empurra o tip local de
+    # <branch> — que ninguém atualizou — virando no-op silencioso. Resultado:
+    # produção (Vercel deploy de origin/main) congela sem erro visível.
+    worktree_path = _ensure_publish_worktree(repo_path, branch)
+    worktree_target = worktree_path / relative_path
+    worktree_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(target_path, worktree_target)
+
+    if not _has_diff(worktree_path, git_path):
         return False, False
 
-    _run_git(repo_path, 'add', git_path)
+    _run_git(worktree_path, 'add', git_path)
     _run_git(
-        repo_path,
+        worktree_path,
         '-c',
         'user.name=descontos.bot',
         '-c',
@@ -290,8 +301,36 @@ def _commit_and_push(public_path: Path, branch: str | None = None) -> tuple[bool
         '-m',
         DEFAULT_COMMIT_MESSAGE,
     )
-    _run_git(repo_path, 'push', 'origin', branch)
+    _run_git(worktree_path, 'push', 'origin', f'HEAD:{branch}')
     return True, True
+
+
+def _ensure_publish_worktree(repo_path: Path, branch: str) -> Path:
+    """Garante worktree dedicado para o publish, em HEAD destacado no tip remoto.
+
+    O worktree fica em ``<repo>/.publish-worktree`` (ignorado pelo Git). Usamos
+    HEAD destacado em ``origin/<branch>`` em vez de ``checkout <branch>`` para
+    não colidir com o working tree principal — só um working tree pode ter
+    determinado branch checado por vez. Cada ciclo reseta o worktree a
+    ``origin/<branch>`` (descartando qualquer commit local pendente de ciclo
+    anterior), garantindo que o publish parta sempre de um ponto conhecido.
+    """
+    worktree_path = repo_path / PUBLISH_WORKTREE_DIRNAME
+    _run_git(repo_path, 'fetch', 'origin', branch)
+
+    if not (worktree_path / '.git').exists():
+        _run_git(
+            repo_path,
+            'worktree',
+            'add',
+            '--detach',
+            str(worktree_path),
+            f'origin/{branch}',
+        )
+
+    _run_git(worktree_path, 'fetch', 'origin', branch)
+    _run_git(worktree_path, 'reset', '--hard', f'origin/{branch}')
+    return worktree_path
 
 
 def _has_diff(repo_path: Path, relative_path: str) -> bool:

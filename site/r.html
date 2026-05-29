@@ -69,6 +69,10 @@
     (function () {
       var params = new URLSearchParams(window.location.search);
       var slug = params.get('slug');
+      var utmSource = params.get('utm_source') || '';
+      var utmMedium = params.get('utm_medium') || '';
+      var utmCampaign = params.get('utm_campaign') || '';
+      var utmContent = params.get('utm_content') || '';
       var statusEl = document.getElementById('status');
       var messageEl = document.getElementById('message');
       var directLink = document.getElementById('directLink');
@@ -83,6 +87,21 @@
           directLink.setAttribute('rel', 'noopener');
           directLink.removeAttribute('target');
         }
+      }
+
+      function sendBeacon(offerSlug, source, medium, campaign, content) {
+        var beaconParams = new URLSearchParams();
+        beaconParams.set('slug', offerSlug);
+        if (source) beaconParams.set('utm_source', source);
+        if (medium) beaconParams.set('utm_medium', medium);
+        if (campaign) beaconParams.set('utm_campaign', campaign);
+        if (content) beaconParams.set('utm_content', content);
+        fetch('/api/click?' + beaconParams.toString(), {
+          method: 'GET',
+          keepalive: true,
+        }).catch(function () {
+          // beacon silencioso — não interfere no redirect
+        });
       }
 
       if (!slug) {
@@ -103,6 +122,7 @@
             return;
           }
           var target = offer.affiliate_link;
+          sendBeacon(slug, utmSource, utmMedium, utmCampaign, utmContent);
           if (refreshMeta) refreshMeta.setAttribute('content', '0; url=' + target);
           if (directLink) directLink.setAttribute('href', target);
           window.location.replace(target);

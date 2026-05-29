@@ -1,0 +1,11 @@
+[Unit]
+Description=descontos.bot - Sincroniza cliques do Vercel KV para o banco local
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/descontos.bot
+EnvironmentFile=%h/descontos.bot/.env
+ExecStart=%h/descontos.bot/.venv/bin/python3 manage.py fetch_clicks --limit 500 --clear
+StandardOutput=append:%h/descontos.bot/logs/fetch-clicks.log
+StandardError=append:%h/descontos.bot/logs/fetch-clicks.log

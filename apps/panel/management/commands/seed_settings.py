@@ -43,6 +43,16 @@ class Command(BaseCommand):
                 'value': 'true',
                 'description': 'Permite link original quando afiliado não existir.',
             },
+            {
+                'key': 'referral_enabled',
+                'value': 'true',
+                'description': 'Anexa convite de compartilhamento (hub /links) a cada N mensagens.',
+            },
+            {
+                'key': 'referral_every_n',
+                'value': '5',
+                'description': 'Insere sufixo de referral quando offer.id % N == 0. Use 0 para desabilitar via cadência.',
+            },
         ]
 
         for data in settings:

@@ -17,6 +17,8 @@
  * Compatível com a estrutura de escrita do endpoint /api/click (T7 — Didi).
  */
 
+import { kv } from '@vercel/kv';
+
 // Intervalo de 7 dias em ms
 var SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -29,11 +31,6 @@ export default async function handler(req) {
   }
 
   try {
-    // Verifica se o KV está disponível
-    if (typeof kv === 'undefined') {
-      return fallbackResponse();
-    }
-
     var now = Date.now();
     var cutoff = now - SEVEN_DAYS_MS;
 
@@ -117,23 +114,6 @@ function emptyResponse() {
       total_clicks_7d: 0,
       total_offers_7d: null,
       generated_at: new Date().toISOString(),
-    }),
-    {
-      status: 200,
-      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-    }
-  );
-}
-
-function fallbackResponse() {
-  return new Response(
-    JSON.stringify({
-      clicks_by_channel: [],
-      top_offers: [],
-      total_clicks_7d: 0,
-      total_offers_7d: null,
-      generated_at: new Date().toISOString(),
-      notice: 'Vercel KV não configurado. Configure a integração KV no dashboard da Vercel.',
     }),
     {
       status: 200,

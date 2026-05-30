@@ -113,6 +113,10 @@ ALLOW_PRODUCTION_TELEGRAM_SEND = os.environ.get(
     'ALLOW_PRODUCTION_TELEGRAM_SEND',
     'false',
 ).lower() in ('1', 'true', 'yes', 'on')
+
+VERCEL_KV_REST_API_URL = os.environ.get('VERCEL_KV_REST_API_URL', '')
+VERCEL_KV_REST_API_TOKEN = os.environ.get('VERCEL_KV_REST_API_TOKEN', '')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

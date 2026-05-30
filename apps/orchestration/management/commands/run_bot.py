@@ -1,5 +1,6 @@
 import logging
 from datetime import timedelta
+from pathlib import Path
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
@@ -35,6 +36,7 @@ log = logging.getLogger(__name__)
 DEFAULT_CHANNEL_CODE = 'whatsapp_main'
 PRODUCTION_WHATSAPP_TARGET = 'descontos.bot'
 INSTAGRAM_GENERATION_WINDOW_HOURS = 36
+HEALTHCHECK_FILE = Path(settings.BASE_DIR) / 'data' / 'last_cycle.txt'
 
 
 class Command(BaseCommand):
@@ -156,6 +158,7 @@ class Command(BaseCommand):
         if not offers:
             self.stdout.write(self.style.WARNING('Nenhuma oferta elegível encontrada.'))
             log.info('Ciclo finalizado sem ofertas elegíveis.')
+            self._write_healthcheck()
             return
 
         if not dry_run and is_distribution_silenced():
@@ -190,6 +193,14 @@ class Command(BaseCommand):
                 ),
             )
         log.info('Ciclo finalizado. ofertas_selecionadas=%s', len(offers))
+        self._write_healthcheck()
+
+    def _write_healthcheck(self) -> None:
+        try:
+            HEALTHCHECK_FILE.parent.mkdir(parents=True, exist_ok=True)
+            HEALTHCHECK_FILE.write_text(timezone.now().isoformat() + '\n')
+        except Exception as exc:
+            log.warning('healthcheck.write_failed erro=%s', exc)
 
     def _run_scraping(self, max_pages: int) -> dict[str, int]:
         self.stdout.write('Início da captura de ofertas nos marketplaces.')

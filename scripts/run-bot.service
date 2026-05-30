@@ -1,0 +1,17 @@
+[Unit]
+Description=descontos.bot - Scheduler local (scraping + curadoria + envio)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/descontos.bot
+EnvironmentFile=%h/descontos.bot/.env
+ExecStart=%h/descontos.bot/.venv/bin/python3 manage.py run_bot
+Restart=always
+RestartSec=30
+StandardOutput=append:%h/descontos.bot/logs/run-bot.log
+StandardError=append:%h/descontos.bot/logs/run-bot.log
+
+[Install]
+WantedBy=default.target

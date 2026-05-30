@@ -7,7 +7,8 @@ export default async function handler(req) {
     return new Response(null, { status: 405 });
   }
 
-  const { searchParams } = new URL(req.url);
+  const queryString = req.url.split('?')[1] || '';
+  const searchParams = new URLSearchParams(queryString);
   const slug = searchParams.get('slug');
 
   if (!slug) {

@@ -1,4 +1,8 @@
+import logging
+from datetime import timedelta
+
 from django.db import transaction
+from django.utils import timezone
 
 from apps.offers.models import Offer
 from apps.social_posts.models import InstagramPost
@@ -9,6 +13,10 @@ from apps.social_posts.services.image_renderer import (
     render_story_asset,
 )
 from apps.social_posts.services.link_builder import build_instagram_tracked_url
+
+logger = logging.getLogger(__name__)
+
+FRESHNESS_HOURS = 36
 
 
 def generate_feed_post(top: int = 1) -> InstagramPost:
@@ -83,6 +91,7 @@ def _create_post(
 
 def _get_ranked_offers(limit: int) -> list[Offer]:
     generated_offer_ids = _get_generated_offer_ids()
+    cutoff = timezone.now() - timedelta(hours=FRESHNESS_HOURS)
     offers = list(
         Offer.objects
         .select_related('marketplace')
@@ -91,6 +100,7 @@ def _get_ranked_offers(limit: int) -> list[Offer]:
         .exclude(slug='')
         .exclude(marketplace__code='amazon', asin='')
         .exclude(id__in=generated_offer_ids)
+        .filter(created_at__gte=cutoff)
         .order_by('-discount_pct', 'current_price', 'title')[:limit],
     )
     if len(offers) < limit:

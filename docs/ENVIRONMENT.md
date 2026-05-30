@@ -40,5 +40,5 @@ python3 manage.py seed_initial_data
 - `PUBLISH_OFFERS_PUSH=false` atualiza `site/offers.json` localmente quando houver diff, sem commit nem push.
 - `PUBLISH_OFFERS_BRANCH` define a branch usada no `git push`; o padrão é `main`.
 - `OFFERS_JSON_OUTPUT_PATH` define o `offers.json` consumido pelo site estático.
-- Sessões do WhatsApp ficam em `wa_service/auth_state/` e são ignoradas pelo git.
+- Sessões do WhatsApp do Baileys ficam em `wa_service/auth_state/` por padrão (`WA_AUTH_DIR` pode sobrescrever) e são ignoradas pelo git; o `wa_session/` da raiz é perfil de navegador legado.
 - A prévia operacional está documentada em `docs/DRY_RUN.md`.

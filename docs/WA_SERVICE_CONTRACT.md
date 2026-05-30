@@ -7,8 +7,9 @@ O `wa_service/` é o serviço Node.js auxiliar responsável pelo envio no WhatsA
 - Node.js 20 LTS.
 - Porta local fixa atual: `8787`.
 - Base URL: `http://127.0.0.1:8787`.
-- Auth state local: `wa_service/auth_state/`.
-- O diretório `wa_service/auth_state/` contém sessão WhatsApp e não deve ser versionado.
+- Auth state local do Baileys: `wa_service/auth_state/` por padrão (`WA_AUTH_DIR` pode sobrescrever).
+- O diretório `wa_service/auth_state/` contém a sessão WhatsApp do Baileys e não deve ser versionado.
+- O diretório `wa_session/` na raiz é perfil/sessão de navegador legado; não é o mesmo formato usado pelo Baileys.
 
 ## Comandos
 

@@ -14,7 +14,11 @@ import pino from "pino";
 
 const logger = pino({ level: "silent" });
 
-const AUTH_DIR = path.resolve("auth_state");
+const DEFAULT_AUTH_DIR = "auth_state";
+
+export function getAuthDir(): string {
+  return path.resolve(process.env.WA_AUTH_DIR || DEFAULT_AUTH_DIR);
+}
 
 export interface SendItem {
   id: string;
@@ -58,7 +62,7 @@ export function getStatus() {
 }
 
 export async function connect(): Promise<void> {
-  const { state, saveCreds } = await useMultiFileAuthState(AUTH_DIR);
+  const { state, saveCreds } = await useMultiFileAuthState(getAuthDir());
   const { version } = await fetchLatestBaileysVersion();
 
   sock = makeWASocket({

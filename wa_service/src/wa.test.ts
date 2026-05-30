@@ -17,7 +17,7 @@ vi.mock("@whiskeysockets/baileys", () => ({
 vi.mock("qrcode-terminal", () => ({ default: { generate: vi.fn() } }));
 vi.mock("pino", () => ({ default: vi.fn(() => ({ level: "silent" })) }));
 
-import { listGroups, resolveGroupJid, sendImage, sendText } from "./wa.js";
+import { getAuthDir, listGroups, resolveGroupJid, sendImage, sendText } from "./wa.js";
 
 const mockSock = {
   groupFetchAllParticipating: vi.fn(),
@@ -28,6 +28,18 @@ const mockSock = {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  delete process.env.WA_AUTH_DIR;
+});
+
+describe("getAuthDir", () => {
+  it("usa auth_state como diretório padrão da sessão Baileys", () => {
+    expect(getAuthDir()).toBe(path.resolve("auth_state"));
+  });
+
+  it("permite sobrescrever o diretório via WA_AUTH_DIR", () => {
+    process.env.WA_AUTH_DIR = "../wa_session";
+    expect(getAuthDir()).toBe(path.resolve("../wa_session"));
+  });
 });
 
 describe("resolveGroupJid", () => {

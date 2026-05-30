@@ -22,14 +22,7 @@ import { kv } from '@vercel/kv';
 // Intervalo de 7 dias em ms
 var SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
 
-export default async function handler(req) {
-  if (req.method !== 'GET') {
-    return new Response(JSON.stringify({ error: 'Method not allowed' }), {
-      status: 405,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
-
+export async function GET() {
   try {
     var now = Date.now();
     var cutoff = now - SEVEN_DAYS_MS;

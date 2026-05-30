@@ -2,13 +2,8 @@ import { kv } from '@vercel/kv';
 
 const EVENTS_KEY = 'clicks:events';
 
-export default async function handler(req) {
-  if (req.method !== 'GET') {
-    return new Response(null, { status: 405 });
-  }
-
-  const queryString = req.url.split('?')[1] || '';
-  const searchParams = new URLSearchParams(queryString);
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
   const slug = searchParams.get('slug');
 
   if (!slug) {
@@ -22,8 +17,8 @@ export default async function handler(req) {
     utm_campaign: searchParams.get('utm_campaign') || '',
     utm_content: searchParams.get('utm_content') || '',
     clicked_at: new Date().toISOString(),
-    user_agent: req.headers.get('user-agent') || '',
-    ip_hash: hash_ip(get_client_ip(req)),
+    user_agent: request.headers.get('user-agent') || '',
+    ip_hash: hash_ip(get_client_ip(request)),
     offer_title: '',
   };
 
@@ -36,16 +31,16 @@ export default async function handler(req) {
   return new Response(null, { status: 204 });
 }
 
-function get_client_ip(req) {
+function get_client_ip(request) {
   return (
-    req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-    req.headers.get('x-real-ip') ||
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+    request.headers.get('x-real-ip') ||
     'unknown'
   );
 }
 
 function hash_ip(ip) {
-  // hash simples para privacidade — SHA-256 truncado
+  // hash simples para privacidade — não é criptográfico, só ofusca pra evitar PII direto
   let hash = 0;
   const str = `descontos.bot:${ip}:click`;
   for (let i = 0; i < str.length; i++) {

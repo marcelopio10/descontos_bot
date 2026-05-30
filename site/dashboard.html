@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | descontos.bot</title>
+  <meta name="description" content="Dashboard de métricas do descontos.bot: cliques por canal, top ofertas e CTR.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    .dashboard-shell {
+      padding: 52px 0 84px;
+    }
+    .dashboard-shell h1 {
+      margin: 12px 0 0;
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 700;
+      line-height: 1.02;
+    }
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .kpi-card {
+      padding: 22px;
+      background: rgba(22, 26, 34, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    .kpi-label {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .kpi-value {
+      display: block;
+      margin-top: 10px;
+      font-family: 'Space Mono', monospace;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--yellow);
+      line-height: 1;
+    }
+    .kpi-sub {
+      display: block;
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .panel {
+      margin-top: 28px;
+    }
+    .panel-header {
+      margin-bottom: 14px;
+      font-family: 'Space Mono', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: rgba(22, 26, 34, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .data-table th,
+    .data-table td {
+      padding: 12px 16px;
+      text-align: left;
+      font-size: 13px;
+      border-bottom: 1px solid var(--line);
+    }
+    .data-table th {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--dark2);
+    }
+    .data-table td {
+      color: var(--white);
+    }
+    .data-table .num {
+      text-align: right;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      color: var(--yellow);
+    }
+    .data-table .pct {
+      text-align: right;
+      font-family: 'Space Mono', monospace;
+      color: var(--cyan);
+    }
+    .data-table .offer-title-cell {
+      max-width: 420px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .state-message {
+      grid-column: 1 / -1;
+      padding: 34px;
+      background: var(--dark2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+      text-align: center;
+    }
+    .notice {
+      margin-top: 28px;
+      padding: 14px 18px;
+      background: rgba(255, 225, 77, 0.08);
+      border: 1px solid rgba(255, 225, 77, 0.24);
+      border-radius: 12px;
+      color: var(--yellow);
+      font-size: 13px;
+    }
+    .notice a {
+      color: var(--yellow);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">descontos<span>.bot</span></a>
+    <nav class="navlinks" aria-label="Navegação principal">
+      <a href="/">Ofertas</a>
+      <a href="/links">Links</a>
+      <a href="/sobre">Sobre</a>
+      <a href="/disclosure">Disclosure</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="dashboard-shell" aria-live="polite">
+      <p class="eyebrow">Métricas</p>
+      <h1>Dashboard</h1>
+
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <span class="kpi-label">Cliques (7d)</span>
+          <span class="kpi-value" id="totalClicks">--</span>
+          <span class="kpi-sub" id="clicksSub">Carregando...</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">CTR</span>
+          <span class="kpi-value" id="ctr">--</span>
+          <span class="kpi-sub">Cliques / ofertas disponíveis</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Ofertas no ar</span>
+          <span class="kpi-value" id="totalOffers">--</span>
+          <span class="kpi-sub" id="offersSub">Carregando...</span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-header">Cliques por canal (7 dias)</h2>
+        <div id="channelTable"></div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-header">Top 10 ofertas (7 dias)</h2>
+        <div id="topOffersTable"></div>
+      </div>
+
+      <div class="notice">
+        Este dashboard depende do Vercel KV. Configure a integração no dashboard da Vercel e
+        verifique se o endpoint <code>/api/click</code> está registrando eventos.
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Como Associado da Amazon, ganho por compras qualificadas.</p>
+    <p>Os preços podem mudar depois do horário de coleta. Consulte a loja antes de finalizar a compra.</p>
+  </footer>
+
+  <script>
+    (function () {
+      function formatNum(n) {
+        if (n === null || n === undefined) return '--';
+        return Number(n).toLocaleString('pt-BR');
+      }
+
+      function formatPct(n) {
+        if (n === null || n === undefined) return '--';
+        return Number(n).toFixed(2) + '%';
+      }
+
+      function escapeText(s) {
+        var div = document.createElement('div');
+        div.textContent = s || '';
+        return div.innerHTML;
+      }
+
+      function renderChannelTable(channels, total) {
+        var container = document.getElementById('channelTable');
+        if (!channels || channels.length === 0) {
+          container.innerHTML = '<div class="state-message">Nenhum clique registrado nos últimos 7 dias.</div>';
+          return;
+        }
+        var rows = channels.map(function (ch) {
+          var share = total > 0 ? ((ch.count / total) * 100).toFixed(1) : '0.0';
+          return '<tr>' +
+            '<td>' + escapeText(ch.channel) + '</td>' +
+            '<td class="num">' + formatNum(ch.count) + '</td>' +
+            '<td class="pct">' + share + '%</td>' +
+            '</tr>';
+        }).join('');
+        container.innerHTML = '<table class="data-table">' +
+          '<thead><tr><th>Canal</th><th>Cliques</th><th>Share</th></tr></thead>' +
+          '<tbody>' + rows + '</tbody>' +
+          '</table>';
+      }
+
+      function renderTopOffers(offers) {
+        var container = document.getElementById('topOffersTable');
+        if (!offers || offers.length === 0) {
+          container.innerHTML = '<div class="state-message">Nenhuma oferta com cliques nos últimos 7 dias.</div>';
+          return;
+        }
+        var rows = offers.map(function (o, i) {
+          return '<tr>' +
+            '<td>' + (i + 1) + '</td>' +
+            '<td class="offer-title-cell" title="' + escapeText(o.title) + '">' + escapeText(o.title) + '</td>' +
+            '<td class="num">' + formatNum(o.count) + '</td>' +
+            '</tr>';
+        }).join('');
+        container.innerHTML = '<table class="data-table">' +
+          '<thead><tr><th>#</th><th>Oferta</th><th>Cliques</th></tr></thead>' +
+          '<tbody>' + rows + '</tbody>' +
+          '</table>';
+      }
+
+      function updateKPIs(clicksTotal, offersTotal) {
+        document.getElementById('totalClicks').textContent = formatNum(clicksTotal);
+        document.getElementById('clicksSub').textContent = 'Últimos 7 dias';
+        document.getElementById('totalOffers').textContent = formatNum(offersTotal);
+        document.getElementById('offersSub').textContent = 'Catálogo atual';
+        if (offersTotal > 0 && clicksTotal !== null) {
+          document.getElementById('ctr').textContent = formatPct((clicksTotal / offersTotal) * 100);
+        } else {
+          document.getElementById('ctr').textContent = '--';
+        }
+      }
+
+      // Carrega offers.json para ter o total de ofertas
+      function loadOffersCount() {
+        return fetch('offers.json', { cache: 'no-store' })
+          .then(function (r) { return r.json(); })
+          .then(function (payload) {
+            return (payload && payload.offers) ? payload.offers.length : 0;
+          })
+          .catch(function () { return 0; });
+      }
+
+      // Carrega métricas de cliques
+      function loadClicks() {
+        return fetch('/api/clicks', { cache: 'no-store' })
+          .then(function (r) {
+            if (!r.ok) throw new Error('API ' + r.status);
+            return r.json();
+          })
+          .catch(function () {
+            return { clicks_by_channel: [], top_offers: [], total_clicks_7d: 0, notice: 'API indisponível' };
+          });
+      }
+
+      Promise.all([loadClicks(), loadOffersCount()])
+        .then(function (results) {
+          var clicksData = results[0];
+          var offersTotal = results[1];
+
+          updateKPIs(clicksData.total_clicks_7d, offersTotal);
+          renderChannelTable(clicksData.clicks_by_channel, clicksData.total_clicks_7d);
+          renderTopOffers(clicksData.top_offers);
+        })
+        .catch(function () {
+          document.getElementById('totalClicks').textContent = 'Erro';
+          document.getElementById('ctr').textContent = 'Erro';
+          document.getElementById('totalOffers').textContent = 'Erro';
+          document.getElementById('channelTable').innerHTML = '<div class="state-message">Falha ao carregar métricas.</div>';
+          document.getElementById('topOffersTable').innerHTML = '<div class="state-message">Falha ao carregar métricas.</div>';
+        });
+    })();
+  </script>
+</body>
+</html>

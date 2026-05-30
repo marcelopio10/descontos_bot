@@ -6,6 +6,8 @@
     { "source": "/sobre", "destination": "/sobre.html" },
     { "source": "/disclosure", "destination": "/disclosure.html" },
     { "source": "/r", "destination": "/r.html" },
-    { "source": "/api/click", "destination": "/api/click.js" }
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/api/click", "destination": "/api/click.js" },
+    { "source": "/api/clicks", "destination": "/api/clicks.js" }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "name": "descontos-bot-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site público descontos.bot — funções serverless de tracking e dashboard.",
+  "dependencies": {
+    "@vercel/kv": "^3.0.0"
+  }
+}

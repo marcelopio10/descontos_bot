@@ -2,7 +2,7 @@ import { kv } from '@vercel/kv';
 
 const EVENTS_KEY = 'clicks:events';
 
-export async function GET(request) {
+async function handle(request) {
   const { searchParams } = new URL(request.url);
   const slug = searchParams.get('slug');
 
@@ -30,6 +30,9 @@ export async function GET(request) {
 
   return new Response(null, { status: 204 });
 }
+
+export const GET = handle;
+export const POST = handle;
 
 function get_client_ip(request) {
   return (

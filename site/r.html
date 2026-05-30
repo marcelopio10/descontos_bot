@@ -96,12 +96,14 @@
         if (medium) beaconParams.set('utm_medium', medium);
         if (campaign) beaconParams.set('utm_campaign', campaign);
         if (content) beaconParams.set('utm_content', content);
-        fetch('/api/click?' + beaconParams.toString(), {
-          method: 'GET',
-          keepalive: true,
-        }).catch(function () {
-          // beacon silencioso — não interfere no redirect
-        });
+        var url = '/api/click?' + beaconParams.toString();
+        // navigator.sendBeacon é o único caminho confiável durante unload —
+        // o fetch com keepalive é cancelado pelo window.location.replace seguinte.
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(url);
+        } else {
+          fetch(url, { method: 'POST', keepalive: true }).catch(function () {});
+        }
       }
 
       if (!slug) {

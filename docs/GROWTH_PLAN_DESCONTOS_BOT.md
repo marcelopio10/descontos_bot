@@ -359,3 +359,42 @@ InstagramPost.status  →  rotina editorial
 ## 8. Próximo Passo
 
 Aguardar ordem do PO para iniciar a **Sprint 2: Métricas, UTMs e Rastreamento de Cliques.**
+
+---
+
+## 9. Encerramento da Sprint 2 — 2026-05-29
+
+**Status:** Parcialmente concluída. Tracking via beacon do navegador **abortado** por decisão de produto.
+
+### O que ficou entregue e em produção
+
+- App `apps/analytics/` completo: model `ClickEvent` + migration, Admin com filtros e busca, `link_builder.py` com `build_tracked_url`, `build_instagram_tracked_url`, `build_referral_hub_url`, `build_referral_suffix`, SubID nativo do Mercado Livre (`matt_word`).
+- **UTMs padronizadas em todos os canais ativos** — WhatsApp/Telegram via `message_builder.py`; Instagram (story/feed/carousel/bio) via `post_generator.py`, `image_renderer.py`, `bio_link_publisher.py`.
+- Bridge `/r?slug=…` mantido (compliance Amazon — diversidade de origem de cliques).
+- `apps/analytics/management/commands/fetch_clicks.py` + `scripts/fetch-clicks.timer` (sincroniza KV→SQLite quando houver dados).
+- Endpoints `site/api/click.js` e `site/api/clicks.js` deployados — em standby, **sem uso operacional**.
+
+### O que foi abortado e por quê
+
+A camada de tracking ponta-a-ponta (`/r` → `navigator.sendBeacon` → Vercel Function → Upstash → `fetch_clicks` → dashboard) apresentou múltiplos pontos de falha em série (adblockers, race condition de unload, detecção de framework da Vercel, mismatch de assinatura Node/Edge). Mais de uma semana investida sem evento real chegando no Upstash. Decisão do PO em 2026-05-29: **abortar** essa instrumentação e priorizar geração de tráfego.
+
+### O que substitui o tracking customizado
+
+Quando a operação retomar mensuração, a fonte de verdade passa a ser **relatórios oficiais dos marketplaces**:
+- **Amazon Associates** — relatórios de cliques/pedidos exportáveis em CSV/XLSX.
+- **Mercado Livre Afiliados** — relatórios por SubID (`matt_word`). O SubID já está propagado nos links (`dbot_<canal>_<offer_id>`) — basta consumir o export.
+
+Esses relatórios entregam **conversões reais** (não só cliques), são imunes a adblocker, e dispensam infra própria. Não há perda de dado relevante.
+
+### Próxima sprint a executar
+
+Pular Sprint 3 (já entregue: `/links` redesenhado com CTAs + OG/Twitter + UTMs internas).
+**Próxima ordem:** Sprint 4 — **Instagram Operacional e Status Editorial** (geração de tráfego — alinhado com a urgência de acessos e vendas).
+
+### Backlog parado (a retomar quando voltar a mensuração)
+
+- Ingestão de relatórios Amazon Associates (CSV/XLSX) em model próprio (provavelmente `AffiliateConversion`).
+- Mesmo padrão para Mercado Livre Afiliados.
+- Atualizar `/dashboard` pra consumir essa nova fonte (em vez do KV vazio).
+- Avaliar se vale aposentar `site/api/click.js`, `site/api/clicks.js` e `fetch_clicks` ou manter como fallback.
+

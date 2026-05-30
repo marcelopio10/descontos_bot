@@ -41,6 +41,7 @@ def _get_ranked_offers(limit: int) -> list[Offer]:
         .filter(marketplace__code='amazon')
         .exclude(slug='')
         .exclude(marketplace__code='amazon', asin='')
+        .filter(discount_pct__gt=0)
         .order_by('-discount_pct', 'current_price', 'title')[:limit],
     )
     if len(offers) < limit:

@@ -398,3 +398,31 @@ Pular Sprint 3 (já entregue: `/links` redesenhado com CTAs + OG/Twitter + UTMs 
 - Atualizar `/dashboard` pra consumir essa nova fonte (em vez do KV vazio).
 - Avaliar se vale aposentar `site/api/click.js`, `site/api/clicks.js` e `fetch_clicks` ou manter como fallback.
 
+---
+
+## 10. Encerramento da Sprint 4 — 2026-05-30
+
+**Status:** Concluída.
+
+### O que ficou entregue
+
+- **Admin actions para transição de status** — `mark_as_posted` e `mark_as_rejected` em `apps/social_posts/admin.py`. Popula `posted_at = now()` ao postar e zera ao rejeitar. Reporta quantidade alterada vs. já no estado de destino.
+- **Filtros e busca no Admin Instagram** — `list_filter = ('format', 'status')`, `search_fields = ('primary_offer__title', 'caption')`, `autocomplete_fields` para ofertas. `list_display` com formato, status, oferta primária, `posted_at` e `created_at`.
+- **Comando `publish_bio_link`** — saiu de esboço para serviço real (`apps/social_posts/services/bio_link_publisher.py`), integrado ao gerador de posts.
+- **`fix_instagram_assets`** — comando que resolve a discrepância 2.921 stories no banco vs. ~15 assets em disco. Reconstrói/repara assets de posts em estado `ready`.
+- **Rotina editorial documentada** — `docs/ROTINA_EDITORIAL_INSTAGRAM.md` (215 linhas): 3 stories/dia, 1 feed/dia, 1 reel/semana; janelas 10h/14h/19h BRT; critérios de priorização; respeito à janela de silêncio 00:00-06:00 BRT.
+- **Freshness de 36h** — `apps/offers/services/freshness.py` define `SITE_OFFER_MAX_AGE_HOURS=36` (configurável). Aplicado no selector e no `site_publisher.py`. Evita publicar oferta velha em qualquer canal.
+- **Frontend refinado** — `site/index.html`, `oferta.html`, `disclosure.html`, `sobre.html`, `links.html`, `r.html` ajustados; `site.css` evoluído (+94 linhas); minificados `site.min.css` e `site.min.js` gerados; favicons (`favicon.svg`, `favicon.ico`, `favicon-192.png`).
+- **`short_description` com fallback** no `site_publisher.py` (evita card vazio no site).
+- **`offer_title` propagado nos cliques** em `site/api/click.js` (rastreamento de qual produto foi clicado, não só o slug).
+- **DevDeps de build** — `csso`, `sharp`, `terser` registrados em `site/package.json`.
+
+### O que não foi feito (e por quê)
+
+- **Automação de postagem direta no Instagram (Meta Graph API)** — bloqueada por restrição do plano da Meta, conforme já documentado na Sprint 4 do plano original. Continua manual; o operador usa as Admin actions para fechar o ciclo.
+
+### Próxima sprint a executar
+
+**Sprint 5 — Qualidade da Curadoria, Blacklist e Score de Oferta.**
+Pré-requisitos satisfeitos: selector estável em `apps/curation/services/selector.py`, modelo `Setting` operacional para blacklist configurável, helpers `get_integer_setting`/`get_decimal_setting` prontos para receber `get_json_setting` análogo, e `Offer` com campos suficientes (`discount_pct`, `current_price`, `original_price`, `image_url`, `absolute_saving`, `raw_payload`) para calcular score sem migração.
+

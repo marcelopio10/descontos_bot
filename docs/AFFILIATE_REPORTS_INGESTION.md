@@ -9,83 +9,132 @@ estimativa de cliques via Vercel KV.
 
 ---
 
+## Modelo de dados
+
+`AffiliateConversion` agrega:
+
+- `offer` (FK opcional, SET_NULL) — preenche quando ASIN/MLB casa com nosso catálogo.
+- `external_ref` — ASIN da Amazon ou MLB do ML quando a oferta **não** está no catálogo.
+- `product_title` — título do produto vindo do relatório (fallback quando órfã).
+- `source` — `amazon` ou `mercado_livre`.
+- `period_start` + `period_end` — janela coberta pelo relatório.
+- `clicks` / `conversions` / `revenue_brl` / `commission_brl`.
+
+**Granularidade**: 1 linha por (oferta OU external_ref) × source × período.
+
+**Sem canal**: nem Amazon (Earnings Report) nem o painel ML expõem origem do
+clique por canal social. `social_channel` fica null. Para segmentar por canal
+seria necessário rodar relatórios separados por SubID/filtro — não suportado
+nesta primeira versão.
+
+---
+
 ## Cadência sugerida
 
 Importar **toda segunda-feira de manhã** a janela da semana anterior (segunda
 a domingo). O dashboard sempre mostra os últimos 7 dias agregados.
 
 Re-importar período já carregado **não duplica**: o parser usa
-`update_or_create(offer × canal × fonte × dia)` e sobrescreve com os números
-mais recentes. Útil quando a Amazon ajusta comissão depois do fechamento.
+`update_or_create((offer | external_ref), source, period_start, period_end)` e
+sobrescreve com os números mais recentes. Útil quando a Amazon ajusta comissão
+depois do fechamento. Re-importar payload **idêntico** (mesmo SHA-256) é
+bloqueado com mensagem amigável apontando o lote anterior.
 
 ---
 
 ## Amazon Associates
 
-### 1. Exportar do painel
+### 1. Exportar relatório por ASIN
+
+> **Importante**: precisa ser o relatório agrupado por **ASIN** (1 linha por
+> produto). O relatório por Tracking ID é uma única linha agregada — não
+> identifica produto e o parser recusa.
 
 1. Entrar em [associados.amazon.com.br](https://associados.amazon.com.br/).
-2. Menu superior **Relatórios → Visão geral de ganhos** (ou "Earnings Report").
+2. **Relatórios → Ganhos → ASIN** (ou caminho equivalente do painel atual).
 3. Selecionar o período (ex.: semana anterior).
-4. Escolher o agrupamento por **Data + ASIN** (granularidade obrigatória).
-5. Clicar **Baixar relatório** → `.tsv` (Tab-delimited UTF-8).
+4. Clicar **Baixar relatório**.
 
-> O parser também aceita CSV separado por `,` ou `;`, mas o default Amazon é TSV.
+Colunas esperadas (tolerante a aliases pt-BR/en):
+
+```
+ASIN | Produto | Cliques | Produtos pedidos | Produtos enviados |
+Receita de produtos enviados | Ganhos totais | (Tracking ID opcional)
+```
 
 ### 2. Importar pelo Admin
 
-1. Admin → **Analytics → Lotes de importação de afiliados** → botão
-   **Importar Amazon Associates**.
-2. Selecionar o arquivo baixado.
-3. **Importar**. Mensagens flash mostram quantas linhas foram importadas, quantas
-   ignoradas e qualquer warning (ASINs órfãos, Tracking IDs divergentes).
-4. `affiliate-summary.json` é regerado automaticamente ao final.
+1. Admin → **Lotes de importação de afiliados** → botão **Importar Amazon Associates**.
+2. Anexar o arquivo.
+3. Preencher **Início do período** e **Fim do período** (Amazon não inclui no arquivo — você precisa informar).
+4. **Importar**. Mensagens flash mostram linhas importadas, ignoradas e warnings
+   (ASINs órfãos, Tracking IDs divergentes).
+5. `affiliate-summary.json` é regerado automaticamente.
 
 ### 3. Alternativa via CLI
 
 ```bash
-python manage.py ingest_affiliate_amazon --file /caminho/relatorio.tsv --dry-run
-python manage.py ingest_affiliate_amazon --file /caminho/relatorio.tsv
+python manage.py ingest_affiliate_amazon \
+    --file /caminho/relatorio.tsv \
+    --period-start 2026-05-26 \
+    --period-end 2026-06-01 \
+    --dry-run
+
+python manage.py ingest_affiliate_amazon \
+    --file /caminho/relatorio.tsv \
+    --period-start 2026-05-26 \
+    --period-end 2026-06-01
 ```
 
-`--dry-run` roda o parser sem persistir nada — útil para conferir contagem
-antes de aceitar.
+`--dry-run` roda o parser sem persistir.
 
-### Observações importantes
+### Observações
 
-- **Sem canal:** o Earnings Report da Amazon não traz a origem do clique
-  (canal social). Toda conversão fica com `social_channel = null`.
-- **ASIN é a chave:** o parser resolve `Offer` por `marketplace='amazon'` +
-  `asin`. ASINs órfãos viram warning no batch e não bloqueiam a importação.
-- **Tracking ID:** se aparecer um Tracking ID diferente do
-  `Marketplace.affiliate_tag` cadastrado, gera warning para auditoria.
+- **Sem canal**: `social_channel = null` em toda conversão Amazon.
+- **ASIN como chave**: ASINs não cadastrados viram conversões "órfãs"
+  (`offer=null`, `external_ref=ASIN`, `product_title` do relatório). Continuam
+  agregando no dashboard, marcadas como "não cadastrada".
+- **Tracking ID** divergente da `Marketplace.affiliate_tag` gera warning.
 
 ---
 
 ## Mercado Livre Afiliados
 
 **Não existe export oficial** (confirmado por pesquisa em 2026-06). O painel
-ML só mostra os dados em tela. Solução: capturar o JSON da response interna
-no DevTools do navegador e colar no Admin.
+ML só mostra os dados em tela. Captura: copiar o JSON da response interna no
+DevTools.
 
 ### 1. Capturar o JSON
 
 1. Entrar em [mercadolivre.com.br/afiliados](https://www.mercadolivre.com.br/afiliados/).
-2. Abrir a página do relatório de SubID / Marketing Toolbox.
+2. Abrir relatório de performance (item list).
 3. **Abrir DevTools** (F12) → aba **Network** → filtrar por `XHR/Fetch`.
-4. Selecionar o período desejado no painel — observar a request que dispara.
-5. Clicar na request, aba **Response** → **copiar** (ou "Copy response").
+4. Selecionar o período no painel — observar a request que dispara.
+5. Clicar na request, aba **Response** → **Copy response** (botão direito ou ícone).
 
-> O schema do JSON pode mudar com o tempo. O parser é defensivo: aceita
-> chaves alternativas (`matt_word`/`subid`, `clicks`/`cliques`,
-> `commission`/`commission_amount`, etc.). Se um item falhar, ele é contado
-> em `rows_skipped` com warning explicando a linha bruta.
+Schema validado (campos relevantes):
+
+```json
+{
+  "item_list": [
+    {
+      "product": "Nome do produto",
+      "entity_id": "MLB...",       // casa com Offer.external_id
+      "quantity": 3,                // conversões
+      "earnings": 23.34,            // comissão R$
+      "total_sales": 142.23,        // receita R$
+      "fee": 0.20                   // % comissão (não usado)
+    }
+  ],
+  "filter_time_range": "1777766400000--1780358400000"  // millis UNIX
+}
+```
 
 ### 2. Importar pelo Admin
 
 1. Admin → **Lotes de importação** → **Importar Mercado Livre**.
 2. Colar o JSON na textarea **OU** anexar um arquivo `.json`.
-3. **Importar**.
+3. **Importar**. O período sai automaticamente de `filter_time_range`.
 
 ### 3. Alternativa via CLI
 
@@ -97,22 +146,12 @@ python manage.py ingest_affiliate_mercadolivre --file /tmp/painel-ml.json
 python manage.py ingest_affiliate_mercadolivre --stdin
 ```
 
-### Como o SubID resolve canal + oferta
+### Observações
 
-O `link_builder.py` propaga em todo link ML o SubID no formato
-**`dbot_<canal_curto>_<offer_id>`** (ex.: `dbot_tg_homolog_1234`).
-
-O parser:
-
-1. Casa a regex `^dbot_(?P<channel>[a-z0-9_]+)_(?P<offer_id>\d+)$`.
-2. Resolve `Offer` por `id` + marketplace ML.
-3. Resolve `SocialChannel` pelo `channel_codes.expand_short_channel_code()`:
-   - `wa_main` → tenta `whatsapp_main`, `whatsapp_channel_main`, `whatsapp_group_main`.
-   - `tg_homolog` → tenta `telegram_homolog`, `telegram_channel_homolog`.
-   - Empate: prefere canal `is_enabled=True`.
-
-Items com SubID fora do padrão (cliques orgânicos no link sem segmentação)
-viram conversão com `social_channel=null` e `subid` contendo o valor bruto.
+- **Sem canal**: `social_channel = null` (ML não expõe origem por SubID no relatório).
+- **Sem cliques**: `clicks = 0` (ML só mostra conversões agregadas).
+- **Entity IDs órfãos**: `entity_id` que não bate com nenhum `Offer.external_id`
+  vira conversão órfã, marcada como "não cadastrada" no dashboard.
 
 ---
 
@@ -124,7 +163,7 @@ python manage.py publish_affiliate_summary --window-days 30
 ```
 
 Regera `site/affiliate-summary.json` a partir das conversões já no banco. Útil
-para mudar a janela mostrada no dashboard sem reprocessar arquivos.
+para mudar a janela mostrada no dashboard.
 
 ---
 
@@ -134,15 +173,19 @@ para mudar a janela mostrada no dashboard sem reprocessar arquivos.
   Sprint 2, mantidos parados por decisão de produto.
 - ❌ Não credencializar painel ML no servidor (Playwright headless) — solução
   rejeitada por exigir 2FA e ser frágil a mudanças de DOM.
-- ❌ Não persistir o payload bruto em banco; só o `payload_sha256` para
-  dedup defensivo de re-upload idêntico.
+- ❌ Não persistir payload bruto em banco; só `payload_sha256` para dedup.
 
 ---
 
 ## Riscos abertos
 
-- **Schema do XHR ML**: estimado. Primeira importação real pode precisar de
-  ajuste no parser (chaves novas). Reportar via warning do batch.
-- **Tracking ID Amazon**: a presença da coluna varia conforme tipo de
-  relatório. Sem ela, `subid` fica vazio no batch Amazon — sem prejuízo
-  (canal já é null na Amazon).
+- **Schema XHR do ML pode mudar**: aceita só os campos atuais
+  (`item_list`, `entity_id`, `quantity`, `earnings`, `total_sales`,
+  `filter_time_range`). Mudança quebra parser — atualizar
+  `apps/analytics/services/affiliate_parsers/mercadolivre.py`.
+- **Schema TSV da Amazon**: usa aliases tolerantes para colunas pt-BR/en. Se
+  cabeçalho mudar substancialmente, adicionar alias em `COLUMN_ALIASES`.
+- **Segmentação por canal**: não implementada nesta versão. Se quiser breakdown
+  WhatsApp vs Telegram, será necessário (a) rodar relatórios separados por
+  SubID no painel ML e adicionar campo no Admin pra informar manualmente o
+  canal; ou (b) mudar processo de envio para usar links curtos rastreados.

@@ -1,8 +1,6 @@
 import hashlib
 import json
-import re
-from collections import defaultdict
-from datetime import date, datetime
+from datetime import date, datetime, timezone as dt_timezone
 from decimal import Decimal, InvalidOperation
 
 from django.db import transaction
@@ -13,27 +11,10 @@ from apps.analytics.models import (
     AffiliateSource,
 )
 from apps.analytics.services.affiliate_parsers import BatchResult, DuplicatePayloadError
-from apps.analytics.services.channel_codes import expand_short_channel_code
 from apps.offers.models import Offer
 
 
 ML_MARKETPLACE_CODES = ('mercadolivre', 'mercado_livre')
-
-SUBID_PATTERN = re.compile(r'^dbot_(?P<channel>[a-z0-9_]+?)_(?P<offer_id>\d+)$')
-
-SUBID_KEYS = ('matt_word', 'subid', 'sub_id', 'tag', 'tracking_id')
-DATE_KEYS = ('date', 'report_date', 'day', 'data')
-CLICK_KEYS = ('clicks', 'cliques', 'click_count')
-CONVERSION_KEYS = ('conversions', 'orders', 'sales', 'conversoes', 'pedidos')
-REVENUE_KEYS = ('revenue', 'gmv', 'sales_amount', 'amount', 'receita')
-COMMISSION_KEYS = (
-    'commission',
-    'commission_amount',
-    'commissions',
-    'earnings',
-    'comissao',
-    'comissão',
-)
 
 
 def parse_mercadolivre_payload(
@@ -42,10 +23,30 @@ def parse_mercadolivre_payload(
     filename: str = '',
     commit: bool = True,
 ) -> BatchResult:
-    """Parseia payload JSON copiado do painel ML Afiliados (DevTools).
+    """Parseia payload JSON do painel ML Afiliados (DevTools).
 
-    Formato esperado: lista de items ou dict com lista em alguma chave comum
-    (`results`, `items`, `data`, `rows`). Cada item agrupa por SubID + dia.
+    Schema real do XHR (validado em 2026-06):
+
+        {
+            "item_list": [
+                {
+                    "product": "...",
+                    "entity_id": "MLB...",   ← casa com Offer.external_id
+                    "quantity": 3,           ← conversões (pedidos)
+                    "earnings": 23.34,       ← comissão R$
+                    "total_sales": 142.23,   ← receita R$
+                    "fee": 0.20              ← % comissão (não usado)
+                    ...
+                }
+            ],
+            "filter_time_range": "1777766400000--1780358400000",  ← millis UNIX
+            ...
+        }
+
+    Observações:
+    - ML não expõe SubID por linha → `social_channel` sempre null.
+    - ML não expõe cliques → `clicks = 0`.
+    - Granularidade: 1 linha por entity_id, agregando o período inteiro.
     """
     raw_bytes = payload if isinstance(payload, bytes) else payload.encode('utf-8')
     payload_sha256 = hashlib.sha256(raw_bytes).hexdigest()
@@ -63,107 +64,32 @@ def parse_mercadolivre_payload(
     except json.JSONDecodeError as exc:
         raise ValueError(f'JSON inválido: {exc}') from exc
 
-    items = _extract_items(data)
-    if not items:
-        raise ValueError('Nenhum item encontrado no payload (esperado lista de conversões).')
+    if not isinstance(data, dict):
+        raise ValueError('Payload raiz precisa ser um objeto JSON.')
 
-    aggregated: dict[tuple[int, int | None, date], dict] = defaultdict(
-        lambda: {
-            'clicks': 0,
-            'conversions': 0,
-            'revenue_brl': Decimal('0'),
-            'commission_brl': Decimal('0'),
-            'subid_raw': '',
-        }
-    )
+    items = data.get('item_list')
+    if not isinstance(items, list) or not items:
+        raise ValueError('Campo "item_list" ausente ou vazio no payload.')
 
-    warnings: list[str] = []
-    unresolved_offers: list[int] = []
-    unresolved_subids: list[str] = []
-    skipped = 0
-    period_start: date | None = None
-    period_end: date | None = None
+    period_start, period_end = _extract_period(data)
 
-    offer_ids: set[int] = set()
-    channel_cache: dict[str, int | None] = {}
-
-    parsed_items: list[tuple[date, int | None, int | None, str, dict]] = []
-
-    for item in items:
-        if not isinstance(item, dict):
-            skipped += 1
-            warnings.append(f'Item ignorado (não é dict): {item!r}')
-            continue
-
-        subid_raw = _first_string(item, SUBID_KEYS).strip()
-        try:
-            report_date = _parse_date(_first_string(item, DATE_KEYS))
-        except ValueError as exc:
-            skipped += 1
-            warnings.append(f'Data inválida ({exc}) — item: {_brief(item)}')
-            continue
-
-        match = SUBID_PATTERN.match(subid_raw) if subid_raw else None
-        offer_id: int | None = None
-        channel_short: str = ''
-        if match:
-            offer_id = int(match.group('offer_id'))
-            channel_short = match.group('channel')
-            offer_ids.add(offer_id)
-        else:
-            unresolved_subids.append(subid_raw or '(vazio)')
-
-        parsed_items.append((report_date, offer_id, None, channel_short, item))
-
-        period_start = report_date if period_start is None else min(period_start, report_date)
-        period_end = report_date if period_end is None else max(period_end, report_date)
-
-    offers_by_id = {
-        offer.id: offer
+    entity_ids = {
+        str(item.get('entity_id', '')).strip().upper()
+        for item in items
+        if isinstance(item, dict) and item.get('entity_id')
+    }
+    offers_by_external = {
+        (offer.external_id or '').upper(): offer
         for offer in Offer.objects.select_related('marketplace').filter(
-            id__in=offer_ids,
             marketplace__code__in=ML_MARKETPLACE_CODES,
+            external_id__in=entity_ids,
         )
     }
 
-    for report_date, offer_id, _unused, channel_short, item in parsed_items:
-        if offer_id is None or offer_id not in offers_by_id:
-            skipped += 1
-            if offer_id is not None:
-                unresolved_offers.append(offer_id)
-            continue
-
-        channel_id: int | None
-        if channel_short in channel_cache:
-            channel_id = channel_cache[channel_short]
-        else:
-            channel = expand_short_channel_code(channel_short)
-            channel_id = channel.id if channel else None
-            channel_cache[channel_short] = channel_id
-            if channel is None and channel_short:
-                warnings.append(f'Canal não resolvido para sufixo "{channel_short}"')
-
-        key = (offer_id, channel_id, report_date)
-        bucket = aggregated[key]
-        bucket['clicks'] += _first_int(item, CLICK_KEYS)
-        bucket['conversions'] += _first_int(item, CONVERSION_KEYS)
-        bucket['revenue_brl'] += _first_decimal(item, REVENUE_KEYS)
-        bucket['commission_brl'] += _first_decimal(item, COMMISSION_KEYS)
-        if not bucket['subid_raw']:
-            bucket['subid_raw'] = _first_string(item, SUBID_KEYS).strip()
-
-    if unresolved_subids:
-        warnings.append(
-            f'SubIDs fora do padrão dbot_<canal>_<offer_id> ({len(unresolved_subids)}): '
-            + ', '.join(sorted(set(unresolved_subids))[:20])
-        )
-    if unresolved_offers:
-        warnings.append(
-            f'IDs de oferta ML não encontrados ({len(unresolved_offers)}): '
-            + ', '.join(str(i) for i in sorted(set(unresolved_offers))[:20])
-        )
-
+    warnings: list[str] = []
+    unresolved: list[str] = []
     imported = 0
+    skipped = 0
 
     with transaction.atomic():
         batch = AffiliateImportBatch.objects.create(
@@ -175,22 +101,59 @@ def parse_mercadolivre_payload(
             notes='',
         )
 
-        for (offer_id, channel_id, report_date), bucket in aggregated.items():
+        for item in items:
+            if not isinstance(item, dict):
+                skipped += 1
+                warnings.append(f'Item ignorado (não é dict): {item!r}')
+                continue
+
+            entity_id = str(item.get('entity_id', '')).strip().upper()
+            if not entity_id:
+                skipped += 1
+                warnings.append(f'Item sem entity_id: {_brief(item)}')
+                continue
+
+            offer = offers_by_external.get(entity_id)
+            if offer is None:
+                unresolved.append(entity_id)
+
+            quantity = _to_int(item.get('quantity'))
+            earnings = _to_decimal(item.get('earnings'))
+            total_sales = _to_decimal(item.get('total_sales'))
+            product_title = str(item.get('product') or '')[:255]
+
+            lookup = {
+                'source': AffiliateSource.MERCADO_LIVRE,
+                'period_start': period_start,
+                'period_end': period_end,
+            }
+            if offer is not None:
+                lookup['offer'] = offer
+                lookup['external_ref'] = ''
+            else:
+                lookup['offer'] = None
+                lookup['external_ref'] = entity_id
+
             AffiliateConversion.objects.update_or_create(
-                offer_id=offer_id,
-                social_channel_id=channel_id,
-                source=AffiliateSource.MERCADO_LIVRE,
-                report_date=report_date,
                 defaults={
-                    'subid': bucket['subid_raw'],
-                    'clicks': bucket['clicks'],
-                    'conversions': bucket['conversions'],
-                    'revenue_brl': bucket['revenue_brl'],
-                    'commission_brl': bucket['commission_brl'],
+                    'social_channel': None,
+                    'product_title': product_title,
+                    'clicks': 0,
+                    'conversions': quantity,
+                    'revenue_brl': total_sales,
+                    'commission_brl': earnings,
                     'batch': batch,
                 },
+                **lookup,
             )
             imported += 1
+
+        if unresolved:
+            warnings.append(
+                f'Entity IDs ML sem oferta cadastrada ({len(unresolved)}): '
+                + ', '.join(sorted(set(unresolved))[:20])
+                + ('…' if len(set(unresolved)) > 20 else '')
+            )
 
         batch.rows_imported = imported
         batch.rows_skipped = skipped
@@ -210,59 +173,45 @@ def parse_mercadolivre_payload(
     )
 
 
-def _extract_items(data) -> list:
-    if isinstance(data, list):
-        return data
-    if isinstance(data, dict):
-        for key in ('results', 'items', 'data', 'rows', 'records', 'subids'):
-            value = data.get(key)
-            if isinstance(value, list):
-                return value
-    return []
+def _extract_period(data: dict) -> tuple[date, date]:
+    raw = data.get('filter_time_range') or ''
+    if not raw or '--' not in raw:
+        raise ValueError(
+            'Campo "filter_time_range" ausente — necessário para identificar o período.'
+        )
+    start_str, _, end_str = raw.partition('--')
+    try:
+        start_ms = int(start_str)
+        end_ms = int(end_str)
+    except ValueError as exc:
+        raise ValueError(f'"filter_time_range" inválido: {raw}') from exc
+
+    start = datetime.fromtimestamp(start_ms / 1000, tz=dt_timezone.utc).date()
+    end = datetime.fromtimestamp(end_ms / 1000, tz=dt_timezone.utc).date()
+    if start > end:
+        start, end = end, start
+    return start, end
 
 
-def _first_string(item: dict, keys: tuple[str, ...]) -> str:
-    for key in keys:
-        if key in item and item[key] is not None:
-            return str(item[key])
-    return ''
-
-
-def _first_int(item: dict, keys: tuple[str, ...]) -> int:
-    for key in keys:
-        if key in item and item[key] is not None:
-            try:
-                return int(item[key])
-            except (TypeError, ValueError):
-                try:
-                    return int(float(item[key]))
-                except (TypeError, ValueError):
-                    return 0
-    return 0
-
-
-def _first_decimal(item: dict, keys: tuple[str, ...]) -> Decimal:
-    for key in keys:
-        if key in item and item[key] is not None:
-            try:
-                return Decimal(str(item[key]))
-            except InvalidOperation:
-                return Decimal('0')
-    return Decimal('0')
-
-
-def _parse_date(raw: str) -> date:
-    raw = (raw or '').strip()
-    if not raw:
-        raise ValueError('data vazia')
-    if 'T' in raw:
-        raw = raw.split('T', 1)[0]
-    for fmt in ('%Y-%m-%d', '%d/%m/%Y', '%m/%d/%Y', '%Y/%m/%d'):
+def _to_int(value) -> int:
+    if value is None:
+        return 0
+    try:
+        return int(value)
+    except (TypeError, ValueError):
         try:
-            return datetime.strptime(raw, fmt).date()
-        except ValueError:
-            continue
-    raise ValueError(raw)
+            return int(float(value))
+        except (TypeError, ValueError):
+            return 0
+
+
+def _to_decimal(value) -> Decimal:
+    if value is None:
+        return Decimal('0')
+    try:
+        return Decimal(str(value))
+    except InvalidOperation:
+        return Decimal('0')
 
 
 def _brief(item: dict, limit: int = 120) -> str:

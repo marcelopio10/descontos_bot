@@ -63,7 +63,9 @@ class AffiliateConversion(TimestampedModel):
     offer = models.ForeignKey(
         Offer,
         verbose_name='oferta',
-        on_delete=models.PROTECT,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
         related_name='affiliate_conversions',
     )
     social_channel = models.ForeignKey(
@@ -80,14 +82,23 @@ class AffiliateConversion(TimestampedModel):
         choices=AffiliateSource.choices,
         db_index=True,
     )
-    subid = models.CharField(
-        'SubID / Tracking ID',
-        max_length=120,
+    external_ref = models.CharField(
+        'referência externa (ASIN/MLB)',
+        max_length=64,
         blank=True,
         db_index=True,
     )
-    report_date = models.DateField(
-        'data do relatório',
+    product_title = models.CharField(
+        'título do produto (relatório)',
+        max_length=255,
+        blank=True,
+    )
+    period_start = models.DateField(
+        'início do período',
+        db_index=True,
+    )
+    period_end = models.DateField(
+        'fim do período',
         db_index=True,
     )
     clicks = models.PositiveIntegerField(
@@ -118,30 +129,31 @@ class AffiliateConversion(TimestampedModel):
     )
 
     class Meta:
-        ordering = ['-report_date', '-commission_brl']
+        ordering = ['-period_end', '-commission_brl']
         constraints = [
             models.UniqueConstraint(
-                fields=['offer', 'social_channel', 'source', 'report_date'],
-                condition=models.Q(social_channel__isnull=False),
-                name='uniq_affconv_with_channel',
+                fields=['offer', 'source', 'period_start', 'period_end'],
+                condition=models.Q(offer__isnull=False),
+                name='uniq_affconv_with_offer',
             ),
             models.UniqueConstraint(
-                fields=['offer', 'source', 'report_date'],
-                condition=models.Q(social_channel__isnull=True),
-                name='uniq_affconv_no_channel',
+                fields=['external_ref', 'source', 'period_start', 'period_end'],
+                condition=models.Q(offer__isnull=True),
+                name='uniq_affconv_no_offer',
             ),
         ]
         indexes = [
-            models.Index(fields=['source', 'report_date']),
-            models.Index(fields=['social_channel', 'report_date']),
+            models.Index(fields=['source', 'period_end']),
+            models.Index(fields=['social_channel', 'period_end']),
         ]
         verbose_name = 'conversão de afiliado'
         verbose_name_plural = 'conversões de afiliados'
 
     def __str__(self):
+        ref = self.offer or self.external_ref or '—'
         return (
-            f'{self.offer} — {self.get_source_display()} — '
-            f'{self.report_date} — R$ {self.commission_brl}'
+            f'{ref} — {self.get_source_display()} — '
+            f'{self.period_start}..{self.period_end} — R$ {self.commission_brl}'
         )
 
 

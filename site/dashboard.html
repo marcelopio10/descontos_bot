@@ -132,6 +132,20 @@
       color: var(--yellow);
       text-decoration: underline;
     }
+    .orphan-badge {
+      display: inline-block;
+      margin-left: 8px;
+      padding: 2px 8px;
+      background: rgba(255, 140, 0, 0.15);
+      border: 1px solid rgba(255, 140, 0, 0.4);
+      border-radius: 999px;
+      color: #ffb070;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
     .source-banner {
       margin: 22px 0 0;
       padding: 12px 16px;
@@ -274,9 +288,13 @@
           return;
         }
         var html = rows.map(function (o, i) {
+          var label = o.title || o.external_ref || '—';
+          var badge = o.is_orphan
+            ? ' <span class="orphan-badge" title="' + escapeText(o.external_ref) + ' não está no nosso catálogo">não cadastrada</span>'
+            : '';
           return '<tr>' +
             '<td>' + (i + 1) + '</td>' +
-            '<td class="offer-title-cell" title="' + escapeText(o.title) + '">' + escapeText(o.title) + '</td>' +
+            '<td class="offer-title-cell" title="' + escapeText(label) + '">' + escapeText(label) + badge + '</td>' +
             '<td>' + escapeText(o.marketplace) + '</td>' +
             '<td class="num">' + formatNum(o.conversions) + '</td>' +
             '<td class="num">' + formatBRL(o.commission_brl) + '</td>' +

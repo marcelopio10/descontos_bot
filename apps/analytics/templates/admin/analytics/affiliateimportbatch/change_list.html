@@ -1,0 +1,15 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block object-tools-items %}
+  <li>
+    <a href="{% url 'admin:analytics_affiliateimportbatch_import_amazon' %}" class="addlink">
+      Importar Amazon Associates
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'admin:analytics_affiliateimportbatch_import_mercadolivre' %}" class="addlink">
+      Importar Mercado Livre
+    </a>
+  </li>
+{% endblock %}

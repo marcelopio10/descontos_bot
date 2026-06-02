@@ -465,3 +465,28 @@ Pré-requisitos satisfeitos: selector estável em `apps/curation/services/select
 **Sprint 6 — Relatórios Semanais e Dashboard Operacional.**
 Restrição herdada: ClickEvent foi abortado (Sprint 2 §9). Métricas de clique não estão disponíveis localmente — o relatório precisará consumir relatórios oficiais de Amazon Associates e Mercado Livre Afiliados (SubID `dbot_<canal>_<offer_id>` já propagado). Avaliar se Sprint 6 vira: (a) `weekly_report` com métricas internas (envios por canal, posts Instagram publicados/pendentes, score médio das selecionadas, taxa de blacklist) já disponíveis sem CTR; ou (b) bloquear até existir ingestão de relatórios externos.
 
+---
+
+## 12. Sprint extra — Ingestão de relatórios de afiliados (Amazon + Mercado Livre)
+
+**Status:** Concluída. Desbloqueia o backlog parado da Sprint 2.
+
+### O que ficou entregue
+
+- **Models `AffiliateImportBatch` + `AffiliateConversion`** em `apps/analytics/models.py` (granularidade `oferta × canal × fonte × dia`). UniqueConstraints separadas para canal=null (Amazon) e canal definido (ML) — SQLite trata NULL como distinto, então a constraint composta precisa ser particionada por `Q(social_channel__isnull=...)`.
+- **Parser Amazon** em `apps/analytics/services/affiliate_parsers/amazon.py` — TSV/CSV UTF-8 do Earnings Report. Resolve `Offer` por `asin` (fallback `external_id`), agrega por (ASIN, dia), warning para Tracking ID divergente do `Marketplace.affiliate_tag`. Channel sempre null (Amazon não expõe origem no relatório).
+- **Parser Mercado Livre** em `apps/analytics/services/affiliate_parsers/mercadolivre.py` — payload JSON copiado do **DevTools** do painel ML (não existe export oficial, confirmado por pesquisa). Defensivo a aliases de chave. Parseia SubID `dbot_<canal>_<offer_id>` (regex), resolve canal via `apps/analytics/services/channel_codes.py:expand_short_channel_code` (inverso do `_short_channel_code` do `link_builder`).
+- **Comandos management**: `ingest_affiliate_amazon --file ...`, `ingest_affiliate_mercadolivre --file/--stdin`, `publish_affiliate_summary [--window-days]`. Todos suportam `--dry-run` quando aplicável.
+- **Admin upload** em `apps/analytics/admin.py` — `AffiliateImportBatchAdmin` com 2 botões na changelist ("Importar Amazon Associates", "Importar Mercado Livre"). Form de upload TSV para Amazon; textarea OU file `.json` para ML. Após sucesso, regera `site/affiliate-summary.json` automaticamente. `AffiliateConversionAdmin` readonly com filtros (source, channel, data, marketplace) e link para o lote.
+- **Publisher** `apps/analytics/services/affiliate_summary.py` — gera `site/affiliate-summary.json` agregando últimos 7 dias (`totals`, `by_channel`, `by_source`, `top_offers`). Padrão estático consistente com `offers.json`.
+- **`site/dashboard.html` adaptado** — substituído consumo de `/api/clicks` (KV Vercel) por `affiliate-summary.json`. KPIs renomeados: Comissão 7d, Conversões 7d, Ofertas no ar. Painéis novos: "Comissão por canal", "Comissão por marketplace", "Top 10 ofertas por comissão". Banner indicando fonte de dados.
+- **Doc `docs/AFFILIATE_REPORTS_INGESTION.md`** — passo-a-passo do operador (Amazon + ML), cadência semanal sugerida, observações sobre re-import e SubID, anti-checklist.
+
+### O que ficou parado (consistente com decisão da Sprint 2 §9)
+
+- `site/api/click.js`, `site/api/clicks.js` e `apps/analytics/management/commands/fetch_clicks.py` permanecem no repositório **sem uso operacional**. Decisão do PO: manter parado em vez de aposentar, sem custo de manutenção.
+
+### Próxima sprint a executar
+
+**Sprint 6 — Relatórios Semanais.** Pré-requisitos satisfeitos: `AffiliateConversion` agora é a fonte de verdade. Comando `weekly_report` pode agregar conversões + posts Instagram publicados + score médio das selecionadas + taxa de blacklist em um único export semanal.
+

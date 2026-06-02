@@ -426,3 +426,42 @@ Pular Sprint 3 (já entregue: `/links` redesenhado com CTAs + OG/Twitter + UTMs 
 **Sprint 5 — Qualidade da Curadoria, Blacklist e Score de Oferta.**
 Pré-requisitos satisfeitos: selector estável em `apps/curation/services/selector.py`, modelo `Setting` operacional para blacklist configurável, helpers `get_integer_setting`/`get_decimal_setting` prontos para receber `get_json_setting` análogo, e `Offer` com campos suficientes (`discount_pct`, `current_price`, `original_price`, `image_url`, `absolute_saving`, `raw_payload`) para calcular score sem migração.
 
+---
+
+## 11. Encerramento da Sprint 5 — 2026-06-02
+
+**Status:** Concluída. Sem migração de schema.
+
+### O que ficou entregue
+
+- **Blacklist configurável** — `apps/curation/services/blacklist.py`. Termos default: `usado`, `reembalado`, `avariado`, `seminovo`, `sem garantia`, `produto indisponivel`, `recondicionado`, `danificado`, `com defeito`, `open box`, `mostruario`. Override via `Setting.code='blacklist_terms'` (JSON list). Filtragem em duas camadas: `apply_blacklist_exclusion` (SQL `__icontains` rápido) + `is_blacklisted` (double-check Python com `_strip_accents` + word boundary regex, para variantes acentuadas que `icontains` SQLite não normaliza).
+- **Score de qualidade 0-100** — `apps/curation/services/quality_score.py`. Composição:
+  - `discount` (peso 35) — curva linear até 50%, plateau até 85%, decay até 99%, zera acima
+  - `saving` (peso 25) — log10 sobre economia absoluta, satura em R$ 1.000
+  - `image` (peso 10) — binário (tem/não tem)
+  - `title` (peso 10) — penaliza títulos curtos (<15 chars → 0.4) e caixa alta (>80% → 0.6)
+  - `recency` (peso 10) — linear sobre `SITE_OFFER_MAX_AGE_HOURS` (36h)
+  - `marketplace` (peso 10) — Amazon 1.0, Mercado Livre 0.9, outros 0.7
+  - Penalidades multiplicativas: sem imagem `*0.7`, original suspeito (ratio ≥20x) `*0.5`, desconto >99% zera
+  - Retorna `ScoreBreakdown` auditável (`score`, `components`, `penalties`)
+- **`get_json_setting`** — `apps/curation/services/settings.py`, análogo aos helpers integer/decimal já existentes; usado pela blacklist e disponível para futuras configs.
+- **Selector reescrito** — `apps/curation/services/selector.py`:
+  1. Pool de candidatos `max(60, global_limit * 5)` ordenado por desconto (corte de eficiência via SQL)
+  2. Double-check Python da blacklist
+  3. Score em cada candidato + filtro por `min_quality_score` (Setting opcional, default 0)
+  4. Ordenação por `(score desc, discount_pct desc, current_price desc)`
+  5. Aplica limites por marketplace e global
+- **Admin de Offer** — `apps/offers/admin.py`: coluna `quality_score_column` colorida (verde ≥60, âmbar ≥30, vermelho <30), readonly `quality_score_breakdown_display` (JSON do breakdown) e `blacklist_status_display`.
+
+### Validação
+
+- `manage.py check` OK
+- `makemigrations --dry-run`: nada (sem alteração de schema)
+- Smoke test em DB real (`telegram_homolog`): 16 ofertas selecionadas. Topo: Bicicleta Spinning 73% desc, score 97.31, zero penalidades.
+- Blacklist: 0 hits em 500 amostradas — scrapers já filtram bem na entrada; blacklist é segurança preventiva.
+
+### Próxima sprint a executar
+
+**Sprint 6 — Relatórios Semanais e Dashboard Operacional.**
+Restrição herdada: ClickEvent foi abortado (Sprint 2 §9). Métricas de clique não estão disponíveis localmente — o relatório precisará consumir relatórios oficiais de Amazon Associates e Mercado Livre Afiliados (SubID `dbot_<canal>_<offer_id>` já propagado). Avaliar se Sprint 6 vira: (a) `weekly_report` com métricas internas (envios por canal, posts Instagram publicados/pendentes, score médio das selecionadas, taxa de blacklist) já disponíveis sem CTR; ou (b) bloquear até existir ingestão de relatórios externos.
+

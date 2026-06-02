@@ -1,4 +1,6 @@
+import json
 from decimal import Decimal, InvalidOperation
+from typing import Any
 
 from apps.panel.models import Setting
 
@@ -22,6 +24,17 @@ def get_decimal_setting(key: str, default: Decimal) -> Decimal:
     try:
         return Decimal(value)
     except (InvalidOperation, TypeError, ValueError):
+        return default
+
+
+def get_json_setting(key: str, default: Any) -> Any:
+    value = _get_setting_value(key)
+    if value is None:
+        return default
+
+    try:
+        return json.loads(value)
+    except (TypeError, ValueError, json.JSONDecodeError):
         return default
 
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard | descontos.bot</title>
-  <meta name="description" content="Dashboard de métricas do descontos.bot: cliques por canal, top ofertas e CTR.">
+  <meta name="description" content="Dashboard de afiliados do descontos.bot: comissão, conversões e top ofertas por relatório oficial.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,6 +132,16 @@
       color: var(--yellow);
       text-decoration: underline;
     }
+    .source-banner {
+      margin: 22px 0 0;
+      padding: 12px 16px;
+      background: rgba(106, 220, 255, 0.06);
+      border: 1px solid rgba(106, 220, 255, 0.2);
+      border-radius: 12px;
+      color: var(--cyan);
+      font-size: 12px;
+      font-family: 'Space Mono', monospace;
+    }
   </style>
 </head>
 <body>
@@ -147,19 +157,22 @@
 
   <main>
     <section class="dashboard-shell" aria-live="polite">
-      <p class="eyebrow">Métricas</p>
+      <p class="eyebrow">Performance</p>
       <h1>Dashboard</h1>
+      <p class="source-banner">
+        Fonte: relatórios oficiais Amazon Associates + Mercado Livre Afiliados — importação manual via Admin.
+      </p>
 
       <div class="kpi-row">
         <div class="kpi-card">
-          <span class="kpi-label">Cliques (7d)</span>
-          <span class="kpi-value" id="totalClicks">--</span>
-          <span class="kpi-sub" id="clicksSub">Carregando...</span>
+          <span class="kpi-label">Comissão (7d)</span>
+          <span class="kpi-value" id="totalCommission">--</span>
+          <span class="kpi-sub" id="commissionSub">Carregando...</span>
         </div>
         <div class="kpi-card">
-          <span class="kpi-label">CTR</span>
-          <span class="kpi-value" id="ctr">--</span>
-          <span class="kpi-sub">Cliques / ofertas disponíveis</span>
+          <span class="kpi-label">Conversões (7d)</span>
+          <span class="kpi-value" id="totalConversions">--</span>
+          <span class="kpi-sub">Pedidos confirmados</span>
         </div>
         <div class="kpi-card">
           <span class="kpi-label">Ofertas no ar</span>
@@ -169,18 +182,22 @@
       </div>
 
       <div class="panel">
-        <h2 class="panel-header">Cliques por canal (7 dias)</h2>
+        <h2 class="panel-header">Comissão por canal (7 dias)</h2>
         <div id="channelTable"></div>
       </div>
 
       <div class="panel">
-        <h2 class="panel-header">Top 10 ofertas (7 dias)</h2>
+        <h2 class="panel-header">Comissão por marketplace (7 dias)</h2>
+        <div id="sourceTable"></div>
+      </div>
+
+      <div class="panel">
+        <h2 class="panel-header">Top 10 ofertas por comissão (7 dias)</h2>
         <div id="topOffersTable"></div>
       </div>
 
       <div class="notice">
-        Este dashboard depende do Vercel KV. Configure a integração no dashboard da Vercel e
-        verifique se o endpoint <code>/api/click</code> está registrando eventos.
+        Importe os relatórios semanais no Admin (Analytics → Lotes de importação de afiliados). Sem novos lotes, este painel mostra os últimos 7 dias já consolidados.
       </div>
     </section>
   </main>
@@ -192,14 +209,16 @@
 
   <script>
     (function () {
+      function formatBRL(v) {
+        if (v === null || v === undefined) return 'R$ 0,00';
+        var n = Number(v);
+        if (Number.isNaN(n)) return 'R$ 0,00';
+        return n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      }
+
       function formatNum(n) {
         if (n === null || n === undefined) return '--';
         return Number(n).toLocaleString('pt-BR');
-      }
-
-      function formatPct(n) {
-        if (n === null || n === undefined) return '--';
-        return Number(n).toFixed(2) + '%';
       }
 
       function escapeText(s) {
@@ -208,58 +227,75 @@
         return div.innerHTML;
       }
 
-      function renderChannelTable(channels, total) {
+      function renderChannelTable(rows) {
         var container = document.getElementById('channelTable');
-        if (!channels || channels.length === 0) {
-          container.innerHTML = '<div class="state-message">Nenhum clique registrado nos últimos 7 dias.</div>';
+        if (!rows || rows.length === 0) {
+          container.innerHTML = '<div class="state-message">Nenhuma conversão registrada nos últimos 7 dias.</div>';
           return;
         }
-        var rows = channels.map(function (ch) {
-          var share = total > 0 ? ((ch.count / total) * 100).toFixed(1) : '0.0';
+        var html = rows.map(function (r) {
           return '<tr>' +
-            '<td>' + escapeText(ch.channel) + '</td>' +
-            '<td class="num">' + formatNum(ch.count) + '</td>' +
-            '<td class="pct">' + share + '%</td>' +
+            '<td>' + escapeText(r.channel_name || r.channel_code) + '</td>' +
+            '<td class="num">' + formatNum(r.conversions) + '</td>' +
+            '<td class="num">' + formatNum(r.clicks) + '</td>' +
+            '<td class="num">' + formatBRL(r.commission_brl) + '</td>' +
             '</tr>';
         }).join('');
         container.innerHTML = '<table class="data-table">' +
-          '<thead><tr><th>Canal</th><th>Cliques</th><th>Share</th></tr></thead>' +
-          '<tbody>' + rows + '</tbody>' +
+          '<thead><tr><th>Canal</th><th>Conversões</th><th>Cliques</th><th>Comissão</th></tr></thead>' +
+          '<tbody>' + html + '</tbody>' +
           '</table>';
       }
 
-      function renderTopOffers(offers) {
-        var container = document.getElementById('topOffersTable');
-        if (!offers || offers.length === 0) {
-          container.innerHTML = '<div class="state-message">Nenhuma oferta com cliques nos últimos 7 dias.</div>';
+      function renderSourceTable(rows) {
+        var container = document.getElementById('sourceTable');
+        if (!rows || rows.length === 0) {
+          container.innerHTML = '<div class="state-message">Nenhuma fonte registrada.</div>';
           return;
         }
-        var rows = offers.map(function (o, i) {
+        var html = rows.map(function (r) {
+          return '<tr>' +
+            '<td>' + escapeText(r.source_label || r.source) + '</td>' +
+            '<td class="num">' + formatNum(r.conversions) + '</td>' +
+            '<td class="num">' + formatBRL(r.revenue_brl) + '</td>' +
+            '<td class="num">' + formatBRL(r.commission_brl) + '</td>' +
+            '</tr>';
+        }).join('');
+        container.innerHTML = '<table class="data-table">' +
+          '<thead><tr><th>Marketplace</th><th>Conversões</th><th>Receita</th><th>Comissão</th></tr></thead>' +
+          '<tbody>' + html + '</tbody>' +
+          '</table>';
+      }
+
+      function renderTopOffers(rows) {
+        var container = document.getElementById('topOffersTable');
+        if (!rows || rows.length === 0) {
+          container.innerHTML = '<div class="state-message">Nenhuma oferta com comissão nos últimos 7 dias.</div>';
+          return;
+        }
+        var html = rows.map(function (o, i) {
           return '<tr>' +
             '<td>' + (i + 1) + '</td>' +
             '<td class="offer-title-cell" title="' + escapeText(o.title) + '">' + escapeText(o.title) + '</td>' +
-            '<td class="num">' + formatNum(o.count) + '</td>' +
+            '<td>' + escapeText(o.marketplace) + '</td>' +
+            '<td class="num">' + formatNum(o.conversions) + '</td>' +
+            '<td class="num">' + formatBRL(o.commission_brl) + '</td>' +
             '</tr>';
         }).join('');
         container.innerHTML = '<table class="data-table">' +
-          '<thead><tr><th>#</th><th>Oferta</th><th>Cliques</th></tr></thead>' +
-          '<tbody>' + rows + '</tbody>' +
+          '<thead><tr><th>#</th><th>Oferta</th><th>Marketplace</th><th>Conversões</th><th>Comissão</th></tr></thead>' +
+          '<tbody>' + html + '</tbody>' +
           '</table>';
       }
 
-      function updateKPIs(clicksTotal, offersTotal) {
-        document.getElementById('totalClicks').textContent = formatNum(clicksTotal);
-        document.getElementById('clicksSub').textContent = 'Últimos 7 dias';
+      function updateKPIs(totals, offersTotal) {
+        document.getElementById('totalCommission').textContent = formatBRL(totals.commission_brl || 0);
+        document.getElementById('commissionSub').textContent = 'Últimos 7 dias';
+        document.getElementById('totalConversions').textContent = formatNum(totals.conversions || 0);
         document.getElementById('totalOffers').textContent = formatNum(offersTotal);
         document.getElementById('offersSub').textContent = 'Catálogo atual';
-        if (offersTotal > 0 && clicksTotal !== null) {
-          document.getElementById('ctr').textContent = formatPct((clicksTotal / offersTotal) * 100);
-        } else {
-          document.getElementById('ctr').textContent = '--';
-        }
       }
 
-      // Carrega offers.json para ter o total de ofertas
       function loadOffersCount() {
         return fetch('offers.json', { cache: 'no-store' })
           .then(function (r) { return r.json(); })
@@ -269,32 +305,32 @@
           .catch(function () { return 0; });
       }
 
-      // Carrega métricas de cliques
-      function loadClicks() {
-        return fetch('/api/clicks', { cache: 'no-store' })
+      function loadSummary() {
+        return fetch('affiliate-summary.json', { cache: 'no-store' })
           .then(function (r) {
-            if (!r.ok) throw new Error('API ' + r.status);
+            if (!r.ok) throw new Error('summary ' + r.status);
             return r.json();
           })
           .catch(function () {
-            return { clicks_by_channel: [], top_offers: [], total_clicks_7d: 0, notice: 'API indisponível' };
+            return { totals: {}, by_channel: [], by_source: [], top_offers: [] };
           });
       }
 
-      Promise.all([loadClicks(), loadOffersCount()])
+      Promise.all([loadSummary(), loadOffersCount()])
         .then(function (results) {
-          var clicksData = results[0];
+          var summary = results[0];
           var offersTotal = results[1];
-
-          updateKPIs(clicksData.total_clicks_7d, offersTotal);
-          renderChannelTable(clicksData.clicks_by_channel, clicksData.total_clicks_7d);
-          renderTopOffers(clicksData.top_offers);
+          updateKPIs(summary.totals || {}, offersTotal);
+          renderChannelTable(summary.by_channel);
+          renderSourceTable(summary.by_source);
+          renderTopOffers(summary.top_offers);
         })
         .catch(function () {
-          document.getElementById('totalClicks').textContent = 'Erro';
-          document.getElementById('ctr').textContent = 'Erro';
+          document.getElementById('totalCommission').textContent = 'Erro';
+          document.getElementById('totalConversions').textContent = 'Erro';
           document.getElementById('totalOffers').textContent = 'Erro';
           document.getElementById('channelTable').innerHTML = '<div class="state-message">Falha ao carregar métricas.</div>';
+          document.getElementById('sourceTable').innerHTML = '<div class="state-message">Falha ao carregar métricas.</div>';
           document.getElementById('topOffersTable').innerHTML = '<div class="state-message">Falha ao carregar métricas.</div>';
         });
     })();

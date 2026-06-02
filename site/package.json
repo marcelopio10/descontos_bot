@@ -5,5 +5,10 @@
   "description": "Site público descontos.bot — funções serverless de tracking e dashboard.",
   "dependencies": {
     "@vercel/kv": "^3.0.0"
+  },
+  "devDependencies": {
+    "csso": "^5.0.5",
+    "sharp": "^0.34.5",
+    "terser": "^5.48.0"
   }
 }

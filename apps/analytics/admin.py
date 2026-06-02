@@ -114,6 +114,8 @@ class AffiliateImportBatchAdmin(admin.ModelAdmin):
                 try:
                     result = parse_amazon_tsv(
                         uploaded.read(),
+                        period_start=form.cleaned_data['period_start'],
+                        period_end=form.cleaned_data['period_end'],
                         filename=uploaded.name,
                         commit=True,
                     )
@@ -197,25 +199,27 @@ class AffiliateImportBatchAdmin(admin.ModelAdmin):
 @admin.register(AffiliateConversion)
 class AffiliateConversionAdmin(admin.ModelAdmin):
     list_display = (
-        'report_date',
+        'period_end',
+        'period_start',
         'source',
         'offer',
+        'external_ref',
         'social_channel',
         'conversions',
         'clicks',
         'commission_brl',
         'revenue_brl',
-        'subid',
         'batch_link',
     )
     list_filter = (
         'source',
         'social_channel',
-        ('report_date', admin.DateFieldListFilter),
+        ('period_end', admin.DateFieldListFilter),
         'offer__marketplace',
     )
     search_fields = (
-        'subid',
+        'external_ref',
+        'product_title',
         'offer__title',
         'offer__slug',
         'offer__asin',
@@ -225,8 +229,10 @@ class AffiliateConversionAdmin(admin.ModelAdmin):
         'offer',
         'social_channel',
         'source',
-        'subid',
-        'report_date',
+        'external_ref',
+        'product_title',
+        'period_start',
+        'period_end',
         'clicks',
         'conversions',
         'revenue_brl',
@@ -236,7 +242,7 @@ class AffiliateConversionAdmin(admin.ModelAdmin):
         'updated_at',
     )
     autocomplete_fields = ()
-    date_hierarchy = 'report_date'
+    date_hierarchy = 'period_end'
 
     def has_add_permission(self, request):
         return False

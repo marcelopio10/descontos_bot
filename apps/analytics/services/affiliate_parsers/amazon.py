@@ -1,8 +1,9 @@
 import csv
 import hashlib
 import io
+import unicodedata
 from collections import defaultdict
-from datetime import date, datetime
+from datetime import date
 from decimal import Decimal, InvalidOperation
 
 from django.db import transaction
@@ -19,21 +20,29 @@ from apps.offers.models import Offer
 
 AMAZON_MARKETPLACE_CODE = 'amazon'
 
+# Aliases tolerantes (pt-BR oficial + en). Header normalizado para ASCII lower.
 COLUMN_ALIASES: dict[str, tuple[str, ...]] = {
-    'date': ('date', 'data', 'report date', 'report_date'),
     'asin': ('asin',),
-    'title': ('title', 'titulo', 'product title', 'name'),
-    'tracking_id': ('tracking id', 'tracking_id', 'tag', 'associate tag'),
-    'clicks': ('clicks', 'cliques'),
-    'shipped': ('items shipped', 'shipped', 'ordered', 'orders', 'pedidos'),
-    'revenue': ('revenue', 'receita', 'ordered revenue', 'shipped revenue'),
+    'title': (
+        'produto', 'titulo', 'nome', 'product title', 'name', 'title',
+    ),
+    'tracking_id': (
+        'numero de rastreamento', 'tracking id', 'associate tag', 'tag',
+    ),
+    'clicks': ('cliques', 'clicks'),
+    'shipped': (
+        'produtos enviados', 'items shipped', 'shipped',
+    ),
+    'ordered': (
+        'produtos pedidos', 'items ordered', 'ordered', 'orders',
+    ),
+    'revenue': (
+        'receita de produtos enviados', 'receita solicitada',
+        'shipped revenue', 'ordered revenue', 'revenue',
+    ),
     'commission': (
-        'commission',
-        'commission income',
-        'earnings',
-        'comissao',
-        'comissão',
-        'total earnings',
+        'ganhos totais', 'ganhos de produtos enviados',
+        'total earnings', 'earnings', 'commission', 'commission income',
     ),
 }
 
@@ -41,14 +50,33 @@ COLUMN_ALIASES: dict[str, tuple[str, ...]] = {
 def parse_amazon_tsv(
     payload: bytes,
     *,
+    period_start: date,
+    period_end: date,
     filename: str = '',
     commit: bool = True,
 ) -> BatchResult:
-    """Parseia Earnings Report do Amazon Associates (TSV UTF-8).
+    """Parseia relatório Amazon Associates por ASIN (TSV/CSV).
 
-    Amazon não expõe canal de origem no Earnings Report — todas as conversões
-    ficam com social_channel=null e source='amazon'.
+    O painel Associates não inclui data nem canal nos exports — `period_start`
+    e `period_end` precisam ser informados externamente pelo operador.
+
+    Schema esperado (relatório por ASIN, Brasil pt-BR):
+        ASIN | Produto | Cliques | Produtos pedidos | Produtos enviados |
+        Receita... | Ganhos totais | ...
+
+    Tolerante a aliases para suportar também o relatório agrupado por
+    Tracking ID — nesse caso ASIN fica ausente e o parser ignora as linhas
+    com warning explícito (use relatório por ASIN).
+
+    Observações:
+    - Channel sempre null (Amazon não expõe origem do clique no relatório).
+    - Granularidade: 1 conversão por ASIN, agregando o período inteiro.
     """
+    if period_start is None or period_end is None:
+        raise ValueError('period_start e period_end são obrigatórios.')
+    if period_start > period_end:
+        period_start, period_end = period_end, period_start
+
     text = _decode_payload(payload)
     payload_sha256 = hashlib.sha256(payload).hexdigest()
 
@@ -59,19 +87,24 @@ def parse_amazon_tsv(
     if existing:
         raise DuplicatePayloadError(existing)
 
-    dialect, has_header = _detect_dialect(text)
+    dialect = _detect_dialect(text)
     reader = csv.DictReader(io.StringIO(text), dialect=dialect)
     if not reader.fieldnames:
         raise ValueError('Arquivo vazio ou sem cabeçalho.')
 
     field_map = _build_field_map(reader.fieldnames)
-    _require_columns(field_map, ('date', 'asin', 'commission'))
+    if 'asin' not in field_map:
+        raise ValueError(
+            'Coluna ASIN ausente. Exporte o relatório com agrupamento por '
+            'ASIN no painel Amazon Associates (ex: Ganhos → ASIN).'
+        )
+    if 'commission' not in field_map:
+        raise ValueError(
+            'Coluna de ganhos/comissão ausente no relatório. '
+            f'Cabeçalho recebido: {reader.fieldnames}'
+        )
 
-    marketplace = Marketplace.objects.filter(code=AMAZON_MARKETPLACE_CODE).first()
-    if marketplace is None:
-        raise ValueError("Marketplace 'amazon' não cadastrado.")
-
-    aggregated: dict[tuple[str, date], dict] = defaultdict(
+    aggregated: dict[str, dict] = defaultdict(
         lambda: {
             'clicks': 0,
             'conversions': 0,
@@ -81,42 +114,40 @@ def parse_amazon_tsv(
             'title': '',
         }
     )
-
-    warnings: list[str] = []
-    period_start: date | None = None
-    period_end: date | None = None
     tracking_id_seen: set[str] = set()
 
     for row in reader:
-        try:
-            report_date = _parse_date(_get(row, field_map, 'date'))
-        except ValueError as exc:
-            warnings.append(f'Data inválida: {exc} — linha: {row}')
-            continue
-
-        asin = (_get(row, field_map, 'asin') or '').strip().upper()
+        asin = _get(row, field_map, 'asin').strip().upper()
         if not asin:
-            warnings.append(f'Linha sem ASIN: {row}')
             continue
 
-        key = (asin, report_date)
-        bucket = aggregated[key]
+        bucket = aggregated[asin]
         bucket['clicks'] += _to_int(_get(row, field_map, 'clicks'))
-        bucket['conversions'] += _to_int(_get(row, field_map, 'shipped'))
+        # Preferência: produtos enviados (definitivo) > pedidos (mais agressivo)
+        shipped = _to_int(_get(row, field_map, 'shipped'))
+        ordered = _to_int(_get(row, field_map, 'ordered'))
+        bucket['conversions'] += shipped or ordered
         bucket['revenue_brl'] += _to_decimal(_get(row, field_map, 'revenue'))
         bucket['commission_brl'] += _to_decimal(_get(row, field_map, 'commission'))
-        title = (_get(row, field_map, 'title') or '').strip()
+
+        title = _get(row, field_map, 'title').strip()
         if title and not bucket['title']:
             bucket['title'] = title
-        tracking_id = (_get(row, field_map, 'tracking_id') or '').strip()
+
+        tracking_id = _get(row, field_map, 'tracking_id').strip()
         if tracking_id:
             bucket['tracking_ids'].add(tracking_id)
             tracking_id_seen.add(tracking_id)
 
-        period_start = report_date if period_start is None else min(period_start, report_date)
-        period_end = report_date if period_end is None else max(period_end, report_date)
+    if not aggregated:
+        raise ValueError('Nenhuma linha com ASIN encontrada no arquivo.')
+
+    marketplace = Marketplace.objects.filter(code=AMAZON_MARKETPLACE_CODE).first()
+    if marketplace is None:
+        raise ValueError("Marketplace 'amazon' não cadastrado.")
 
     expected_tag = (marketplace.affiliate_tag or '').strip()
+    warnings: list[str] = []
     if expected_tag and tracking_id_seen:
         unknown = sorted(t for t in tracking_id_seen if t != expected_tag)
         if unknown:
@@ -124,7 +155,7 @@ def parse_amazon_tsv(
                 f'Tracking IDs divergentes de "{expected_tag}": {", ".join(unknown)}'
             )
 
-    asin_offers = _resolve_amazon_offers({asin for asin, _ in aggregated.keys()})
+    asin_offers = _resolve_amazon_offers(set(aggregated.keys()))
 
     imported = 0
     skipped = 0
@@ -140,33 +171,40 @@ def parse_amazon_tsv(
             notes='',
         )
 
-        for (asin, report_date), bucket in aggregated.items():
+        for asin, bucket in aggregated.items():
             offer = asin_offers.get(asin)
             if offer is None:
-                skipped += 1
                 unresolved_asins.append(asin)
-                continue
 
-            subid = next(iter(bucket['tracking_ids']), '')
+            lookup = {
+                'source': AffiliateSource.AMAZON,
+                'period_start': period_start,
+                'period_end': period_end,
+            }
+            if offer is not None:
+                lookup['offer'] = offer
+                lookup['external_ref'] = ''
+            else:
+                lookup['offer'] = None
+                lookup['external_ref'] = asin
+
             AffiliateConversion.objects.update_or_create(
-                offer=offer,
-                social_channel=None,
-                source=AffiliateSource.AMAZON,
-                report_date=report_date,
                 defaults={
-                    'subid': subid,
+                    'social_channel': None,
+                    'product_title': bucket['title'][:255],
                     'clicks': bucket['clicks'],
                     'conversions': bucket['conversions'],
                     'revenue_brl': bucket['revenue_brl'],
                     'commission_brl': bucket['commission_brl'],
                     'batch': batch,
                 },
+                **lookup,
             )
             imported += 1
 
         if unresolved_asins:
             warnings.append(
-                f'ASINs sem oferta correspondente ({len(unresolved_asins)}): '
+                f'ASINs sem oferta cadastrada ({len(unresolved_asins)}): '
                 + ', '.join(sorted(unresolved_asins)[:20])
                 + ('…' if len(unresolved_asins) > 20 else '')
             )
@@ -198,15 +236,12 @@ def _decode_payload(payload: bytes) -> str:
     raise ValueError('Não foi possível decodificar o arquivo (esperado UTF-8 ou Latin-1).')
 
 
-def _detect_dialect(text: str) -> tuple[csv.Dialect, bool]:
+def _detect_dialect(text: str) -> csv.Dialect:
     sample = text[:4096]
     try:
-        dialect = csv.Sniffer().sniff(sample, delimiters='\t,;')
-        has_header = csv.Sniffer().has_header(sample)
+        return csv.Sniffer().sniff(sample, delimiters='\t,;')
     except csv.Error:
-        dialect = csv.excel_tab
-        has_header = True
-    return dialect, has_header
+        return csv.excel_tab
 
 
 def _build_field_map(fieldnames: list[str]) -> dict[str, str]:
@@ -221,15 +256,9 @@ def _build_field_map(fieldnames: list[str]) -> dict[str, str]:
 
 
 def _normalize_header(name: str) -> str:
-    return ' '.join(name.strip().lower().split())
-
-
-def _require_columns(field_map: dict[str, str], required: tuple[str, ...]) -> None:
-    missing = [key for key in required if key not in field_map]
-    if missing:
-        raise ValueError(
-            f'Colunas obrigatórias ausentes no relatório Amazon: {", ".join(missing)}'
-        )
+    cleaned = ' '.join(name.strip().split()).lower()
+    decomposed = unicodedata.normalize('NFKD', cleaned)
+    return ''.join(ch for ch in decomposed if not unicodedata.combining(ch))
 
 
 def _get(row: dict, field_map: dict[str, str], key: str) -> str:
@@ -239,24 +268,15 @@ def _get(row: dict, field_map: dict[str, str], key: str) -> str:
     return row.get(column) or ''
 
 
-def _parse_date(raw: str) -> date:
+def _to_int(raw: str) -> int:
     raw = (raw or '').strip()
     if not raw:
-        raise ValueError('vazia')
-    for fmt in ('%Y-%m-%d', '%d/%m/%Y', '%m/%d/%Y', '%Y/%m/%d'):
-        try:
-            return datetime.strptime(raw, fmt).date()
-        except ValueError:
-            continue
-    raise ValueError(raw)
-
-
-def _to_int(raw: str) -> int:
-    raw = (raw or '').strip().replace('.', '').replace(',', '')
-    if not raw:
+        return 0
+    cleaned = raw.replace('.', '').replace(',', '').replace(' ', '')
+    if not cleaned:
         return 0
     try:
-        return int(float(raw))
+        return int(float(cleaned))
     except ValueError:
         return 0
 
@@ -267,6 +287,7 @@ def _to_decimal(raw: str) -> Decimal:
         return Decimal('0')
     cleaned = raw.replace('R$', '').replace(' ', '')
     if ',' in cleaned and cleaned.rfind(',') > cleaned.rfind('.'):
+        # pt-BR: 1.234,56
         cleaned = cleaned.replace('.', '').replace(',', '.')
     else:
         cleaned = cleaned.replace(',', '')

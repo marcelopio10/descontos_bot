@@ -48,7 +48,7 @@ def build_affiliate_summary_payload(window_days: int = DEFAULT_WINDOW_DAYS) -> d
     now = timezone.now()
     cutoff_date = (now - timedelta(days=window_days)).date()
 
-    qs = AffiliateConversion.objects.filter(report_date__gte=cutoff_date)
+    qs = AffiliateConversion.objects.filter(period_end__gte=cutoff_date)
 
     totals = qs.aggregate(
         clicks=Sum('clicks'),
@@ -84,6 +84,9 @@ def build_affiliate_summary_payload(window_days: int = DEFAULT_WINDOW_DAYS) -> d
             'offer__slug',
             'offer__title',
             'offer__marketplace__code',
+            'source',
+            'external_ref',
+            'product_title',
         )
         .annotate(
             clicks=Sum('clicks'),
@@ -139,14 +142,26 @@ def _serialize_source_row(row: dict) -> dict:
 
 
 def _serialize_offer_row(row: dict) -> dict:
+    source = row.get('source') or ''
+    marketplace = row.get('offer__marketplace__code') or _marketplace_for_source(source)
     return {
         'slug': row.get('offer__slug') or '',
-        'title': row.get('offer__title') or '',
-        'marketplace': row.get('offer__marketplace__code') or '',
+        'title': row.get('offer__title') or row.get('product_title') or '',
+        'marketplace': marketplace,
+        'external_ref': row.get('external_ref') or '',
+        'is_orphan': not row.get('offer__slug'),
         'clicks': int(row.get('clicks') or 0),
         'conversions': int(row.get('conversions') or 0),
         'commission_brl': _decimal_str(row.get('commission_brl')),
     }
+
+
+def _marketplace_for_source(source: str) -> str:
+    if source == AffiliateSource.AMAZON:
+        return 'amazon'
+    if source == AffiliateSource.MERCADO_LIVRE:
+        return 'mercadolivre'
+    return ''
 
 
 def _decimal_str(value) -> str:

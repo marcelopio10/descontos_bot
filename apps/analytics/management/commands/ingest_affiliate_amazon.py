@@ -1,3 +1,4 @@
+from datetime import datetime
 from pathlib import Path
 
 from django.core.management.base import BaseCommand, CommandError
@@ -7,13 +8,26 @@ from apps.analytics.services.affiliate_summary import publish_affiliate_summary
 
 
 class Command(BaseCommand):
-    help = 'Importa relatório de earnings do Amazon Associates (TSV/CSV).'
+    help = (
+        'Importa relatório por ASIN do Amazon Associates (TSV/CSV). '
+        'Período deve ser informado manualmente — Amazon não inclui data no arquivo.'
+    )
 
     def add_arguments(self, parser):
         parser.add_argument(
             '--file',
             required=True,
             help='Caminho do arquivo TSV exportado do painel Amazon Associates.',
+        )
+        parser.add_argument(
+            '--period-start',
+            required=True,
+            help='Início do período (YYYY-MM-DD).',
+        )
+        parser.add_argument(
+            '--period-end',
+            required=True,
+            help='Fim do período (YYYY-MM-DD).',
         )
         parser.add_argument(
             '--dry-run',
@@ -31,9 +45,17 @@ class Command(BaseCommand):
         if not file_path.exists():
             raise CommandError(f'Arquivo não encontrado: {file_path}')
 
+        try:
+            period_start = datetime.strptime(options['period_start'], '%Y-%m-%d').date()
+            period_end = datetime.strptime(options['period_end'], '%Y-%m-%d').date()
+        except ValueError as exc:
+            raise CommandError(f'Data inválida (use YYYY-MM-DD): {exc}')
+
         payload = file_path.read_bytes()
         result = parse_amazon_tsv(
             payload,
+            period_start=period_start,
+            period_end=period_end,
             filename=file_path.name,
             commit=not options['dry_run'],
         )

@@ -1,7 +1,75 @@
 # Plano Técnico de Implementação — Automação Oficial do Instagram
 
-> Status: aprovado para planejamento.
-> Escopo desta etapa: salvar o plano técnico. Não executar implementação, migração, testes, chamadas à API Meta ou publicação real.
+> Status: Sprint 4 (publicação real) entregue em 2026-06-03.
+> Escopo original: salvar plano técnico (Cloudinary + Meta Graph direto). Implementação real adotou Composio CLI — ver seção 2.bis abaixo.
+
+## Atualização de execução (2026-06-03)
+
+A implementação divergiu do plano original em dois pontos principais. Ambos foram validados em produção com publicação real bem-sucedida.
+
+### 2.bis Caminho oficial via Composio CLI
+
+Decisão revisada: usar Composio CLI como camada de abstração sobre a Instagram Graph API. Composio resolve simultaneamente:
+
+- hospedagem temporária pública da mídia (substitui Cloudinary),
+- autenticação Meta (token + permissões gerenciados pela conexão Composio),
+- chamadas `INSTAGRAM_POST_IG_USER_MEDIA` (create container) e `INSTAGRAM_POST_IG_USER_MEDIA_PUBLISH` (publish).
+
+Conexão ativa: `instagram_midge-frieda`.
+
+Implicações:
+
+- Cloudinary não é mais dependência operacional.
+- Não há `meta_graph_client.py` separado — a Graph API é consumida via subprocess `composio execute`.
+- Guard de produção foi renomeado para `INSTAGRAM_PUBLISH_DRY_RUN` (default `false`). Para forçar dry-run, exportar `INSTAGRAM_PUBLISH_DRY_RUN=true`.
+
+Componentes reais entregues:
+
+```text
+apps/social_posts/
+  services/composio_publisher.py     # orquestra create container + publish + atualiza DB
+  management/commands/publish_instagram_post.py  # comando --post-id + --dry-run
+  migrations/0002_instagrampost_instagram_media_id_and_more.py
+```
+
+Modelo `InstagramPost` recebeu apenas dois campos novos nesta etapa (escopo mínimo):
+
+- `instagram_media_id` (CharField, indexado) — ID retornado pela Meta.
+- `published_error` (TextField) — última mensagem de erro operacional.
+
+Demais campos do plano original (`external_container_id`, `published_url`, `publish_attempts`, `scheduled_for`, `media_public_url`) ficaram fora desta sprint. Serão reavaliados em Sprint 5 conforme necessidade real.
+
+### Gotcha técnico — Composio file_uploadable
+
+A tool `INSTAGRAM_POST_IG_USER_MEDIA` expõe dois campos `file_uploadable` (`image_file` + `video_file`). Por isso:
+
+- A flag `--file <path>` falha com `Pass the target field explicitly with -d`.
+- A sintaxe `@<path>` dentro do JSON `-d` também falha (CLI tenta abrir literalmente `@/path`).
+
+Forma correta: passar o caminho como string pura na chave do field:
+
+```json
+{
+  "ig_user_id": "...",
+  "media_type": "STORIES",
+  "image_file": "/tmp/arquivo.jpg"
+}
+```
+
+O CLI detecta que o field é `file_uploadable`, sobe o arquivo para storage temporário e injeta a URL pública para a Meta buscar.
+
+### Limitação Story link sticker
+
+A tool atual não expõe campo de sticker URL clicável para stories. Tráfego de afiliado continua via bio link (`/links`). Caption do story não vira link clicável.
+
+### Sprint 4 — DoD validado
+
+- Post `#3952` publicado em 2026-06-03 via API oficial.
+- `instagram_media_id=18097955294030410` (`container_id=18094318856090197`).
+- Status no banco: `posted`, `posted_at` preenchido, sem erro.
+- Compliance Amazon mantido na caption (disclosure + tag).
+
+
 
 ## 1. Objetivo
 

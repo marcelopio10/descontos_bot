@@ -59,6 +59,16 @@ class InstagramPost(TimestampedModel):
         null=True,
         blank=True,
     )
+    instagram_media_id = models.CharField(
+        'ID da mídia no Instagram',
+        max_length=64,
+        blank=True,
+        db_index=True,
+    )
+    published_error = models.TextField(
+        'erro de publicação',
+        blank=True,
+    )
 
     class Meta:
         ordering = ['-created_at']

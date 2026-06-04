@@ -67,6 +67,11 @@ OFFERS_JSON_OUTPUT_PATH = os.environ.get(
     'OFFERS_JSON_OUTPUT_PATH',
     str(BASE_DIR / 'site' / 'offers.json'),
 )
+LINKS_JSON_OUTPUT_PATH = os.environ.get(
+    'LINKS_JSON_OUTPUT_PATH',
+    str(BASE_DIR / 'site' / 'links.json'),
+)
+LINKS_JSON_ITEMS_COUNT = int(os.environ.get('LINKS_JSON_ITEMS_COUNT', '5'))
 SITE_PUBLIC_DIR = os.environ.get(
     'SITE_PUBLIC_DIR',
     str(BASE_DIR / 'site'),

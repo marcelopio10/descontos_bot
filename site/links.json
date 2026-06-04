@@ -1,42 +1,57 @@
 {
-  "version": "1.0",
-  "generated_at": "2026-05-07T20:41:34.265076+00:00",
+  "version": "1.1",
+  "generated_at": "2026-06-04T08:04:40.102187+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 134,
-      "title": "Coenzima Q10 (60 Caps), VitaFor",
-      "current_price": "98.44",
-      "discount_pct": "97.00",
-      "tracked_url": "https://www.amazon.com.br/dp/B07L5VNT9Q?tag=desconto.bot-20&utm_source=instagram&utm_medium=bio&utm_campaign=offer_134"
+      "id": 3698,
+      "title": "Omega Plus 120 Cápsulas Ômega 3 Dark Lab Sem Sabor",
+      "current_price": "99.00",
+      "original_price": "449.00",
+      "discount_pct": "77.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_840067-MLA97214107041_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/114drmQ?matt_word=dbot_ig_bio_3698&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3698"
     },
     {
-      "id": 131,
-      "title": "Bellacotton Algodao Quadrado Baby Bellacotton 100 Un. (Lv100Pg85)",
-      "current_price": "23.90",
-      "discount_pct": "93.00",
-      "tracked_url": "https://www.amazon.com.br/dp/B0B5YF3HSW?tag=desconto.bot-20&utm_source=instagram&utm_medium=bio&utm_campaign=offer_131"
+      "id": 1096,
+      "title": "Bicicleta Spinning Wct Fitness Ergométrica 6kg Aço Preto",
+      "current_price": "443.00",
+      "original_price": "1850.00",
+      "discount_pct": "76.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_862020-MLA102088986767_122025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1VH9DJM?matt_word=dbot_ig_bio_1096&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1096"
     },
     {
-      "id": 138,
-      "title": "Vasenol Geleia De Vaselina",
-      "current_price": "23.99",
-      "discount_pct": "90.00",
-      "tracked_url": "https://www.amazon.com.br/dp/B07JR55K68?tag=desconto.bot-20&utm_source=instagram&utm_medium=bio&utm_campaign=offer_138"
+      "id": 3426,
+      "title": "Pre Treino Carnage Pink Lemonade 450g Com Creatina Dark Lab",
+      "current_price": "99.00",
+      "original_price": "399.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_910513-MLA99911074229_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1utJS1y?matt_word=dbot_ig_bio_3426&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3426"
     },
     {
-      "id": 1762,
-      "title": "Sackbo: Uma Grande Aventura Ps5-padrão-playstation_5",
-      "current_price": "99.90",
-      "discount_pct": "70.00",
-      "tracked_url": "https://www.amazon.com.br/dp/B08QTSFCHX?tag=desconto.bot-20&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1762"
+      "id": 1330,
+      "title": "Pre Treino Carnage Uva 450g Com Creatina Dark Lab",
+      "current_price": "99.00",
+      "original_price": "399.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_704549-MLA99446265254_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2hkWfs1?matt_word=dbot_ig_bio_1330&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1330"
     },
     {
-      "id": 1756,
-      "title": "God of War Ragnarök - Edição Standard - PlayStation 5",
-      "current_price": "119.90",
-      "discount_pct": "70.00",
-      "tracked_url": "https://www.amazon.com.br/dp/B0BH59HP23?tag=desconto.bot-20&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1756"
+      "id": 2868,
+      "title": "Creatina 600g Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
+      "current_price": "39.00",
+      "original_price": "154.00",
+      "discount_pct": "74.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_788109-MLA110452427960_052026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/27aRfTG?matt_word=dbot_ig_bio_2868&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2868"
     }
   ]
 }

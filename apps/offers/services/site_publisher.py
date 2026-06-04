@@ -80,6 +80,9 @@ def publish_offers(
     public_path = Path(settings.OFFERS_JSON_OUTPUT_PATH)
     if not public_path.is_absolute():
         public_path = Path(settings.BASE_DIR) / public_path
+    links_path = Path(settings.LINKS_JSON_OUTPUT_PATH)
+    if not links_path.is_absolute():
+        links_path = Path(settings.BASE_DIR) / links_path
     generated = False
     changed = False
     offers_count = 0
@@ -88,13 +91,20 @@ def publish_offers(
         payload = build_offers_payload()
         generated = True
         offers_count = len(payload['offers'])
-        changed = _has_real_payload_change(public_path, payload)
+        offers_changed = _has_real_payload_change(public_path, payload)
+
+        links_payload, links_error = _build_links_payload_safe()
+        links_changed = (
+            links_payload is not None
+            and _has_real_payload_change(links_path, links_payload)
+        )
 
         if export_path.resolve() != public_path.resolve():
             _write_json(export_path, payload)
 
+        changed = offers_changed or links_changed
         if not changed:
-            message = 'Sem alteração real nas ofertas; commit e push ignorados.'
+            message = 'Sem alteração real em offers.json ou links.json; commit e push ignorados.'
             log.info(message)
             return PublishResult(
                 generated=True,
@@ -104,9 +114,21 @@ def publish_offers(
                 message=message,
             ).as_dict()
 
-        _write_json(public_path, payload)
-        message = 'offers.json atualizado com alteração real nas ofertas.'
-        log.info('%s ofertas=%s caminho=%s', message, offers_count, public_path)
+        commit_paths: list[Path] = []
+        if offers_changed:
+            _write_json(public_path, payload)
+            commit_paths.append(public_path)
+            log.info('offers.json atualizado caminho=%s', public_path)
+        if links_changed and links_payload is not None:
+            _write_json(links_path, links_payload)
+            commit_paths.append(links_path)
+            log.info(
+                'links.json atualizado itens=%s caminho=%s',
+                len(links_payload['items']),
+                links_path,
+            )
+        if links_error:
+            log.warning('links.json não pôde ser gerado: %s', links_error)
 
         if not push:
             return PublishResult(
@@ -114,16 +136,16 @@ def publish_offers(
                 changed=True,
                 output_path=str(public_path),
                 offers_count=offers_count,
-                message='offers.json atualizado localmente; push desabilitado.',
+                message='offers.json/links.json atualizados localmente; push desabilitado.',
             ).as_dict()
 
-        pushed, committed = _commit_and_push(public_path, branch=branch)
+        pushed, committed = _commit_and_push(commit_paths, branch=branch)
         if not committed:
-            message = 'Sem diff rastreável no Git após atualizar offers.json.'
+            message = 'Sem diff rastreável no Git após atualizar offers.json/links.json.'
         elif pushed:
-            message = 'offers.json commitado e enviado ao repositório remoto.'
+            message = 'offers.json/links.json commitados e enviados ao repositório remoto.'
         else:
-            message = 'offers.json commitado; push não executado.'
+            message = 'offers.json/links.json commitados; push não executado.'
 
         return PublishResult(
             generated=True,
@@ -257,40 +279,66 @@ def _stable_payload(payload: dict[str, Any]) -> dict[str, Any]:
     return stable
 
 
-def _commit_and_push(public_path: Path, branch: str | None = None) -> tuple[bool, bool]:
+def _build_links_payload_safe() -> tuple[dict[str, Any] | None, str]:
+    """Gera payload de links.json sem propagar exceções.
+
+    Falha de geração (ex.: poucas ofertas dentro da janela) não deve abortar
+    a publicação de offers.json — links.json é complementar.
+    """
+    # Import local pra evitar ciclo de import com apps.offers no boot.
+    from apps.social_posts.services.bio_link_publisher import build_links_payload
+
+    try:
+        return build_links_payload(count=settings.LINKS_JSON_ITEMS_COUNT), ''
+    except Exception as exc:  # noqa: BLE001
+        return None, str(exc)
+
+
+def _commit_and_push(
+    public_paths: list[Path],
+    branch: str | None = None,
+) -> tuple[bool, bool]:
+    if not public_paths:
+        return False, False
+
     repo_path = Path(settings.SITE_REPO_LOCAL_PATH).resolve()
     if not repo_path.exists():
         raise GitCommandError(f'Repositório integrado não encontrado: {repo_path}')
 
     branch = branch or settings.PUBLISH_OFFERS_BRANCH
 
-    target_path = public_path.resolve()
-    if not _is_relative_to(target_path, repo_path):
-        public_dir = Path(settings.SITE_PUBLIC_DIR)
-        if not public_dir.is_absolute():
-            public_dir = repo_path / public_dir
-        target_path = public_dir / 'offers.json'
-        target_path.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(public_path, target_path)
-
-    relative_path = target_path.relative_to(repo_path)
-    git_path = relative_path.as_posix()
+    public_dir = Path(settings.SITE_PUBLIC_DIR)
+    if not public_dir.is_absolute():
+        public_dir = repo_path / public_dir
 
     # Worktree dedicado em PUBLISH_OFFERS_BRANCH desacopla o publish do branch
     # checado no working tree principal. Sem isso, se o operador trocar de
-    # branch (ex.: trabalhar numa feature), o commit do offers.json cai no
-    # branch errado e o `push origin <branch>` empurra o tip local de
-    # <branch> — que ninguém atualizou — virando no-op silencioso. Resultado:
-    # produção (Vercel deploy de origin/main) congela sem erro visível.
+    # branch (ex.: trabalhar numa feature), o commit cai no branch errado e o
+    # `push origin <branch>` empurra o tip local de <branch> — que ninguém
+    # atualizou — virando no-op silencioso. Resultado: produção (Vercel deploy
+    # de origin/main) congela sem erro visível.
     worktree_path = _ensure_publish_worktree(repo_path, branch)
-    worktree_target = worktree_path / relative_path
-    worktree_target.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(target_path, worktree_target)
 
-    if not _has_diff(worktree_path, git_path):
+    git_paths: list[str] = []
+    for public_path in public_paths:
+        target_path = public_path.resolve()
+        if not _is_relative_to(target_path, repo_path):
+            target_path = public_dir / public_path.name
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(public_path, target_path)
+
+        relative_path = target_path.relative_to(repo_path)
+        worktree_target = worktree_path / relative_path
+        worktree_target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(target_path, worktree_target)
+        git_paths.append(relative_path.as_posix())
+
+    diff_paths = [p for p in git_paths if _has_diff(worktree_path, p)]
+    if not diff_paths:
         return False, False
 
-    _run_git(worktree_path, 'add', git_path)
+    for git_path in diff_paths:
+        _run_git(worktree_path, 'add', git_path)
     _run_git(
         worktree_path,
         '-c',

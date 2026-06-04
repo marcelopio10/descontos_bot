@@ -1,0 +1,76 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="250" cy="250" r="250" fill="#0D0F14"/>
+  <circle cx="250" cy="250" r="222" fill="#161A22"/>
+
+  <!-- Body -->
+  <rect x="105" y="168" width="290" height="210" rx="48" fill="#1E2330"/>
+  <rect x="105" y="168" width="290" height="210" rx="48" stroke="#00C9B1" stroke-width="7"/>
+
+  <!-- Head -->
+  <rect x="132" y="92" width="236" height="96" rx="36" fill="#1E2330"/>
+  <rect x="132" y="92" width="236" height="96" rx="36" stroke="#00C9B1" stroke-width="7"/>
+
+  <!-- Antenna -->
+  <line x1="250" y1="92" x2="250" y2="64" stroke="#00C9B1" stroke-width="10" stroke-linecap="round"/>
+  <!-- Antenna ball -->
+  <circle cx="250" cy="52" r="18" fill="#FFE14D"/>
+  <circle cx="250" cy="52" r="10" fill="#F5C800"/>
+
+  <!-- Left Eye -->
+  <circle cx="185" cy="225" r="36" fill="#0D0F14" stroke="#00C9B1" stroke-width="6"/>
+  <circle cx="185" cy="225" r="20" fill="#00C9B1"/>
+  <circle cx="192" cy="218" r="8" fill="#161A22"/>
+  <circle cx="196" cy="215" r="3" fill="#ffffff"/>
+
+  <!-- Right Eye -->
+  <circle cx="315" cy="225" r="36" fill="#0D0F14" stroke="#00C9B1" stroke-width="6"/>
+  <circle cx="315" cy="225" r="20" fill="#00C9B1"/>
+  <circle cx="322" cy="218" r="8" fill="#161A22"/>
+  <circle cx="326" cy="215" r="3" fill="#ffffff"/>
+
+  <!-- Visor / mouth display -->
+  <rect x="130" y="278" width="240" height="76" rx="20" fill="#0D0F14" stroke="#00C9B1" stroke-width="4"/>
+  <!-- Visor inner glow bg -->
+  <rect x="138" y="286" width="224" height="60" rx="14" fill="#0A1A18"/>
+  <!-- % symbol -->
+  <text x="175" y="331" font-family="'Courier New', monospace" font-size="38" font-weight="700" fill="#FFE14D">%</text>
+  <!-- DESCONTO text -->
+  <text x="215" y="326" font-family="'Courier New', monospace" font-size="22" font-weight="700" fill="#00C9B1">DESCONTO</text>
+  <!-- Blinking cursor dot -->
+  <rect x="360" y="304" width="6" height="28" rx="3" fill="#00C9B1" opacity="0.7"/>
+
+  <!-- Left arm -->
+  <rect x="68" y="196" width="40" height="76" rx="18" fill="#1E2330" stroke="#00C9B1" stroke-width="5"/>
+  <!-- Left hand fingers -->
+  <rect x="72" y="266" width="10" height="22" rx="5" fill="#1E2330" stroke="#00C9B1" stroke-width="4"/>
+  <rect x="86" y="270" width="10" height="20" rx="5" fill="#1E2330" stroke="#00C9B1" stroke-width="4"/>
+
+  <!-- Right arm -->
+  <rect x="392" y="196" width="40" height="76" rx="18" fill="#1E2330" stroke="#00C9B1" stroke-width="5"/>
+  <!-- Right hand fingers -->
+  <rect x="396" y="266" width="10" height="22" rx="5" fill="#1E2330" stroke="#00C9B1" stroke-width="4"/>
+  <rect x="410" y="270" width="10" height="20" rx="5" fill="#1E2330" stroke="#00C9B1" stroke-width="4"/>
+
+  <!-- Left leg -->
+  <rect x="152" y="370" width="60" height="46" rx="16" fill="#1E2330" stroke="#00C9B1" stroke-width="5"/>
+  <!-- Right leg -->
+  <rect x="288" y="370" width="60" height="46" rx="16" fill="#1E2330" stroke="#00C9B1" stroke-width="5"/>
+
+  <!-- Price tag badge top right -->
+  <circle cx="388" cy="118" r="48" fill="#FFE14D"/>
+  <circle cx="388" cy="118" r="38" fill="#F5C800"/>
+  <text x="388" y="108" text-anchor="middle" font-family="'Courier New', monospace" font-size="16" font-weight="700" fill="#0D0F14">R$</text>
+  <text x="388" y="132" text-anchor="middle" font-family="'Courier New', monospace" font-size="22" font-weight="700" fill="#0D0F14">OFF</text>
+  <!-- Tag string -->
+  <line x1="348" y1="82" x2="335" y2="70" stroke="#FFE14D" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Circuit details on body -->
+  <line x1="145" y1="190" x2="165" y2="190" stroke="#00C9B1" stroke-width="2" opacity="0.3"/>
+  <line x1="165" y1="190" x2="165" y2="200" stroke="#00C9B1" stroke-width="2" opacity="0.3"/>
+  <circle cx="165" cy="200" r="3" fill="#00C9B1" opacity="0.4"/>
+
+  <line x1="355" y1="190" x2="335" y2="190" stroke="#00C9B1" stroke-width="2" opacity="0.3"/>
+  <line x1="335" y1="190" x2="335" y2="200" stroke="#00C9B1" stroke-width="2" opacity="0.3"/>
+  <circle cx="335" cy="200" r="3" fill="#00C9B1" opacity="0.4"/>
+</svg>

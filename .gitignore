@@ -33,3 +33,7 @@ media/instagram/**
 !media/instagram/
 !media/instagram/*/
 !media/instagram/**/.gitkeep
+
+# macOS metadata (não versionar)
+.DS_Store
+._*

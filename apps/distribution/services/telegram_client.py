@@ -1,8 +1,11 @@
 import json
 import logging
+import mimetypes
 import time
+import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone as dt_timezone
+from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -10,6 +13,7 @@ from django.conf import settings
 
 
 DEFAULT_TIMEOUT_SECONDS = 15
+DEFAULT_LONG_POLL_TIMEOUT = 30
 MAX_RETRIES_5XX = 3
 TELEGRAM_API_BASE = 'https://api.telegram.org'
 
@@ -62,16 +66,115 @@ class TelegramClient:
         text_html: str,
         inline_keyboard: list[list[dict]] | None = None,
         disable_web_page_preview: bool = True,
+        disable_notification: bool = False,
     ) -> TelegramSendResult:
         payload = {
             'chat_id': chat_id,
             'text': text_html,
             'parse_mode': 'HTML',
             'disable_web_page_preview': disable_web_page_preview,
+            'disable_notification': disable_notification,
         }
         if inline_keyboard:
             payload['reply_markup'] = {'inline_keyboard': inline_keyboard}
         return self._send('sendMessage', payload)
+
+    def send_document(
+        self,
+        chat_id: str,
+        document_path: str | Path,
+        caption_html: str = '',
+        inline_keyboard: list[list[dict]] | None = None,
+        disable_notification: bool = False,
+    ) -> TelegramSendResult:
+        path = Path(document_path)
+        if not path.exists():
+            return TelegramSendResult(
+                success=False,
+                message_id='',
+                sent_at=None,
+                error_message=f'Arquivo não encontrado: {path}',
+            )
+
+        fields: dict[str, str] = {
+            'chat_id': str(chat_id),
+            'disable_notification': 'true' if disable_notification else 'false',
+        }
+        if caption_html:
+            fields['caption'] = caption_html
+            fields['parse_mode'] = 'HTML'
+        if inline_keyboard:
+            fields['reply_markup'] = json.dumps(
+                {'inline_keyboard': inline_keyboard},
+            )
+
+        try:
+            response = self._request_multipart(
+                'sendDocument',
+                fields=fields,
+                file_field='document',
+                file_path=path,
+            )
+        except TelegramClientError as exc:
+            return TelegramSendResult(
+                success=False,
+                message_id='',
+                sent_at=None,
+                error_message=str(exc),
+            )
+        return self._build_send_result(response)
+
+    def answer_callback_query(
+        self,
+        callback_query_id: str,
+        text: str = '',
+        show_alert: bool = False,
+    ) -> bool:
+        payload: dict = {
+            'callback_query_id': callback_query_id,
+            'show_alert': show_alert,
+        }
+        if text:
+            payload['text'] = text
+        response = self._request('answerCallbackQuery', payload)
+        return bool(response.get('result'))
+
+    def edit_message_reply_markup(
+        self,
+        chat_id: str,
+        message_id: int | str,
+        inline_keyboard: list[list[dict]] | None = None,
+    ) -> bool:
+        payload: dict = {
+            'chat_id': chat_id,
+            'message_id': int(message_id),
+        }
+        if inline_keyboard is None:
+            payload['reply_markup'] = {'inline_keyboard': []}
+        else:
+            payload['reply_markup'] = {'inline_keyboard': inline_keyboard}
+        try:
+            response = self._request('editMessageReplyMarkup', payload)
+        except TelegramClientError as exc:
+            logger.warning('telegram.edit_markup_failed message_id=%s error=%s', message_id, exc)
+            return False
+        return bool(response.get('result'))
+
+    def get_updates(
+        self,
+        offset: int | None = None,
+        timeout: int = DEFAULT_LONG_POLL_TIMEOUT,
+        allowed_updates: list[str] | None = None,
+    ) -> list[dict]:
+        payload: dict = {'timeout': timeout}
+        if offset is not None:
+            payload['offset'] = offset
+        if allowed_updates is not None:
+            payload['allowed_updates'] = allowed_updates
+        long_poll_timeout = max(self.timeout, timeout + 10)
+        response = self._request('getUpdates', payload, timeout=long_poll_timeout)
+        result = response.get('result') or []
+        return result if isinstance(result, list) else []
 
     def pin_chat_message(
         self,
@@ -100,7 +203,9 @@ class TelegramClient:
                 sent_at=None,
                 error_message=str(exc),
             )
+        return self._build_send_result(response)
 
+    def _build_send_result(self, response: dict) -> TelegramSendResult:
         result = response.get('result') or {}
         message_id = result.get('message_id')
         unix_date = result.get('date')
@@ -114,13 +219,14 @@ class TelegramClient:
             error_message='',
         )
 
-    def _request(self, method: str, payload: dict) -> dict:
+    def _request(self, method: str, payload: dict, timeout: int | None = None) -> dict:
         url = f'{TELEGRAM_API_BASE}/bot{self.token}/{method}'
         body = json.dumps(payload).encode('utf-8')
         headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
         }
+        effective_timeout = timeout if timeout is not None else self.timeout
 
         attempts = 0
         backoff = 1.0
@@ -128,7 +234,7 @@ class TelegramClient:
             attempts += 1
             request = Request(url, data=body, headers=headers, method='POST')
             try:
-                with urlopen(request, timeout=self.timeout) as response:
+                with urlopen(request, timeout=effective_timeout) as response:
                     return self._decode_response(response.read())
             except HTTPError as exc:
                 raw = exc.read() if hasattr(exc, 'read') else b''
@@ -211,3 +317,91 @@ class TelegramClient:
             return max(1.0, float(retry_after))
         except (TypeError, ValueError):
             return 5.0
+
+    def _request_multipart(
+        self,
+        method: str,
+        fields: dict[str, str],
+        file_field: str,
+        file_path: Path,
+    ) -> dict:
+        url = f'{TELEGRAM_API_BASE}/bot{self.token}/{method}'
+        boundary = f'----descontosbot{uuid.uuid4().hex}'
+        body = self._encode_multipart(boundary, fields, file_field, file_path)
+        headers = {
+            'Content-Type': f'multipart/form-data; boundary={boundary}',
+            'Accept': 'application/json',
+        }
+
+        attempts = 0
+        backoff = 1.0
+        # Documentos podem ser pesados; usa timeout maior.
+        upload_timeout = max(self.timeout, 60)
+        while True:
+            attempts += 1
+            request = Request(url, data=body, headers=headers, method='POST')
+            try:
+                with urlopen(request, timeout=upload_timeout) as response:
+                    return self._decode_response(response.read())
+            except HTTPError as exc:
+                raw = exc.read() if hasattr(exc, 'read') else b''
+                decoded = self._safe_decode(raw)
+                if exc.code == 429:
+                    retry_after = self._extract_retry_after(decoded)
+                    if attempts > MAX_RETRIES_5XX:
+                        raise TelegramClientError(
+                            f'429 persistente após {attempts} tentativas: '
+                            f'{decoded.get("description") or "rate limit"}',
+                        ) from exc
+                    time.sleep(retry_after)
+                    continue
+                if 500 <= exc.code < 600 and attempts <= MAX_RETRIES_5XX:
+                    time.sleep(backoff)
+                    backoff *= 2
+                    continue
+                description = decoded.get('description') or f'HTTP {exc.code}'
+                raise TelegramClientError(
+                    f'Telegram API erro {exc.code}: {description}',
+                ) from exc
+            except (URLError, TimeoutError) as exc:
+                if attempts <= MAX_RETRIES_5XX:
+                    time.sleep(backoff)
+                    backoff *= 2
+                    continue
+                raise TelegramClientError(
+                    f'Telegram API indisponível durante upload: {exc}',
+                ) from exc
+
+    @staticmethod
+    def _encode_multipart(
+        boundary: str,
+        fields: dict[str, str],
+        file_field: str,
+        file_path: Path,
+    ) -> bytes:
+        crlf = b'\r\n'
+        parts: list[bytes] = []
+        for name, value in fields.items():
+            parts.append(f'--{boundary}'.encode())
+            parts.append(
+                f'Content-Disposition: form-data; name="{name}"'.encode(),
+            )
+            parts.append(b'')
+            parts.append(str(value).encode('utf-8'))
+
+        mime_type, _ = mimetypes.guess_type(file_path.name)
+        mime_type = mime_type or 'application/octet-stream'
+        parts.append(f'--{boundary}'.encode())
+        parts.append(
+            (
+                f'Content-Disposition: form-data; name="{file_field}"; '
+                f'filename="{file_path.name}"'
+            ).encode(),
+        )
+        parts.append(f'Content-Type: {mime_type}'.encode())
+        parts.append(b'')
+        parts.append(file_path.read_bytes())
+
+        parts.append(f'--{boundary}--'.encode())
+        parts.append(b'')
+        return crlf.join(parts)

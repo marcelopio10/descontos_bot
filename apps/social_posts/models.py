@@ -14,6 +14,7 @@ class InstagramPost(TimestampedModel):
     class Status(models.TextChoices):
         DRAFT = 'draft', 'Rascunho'
         READY = 'ready', 'Pronto'
+        AWAITING_POST = 'awaiting_post', 'Aguardando publicação manual'
         POSTED = 'posted', 'Postado'
         REJECTED = 'rejected', 'Rejeitado'
 
@@ -68,6 +69,12 @@ class InstagramPost(TimestampedModel):
     published_error = models.TextField(
         'erro de publicação',
         blank=True,
+    )
+    telegram_handoff_message_id = models.CharField(
+        'ID da mensagem de handoff Telegram',
+        max_length=64,
+        blank=True,
+        db_index=True,
     )
 
     class Meta:

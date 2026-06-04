@@ -1,7 +1,62 @@
 # Plano Técnico de Implementação — Automação Oficial do Instagram
 
-> Status: Sprint 4 (publicação real) entregue em 2026-06-03.
-> Escopo original: salvar plano técnico (Cloudinary + Meta Graph direto). Implementação real adotou Composio CLI — ver seção 2.bis abaixo.
+> Status: Sprint 5 (handoff manual via Telegram) entregue em 2026-06-03.
+> Escopo original: salvar plano técnico (Cloudinary + Meta Graph direto). Implementação real adotou Composio CLI no Sprint 4 e, no Sprint 5, virou estratégia para **publicação manual com handoff por Telegram** — ver seções 2.bis e 2.ter abaixo.
+
+## Atualização de execução (2026-06-03) — Sprint 5
+
+A estratégia de automação total foi revertida. Decisão do PO: continuar publicando manualmente no app do Instagram (onde o link sticker do story funciona nativamente) ao invés de empurrar pela API. Volume é baixo (≤ 2 stories/dia) e o PO se organiza sozinho.
+
+### 2.ter Handoff manual via Telegram
+
+Componentes entregues:
+
+```text
+apps/social_posts/
+  services/instagram_handoff_telegram.py        # deliver_post_to_handoff + mark_post_as_posted
+  management/commands/discover_handoff_chat_id.py
+  management/commands/telegram_handoff_listener.py
+  migrations/0003_instagrampost_telegram_handoff_message_id_and_more.py
+apps/distribution/services/telegram_client.py  # send_document, get_updates, answer_callback_query, edit_message_reply_markup
+docs/HOWTO_HANDOFF_INSTAGRAM_TELEGRAM.md
+```
+
+Fluxo:
+
+```text
+generate_instagram_story
+  → InstagramPost(status=ready)
+  → deliver_post_to_handoff envia no DM Telegram do PO (PNG como document, caption pronta, URL do sticker em bloco destacado, botão inline "✅ Marcar como postado")
+  → status=awaiting_post
+  → PO posta manualmente no IG (cola URL no link sticker)
+  → PO clica no botão "✅ Marcar como postado"
+  → telegram_handoff_listener (daemon long-poll) recebe callback_query
+  → mark_post_as_posted atualiza status=posted + edita botão pra "✅ Postado"
+```
+
+Pontos chave:
+
+- Bot Telegram **dedicado** ao handoff (`INSTAGRAM_HANDOFF_BOT_TOKEN`), separado do bot de publicação em canais (`TELEGRAM_BOT_TOKEN`) e separado do Hermes — evita conflito de long-poll com outros consumers.
+- Allowlist por `INSTAGRAM_HANDOFF_CHAT_ID` — só o PO consegue marcar.
+- `INSTAGRAM_HANDOFF_QUIET_HOURS_BRT=22:00-08:00` (default): mensagens silenciosas dentro da janela noturna. Sistema **não** enforça horários de publicação — só evita acordar o PO.
+- Caption ganha bloco CTA grupo em rotação WhatsApp/Telegram (paridade do total de posts).
+- Fallback Admin: ação **"Marcar como postado manualmente"** atualiza DB e edita botão Telegram mesmo se o daemon estiver offline.
+- Re-envio: ação **"Re-enviar pacote Telegram"** limpa `telegram_handoff_message_id` e dispara `deliver_post_to_handoff` de novo.
+- Composio publisher do Sprint 4 continua disponível como fallback técnico — action renomeada para **"Publicar via Composio (modo manual/fallback)"**.
+
+Novo status no `InstagramPost.Status`: `AWAITING_POST` (`awaiting_post`).
+Novo campo: `telegram_handoff_message_id`.
+
+Documentação operacional: `docs/HOWTO_HANDOFF_INSTAGRAM_TELEGRAM.md`.
+
+### Itens arquivados (fora de escopo)
+
+- Publicação totalmente automatizada por scheduler.
+- Janelas de publicação enforçadas pelo sistema (viram apenas janela de silêncio de notificação).
+- Hosting de mídia pública (Cloudinary) — não necessário, PO posta direto pelo app.
+- Spike Meta Graph API direto para link sticker — não necessário, sticker é adicionado no app pelo PO.
+
+
 
 ## Atualização de execução (2026-06-03)
 

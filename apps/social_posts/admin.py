@@ -9,6 +9,12 @@ from apps.social_posts.services.composio_publisher import (
     publish_story,
     record_failure,
 )
+from apps.social_posts.services.instagram_handoff_telegram import (
+    HandoffDisabled,
+    HandoffError,
+    deliver_post_to_handoff,
+    mark_post_as_posted,
+)
 
 
 @admin.action(description='Marcar como postado')
@@ -29,6 +35,55 @@ def mark_as_posted(modeladmin, request, queryset):
         )
 
 
+@admin.action(description='Marcar como postado manualmente (com edição do botão Telegram)')
+def mark_as_posted_manual(modeladmin, request, queryset):
+    success = 0
+    for post in queryset:
+        try:
+            mark_post_as_posted(post, actor='admin_manual')
+        except Exception as exc:  # noqa: BLE001
+            messages.error(request, f'Post #{post.id}: {exc}')
+        else:
+            success += 1
+    modeladmin.message_user(
+        request,
+        f'{success} post(ns) marcado(s) como postado(s) manualmente.',
+    )
+
+
+@admin.action(description='Re-enviar pacote Telegram (handoff)')
+def resend_handoff(modeladmin, request, queryset):
+    sent = 0
+    failed = 0
+    for post in queryset:
+        if post.format != InstagramPost.Format.STORY:
+            messages.warning(
+                request,
+                f'Post #{post.id} ignorado — handoff só suporta story.',
+            )
+            continue
+        # Limpa o id antigo pra forçar reentrega.
+        post.telegram_handoff_message_id = ''
+        post.save(update_fields=['telegram_handoff_message_id', 'updated_at'])
+        try:
+            deliver_post_to_handoff(post)
+        except HandoffDisabled as exc:
+            failed += 1
+            messages.error(request, f'Post #{post.id}: handoff desativado — {exc}')
+        except HandoffError as exc:
+            failed += 1
+            messages.error(request, f'Post #{post.id}: {exc}')
+        except Exception as exc:  # noqa: BLE001
+            failed += 1
+            messages.error(request, f'Post #{post.id}: erro inesperado — {exc}')
+        else:
+            sent += 1
+    modeladmin.message_user(
+        request,
+        f'Handoff: {sent} reenviado(s), {failed} falha(s).',
+    )
+
+
 @admin.action(description='Marcar como rejeitado')
 def mark_as_rejected(modeladmin, request, queryset):
     updated = queryset.exclude(status=InstagramPost.Status.REJECTED).update(
@@ -47,7 +102,7 @@ def mark_as_rejected(modeladmin, request, queryset):
         )
 
 
-@admin.action(description='Aprovar e publicar agora (story via Composio)')
+@admin.action(description='Publicar via Composio (modo manual/fallback)')
 def approve_and_publish(modeladmin, request, queryset):
     success = 0
     skipped = 0
@@ -98,6 +153,7 @@ class InstagramPostAdmin(admin.ModelAdmin):
         'status',
         'primary_offer',
         'instagram_media_id',
+        'telegram_handoff_message_id',
         'posted_at',
         'created_at',
     )
@@ -109,9 +165,11 @@ class InstagramPostAdmin(admin.ModelAdmin):
         'primary_offer__title',
         'caption',
         'instagram_media_id',
+        'telegram_handoff_message_id',
     )
     readonly_fields = (
         'instagram_media_id',
+        'telegram_handoff_message_id',
         'posted_at',
         'published_error',
         'created_at',
@@ -121,4 +179,10 @@ class InstagramPostAdmin(admin.ModelAdmin):
         'primary_offer',
         'related_offers',
     )
-    actions = (approve_and_publish, mark_as_posted, mark_as_rejected,)
+    actions = (
+        resend_handoff,
+        mark_as_posted_manual,
+        approve_and_publish,
+        mark_as_posted,
+        mark_as_rejected,
+    )

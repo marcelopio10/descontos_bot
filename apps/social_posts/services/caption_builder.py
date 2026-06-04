@@ -6,8 +6,17 @@ from apps.offers.models import Offer
 DISCLOSURE = 'Como Associado da Amazon, ganho por compras qualificadas.'
 HASHTAGS = '#ofertas #descontos #achadinhos #amazonbrasil #descontosbot'
 
+GROUP_CTA_WHATSAPP = (
+    '💬 Recebe ofertas em primeira mão no nosso WhatsApp\n'
+    '👉 Link na bio descontos.bot/links'
+)
+GROUP_CTA_TELEGRAM = (
+    '💬 Recebe ofertas em primeira mão no nosso Telegram\n'
+    '👉 Link na bio descontos.bot/links'
+)
 
-def build_caption(offer: Offer) -> str:
+
+def build_caption(offer: Offer, *, group_cta: str = 'whatsapp') -> str:
     lines = [
         'Oferta monitorada pelo descontos.bot',
         '',
@@ -20,10 +29,12 @@ def build_caption(offer: Offer) -> str:
     if offer.discount_pct:
         lines.append(f'Desconto: {_format_decimal(offer.discount_pct)}%')
 
+    cta = GROUP_CTA_TELEGRAM if group_cta == 'telegram' else GROUP_CTA_WHATSAPP
     lines.extend(
         [
             '',
-            'Link rastreado na bio ou no sticker do story.',
+            cta,
+            '',
             DISCLOSURE,
             HASHTAGS,
         ],

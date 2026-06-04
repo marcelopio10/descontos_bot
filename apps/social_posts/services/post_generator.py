@@ -75,18 +75,52 @@ def _create_post(
     asset_paths: list[str],
     medium: str,
 ) -> InstagramPost:
+    group_cta = _next_group_cta()
     with transaction.atomic():
         post = InstagramPost.objects.create(
             format=post_format,
             status=InstagramPost.Status.READY,
             primary_offer=primary_offer,
             asset_paths=asset_paths,
-            caption=build_caption(primary_offer),
+            caption=build_caption(primary_offer, group_cta=group_cta),
             sticker_target_url=build_instagram_tracked_url(primary_offer, medium),
         )
         if related_offers:
             post.related_offers.set(related_offers)
-        return post
+
+    if post_format == InstagramPost.Format.STORY:
+        _trigger_handoff(post)
+    return post
+
+
+def _trigger_handoff(post: InstagramPost) -> None:
+    # Import local pra evitar ciclo de import com modelos no boot.
+    from apps.social_posts.services.instagram_handoff_telegram import (
+        HandoffDisabled,
+        HandoffError,
+        deliver_post_to_handoff,
+    )
+
+    try:
+        result = deliver_post_to_handoff(post)
+    except HandoffDisabled as exc:
+        logger.info('handoff.disabled post_id=%s reason=%s', post.id, exc)
+        return
+    except HandoffError as exc:
+        logger.warning('handoff.failed post_id=%s error=%s', post.id, exc)
+        post.published_error = f'handoff: {exc}'[:4000]
+        post.save(update_fields=['published_error', 'updated_at'])
+        return
+    except Exception as exc:  # noqa: BLE001
+        logger.exception('handoff.unexpected_error post_id=%s', post.id)
+        post.published_error = f'handoff inesperado: {exc}'[:4000]
+        post.save(update_fields=['published_error', 'updated_at'])
+        return
+
+    logger.info(
+        'handoff.delivered post_id=%s text_msg=%s doc_msg=%s skipped=%s',
+        post.id, result.text_message_id, result.document_message_id, result.skipped,
+    )
 
 
 def _get_ranked_offers(limit: int) -> list[Offer]:
@@ -112,6 +146,11 @@ def _get_offer_by_rank(rank: int) -> Offer:
     if rank < 1:
         raise ValueError('O ranking da oferta deve ser maior ou igual a 1.')
     return _get_ranked_offers(rank)[rank - 1]
+
+
+def _next_group_cta() -> str:
+    # Alterna WhatsApp/Telegram por paridade do total de posts gerados.
+    return 'telegram' if InstagramPost.objects.count() % 2 == 1 else 'whatsapp'
 
 
 def _get_generated_offer_ids() -> set[int]:

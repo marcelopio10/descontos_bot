@@ -1,7 +1,130 @@
 # Plano Técnico de Implementação — Automação Oficial do Instagram
 
-> Status: aprovado para planejamento.
-> Escopo desta etapa: salvar o plano técnico. Não executar implementação, migração, testes, chamadas à API Meta ou publicação real.
+> Status: Sprint 5 (handoff manual via Telegram) entregue em 2026-06-03.
+> Escopo original: salvar plano técnico (Cloudinary + Meta Graph direto). Implementação real adotou Composio CLI no Sprint 4 e, no Sprint 5, virou estratégia para **publicação manual com handoff por Telegram** — ver seções 2.bis e 2.ter abaixo.
+
+## Atualização de execução (2026-06-03) — Sprint 5
+
+A estratégia de automação total foi revertida. Decisão do PO: continuar publicando manualmente no app do Instagram (onde o link sticker do story funciona nativamente) ao invés de empurrar pela API. Volume é baixo (≤ 2 stories/dia) e o PO se organiza sozinho.
+
+### 2.ter Handoff manual via Telegram
+
+Componentes entregues:
+
+```text
+apps/social_posts/
+  services/instagram_handoff_telegram.py        # deliver_post_to_handoff + mark_post_as_posted
+  management/commands/discover_handoff_chat_id.py
+  management/commands/telegram_handoff_listener.py
+  migrations/0003_instagrampost_telegram_handoff_message_id_and_more.py
+apps/distribution/services/telegram_client.py  # send_document, get_updates, answer_callback_query, edit_message_reply_markup
+docs/HOWTO_HANDOFF_INSTAGRAM_TELEGRAM.md
+```
+
+Fluxo:
+
+```text
+generate_instagram_story
+  → InstagramPost(status=ready)
+  → deliver_post_to_handoff envia no DM Telegram do PO (PNG como document, caption pronta, URL do sticker em bloco destacado, botão inline "✅ Marcar como postado")
+  → status=awaiting_post
+  → PO posta manualmente no IG (cola URL no link sticker)
+  → PO clica no botão "✅ Marcar como postado"
+  → telegram_handoff_listener (daemon long-poll) recebe callback_query
+  → mark_post_as_posted atualiza status=posted + edita botão pra "✅ Postado"
+```
+
+Pontos chave:
+
+- Bot Telegram **dedicado** ao handoff (`INSTAGRAM_HANDOFF_BOT_TOKEN`), separado do bot de publicação em canais (`TELEGRAM_BOT_TOKEN`) e separado do Hermes — evita conflito de long-poll com outros consumers.
+- Allowlist por `INSTAGRAM_HANDOFF_CHAT_ID` — só o PO consegue marcar.
+- `INSTAGRAM_HANDOFF_QUIET_HOURS_BRT=22:00-08:00` (default): mensagens silenciosas dentro da janela noturna. Sistema **não** enforça horários de publicação — só evita acordar o PO.
+- Caption ganha bloco CTA grupo em rotação WhatsApp/Telegram (paridade do total de posts).
+- Fallback Admin: ação **"Marcar como postado manualmente"** atualiza DB e edita botão Telegram mesmo se o daemon estiver offline.
+- Re-envio: ação **"Re-enviar pacote Telegram"** limpa `telegram_handoff_message_id` e dispara `deliver_post_to_handoff` de novo.
+- Composio publisher do Sprint 4 continua disponível como fallback técnico — action renomeada para **"Publicar via Composio (modo manual/fallback)"**.
+
+Novo status no `InstagramPost.Status`: `AWAITING_POST` (`awaiting_post`).
+Novo campo: `telegram_handoff_message_id`.
+
+Documentação operacional: `docs/HOWTO_HANDOFF_INSTAGRAM_TELEGRAM.md`.
+
+### Itens arquivados (fora de escopo)
+
+- Publicação totalmente automatizada por scheduler.
+- Janelas de publicação enforçadas pelo sistema (viram apenas janela de silêncio de notificação).
+- Hosting de mídia pública (Cloudinary) — não necessário, PO posta direto pelo app.
+- Spike Meta Graph API direto para link sticker — não necessário, sticker é adicionado no app pelo PO.
+
+
+
+## Atualização de execução (2026-06-03)
+
+A implementação divergiu do plano original em dois pontos principais. Ambos foram validados em produção com publicação real bem-sucedida.
+
+### 2.bis Caminho oficial via Composio CLI
+
+Decisão revisada: usar Composio CLI como camada de abstração sobre a Instagram Graph API. Composio resolve simultaneamente:
+
+- hospedagem temporária pública da mídia (substitui Cloudinary),
+- autenticação Meta (token + permissões gerenciados pela conexão Composio),
+- chamadas `INSTAGRAM_POST_IG_USER_MEDIA` (create container) e `INSTAGRAM_POST_IG_USER_MEDIA_PUBLISH` (publish).
+
+Conexão ativa: `instagram_midge-frieda`.
+
+Implicações:
+
+- Cloudinary não é mais dependência operacional.
+- Não há `meta_graph_client.py` separado — a Graph API é consumida via subprocess `composio execute`.
+- Guard de produção foi renomeado para `INSTAGRAM_PUBLISH_DRY_RUN` (default `false`). Para forçar dry-run, exportar `INSTAGRAM_PUBLISH_DRY_RUN=true`.
+
+Componentes reais entregues:
+
+```text
+apps/social_posts/
+  services/composio_publisher.py     # orquestra create container + publish + atualiza DB
+  management/commands/publish_instagram_post.py  # comando --post-id + --dry-run
+  migrations/0002_instagrampost_instagram_media_id_and_more.py
+```
+
+Modelo `InstagramPost` recebeu apenas dois campos novos nesta etapa (escopo mínimo):
+
+- `instagram_media_id` (CharField, indexado) — ID retornado pela Meta.
+- `published_error` (TextField) — última mensagem de erro operacional.
+
+Demais campos do plano original (`external_container_id`, `published_url`, `publish_attempts`, `scheduled_for`, `media_public_url`) ficaram fora desta sprint. Serão reavaliados em Sprint 5 conforme necessidade real.
+
+### Gotcha técnico — Composio file_uploadable
+
+A tool `INSTAGRAM_POST_IG_USER_MEDIA` expõe dois campos `file_uploadable` (`image_file` + `video_file`). Por isso:
+
+- A flag `--file <path>` falha com `Pass the target field explicitly with -d`.
+- A sintaxe `@<path>` dentro do JSON `-d` também falha (CLI tenta abrir literalmente `@/path`).
+
+Forma correta: passar o caminho como string pura na chave do field:
+
+```json
+{
+  "ig_user_id": "...",
+  "media_type": "STORIES",
+  "image_file": "/tmp/arquivo.jpg"
+}
+```
+
+O CLI detecta que o field é `file_uploadable`, sobe o arquivo para storage temporário e injeta a URL pública para a Meta buscar.
+
+### Limitação Story link sticker
+
+A tool atual não expõe campo de sticker URL clicável para stories. Tráfego de afiliado continua via bio link (`/links`). Caption do story não vira link clicável.
+
+### Sprint 4 — DoD validado
+
+- Post `#3952` publicado em 2026-06-03 via API oficial.
+- `instagram_media_id=18097955294030410` (`container_id=18094318856090197`).
+- Status no banco: `posted`, `posted_at` preenchido, sem erro.
+- Compliance Amazon mantido na caption (disclosure + tag).
+
+
 
 ## 1. Objetivo
 

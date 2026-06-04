@@ -75,6 +75,24 @@ SITE_REPO_LOCAL_PATH = os.environ.get(
     'SITE_REPO_LOCAL_PATH',
     str(BASE_DIR),
 )
+INSTAGRAM_USER_ID = os.environ.get('IG_USER_ID', '27176727021981283')
+COMPOSIO_BIN = os.environ.get(
+    'COMPOSIO_BIN',
+    str(Path.home() / '.composio' / 'composio'),
+)
+INSTAGRAM_PUBLISH_DRY_RUN = os.environ.get(
+    'INSTAGRAM_PUBLISH_DRY_RUN',
+    'false',
+).lower() in ('1', 'true', 'yes', 'on')
+
+INSTAGRAM_TIMEZONE = os.environ.get('INSTAGRAM_TIMEZONE', 'America/Sao_Paulo')
+INSTAGRAM_HANDOFF_BOT_TOKEN = os.environ.get('INSTAGRAM_HANDOFF_BOT_TOKEN', '')
+INSTAGRAM_HANDOFF_CHAT_ID = os.environ.get('INSTAGRAM_HANDOFF_CHAT_ID', '')
+INSTAGRAM_HANDOFF_QUIET_HOURS_BRT = os.environ.get(
+    'INSTAGRAM_HANDOFF_QUIET_HOURS_BRT',
+    '22:00-08:00',
+)
+
 PUBLISH_OFFERS_AFTER_CAPTURE = os.environ.get(
     'PUBLISH_OFFERS_AFTER_CAPTURE',
     'true',

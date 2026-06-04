@@ -1,13 +1,132 @@
 {
-  "generated_at": "2026-06-02T23:49:45.787946+00:00",
+  "generated_at": "2026-06-02T23:55:13.066221+00:00",
   "window_days": 7,
   "totals": {
     "clicks": 0,
-    "conversions": 0,
-    "revenue_brl": "0.00",
-    "commission_brl": "0.00"
+    "conversions": 14,
+    "revenue_brl": "1758.18",
+    "commission_brl": "234.73"
   },
-  "by_channel": [],
-  "by_source": [],
-  "top_offers": []
+  "by_channel": [
+    {
+      "channel_code": "organico",
+      "channel_name": "Orgânico / sem segmentação",
+      "clicks": 0,
+      "conversions": 14,
+      "revenue_brl": "1758.18",
+      "commission_brl": "234.73"
+    }
+  ],
+  "by_source": [
+    {
+      "source": "mercado_livre",
+      "source_label": "Mercado Livre Afiliados",
+      "clicks": 0,
+      "conversions": 14,
+      "revenue_brl": "1758.18",
+      "commission_brl": "234.73"
+    }
+  ],
+  "top_offers": [
+    {
+      "slug": "",
+      "title": "Bicicleta Ergométrica Spinning Profissional Inércia 15kg App Preto",
+      "marketplace": "mercadolivre",
+      "external_ref": "MLB6506420936",
+      "is_orphan": true,
+      "clicks": 0,
+      "conversions": 1,
+      "commission_brl": "112.65"
+    },
+    {
+      "slug": "kit-10-cuecas-polo-fit-boxer-box-algodao-original-promocao-3151",
+      "title": "Kit 10 Cuecas Polo Fit Boxer Box Algodão Original Promoção",
+      "marketplace": "mercadolivre",
+      "external_ref": "",
+      "is_orphan": false,
+      "clicks": 0,
+      "conversions": 1,
+      "commission_brl": "28.95"
+    },
+    {
+      "slug": "vestido-feminino-midi-moda-evangelica-soltinho-confortavel-1979",
+      "title": "Vestido Feminino Midi Moda Evangélica Soltinho Confortável",
+      "marketplace": "mercadolivre",
+      "external_ref": "",
+      "is_orphan": false,
+      "clicks": 0,
+      "conversions": 3,
+      "commission_brl": "23.34"
+    },
+    {
+      "slug": "daily-t-shirt-insider-814",
+      "title": "Daily T-shirt Insider",
+      "marketplace": "mercadolivre",
+      "external_ref": "",
+      "is_orphan": false,
+      "clicks": 0,
+      "conversions": 2,
+      "commission_brl": "19.42"
+    },
+    {
+      "slug": "jogo-de-panelas-8-pecas-teflon-antiaderente-c-tampa-de-vidro-4771",
+      "title": "Jogo De Panelas 8 Peças Teflon Antiaderente C Tampa De Vidro",
+      "marketplace": "mercadolivre",
+      "external_ref": "",
+      "is_orphan": false,
+      "clicks": 0,
+      "conversions": 1,
+      "commission_brl": "18.04"
+    },
+    {
+      "slug": "",
+      "title": "Jogo De Banho 4 Peças Fio Cardado 100% Algodão Empire Urbano Cinza Karsten Liso",
+      "marketplace": "mercadolivre",
+      "external_ref": "MLB4078299847",
+      "is_orphan": true,
+      "clicks": 0,
+      "conversions": 1,
+      "commission_brl": "13.77"
+    },
+    {
+      "slug": "daily-t-shirt-feminina-insider-2081",
+      "title": "Daily T-shirt Feminina Insider",
+      "marketplace": "mercadolivre",
+      "external_ref": "",
+      "is_orphan": false,
+      "clicks": 0,
+      "conversions": 1,
+      "commission_brl": "9.71"
+    },
+    {
+      "slug": "",
+      "title": "Meias Spectrum Mid 2.0 Insider",
+      "marketplace": "mercadolivre",
+      "external_ref": "MLB5082525264",
+      "is_orphan": true,
+      "clicks": 0,
+      "conversions": 1,
+      "commission_brl": "4.36"
+    },
+    {
+      "slug": "",
+      "title": "Fone Ouvido Bluetooth 5.3 Sem Fio Estojo Bateria Longa Duração Portátil Tela Display Digital Led Prova Dagua Compatível... Preto",
+      "marketplace": "mercadolivre",
+      "external_ref": "MLB4343123913",
+      "is_orphan": true,
+      "clicks": 0,
+      "conversions": 2,
+      "commission_brl": "2.91"
+    },
+    {
+      "slug": "",
+      "title": "Bolsa Saco Coletor Limpeza Ar Condicionado Split 7 A 24 Btu Azul",
+      "marketplace": "mercadolivre",
+      "external_ref": "MLB3531911596",
+      "is_orphan": true,
+      "clicks": 0,
+      "conversions": 1,
+      "commission_brl": "1.58"
+    }
+  ]
 }

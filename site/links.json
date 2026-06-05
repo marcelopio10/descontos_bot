@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-04T08:04:40.102187+00:00",
+  "generated_at": "2026-06-05T11:53:38.505820+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,16 +14,6 @@
       "tracked_url": "https://meli.la/114drmQ?matt_word=dbot_ig_bio_3698&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3698"
     },
     {
-      "id": 1096,
-      "title": "Bicicleta Spinning Wct Fitness Ergométrica 6kg Aço Preto",
-      "current_price": "443.00",
-      "original_price": "1850.00",
-      "discount_pct": "76.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_862020-MLA102088986767_122025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1VH9DJM?matt_word=dbot_ig_bio_1096&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1096"
-    },
-    {
       "id": 3426,
       "title": "Pre Treino Carnage Pink Lemonade 450g Com Creatina Dark Lab",
       "current_price": "99.00",
@@ -34,24 +24,34 @@
       "tracked_url": "https://meli.la/1utJS1y?matt_word=dbot_ig_bio_3426&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3426"
     },
     {
-      "id": 1330,
-      "title": "Pre Treino Carnage Uva 450g Com Creatina Dark Lab",
-      "current_price": "99.00",
-      "original_price": "399.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_704549-MLA99446265254_112025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2hkWfs1?matt_word=dbot_ig_bio_1330&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1330"
+      "id": 2526,
+      "title": "Moda vintage: Manual prático para selecionar e confeccionar roupas no estilo retrô",
+      "current_price": "34.81",
+      "original_price": "128.00",
+      "discount_pct": "73.00",
+      "image_url": "https://m.media-amazon.com/images/I/71fzNl900-L._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=moda-vintage-manual-pratico-para-selecionar-e-confeccionar-roupas-no-estilo-retro-2526&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2526"
     },
     {
-      "id": 2868,
-      "title": "Creatina 600g Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
-      "current_price": "39.00",
-      "original_price": "154.00",
-      "discount_pct": "74.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_788109-MLA110452427960_052026-AB.webp",
+      "id": 1940,
+      "title": "Creatina 1kg Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
+      "current_price": "65.00",
+      "original_price": "239.00",
+      "discount_pct": "72.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/27aRfTG?matt_word=dbot_ig_bio_2868&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2868"
+      "tracked_url": "https://meli.la/13ujmWR?matt_word=dbot_ig_bio_1940&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1940"
+    },
+    {
+      "id": 3880,
+      "title": "Mochila Dos Homens Com Faixa Impermeável Para Expansão Preto Liso",
+      "current_price": "85.00",
+      "original_price": "297.00",
+      "discount_pct": "71.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_741399-MLB112035982759_052026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1j6qoQN?matt_word=dbot_ig_bio_3880&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3880"
     }
   ]
 }

@@ -1,9 +1,2627 @@
 {
   "version": "2.0",
-  "generated_at": "2026-06-05T14:54:05.636308+00:00",
+  "generated_at": "2026-06-05T15:00:49.451082+00:00",
   "site_base_url": "https://descontos-bot.vercel.app",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "offers": [
+    {
+      "id": 5635,
+      "slug": "tenis-corrida-duramo-sl-2-adidas-5635",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Corrida Duramo Sl 2 adidas",
+      "short_description": "",
+      "current_price": "274.00",
+      "original_price": "499.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_663432-MLB83443232817_032025-AB-tnis-corrida-duramo-sl-2-adidas.webp",
+      "affiliate_link": "https://meli.la/2fPpJEb",
+      "detail_url": "/oferta?slug=tenis-corrida-duramo-sl-2-adidas-5635",
+      "price_collected_at": "2026-06-05T15:01:08.638464+00:00"
+    },
+    {
+      "id": 5634,
+      "slug": "loreal-paris-elseve-collagen-lifter-kit-shampoo-condicionador-e-serum-leave-in-com-peptideos-e-protecao-termica-para-cabelos-finos-volume-em-3d-400ml-400ml-100ml-5634",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "L'oréal Paris Elseve Collagen Lifter Kit Shampoo, Condicionador E Sérum Leave-in Com Peptídeos E Proteção Térmica Para Cabelos Finos, Volume Em 3d, 400ml + 400ml + 100ml",
+      "short_description": "",
+      "current_price": "93.00",
+      "original_price": "139.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_920780-MLA109640286659_032026-AB.webp",
+      "affiliate_link": "https://meli.la/2FYvjTi",
+      "detail_url": "/oferta?slug=loreal-paris-elseve-collagen-lifter-kit-shampoo-condicionador-e-serum-leave-in-com-peptideos-e-protecao-termica-para-cabelos-finos-volume-em-3d-400ml-400ml-100ml-5634",
+      "price_collected_at": "2026-06-05T15:01:08.605331+00:00"
+    },
+    {
+      "id": 4934,
+      "slug": "taiff-prancha-ceramica-profissional-classic-180-preto-127220v-4934",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Taiff Prancha Cerâmica Profissional Classic 180° Preto 127/220v",
+      "short_description": "",
+      "current_price": "99.00",
+      "original_price": "186.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_853429-MLA110085217997_042026-AB.webp",
+      "affiliate_link": "https://meli.la/25duJqX",
+      "detail_url": "/oferta?slug=taiff-prancha-ceramica-profissional-classic-180-preto-127220v-4934",
+      "price_collected_at": "2026-06-05T15:01:08.576019+00:00"
+    },
+    {
+      "id": 4921,
+      "slug": "perfume-asad-elixir-lattafa-arabe-original-nota-fiscal-4921",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Asad Elixir Lattafa Árabe Original Nota Fiscal",
+      "short_description": "",
+      "current_price": "220.00",
+      "original_price": "449.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_644973-MLB95852137355_102025-AB.webp",
+      "affiliate_link": "https://meli.la/1SS9Vzv",
+      "detail_url": "/oferta?slug=perfume-asad-elixir-lattafa-arabe-original-nota-fiscal-4921",
+      "price_collected_at": "2026-06-05T15:01:08.555080+00:00"
+    },
+    {
+      "id": 5503,
+      "slug": "perfume-arabe-feminino-yara-lattafa-eau-de-parfum-100-ml-5503",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Árabe Feminino Yara Lattafa Eau De Parfum 100 Ml",
+      "short_description": "",
+      "current_price": "172.00",
+      "original_price": "249.00",
+      "discount_pct": "31.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_904984-MLB89160280950_082025-AB.webp",
+      "affiliate_link": "https://meli.la/15y4rDE",
+      "detail_url": "/oferta?slug=perfume-arabe-feminino-yara-lattafa-eau-de-parfum-100-ml-5503",
+      "price_collected_at": "2026-06-05T15:01:08.527397+00:00"
+    },
+    {
+      "id": 1858,
+      "slug": "perfume-arabe-durrat-al-aroos-feminino-85ml-edp-original-1858",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Árabe Durrat Al Aroos Feminino 85ml Edp Original",
+      "short_description": "",
+      "current_price": "158.00",
+      "original_price": "219.00",
+      "discount_pct": "28.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_715459-MLB100776588921_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1NvmnLz",
+      "detail_url": "/oferta?slug=perfume-arabe-durrat-al-aroos-feminino-85ml-edp-original-1858",
+      "price_collected_at": "2026-06-05T15:01:08.507211+00:00"
+    },
+    {
+      "id": 568,
+      "slug": "perfume-masculino-arabe-salvo-intense-100ml-original-c-nf-568",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Masculino Arabe Salvo Intense 100ml Original C/ Nf",
+      "short_description": "",
+      "current_price": "166.00",
+      "original_price": "277.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_674365-MLB91144003669_082025-AB.webp",
+      "affiliate_link": "https://meli.la/11T7C3E",
+      "detail_url": "/oferta?slug=perfume-masculino-arabe-salvo-intense-100ml-original-c-nf-568",
+      "price_collected_at": "2026-06-05T15:01:08.488774+00:00"
+    },
+    {
+      "id": 5633,
+      "slug": "secador-de-cabelo-stylle-profissional-motor-ac-2000w-taiff-cor-preto-220v-5633",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Secador De Cabelo Stylle Profissional Motor Ac 2000w Taiff Cor Preto 220v",
+      "short_description": "",
+      "current_price": "179.00",
+      "original_price": "404.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_860901-MLA99936562703_112025-AB.webp",
+      "affiliate_link": "https://meli.la/18584jc",
+      "detail_url": "/oferta?slug=secador-de-cabelo-stylle-profissional-motor-ac-2000w-taiff-cor-preto-220v-5633",
+      "price_collected_at": "2026-06-05T15:01:08.468101+00:00"
+    },
+    {
+      "id": 1745,
+      "slug": "aparador-de-pelos-multigroom-8-em-1-mg391715-philips-preto-127220v-1745",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Aparador De Pelos Multigroom 8 Em 1 Mg3917/15 Philips Preto 127/220v",
+      "short_description": "",
+      "current_price": "134.00",
+      "original_price": "233.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_871498-MLB89720767443_082025-AB.webp",
+      "affiliate_link": "https://meli.la/2j2TUqC",
+      "detail_url": "/oferta?slug=aparador-de-pelos-multigroom-8-em-1-mg391715-philips-preto-127220v-1745",
+      "price_collected_at": "2026-06-05T15:01:08.447692+00:00"
+    },
+    {
+      "id": 68,
+      "slug": "perfume-sedutor-arabe-sabah-100ml-original-feminino-68",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Sedutor Árabe Sabah 100ml Original Feminino",
+      "short_description": "",
+      "current_price": "149.00",
+      "original_price": "230.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_753960-MLB78002610612_082024-AB.webp",
+      "affiliate_link": "https://meli.la/317ndVc",
+      "detail_url": "/oferta?slug=perfume-sedutor-arabe-sabah-100ml-original-feminino-68",
+      "price_collected_at": "2026-06-05T15:01:08.427609+00:00"
+    },
+    {
+      "id": 5318,
+      "slug": "tasty-whey-3w-gourmet-whey-adaptogen-900g-original-5318",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tasty Whey 3w Gourmet Whey Adaptogen 900g Original",
+      "short_description": "",
+      "current_price": "199.00",
+      "original_price": "249.00",
+      "discount_pct": "19.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_747842-MLA111600182667_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1ybfLPP",
+      "detail_url": "/oferta?slug=tasty-whey-3w-gourmet-whey-adaptogen-900g-original-5318",
+      "price_collected_at": "2026-06-05T15:00:48.830909+00:00"
+    },
+    {
+      "id": 635,
+      "slug": "bicicleta-ergometrica-spinning-mecanica-roda-inercia-13kg-sprint-odin-fit-preto-635",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bicicleta Ergométrica Spinning Mecanica Roda Inércia 13kg Sprint Odin Fit Preto",
+      "short_description": "",
+      "current_price": "1499.00",
+      "original_price": "2399.00",
+      "discount_pct": "37.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_988024-MLA100019113485_122025-AB.webp",
+      "affiliate_link": "https://meli.la/13i3iL3",
+      "detail_url": "/oferta?slug=bicicleta-ergometrica-spinning-mecanica-roda-inercia-13kg-sprint-odin-fit-preto-635",
+      "price_collected_at": "2026-06-05T15:00:48.812321+00:00"
+    },
+    {
+      "id": 868,
+      "slug": "tenis-sandrini-aero-run-academia-caminhada-treino-868",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Sandrini Aero Run Academia Caminhada Treino",
+      "short_description": "",
+      "current_price": "47.00",
+      "original_price": "149.00",
+      "discount_pct": "68.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_655320-MLB107468613084_032026-AB-tnis-sandrini-aero-run-academia-caminhada-treino.webp",
+      "affiliate_link": "https://meli.la/28JgLtW",
+      "detail_url": "/oferta?slug=tenis-sandrini-aero-run-academia-caminhada-treino-868",
+      "price_collected_at": "2026-06-05T15:00:48.790533+00:00"
+    },
+    {
+      "id": 442,
+      "slug": "tenis-under-armour-charged-wing-2-esportivo-academia-fitness-442",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Under Armour Charged Wing 2 Esportivo Academia Fitness",
+      "short_description": "",
+      "current_price": "269.00",
+      "original_price": "399.00",
+      "discount_pct": "32.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_768820-MLB107964268489_032026-AB-tnis-under-armour-charged-wing-2-esportivo-academia-fitness.webp",
+      "affiliate_link": "https://meli.la/1RMNwZk",
+      "detail_url": "/oferta?slug=tenis-under-armour-charged-wing-2-esportivo-academia-fitness-442",
+      "price_collected_at": "2026-06-05T15:00:48.767876+00:00"
+    },
+    {
+      "id": 5638,
+      "slug": "bicicleta-ergometrica-fitness-para-cardio-e-musculacao-com-base-cor-preto-e-amarelo-10kg-inercia-150kg-marca-sevenfit-5638",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Amarelo 10kg Inercia 150kg Marca Sevenfit",
+      "short_description": "",
+      "current_price": "749.00",
+      "original_price": "799.00",
+      "discount_pct": "6.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_817325-MLA110301862808_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2y1eH18",
+      "detail_url": "/oferta?slug=bicicleta-ergometrica-fitness-para-cardio-e-musculacao-com-base-cor-preto-e-amarelo-10kg-inercia-150kg-marca-sevenfit-5638",
+      "price_collected_at": "2026-06-05T15:00:48.738754+00:00"
+    },
+    {
+      "id": 3438,
+      "slug": "whey-protein-concentrado-100-900g-refil-dark-lab-sabor-morango-3438",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Whey Protein Concentrado 100% 900g Refil Dark Lab Sabor Morango",
+      "short_description": "",
+      "current_price": "159.00",
+      "original_price": "499.00",
+      "discount_pct": "68.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_760779-MLA99484493666_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2xYPcyT",
+      "detail_url": "/oferta?slug=whey-protein-concentrado-100-900g-refil-dark-lab-sabor-morango-3438",
+      "price_collected_at": "2026-06-05T15:00:48.721453+00:00"
+    },
+    {
+      "id": 334,
+      "slug": "proteina-isolada-beef-protein-900g-shark-pro-zero-lactose-334",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Proteína Isolada Beef Protein 900g Shark Pro Zero Lactose",
+      "short_description": "",
+      "current_price": "137.00",
+      "original_price": "190.00",
+      "discount_pct": "28.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_892896-MLB90072283622_082025-AB-proteina-isolada-beef-protein-900g-shark-pro-zero-lactose.webp",
+      "affiliate_link": "https://meli.la/2fPSUFh",
+      "detail_url": "/oferta?slug=proteina-isolada-beef-protein-900g-shark-pro-zero-lactose-334",
+      "price_collected_at": "2026-06-05T15:00:48.698519+00:00"
+    },
+    {
+      "id": 213,
+      "slug": "creatina-monohidratada-em-pote-300g-100-pura-dark-lab-213",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Creatina Monohidratada Em Pote 300g 100% Pura Dark Lab Sem Sabor",
+      "short_description": "",
+      "current_price": "39.00",
+      "original_price": "78.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_716663-MLA99599672360_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1WPAF79",
+      "detail_url": "/oferta?slug=creatina-monohidratada-em-pote-300g-100-pura-dark-lab-213",
+      "price_collected_at": "2026-06-05T15:00:48.672228+00:00"
+    },
+    {
+      "id": 1780,
+      "slug": "whey-protein-concentrado-1kg-growth-supplements-chocolate-1780",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Whey Protein Concentrado 1kg Growth Supplements - Chocolate",
+      "short_description": "",
+      "current_price": "179.00",
+      "original_price": "299.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_810392-MLA98296434364_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1kt5fHV",
+      "detail_url": "/oferta?slug=whey-protein-concentrado-1kg-growth-supplements-chocolate-1780",
+      "price_collected_at": "2026-06-05T15:00:48.652333+00:00"
+    },
+    {
+      "id": 4550,
+      "slug": "bicicleta-ergometrica-spinning-rmira-com-bluetooth-inercia-12kg-e-suporte-150kg-pretovermelho-4550",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bicicleta Ergométrica Spinning Rmira Com Bluetooth, Inércia 12kg E Suporte 150kg Preto/vermelho",
+      "short_description": "",
+      "current_price": "872.00",
+      "original_price": "1499.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_602198-MLA105931350594_022026-AB.webp",
+      "affiliate_link": "https://meli.la/1wCVHtD",
+      "detail_url": "/oferta?slug=bicicleta-ergometrica-spinning-rmira-com-bluetooth-inercia-12kg-e-suporte-150kg-pretovermelho-4550",
+      "price_collected_at": "2026-06-05T15:00:48.631542+00:00"
+    },
+    {
+      "id": 4630,
+      "slug": "bicicleta-ergometrica-spinning-inercia-15-kg-peso-max-150-kg-4630",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bicicleta Ergométrica Spinning Inércia 15 Kg Peso Máx 150 Kg",
+      "short_description": "",
+      "current_price": "799.00",
+      "original_price": "862.00",
+      "discount_pct": "7.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_862012-MLB107950910394_032026-AB.webp",
+      "affiliate_link": "https://meli.la/2zccroJ",
+      "detail_url": "/oferta?slug=bicicleta-ergometrica-spinning-inercia-15-kg-peso-max-150-kg-4630",
+      "price_collected_at": "2026-06-05T15:00:48.610191+00:00"
+    },
+    {
+      "id": 1096,
+      "slug": "bicicleta-spinning-wct-fitness-ergometrica-6kg-aco-preto-1096",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bicicleta Spinning Wct Fitness Ergométrica 6kg Aço Preto",
+      "short_description": "",
+      "current_price": "443.00",
+      "original_price": "1850.00",
+      "discount_pct": "76.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_862020-MLA102088986767_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1VH9DJM",
+      "detail_url": "/oferta?slug=bicicleta-spinning-wct-fitness-ergometrica-6kg-aco-preto-1096",
+      "price_collected_at": "2026-06-05T15:00:48.592225+00:00"
+    },
+    {
+      "id": 248,
+      "slug": "mesa-dobravel-vira-maleta-com-alca-portatil-180m-para-camping-pesca-jardim-area-externa-ou-interna-salao-de-festas-gourmet-cor-brancoluvinco-248",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mesa Dobrável Vira Maleta Com Alça Portátil 1.80m Para Camping Pesca Jardim Área Externa Ou Interna Salão De Festas Gourmet Cor Brancoluvinco",
+      "short_description": "",
+      "current_price": "206.00",
+      "original_price": "388.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_972551-MLA99950757175_112025-AB.webp",
+      "affiliate_link": "https://meli.la/19WE7HP",
+      "detail_url": "/oferta?slug=mesa-dobravel-vira-maleta-com-alca-portatil-180m-para-camping-pesca-jardim-area-externa-ou-interna-salao-de-festas-gourmet-cor-brancoluvinco-248",
+      "price_collected_at": "2026-06-05T15:00:48.570922+00:00"
+    },
+    {
+      "id": 286,
+      "slug": "multivitaminico-120-caps-growth-supplements-sabor-neutro-nova-formula-286",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Multivitamínico 120 Cáps. Growth Supplements - Sabor Neutro (nova Fórmula)",
+      "short_description": "",
+      "current_price": "47.00",
+      "original_price": "57.00",
+      "discount_pct": "17.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_723031-MLA98380453196_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1wLG1zo",
+      "detail_url": "/oferta?slug=multivitaminico-120-caps-growth-supplements-sabor-neutro-nova-formula-286",
+      "price_collected_at": "2026-06-05T15:00:48.546099+00:00"
+    },
+    {
+      "id": 5637,
+      "slug": "bola-volei-80-pro-penalty-quadra-selo-fivb-amarelo-amareloroxo-5637",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bola Volei 8.0 Pró Penalty Quadra Selo Fivb Amarelo Amarelo/roxo",
+      "short_description": "",
+      "current_price": "299.00",
+      "original_price": "389.00",
+      "discount_pct": "23.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_892159-MLA99961034565_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2iQVDCP",
+      "detail_url": "/oferta?slug=bola-volei-80-pro-penalty-quadra-selo-fivb-amarelo-amareloroxo-5637",
+      "price_collected_at": "2026-06-05T15:00:48.518926+00:00"
+    },
+    {
+      "id": 744,
+      "slug": "whey-protein-concentrado-1kg-growth-supplements-leite-em-po-744",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Whey Protein Concentrado 1kg Growth Supplements - Leite Em Pó",
+      "short_description": "",
+      "current_price": "179.00",
+      "original_price": "279.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_696746-MLA98296977552_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2Ljzkpb",
+      "detail_url": "/oferta?slug=whey-protein-concentrado-1kg-growth-supplements-leite-em-po-744",
+      "price_collected_at": "2026-06-05T15:00:48.498210+00:00"
+    },
+    {
+      "id": 592,
+      "slug": "vitamina-d3-k2-menaquinona-7-formula-com-maxima-concentracao-e-biodisponibilidade-60-capsulas-sem-sabor-592",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Vitamina D3 + K2 Menaquinona-7 - Fórmula Com Máxima Concentração E Biodisponibilidade - 60 Cápsulas Sem Sabor",
+      "short_description": "",
+      "current_price": "48.00",
+      "original_price": "89.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_977019-MLA100790399283_122025-AB.webp",
+      "affiliate_link": "https://meli.la/2ZG5zQy",
+      "detail_url": "/oferta?slug=vitamina-d3-k2-menaquinona-7-formula-com-maxima-concentracao-e-biodisponibilidade-60-capsulas-sem-sabor-592",
+      "price_collected_at": "2026-06-05T15:00:48.472665+00:00"
+    },
+    {
+      "id": 397,
+      "slug": "whey-protein-concentrado-1kg-growth-supplements-milkshake-de-chocolate-397",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Whey Protein Concentrado 1kg Growth Supplements - Milkshake De Chocolate",
+      "short_description": "",
+      "current_price": "179.00",
+      "original_price": "279.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_803453-MLA98778415369_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2ysMr2Q",
+      "detail_url": "/oferta?slug=whey-protein-concentrado-1kg-growth-supplements-milkshake-de-chocolate-397",
+      "price_collected_at": "2026-06-05T15:00:48.451139+00:00"
+    },
+    {
+      "id": 1881,
+      "slug": "polo-masculina-lacoste-slim-fit-original-1881",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Polo Masculina Lacoste Slim Fit - Original",
+      "short_description": "",
+      "current_price": "233.00",
+      "original_price": "487.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_716399-MLB86815672888_072025-AB-polo-masculina-lacoste-slim-fit-original.webp",
+      "affiliate_link": "https://meli.la/1EzCc8j",
+      "detail_url": "/oferta?slug=polo-masculina-lacoste-slim-fit-original-1881",
+      "price_collected_at": "2026-06-05T15:00:48.429599+00:00"
+    },
+    {
+      "id": 279,
+      "slug": "basic-whey-1kg-growth-supplements-chocolate-279",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Basic Whey 1kg Growth Supplements - Chocolate",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "104.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_819000-MLA101180020755_122025-AB.webp",
+      "affiliate_link": "https://meli.la/14nsjNS",
+      "detail_url": "/oferta?slug=basic-whey-1kg-growth-supplements-chocolate-279",
+      "price_collected_at": "2026-06-05T15:00:48.405107+00:00"
+    },
+    {
+      "id": 2284,
+      "slug": "testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-precursor-da-testosterona-60-capsulas-sem-sabor-2284",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Testo Essencial - Fórmula Exclusiva Com Feno Grego + Boro + Arginina + Zma - Precursor Da Testosterona - 60 Cápsulas Sem Sabor",
+      "short_description": "",
+      "current_price": "57.00",
+      "original_price": "91.00",
+      "discount_pct": "37.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_991094-MLA97048061291_112025-AB.webp",
+      "affiliate_link": "https://meli.la/27pzNAU",
+      "detail_url": "/oferta?slug=testo-essencial-formula-exclusiva-com-feno-grego-boro-arginina-zma-precursor-da-testosterona-60-capsulas-sem-sabor-2284",
+      "price_collected_at": "2026-06-05T15:00:48.381806+00:00"
+    },
+    {
+      "id": 5636,
+      "slug": "whey-protein-3w-black-skull-900g-refil-100-hd-concentrado-sabor-chocolate-5636",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Whey Protein 3w Black Skull 900g Refil 100% Hd Concentrado Sabor Chocolate",
+      "short_description": "",
+      "current_price": "75.00",
+      "original_price": "149.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_603344-MLA99015461498_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1ZPPfg7",
+      "detail_url": "/oferta?slug=whey-protein-3w-black-skull-900g-refil-100-hd-concentrado-sabor-chocolate-5636",
+      "price_collected_at": "2026-06-05T15:00:48.342569+00:00"
+    },
+    {
+      "id": 3772,
+      "slug": "bicicleta-spinning-com-roda-de-inercia-de-13kg-wct-fitness-cor-preto-pretoamarelo-3772",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bicicleta Spinning Com Roda De Inércia De 13kg Wct Fitness Cor Preto Preto/amarelo",
+      "short_description": "",
+      "current_price": "1259.00",
+      "original_price": "2290.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_874975-MLA103430021763_012026-AB.webp",
+      "affiliate_link": "https://meli.la/1a8PHbK",
+      "detail_url": "/oferta?slug=bicicleta-spinning-com-roda-de-inercia-de-13kg-wct-fitness-cor-preto-pretoamarelo-3772",
+      "price_collected_at": "2026-06-05T15:00:48.318873+00:00"
+    },
+    {
+      "id": 4045,
+      "slug": "penta-magnesio-bisglicinato-dimalato-citrato-taurato-oxido-de-magnesio-a-combinacao-perfeita-de-5-magnesios-com-maxima-pureza-e-biodisponibilidade-60-capsulas-sem-sabor-4045",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Penta Magnésio - Bisglicinato + Dimalato + Citrato + Taurato + Óxido De Magnésio - A Combinação Perfeita De 5 Magnésios Com Máxima Pureza E Biodisponibilidade - 60 Cápsulas Sem Sabor",
+      "short_description": "",
+      "current_price": "56.00",
+      "original_price": "94.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_945958-MLA100297313496_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1GfV7n4",
+      "detail_url": "/oferta?slug=penta-magnesio-bisglicinato-dimalato-citrato-taurato-oxido-de-magnesio-a-combinacao-perfeita-de-5-magnesios-com-maxima-pureza-e-biodisponibilidade-60-capsulas-sem-sabor-4045",
+      "price_collected_at": "2026-06-05T15:00:48.292252+00:00"
+    },
+    {
+      "id": 2340,
+      "slug": "nac-600mg-formula-exclusiva-com-maxima-concentracao-e-pureza-n-acetil-l-cisteina-60-capsulas-sem-sabor-2340",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Nac 600mg - Fórmula Exclusiva Com Máxima Concentração E Pureza - N-acetil L-cisteína - 60 Cápsulas Sem Sabor",
+      "short_description": "",
+      "current_price": "46.00",
+      "original_price": "89.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_628799-MLA105714524195_012026-AB.webp",
+      "affiliate_link": "https://meli.la/2YyEmWL",
+      "detail_url": "/oferta?slug=nac-600mg-formula-exclusiva-com-maxima-concentracao-e-pureza-n-acetil-l-cisteina-60-capsulas-sem-sabor-2340",
+      "price_collected_at": "2026-06-05T15:00:48.265801+00:00"
+    },
+    {
+      "id": 82,
+      "slug": "creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor-82",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Creatina Monohidratada Pura 1kg Dark Lab Unidade Sem Sabor",
+      "short_description": "",
+      "current_price": "69.00",
+      "original_price": "159.00",
+      "discount_pct": "56.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_848860-MLA99964507641_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2gafvyH",
+      "detail_url": "/oferta?slug=creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor-82",
+      "price_collected_at": "2026-06-05T15:00:48.240984+00:00"
+    },
+    {
+      "id": 180,
+      "slug": "creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po-180",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Creatina Monohidratada 500g Growth Supplements - Sem Sabor Em Pó",
+      "short_description": "",
+      "current_price": "69.00",
+      "original_price": "104.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_602304-MLA109372354737_032026-AB.webp",
+      "affiliate_link": "https://meli.la/2Vo9qFw",
+      "detail_url": "/oferta?slug=creatina-monohidratada-500g-growth-supplements-sem-sabor-em-po-180",
+      "price_collected_at": "2026-06-05T15:00:48.215396+00:00"
+    },
+    {
+      "id": 151,
+      "slug": "bicicleta-ergometrica-fitness-para-cardio-e-musculacao-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit-151",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bicicleta Ergométrica Fitness Para Cardio E Musculação Com Base Cor Preto E Vermelho 6kg Inercia Marca Sevenfit",
+      "short_description": "",
+      "current_price": "549.00",
+      "original_price": "1094.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_679526-MLA100501405537_122025-AB.webp",
+      "affiliate_link": "https://meli.la/2qukXcP",
+      "detail_url": "/oferta?slug=bicicleta-ergometrica-fitness-para-cardio-e-musculacao-com-base-cor-preto-e-vermelho-6kg-inercia-marca-sevenfit-151",
+      "price_collected_at": "2026-06-05T15:00:48.186148+00:00"
+    },
+    {
+      "id": 184,
+      "slug": "creatina-monohidratada-pura-500g-dark-lab-unidade-sem-sabor-184",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Creatina Monohidratada Pura 500g Dark Lab Unidade Sem Sabor",
+      "short_description": "",
+      "current_price": "44.00",
+      "original_price": "129.00",
+      "discount_pct": "65.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_942122-MLA99923169249_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1W7k642",
+      "detail_url": "/oferta?slug=creatina-monohidratada-pura-500g-dark-lab-unidade-sem-sabor-184",
+      "price_collected_at": "2026-06-05T15:00:48.154470+00:00"
+    },
+    {
+      "id": 1940,
+      "slug": "creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition-sem-sabor-1940",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Creatina 1kg Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
+      "short_description": "",
+      "current_price": "65.00",
+      "original_price": "239.00",
+      "discount_pct": "72.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
+      "affiliate_link": "https://meli.la/13ujmWR",
+      "detail_url": "/oferta?slug=creatina-1kg-suplemento-monohidratada-em-po-100-pura-soldiers-nutrition-sem-sabor-1940",
+      "price_collected_at": "2026-06-05T15:00:48.123012+00:00"
+    },
+    {
+      "id": 75,
+      "slug": "creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po-75",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Creatina Monohidratada 250g Growth Supplements - Sem Sabor Em Pó",
+      "short_description": "",
+      "current_price": "39.00",
+      "original_price": "64.00",
+      "discount_pct": "38.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_662415-MLA97812910758_112025-AB.webp",
+      "affiliate_link": "https://meli.la/33X5Qda",
+      "detail_url": "/oferta?slug=creatina-monohidratada-250g-growth-supplements-sem-sabor-em-po-75",
+      "price_collected_at": "2026-06-05T15:00:48.088553+00:00"
+    },
+    {
+      "id": 280,
+      "slug": "escova-progressiva-150g-fashion-gold-280",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Escova Progressiva 150g - Fashion Gold",
+      "short_description": "",
+      "current_price": "85.00",
+      "original_price": "116.00",
+      "discount_pct": "26.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_861957-MLA108178234350_032026-AB.webp",
+      "affiliate_link": "https://meli.la/1K4yHSq",
+      "detail_url": "/oferta?slug=escova-progressiva-150g-fashion-gold-280",
+      "price_collected_at": "2026-06-05T15:00:47.816084+00:00"
+    },
+    {
+      "id": 5632,
+      "slug": "secador-de-cabelos-turbo-mondial-pretovermelho-1900w-sc-41-127v-5632",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Secador De Cabelos Turbo, Mondial Preto/vermelho 1900w Sc-41 127v",
+      "short_description": "",
+      "current_price": "82.00",
+      "original_price": "189.00",
+      "discount_pct": "56.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_682240-MLA99945701205_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1TCh5Pb",
+      "detail_url": "/oferta?slug=secador-de-cabelos-turbo-mondial-pretovermelho-1900w-sc-41-127v-5632",
+      "price_collected_at": "2026-06-05T15:00:47.791657+00:00"
+    },
+    {
+      "id": 87,
+      "slug": "perfume-lattafa-asad-100ml-eau-de-parfum-original-arabe-original-com-nota-fiscal-e-selo-original-lataffa-87",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Lattafa Asad 100ml Eau De Parfum Original Árabe Original Com Nota Fiscal E Selo Original Lataffa",
+      "short_description": "",
+      "current_price": "195.00",
+      "original_price": "289.00",
+      "discount_pct": "32.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_687418-MLB81527468562_012025-AB.webp",
+      "affiliate_link": "https://meli.la/1qSgU7g",
+      "detail_url": "/oferta?slug=perfume-lattafa-asad-100ml-eau-de-parfum-original-arabe-original-com-nota-fiscal-e-selo-original-lataffa-87",
+      "price_collected_at": "2026-06-05T15:00:47.773510+00:00"
+    },
+    {
+      "id": 5631,
+      "slug": "deo-parfum-natura-ilia-secreto-25ml-5631",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Deo Parfum Natura Ilía Secreto 25ml",
+      "short_description": "",
+      "current_price": "77.00",
+      "original_price": "110.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_968718-MLA107597130746_032026-AB.webp",
+      "affiliate_link": "https://meli.la/1wWWQg4",
+      "detail_url": "/oferta?slug=deo-parfum-natura-ilia-secreto-25ml-5631",
+      "price_collected_at": "2026-06-05T15:00:47.753310+00:00"
+    },
+    {
+      "id": 5221,
+      "slug": "kit-serum-facial-creme-anti-idade-revitalift-loreal-paris-5221",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit Sérum Facial + Creme Anti-idade Revitalift L'oréal Paris",
+      "short_description": "",
+      "current_price": "69.00",
+      "original_price": "218.00",
+      "discount_pct": "67.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_801429-MLU75812441276_042024-AB.webp",
+      "affiliate_link": "https://meli.la/2c9KH54",
+      "detail_url": "/oferta?slug=kit-serum-facial-creme-anti-idade-revitalift-loreal-paris-5221",
+      "price_collected_at": "2026-06-05T15:00:47.732879+00:00"
+    },
+    {
+      "id": 828,
+      "slug": "kit-body-splash-masculino-barbarius-enigma-midtown-200ml-828",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit Body Splash Masculino Barbarius + Enigma + Midtown 200ml",
+      "short_description": "",
+      "current_price": "89.00",
+      "original_price": "140.00",
+      "discount_pct": "36.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_997574-MLA109633443994_042026-AB.webp",
+      "affiliate_link": "https://meli.la/2rAKxta",
+      "detail_url": "/oferta?slug=kit-body-splash-masculino-barbarius-enigma-midtown-200ml-828",
+      "price_collected_at": "2026-06-05T15:00:47.716572+00:00"
+    },
+    {
+      "id": 3078,
+      "slug": "projetor-hy320-davely-smart-tv-android-wifi-6-390-ansi-lumens-full-hd-suporte-4k-hdmi-bluetooth-85-200-polegadas-alto-falante-com-controle-remoto-bivolt-portatil-preto-127220v-3078",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Projetor Hy320 Davely Smart Tv Android Wifi 6 390 Ansi Lumens Full Hd Suporte 4k Hdmi Bluetooth 85-200 Polegadas Alto Falante Com Controle Remoto Bivolt Portátil Preto 127/220v",
+      "short_description": "",
+      "current_price": "219.00",
+      "original_price": "299.00",
+      "discount_pct": "26.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_747790-MLA99938308215_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2cdSReT",
+      "detail_url": "/oferta?slug=projetor-hy320-davely-smart-tv-android-wifi-6-390-ansi-lumens-full-hd-suporte-4k-hdmi-bluetooth-85-200-polegadas-alto-falante-com-controle-remoto-bivolt-portatil-preto-127220v-3078",
+      "price_collected_at": "2026-06-05T15:00:47.697753+00:00"
+    },
+    {
+      "id": 5630,
+      "slug": "power-bank-turbo-carregador-portatil-50000mah-turbo-225w-premium-universal-rapida-carga-para-celular-iphone-xiaomi-motorola-lg-smartwatch-tablet-display-digital-viagens-festa-ios-nixzen-preto-5630",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Power Bank Turbo Carregador Portátil 50.000mah Turbo 22.5w Premium Universal Rápida Carga Para Celular iPhone Xiaomi Motorola LG Smartwatch Tablet Display Digital Viagens Festa Ios Nixzen Preto",
+      "short_description": "",
+      "current_price": "129.00",
+      "original_price": "199.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_938855-MLA99372609302_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2fvucL9",
+      "detail_url": "/oferta?slug=power-bank-turbo-carregador-portatil-50000mah-turbo-225w-premium-universal-rapida-carga-para-celular-iphone-xiaomi-motorola-lg-smartwatch-tablet-display-digital-viagens-festa-ios-nixzen-preto-5630",
+      "price_collected_at": "2026-06-05T15:00:47.673611+00:00"
+    },
+    {
+      "id": 5629,
+      "slug": "cartao-de-memoria-micro-sd-kateluo-256-gb-classe-10-para-cameras-e-drones-5629",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cartão De Memória Micro Sd Kateluo 256 Gb Classe 10 Para Câmeras E Drones",
+      "short_description": "",
+      "current_price": "44.00",
+      "original_price": "59.00",
+      "discount_pct": "25.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_908173-MLA99002042001_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2dHqgQj",
+      "detail_url": "/oferta?slug=cartao-de-memoria-micro-sd-kateluo-256-gb-classe-10-para-cameras-e-drones-5629",
+      "price_collected_at": "2026-06-05T15:00:47.390713+00:00"
+    },
+    {
+      "id": 5628,
+      "slug": "smartwatch-huawei-watch-fit-3-tela-amoled-de-182-design-ultra-finomonitoramento-completo-de-exerciciosgerenciamento-abrangente-da-saude-compativel-com-ios-e-android-preto-fluoroelastomero-5628",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Smartwatch Huawei Watch Fit 3 Tela Amoled De 1,82 Design Ultra-finomonitoramento Completo De Exercíciosgerenciamento Abrangente Da Saúde Compatível Com Ios E Android Preto Fluoroelastômero",
+      "short_description": "",
+      "current_price": "699.00",
+      "original_price": "1099.00",
+      "discount_pct": "36.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_792763-MLA99887228335_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1NzUvHA",
+      "detail_url": "/oferta?slug=smartwatch-huawei-watch-fit-3-tela-amoled-de-182-design-ultra-finomonitoramento-completo-de-exerciciosgerenciamento-abrangente-da-saude-compativel-com-ios-e-android-preto-fluoroelastomero-5628",
+      "price_collected_at": "2026-06-05T15:00:47.363700+00:00"
+    },
+    {
+      "id": 5627,
+      "slug": "power-bank-50000mah-liggi-carregador-usb-portatil-cabo-carregador-5627",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Power Bank 50.000mah Liggi Carregador Usb Portátil Cabo Carregador",
+      "short_description": "",
+      "current_price": "129.00",
+      "original_price": "199.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_700787-MLA99981423959_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1ZDVD3F",
+      "detail_url": "/oferta?slug=power-bank-50000mah-liggi-carregador-usb-portatil-cabo-carregador-5627",
+      "price_collected_at": "2026-06-05T15:00:47.337293+00:00"
+    },
+    {
+      "id": 5626,
+      "slug": "kit-10-radio-walk-talk-comunicador-16-ch-baofeng-777s-ht-preto-5626",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Radio Walk Talk Comunicador 16 Ch Baofeng 777s Ht Preto",
+      "short_description": "",
+      "current_price": "562.00",
+      "original_price": "1160.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_698031-MLB89227720277_082025-AB.webp",
+      "affiliate_link": "https://meli.la/1F1oSq6",
+      "detail_url": "/oferta?slug=kit-10-radio-walk-talk-comunicador-16-ch-baofeng-777s-ht-preto-5626",
+      "price_collected_at": "2026-06-05T15:00:47.314595+00:00"
+    },
+    {
+      "id": 5625,
+      "slug": "carregador-30w-turbo-para-iphone-8-x-xr-11-12-13-14-pro-max-fonte-usb-c-cor-branca-dtimp-branco-5625",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Carregador 30w Turbo Para iPhone 8 X Xr 11 12 13 14 Pro Max Fonte Usb C Cor Branca Dtimp Branco",
+      "short_description": "",
+      "current_price": "47.00",
+      "original_price": "99.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_606748-MLA111187910741_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1nw4xQj",
+      "detail_url": "/oferta?slug=carregador-30w-turbo-para-iphone-8-x-xr-11-12-13-14-pro-max-fonte-usb-c-cor-branca-dtimp-branco-5625",
+      "price_collected_at": "2026-06-05T15:00:47.291446+00:00"
+    },
+    {
+      "id": 5624,
+      "slug": "carregador-portatil-power-bank-turbo-20000mah-universal-para-iphone-samsung-motorola-xiaomi-20w-com-display-digital-cor-branco-dtimp-5624",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Carregador Portátil Power Bank Turbo 20000mah Universal Para iPhone Samsung Motorola Xiaomi 20w Com Display Digital Cor Branco Dtimp",
+      "short_description": "",
+      "current_price": "105.00",
+      "original_price": "249.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_951945-MLA99924065771_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1sbYozh",
+      "detail_url": "/oferta?slug=carregador-portatil-power-bank-turbo-20000mah-universal-para-iphone-samsung-motorola-xiaomi-20w-com-display-digital-cor-branco-dtimp-5624",
+      "price_collected_at": "2026-06-05T15:00:47.263203+00:00"
+    },
+    {
+      "id": 5623,
+      "slug": "kit-4-radio-comunicador-baofeng-walkie-talkie-bf-777s-profissional-16-canais-16ch-5w-longo-alcance-ate-12km-preto-hardline-127220v-5623",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 4 Rádio Comunicador Baofeng Walkie Talkie Bf-777s Profissional 16 Canais 16ch 5w Longo Alcance Até 12km Preto - Hardline 127/220v",
+      "short_description": "",
+      "current_price": "193.00",
+      "original_price": "289.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_809560-MLA110029226330_042026-AB.webp",
+      "affiliate_link": "https://meli.la/2KBwPGE",
+      "detail_url": "/oferta?slug=kit-4-radio-comunicador-baofeng-walkie-talkie-bf-777s-profissional-16-canais-16ch-5w-longo-alcance-ate-12km-preto-hardline-127220v-5623",
+      "price_collected_at": "2026-06-05T15:00:47.239764+00:00"
+    },
+    {
+      "id": 5622,
+      "slug": "power-bank-turbo-carregador-portatil-50000mah-turbo-225w-premium-universal-rapida-carga-para-celular-iphone-xiaomi-motorola-lg-smartwatch-tablet-display-digital-viagens-festa-ios-nixzen-branco-5622",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Power Bank Turbo Carregador Portátil 50.000mah Turbo 22.5w Premium Universal Rápida Carga Para Celular iPhone Xiaomi Motorola LG Smartwatch Tablet Display Digital Viagens Festa Ios Nixzen Branco",
+      "short_description": "",
+      "current_price": "125.00",
+      "original_price": "199.00",
+      "discount_pct": "37.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_912117-MLA99988983465_112025-AB.webp",
+      "affiliate_link": "https://meli.la/22MLJEf",
+      "detail_url": "/oferta?slug=power-bank-turbo-carregador-portatil-50000mah-turbo-225w-premium-universal-rapida-carga-para-celular-iphone-xiaomi-motorola-lg-smartwatch-tablet-display-digital-viagens-festa-ios-nixzen-branco-5622",
+      "price_collected_at": "2026-06-05T15:00:47.213330+00:00"
+    },
+    {
+      "id": 606,
+      "slug": "smartphone-infinix-smart-10-4gb-ram-256gb-ssd-camera-8mp-ia-tela-667-hd-120hz-bateria-5000mah-processador-t7250-android-15-go-dual-chip-preto-606",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Smartphone Infinix Smart 10 4gb Ram 256gb Ssd Câmera 8mp + Ia, Tela 6.67 Hd+ 120hz, Bateria 5000mah, Processador T7250, Android 15 Go, Dual Chip - Preto",
+      "short_description": "",
+      "current_price": "624.00",
+      "original_price": "1458.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_964227-MLA100071062557_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1jgSGYY",
+      "detail_url": "/oferta?slug=smartphone-infinix-smart-10-4gb-ram-256gb-ssd-camera-8mp-ia-tela-667-hd-120hz-bateria-5000mah-processador-t7250-android-15-go-dual-chip-preto-606",
+      "price_collected_at": "2026-06-05T15:00:47.196195+00:00"
+    },
+    {
+      "id": 586,
+      "slug": "fone-de-ouvido-soundcore-by-anker-p20i-graves-poderosos-e-impactantes-bluetooth-53-30h-de-reproducao-resistencia-a-agua-2-mics-ia-para-chamadas-claras-personalizacao-de-som-via-app-cor-preto-586",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Fone De Ouvido Soundcore By Anker P20i Graves Poderosos E Impactantes Bluetooth 5.3 30h De Reprodução Resistência À Água 2 Mics Ia Para Chamadas Claras Personalização De Som Via App Cor Preto",
+      "short_description": "",
+      "current_price": "165.00",
+      "original_price": "299.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_730568-MLA99983575997_112025-AB.webp",
+      "affiliate_link": "https://meli.la/28UR63U",
+      "detail_url": "/oferta?slug=fone-de-ouvido-soundcore-by-anker-p20i-graves-poderosos-e-impactantes-bluetooth-53-30h-de-reproducao-resistencia-a-agua-2-mics-ia-para-chamadas-claras-personalizacao-de-som-via-app-cor-preto-586",
+      "price_collected_at": "2026-06-05T15:00:47.180340+00:00"
+    },
+    {
+      "id": 544,
+      "slug": "fone-de-ouvido-bluetooth-54-soundcore-p30i-da-anker-cancelamento-de-ruido-adaptativo-graves-poderosos-45h-de-reproducao-estojo-2-em-1-com-suporte-para-celular-ip54-fone-sem-fio-tws-preto-544",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Fone De Ouvido Bluetooth 5.4 Soundcore P30i Da Anker, Cancelamento De Ruído Adaptativo, Graves Poderosos, 45h De Reprodução, Estojo 2-em-1 Com Suporte Para Celular, Ip54, Fone Sem Fio Tws, Preto",
+      "short_description": "",
+      "current_price": "205.00",
+      "original_price": "389.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_760745-MLA95700724020_102025-AB.webp",
+      "affiliate_link": "https://meli.la/198Ww2E",
+      "detail_url": "/oferta?slug=fone-de-ouvido-bluetooth-54-soundcore-p30i-da-anker-cancelamento-de-ruido-adaptativo-graves-poderosos-45h-de-reproducao-estojo-2-em-1-com-suporte-para-celular-ip54-fone-sem-fio-tws-preto-544",
+      "price_collected_at": "2026-06-05T15:00:47.164422+00:00"
+    },
+    {
+      "id": 1300,
+      "slug": "kit-par-2-radio-baofeng-777s-walk-talk-comunicador-16-canais-preto-127220v-1300",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit Par 2 Radio Baofeng 777s Walk Talk Comunicador 16 Canais Preto 127/220v",
+      "short_description": "",
+      "current_price": "87.00",
+      "original_price": "159.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_751470-MLB88748448908_082025-AB.webp",
+      "affiliate_link": "https://meli.la/279qY53",
+      "detail_url": "/oferta?slug=kit-par-2-radio-baofeng-777s-walk-talk-comunicador-16-canais-preto-127220v-1300",
+      "price_collected_at": "2026-06-05T15:00:47.146515+00:00"
+    },
+    {
+      "id": 5490,
+      "slug": "walkie-talkie-radios-comunicador-kit-com-2-unidades-radinho-walk-talk-completo-fone-microfone-e-acessorios-radio-de-comunicacao-longo-alcance-comunicacao-segura-com-16-canais-preto-127220v-5490",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Walkie Talkie Rádios Comunicador Kit Com 2 Unidades Radinho Walk Talk Completo Fone Microfone E Acessórios - Radio De Comunicação Longo Alcance Comunicação Segura Com 16 Canais Preto 127/220v",
+      "short_description": "",
+      "current_price": "76.00",
+      "original_price": "210.00",
+      "discount_pct": "63.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_713059-MLA109481421132_042026-AB.webp",
+      "affiliate_link": "https://meli.la/2HtW8yu",
+      "detail_url": "/oferta?slug=walkie-talkie-radios-comunicador-kit-com-2-unidades-radinho-walk-talk-completo-fone-microfone-e-acessorios-radio-de-comunicacao-longo-alcance-comunicacao-segura-com-16-canais-preto-127220v-5490",
+      "price_collected_at": "2026-06-05T15:00:47.130287+00:00"
+    },
+    {
+      "id": 4690,
+      "slug": "carregador-portatil-power-bank-turbo-20000mah-225w-universal-para-iphone-samsung-motorlola-xiaomi-com-display-digital-preto-ou-branco-hardline-pretobranco-4690",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Carregador Portátil Power Bank Turbo 20000mah 22.5w Universal Para iPhone Samsung Motorlola Xiaomi Com Display Digital Preto Ou Branco- Hardline Preto/branco",
+      "short_description": "",
+      "current_price": "66.00",
+      "original_price": "129.00",
+      "discount_pct": "48.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_753409-MLA110029138996_042026-AB.webp",
+      "affiliate_link": "https://meli.la/1Z7nuV4",
+      "detail_url": "/oferta?slug=carregador-portatil-power-bank-turbo-20000mah-225w-universal-para-iphone-samsung-motorlola-xiaomi-com-display-digital-preto-ou-branco-hardline-pretobranco-4690",
+      "price_collected_at": "2026-06-05T15:00:47.112661+00:00"
+    },
+    {
+      "id": 5621,
+      "slug": "fone-de-ouvido-headphone-bluetooth-53-soundcore-space-one-cancelamento-de-ruido-anc-98-multiponto-graves-potentes-agudos-nitidos-hi-res-ldac-50h-conforto-uso-prolongado-chamadas-claras-cor-preto-5621",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Fone De Ouvido Headphone Bluetooth 5.3 Soundcore Space One Cancelamento De Ruido Anc 98% Multiponto Graves Potentes Agudos Nítidos Hi-res Ldac 50h Conforto Uso Prolongado Chamadas Claras Cor Preto",
+      "short_description": "",
+      "current_price": "640.00",
+      "original_price": "999.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_717735-MLA105992925440_022026-AB.webp",
+      "affiliate_link": "https://meli.la/2ezJJF4",
+      "detail_url": "/oferta?slug=fone-de-ouvido-headphone-bluetooth-53-soundcore-space-one-cancelamento-de-ruido-anc-98-multiponto-graves-potentes-agudos-nitidos-hi-res-ldac-50h-conforto-uso-prolongado-chamadas-claras-cor-preto-5621",
+      "price_collected_at": "2026-06-05T15:00:47.085982+00:00"
+    },
+    {
+      "id": 2994,
+      "slug": "smartwatch-esportivo-masculina-relogio-inteligente-redondo-2994",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Smartwatch Esportivo Masculina Relógio Inteligente Redondo",
+      "short_description": "",
+      "current_price": "148.00",
+      "original_price": "215.00",
+      "discount_pct": "31.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_878249-MLB111673823701_052026-AB-smartwatch-esportivo-masculina-relogio-inteligente-redondo.webp",
+      "affiliate_link": "https://meli.la/1padjyk",
+      "detail_url": "/oferta?slug=smartwatch-esportivo-masculina-relogio-inteligente-redondo-2994",
+      "price_collected_at": "2026-06-05T15:00:47.067778+00:00"
+    },
+    {
+      "id": 311,
+      "slug": "fone-de-ouvido-sem-fio-bluetooth-f9-5-pares-som-imersivo-powerbank-moderno-bateria-longa-duracao-academia-compativel-com-todos-celulares-preto-311",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Fone De Ouvido Sem Fio Bluetooth F9-5 Pares Som Imersivo Powerbank Moderno Bateria Longa Duração Academia Compativel Com Todos Celulares Preto",
+      "short_description": "",
+      "current_price": "24.00",
+      "original_price": "31.00",
+      "discount_pct": "22.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_950255-MLA99604896412_122025-AB.webp",
+      "affiliate_link": "https://meli.la/2shijtq",
+      "detail_url": "/oferta?slug=fone-de-ouvido-sem-fio-bluetooth-f9-5-pares-som-imersivo-powerbank-moderno-bateria-longa-duracao-academia-compativel-com-todos-celulares-preto-311",
+      "price_collected_at": "2026-06-05T15:00:47.044879+00:00"
+    },
+    {
+      "id": 95,
+      "slug": "samsung-galaxy-a06-5g-dual-sim-128gb-preto-95",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Samsung Galaxy A06 5g Dual Sim 128gb Preto",
+      "short_description": "",
+      "current_price": "638.00",
+      "original_price": "989.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_716412-MLA99524473372_122025-AB.webp",
+      "affiliate_link": "https://meli.la/2kcAeMn",
+      "detail_url": "/oferta?slug=samsung-galaxy-a06-5g-dual-sim-128gb-preto-95",
+      "price_collected_at": "2026-06-05T15:00:47.027846+00:00"
+    },
+    {
+      "id": 5620,
+      "slug": "bicicleta-infantil-nathor-charm-aro-12-rosa-5620",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bicicleta Infantil Nathor Charm Aro 12 Rosa",
+      "short_description": "",
+      "current_price": "236.00",
+      "original_price": "349.00",
+      "discount_pct": "32.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_867104-MLA99375906690_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2fRfApY",
+      "detail_url": "/oferta?slug=bicicleta-infantil-nathor-charm-aro-12-rosa-5620",
+      "price_collected_at": "2026-06-05T15:00:47.005483+00:00"
+    },
+    {
+      "id": 5619,
+      "slug": "caminhao-dinossauro-pista-com-6-carrinhos-maleta-transporte-azul-5619",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
+      "short_description": "",
+      "current_price": "144.00",
+      "original_price": "597.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802771-MLB105838199600_022026-AB.webp",
+      "affiliate_link": "https://meli.la/2pK3wDF",
+      "detail_url": "/oferta?slug=caminhao-dinossauro-pista-com-6-carrinhos-maleta-transporte-azul-5619",
+      "price_collected_at": "2026-06-05T15:00:46.979852+00:00"
+    },
+    {
+      "id": 5618,
+      "slug": "fichario-album-para-cartas-pokemon-360-cartas-pasta-otug-preto-5618",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Fichário Álbum Para Cartas Pokémon - 360 Cartas Pasta Otug Preto",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "99.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_895261-MLB107259255978_032026-AB.webp",
+      "affiliate_link": "https://meli.la/1nFY71k",
+      "detail_url": "/oferta?slug=fichario-album-para-cartas-pokemon-360-cartas-pasta-otug-preto-5618",
+      "price_collected_at": "2026-06-05T15:00:46.954143+00:00"
+    },
+    {
+      "id": 5617,
+      "slug": "pista-carrinho-dinossauro-caminhao-lancador-6-carrinhos-5617",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Pista Carrinho Dinossauro Caminhão Lançador 6 Carrinhos",
+      "short_description": "",
+      "current_price": "129.00",
+      "original_price": "272.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_714907-MLB92744683477_092025-AB-pista-carrinho-dinossauro-caminho-lancador-6-carrinhos.webp",
+      "affiliate_link": "https://meli.la/2rpuqUr",
+      "detail_url": "/oferta?slug=pista-carrinho-dinossauro-caminhao-lancador-6-carrinhos-5617",
+      "price_collected_at": "2026-06-05T15:00:46.926178+00:00"
+    },
+    {
+      "id": 5616,
+      "slug": "carrinho-controle-remoto-recarregavel-grande-off-road-cross-preto-5616",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Carrinho Controle Remoto Recarregável Grande Off Road Cross Preto",
+      "short_description": "",
+      "current_price": "146.00",
+      "original_price": "199.00",
+      "discount_pct": "26.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_733838-MLA108481965898_032026-AB.webp",
+      "affiliate_link": "https://meli.la/1BGTX9M",
+      "detail_url": "/oferta?slug=carrinho-controle-remoto-recarregavel-grande-off-road-cross-preto-5616",
+      "price_collected_at": "2026-06-05T15:00:46.902998+00:00"
+    },
+    {
+      "id": 5615,
+      "slug": "kit-70-figurinhas-album-copa-do-mundo-fifa-2026-panini-capa-dura-c-10-envelopes-5615",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 70 Figurinhas + Álbum Copa Do Mundo Fifa 2026 Panini Capa Dura C/ 10 Envelopes",
+      "short_description": "",
+      "current_price": "145.00",
+      "original_price": "380.00",
+      "discount_pct": "61.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_741192-MLB111504791025_052026-AB.webp",
+      "affiliate_link": "https://meli.la/21siFLz",
+      "detail_url": "/oferta?slug=kit-70-figurinhas-album-copa-do-mundo-fifa-2026-panini-capa-dura-c-10-envelopes-5615",
+      "price_collected_at": "2026-06-05T15:00:46.876575+00:00"
+    },
+    {
+      "id": 5614,
+      "slug": "kit-105-figurinhas-album-da-copa-do-mundo-fifa-2026-original-album-da-copa-2026-5614",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 105 Figurinhas Album Da Copa Do Mundo Fifa 2026 Original Álbum Da Copa 2026",
+      "short_description": "",
+      "current_price": "119.00",
+      "original_price": "199.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_787481-MLB111242347464_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1e8RwZe",
+      "detail_url": "/oferta?slug=kit-105-figurinhas-album-da-copa-do-mundo-fifa-2026-original-album-da-copa-2026-5614",
+      "price_collected_at": "2026-06-05T15:00:46.844490+00:00"
+    },
+    {
+      "id": 4294,
+      "slug": "kit-140-figurinhas-da-copa-do-mundo-2026-panini-20-envelopes-copa-do-mundo-2026-20-4294",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 140 Figurinhas Da Copa Do Mundo 2026 Panini 20 Envelopes Copa Do Mundo 2026 20",
+      "short_description": "",
+      "current_price": "155.00",
+      "original_price": "280.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_785404-MLB110359807212_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1n5oUbd",
+      "detail_url": "/oferta?slug=kit-140-figurinhas-da-copa-do-mundo-2026-panini-20-envelopes-copa-do-mundo-2026-20-4294",
+      "price_collected_at": "2026-06-05T15:00:46.822328+00:00"
+    },
+    {
+      "id": 4595,
+      "slug": "kit-350-figurinhas-copa-do-mundo-2026-50-envelopes-da-panini-copa-do-mundo-2026-50-4595",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 350 Figurinhas Copa Do Mundo 2026 50 Envelopes Da Panini Copa Do Mundo 2026 50",
+      "short_description": "",
+      "current_price": "346.00",
+      "original_price": "599.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_620318-MLB111827485681_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1LNKdq3",
+      "detail_url": "/oferta?slug=kit-350-figurinhas-copa-do-mundo-2026-50-envelopes-da-panini-copa-do-mundo-2026-50-4595",
+      "price_collected_at": "2026-06-05T15:00:46.797816+00:00"
+    },
+    {
+      "id": 3456,
+      "slug": "kit-album-capa-dura-35-figurinhas-copa-do-mundo-fifa-2026-3456",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit Álbum Capa Dura + 35 Figurinhas Copa Do Mundo Fifa 2026",
+      "short_description": "",
+      "current_price": "135.00",
+      "original_price": "199.00",
+      "discount_pct": "32.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_905858-MLB110859600018_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1Cn1KuY",
+      "detail_url": "/oferta?slug=kit-album-capa-dura-35-figurinhas-copa-do-mundo-fifa-2026-3456",
+      "price_collected_at": "2026-06-05T15:00:46.776296+00:00"
+    },
+    {
+      "id": 3366,
+      "slug": "album-figurinhas-oficial-copa-do-mundo-2026-35-figurinhas-3366",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Álbum Figurinhas Oficial Copa Do Mundo 2026 + 35 Figurinhas",
+      "short_description": "",
+      "current_price": "67.00",
+      "original_price": "99.00",
+      "discount_pct": "32.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_836546-MLB111826386751_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2bGPiH8",
+      "detail_url": "/oferta?slug=album-figurinhas-oficial-copa-do-mundo-2026-35-figurinhas-3366",
+      "price_collected_at": "2026-06-05T15:00:46.749936+00:00"
+    },
+    {
+      "id": 4620,
+      "slug": "album-copa-do-mundo-26-dourado-ouro-oficial-140-figurinha-4620",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Álbum Copa Do Mundo 26 Dourado Ouro Oficial + 140 Figurinha",
+      "short_description": "",
+      "current_price": "319.00",
+      "original_price": "799.00",
+      "discount_pct": "60.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_923414-MLB110550719764_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1FeFGDy",
+      "detail_url": "/oferta?slug=album-copa-do-mundo-26-dourado-ouro-oficial-140-figurinha-4620",
+      "price_collected_at": "2026-06-05T15:00:46.728373+00:00"
+    },
+    {
+      "id": 3911,
+      "slug": "kit-album-copa-do-mundo-fifa-2026-12-envelopes-figurinhas-capa-mole-3911",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Àlbum Copa Do Mundo Fifa 2026 + 84 Figurinhas Capa Mole (12 Envelopes)",
+      "short_description": "",
+      "current_price": "105.00",
+      "original_price": "149.00",
+      "discount_pct": "29.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_914246-MLA110537924910_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2PN4McN",
+      "detail_url": "/oferta?slug=kit-album-copa-do-mundo-fifa-2026-12-envelopes-figurinhas-capa-mole-3911",
+      "price_collected_at": "2026-06-05T15:00:46.704674+00:00"
+    },
+    {
+      "id": 2175,
+      "slug": "kit-70-figurinhas-copa-do-mundo-2026-10-envelopes-da-panini-copa-do-mundo-2026-10-2175",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 70 Figurinhas Copa Do Mundo 2026 10 Envelopes Da Panini Copa Do Mundo 2026 10",
+      "short_description": "",
+      "current_price": "74.00",
+      "original_price": "140.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_904712-MLB111294752681_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2UNh3Gv",
+      "detail_url": "/oferta?slug=kit-70-figurinhas-copa-do-mundo-2026-10-envelopes-da-panini-copa-do-mundo-2026-10-2175",
+      "price_collected_at": "2026-06-05T15:00:46.685253+00:00"
+    },
+    {
+      "id": 5613,
+      "slug": "kit-com-10-envelopes-70-cromos-copa-do-mundo-fifa-2026-5613",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit Com 10 Envelopes (70 Cromos) - Copa Do Mundo Fifa 2026",
+      "short_description": "",
+      "current_price": "67.00",
+      "original_price": "128.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_653831-MLB110126921171_042026-AB.webp",
+      "affiliate_link": "https://meli.la/1g7XpLq",
+      "detail_url": "/oferta?slug=kit-com-10-envelopes-70-cromos-copa-do-mundo-fifa-2026-5613",
+      "price_collected_at": "2026-06-05T15:00:46.652849+00:00"
+    },
+    {
+      "id": 2948,
+      "slug": "calca-jeans-plus-size-feminina-skinny-com-lycra-cintura-alta-2948",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jeans Plus Size Feminina Skinny Com Lycra Cintura Alta",
+      "short_description": "",
+      "current_price": "57.00",
+      "original_price": "99.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_644303-MLB106351065029_022026-AB-calca-jeans-plus-size-feminina-skinny-com-lycra-cintura-alta.webp",
+      "affiliate_link": "https://meli.la/1ECaBgx",
+      "detail_url": "/oferta?slug=calca-jeans-plus-size-feminina-skinny-com-lycra-cintura-alta-2948",
+      "price_collected_at": "2026-06-05T15:00:46.629185+00:00"
+    },
+    {
+      "id": 3151,
+      "slug": "kit-10-cuecas-polo-fit-boxer-box-algodao-original-promocao-3151",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Cuecas Polo Fit Boxer Box Algodão Original Promoção",
+      "short_description": "",
+      "current_price": "111.00",
+      "original_price": "239.00",
+      "discount_pct": "53.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_673108-MLB110443963712_052026-AB-kit-10-cuecas-polo-fit-boxer-box-algodo-original-promoco.webp",
+      "affiliate_link": "https://meli.la/2ByGuAk",
+      "detail_url": "/oferta?slug=kit-10-cuecas-polo-fit-boxer-box-algodao-original-promocao-3151",
+      "price_collected_at": "2026-06-05T15:00:46.603860+00:00"
+    },
+    {
+      "id": 159,
+      "slug": "mochila-de-negocios-impermeavela-senha-de-bloqueio-preto-florido-159",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mochila De Negócios Impermeávela Senha De Bloqueio Preto Florido",
+      "short_description": "",
+      "current_price": "112.00",
+      "original_price": "278.00",
+      "discount_pct": "59.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_971850-MLB111370056022_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1QgCrdB",
+      "detail_url": "/oferta?slug=mochila-de-negocios-impermeavela-senha-de-bloqueio-preto-florido-159",
+      "price_collected_at": "2026-06-05T15:00:46.578193+00:00"
+    },
+    {
+      "id": 1124,
+      "slug": "kit-10-cuecas-boxer-lisa-polo-wear-sortido-sortido-liso-g-1124",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Cuecas Boxer Lisa Polo Wear Sortido Sortido Liso G",
+      "short_description": "",
+      "current_price": "89.00",
+      "original_price": "199.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_751178-MLB101662448092_122025-AB.webp",
+      "affiliate_link": "https://meli.la/2kcMJMZ",
+      "detail_url": "/oferta?slug=kit-10-cuecas-boxer-lisa-polo-wear-sortido-sortido-liso-g-1124",
+      "price_collected_at": "2026-06-05T15:00:46.555834+00:00"
+    },
+    {
+      "id": 703,
+      "slug": "calca-jeans-masculina-original-elastano-lycra-703",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jeans Masculina Original Elastano Lycra",
+      "short_description": "",
+      "current_price": "41.00",
+      "original_price": "78.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_736480-MLB110617161021_042026-AB-calca-jeans-masculina-original-elastano-lycra.webp",
+      "affiliate_link": "https://meli.la/23e1JYB",
+      "detail_url": "/oferta?slug=calca-jeans-masculina-original-elastano-lycra-703",
+      "price_collected_at": "2026-06-05T15:00:46.534383+00:00"
+    },
+    {
+      "id": 953,
+      "slug": "jaqueta-de-couro-masculino-slim-resistente-953",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jaqueta De Couro Masculino Slim Resistente",
+      "short_description": "",
+      "current_price": "145.00",
+      "original_price": "312.00",
+      "discount_pct": "53.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_881631-MLB109190399926_042026-AB-jaqueta-de-couro-masculino-slim-resistente.webp",
+      "affiliate_link": "https://meli.la/25eGYx1",
+      "detail_url": "/oferta?slug=jaqueta-de-couro-masculino-slim-resistente-953",
+      "price_collected_at": "2026-06-05T15:00:46.509235+00:00"
+    },
+    {
+      "id": 743,
+      "slug": "kit-6-cuecas-boxer-lupo-poliamida-sem-costura-box-original-743",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 6 Cuecas Boxer Lupo Poliamida Sem Costura Box Original",
+      "short_description": "",
+      "current_price": "129.00",
+      "original_price": "309.00",
+      "discount_pct": "58.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_797944-MLB82978249605_032025-AB-kit-6-cuecas-boxer-lupo-poliamida-sem-costura-box-original.webp",
+      "affiliate_link": "https://meli.la/1e2Bgk9",
+      "detail_url": "/oferta?slug=kit-6-cuecas-boxer-lupo-poliamida-sem-costura-box-original-743",
+      "price_collected_at": "2026-06-05T15:00:46.481794+00:00"
+    },
+    {
+      "id": 3143,
+      "slug": "calca-jeans-wide-leg-pantalona-cintura-alta-feminina-premium-3143",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jeans Wide Leg Pantalona Cintura Alta Feminina Premium",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "109.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_833642-MLB110595647054_052026-AB-calca-jeans-wide-leg-pantalona-cintura-alta-feminina-premium.webp",
+      "affiliate_link": "https://meli.la/11P8bhd",
+      "detail_url": "/oferta?slug=calca-jeans-wide-leg-pantalona-cintura-alta-feminina-premium-3143",
+      "price_collected_at": "2026-06-05T15:00:46.460516+00:00"
+    },
+    {
+      "id": 5325,
+      "slug": "tenis-masculino-space-6-mizuno-90-preto-lisa-40-br-5325",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Masculino Space 6 Mizuno 90-preto Lisa 40 Br",
+      "short_description": "",
+      "current_price": "221.00",
+      "original_price": "379.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_980024-MLA100687251734_122025-AB.webp",
+      "affiliate_link": "https://meli.la/17925K8",
+      "detail_url": "/oferta?slug=tenis-masculino-space-6-mizuno-90-preto-lisa-40-br-5325",
+      "price_collected_at": "2026-06-05T15:00:46.437071+00:00"
+    },
+    {
+      "id": 5612,
+      "slug": "camisa-cr-flamengo-lfstlr-adidas-5612",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Camisa Cr Flamengo Lfstlr adidas",
+      "short_description": "",
+      "current_price": "313.00",
+      "original_price": "699.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_704173-MLB110676998771_042026-AB-camisa-cr-flamengo-lfstlr-adidas.webp",
+      "affiliate_link": "https://meli.la/2NCst7r",
+      "detail_url": "/oferta?slug=camisa-cr-flamengo-lfstlr-adidas-5612",
+      "price_collected_at": "2026-06-05T15:00:46.410507+00:00"
+    },
+    {
+      "id": 963,
+      "slug": "calca-jeans-feminina-cos-alto-empina-bumbum-patria-brasil-963",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jeans Feminina Cós Alto Empina Bumbum Patria Brasil",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "99.00",
+      "discount_pct": "39.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_787066-MLB96747239684_112025-AB-calca-jeans-feminina-cos-alto-empina-bumbum-patria-brasil.webp",
+      "affiliate_link": "https://meli.la/2mgQz4D",
+      "detail_url": "/oferta?slug=calca-jeans-feminina-cos-alto-empina-bumbum-patria-brasil-963",
+      "price_collected_at": "2026-06-05T15:00:46.384124+00:00"
+    },
+    {
+      "id": 5611,
+      "slug": "sandalia-chinelo-kenner-kivah-original-masculino-feminino-5611",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Sandália Chinelo Kenner Kivah Original Masculino Feminino",
+      "short_description": "",
+      "current_price": "135.00",
+      "original_price": "177.00",
+      "discount_pct": "23.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_771181-MLB72682460799_112023-AB-sandalia-chinelo-kenner-kivah-original-masculino-feminino.webp",
+      "affiliate_link": "https://meli.la/2sKWqMs",
+      "detail_url": "/oferta?slug=sandalia-chinelo-kenner-kivah-original-masculino-feminino-5611",
+      "price_collected_at": "2026-06-05T15:00:46.353238+00:00"
+    },
+    {
+      "id": 2511,
+      "slug": "jaqueta-bobojaco-casaco-forrada-inverno-intenso-neve-frio-2511",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jaqueta Bobojaco Casaco Forrada Inverno Intenso Neve Frio",
+      "short_description": "",
+      "current_price": "152.00",
+      "original_price": "249.00",
+      "discount_pct": "38.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_725606-MLB111692273156_062026-AB-jaqueta-bobojaco-casaco-forrada-inverno-intenso-neve-frio.webp",
+      "affiliate_link": "https://meli.la/16bzW8a",
+      "detail_url": "/oferta?slug=jaqueta-bobojaco-casaco-forrada-inverno-intenso-neve-frio-2511",
+      "price_collected_at": "2026-06-05T15:00:46.332257+00:00"
+    },
+    {
+      "id": 3696,
+      "slug": "kit-3-camisetas-masculina-100-algodao-premium-verao-casual-3696",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 3 Camisetas Masculina 100% Algodão Premium Verão Casual",
+      "short_description": "",
+      "current_price": "60.00",
+      "original_price": "78.00",
+      "discount_pct": "24.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_748631-MLB89560914165_082025-AB-kit-3-camisetas-masculina-100-algodo-premium-vero-casual.webp",
+      "affiliate_link": "https://meli.la/1CKNwvH",
+      "detail_url": "/oferta?slug=kit-3-camisetas-masculina-100-algodao-premium-verao-casual-3696",
+      "price_collected_at": "2026-06-05T15:00:46.312018+00:00"
+    },
+    {
+      "id": 5610,
+      "slug": "bota-bico-fino-coturno-feminino-cano-curto-salto-confortavel-5610",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bota Bico Fino Coturno Feminino Cano Curto Salto Confortável",
+      "short_description": "",
+      "current_price": "88.00",
+      "original_price": "99.00",
+      "discount_pct": "11.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_700605-MLB49312971074_032022-AB-bota-bico-fino-coturno-feminino-cano-curto-salto-confortavel.webp",
+      "affiliate_link": "https://meli.la/1sfosbF",
+      "detail_url": "/oferta?slug=bota-bico-fino-coturno-feminino-cano-curto-salto-confortavel-5610",
+      "price_collected_at": "2026-06-05T15:00:46.282477+00:00"
+    },
+    {
+      "id": 5609,
+      "slug": "tenis-ultimashow-20-adidas-5609",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Ultimashow 2.0 adidas",
+      "short_description": "",
+      "current_price": "227.00",
+      "original_price": "349.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_759148-MLB111633218882_062026-AB-tnis-ultimashow-20-adidas.webp",
+      "affiliate_link": "https://meli.la/1ijWBE5",
+      "detail_url": "/oferta?slug=tenis-ultimashow-20-adidas-5609",
+      "price_collected_at": "2026-06-05T15:00:46.255750+00:00"
+    },
+    {
+      "id": 2092,
+      "slug": "kit-10-cuecas-boxer-masculina-algodao-confortavel-polo-fit-2092",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Cuecas Boxer Masculina Algodão Confortável Polo Fit",
+      "short_description": "",
+      "current_price": "111.00",
+      "original_price": "139.00",
+      "discount_pct": "20.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_986678-MLB107454058073_022026-AB-kit-10-cuecas-boxer-masculina-algodo-confortavel-polo-fit.webp",
+      "affiliate_link": "https://meli.la/1rchkBs",
+      "detail_url": "/oferta?slug=kit-10-cuecas-boxer-masculina-algodao-confortavel-polo-fit-2092",
+      "price_collected_at": "2026-06-05T15:00:46.234865+00:00"
+    },
+    {
+      "id": 2164,
+      "slug": "tenis-masculino-adidas-acelera-2-corrida-caminhada-leve-2164",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Masculino adidas Acelera 2 Corrida Caminhada Leve",
+      "short_description": "",
+      "current_price": "278.00",
+      "original_price": "499.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_883372-MLB93324213232_092025-AB-tnis-masculino-adidas-acelera-2-corrida-caminhada-leve.webp",
+      "affiliate_link": "https://meli.la/14bRpTW",
+      "detail_url": "/oferta?slug=tenis-masculino-adidas-acelera-2-corrida-caminhada-leve-2164",
+      "price_collected_at": "2026-06-05T15:00:46.215820+00:00"
+    },
+    {
+      "id": 2918,
+      "slug": "bota-feminina-lumiss-salto-alto-cano-alto-bico-quadrado-2918",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bota Feminina Lumiss Salto Alto Cano Alto Bico Quadrado",
+      "short_description": "",
+      "current_price": "120.00",
+      "original_price": "199.00",
+      "discount_pct": "39.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_682230-MLB82473773400_022025-AB-bota-feminina-lumiss-salto-alto-cano-alto-bico-quadrado.webp",
+      "affiliate_link": "https://meli.la/2fB8M1S",
+      "detail_url": "/oferta?slug=bota-feminina-lumiss-salto-alto-cano-alto-bico-quadrado-2918",
+      "price_collected_at": "2026-06-05T15:00:46.195822+00:00"
+    },
+    {
+      "id": 5181,
+      "slug": "tenis-masculino-gama-olympikus-chumbopreto-lisa-40-br-5181",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Masculino Gama Olympikus Chumbo/preto Lisa 40 Br",
+      "short_description": "",
+      "current_price": "170.00",
+      "original_price": "299.00",
+      "discount_pct": "43.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_643066-MLA98420220498_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2aFjHqA",
+      "detail_url": "/oferta?slug=tenis-masculino-gama-olympikus-chumbopreto-lisa-40-br-5181",
+      "price_collected_at": "2026-06-05T15:00:46.175168+00:00"
+    },
+    {
+      "id": 5608,
+      "slug": "calca-jogger-cargo-masculina-milimetrica-preta-4-bolsos-5608",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jogger Cargo Masculina Milimétrica Preta 4 Bolsos",
+      "short_description": "",
+      "current_price": "47.00",
+      "original_price": "99.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_919432-MLB87244834408_072025-AB-calca-jogger-cargo-masculina-milimetrica-preta-4-bolsos.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5486876312-calca-jogger-cargo-masculina-milimetrica-preta-4-bolsos-_JM",
+      "detail_url": "/oferta?slug=calca-jogger-cargo-masculina-milimetrica-preta-4-bolsos-5608",
+      "price_collected_at": "2026-06-05T15:00:46.140010+00:00"
+    },
+    {
+      "id": 144,
+      "slug": "calca-jeans-wide-leg-feminina-cintura-alta-sem-lycra-stillge-144",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jeans Wide Leg Feminina Cintura Alta Sem Lycra Stillge",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "109.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_717613-MLB96633630079_102025-AB-calca-jeans-wide-leg-feminina-cintura-alta-sem-lycra-stillge.webp",
+      "affiliate_link": "https://meli.la/2Z67dRN",
+      "detail_url": "/oferta?slug=calca-jeans-wide-leg-feminina-cintura-alta-sem-lycra-stillge-144",
+      "price_collected_at": "2026-06-05T15:00:46.120262+00:00"
+    },
+    {
+      "id": 1998,
+      "slug": "calca-mom-jeans-feminina-cintura-alta-marmorizada-1998",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Mom Jeans Feminina Cintura Alta Marmorizada",
+      "short_description": "",
+      "current_price": "57.00",
+      "original_price": "99.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_799787-MLB85664619217_062025-AB-calca-mom-jeans-feminina-cintura-alta-marmorizada.webp",
+      "affiliate_link": "https://meli.la/1uWJ5cp",
+      "detail_url": "/oferta?slug=calca-mom-jeans-feminina-cintura-alta-marmorizada-1998",
+      "price_collected_at": "2026-06-05T15:00:46.099226+00:00"
+    },
+    {
+      "id": 1735,
+      "slug": "camiseta-light-t-shirt-insider-masculino-1735",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Camiseta Light T-shirt Insider Masculino",
+      "short_description": "",
+      "current_price": "69.00",
+      "original_price": "189.00",
+      "discount_pct": "63.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_779849-MLB89746747076_082025-AB-camiseta-light-t-shirt-insider-masculino.webp",
+      "affiliate_link": "https://meli.la/1BCCPZR",
+      "detail_url": "/oferta?slug=camiseta-light-t-shirt-insider-masculino-1735",
+      "price_collected_at": "2026-06-05T15:00:46.076699+00:00"
+    },
+    {
+      "id": 4539,
+      "slug": "tenis-feminino-questar-3-adidas-violeta-e-rosa-lisa-37-4539",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Feminino Questar 3 adidas Violeta E Rosa Lisa 37",
+      "short_description": "",
+      "current_price": "286.00",
+      "original_price": "599.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_937716-MLB110264132150_052026-AB.webp",
+      "affiliate_link": "https://meli.la/25GXDgc",
+      "detail_url": "/oferta?slug=tenis-feminino-questar-3-adidas-violeta-e-rosa-lisa-37-4539",
+      "price_collected_at": "2026-06-05T15:00:46.055991+00:00"
+    },
+    {
+      "id": 754,
+      "slug": "calca-jeans-masculina-tradicional-corte-reto-754",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jeans Masculina Tradicional Corte Reto",
+      "short_description": "",
+      "current_price": "57.00",
+      "original_price": "99.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_996599-MLB88495135003_072025-AB-calca-jeans-masculina-tradicional-corte-reto.webp",
+      "affiliate_link": "https://meli.la/18XEqLc",
+      "detail_url": "/oferta?slug=calca-jeans-masculina-tradicional-corte-reto-754",
+      "price_collected_at": "2026-06-05T15:00:46.034797+00:00"
+    },
+    {
+      "id": 5230,
+      "slug": "tenis-park-st-20-adidas-5230",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Park St 2,0 adidas",
+      "short_description": "",
+      "current_price": "244.00",
+      "original_price": "399.00",
+      "discount_pct": "38.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_946417-MLB111083843428_052026-AB-tnis-park-st-20-adidas.webp",
+      "affiliate_link": "https://meli.la/1zoje4i",
+      "detail_url": "/oferta?slug=tenis-park-st-20-adidas-5230",
+      "price_collected_at": "2026-06-05T15:00:46.011759+00:00"
+    },
+    {
+      "id": 4841,
+      "slug": "jaqueta-feminina-puffer-bobojaco-capuz-nylon-forrada-ate-g4-4841",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jaqueta Feminina Puffer Bobojaco Capuz Nylon Forrada Até G4",
+      "short_description": "",
+      "current_price": "126.00",
+      "original_price": "250.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_673537-MLB109930552435_042026-AB-jaqueta-feminina-puffer-bobojaco-capuz-nylon-forrada-ate-g4.webp",
+      "affiliate_link": "https://meli.la/1E3Toun",
+      "detail_url": "/oferta?slug=jaqueta-feminina-puffer-bobojaco-capuz-nylon-forrada-ate-g4-4841",
+      "price_collected_at": "2026-06-05T15:00:45.981250+00:00"
+    },
+    {
+      "id": 281,
+      "slug": "kit-4-camiseta-dry-fit-sandrini-masculina-academia-caminhada-281",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 4 Camiseta Dry-fit Sandrini Masculina Academia Caminhada",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "135.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_626928-MLB82004918446_022025-AB-kit-4-camiseta-dry-fit-sandrini-masculina-academia-caminhada.webp",
+      "affiliate_link": "https://meli.la/2RMDUbW",
+      "detail_url": "/oferta?slug=kit-4-camiseta-dry-fit-sandrini-masculina-academia-caminhada-281",
+      "price_collected_at": "2026-06-05T15:00:45.962237+00:00"
+    },
+    {
+      "id": 640,
+      "slug": "kit-9-pares-meias-puma-sapatilha-soquete-invisivel-original-640",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 9 Pares Meias Puma Sapatilha Soquete Invisível Original",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "149.00",
+      "discount_pct": "60.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_872253-MLB96642336275_102025-AB-kit-9-pares-meias-puma-sapatilha-soquete-invisivel-original.webp",
+      "affiliate_link": "https://meli.la/2iUitRX",
+      "detail_url": "/oferta?slug=kit-9-pares-meias-puma-sapatilha-soquete-invisivel-original-640",
+      "price_collected_at": "2026-06-05T15:00:45.941504+00:00"
+    },
+    {
+      "id": 196,
+      "slug": "sapatenis-leve-de-ziper-super-conforto-196",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Sapatênis , Leve De Zíper Super Conforto",
+      "short_description": "",
+      "current_price": "56.00",
+      "original_price": "94.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_957872-MLB97351627901_112025-AB-sapatnis-leve-de-ziper-super-conforto.webp",
+      "affiliate_link": "https://meli.la/2xp9Kpo",
+      "detail_url": "/oferta?slug=sapatenis-leve-de-ziper-super-conforto-196",
+      "price_collected_at": "2026-06-05T15:00:45.919287+00:00"
+    },
+    {
+      "id": 244,
+      "slug": "calca-masculina-sarja-premium-esporte-fino-bolso-faca-lycra-244",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Masculina Sarja Premium Esporte Fino Bolso Faca Lycra",
+      "short_description": "",
+      "current_price": "66.00",
+      "original_price": "99.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_925439-MLB95522562902_102025-AB-calca-masculina-sarja-premium-esporte-fino-bolso-faca-lycra.webp",
+      "affiliate_link": "https://meli.la/1u6p5UZ",
+      "detail_url": "/oferta?slug=calca-masculina-sarja-premium-esporte-fino-bolso-faca-lycra-244",
+      "price_collected_at": "2026-06-05T15:00:45.902096+00:00"
+    },
+    {
+      "id": 5150,
+      "slug": "tenis-kappa-galaxy-masculino-feminino-5150",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Kappa Galaxy Masculino Feminino",
+      "short_description": "",
+      "current_price": "108.00",
+      "original_price": "169.00",
+      "discount_pct": "36.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_621036-MLB92885763645_092025-AB-tnis-kappa-galaxy-masculino-feminino.webp",
+      "affiliate_link": "https://meli.la/2EbGaGR",
+      "detail_url": "/oferta?slug=tenis-kappa-galaxy-masculino-feminino-5150",
+      "price_collected_at": "2026-06-05T15:00:45.881203+00:00"
+    },
+    {
+      "id": 243,
+      "slug": "mochila-viagem-feminina-masculina-para-notebook-executiva-243",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mochila Viagem Feminina Masculina Para Notebook Executiva",
+      "short_description": "",
+      "current_price": "112.00",
+      "original_price": "289.00",
+      "discount_pct": "61.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_986467-MLB112482124811_052026-AB-mochila-viagem-feminina-masculina-para-notebook-executiva.webp",
+      "affiliate_link": "https://meli.la/33j5DVT",
+      "detail_url": "/oferta?slug=mochila-viagem-feminina-masculina-para-notebook-executiva-243",
+      "price_collected_at": "2026-06-05T15:00:45.864743+00:00"
+    },
+    {
+      "id": 5607,
+      "slug": "kit-3-t-shirts-oversized-classic-algodao-clea-store-5607",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 3 T-shirts Oversized Classic Algodão Cléa Store",
+      "short_description": "",
+      "current_price": "127.00",
+      "original_price": "199.00",
+      "discount_pct": "36.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_967821-MLB106425794651_022026-AB-kit-3-t-shirts-oversized-classic-algodo-clea-store.webp",
+      "affiliate_link": "https://meli.la/1QVCHTW",
+      "detail_url": "/oferta?slug=kit-3-t-shirts-oversized-classic-algodao-clea-store-5607",
+      "price_collected_at": "2026-06-05T15:00:45.830269+00:00"
+    },
+    {
+      "id": 5193,
+      "slug": "tenis-olympikus-corre-trilha-2-5193",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Olympikus Corre Trilha 2",
+      "short_description": "",
+      "current_price": "395.00",
+      "original_price": "679.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_982593-MLB110431916853_042026-AB-tnis-olympikus-corre-trilha-2.webp",
+      "affiliate_link": "https://meli.la/2Wr8A1S",
+      "detail_url": "/oferta?slug=tenis-olympikus-corre-trilha-2-5193",
+      "price_collected_at": "2026-06-05T15:00:45.812073+00:00"
+    },
+    {
+      "id": 190,
+      "slug": "kit-6-cuecas-lupo-boxer-box-sem-costura-basic-microfibra-190",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 6 Cuecas Lupo Boxer Box Sem Costura Basic Microfibra",
+      "short_description": "",
+      "current_price": "125.00",
+      "original_price": "288.00",
+      "discount_pct": "56.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_738813-MLB83279416363_032025-AB-kit-6-cuecas-lupo-boxer-box-sem-costura-basic-microfibra.webp",
+      "affiliate_link": "https://meli.la/1f44pQa",
+      "detail_url": "/oferta?slug=kit-6-cuecas-lupo-boxer-box-sem-costura-basic-microfibra-190",
+      "price_collected_at": "2026-06-05T15:00:45.790652+00:00"
+    },
+    {
+      "id": 2093,
+      "slug": "calca-cargo-feminina-wide-leg-cintura-alta-jeans-stillger-2093",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Cargo Feminina Wide Leg Cintura Alta Jeans Stillger",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "110.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_989976-MLB106465814960_022026-AB-calca-cargo-feminina-wide-leg-cintura-alta-jeans-stillger.webp",
+      "affiliate_link": "https://meli.la/2Jn7fGC",
+      "detail_url": "/oferta?slug=calca-cargo-feminina-wide-leg-cintura-alta-jeans-stillger-2093",
+      "price_collected_at": "2026-06-05T15:00:45.770624+00:00"
+    },
+    {
+      "id": 3910,
+      "slug": "moletom-masculino-gola-careca-flanelado-paris-sueter-frio-3910",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Moletom Masculino Gola Careca Flanelado Paris Suéter Frio",
+      "short_description": "",
+      "current_price": "38.00",
+      "original_price": "89.00",
+      "discount_pct": "56.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_994579-MLB108190706233_032026-AB-moletom-masculino-gola-careca-flanelado-paris-sueter-frio.webp",
+      "affiliate_link": "https://meli.la/1A7rJC2",
+      "detail_url": "/oferta?slug=moletom-masculino-gola-careca-flanelado-paris-sueter-frio-3910",
+      "price_collected_at": "2026-06-05T15:00:45.751158+00:00"
+    },
+    {
+      "id": 3097,
+      "slug": "kit-5-camisetas-hering-masculina-basica-original-algodao-3097",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 5 Camisetas Hering Masculina Basica Original Algodão",
+      "short_description": "",
+      "current_price": "129.00",
+      "original_price": "239.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_920817-MLB94004751894_102025-AB-kit-5-camisetas-hering-masculina-basica-original-algodo.webp",
+      "affiliate_link": "https://meli.la/1F3iC8o",
+      "detail_url": "/oferta?slug=kit-5-camisetas-hering-masculina-basica-original-algodao-3097",
+      "price_collected_at": "2026-06-05T15:00:45.731221+00:00"
+    },
+    {
+      "id": 2000,
+      "slug": "kit-4-cuecas-boxer-lupo-algodao-confortavel-box-original-2000",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 4 Cuecas Boxer Lupo Algodão Confortável Box Original",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "199.00",
+      "discount_pct": "70.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_812578-MLB82638744739_022025-AB-kit-4-cuecas-boxer-lupo-algodo-confortavel-box-original.webp",
+      "affiliate_link": "https://meli.la/1FhkTrj",
+      "detail_url": "/oferta?slug=kit-4-cuecas-boxer-lupo-algodao-confortavel-box-original-2000",
+      "price_collected_at": "2026-06-05T15:00:45.713290+00:00"
+    },
+    {
+      "id": 5354,
+      "slug": "kit-5-camisetas-hering-basica-masculina-algodao-original-5354",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 5 Camisetas Hering Basica Masculina Algodão Original",
+      "short_description": "",
+      "current_price": "129.00",
+      "original_price": "219.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_939868-MLB110678291598_052026-AB-kit-5-camisetas-hering-basica-masculina-algodo-original.webp",
+      "affiliate_link": "https://meli.la/15h68Tz",
+      "detail_url": "/oferta?slug=kit-5-camisetas-hering-basica-masculina-algodao-original-5354",
+      "price_collected_at": "2026-06-05T15:00:45.692696+00:00"
+    },
+    {
+      "id": 5199,
+      "slug": "kit-10-cuecas-algodao-polo-wear-sortido-5199",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Cuecas Algodão Polo Wear Sortido",
+      "short_description": "",
+      "current_price": "139.00",
+      "original_price": "299.00",
+      "discount_pct": "53.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_737982-MLB96738249051_102025-AB-kit-10-cuecas-algodo-polo-wear-sortido.webp",
+      "affiliate_link": "https://meli.la/25fhAAK",
+      "detail_url": "/oferta?slug=kit-10-cuecas-algodao-polo-wear-sortido-5199",
+      "price_collected_at": "2026-06-05T15:00:45.670880+00:00"
+    },
+    {
+      "id": 362,
+      "slug": "mochila-dos-homens-com-faixa-impermeavel-para-expansao-preto-liso-362",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mochila Dos Homens Com Faixa Impermeável Para Expansão Preto Liso",
+      "short_description": "",
+      "current_price": "89.00",
+      "original_price": "297.00",
+      "discount_pct": "69.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_843569-MLB112036219477_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2dRvfzL",
+      "detail_url": "/oferta?slug=mochila-dos-homens-com-faixa-impermeavel-para-expansao-preto-liso-362",
+      "price_collected_at": "2026-06-05T15:00:45.425462+00:00"
+    },
+    {
+      "id": 3436,
+      "slug": "calca-jeans-mom-stillger-feminina-cintura-alta-cor-clara-3436",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jeans Mom Stillger Feminina Cintura Alta Cor Clara",
+      "short_description": "",
+      "current_price": "58.00",
+      "original_price": "74.00",
+      "discount_pct": "22.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_714677-MLB106514234007_022026-AB-calca-jeans-mom-stillger-feminina-cintura-alta-cor-clara.webp",
+      "affiliate_link": "https://meli.la/1bA8mcN",
+      "detail_url": "/oferta?slug=calca-jeans-mom-stillger-feminina-cintura-alta-cor-clara-3436",
+      "price_collected_at": "2026-06-05T15:00:45.397849+00:00"
+    },
+    {
+      "id": 4139,
+      "slug": "jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno-4139",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jaqueta Puffer De Frio Intenso Blusa Impermeável Inverno",
+      "short_description": "",
+      "current_price": "73.00",
+      "original_price": "99.00",
+      "discount_pct": "26.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_829600-MLB112200803145_052026-AB-jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno.webp",
+      "affiliate_link": "https://meli.la/28Wzh3a",
+      "detail_url": "/oferta?slug=jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno-4139",
+      "price_collected_at": "2026-06-05T15:00:45.373829+00:00"
+    },
+    {
+      "id": 3858,
+      "slug": "kit2-calca-moletom-masculina-academia-corrida-chimpa-esporte-3858",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit2 Calça Moletom Masculina Academia Corrida Chimpa Esporte",
+      "short_description": "",
+      "current_price": "74.00",
+      "original_price": "149.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_953460-MLB108170752070_032026-AB-kit2-calca-moletom-masculina-academia-corrida-chimpa-esporte.webp",
+      "affiliate_link": "https://meli.la/2o27mWQ",
+      "detail_url": "/oferta?slug=kit2-calca-moletom-masculina-academia-corrida-chimpa-esporte-3858",
+      "price_collected_at": "2026-06-05T15:00:45.326897+00:00"
+    },
+    {
+      "id": 1176,
+      "slug": "conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox-baunilha-1176",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Conj De Panelas 8 Peças Ceramic Life Smart Plus Vanilla - Brinox Baunilha",
+      "short_description": "",
+      "current_price": "599.00",
+      "original_price": "1099.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_926181-MLA106965198532_022026-AB.webp",
+      "affiliate_link": "https://meli.la/23UUjgG",
+      "detail_url": "/oferta?slug=conj-de-panelas-8-pecas-ceramic-life-smart-plus-vanilla-brinox-baunilha-1176",
+      "price_collected_at": "2026-06-05T15:00:45.308165+00:00"
+    },
+    {
+      "id": 5606,
+      "slug": "luminaria-rustica-lustre-pendente-industrial-com-6-cordas-rusticas-decorativas-ideal-para-instalacao-no-teto-127220v-preto-5606",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Luminária Rústica, Lustre Pendente Industrial, Com 6 Cordas Rústicas Decorativas, Ideal Para Instalação No Teto 127/220v Preto",
+      "short_description": "",
+      "current_price": "309.00",
+      "original_price": "698.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_700207-MLA109440651862_042026-AB.webp",
+      "affiliate_link": "https://meli.la/2rgus2z",
+      "detail_url": "/oferta?slug=luminaria-rustica-lustre-pendente-industrial-com-6-cordas-rusticas-decorativas-ideal-para-instalacao-no-teto-127220v-preto-5606",
+      "price_collected_at": "2026-06-05T15:00:45.278496+00:00"
+    },
+    {
+      "id": 809,
+      "slug": "kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Pote De Vidro Marmita Hermético 370ml Freezer Fitness Rishon Transparente",
+      "short_description": "",
+      "current_price": "67.00",
+      "original_price": "159.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_761825-MLA111240637734_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2kBbZys",
+      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
+      "price_collected_at": "2026-06-05T15:00:45.258120+00:00"
+    },
+    {
+      "id": 4915,
+      "slug": "jogo-6-copos-diamond-egipcio-300ml-vidro-grosso-diamante-luxo-transparente-vitrex-4915",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo 6 Copos Diamond Egipcio 300ml Vidro Grosso Diamante Luxo Transparente Vitrex",
+      "short_description": "",
+      "current_price": "26.00",
+      "original_price": "69.00",
+      "discount_pct": "62.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_882989-MLA106924265722_022026-AB.webp",
+      "affiliate_link": "https://meli.la/1Q9sQn2",
+      "detail_url": "/oferta?slug=jogo-6-copos-diamond-egipcio-300ml-vidro-grosso-diamante-luxo-transparente-vitrex-4915",
+      "price_collected_at": "2026-06-05T15:00:45.236560+00:00"
+    },
+    {
+      "id": 406,
+      "slug": "jogo-de-panelas-inducao-antiaderente-ceramica-10-pecas-ppg-pfoa-free-grafite-406",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Panelas Induçao Antiaderente Cerâmica 10 Peças Ppg Pfoa Free Grafite",
+      "short_description": "",
+      "current_price": "326.00",
+      "original_price": "683.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_759016-MLA97124665410_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2149FmC",
+      "detail_url": "/oferta?slug=jogo-de-panelas-inducao-antiaderente-ceramica-10-pecas-ppg-pfoa-free-grafite-406",
+      "price_collected_at": "2026-06-05T15:00:45.218680+00:00"
+    },
+    {
+      "id": 800,
+      "slug": "varal-de-chao-grande-de-roupas-3-andares-dobravel-cor-azul-kontuz-170-cm-800",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Varal De Chão Grande De Roupas 3 Andares Dobrável Cor Azul Kontuz 170 Cm",
+      "short_description": "",
+      "current_price": "71.00",
+      "original_price": "119.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_712866-MLA109482654866_042026-AB.webp",
+      "affiliate_link": "https://meli.la/1nYR93G",
+      "detail_url": "/oferta?slug=varal-de-chao-grande-de-roupas-3-andares-dobravel-cor-azul-kontuz-170-cm-800",
+      "price_collected_at": "2026-06-05T15:00:45.189736+00:00"
+    },
+    {
+      "id": 5605,
+      "slug": "tapete-200x150-felpudo-sala-e-quarto-diversas-cores-macio-5605",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tapete 2,00x1,50 Felpudo Sala E Quarto Diversas Cores Macio",
+      "short_description": "",
+      "current_price": "56.00",
+      "original_price": "115.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_906674-MLB79375488742_092024-AB-tapete-200x150-felpudo-sala-e-quarto-diversas-cores-macio.webp",
+      "affiliate_link": "https://meli.la/1eGoipE",
+      "detail_url": "/oferta?slug=tapete-200x150-felpudo-sala-e-quarto-diversas-cores-macio-5605",
+      "price_collected_at": "2026-06-05T15:00:45.155791+00:00"
+    },
+    {
+      "id": 155,
+      "slug": "800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "800mlgarrafa Térmica Água Squeeze Inox Academiaquente E Frio",
+      "short_description": "",
+      "current_price": "35.00",
+      "original_price": "59.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_963485-MLB94579785063_102025-AB-800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio.webp",
+      "affiliate_link": "https://meli.la/19NZft3",
+      "detail_url": "/oferta?slug=800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
+      "price_collected_at": "2026-06-05T15:00:45.133362+00:00"
+    },
+    {
+      "id": 1668,
+      "slug": "camera-inteligente-im7-3mp-de-resolucao-branca-intelbras-branco-1668",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Câmera Inteligente Im7 + 3mp De Resolução Branca Intelbras Branco",
+      "short_description": "",
+      "current_price": "365.00",
+      "original_price": "599.00",
+      "discount_pct": "39.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_892568-MLA99939109103_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2Xx2ZLr",
+      "detail_url": "/oferta?slug=camera-inteligente-im7-3mp-de-resolucao-branca-intelbras-branco-1668",
+      "price_collected_at": "2026-06-05T15:00:45.107112+00:00"
+    },
+    {
+      "id": 5604,
+      "slug": "armario-multiuso-escrit-ou-lavand-4-prat-belem-madoff-madeiroff-5604",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Armário Multiuso Escrit Ou Lavand 4 Prat Belém Mad/off Madeir/off",
+      "short_description": "",
+      "current_price": "269.00",
+      "original_price": "587.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_901856-MLB109897951256_042026-AB.webp",
+      "affiliate_link": "https://meli.la/1WphGpy",
+      "detail_url": "/oferta?slug=armario-multiuso-escrit-ou-lavand-4-prat-belem-madoff-madeiroff-5604",
+      "price_collected_at": "2026-06-05T15:00:45.075106+00:00"
+    },
+    {
+      "id": 448,
+      "slug": "esfregao-perfect-pro-mop-360-balde-inox-cabo-longo-microfibra-16l-azul-448",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Esfregão Perfect Pro Mop 360° Balde Inox Cabo Longo Microfibra 16l Azul",
+      "short_description": "",
+      "current_price": "133.00",
+      "original_price": "228.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_878694-MLA99840378519_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2Aj8GEc",
+      "detail_url": "/oferta?slug=esfregao-perfect-pro-mop-360-balde-inox-cabo-longo-microfibra-16l-azul-448",
+      "price_collected_at": "2026-06-05T15:00:45.050682+00:00"
+    },
+    {
+      "id": 5603,
+      "slug": "jogo-de-sobremesa-tigela-bowl-6-pecas-em-vidro-desenhado-trasparente-5603",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Sobremesa Tigela Bowl 6 Peças Em Vidro Desenhado Trasparente",
+      "short_description": "",
+      "current_price": "19.00",
+      "original_price": "49.00",
+      "discount_pct": "60.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_943261-MLB110882142296_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2bdmajZ",
+      "detail_url": "/oferta?slug=jogo-de-sobremesa-tigela-bowl-6-pecas-em-vidro-desenhado-trasparente-5603",
+      "price_collected_at": "2026-06-05T15:00:45.015339+00:00"
+    },
+    {
+      "id": 956,
+      "slug": "cortina-300x280-metros-blackout-blecaute-avela-corta-luz-em-tecido-grosso-para-quarto-e-sala-casa-laura-enxovais-956",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cortina 3,00x2,80 Metros Blackout Blecaute Avelã Corta Luz Em Tecido Grosso Para Quarto E Sala Casa Laura Enxovais",
+      "short_description": "",
+      "current_price": "72.00",
+      "original_price": "143.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_979898-MLA96116211167_102025-AB.webp",
+      "affiliate_link": "https://meli.la/21BQNV3",
+      "detail_url": "/oferta?slug=cortina-300x280-metros-blackout-blecaute-avela-corta-luz-em-tecido-grosso-para-quarto-e-sala-casa-laura-enxovais-956",
+      "price_collected_at": "2026-06-05T15:00:44.992553+00:00"
+    },
+    {
+      "id": 203,
+      "slug": "cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-malha-203",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh Malha",
+      "short_description": "",
+      "current_price": "474.00",
+      "original_price": "906.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1nnYp49",
+      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-malha-203",
+      "price_collected_at": "2026-06-05T15:00:44.966456+00:00"
+    },
+    {
+      "id": 856,
+      "slug": "conjunto-panelas-antiaderente-10-pecas-teflon-varias-cores-856",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Conjunto Panelas Antiaderente 10 Peças Teflon Várias Cores",
+      "short_description": "",
+      "current_price": "178.00",
+      "original_price": "229.00",
+      "discount_pct": "22.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_978965-MLB111357549836_052026-AB-conjunto-panelas-antiaderente-10-pecas-teflon-varias-cores.webp",
+      "affiliate_link": "https://meli.la/2xyeyuY",
+      "detail_url": "/oferta?slug=conjunto-panelas-antiaderente-10-pecas-teflon-varias-cores-856",
+      "price_collected_at": "2026-06-05T15:00:44.946727+00:00"
+    },
+    {
+      "id": 368,
+      "slug": "jogo-de-panelas-inducao-antiaderente-ceramica-10-pecas-ppg-pfoa-free-baunilha-368",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Panelas Induçao Antiaderente Cerâmica 10 Peças Ppg Pfoa Free Baunilha",
+      "short_description": "",
+      "current_price": "311.00",
+      "original_price": "683.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896529-MLA98735006295_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1gC4ntD",
+      "detail_url": "/oferta?slug=jogo-de-panelas-inducao-antiaderente-ceramica-10-pecas-ppg-pfoa-free-baunilha-368",
+      "price_collected_at": "2026-06-05T15:00:44.931601+00:00"
+    },
+    {
+      "id": 5383,
+      "slug": "camera-ip-a8-app-icsee-infravermelho-prova-dagua-externa-wifi-hd-3-cor-branco-5383",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Câmera Ip A8 App Icsee Infravermelho Prova D'água Externa Wifi Hd Cor Branco",
+      "short_description": "",
+      "current_price": "77.00",
+      "original_price": "175.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_921837-MLA99700943906_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1uw2W5D",
+      "detail_url": "/oferta?slug=camera-ip-a8-app-icsee-infravermelho-prova-dagua-externa-wifi-hd-3-cor-branco-5383",
+      "price_collected_at": "2026-06-05T15:00:44.913117+00:00"
+    },
+    {
+      "id": 2420,
+      "slug": "cadeira-de-escritorio-presidente-giratoria-reclinavel-cinza-couro-sintetico-2420",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira De Escritório Presidente Giratória Reclinável Cinza Couro Sintético",
+      "short_description": "",
+      "current_price": "528.00",
+      "original_price": "1248.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_692481-MLA108382852496_032026-AB.webp",
+      "affiliate_link": "https://meli.la/2jKKWDh",
+      "detail_url": "/oferta?slug=cadeira-de-escritorio-presidente-giratoria-reclinavel-cinza-couro-sintetico-2420",
+      "price_collected_at": "2026-06-05T15:00:44.894448+00:00"
+    },
+    {
+      "id": 892,
+      "slug": "camera-seguranca-wifi-ip-lente-dupla-2x-3mp-externa-360-a-prova-dagua-cor-cinza-892",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Câmera Segurança Wifi Ip Lente Dupla 2x 3mp Externa 360° A Prova Dágua Cor Cinza",
+      "short_description": "",
+      "current_price": "117.00",
+      "original_price": "219.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_617999-MLA107805745177_022026-AB.webp",
+      "affiliate_link": "https://meli.la/1NhQXBD",
+      "detail_url": "/oferta?slug=camera-seguranca-wifi-ip-lente-dupla-2x-3mp-externa-360-a-prova-dagua-cor-cinza-892",
+      "price_collected_at": "2026-06-05T15:00:44.876078+00:00"
+    },
+    {
+      "id": 4050,
+      "slug": "cadeira-escritorio-ergonomica-giratoria-com-apoio-lombar-da-python-fly-preto-malha-4050",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira Escritório Ergonômica Giratória Com Apoio Lombar Da Python Fly Preto Malha",
+      "short_description": "",
+      "current_price": "359.00",
+      "original_price": "748.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_767880-MLA99418713376_112025-AB.webp",
+      "affiliate_link": "https://meli.la/21RqFsX",
+      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-giratoria-com-apoio-lombar-da-python-fly-preto-malha-4050",
+      "price_collected_at": "2026-06-05T15:00:44.854123+00:00"
+    },
+    {
+      "id": 4272,
+      "slug": "brinox-pressure-panela-de-pressao-revestimento-ceramica-inducao-42l-cor-vanilla-vanila-4272",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Panela De Pressão Brinox Pressure 4,2l Ø20 X 14,5 Cm Vanilla Baunilha Vanila",
+      "short_description": "",
+      "current_price": "179.00",
+      "original_price": "477.00",
+      "discount_pct": "62.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_917659-MLA112161611883_052026-AB.webp",
+      "affiliate_link": "https://meli.la/19JRER9",
+      "detail_url": "/oferta?slug=brinox-pressure-panela-de-pressao-revestimento-ceramica-inducao-42l-cor-vanilla-vanila-4272",
+      "price_collected_at": "2026-06-05T15:00:44.837161+00:00"
+    },
+    {
+      "id": 92,
+      "slug": "kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 2 Câmera Segurança Ip Interna Externa Wifi Icsee Infravermelho Prova Dágua - Hw Branco",
+      "short_description": "",
+      "current_price": "184.00",
+      "original_price": "339.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_901090-MLA99414404486_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2CTJTHC",
+      "detail_url": "/oferta?slug=kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
+      "price_collected_at": "2026-06-05T15:00:44.814977+00:00"
+    },
+    {
+      "id": 3546,
+      "slug": "kit-2-camera-wifi-externa-a28-app-icsee-dupla-visao-3mp-prova-dagua-cor-branco-3546",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 2 Câmera Wifi Externa A28 App Icsee Dupla Visão 3mp Prova Dágua Cor Branco",
+      "short_description": "",
+      "current_price": "179.00",
+      "original_price": "499.00",
+      "discount_pct": "63.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_783554-MLA95668214622_102025-AB.webp",
+      "affiliate_link": "https://meli.la/1fDAJ58",
+      "detail_url": "/oferta?slug=kit-2-camera-wifi-externa-a28-app-icsee-dupla-visao-3mp-prova-dagua-cor-branco-3546",
+      "price_collected_at": "2026-06-05T15:00:44.792394+00:00"
+    },
+    {
+      "id": 5602,
+      "slug": "refletor-super-premium-led-holofote-3000w-pdagua-bivolt-frio-127220v-preto-branco-frio-5602",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Refletor Super Premium Led Holofote 3000w Pdágua Bivolt Frio 127/220v Preto Branco-frio",
+      "short_description": "",
+      "current_price": "74.00",
+      "original_price": "255.00",
+      "discount_pct": "70.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_702298-MLB100383382175_122025-AB.webp",
+      "affiliate_link": "https://meli.la/2AwkHgp",
+      "detail_url": "/oferta?slug=refletor-super-premium-led-holofote-3000w-pdagua-bivolt-frio-127220v-preto-branco-frio-5602",
+      "price_collected_at": "2026-06-05T15:00:44.754549+00:00"
+    },
+    {
+      "id": 253,
+      "slug": "garrafa-termica-1-litro-com-termometro-led-para-chas-cafe-253",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Garrafa Térmica 1 Litro Com Termômetro Led Para Chás / Café",
+      "short_description": "",
+      "current_price": "48.00",
+      "original_price": "75.00",
+      "discount_pct": "34.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_658148-MLB89993492671_082025-AB-garrafa-termica-1-litro-com-termmetro-led-para-chas-cafe.webp",
+      "affiliate_link": "https://meli.la/1HBzP7Y",
+      "detail_url": "/oferta?slug=garrafa-termica-1-litro-com-termometro-led-para-chas-cafe-253",
+      "price_collected_at": "2026-06-05T15:00:44.716384+00:00"
+    },
     {
       "id": 4811,
       "slug": "bravecto-caes-1400mg-antipulgas-e-carrapatos-caes-de-40-a-56kg-1-comp-mastigavel-msd-saude-animal-4811",
@@ -2079,23 +4697,6 @@
       "price_collected_at": "2026-06-05T11:52:33.912481+00:00"
     },
     {
-      "id": 243,
-      "slug": "mochila-viagem-feminina-masculina-para-notebook-executiva-243",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mochila Viagem Feminina Masculina Para Notebook Executiva",
-      "short_description": "",
-      "current_price": "112.00",
-      "original_price": "289.00",
-      "discount_pct": "61.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_986467-MLB112482124811_052026-AB-mochila-viagem-feminina-masculina-para-notebook-executiva.webp",
-      "affiliate_link": "https://meli.la/33j5DVT",
-      "detail_url": "/oferta?slug=mochila-viagem-feminina-masculina-para-notebook-executiva-243",
-      "price_collected_at": "2026-06-05T11:03:46.063588+00:00"
-    },
-    {
       "id": 1455,
       "slug": "monitor-gamer-aoc-agon-g50-24-144hz-05ms-24g50f-preto-127220v-1455",
       "marketplace": {
@@ -2300,23 +4901,6 @@
       "price_collected_at": "2026-06-05T02:53:40.357933+00:00"
     },
     {
-      "id": 184,
-      "slug": "creatina-monohidratada-pura-500g-dark-lab-unidade-sem-sabor-184",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Creatina Monohidratada Pura 500g Dark Lab Unidade Sem Sabor",
-      "short_description": "",
-      "current_price": "44.00",
-      "original_price": "129.00",
-      "discount_pct": "65.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_942122-MLA99923169249_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1W7k642",
-      "detail_url": "/oferta?slug=creatina-monohidratada-pura-500g-dark-lab-unidade-sem-sabor-184",
-      "price_collected_at": "2026-06-05T02:53:40.333102+00:00"
-    },
-    {
       "id": 5370,
       "slug": "notebook-asus-v16-v3607vu-nvidia-rtx-4050-intel-core-5-210h-16gb-ram-512gb-ssd-windows-11-home-tela-16-led-fhd-144hz-nivel-ips-black-rp306w-preto-5370",
       "marketplace": {
@@ -2383,23 +4967,6 @@
       "affiliate_link": "https://meli.la/1ozNAVz",
       "detail_url": "/oferta?slug=opk-relogio-masculino-original-aco-inoxidavel-quartzo-8135-5521",
       "price_collected_at": "2026-06-04T13:22:37.870132+00:00"
-    },
-    {
-      "id": 2164,
-      "slug": "tenis-masculino-adidas-acelera-2-corrida-caminhada-leve-2164",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis Masculino adidas Acelera 2 Corrida Caminhada Leve",
-      "short_description": "",
-      "current_price": "252.00",
-      "original_price": "499.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_882343-MLB93324608162_092025-AB-tnis-masculino-adidas-acelera-2-corrida-caminhada-leve.webp",
-      "affiliate_link": "https://meli.la/14bRpTW",
-      "detail_url": "/oferta?slug=tenis-masculino-adidas-acelera-2-corrida-caminhada-leve-2164",
-      "price_collected_at": "2026-06-04T13:22:37.862683+00:00"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-06T01:15:55.468868+00:00",
+  "generated_at": "2026-06-06T11:03:56.750963+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,6 +24,16 @@
       "tracked_url": "https://meli.la/24G4KDm?matt_word=dbot_ig_bio_1371&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1371"
     },
     {
+      "id": 2868,
+      "title": "Creatina 600g Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
+      "current_price": "36.00",
+      "original_price": "154.00",
+      "discount_pct": "76.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_788109-MLA110452427960_052026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/27aRfTG?matt_word=dbot_ig_bio_2868&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2868"
+    },
+    {
       "id": 1096,
       "title": "Bicicleta Spinning Wct Fitness Ergométrica 6kg Aço Preto",
       "current_price": "443.00",
@@ -34,21 +44,11 @@
       "tracked_url": "https://meli.la/1VH9DJM?matt_word=dbot_ig_bio_1096&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1096"
     },
     {
-      "id": 5619,
-      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
-      "current_price": "144.00",
-      "original_price": "597.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802771-MLB105838199600_022026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2pK3wDF?matt_word=dbot_ig_bio_5619&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5619"
-    },
-    {
       "id": 1940,
       "title": "Creatina 1kg Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
-      "current_price": "65.00",
+      "current_price": "59.00",
       "original_price": "239.00",
-      "discount_pct": "72.00",
+      "discount_pct": "75.00",
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/13ujmWR?matt_word=dbot_ig_bio_1940&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1940"

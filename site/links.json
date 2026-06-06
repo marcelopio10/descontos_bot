@@ -1,8 +1,28 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-05T15:00:49.483576+00:00",
+  "generated_at": "2026-06-06T01:15:55.468868+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 2586,
+      "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
+      "current_price": "159.00",
+      "original_price": "699.00",
+      "discount_pct": "77.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
+    },
+    {
+      "id": 1371,
+      "title": "Whey Isolate Protein Fuse 1.8kg Baunilha Dark Lab",
+      "current_price": "159.00",
+      "original_price": "699.00",
+      "discount_pct": "77.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_819928-MLA99495645778_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/24G4KDm?matt_word=dbot_ig_bio_1371&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1371"
+    },
     {
       "id": 1096,
       "title": "Bicicleta Spinning Wct Fitness Ergométrica 6kg Aço Preto",
@@ -32,26 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/13ujmWR?matt_word=dbot_ig_bio_1940&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1940"
-    },
-    {
-      "id": 2000,
-      "title": "Kit 4 Cuecas Boxer Lupo Algodão Confortável Box Original",
-      "current_price": "59.00",
-      "original_price": "199.00",
-      "discount_pct": "70.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_812578-MLB82638744739_022025-AB-kit-4-cuecas-boxer-lupo-algodo-confortavel-box-original.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1FhkTrj?matt_word=dbot_ig_bio_2000&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2000"
-    },
-    {
-      "id": 5602,
-      "title": "Refletor Super Premium Led Holofote 3000w Pdágua Bivolt Frio 127/220v Preto Branco-frio",
-      "current_price": "74.00",
-      "original_price": "255.00",
-      "discount_pct": "70.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_702298-MLB100383382175_122025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2AwkHgp?matt_word=dbot_ig_bio_5602&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5602"
     }
   ]
 }

@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-06T11:03:56.750963+00:00",
+  "generated_at": "2026-06-06T15:46:23.293294+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 5705,
+      "title": "Kit 10 Cuecas Boxer Selene Poliamida Sem Costura Microfibra",
+      "current_price": "114.00",
+      "original_price": "499.00",
+      "discount_pct": "77.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_688535-MLB71897529346_092023-AB-kit-10-cuecas-boxer-selene-poliamida-sem-costura-microfibra.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1xXLqSc?matt_word=dbot_ig_bio_5705&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5705"
+    },
     {
       "id": 2586,
       "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_862020-MLA102088986767_122025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1VH9DJM?matt_word=dbot_ig_bio_1096&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1096"
-    },
-    {
-      "id": 1940,
-      "title": "Creatina 1kg Suplemento Monohidratada Em Pó 100% Pura - Soldiers Nutrition Sem Sabor",
-      "current_price": "59.00",
-      "original_price": "239.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/13ujmWR?matt_word=dbot_ig_bio_1940&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1940"
     }
   ]
 }

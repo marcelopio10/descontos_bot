@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-07T11:04:04.470430+00:00",
+  "generated_at": "2026-06-07T14:36:42.283041+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 5772,
+      "title": "Brinquedo Caminhão Transporte Dinossauro Com Pista Y 6 Cars Azul",
+      "current_price": "125.00",
+      "original_price": "597.00",
+      "discount_pct": "79.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_676481-MLB108626083553_032026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1Ekwhhq?matt_word=dbot_ig_bio_5772&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5772"
+    },
     {
       "id": 5705,
       "title": "Kit 10 Cuecas Boxer Selene Poliamida Sem Costura Microfibra",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_788109-MLA110452427960_052026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/27aRfTG?matt_word=dbot_ig_bio_2868&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2868"
-    },
-    {
-      "id": 5720,
-      "title": "Patinete Infantil 3 Rodas Dobrável Com Led Conect Brinq Bv0011 Brinquedo Para Crianças Estável, Seguro E Divertido Colorido Azul",
-      "current_price": "49.00",
-      "original_price": "199.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_716491-MLA111486435110_052026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1DDC25d?matt_word=dbot_ig_bio_5720&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5720"
     }
   ]
 }

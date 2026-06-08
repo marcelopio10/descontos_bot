@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-08T11:03:53.337460+00:00",
+  "generated_at": "2026-06-08T14:02:33.215470+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -34,6 +34,16 @@
       "tracked_url": "https://meli.la/1Ekwhhq?matt_word=dbot_ig_bio_5772&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5772"
     },
     {
+      "id": 5846,
+      "title": "Caminhão Transporte Dinossauro Transformável Com 6 Carros Carro De Dinossauro Azul",
+      "current_price": "84.00",
+      "original_price": "400.00",
+      "discount_pct": "78.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_941899-MLB109651172401_032026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/287Ky4Y?matt_word=dbot_ig_bio_5846&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5846"
+    },
+    {
       "id": 3777,
       "title": "Pre Treino Venom Underground 300g Mango Loko Dark Lab",
       "current_price": "91.00",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_999459-MLA99539534758_122025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1JaKPDA?matt_word=dbot_ig_bio_3777&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3777"
-    },
-    {
-      "id": 2586,
-      "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
-      "current_price": "159.00",
-      "original_price": "699.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
     }
   ]
 }

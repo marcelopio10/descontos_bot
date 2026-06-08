@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-07T19:11:58.544223+00:00",
+  "generated_at": "2026-06-08T00:37:05.562503+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 5812,
+      "title": "Kit Álbum Copa Do Mundo Fifa 2026 Panini Brinde Lata Pocket",
+      "current_price": "31.00",
+      "original_price": "159.00",
+      "discount_pct": "80.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_657010-MLB111030020704_052026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1ekgA64?matt_word=dbot_ig_bio_5812&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5812"
+    },
     {
       "id": 5772,
       "title": "Brinquedo Caminhão Transporte Dinossauro Com Pista Y 6 Cars Azul",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_819928-MLA99495645778_112025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/24G4KDm?matt_word=dbot_ig_bio_1371&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1371"
-    },
-    {
-      "id": 1429,
-      "title": "Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Importad Sabor Creme De Avelã",
-      "current_price": "159.00",
-      "original_price": "699.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_630816-MLA99935887857_112025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/33ygqki?matt_word=dbot_ig_bio_1429&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1429"
     }
   ]
 }

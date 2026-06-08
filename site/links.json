@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-08T00:37:05.562503+00:00",
+  "generated_at": "2026-06-08T02:54:37.416394+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,6 +12,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_657010-MLB111030020704_052026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1ekgA64?matt_word=dbot_ig_bio_5812&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5812"
+    },
+    {
+      "id": 5823,
+      "title": "Caminhão De Engolir Dinossauro Transformável Brinquedo 7 Em1 Azul",
+      "current_price": "122.00",
+      "original_price": "600.00",
+      "discount_pct": "79.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_996450-MLB95286940381_102025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/23cTXXC?matt_word=dbot_ig_bio_5823&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5823"
     },
     {
       "id": 5772,
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
-    },
-    {
-      "id": 1371,
-      "title": "Whey Isolate Protein Fuse 1.8kg Baunilha Dark Lab",
-      "current_price": "159.00",
-      "original_price": "699.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_819928-MLA99495645778_112025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/24G4KDm?matt_word=dbot_ig_bio_1371&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1371"
     }
   ]
 }

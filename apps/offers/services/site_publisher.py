@@ -10,6 +10,7 @@ from typing import Any
 from django.conf import settings
 from django.utils import timezone
 
+from apps.curation.services.blacklist import filter_blacklisted_offers
 from apps.offers.models import Offer
 from apps.offers.services.freshness import get_freshness_cutoff, resolve_max_age_hours
 
@@ -213,17 +214,22 @@ def _get_publishable_offers():
     total_eligible = eligible_qs.count()
     skipped = total_before - total_eligible
 
+    publishable_offers = filter_blacklisted_offers(list(eligible_qs))
+    blocked_by_blacklist = total_eligible - len(publishable_offers)
+
     log.info(
         'Publicação offers.json: cutoff=%s janela_horas=%s total_antes=%s '
-        'elegiveis=%s ignoradas_por_expiracao=%s (registros antigos preservados no banco).',
+        'elegiveis=%s ignoradas_por_expiracao=%s bloqueadas_por_blacklist=%s '
+        '(registros antigos preservados no banco).',
         cutoff.isoformat(),
         max_age_hours,
         total_before,
         total_eligible,
         skipped,
+        blocked_by_blacklist,
     )
 
-    return eligible_qs
+    return publishable_offers
 
 
 def _serialize_offer(offer: Offer) -> dict[str, Any]:

@@ -422,5 +422,8 @@ class AmazonScraper:
 
 def build_from_env() -> AmazonScraper:
     return AmazonScraper(
-        associate_tag=os.environ.get('AMAZON_ASSOCIATE_TAG', ''),
+        associate_tag=(
+            os.environ.get('AMAZON_AFFILIATE_TAG')
+            or os.environ.get('AMAZON_ASSOCIATE_TAG', '')
+        ),
     )

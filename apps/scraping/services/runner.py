@@ -60,6 +60,10 @@ def run_marketplace_scraping(marketplace: Marketplace, max_pages: int) -> Scrapi
 
         if adapter.blocked:
             errors.append(adapter.error_message or 'CAPTCHA ou HTML bloqueado detectado.')
+        if marketplace.code == 'amazon' and total_valid == 0 and not adapter.blocked:
+            errors.append(
+                'Amazon retornou 0 ofertas válidas; verificar seletor, bloqueio silencioso ou execução do marketplace.',
+            )
 
         status = ScrapingRun.RunStatus.SUCCESS
         if errors or adapter.blocked:

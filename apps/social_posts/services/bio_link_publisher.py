@@ -5,6 +5,7 @@ from typing import Any
 
 from django.utils import timezone
 
+from apps.curation.services.blacklist import filter_blacklisted_offers
 from apps.offers.models import Offer
 from apps.offers.services.freshness import get_freshness_cutoff
 from apps.offers.services.site_publisher import DISCLOSURE
@@ -40,7 +41,7 @@ def publish_bio_links(output_path: str | Path, count: int = 5) -> BioLinksResult
 
 def _get_ranked_offers(limit: int) -> list[Offer]:
     cutoff = get_freshness_cutoff()
-    offers = list(
+    offers = filter_blacklisted_offers(list(
         Offer.objects
         .select_related('marketplace')
         .filter(is_active=True, slug__isnull=False)
@@ -48,8 +49,8 @@ def _get_ranked_offers(limit: int) -> list[Offer]:
         .exclude(marketplace__code='amazon', asin='')
         .filter(discount_pct__gt=0)
         .filter(last_seen_at__gte=cutoff)
-        .order_by('-discount_pct', 'current_price', 'title')[:limit],
-    )
+        .order_by('-discount_pct', 'current_price', 'title')[:limit * 3],
+    ))[:limit]
     if not offers:
         raise ValueError('Nenhuma oferta publicável dentro da janela de recência.')
     return offers

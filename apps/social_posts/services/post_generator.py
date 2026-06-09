@@ -4,6 +4,7 @@ from datetime import timedelta
 from django.db import transaction
 from django.utils import timezone
 
+from apps.curation.services.blacklist import filter_blacklisted_offers, is_blacklisted
 from apps.offers.models import Offer
 from apps.social_posts.models import InstagramPost
 from apps.social_posts.services.caption_builder import build_caption
@@ -37,6 +38,9 @@ def generate_story(top: int = 1) -> InstagramPost:
 
 
 def generate_story_for_offer(offer: Offer) -> InstagramPost:
+    if is_blacklisted(offer):
+        raise ValueError(f'Oferta bloqueada pela blacklist: #{offer.pk} {offer.title}')
+
     existing = (
         InstagramPost.objects
         .filter(format=InstagramPost.Format.STORY, primary_offer=offer)
@@ -75,6 +79,13 @@ def _create_post(
     asset_paths: list[str],
     medium: str,
 ) -> InstagramPost:
+    if is_blacklisted(primary_offer):
+        raise ValueError(f'Oferta bloqueada pela blacklist: #{primary_offer.pk} {primary_offer.title}')
+    blocked_related = [offer for offer in related_offers if is_blacklisted(offer)]
+    if blocked_related:
+        blocked = blocked_related[0]
+        raise ValueError(f'Oferta relacionada bloqueada pela blacklist: #{blocked.pk} {blocked.title}')
+
     group_cta = _next_group_cta()
     with transaction.atomic():
         post = InstagramPost.objects.create(
@@ -126,7 +137,7 @@ def _trigger_handoff(post: InstagramPost) -> None:
 def _get_ranked_offers(limit: int) -> list[Offer]:
     generated_offer_ids = _get_generated_offer_ids()
     cutoff = timezone.now() - timedelta(hours=FRESHNESS_HOURS)
-    offers = list(
+    offers = filter_blacklisted_offers(list(
         Offer.objects
         .select_related('marketplace')
         .filter(is_active=True, slug__isnull=False)
@@ -135,8 +146,8 @@ def _get_ranked_offers(limit: int) -> list[Offer]:
         .exclude(marketplace__code='amazon', asin='')
         .exclude(id__in=generated_offer_ids)
         .filter(created_at__gte=cutoff)
-        .order_by('-discount_pct', 'current_price', 'title')[:limit],
-    )
+        .order_by('-discount_pct', 'current_price', 'title')[:limit * 3],
+    ))[:limit]
     if len(offers) < limit:
         raise ValueError(f'Ofertas publicáveis insuficientes: {len(offers)} de {limit}.')
     return offers

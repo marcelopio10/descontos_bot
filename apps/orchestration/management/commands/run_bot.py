@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 
+from apps.curation.services.blacklist import filter_blacklisted_offers
 from apps.curation.services.message_builder import build_offer_message, get_final_url
 from apps.curation.services.selector import get_selection_config, select_offers_for_channel
 from apps.distribution.models import SocialChannel
@@ -288,13 +289,21 @@ class Command(BaseCommand):
             .filter(format=InstagramPost.Format.STORY)
             .values_list('primary_offer_id', flat=True),
         )
-        offers = list(
+        candidate_offers = list(
             Offer.objects
             .select_related('marketplace')
             .filter(is_active=True, last_seen_at__gte=cutoff)
             .exclude(id__in=posted_offer_ids)
             .order_by('-discount_pct', 'current_price', 'title'),
         )
+        offers = filter_blacklisted_offers(candidate_offers)
+        blocked_by_blacklist = len(candidate_offers) - len(offers)
+        if blocked_by_blacklist:
+            self.stdout.write(
+                self.style.WARNING(
+                    f'{blocked_by_blacklist} oferta(s) bloqueada(s) pela blacklist de segurança.',
+                ),
+            )
         if not offers:
             self.stdout.write(
                 f'Nenhuma oferta nova (últimas {INSTAGRAM_GENERATION_WINDOW_HOURS}h) '

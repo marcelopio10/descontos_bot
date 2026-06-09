@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated_at": "2026-06-09T22:06:56.060093+00:00",
+  "generated_at": "2026-06-09T22:18:04.626648+00:00",
   "site_base_url": "https://descontos-bot.vercel.app",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "offers": [
@@ -1584,23 +1584,6 @@
       "affiliate_link": "https://meli.la/2yX7dVL",
       "detail_url": "/oferta?slug=jaqueta-puffer-impermeavel-masculina-inverno-bobojaco-preto-gg-lisa-5974",
       "price_collected_at": "2026-06-09T22:01:30.340841+00:00"
-    },
-    {
-      "id": 5973,
-      "slug": "conjunto-lingerie-cinta-liga-sensual-completo-fantasia-5973",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Conjunto Lingerie Cinta Liga Sensual Completo Fantasia.",
-      "short_description": "",
-      "current_price": "96.00",
-      "original_price": "139.00",
-      "discount_pct": "30.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_748044-MLB109467394878_042026-AB-conjunto-lingerie-cinta-liga-sensual-completo-fantasia.webp",
-      "affiliate_link": "https://meli.la/1vLwxWn",
-      "detail_url": "/oferta?slug=conjunto-lingerie-cinta-liga-sensual-completo-fantasia-5973",
-      "price_collected_at": "2026-06-09T22:01:30.325456+00:00"
     },
     {
       "id": 703,
@@ -8384,23 +8367,6 @@
       "affiliate_link": "https://meli.la/2hH7aEQ",
       "detail_url": "/oferta?slug=jogo-de-toalha-banho-4-pecas-100-algodao-400-grm-loft-camesa-azul-marinho-liso-2106",
       "price_collected_at": "2026-06-08T14:02:30.103401+00:00"
-    },
-    {
-      "id": 832,
-      "slug": "body-splash-my-sweet-delight-e-very-sexy-barbours-200ml-832",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Body Splash My Sweet Delight E Very Sexy Barbour's 200ml",
-      "short_description": "",
-      "current_price": "73.00",
-      "original_price": "98.00",
-      "discount_pct": "25.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_990826-MLA109639109233_032026-AB.webp",
-      "affiliate_link": "https://meli.la/18PG2pZ",
-      "detail_url": "/oferta?slug=body-splash-my-sweet-delight-e-very-sexy-barbours-200ml-832",
-      "price_collected_at": "2026-06-08T11:03:51.846828+00:00"
     },
     {
       "id": 4921,

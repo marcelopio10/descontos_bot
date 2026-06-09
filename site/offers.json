@@ -1,9 +1,791 @@
 {
   "version": "2.0",
-  "generated_at": "2026-06-09T18:54:15.580289+00:00",
+  "generated_at": "2026-06-09T21:50:58.466076+00:00",
   "site_base_url": "https://descontos-bot.vercel.app",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "offers": [
+    {
+      "id": 2000,
+      "slug": "kit-4-cuecas-boxer-lupo-algodao-confortavel-box-original-2000",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 4 Cuecas Boxer Lupo Algodão Confortável Box Original",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "199.00",
+      "discount_pct": "70.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_812578-MLB82638744739_022025-AB-kit-4-cuecas-boxer-lupo-algodo-confortavel-box-original.webp",
+      "affiliate_link": "https://meli.la/1FhkTrj",
+      "detail_url": "/oferta?slug=kit-4-cuecas-boxer-lupo-algodao-confortavel-box-original-2000",
+      "price_collected_at": "2026-06-09T21:48:26.939037+00:00"
+    },
+    {
+      "id": 5170,
+      "slug": "kit-2-camisetas-masculina-dry-alpha-5170",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 2 Camisetas Masculina Dry Alpha",
+      "short_description": "",
+      "current_price": "42.00",
+      "original_price": "99.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_888164-MLB111598414485_052026-AB-kit-2-camisetas-masculina-dry-alpha.webp",
+      "affiliate_link": "https://meli.la/2bbToU4",
+      "detail_url": "/oferta?slug=kit-2-camisetas-masculina-dry-alpha-5170",
+      "price_collected_at": "2026-06-09T21:48:26.926312+00:00"
+    },
+    {
+      "id": 207,
+      "slug": "kit-3-shorts-2-em-1-duplo-bolso-para-academia-treino-corrida-207",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 3 Shorts 2 Em 1 Duplo Bolso Para Academia Treino Corrida",
+      "short_description": "",
+      "current_price": "75.00",
+      "original_price": "102.00",
+      "discount_pct": "25.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_745140-MLB108142856101_032026-AB-kit-3-shorts-2-em-1-duplo-bolso-para-academia-treino-corrida.webp",
+      "affiliate_link": "https://meli.la/1FPZqHE",
+      "detail_url": "/oferta?slug=kit-3-shorts-2-em-1-duplo-bolso-para-academia-treino-corrida-207",
+      "price_collected_at": "2026-06-09T21:48:26.914393+00:00"
+    },
+    {
+      "id": 752,
+      "slug": "kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original-752",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 6 Pares Meias Puma Cano Médio Alto Atoalhada Original",
+      "short_description": "",
+      "current_price": "64.00",
+      "original_price": "199.00",
+      "discount_pct": "67.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_617361-MLB54128842596_032023-AB-kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original.webp",
+      "affiliate_link": "https://meli.la/1Z9dVvj",
+      "detail_url": "/oferta?slug=kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original-752",
+      "price_collected_at": "2026-06-09T21:48:26.901010+00:00"
+    },
+    {
+      "id": 5819,
+      "slug": "calca-jeans-pantalona-wide-leg-feminina-cintura-alta-larga-5819",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jeans Pantalona Wide Leg Feminina Cintura Alta Larga",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "109.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_833642-MLB110595647054_052026-AB-calca-jeans-pantalona-wide-leg-feminina-cintura-alta-larga.webp",
+      "affiliate_link": "https://meli.la/11P8bhd",
+      "detail_url": "/oferta?slug=calca-jeans-pantalona-wide-leg-feminina-cintura-alta-larga-5819",
+      "price_collected_at": "2026-06-09T21:48:26.888454+00:00"
+    },
+    {
+      "id": 640,
+      "slug": "kit-9-pares-meias-puma-sapatilha-soquete-invisivel-original-640",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 9 Pares Meias Puma Sapatilha Soquete Invisível Original",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "149.00",
+      "discount_pct": "60.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_872253-MLB96642336275_102025-AB-kit-9-pares-meias-puma-sapatilha-soquete-invisivel-original.webp",
+      "affiliate_link": "https://meli.la/2iUitRX",
+      "detail_url": "/oferta?slug=kit-9-pares-meias-puma-sapatilha-soquete-invisivel-original-640",
+      "price_collected_at": "2026-06-09T21:48:26.875557+00:00"
+    },
+    {
+      "id": 1998,
+      "slug": "calca-mom-jeans-feminina-cintura-alta-marmorizada-1998",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Mom Jeans Feminina Cintura Alta Marmorizada",
+      "short_description": "",
+      "current_price": "57.00",
+      "original_price": "99.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_799787-MLB85664619217_062025-AB-calca-mom-jeans-feminina-cintura-alta-marmorizada.webp",
+      "affiliate_link": "https://meli.la/1uWJ5cp",
+      "detail_url": "/oferta?slug=calca-mom-jeans-feminina-cintura-alta-marmorizada-1998",
+      "price_collected_at": "2026-06-09T21:48:26.864367+00:00"
+    },
+    {
+      "id": 2093,
+      "slug": "calca-cargo-feminina-wide-leg-cintura-alta-jeans-stillger-2093",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Cargo Feminina Wide Leg Cintura Alta Jeans Stillger",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "110.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_735679-MLB112799081163_062026-AB-calca-cargo-feminina-wide-leg-cintura-alta-jeans-stillger.webp",
+      "affiliate_link": "https://meli.la/2Jn7fGC",
+      "detail_url": "/oferta?slug=calca-cargo-feminina-wide-leg-cintura-alta-jeans-stillger-2093",
+      "price_collected_at": "2026-06-09T21:48:26.851716+00:00"
+    },
+    {
+      "id": 244,
+      "slug": "calca-masculina-sarja-premium-esporte-fino-bolso-faca-lycra-244",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Masculina Sarja Premium Esporte Fino Bolso Faca Lycra",
+      "short_description": "",
+      "current_price": "66.00",
+      "original_price": "99.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_925439-MLB95522562902_102025-AB-calca-masculina-sarja-premium-esporte-fino-bolso-faca-lycra.webp",
+      "affiliate_link": "https://meli.la/1u6p5UZ",
+      "detail_url": "/oferta?slug=calca-masculina-sarja-premium-esporte-fino-bolso-faca-lycra-244",
+      "price_collected_at": "2026-06-09T21:48:26.839840+00:00"
+    },
+    {
+      "id": 5893,
+      "slug": "tenis-carina-feminino-puma-branco-36-br-5893",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Carina Feminino Puma Branco 36 Br",
+      "short_description": "",
+      "current_price": "199.00",
+      "original_price": "399.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_734830-MLB110359512132_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2o699XS",
+      "detail_url": "/oferta?slug=tenis-carina-feminino-puma-branco-36-br-5893",
+      "price_collected_at": "2026-06-09T21:48:26.828425+00:00"
+    },
+    {
+      "id": 5678,
+      "slug": "tenis-flexfocus-lite-modern-bdp-puma-5678",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Flexfocus Lite Modern Bdp Puma",
+      "short_description": "",
+      "current_price": "219.00",
+      "original_price": "349.00",
+      "discount_pct": "37.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_717590-MLB105886867446_022026-AB-tnis-flexfocus-lite-modern-bdp-puma.webp",
+      "affiliate_link": "https://meli.la/2aLmg24",
+      "detail_url": "/oferta?slug=tenis-flexfocus-lite-modern-bdp-puma-5678",
+      "price_collected_at": "2026-06-09T21:48:26.815446+00:00"
+    },
+    {
+      "id": 4841,
+      "slug": "jaqueta-feminina-puffer-bobojaco-capuz-nylon-forrada-ate-g4-4841",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jaqueta Feminina Puffer Bobojaco Capuz Nylon Forrada Até G4",
+      "short_description": "",
+      "current_price": "126.00",
+      "original_price": "250.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_673537-MLB109930552435_042026-AB-jaqueta-feminina-puffer-bobojaco-capuz-nylon-forrada-ate-g4.webp",
+      "affiliate_link": "https://meli.la/1E3Toun",
+      "detail_url": "/oferta?slug=jaqueta-feminina-puffer-bobojaco-capuz-nylon-forrada-ate-g4-4841",
+      "price_collected_at": "2026-06-09T21:48:26.803750+00:00"
+    },
+    {
+      "id": 2315,
+      "slug": "tenis-flexfocus-lite-modern-bdp-puma-2315",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Flexfocus Lite Modern Bdp Puma",
+      "short_description": "",
+      "current_price": "219.00",
+      "original_price": "349.00",
+      "discount_pct": "37.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_827200-MLB109427022348_042026-AB-tnis-flexfocus-lite-modern-bdp-puma.webp",
+      "affiliate_link": "https://meli.la/18bxUHG",
+      "detail_url": "/oferta?slug=tenis-flexfocus-lite-modern-bdp-puma-2315",
+      "price_collected_at": "2026-06-09T21:48:26.792972+00:00"
+    },
+    {
+      "id": 3880,
+      "slug": "mochila-dos-homens-com-faixa-impermeavel-para-expansao-preto-liso-3880",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mochila Dos Homens Com Faixa Impermeável Para Expansão Preto Liso",
+      "short_description": "",
+      "current_price": "85.00",
+      "original_price": "297.00",
+      "discount_pct": "71.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_741399-MLB112035982759_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1j6qoQN",
+      "detail_url": "/oferta?slug=mochila-dos-homens-com-faixa-impermeavel-para-expansao-preto-liso-3880",
+      "price_collected_at": "2026-06-09T21:48:26.780572+00:00"
+    },
+    {
+      "id": 4139,
+      "slug": "jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno-4139",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jaqueta Puffer De Frio Intenso Blusa Impermeável Inverno",
+      "short_description": "",
+      "current_price": "74.00",
+      "original_price": "99.00",
+      "discount_pct": "25.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_829600-MLB112200803145_052026-AB-jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno.webp",
+      "affiliate_link": "https://meli.la/28Wzh3a",
+      "detail_url": "/oferta?slug=jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno-4139",
+      "price_collected_at": "2026-06-09T21:48:26.765667+00:00"
+    },
+    {
+      "id": 782,
+      "slug": "tenis-masculino-casual-aramis-daily-slip-confortavel-moderno-782",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Masculino Casual Aramis Daily Slip Confortável Moderno",
+      "short_description": "",
+      "current_price": "159.00",
+      "original_price": "339.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_839947-MLB107523923436_032026-AB-tnis-masculino-casual-aramis-daily-slip-confortavel-moderno.webp",
+      "affiliate_link": "https://meli.la/2jtbgAM",
+      "detail_url": "/oferta?slug=tenis-masculino-casual-aramis-daily-slip-confortavel-moderno-782",
+      "price_collected_at": "2026-06-09T21:48:26.642921+00:00"
+    },
+    {
+      "id": 5919,
+      "slug": "kit-4-cuecas-lupo-boxer-poliamida-box-sem-costura-original-5919",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 4 Cuecas Lupo Boxer Poliamida Box Sem Costura Original",
+      "short_description": "",
+      "current_price": "78.00",
+      "original_price": "199.00",
+      "discount_pct": "60.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896542-MLB112284707309_052026-AB-kit-4-cuecas-lupo-boxer-poliamida-box-sem-costura-original.webp",
+      "affiliate_link": "https://meli.la/28AHr2i",
+      "detail_url": "/oferta?slug=kit-4-cuecas-lupo-boxer-poliamida-box-sem-costura-original-5919",
+      "price_collected_at": "2026-06-09T21:48:26.629169+00:00"
+    },
+    {
+      "id": 5930,
+      "slug": "camiseta-daily-t-shirt-insider-5930",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Camiseta Daily T-shirt Insider",
+      "short_description": "",
+      "current_price": "64.00",
+      "original_price": "145.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_619105-MLB86042487045_062025-AB-camiseta-daily-t-shirt-insider.webp",
+      "affiliate_link": "https://meli.la/1Cy2wNj",
+      "detail_url": "/oferta?slug=camiseta-daily-t-shirt-insider-5930",
+      "price_collected_at": "2026-06-09T21:48:26.614101+00:00"
+    },
+    {
+      "id": 1735,
+      "slug": "camiseta-light-t-shirt-insider-masculino-1735",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Camiseta Light T-shirt Insider Masculino",
+      "short_description": "",
+      "current_price": "69.00",
+      "original_price": "189.00",
+      "discount_pct": "63.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_779849-MLB89746747076_082025-AB-camiseta-light-t-shirt-insider-masculino.webp",
+      "affiliate_link": "https://meli.la/1BCCPZR",
+      "detail_url": "/oferta?slug=camiseta-light-t-shirt-insider-masculino-1735",
+      "price_collected_at": "2026-06-09T21:48:26.598358+00:00"
+    },
+    {
+      "id": 5287,
+      "slug": "kit-10-calcinhas-sem-costura-premium-conforto-invisivel-5287",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Calcinhas Sem Costura Premium Conforto Invisível",
+      "short_description": "",
+      "current_price": "45.00",
+      "original_price": "89.00",
+      "discount_pct": "48.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_794115-MLB112309597167_052026-AB-kit-10-calcinhas-sem-costura-premium-conforto-invisivel.webp",
+      "affiliate_link": "https://meli.la/1n6VFMy",
+      "detail_url": "/oferta?slug=kit-10-calcinhas-sem-costura-premium-conforto-invisivel-5287",
+      "price_collected_at": "2026-06-09T21:48:26.580900+00:00"
+    },
+    {
+      "id": 5912,
+      "slug": "tenis-olympikus-acqua-feminino-corrida-caminhada-5912",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Olympikus Acqua Feminino Corrida - Caminhada",
+      "short_description": "",
+      "current_price": "179.00",
+      "original_price": "222.00",
+      "discount_pct": "19.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_935715-MLB106815491994_022026-AB-tnis-olympikus-acqua-feminino-corrida-caminhada.webp",
+      "affiliate_link": "https://meli.la/1wt5mYr",
+      "detail_url": "/oferta?slug=tenis-olympikus-acqua-feminino-corrida-caminhada-5912",
+      "price_collected_at": "2026-06-09T21:48:26.561121+00:00"
+    },
+    {
+      "id": 5602,
+      "slug": "refletor-super-premium-led-holofote-3000w-pdagua-bivolt-frio-127220v-preto-branco-frio-5602",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Refletor Super Premium Led Holofote 3000w Pdágua Bivolt Frio 127/220v Preto Branco-frio",
+      "short_description": "",
+      "current_price": "129.00",
+      "original_price": "255.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_702298-MLB100383382175_122025-AB.webp",
+      "affiliate_link": "https://meli.la/2AwkHgp",
+      "detail_url": "/oferta?slug=refletor-super-premium-led-holofote-3000w-pdagua-bivolt-frio-127220v-preto-branco-frio-5602",
+      "price_collected_at": "2026-06-09T21:48:26.548314+00:00"
+    },
+    {
+      "id": 1668,
+      "slug": "camera-inteligente-im7-3mp-de-resolucao-branca-intelbras-branco-1668",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Câmera Inteligente Im7 + 3mp De Resolução Branca Intelbras Branco",
+      "short_description": "",
+      "current_price": "364.00",
+      "original_price": "749.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_892568-MLA99939109103_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2Xx2ZLr",
+      "detail_url": "/oferta?slug=camera-inteligente-im7-3mp-de-resolucao-branca-intelbras-branco-1668",
+      "price_collected_at": "2026-06-09T21:48:26.533818+00:00"
+    },
+    {
+      "id": 5939,
+      "slug": "airtag-apple-rastreador-gps-localizacao-garantia-original-un-branco-5939",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Airtag Apple Rastreador Gps Localização Garantia Original Un Branco",
+      "short_description": "",
+      "current_price": "174.00",
+      "original_price": "239.00",
+      "discount_pct": "27.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677643-MLB98419569176_112025-AB.webp",
+      "affiliate_link": "https://meli.la/212ZyQ8",
+      "detail_url": "/oferta?slug=airtag-apple-rastreador-gps-localizacao-garantia-original-un-branco-5939",
+      "price_collected_at": "2026-06-09T21:48:26.516010+00:00"
+    },
+    {
+      "id": 5938,
+      "slug": "lixeira-atacadao-jaguar-40l-brancopreto-basculante-5938",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Lixeira Atacadao Jaguar 40l Branco/preto Basculante",
+      "short_description": "",
+      "current_price": "57.00",
+      "original_price": "78.00",
+      "discount_pct": "26.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_942419-MLB97536434526_112025-AB-lixeira-atacadao-jaguar-40l-brancopreto-basculante.webp",
+      "affiliate_link": "https://meli.la/2c3SuiE",
+      "detail_url": "/oferta?slug=lixeira-atacadao-jaguar-40l-brancopreto-basculante-5938",
+      "price_collected_at": "2026-06-09T21:48:26.497242+00:00"
+    },
+    {
+      "id": 4733,
+      "slug": "tenda-sanfonada-gazebo-3x3-articulada-pesca-praia-camping-azul-escuro-4733",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tenda Sanfonada Gazebo 3x3 Articulada Pesca Praia Camping Azul-escuro",
+      "short_description": "",
+      "current_price": "363.00",
+      "original_price": "699.00",
+      "discount_pct": "48.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_727658-MLB111105973357_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2WwmCSL",
+      "detail_url": "/oferta?slug=tenda-sanfonada-gazebo-3x3-articulada-pesca-praia-camping-azul-escuro-4733",
+      "price_collected_at": "2026-06-09T21:48:26.481094+00:00"
+    },
+    {
+      "id": 5937,
+      "slug": "kit-15-potes-hermetico-cadencia-mantimentos-quadrado-cozinha-branco-5937",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 15 Potes Hermético Cadencia Mantimentos Quadrado Cozinha Branco",
+      "short_description": "",
+      "current_price": "114.00",
+      "original_price": "218.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_821162-MLA99496660772_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2LdvKSW",
+      "detail_url": "/oferta?slug=kit-15-potes-hermetico-cadencia-mantimentos-quadrado-cozinha-branco-5937",
+      "price_collected_at": "2026-06-09T21:48:26.461726+00:00"
+    },
+    {
+      "id": 4272,
+      "slug": "brinox-pressure-panela-de-pressao-revestimento-ceramica-inducao-42l-cor-vanilla-vanila-4272",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Panela De Pressão Brinox Pressure 4,2l Ø20 X 14,5 Cm Vanilla Baunilha Vanila",
+      "short_description": "",
+      "current_price": "217.00",
+      "original_price": "477.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_917659-MLA112161611883_052026-AB.webp",
+      "affiliate_link": "https://meli.la/19JRER9",
+      "detail_url": "/oferta?slug=brinox-pressure-panela-de-pressao-revestimento-ceramica-inducao-42l-cor-vanilla-vanila-4272",
+      "price_collected_at": "2026-06-09T21:48:26.443845+00:00"
+    },
+    {
+      "id": 2211,
+      "slug": "rocadeira-knakasaki-75cc-35hp-gasolina-2-tempos-profissional-multifuncional-4-em-1-2211",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Roçadeira Knakasaki 75cc 3,5hp Gasolina 2 Tempos Profissional Multifuncional 4 Em 1",
+      "short_description": "",
+      "current_price": "409.00",
+      "original_price": "899.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_611802-MLA111510380384_062026-AB.webp",
+      "affiliate_link": "https://meli.la/1E2FAhX",
+      "detail_url": "/oferta?slug=rocadeira-knakasaki-75cc-35hp-gasolina-2-tempos-profissional-multifuncional-4-em-1-2211",
+      "price_collected_at": "2026-06-09T21:48:26.423377+00:00"
+    },
+    {
+      "id": 5384,
+      "slug": "torneira-gourmet-para-cozinha-inox-escovado-monocomando-cor-prateado-5384",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Torneira Gourmet Para Cozinha Inox Escovado Monocomando Cor Prateado",
+      "short_description": "",
+      "current_price": "240.00",
+      "original_price": "336.00",
+      "discount_pct": "28.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_688729-MLA106367182077_022026-AB.webp",
+      "affiliate_link": "https://meli.la/1SaNtvY",
+      "detail_url": "/oferta?slug=torneira-gourmet-para-cozinha-inox-escovado-monocomando-cor-prateado-5384",
+      "price_collected_at": "2026-06-09T21:48:26.410465+00:00"
+    },
+    {
+      "id": 714,
+      "slug": "escrivaninha-industrial-mesa-estudo-aparador-office-aco-mdf-714",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Escrivaninha Industrial Mesa Estudo Aparador Office Aço Mdf",
+      "short_description": "",
+      "current_price": "140.00",
+      "original_price": "200.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_656318-MLB111756016068_062026-AB-escrivaninha-industrial-mesa-estudo-aparador-office-aco-mdf.webp",
+      "affiliate_link": "https://meli.la/1aUeeJA",
+      "detail_url": "/oferta?slug=escrivaninha-industrial-mesa-estudo-aparador-office-aco-mdf-714",
+      "price_collected_at": "2026-06-09T21:48:26.393586+00:00"
+    },
+    {
+      "id": 2941,
+      "slug": "coberta-manta-soft-casal-microfibra-anti-alergica-dupla-face-2941",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Coberta Manta Soft Casal Microfibra Anti-alérgica Dupla Face",
+      "short_description": "",
+      "current_price": "39.00",
+      "original_price": "55.00",
+      "discount_pct": "28.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_742738-MLB109125449330_042026-AB-coberta-manta-soft-casal-microfibra-anti-alergica-dupla-face.webp",
+      "affiliate_link": "https://meli.la/2SdPMHC",
+      "detail_url": "/oferta?slug=coberta-manta-soft-casal-microfibra-anti-alergica-dupla-face-2941",
+      "price_collected_at": "2026-06-09T21:48:26.378974+00:00"
+    },
+    {
+      "id": 1461,
+      "slug": "500ml-caneca-kit-garrafa-termica-vacuum-bottle-inox-3-xica-1461",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "500ml Caneca Kit Garrafa Térmica Vacuum Bottle Inox + 3 Xíca",
+      "short_description": "",
+      "current_price": "27.00",
+      "original_price": "50.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_723310-MLB95873658409_102025-AB-500ml-caneca-kit-garrafa-termica-vacuum-bottle-inox-3-xica.webp",
+      "affiliate_link": "https://meli.la/22vaKte",
+      "detail_url": "/oferta?slug=500ml-caneca-kit-garrafa-termica-vacuum-bottle-inox-3-xica-1461",
+      "price_collected_at": "2026-06-09T21:48:26.358140+00:00"
+    },
+    {
+      "id": 800,
+      "slug": "varal-de-chao-grande-de-roupas-3-andares-dobravel-cor-azul-kontuz-170-cm-800",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Varal De Chão Grande De Roupas 3 Andares Dobrável Cor Azul Kontuz 170 Cm",
+      "short_description": "",
+      "current_price": "74.00",
+      "original_price": "119.00",
+      "discount_pct": "37.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_712866-MLA109482654866_042026-AB.webp",
+      "affiliate_link": "https://meli.la/1nYR93G",
+      "detail_url": "/oferta?slug=varal-de-chao-grande-de-roupas-3-andares-dobravel-cor-azul-kontuz-170-cm-800",
+      "price_collected_at": "2026-06-09T21:48:26.339876+00:00"
+    },
+    {
+      "id": 5936,
+      "slug": "escrivaninha-mesa-office-estudo-estilo-industrial-cor-preto-110m-klm-store-5936",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Escrivaninha Mesa Office Estudo Estilo Industrial Cor Preto 1,10m Klm Store",
+      "short_description": "",
+      "current_price": "173.00",
+      "original_price": "236.00",
+      "discount_pct": "26.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_873591-MLA99437059544_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1icZqma",
+      "detail_url": "/oferta?slug=escrivaninha-mesa-office-estudo-estilo-industrial-cor-preto-110m-klm-store-5936",
+      "price_collected_at": "2026-06-09T21:48:26.318039+00:00"
+    },
+    {
+      "id": 169,
+      "slug": "lustre-led-sala-moderno-60w-3-arcos-pendente-luminaria-teto-127220v-dourado-169",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Lustre Led Sala Moderno 60w, 3 Arcos Pendente Luminária Teto 127/220v Dourado",
+      "short_description": "",
+      "current_price": "164.00",
+      "original_price": "298.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_693366-MLB89308241348_082025-AB.webp",
+      "affiliate_link": "https://meli.la/1a1Upcd",
+      "detail_url": "/oferta?slug=lustre-led-sala-moderno-60w-3-arcos-pendente-luminaria-teto-127220v-dourado-169",
+      "price_collected_at": "2026-06-09T21:48:26.302701+00:00"
+    },
+    {
+      "id": 892,
+      "slug": "camera-seguranca-wifi-ip-lente-dupla-2x-3mp-externa-360-a-prova-dagua-cor-cinza-892",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Câmera Segurança Wifi Ip Lente Dupla 2x 3mp Externa 360° A Prova Dágua Cor Cinza",
+      "short_description": "",
+      "current_price": "117.00",
+      "original_price": "219.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_617999-MLA107805745177_022026-AB.webp",
+      "affiliate_link": "https://meli.la/1NhQXBD",
+      "detail_url": "/oferta?slug=camera-seguranca-wifi-ip-lente-dupla-2x-3mp-externa-360-a-prova-dagua-cor-cinza-892",
+      "price_collected_at": "2026-06-09T21:48:26.286572+00:00"
+    },
+    {
+      "id": 359,
+      "slug": "chuveiro-lorenzetti-loren-shower-ultra-eletronico-branco-7500w-220v-75-w-359",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Chuveiro Lorenzetti Loren Shower Ultra Eletrônico Branco 7500w 220v 7.5 W",
+      "short_description": "",
+      "current_price": "100.00",
+      "original_price": "240.00",
+      "discount_pct": "58.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896908-MLA101388142032_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1rpzpVk",
+      "detail_url": "/oferta?slug=chuveiro-lorenzetti-loren-shower-ultra-eletronico-branco-7500w-220v-75-w-359",
+      "price_collected_at": "2026-06-09T21:48:26.271351+00:00"
+    },
+    {
+      "id": 368,
+      "slug": "jogo-de-panelas-inducao-antiaderente-ceramica-10-pecas-ppg-pfoa-free-baunilha-368",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Panelas Induçao Antiaderente Cerâmica 10 Peças Ppg Pfoa Free Baunilha",
+      "short_description": "",
+      "current_price": "345.00",
+      "original_price": "683.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896529-MLA98735006295_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1gC4ntD",
+      "detail_url": "/oferta?slug=jogo-de-panelas-inducao-antiaderente-ceramica-10-pecas-ppg-pfoa-free-baunilha-368",
+      "price_collected_at": "2026-06-09T21:48:26.256208+00:00"
+    },
+    {
+      "id": 1483,
+      "slug": "lorenzetti-loren-shower-ultra-multitemperaturas-de-220v-7500w-ducha-branca-branco-75-kw-1483",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Lorenzetti Loren Shower Ultra Multitemperaturas De 220v 7500w Ducha Branca Branco 7.5 Kw",
+      "short_description": "",
+      "current_price": "115.00",
+      "original_price": "156.00",
+      "discount_pct": "26.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_906215-MLA96637759000_112025-AB.webp",
+      "affiliate_link": "https://meli.la/21yzoad",
+      "detail_url": "/oferta?slug=lorenzetti-loren-shower-ultra-multitemperaturas-de-220v-7500w-ducha-branca-branco-75-kw-1483",
+      "price_collected_at": "2026-06-09T21:48:26.241382+00:00"
+    },
+    {
+      "id": 155,
+      "slug": "800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "800mlgarrafa Térmica Água Squeeze Inox Academiaquente E Frio",
+      "short_description": "",
+      "current_price": "39.00",
+      "original_price": "59.00",
+      "discount_pct": "34.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_963485-MLB94579785063_102025-AB-800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio.webp",
+      "affiliate_link": "https://meli.la/19NZft3",
+      "detail_url": "/oferta?slug=800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
+      "price_collected_at": "2026-06-09T21:48:26.227902+00:00"
+    },
+    {
+      "id": 253,
+      "slug": "garrafa-termica-1-litro-com-termometro-led-para-chas-cafe-253",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Garrafa Térmica 1 Litro Com Termômetro Led Para Chás / Café",
+      "short_description": "",
+      "current_price": "48.00",
+      "original_price": "75.00",
+      "discount_pct": "34.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_658148-MLB89993492671_082025-AB-garrafa-termica-1-litro-com-termmetro-led-para-chas-cafe.webp",
+      "affiliate_link": "https://meli.la/1HBzP7Y",
+      "detail_url": "/oferta?slug=garrafa-termica-1-litro-com-termometro-led-para-chas-cafe-253",
+      "price_collected_at": "2026-06-09T21:48:26.217273+00:00"
+    },
+    {
+      "id": 92,
+      "slug": "kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 2 Câmera Segurança Ip Interna Externa Wifi Icsee Infravermelho Prova Dágua - Hw Branco",
+      "short_description": "",
+      "current_price": "184.00",
+      "original_price": "339.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_901090-MLA99414404486_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2CTJTHC",
+      "detail_url": "/oferta?slug=kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
+      "price_collected_at": "2026-06-09T21:48:26.206401+00:00"
+    },
+    {
+      "id": 178,
+      "slug": "kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Rishon Azul-escuro",
+      "short_description": "",
+      "current_price": "96.00",
+      "original_price": "179.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_830343-MLA104536987832_012026-AB.webp",
+      "affiliate_link": "https://meli.la/15a74wK",
+      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
+      "price_collected_at": "2026-06-09T21:48:26.195250+00:00"
+    },
+    {
+      "id": 856,
+      "slug": "conjunto-panelas-antiaderente-10-pecas-teflon-varias-cores-856",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Conjunto Panelas Antiaderente 10 Peças Teflon Várias Cores",
+      "short_description": "",
+      "current_price": "179.00",
+      "original_price": "229.00",
+      "discount_pct": "21.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_978965-MLB111357549836_052026-AB-conjunto-panelas-antiaderente-10-pecas-teflon-varias-cores.webp",
+      "affiliate_link": "https://meli.la/2xyeyuY",
+      "detail_url": "/oferta?slug=conjunto-panelas-antiaderente-10-pecas-teflon-varias-cores-856",
+      "price_collected_at": "2026-06-09T21:48:26.183886+00:00"
+    },
+    {
+      "id": 203,
+      "slug": "cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-malha-203",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh Malha",
+      "short_description": "",
+      "current_price": "499.00",
+      "original_price": "906.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1nnYp49",
+      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-malha-203",
+      "price_collected_at": "2026-06-09T21:48:26.167622+00:00"
+    },
     {
       "id": 1611,
       "slug": "kit-3-camisetas-termicas-masculina-segunda-pele-camisa-uv50-1611",
@@ -1773,23 +2555,6 @@
       "price_collected_at": "2026-06-09T18:54:13.681830+00:00"
     },
     {
-      "id": 2093,
-      "slug": "calca-cargo-feminina-wide-leg-cintura-alta-jeans-stillger-2093",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Calça Cargo Feminina Wide Leg Cintura Alta Jeans Stillger",
-      "short_description": "",
-      "current_price": "59.00",
-      "original_price": "110.00",
-      "discount_pct": "45.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_735679-MLB112799081163_062026-AB-calca-cargo-feminina-wide-leg-cintura-alta-jeans-stillger.webp",
-      "affiliate_link": "https://meli.la/2Jn7fGC",
-      "detail_url": "/oferta?slug=calca-cargo-feminina-wide-leg-cintura-alta-jeans-stillger-2093",
-      "price_collected_at": "2026-06-09T18:54:13.669559+00:00"
-    },
-    {
       "id": 5193,
       "slug": "tenis-olympikus-corre-trilha-2-5193",
       "marketplace": {
@@ -1824,125 +2589,6 @@
       "price_collected_at": "2026-06-09T18:54:13.646833+00:00"
     },
     {
-      "id": 5819,
-      "slug": "calca-jeans-pantalona-wide-leg-feminina-cintura-alta-larga-5819",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Calça Jeans Pantalona Wide Leg Feminina Cintura Alta Larga",
-      "short_description": "",
-      "current_price": "59.00",
-      "original_price": "109.00",
-      "discount_pct": "45.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_833642-MLB110595647054_052026-AB-calca-jeans-pantalona-wide-leg-feminina-cintura-alta-larga.webp",
-      "affiliate_link": "https://meli.la/11P8bhd",
-      "detail_url": "/oferta?slug=calca-jeans-pantalona-wide-leg-feminina-cintura-alta-larga-5819",
-      "price_collected_at": "2026-06-09T18:54:13.635291+00:00"
-    },
-    {
-      "id": 2000,
-      "slug": "kit-4-cuecas-boxer-lupo-algodao-confortavel-box-original-2000",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 4 Cuecas Boxer Lupo Algodão Confortável Box Original",
-      "short_description": "",
-      "current_price": "59.00",
-      "original_price": "199.00",
-      "discount_pct": "70.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_812578-MLB82638744739_022025-AB-kit-4-cuecas-boxer-lupo-algodo-confortavel-box-original.webp",
-      "affiliate_link": "https://meli.la/1FhkTrj",
-      "detail_url": "/oferta?slug=kit-4-cuecas-boxer-lupo-algodao-confortavel-box-original-2000",
-      "price_collected_at": "2026-06-09T18:54:13.624496+00:00"
-    },
-    {
-      "id": 244,
-      "slug": "calca-masculina-sarja-premium-esporte-fino-bolso-faca-lycra-244",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Calça Masculina Sarja Premium Esporte Fino Bolso Faca Lycra",
-      "short_description": "",
-      "current_price": "66.00",
-      "original_price": "99.00",
-      "discount_pct": "33.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_925439-MLB95522562902_102025-AB-calca-masculina-sarja-premium-esporte-fino-bolso-faca-lycra.webp",
-      "affiliate_link": "https://meli.la/1u6p5UZ",
-      "detail_url": "/oferta?slug=calca-masculina-sarja-premium-esporte-fino-bolso-faca-lycra-244",
-      "price_collected_at": "2026-06-09T18:54:13.613046+00:00"
-    },
-    {
-      "id": 752,
-      "slug": "kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original-752",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 6 Pares Meias Puma Cano Médio Alto Atoalhada Original",
-      "short_description": "",
-      "current_price": "64.00",
-      "original_price": "199.00",
-      "discount_pct": "67.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_617361-MLB54128842596_032023-AB-kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original.webp",
-      "affiliate_link": "https://meli.la/1Z9dVvj",
-      "detail_url": "/oferta?slug=kit-6-pares-meias-puma-cano-medio-alto-atoalhada-original-752",
-      "price_collected_at": "2026-06-09T18:54:13.601317+00:00"
-    },
-    {
-      "id": 1998,
-      "slug": "calca-mom-jeans-feminina-cintura-alta-marmorizada-1998",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Calça Mom Jeans Feminina Cintura Alta Marmorizada",
-      "short_description": "",
-      "current_price": "57.00",
-      "original_price": "99.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_799787-MLB85664619217_062025-AB-calca-mom-jeans-feminina-cintura-alta-marmorizada.webp",
-      "affiliate_link": "https://meli.la/1uWJ5cp",
-      "detail_url": "/oferta?slug=calca-mom-jeans-feminina-cintura-alta-marmorizada-1998",
-      "price_collected_at": "2026-06-09T18:54:13.588563+00:00"
-    },
-    {
-      "id": 207,
-      "slug": "kit-3-shorts-2-em-1-duplo-bolso-para-academia-treino-corrida-207",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 3 Shorts 2 Em 1 Duplo Bolso Para Academia Treino Corrida",
-      "short_description": "",
-      "current_price": "75.00",
-      "original_price": "102.00",
-      "discount_pct": "25.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_745140-MLB108142856101_032026-AB-kit-3-shorts-2-em-1-duplo-bolso-para-academia-treino-corrida.webp",
-      "affiliate_link": "https://meli.la/1FPZqHE",
-      "detail_url": "/oferta?slug=kit-3-shorts-2-em-1-duplo-bolso-para-academia-treino-corrida-207",
-      "price_collected_at": "2026-06-09T18:54:13.577277+00:00"
-    },
-    {
-      "id": 640,
-      "slug": "kit-9-pares-meias-puma-sapatilha-soquete-invisivel-original-640",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 9 Pares Meias Puma Sapatilha Soquete Invisível Original",
-      "short_description": "",
-      "current_price": "59.00",
-      "original_price": "149.00",
-      "discount_pct": "60.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_872253-MLB96642336275_102025-AB-kit-9-pares-meias-puma-sapatilha-soquete-invisivel-original.webp",
-      "affiliate_link": "https://meli.la/2iUitRX",
-      "detail_url": "/oferta?slug=kit-9-pares-meias-puma-sapatilha-soquete-invisivel-original-640",
-      "price_collected_at": "2026-06-09T18:54:13.565063+00:00"
-    },
-    {
       "id": 743,
       "slug": "kit-6-cuecas-boxer-lupo-poliamida-sem-costura-box-original-743",
       "marketplace": {
@@ -1958,57 +2604,6 @@
       "affiliate_link": "https://meli.la/1e2Bgk9",
       "detail_url": "/oferta?slug=kit-6-cuecas-boxer-lupo-poliamida-sem-costura-box-original-743",
       "price_collected_at": "2026-06-09T18:54:13.553352+00:00"
-    },
-    {
-      "id": 5930,
-      "slug": "camiseta-daily-t-shirt-insider-5930",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Camiseta Daily T-shirt Insider",
-      "short_description": "",
-      "current_price": "64.00",
-      "original_price": "145.00",
-      "discount_pct": "55.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_619105-MLB86042487045_062025-AB-camiseta-daily-t-shirt-insider.webp",
-      "affiliate_link": "https://meli.la/1Cy2wNj",
-      "detail_url": "/oferta?slug=camiseta-daily-t-shirt-insider-5930",
-      "price_collected_at": "2026-06-09T18:54:13.537098+00:00"
-    },
-    {
-      "id": 5893,
-      "slug": "tenis-carina-feminino-puma-branco-36-br-5893",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis Carina Feminino Puma Branco 36 Br",
-      "short_description": "",
-      "current_price": "199.00",
-      "original_price": "399.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_734830-MLB110359512132_052026-AB.webp",
-      "affiliate_link": "https://meli.la/2o699XS",
-      "detail_url": "/oferta?slug=tenis-carina-feminino-puma-branco-36-br-5893",
-      "price_collected_at": "2026-06-09T18:54:13.525352+00:00"
-    },
-    {
-      "id": 5678,
-      "slug": "tenis-flexfocus-lite-modern-bdp-puma-5678",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis Flexfocus Lite Modern Bdp Puma",
-      "short_description": "",
-      "current_price": "219.00",
-      "original_price": "349.00",
-      "discount_pct": "37.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_717590-MLB105886867446_022026-AB-tnis-flexfocus-lite-modern-bdp-puma.webp",
-      "affiliate_link": "https://meli.la/2aLmg24",
-      "detail_url": "/oferta?slug=tenis-flexfocus-lite-modern-bdp-puma-5678",
-      "price_collected_at": "2026-06-09T18:54:13.514774+00:00"
     },
     {
       "id": 5858,
@@ -2028,108 +2623,6 @@
       "price_collected_at": "2026-06-09T18:54:13.502490+00:00"
     },
     {
-      "id": 2315,
-      "slug": "tenis-flexfocus-lite-modern-bdp-puma-2315",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis Flexfocus Lite Modern Bdp Puma",
-      "short_description": "",
-      "current_price": "219.00",
-      "original_price": "349.00",
-      "discount_pct": "37.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_693828-MLB109427022344_042026-AB-tnis-flexfocus-lite-modern-bdp-puma.webp",
-      "affiliate_link": "https://meli.la/18bxUHG",
-      "detail_url": "/oferta?slug=tenis-flexfocus-lite-modern-bdp-puma-2315",
-      "price_collected_at": "2026-06-09T18:54:13.491753+00:00"
-    },
-    {
-      "id": 3880,
-      "slug": "mochila-dos-homens-com-faixa-impermeavel-para-expansao-preto-liso-3880",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mochila Dos Homens Com Faixa Impermeável Para Expansão Preto Liso",
-      "short_description": "",
-      "current_price": "85.00",
-      "original_price": "297.00",
-      "discount_pct": "71.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_741399-MLB112035982759_052026-AB.webp",
-      "affiliate_link": "https://meli.la/1j6qoQN",
-      "detail_url": "/oferta?slug=mochila-dos-homens-com-faixa-impermeavel-para-expansao-preto-liso-3880",
-      "price_collected_at": "2026-06-09T18:54:13.480174+00:00"
-    },
-    {
-      "id": 4841,
-      "slug": "jaqueta-feminina-puffer-bobojaco-capuz-nylon-forrada-ate-g4-4841",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jaqueta Feminina Puffer Bobojaco Capuz Nylon Forrada Até G4",
-      "short_description": "",
-      "current_price": "126.00",
-      "original_price": "250.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_673537-MLB109930552435_042026-AB-jaqueta-feminina-puffer-bobojaco-capuz-nylon-forrada-ate-g4.webp",
-      "affiliate_link": "https://meli.la/1E3Toun",
-      "detail_url": "/oferta?slug=jaqueta-feminina-puffer-bobojaco-capuz-nylon-forrada-ate-g4-4841",
-      "price_collected_at": "2026-06-09T18:54:13.468011+00:00"
-    },
-    {
-      "id": 4139,
-      "slug": "jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno-4139",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jaqueta Puffer De Frio Intenso Blusa Impermeável Inverno",
-      "short_description": "",
-      "current_price": "74.00",
-      "original_price": "99.00",
-      "discount_pct": "25.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_829600-MLB112200803145_052026-AB-jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno.webp",
-      "affiliate_link": "https://meli.la/28Wzh3a",
-      "detail_url": "/oferta?slug=jaqueta-puffer-de-frio-intenso-blusa-impermeavel-inverno-4139",
-      "price_collected_at": "2026-06-09T18:54:13.456304+00:00"
-    },
-    {
-      "id": 782,
-      "slug": "tenis-masculino-casual-aramis-daily-slip-confortavel-moderno-782",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis Masculino Casual Aramis Daily Slip Confortável Moderno",
-      "short_description": "",
-      "current_price": "159.00",
-      "original_price": "339.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_839947-MLB107523923436_032026-AB-tnis-masculino-casual-aramis-daily-slip-confortavel-moderno.webp",
-      "affiliate_link": "https://meli.la/2jtbgAM",
-      "detail_url": "/oferta?slug=tenis-masculino-casual-aramis-daily-slip-confortavel-moderno-782",
-      "price_collected_at": "2026-06-09T18:54:13.444539+00:00"
-    },
-    {
-      "id": 1735,
-      "slug": "camiseta-light-t-shirt-insider-masculino-1735",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Camiseta Light T-shirt Insider Masculino",
-      "short_description": "",
-      "current_price": "69.00",
-      "original_price": "189.00",
-      "discount_pct": "63.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_779849-MLB89746747076_082025-AB-camiseta-light-t-shirt-insider-masculino.webp",
-      "affiliate_link": "https://meli.la/1BCCPZR",
-      "detail_url": "/oferta?slug=camiseta-light-t-shirt-insider-masculino-1735",
-      "price_collected_at": "2026-06-09T18:54:13.433066+00:00"
-    },
-    {
       "id": 5929,
       "slug": "bolsa-phase-small-sports-puma-puma-black-lisa-5929",
       "marketplace": {
@@ -2147,23 +2640,6 @@
       "price_collected_at": "2026-06-09T18:54:13.416746+00:00"
     },
     {
-      "id": 5919,
-      "slug": "kit-4-cuecas-lupo-boxer-poliamida-box-sem-costura-original-5919",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 4 Cuecas Lupo Boxer Poliamida Box Sem Costura Original",
-      "short_description": "",
-      "current_price": "78.00",
-      "original_price": "199.00",
-      "discount_pct": "60.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896542-MLB112284707309_052026-AB-kit-4-cuecas-lupo-boxer-poliamida-box-sem-costura-original.webp",
-      "affiliate_link": "https://meli.la/28AHr2i",
-      "detail_url": "/oferta?slug=kit-4-cuecas-lupo-boxer-poliamida-box-sem-costura-original-5919",
-      "price_collected_at": "2026-06-09T18:54:13.405641+00:00"
-    },
-    {
       "id": 5892,
       "slug": "camisa-gola-polo-masculina-premium-5892",
       "marketplace": {
@@ -2179,57 +2655,6 @@
       "affiliate_link": "https://meli.la/2oNEfm4",
       "detail_url": "/oferta?slug=camisa-gola-polo-masculina-premium-5892",
       "price_collected_at": "2026-06-09T18:54:13.393234+00:00"
-    },
-    {
-      "id": 5912,
-      "slug": "tenis-olympikus-acqua-feminino-corrida-caminhada-5912",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis Olympikus Acqua Feminino Corrida - Caminhada",
-      "short_description": "",
-      "current_price": "179.00",
-      "original_price": "222.00",
-      "discount_pct": "19.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_935715-MLB106815491994_022026-AB-tnis-olympikus-acqua-feminino-corrida-caminhada.webp",
-      "affiliate_link": "https://meli.la/1wt5mYr",
-      "detail_url": "/oferta?slug=tenis-olympikus-acqua-feminino-corrida-caminhada-5912",
-      "price_collected_at": "2026-06-09T18:54:13.381697+00:00"
-    },
-    {
-      "id": 5287,
-      "slug": "kit-10-calcinhas-sem-costura-premium-conforto-invisivel-5287",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 10 Calcinhas Sem Costura Premium Conforto Invisível",
-      "short_description": "",
-      "current_price": "45.00",
-      "original_price": "89.00",
-      "discount_pct": "48.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_794115-MLB112309597167_052026-AB-kit-10-calcinhas-sem-costura-premium-conforto-invisivel.webp",
-      "affiliate_link": "https://meli.la/1n6VFMy",
-      "detail_url": "/oferta?slug=kit-10-calcinhas-sem-costura-premium-conforto-invisivel-5287",
-      "price_collected_at": "2026-06-09T18:54:13.369978+00:00"
-    },
-    {
-      "id": 5384,
-      "slug": "torneira-gourmet-para-cozinha-inox-escovado-monocomando-cor-prateado-5384",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Torneira Gourmet Para Cozinha Inox Escovado Monocomando Cor Prateado",
-      "short_description": "",
-      "current_price": "240.00",
-      "original_price": "336.00",
-      "discount_pct": "28.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_688729-MLA106367182077_022026-AB.webp",
-      "affiliate_link": "https://meli.la/1SaNtvY",
-      "detail_url": "/oferta?slug=torneira-gourmet-para-cozinha-inox-escovado-monocomando-cor-prateado-5384",
-      "price_collected_at": "2026-06-09T18:54:13.359453+00:00"
     },
     {
       "id": 2160,
@@ -2283,57 +2708,6 @@
       "price_collected_at": "2026-06-09T18:54:13.331917+00:00"
     },
     {
-      "id": 2941,
-      "slug": "coberta-manta-soft-casal-microfibra-anti-alergica-dupla-face-2941",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Coberta Manta Soft Casal Microfibra Anti-alérgica Dupla Face",
-      "short_description": "",
-      "current_price": "39.00",
-      "original_price": "55.00",
-      "discount_pct": "28.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_742738-MLB109125449330_042026-AB-coberta-manta-soft-casal-microfibra-anti-alergica-dupla-face.webp",
-      "affiliate_link": "https://meli.la/2SdPMHC",
-      "detail_url": "/oferta?slug=coberta-manta-soft-casal-microfibra-anti-alergica-dupla-face-2941",
-      "price_collected_at": "2026-06-09T18:54:13.323012+00:00"
-    },
-    {
-      "id": 4272,
-      "slug": "brinox-pressure-panela-de-pressao-revestimento-ceramica-inducao-42l-cor-vanilla-vanila-4272",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Panela De Pressão Brinox Pressure 4,2l Ø20 X 14,5 Cm Vanilla Baunilha Vanila",
-      "short_description": "",
-      "current_price": "217.00",
-      "original_price": "477.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_917659-MLA112161611883_052026-AB.webp",
-      "affiliate_link": "https://meli.la/19JRER9",
-      "detail_url": "/oferta?slug=brinox-pressure-panela-de-pressao-revestimento-ceramica-inducao-42l-cor-vanilla-vanila-4272",
-      "price_collected_at": "2026-06-09T18:54:13.313377+00:00"
-    },
-    {
-      "id": 359,
-      "slug": "chuveiro-lorenzetti-loren-shower-ultra-eletronico-branco-7500w-220v-75-w-359",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Chuveiro Lorenzetti Loren Shower Ultra Eletrônico Branco 7500w 220v 7.5 W",
-      "short_description": "",
-      "current_price": "100.00",
-      "original_price": "240.00",
-      "discount_pct": "58.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896908-MLA101388142032_122025-AB.webp",
-      "affiliate_link": "https://meli.la/1rpzpVk",
-      "detail_url": "/oferta?slug=chuveiro-lorenzetti-loren-shower-ultra-eletronico-branco-7500w-220v-75-w-359",
-      "price_collected_at": "2026-06-09T18:54:13.303401+00:00"
-    },
-    {
       "id": 313,
       "slug": "cesto-de-roupa-suja-bambu-dobravel-com-tampa-alcas-72-litros-bambu-313",
       "marketplace": {
@@ -2349,23 +2723,6 @@
       "affiliate_link": "https://meli.la/1brd8hK",
       "detail_url": "/oferta?slug=cesto-de-roupa-suja-bambu-dobravel-com-tampa-alcas-72-litros-bambu-313",
       "price_collected_at": "2026-06-09T18:54:13.293557+00:00"
-    },
-    {
-      "id": 892,
-      "slug": "camera-seguranca-wifi-ip-lente-dupla-2x-3mp-externa-360-a-prova-dagua-cor-cinza-892",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Câmera Segurança Wifi Ip Lente Dupla 2x 3mp Externa 360° A Prova Dágua Cor Cinza",
-      "short_description": "",
-      "current_price": "117.00",
-      "original_price": "219.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_617999-MLA107805745177_022026-AB.webp",
-      "affiliate_link": "https://meli.la/1NhQXBD",
-      "detail_url": "/oferta?slug=camera-seguranca-wifi-ip-lente-dupla-2x-3mp-externa-360-a-prova-dagua-cor-cinza-892",
-      "price_collected_at": "2026-06-09T18:54:13.284012+00:00"
     },
     {
       "id": 495,
@@ -2385,40 +2742,6 @@
       "price_collected_at": "2026-06-09T18:54:13.274293+00:00"
     },
     {
-      "id": 155,
-      "slug": "800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "800mlgarrafa Térmica Água Squeeze Inox Academiaquente E Frio",
-      "short_description": "",
-      "current_price": "35.00",
-      "original_price": "59.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_963485-MLB94579785063_102025-AB-800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio.webp",
-      "affiliate_link": "https://meli.la/19NZft3",
-      "detail_url": "/oferta?slug=800mlgarrafa-termica-agua-squeeze-inox-academiaquente-e-frio-155",
-      "price_collected_at": "2026-06-09T18:54:13.265428+00:00"
-    },
-    {
-      "id": 169,
-      "slug": "lustre-led-sala-moderno-60w-3-arcos-pendente-luminaria-teto-127220v-dourado-169",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Lustre Led Sala Moderno 60w, 3 Arcos Pendente Luminária Teto 127/220v Dourado",
-      "short_description": "",
-      "current_price": "159.00",
-      "original_price": "298.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_693366-MLB89308241348_082025-AB.webp",
-      "affiliate_link": "https://meli.la/1a1Upcd",
-      "detail_url": "/oferta?slug=lustre-led-sala-moderno-60w-3-arcos-pendente-luminaria-teto-127220v-dourado-169",
-      "price_collected_at": "2026-06-09T18:54:13.255907+00:00"
-    },
-    {
       "id": 1256,
       "slug": "kit4-tapetes-para-banheiro-tapete-magico-ultra-para-absorca-1256",
       "marketplace": {
@@ -2434,23 +2757,6 @@
       "affiliate_link": "https://meli.la/1gu9qx8",
       "detail_url": "/oferta?slug=kit4-tapetes-para-banheiro-tapete-magico-ultra-para-absorca-1256",
       "price_collected_at": "2026-06-09T18:54:13.246220+00:00"
-    },
-    {
-      "id": 800,
-      "slug": "varal-de-chao-grande-de-roupas-3-andares-dobravel-cor-azul-kontuz-170-cm-800",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Varal De Chão Grande De Roupas 3 Andares Dobrável Cor Azul Kontuz 170 Cm",
-      "short_description": "",
-      "current_price": "74.00",
-      "original_price": "119.00",
-      "discount_pct": "37.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_712866-MLA109482654866_042026-AB.webp",
-      "affiliate_link": "https://meli.la/1nYR93G",
-      "detail_url": "/oferta?slug=varal-de-chao-grande-de-roupas-3-andares-dobravel-cor-azul-kontuz-170-cm-800",
-      "price_collected_at": "2026-06-09T18:54:13.237229+00:00"
     },
     {
       "id": 4050,
@@ -2470,23 +2776,6 @@
       "price_collected_at": "2026-06-09T18:54:13.226700+00:00"
     },
     {
-      "id": 368,
-      "slug": "jogo-de-panelas-inducao-antiaderente-ceramica-10-pecas-ppg-pfoa-free-baunilha-368",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Panelas Induçao Antiaderente Cerâmica 10 Peças Ppg Pfoa Free Baunilha",
-      "short_description": "",
-      "current_price": "345.00",
-      "original_price": "683.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896529-MLA98735006295_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1gC4ntD",
-      "detail_url": "/oferta?slug=jogo-de-panelas-inducao-antiaderente-ceramica-10-pecas-ppg-pfoa-free-baunilha-368",
-      "price_collected_at": "2026-06-09T18:54:13.216165+00:00"
-    },
-    {
       "id": 5918,
       "slug": "panela-frigideira-antiaderente-ceramica-dinda-home-inducao-gas-eletrico-linha-premium-cinza-5918",
       "marketplace": {
@@ -2502,23 +2791,6 @@
       "affiliate_link": "https://meli.la/1mP4pAq",
       "detail_url": "/oferta?slug=panela-frigideira-antiaderente-ceramica-dinda-home-inducao-gas-eletrico-linha-premium-cinza-5918",
       "price_collected_at": "2026-06-09T18:54:13.204941+00:00"
-    },
-    {
-      "id": 253,
-      "slug": "garrafa-termica-1-litro-com-termometro-led-para-chas-cafe-253",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Garrafa Térmica 1 Litro Com Termômetro Led Para Chás / Café",
-      "short_description": "",
-      "current_price": "48.00",
-      "original_price": "75.00",
-      "discount_pct": "34.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_658148-MLB89993492671_082025-AB-garrafa-termica-1-litro-com-termmetro-led-para-chas-cafe.webp",
-      "affiliate_link": "https://meli.la/1HBzP7Y",
-      "detail_url": "/oferta?slug=garrafa-termica-1-litro-com-termometro-led-para-chas-cafe-253",
-      "price_collected_at": "2026-06-09T18:54:13.097824+00:00"
     },
     {
       "id": 5484,
@@ -2538,23 +2810,6 @@
       "price_collected_at": "2026-06-09T18:54:13.086639+00:00"
     },
     {
-      "id": 1483,
-      "slug": "lorenzetti-loren-shower-ultra-multitemperaturas-de-220v-7500w-ducha-branca-branco-75-kw-1483",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Lorenzetti Loren Shower Ultra Multitemperaturas De 220v 7500w Ducha Branca Branco 7.5 Kw",
-      "short_description": "",
-      "current_price": "115.00",
-      "original_price": "156.00",
-      "discount_pct": "26.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_906215-MLA96637759000_112025-AB.webp",
-      "affiliate_link": "https://meli.la/21yzoad",
-      "detail_url": "/oferta?slug=lorenzetti-loren-shower-ultra-multitemperaturas-de-220v-7500w-ducha-branca-branco-75-kw-1483",
-      "price_collected_at": "2026-06-09T18:54:13.057188+00:00"
-    },
-    {
       "id": 3225,
       "slug": "mercusys-mc210-camera-seguranca-wifi-2k-3mp-360-por-tp-link-branco-3225",
       "marketplace": {
@@ -2570,74 +2825,6 @@
       "affiliate_link": "https://meli.la/1iEBbUT",
       "detail_url": "/oferta?slug=mercusys-mc210-camera-seguranca-wifi-2k-3mp-360-por-tp-link-branco-3225",
       "price_collected_at": "2026-06-09T18:54:13.045572+00:00"
-    },
-    {
-      "id": 203,
-      "slug": "cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-malha-203",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh Malha",
-      "short_description": "",
-      "current_price": "499.00",
-      "original_price": "906.00",
-      "discount_pct": "44.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1nnYp49",
-      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-malha-203",
-      "price_collected_at": "2026-06-09T18:54:13.035599+00:00"
-    },
-    {
-      "id": 92,
-      "slug": "kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 2 Câmera Segurança Ip Interna Externa Wifi Icsee Infravermelho Prova Dágua - Hw Branco",
-      "short_description": "",
-      "current_price": "184.00",
-      "original_price": "339.00",
-      "discount_pct": "45.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_901090-MLA99414404486_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2CTJTHC",
-      "detail_url": "/oferta?slug=kit-2-camera-seguranca-ip-interna-externa-wifi-icsee-infravermelho-prova-dagua-hw-branco-92",
-      "price_collected_at": "2026-06-09T18:54:13.025690+00:00"
-    },
-    {
-      "id": 856,
-      "slug": "conjunto-panelas-antiaderente-10-pecas-teflon-varias-cores-856",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Conjunto Panelas Antiaderente 10 Peças Teflon Várias Cores",
-      "short_description": "",
-      "current_price": "179.00",
-      "original_price": "229.00",
-      "discount_pct": "21.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_978965-MLB111357549836_052026-AB-conjunto-panelas-antiaderente-10-pecas-teflon-varias-cores.webp",
-      "affiliate_link": "https://meli.la/2xyeyuY",
-      "detail_url": "/oferta?slug=conjunto-panelas-antiaderente-10-pecas-teflon-varias-cores-856",
-      "price_collected_at": "2026-06-09T18:54:13.015131+00:00"
-    },
-    {
-      "id": 178,
-      "slug": "kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Rishon Azul-escuro",
-      "short_description": "",
-      "current_price": "96.00",
-      "original_price": "179.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_830343-MLA104536987832_012026-AB.webp",
-      "affiliate_link": "https://meli.la/15a74wK",
-      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
-      "price_collected_at": "2026-06-09T18:54:12.986074+00:00"
     },
     {
       "id": 3997,
@@ -4119,23 +4306,6 @@
       "price_collected_at": "2026-06-09T11:03:59.068862+00:00"
     },
     {
-      "id": 1668,
-      "slug": "camera-inteligente-im7-3mp-de-resolucao-branca-intelbras-branco-1668",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Câmera Inteligente Im7 + 3mp De Resolução Branca Intelbras Branco",
-      "short_description": "",
-      "current_price": "364.00",
-      "original_price": "749.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_892568-MLA99939109103_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2Xx2ZLr",
-      "detail_url": "/oferta?slug=camera-inteligente-im7-3mp-de-resolucao-branca-intelbras-branco-1668",
-      "price_collected_at": "2026-06-09T11:03:59.027799+00:00"
-    },
-    {
       "id": 5890,
       "slug": "panela-de-pressao-classic-panelux-aluminio-polido-45-litros-aluminio-polido-5890",
       "marketplace": {
@@ -4338,23 +4508,6 @@
       "affiliate_link": "https://meli.la/1n7h9Nq",
       "detail_url": "/oferta?slug=colchao-inflavel-queen-duplo-eletrico-com-2-travesseiro-bege-5750",
       "price_collected_at": "2026-06-09T00:03:38.165269+00:00"
-    },
-    {
-      "id": 5838,
-      "slug": "aumenta-super-cavalo-torofila-feno-grego-60-capsulas-potente-sem-sabor-5838",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Aumenta Super Cavalo Torofila Feno Grego 60 Cápsulas Potente Sem Sabor",
-      "short_description": "",
-      "current_price": "96.00",
-      "original_price": "140.00",
-      "discount_pct": "31.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_790829-MLB110701262842_052026-AB.webp",
-      "affiliate_link": "https://meli.la/1hx5cLd",
-      "detail_url": "/oferta?slug=aumenta-super-cavalo-torofila-feno-grego-60-capsulas-potente-sem-sabor-5838",
-      "price_collected_at": "2026-06-09T00:03:38.150491+00:00"
     },
     {
       "id": 914,
@@ -5683,23 +5836,6 @@
       "price_collected_at": "2026-06-08T19:26:56.035721+00:00"
     },
     {
-      "id": 5602,
-      "slug": "refletor-super-premium-led-holofote-3000w-pdagua-bivolt-frio-127220v-preto-branco-frio-5602",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Refletor Super Premium Led Holofote 3000w Pdágua Bivolt Frio 127/220v Preto Branco-frio",
-      "short_description": "",
-      "current_price": "78.00",
-      "original_price": "255.00",
-      "discount_pct": "69.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_702298-MLB100383382175_122025-AB.webp",
-      "affiliate_link": "https://meli.la/2AwkHgp",
-      "detail_url": "/oferta?slug=refletor-super-premium-led-holofote-3000w-pdagua-bivolt-frio-127220v-preto-branco-frio-5602",
-      "price_collected_at": "2026-06-08T19:26:55.845715+00:00"
-    },
-    {
       "id": 5873,
       "slug": "kit-10-potes-hermeticos-de-vidro-640ml-retangular-com-tampa-hermetica-4-travas-marmita-fitness-freezer-cozinha-mantimentos-pitia-transparente-5873",
       "marketplace": {
@@ -6565,23 +6701,6 @@
       "affiliate_link": "https://meli.la/2mvM5xi",
       "detail_url": "/oferta?slug=tenis-mormaii-urban-free-skate-casual-original-masculino-473",
       "price_collected_at": "2026-06-08T11:03:50.715798+00:00"
-    },
-    {
-      "id": 5170,
-      "slug": "kit-2-camisetas-masculina-dry-alpha-5170",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 2 Camisetas Masculina Dry Alpha",
-      "short_description": "",
-      "current_price": "42.00",
-      "original_price": "99.00",
-      "discount_pct": "57.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_888164-MLB111598414485_052026-AB-kit-2-camisetas-masculina-dry-alpha.webp",
-      "affiliate_link": "https://meli.la/2bbToU4",
-      "detail_url": "/oferta?slug=kit-2-camisetas-masculina-dry-alpha-5170",
-      "price_collected_at": "2026-06-08T11:03:50.662163+00:00"
     },
     {
       "id": 5821,

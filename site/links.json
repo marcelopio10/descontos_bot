@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-09T14:05:46.679693+00:00",
+  "generated_at": "2026-06-09T16:31:07.613626+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,16 +12,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_657010-MLB111030020704_052026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1ekgA64?matt_word=dbot_ig_bio_5812&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5812"
-    },
-    {
-      "id": 5823,
-      "title": "Caminhão De Engolir Dinossauro Transformável Brinquedo 7 Em1 Azul",
-      "current_price": "122.00",
-      "original_price": "600.00",
-      "discount_pct": "79.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_996450-MLB95286940381_102025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/23cTXXC?matt_word=dbot_ig_bio_5823&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5823"
     },
     {
       "id": 4242,
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_819928-MLA99495645778_112025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/24G4KDm?matt_word=dbot_ig_bio_1371&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1371"
+    },
+    {
+      "id": 1429,
+      "title": "Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Importad Sabor Creme De Avelã",
+      "current_price": "159.00",
+      "original_price": "699.00",
+      "discount_pct": "77.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_630816-MLA99935887857_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/33ygqki?matt_word=dbot_ig_bio_1429&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1429"
     }
   ]
 }

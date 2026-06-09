@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated_at": "2026-06-09T22:01:31.959623+00:00",
+  "generated_at": "2026-06-09T22:06:56.060093+00:00",
   "site_base_url": "https://descontos-bot.vercel.app",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "offers": [
@@ -6497,23 +6497,6 @@
       "affiliate_link": "https://meli.la/1n7h9Nq",
       "detail_url": "/oferta?slug=colchao-inflavel-queen-duplo-eletrico-com-2-travesseiro-bege-5750",
       "price_collected_at": "2026-06-09T00:03:38.165269+00:00"
-    },
-    {
-      "id": 5838,
-      "slug": "aumenta-super-cavalo-torofila-feno-grego-60-capsulas-potente-sem-sabor-5838",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Aumenta Super Cavalo Torofila Feno Grego 60 Cápsulas Potente Sem Sabor",
-      "short_description": "",
-      "current_price": "96.00",
-      "original_price": "140.00",
-      "discount_pct": "31.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_790829-MLB110701262842_052026-AB.webp",
-      "affiliate_link": "https://meli.la/1hx5cLd",
-      "detail_url": "/oferta?slug=aumenta-super-cavalo-torofila-feno-grego-60-capsulas-potente-sem-sabor-5838",
-      "price_collected_at": "2026-06-09T00:03:38.150491+00:00"
     },
     {
       "id": 914,

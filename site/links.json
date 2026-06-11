@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-10T19:39:58.211276+00:00",
+  "generated_at": "2026-06-11T11:05:22.103909+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,16 +12,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_907958-MLB110899488495_042026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/2nV5Ews?matt_word=dbot_ig_bio_6034&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6034"
-    },
-    {
-      "id": 4242,
-      "title": "Caminhão Dinossauro Comendo Carros Brinquedo Com 6 Carros Dinosauros Devoram Carros Azul",
-      "current_price": "125.00",
-      "original_price": "597.00",
-      "discount_pct": "79.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_721772-MLB100517208028_122025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2wvYyHu?matt_word=dbot_ig_bio_4242&utm_source=instagram&utm_medium=bio&utm_campaign=offer_4242"
     },
     {
       "id": 6054,
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_840067-MLA97214107041_112025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/114drmQ?matt_word=dbot_ig_bio_3698&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3698"
+    },
+    {
+      "id": 2586,
+      "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
+      "current_price": "159.00",
+      "original_price": "699.00",
+      "discount_pct": "77.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
     }
   ]
 }

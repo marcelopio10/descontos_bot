@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-11T13:31:16.586676+00:00",
+  "generated_at": "2026-06-11T15:51:59.167887+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,6 +24,16 @@
       "tracked_url": "https://meli.la/16LYjhY?matt_word=dbot_ig_bio_6054&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6054"
     },
     {
+      "id": 6146,
+      "title": "Colchão Solteiro Espuma D33 Inducol Soft 88x188x17cm Cinza Cbp",
+      "current_price": "466.00",
+      "original_price": "2218.00",
+      "discount_pct": "78.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_693833-MLA107393406650_032026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2jwE3u5?matt_word=dbot_ig_bio_6146&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6146"
+    },
+    {
       "id": 3698,
       "title": "Omega Plus 120 Cápsulas Ômega 3 Dark Lab Sem Sabor",
       "current_price": "99.00",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
-    },
-    {
-      "id": 5619,
-      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
-      "current_price": "141.00",
-      "original_price": "597.00",
-      "discount_pct": "76.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802771-MLB105838199600_022026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2pK3wDF?matt_word=dbot_ig_bio_5619&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5619"
     }
   ]
 }

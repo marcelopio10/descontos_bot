@@ -31,6 +31,20 @@ class MarketIntelParserTests(TestCase):
         self.assertEqual(parsed['original_price'], '299.90')
         self.assertEqual(parsed['discount_pct'], '33.34')
 
+    def test_parser_extracts_coupon_after_label_punctuation_or_connector(self):
+        examples = {
+            'Cupom: TESTE10': 'TESTE10',
+            'cupom - TESTE10': 'TESTE10',
+            'use o cupom TESTE10': 'TESTE10',
+            'aplique o cupom TESTE10': 'TESTE10',
+        }
+
+        for text, expected_coupon in examples.items():
+            with self.subTest(text=text):
+                parsed = parse_observed_message(text)
+                self.assertEqual(parsed['coupon'], expected_coupon)
+                self.assertIn('cupom', parsed['labels'])
+
 
 class MarketIntelReportTests(TestCase):
     def test_generate_daily_report_aggregates_without_exposing_sender_or_raw_urls(self):

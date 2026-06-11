@@ -21,7 +21,10 @@ URGENCY_TERMS = ('corre', 'acabando', 'relampago', 'só hoje', 'so hoje', 'ultim
 PROOF_TERMS = ('muito vendido', 'bem avaliado', 'viral', 'campeao', 'campeão')
 
 PRICE_RE = re.compile(r'R\$\s*([0-9\.]+,\d{2}|[0-9]+(?:[\.,]\d{2})?)', re.IGNORECASE)
-COUPON_RE = re.compile(r'\b(?:cupom|use|aplique)\s+([A-Z0-9][A-Z0-9_-]{2,20})\b', re.IGNORECASE)
+COUPON_RE = re.compile(
+    r'\b(?:(?:cupom)\s*[:=\-]?\s*|(?:use|aplique)\s+(?:o\s+)?(?:cupom\s+)?)([A-Z0-9][A-Z0-9_-]{2,20})\b',
+    re.IGNORECASE,
+)
 URL_RE = re.compile(r'https?://[^\s)\]}>"]+', re.IGNORECASE)
 
 

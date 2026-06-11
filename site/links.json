@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-11T15:51:59.167887+00:00",
+  "generated_at": "2026-06-11T19:08:33.867301+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 6169,
+      "title": "Kit 10 Lampada Led Dicróica Mr16 4,8w 3000k Branco Quente Gu10 110v/220v Branco Cod: Alut001203-10 Alut By Avant 127/220v",
+      "current_price": "53.00",
+      "original_price": "284.00",
+      "discount_pct": "81.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_994318-MLA106544633522_022026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1qYM8RB?matt_word=dbot_ig_bio_6169&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6169"
+    },
     {
       "id": 6034,
       "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_840067-MLA97214107041_112025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/114drmQ?matt_word=dbot_ig_bio_3698&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3698"
-    },
-    {
-      "id": 2586,
-      "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
-      "current_price": "159.00",
-      "original_price": "699.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
     }
   ]
 }

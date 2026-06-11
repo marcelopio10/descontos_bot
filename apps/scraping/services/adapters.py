@@ -1,7 +1,16 @@
+import logging
+from collections import defaultdict
 from dataclasses import dataclass
 from typing import Protocol
 
+from apps.curation.services.settings import get_integer_setting
 from scrapers import amazon, mercado_livre
+from scrapers.category_targets import flatten_urls, get_targets
+
+
+log = logging.getLogger(__name__)
+
+CATEGORY_SCRAPING_FLAG = 'category_scraping_enabled'
 
 
 class MarketplaceScraper(Protocol):
@@ -19,6 +28,13 @@ class ScraperAdapter:
     scraper: MarketplaceScraper
 
     def collect(self, max_pages: int) -> list[dict]:
+        if _category_scraping_enabled() and hasattr(self.scraper, 'scrape_categories'):
+            targets = flatten_urls(self.marketplace_code)
+            if targets:
+                payloads = self.scraper.scrape_categories(
+                    [(t.category_code, t.label, t.url, t.trust_hint) for t in targets],
+                )
+                return _apply_category_filters(self.marketplace_code, payloads)
         return self.scraper.scrape_daily_deals(max_pages=max_pages)
 
     @property
@@ -32,6 +48,52 @@ class ScraperAdapter:
     @property
     def pages_scraped(self) -> int:
         return int(getattr(self.scraper, 'pages_scraped', 0) or 0)
+
+
+def _category_scraping_enabled() -> bool:
+    return bool(get_integer_setting(CATEGORY_SCRAPING_FLAG, 0))
+
+
+def _apply_category_filters(marketplace_code: str, payloads: list[dict]) -> list[dict]:
+    cfg = get_targets(marketplace_code)
+    if not cfg:
+        return payloads
+
+    counters: dict[str, int] = defaultdict(int)
+    out: list[dict] = []
+    dropped: dict[str, int] = defaultdict(int)
+
+    for payload in payloads:
+        category_code = payload.get('category_hint', '')
+        rules = cfg.get(category_code)
+        if rules is None:
+            out.append(payload)
+            continue
+
+        discount = float(payload.get('desconto_pct') or 0)
+        price = float(payload.get('preco') or 0)
+
+        if discount < rules.get('min_discount', 0):
+            dropped[f'{category_code}:min_discount'] += 1
+            continue
+        max_price = rules.get('max_price')
+        if max_price is not None and price > max_price:
+            dropped[f'{category_code}:max_price'] += 1
+            continue
+
+        cycle_limit = rules.get('cycle_limit', 0)
+        if cycle_limit and counters[category_code] >= cycle_limit:
+            dropped[f'{category_code}:cycle_limit'] += 1
+            continue
+
+        counters[category_code] += 1
+        out.append(payload)
+
+    log.info(
+        'category_scraping_summary marketplace=%s kept=%d per_category=%s dropped=%s',
+        marketplace_code, len(out), dict(counters), dict(dropped),
+    )
+    return out
 
 
 def build_adapter(marketplace_code: str) -> ScraperAdapter:

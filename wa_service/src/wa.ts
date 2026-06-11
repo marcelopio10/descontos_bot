@@ -57,13 +57,25 @@ function jitter(minMs: number, maxMs: number) {
   return Math.floor(Math.random() * (maxMs - minMs + 1)) + minMs;
 }
 
+export function getWaVersionOverride(): [number, number, number] | undefined {
+  const raw = process.env.WA_VERSION?.trim();
+  if (!raw) return undefined;
+
+  const parts = raw.split(/[,.]/).map((value) => Number.parseInt(value.trim(), 10));
+  if (parts.length !== 3 || parts.some((value) => !Number.isInteger(value) || value < 0)) {
+    throw new Error(`WA_VERSION inválida: ${raw}. Use formato 2,3000,1026152044`);
+  }
+  return parts as [number, number, number];
+}
+
 export function getStatus() {
   return { connected: isConnected, jid: connectedJid };
 }
 
 export async function connect(): Promise<void> {
   const { state, saveCreds } = await useMultiFileAuthState(getAuthDir());
-  const { version } = await fetchLatestBaileysVersion();
+  const latest = await fetchLatestBaileysVersion();
+  const version = getWaVersionOverride() ?? latest.version;
 
   sock = makeWASocket({
     version,
@@ -111,6 +123,17 @@ export async function resolveGroupJid(
   const s = sockInstance ?? sock;
   if (!s) throw new Error("Socket não conectado");
 
+  // Allow callers to send to a known WhatsApp group JID directly. Still refresh
+  // group metadata first so Baileys has the participant/sender-key context it
+  // needs for reliable group encryption.
+  if (targetName.endsWith("@g.us")) {
+    const groups = await s.groupFetchAllParticipating();
+    if (!groups[targetName]) {
+      throw new Error(`Grupo JID "${targetName}" não encontrado no WhatsApp`);
+    }
+    return targetName;
+  }
+
   const shouldUseCache = sockInstance == null;
   const cached = shouldUseCache ? groupJidCache.get(targetName) : undefined;
   if (cached) return cached;
@@ -135,9 +158,29 @@ export async function listGroups(sockInstance?: WASocket | null): Promise<WhatsA
   return Object.entries(groups)
     .map(([jid, meta]) => ({
       jid,
-      subject: meta.subject,
+      subject: meta.subject ?? "(sem nome)",
     }))
     .sort((a, b) => a.subject.localeCompare(b.subject, "pt-BR"));
+}
+
+export async function getGroupDebug(jid: string, sockInstance?: WASocket | null) {
+  const s = sockInstance ?? sock;
+  if (!s) throw new Error("Socket não conectado");
+  const meta = await s.groupMetadata(jid);
+  return {
+    jid,
+    subject: meta.subject,
+    announce: meta.announce,
+    restrict: meta.restrict,
+    participant_count: meta.participants?.length ?? 0,
+    participant_domains: Object.entries(
+      (meta.participants ?? []).reduce<Record<string, number>>((acc, participant) => {
+        const domain = participant.id.split("@")[1] ?? "unknown";
+        acc[domain] = (acc[domain] ?? 0) + 1;
+        return acc;
+      }, {})
+    ).map(([domain, count]) => ({ domain, count })),
+  };
 }
 
 export async function sendImage(
@@ -167,9 +210,15 @@ export async function sendText(
   if (!s) throw new Error("Socket não conectado");
 
   const jid = await resolveGroupJid(target, s);
+  // Force fresh participant/device and group metadata during send. This avoids
+  // stale Baileys device/sender-key caches that can make group recipients see
+  // "Aguardando mensagem" instead of the decrypted text.
+  const sendOptions = jid.endsWith("@g.us")
+    ? { useUserDevicesCache: false, useCachedGroupMetadata: false }
+    : undefined;
   const result = imageUrl
-    ? await s.sendMessage(jid, { image: { url: imageUrl }, caption: message })
-    : await s.sendMessage(jid, { text: message });
+    ? await s.sendMessage(jid, { image: { url: imageUrl }, caption: message }, sendOptions)
+    : await s.sendMessage(jid, { text: message }, sendOptions);
   return {
     success: true,
     message_id: result?.key?.id ?? "",

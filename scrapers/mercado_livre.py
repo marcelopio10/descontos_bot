@@ -42,6 +42,8 @@ class MercadoLivreOffer:
     condicao: str
     frete_gratis: bool
     data: str
+    review_rating: float = 0.0
+    review_count: int = 0
 
     def to_dict(self) -> dict:
         return {
@@ -57,6 +59,8 @@ class MercadoLivreOffer:
             'condicao': self.condicao,
             'frete_gratis': self.frete_gratis,
             'data': self.data,
+            'review_rating': self.review_rating,
+            'review_count': self.review_count,
         }
 
 
@@ -140,6 +144,61 @@ class MercadoLivreScraper(BaseScraper):
                 break
 
             if page < max_pages:
+                time.sleep(round(random.uniform(DELAY_MIN, DELAY_MAX), 2))
+
+        return all_offers
+
+    def scrape_categories(self, targets: list[tuple]) -> list[dict]:
+        """Sprint 5: itera URLs declaradas em scrapers/category_targets.py.
+
+        targets: lista de (category_code, label, url) ou (category_code, label, url, trust_hint).
+        Quando trust_hint=False, omite category_hint do payload — útil para
+        URLs ML que viraram categoria-pai genérica (MLB1430 vestuário inteiro),
+        deixando o classifier de keywords decidir a categoria pelo título.
+        """
+        all_offers: list[dict] = []
+        seen_ids: set[str] = set()
+        total = len(targets)
+
+        for idx, target in enumerate(targets):
+            category_code, label, url, *rest = target
+            trust_hint = rest[0] if rest else True
+
+            if self.blocked:
+                break
+
+            log.info('Buscando ofertas ML [%s] (%d/%d): %s', label, idx + 1, total, url)
+            html = self.get_html(url)
+            if not html:
+                log.warning('[%s] sem HTML — categoria ignorada', label)
+                continue
+
+            if self.is_blocked(html):
+                self.blocked = True
+                self.error_message = f'CAPTCHA detectado em {url}'
+                log.error('CAPTCHA detectado em %s (categoria %s).', url, label)
+                break
+
+            self.pages_scraped += 1
+            page_offers = self._extract_poly_cards(html, idx + 1)
+            captured = 0
+            for offer in page_offers:
+                data = offer.to_dict()
+                if data['id'] in seen_ids:
+                    continue
+                seen_ids.add(data['id'])
+                data['source_label'] = label
+                if category_code and trust_hint:
+                    data['category_hint'] = category_code
+                all_offers.append(data)
+                captured += 1
+
+            log.info(
+                '[%s] %d cards | %d novas | total acumulado: %d',
+                label, len(page_offers), captured, len(all_offers),
+            )
+
+            if idx < total - 1:
                 time.sleep(round(random.uniform(DELAY_MIN, DELAY_MAX), 2))
 
         return all_offers
@@ -263,6 +322,8 @@ class MercadoLivreScraper(BaseScraper):
 
             affiliate_url = self._gerar_link_afiliado_oficial(permalink)
 
+            review_rating, review_count = self._extract_reviews(card)
+
             return MercadoLivreOffer(
                 id=item_id,
                 nome=title,
@@ -276,10 +337,44 @@ class MercadoLivreScraper(BaseScraper):
                 condicao='Novo',
                 frete_gratis=has_free_shipping,
                 data=datetime.now(timezone(BRT_OFFSET)).strftime('%Y-%m-%d'),
+                review_rating=review_rating,
+                review_count=review_count,
             )
         except Exception as exc:
             log.debug('Erro ao parsear card: %s', exc)
             return None
+
+    def _extract_reviews(self, card: BeautifulSoup) -> tuple[float, int]:
+        # ML expõe nota e total na listagem em .poly-reviews__rating e .poly-reviews__total
+        rating = 0.0
+        rating_el = (
+            card.select_one('.poly-reviews__rating')
+            or card.select_one('.ui-search-reviews__rating-number')
+        )
+        if rating_el:
+            m = re.search(r'(\d+[\.,]\d+)', rating_el.get_text())
+            if m:
+                try:
+                    rating = float(m.group(1).replace(',', '.'))
+                    if rating < 0 or rating > 5:
+                        rating = 0.0
+                except ValueError:
+                    rating = 0.0
+
+        count = 0
+        count_el = (
+            card.select_one('.poly-reviews__total')
+            or card.select_one('.ui-search-reviews__amount')
+        )
+        if count_el:
+            text = re.sub(r'[^\d]', '', count_el.get_text())
+            if text:
+                try:
+                    count = int(text)
+                except ValueError:
+                    count = 0
+
+        return rating, count
 
     def _exibir_alerta_cookie(self) -> None:
         if getattr(self, '_alerta_exibido', False):

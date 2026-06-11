@@ -159,7 +159,7 @@ Normaliza, persiste, atualiza e deduplica ofertas. Mantém `first_seen_at`, `las
 
 ### Curation
 
-Filtra ofertas elegíveis e calcula ranking inicial por desconto.
+Filtra ofertas elegíveis e calcula ranking inicial por desconto. Classifica cada oferta em uma `Category` (taxonomia de 14 categorias com peso 1–10) no momento da ingestão, via dicionário de keywords + hint de origem do scraper + fallback `outros`. Vai evoluir para score multidimensional aderente ao público real do bot (DF, 35+, familiar) nas próximas sprints — ver `docs/SPRINT_1_CATEGORIAS.md`.
 
 ### Content
 
@@ -248,6 +248,24 @@ Todas as tabelas de domínio devem herdar `apps._base.models.TimestampedModel`.
 - `raw_payload`
 - `first_seen_at`
 - `last_seen_at`
+- `category_id` — FK opcional para `Category`
+- `category_source` — origem da classificação (`keyword:title`, `hint:source_label`, `fallback:outros`, `manual`)
+- `review_rating` — nota 0–5 extraída da listagem (nullable)
+- `review_count` — quantidade de avaliações (nullable)
+- `created_at`
+- `updated_at`
+
+### Category
+
+Taxonomia de curadoria. Seed inicial com 14 categorias em `apps/offers/migrations/0005_seed_categories.py`.
+
+- `id`
+- `code` — slug estável
+- `name`
+- `weight` — 1–10, prioridade de curadoria
+- `is_test_controlled` — exposição limitada (ex: suplementos por viés do dono)
+- `exposure_quota_pct` — cota inicial sugerida (aplicada a partir do controle de exposição)
+- `is_active`
 - `created_at`
 - `updated_at`
 
@@ -507,6 +525,22 @@ Shopee, Netshoes e Centauro.
 ### Fase 6 — Inteligência
 
 Score avançado, histórico de preço e IA.
+
+### Fase 7 — Curadoria Inteligente (em execução)
+
+Transformar o bot de agregador de descontos em motor de curadoria aderente ao público real (DF, 35+, familiar, ligeiro pendor feminino). Estrutura em 7 sprints incrementais — cada sprint preserva o pipeline de publicação atual e expõe feature flag em `apps.panel.Setting` para rollback runtime.
+
+| Sprint | Tema | Status | Doc |
+|---|---|---|---|
+| 1 | Classificação de Categorias (model + classifier + seed 14 categorias) | concluída | `docs/SPRINT_1_CATEGORIAS.md` |
+| 2 | Score multidimensional 30/30/20/10/10 (desconto, popularidade, avaliações, preço, categoria) + threshold soft 55/70 + rating extraído da listagem | concluída | `docs/SPRINT_2_SCORE.md` |
+| 3 | Pesos por categoria editáveis (admin + override runtime via Setting `category_weights`) + comando `ranking_categorias` | concluída | `docs/SPRINT_3_PESOS.md` |
+| 4 | Filtros de qualidade — blacklist ampliada para B2B/industrial + soft penalties + regra weak_signal + justificativa em `notes` | concluída | `docs/SPRINT_4_FILTROS.md` |
+| 5 | Scrapers orientados a categorias — config declarativa `scrapers/category_targets.py` + `scrape_categories` paralelo + filtros pós-extração + `category_hint` + comando `captura_por_categoria` (chega desligada via flag `category_scraping_enabled`) | concluída | `docs/SPRINT_5_SCRAPERS.md` |
+| 6 | Controle de exposição por categoria — cota por ciclo (1ª passada respeita quota, 2ª preenche overflow), dedup por prefixo do título, comando `composicao_publicacao` (chega desligada via flag `exposure_quota_enabled`) | concluída | `docs/SPRINT_6_EXPOSICAO.md` |
+| 7 | Feedback loop por cliques e conversões reais | planejada | — |
+
+Restrições da fase: sem reconstrução, sem remoção de funcionalidades, suplementos tratados como teste controlado (viés do dono não vira validação de audiência), parametrização externa via `Setting`, decisões rastreáveis em logs.
 
 ## 18. Riscos e Mitigações
 

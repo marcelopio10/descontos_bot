@@ -30,6 +30,8 @@ class NormalizedOffer:
     price_collected_at: datetime | None
     image_url: str
     raw_payload: dict[str, Any]
+    review_rating: Decimal | None = None
+    review_count: int | None = None
 
 
 class OfferNormalizationError(ValueError):
@@ -84,6 +86,12 @@ def normalize_offer(marketplace: Marketplace, payload: dict[str, Any]) -> Normal
         price_collected_at=None,
         image_url=_clean_url(payload.get('imagem') or payload.get('image_url') or ''),
         raw_payload=payload,
+        review_rating=_to_optional_rating(
+            payload.get('review_rating') or payload.get('rating') or payload.get('nota'),
+        ),
+        review_count=_to_optional_count(
+            payload.get('review_count') or payload.get('reviews') or payload.get('total_avaliacoes'),
+        ),
     )
 
 
@@ -161,6 +169,30 @@ def _to_optional_pct(value: Any) -> Decimal | None:
     if pct is None:
         return None
     return pct.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
+
+def _to_optional_rating(value: Any) -> Decimal | None:
+    if value in (None, ''):
+        return None
+    rating = _to_decimal(value)
+    if rating is None:
+        return None
+    if rating < 0 or rating > Decimal('5'):
+        return None
+    return rating.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
+
+def _to_optional_count(value: Any) -> int | None:
+    if value in (None, ''):
+        return None
+    text = str(value).strip()
+    text = re.sub(r'[^\d]', '', text)
+    if not text:
+        return None
+    try:
+        return int(text)
+    except ValueError:
+        return None
 
 
 def _to_decimal(value: Any) -> Decimal | None:

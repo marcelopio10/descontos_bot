@@ -53,6 +53,46 @@ class Command(BaseCommand):
                 'value': '5',
                 'description': 'Insere sufixo de referral quando offer.id % N == 0. Use 0 para desabilitar via cadência.',
             },
+            {
+                'key': 'categories_enabled',
+                'value': '1',
+                'description': 'Sprint 1 — quando 0, classificador de categorias não persiste.',
+            },
+            {
+                'key': 'use_category_score',
+                'value': '1',
+                'description': 'Sprint 2 — quando 0, score volta ao algoritmo legado.',
+            },
+            {
+                'key': 'min_quality_score',
+                'value': '55',
+                'description': 'Sprint 2 — score mínimo para publicação (threshold soft).',
+            },
+            {
+                'key': 'priority_quality_score',
+                'value': '70',
+                'description': 'Sprint 2 — score que coloca a oferta em prioridade máxima.',
+            },
+            {
+                'key': 'category_weights',
+                'value': '{}',
+                'description': 'Sprint 3 — override JSON {code: int 1-10} sobre Category.weight. Vazio = usa banco.',
+            },
+            {
+                'key': 'soft_penalty_terms',
+                'value': '{}',
+                'description': 'Sprint 4 — JSON {term: fator 0..1} de penalidades suaves no score. Vazio = usa DEFAULT_SOFT_PENALTIES.',
+            },
+            {
+                'key': 'category_scraping_enabled',
+                'value': '0',
+                'description': 'Sprint 5 — quando 1, scrapers usam category_targets em vez de scrape_daily_deals.',
+            },
+            {
+                'key': 'exposure_quota_enabled',
+                'value': '0',
+                'description': 'Sprint 6 — quando 1, selector aplica Category.exposure_quota_pct por ciclo.',
+            },
         ]
 
         for data in settings:

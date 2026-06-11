@@ -10,6 +10,7 @@ from apps.offers.models import Offer
 BLACKLIST_SETTING_KEY = 'blacklist_terms'
 
 DEFAULT_BLACKLIST_TERMS: tuple[str, ...] = (
+    # Sprint 0 — produtos não-novos / inválidos
     'usado',
     'reembalado',
     'avariado',
@@ -21,11 +22,43 @@ DEFAULT_BLACKLIST_TERMS: tuple[str, ...] = (
     'com defeito',
     'open box',
     'mostruario',
+    # Sprint 4 — B2B, industrial, construção pesada
+    'luminaria publica',
+    'tela soldada',
+    'arame farpado',
+    'motor estacionario',
+    'motor industrial',
+    'gerador a diesel',
+    'compressor industrial',
+    'inversor de frequencia',
+    'etiqueta couche',
+    'etiqueta industrial',
+    'insumo industrial',
+    'shampoo automotivo profissional',
+    'shampoo veicular profissional',
+    'shampoo para veiculo pesado',
+    'veiculo pesado',
+    'veiculos pesados',
+    'alvenaria estrutural',
+    'chapa galvanizada',
+    'tubo galvanizado',
+    'fachada comercial',
+    'peca de reposicao industrial',
+    'equipamento profissional industrial',
 )
 
 # Termos de segurança não podem ser removidos pelo painel. Eles protegem todos
 # os canais contra produtos adultos/obscenos e suplementos sexuais.
 SAFETY_BLACKLIST_TERMS: tuple[str, ...] = (
+    'erotico',
+    'erotica',
+    'sex shop',
+    'sexy shop',
+    'sexy',
+    'sensual',
+    'lingerie',
+    'cinta liga',
+    'fetiche',
     'super cavalo',
     'torofila',
     'aumenta super',
@@ -38,11 +71,13 @@ SAFETY_BLACKLIST_TERMS: tuple[str, ...] = (
     'penis',
     'peniano',
     'aumentador peniano',
-    'sexy shop',
-    'vibrador',
+    'vibrador intimo',
+    'vibrador sexual',
     'masturbador',
     'massageador intimo',
     'lubrificante intimo',
+    'sutia',
+    'calcinha',
 )
 
 

@@ -186,12 +186,12 @@ def publish_offers(
         ).as_dict()
 
 
-def _get_publishable_offers():
+def _get_publishable_offers() -> list[Offer]:
     """Ofertas exibíveis no site público.
 
-    Aplica corte de recência (`last_seen_at`) e ordenação determinística:
-    `last_seen_at` desc, `discount_pct` desc, `title` asc. Ofertas fora da
-    janela permanecem persistidas; só são omitidas da publicação.
+    Aplica corte de recência (`last_seen_at`), blacklist de segurança e ordenação
+    determinística: `last_seen_at` desc, `discount_pct` desc, `title` asc.
+    Ofertas fora da janela permanecem persistidas; só são omitidas da publicação.
     """
     max_age_hours = resolve_max_age_hours()
     cutoff = get_freshness_cutoff()
@@ -220,13 +220,14 @@ def _get_publishable_offers():
     log.info(
         'Publicação offers.json: cutoff=%s janela_horas=%s total_antes=%s '
         'elegiveis=%s ignoradas_por_expiracao=%s bloqueadas_por_blacklist=%s '
-        '(registros antigos preservados no banco).',
+        'publicaveis=%s (registros antigos preservados no banco).',
         cutoff.isoformat(),
         max_age_hours,
         total_before,
         total_eligible,
         skipped,
         blocked_by_blacklist,
+        len(publishable_offers),
     )
 
     return publishable_offers

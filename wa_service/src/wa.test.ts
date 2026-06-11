@@ -17,7 +17,7 @@ vi.mock("@whiskeysockets/baileys", () => ({
 vi.mock("qrcode-terminal", () => ({ default: { generate: vi.fn() } }));
 vi.mock("pino", () => ({ default: vi.fn(() => ({ level: "silent" })) }));
 
-import { getAuthDir, listGroups, resolveGroupJid, sendImage, sendText } from "./wa.js";
+import { getAuthDir, getWaVersionOverride, listGroups, resolveGroupJid, sendImage, sendText } from "./wa.js";
 
 const mockSock = {
   groupFetchAllParticipating: vi.fn(),
@@ -42,6 +42,23 @@ describe("getAuthDir", () => {
   });
 });
 
+describe("getWaVersionOverride", () => {
+  it("retorna undefined sem WA_VERSION", () => {
+    delete process.env.WA_VERSION;
+    expect(getWaVersionOverride()).toBeUndefined();
+  });
+
+  it("interpreta WA_VERSION no formato vírgula", () => {
+    process.env.WA_VERSION = "2,3000,1026152044";
+    expect(getWaVersionOverride()).toEqual([2, 3000, 1026152044]);
+  });
+
+  it("rejeita WA_VERSION inválida", () => {
+    process.env.WA_VERSION = "foo";
+    expect(() => getWaVersionOverride()).toThrow("WA_VERSION inválida");
+  });
+});
+
 describe("resolveGroupJid", () => {
   it("retorna JID correto quando grupo existe", async () => {
     mockSock.groupFetchAllParticipating.mockResolvedValue({
@@ -53,13 +70,22 @@ describe("resolveGroupJid", () => {
     expect(jid).toBe("120363000000000001@g.us");
   });
 
-  it("lança erro descritivo quando grupo não existe", async () => {
+  it("aceita JID direto, mas valida o grupo para preparar metadados de criptografia", async () => {
     mockSock.groupFetchAllParticipating.mockResolvedValue({
-      "120363000000000002@g.us": { subject: "outro grupo" },
+      "120363000000000001@g.us": { subject: "descontos.bot" },
     });
 
-    await expect(resolveGroupJid("descontos.bot", mockSock as never)).rejects.toThrow(
-      'Grupo "descontos.bot" não encontrado'
+    const jid = await resolveGroupJid("120363000000000001@g.us", mockSock as never);
+
+    expect(jid).toBe("120363000000000001@g.us");
+    expect(mockSock.groupFetchAllParticipating).toHaveBeenCalledOnce();
+  });
+
+  it("lança erro descritivo quando JID direto não participa da conta", async () => {
+    mockSock.groupFetchAllParticipating.mockResolvedValue({});
+
+    await expect(resolveGroupJid("120363000000999999@g.us", mockSock as never)).rejects.toThrow(
+      'Grupo JID "120363000000999999@g.us" não encontrado'
     );
   });
 });
@@ -120,7 +146,8 @@ describe("sendText", () => {
 
     expect(mockSock.sendMessage).toHaveBeenCalledWith(
       "120363000000000001@g.us",
-      { text: "Oferta especial" }
+      { text: "Oferta especial" },
+      { useUserDevicesCache: false, useCachedGroupMetadata: false }
     );
     expect(result.success).toBe(true);
     expect(result.message_id).toBe("abc123");
@@ -147,7 +174,8 @@ describe("sendText", () => {
       {
         image: { url: "https://example.com/produto.jpg" },
         caption: "Oferta especial",
-      }
+      },
+      { useUserDevicesCache: false, useCachedGroupMetadata: false }
     );
     expect(result.message_id).toBe("img123");
   });

@@ -1,3 +1,6 @@
+import logging
+import math
+from collections import defaultdict
 from dataclasses import dataclass
 from decimal import Decimal
 
@@ -8,19 +11,25 @@ from apps.curation.services.blacklist import (
     get_blacklist_terms,
     is_blacklisted,
 )
-from apps.curation.services.quality_score import quality_score
+from apps.curation.services.quality_score import quality_score_breakdown
 from apps.curation.services.settings import get_decimal_setting, get_integer_setting
 from apps.distribution.models import Delivery, SocialChannel
-from apps.offers.models import Offer
+from apps.offers.models import Category, Offer
 from apps.offers.services.freshness import get_freshness_cutoff
+
+
+log = logging.getLogger('apps.curation.selector')
 
 
 DEFAULT_GLOBAL_LIMIT = 20
 DEFAULT_MARKETPLACE_LIMIT = 10
 DEFAULT_MIN_DISCOUNT = Decimal('20')
-DEFAULT_MIN_QUALITY_SCORE = 0.0
+DEFAULT_MIN_QUALITY_SCORE = Decimal('55')  # threshold soft (Sprint 2)
+DEFAULT_PRIORITY_QUALITY_SCORE = Decimal('70')
 CANDIDATE_POOL_MULTIPLIER = 5
 CANDIDATE_POOL_FLOOR = 60
+EXPOSURE_QUOTA_FLAG = 'exposure_quota_enabled'
+SIMILAR_TITLE_PREFIX = 50
 
 
 @dataclass(frozen=True)
@@ -29,6 +38,8 @@ class SelectionConfig:
     marketplace_limit: int
     min_discount_percentage: Decimal
     min_quality_score: float
+    priority_quality_score: float
+    exposure_quota_enabled: bool
 
 
 def get_selection_config() -> SelectionConfig:
@@ -48,8 +59,17 @@ def get_selection_config() -> SelectionConfig:
         min_quality_score=float(
             get_decimal_setting(
                 'min_quality_score',
-                Decimal(str(DEFAULT_MIN_QUALITY_SCORE)),
+                DEFAULT_MIN_QUALITY_SCORE,
             )
+        ),
+        priority_quality_score=float(
+            get_decimal_setting(
+                'priority_quality_score',
+                DEFAULT_PRIORITY_QUALITY_SCORE,
+            )
+        ),
+        exposure_quota_enabled=bool(
+            get_integer_setting(EXPOSURE_QUOTA_FLAG, 0)
         ),
     )
 
@@ -62,40 +82,146 @@ def select_offers_for_channel(
     queryset = _eligible_offers(channel, config)
 
     pool_size = max(CANDIDATE_POOL_FLOOR, config.global_limit * CANDIDATE_POOL_MULTIPLIER)
-    candidates = list(queryset[:pool_size])
+    raw_candidates = list(queryset[:pool_size])
 
     blacklist_terms = get_blacklist_terms()
-    candidates = [
-        offer for offer in candidates
-        if not is_blacklisted(offer, terms=blacklist_terms)
-    ]
+    candidates: list[Offer] = []
+    for offer in raw_candidates:
+        if is_blacklisted(offer, terms=blacklist_terms):
+            log.info(
+                'selector_drop offer_id=%s reason=blacklist category=%s title=%r',
+                offer.id,
+                offer.category.code if offer.category_id else '-',
+                (offer.title or '')[:120],
+            )
+            continue
+        candidates.append(offer)
 
-    scored = [(offer, quality_score(offer)) for offer in candidates]
-    scored = [
-        (offer, score)
-        for offer, score in scored
-        if score >= config.min_quality_score
-    ]
-    scored.sort(
-        key=lambda item: (item[1], item[0].discount_pct or 0, item[0].current_price or 0),
+    evaluated = []
+    for offer in candidates:
+        breakdown = quality_score_breakdown(offer)
+        if breakdown.score < config.min_quality_score:
+            log.info(
+                'selector_drop offer_id=%s reason=low_score score=%.2f classification=%s '
+                'category=%s notes=%s',
+                offer.id, breakdown.score, breakdown.classification,
+                offer.category.code if offer.category_id else '-',
+                breakdown.notes,
+            )
+            continue
+        evaluated.append((offer, breakdown))
+
+    # Prioritários primeiro, depois fila secundária. Empata por desconto + preço (estável).
+    evaluated.sort(
+        key=lambda item: (
+            1 if item[1].score >= config.priority_quality_score else 0,
+            item[1].score,
+            float(item[0].discount_pct or 0),
+            float(item[0].current_price or 0),
+        ),
         reverse=True,
     )
 
-    selected: list[Offer] = []
-    per_marketplace_count: dict[int, int] = {}
+    quotas = _resolve_category_quotas(config) if config.exposure_quota_enabled else {}
 
-    for offer, _ in scored:
-        marketplace_count = per_marketplace_count.get(offer.marketplace_id, 0)
-        if marketplace_count >= config.marketplace_limit:
-            continue
+    selected: list[Offer] = []
+    per_marketplace_count: dict[int, int] = defaultdict(int)
+    per_category_count: dict[str, int] = defaultdict(int)
+    seen_prefixes: set[str] = set()
+
+    def _category_of(offer: Offer) -> str:
+        return offer.category.code if offer.category_id else 'sem_categoria'
+
+    def _try_pick(offer: Offer, breakdown, *, respect_quota: bool, pass_label: str) -> bool:
+        if offer in selected:
+            return False
+
+        prefix = (offer.normalized_title or '')[:SIMILAR_TITLE_PREFIX].strip()
+        if prefix and prefix in seen_prefixes:
+            log.info(
+                'selector_drop offer_id=%s reason=similar_title prefix=%r',
+                offer.id, prefix,
+            )
+            return False
+
+        if per_marketplace_count[offer.marketplace_id] >= config.marketplace_limit:
+            log.info(
+                'selector_drop offer_id=%s reason=marketplace_limit marketplace=%s limit=%s',
+                offer.id,
+                offer.marketplace.code if offer.marketplace_id else '-',
+                config.marketplace_limit,
+            )
+            return False
+
+        category_code = _category_of(offer)
+        if respect_quota:
+            quota = quotas.get(category_code)
+            if quota is not None and per_category_count[category_code] >= quota:
+                # Cota cheia — segura na 1ª passada; pode ser revista na 2ª.
+                return False
+            if quota is None:
+                # Categoria sem quota só entra na 2ª passada.
+                return False
 
         selected.append(offer)
-        per_marketplace_count[offer.marketplace_id] = marketplace_count + 1
+        per_marketplace_count[offer.marketplace_id] += 1
+        per_category_count[category_code] += 1
+        if prefix:
+            seen_prefixes.add(prefix)
 
-        if len(selected) >= config.global_limit:
-            break
+        log.info(
+            'selector_pick offer_id=%s score=%.2f classification=%s decision=%s '
+            'category=%s marketplace=%s discount=%s pass=%s',
+            offer.id, breakdown.score, breakdown.classification, breakdown.decision,
+            category_code,
+            offer.marketplace.code if offer.marketplace_id else '-',
+            offer.discount_pct, pass_label,
+        )
+        return True
+
+    if config.exposure_quota_enabled:
+        # 1ª passada: respeitar cotas das categorias quentes.
+        for offer, breakdown in evaluated:
+            if len(selected) >= config.global_limit:
+                break
+            _try_pick(offer, breakdown, respect_quota=True, pass_label='quota')
+
+        # 2ª passada: preencher slots restantes sem respeitar quota
+        # (categorias sem quota e overflow das quentes podem entrar).
+        for offer, breakdown in evaluated:
+            if len(selected) >= config.global_limit:
+                break
+            _try_pick(offer, breakdown, respect_quota=False, pass_label='overflow')
+    else:
+        for offer, breakdown in evaluated:
+            if len(selected) >= config.global_limit:
+                break
+            _try_pick(offer, breakdown, respect_quota=False, pass_label='flat')
+
+    if config.exposure_quota_enabled:
+        log.info(
+            'selector_summary picked=%d quotas=%s actual=%s',
+            len(selected), quotas, dict(per_category_count),
+        )
 
     return selected
+
+
+def _resolve_category_quotas(config: SelectionConfig) -> dict[str, int]:
+    """Converte exposure_quota_pct (%) das categorias ativas em slots absolutos
+    com base em config.global_limit. Categorias sem quota não entram no mapa.
+    """
+    quotas: dict[str, int] = {}
+    for category in Category.objects.filter(
+        is_active=True,
+        exposure_quota_pct__isnull=False,
+    ):
+        pct = float(category.exposure_quota_pct or 0)
+        if pct <= 0:
+            continue
+        slots = max(1, math.ceil(config.global_limit * pct / 100.0))
+        quotas[category.code] = slots
+    return quotas
 
 
 def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySet[Offer]:

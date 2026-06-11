@@ -66,6 +66,9 @@ class AmazonOffer:
     condicao: str
     frete_gratis: bool
     data: str
+    source_label: str = ''
+    review_rating: float = 0.0
+    review_count: int = 0
 
     def to_dict(self) -> dict:
         return {
@@ -78,6 +81,9 @@ class AmazonOffer:
             'link_afiliado': self.link_afiliado,
             'imagem': self.imagem,
             'vendedor': self.vendedor,
+            'source_label': self.source_label,
+            'review_rating': self.review_rating,
+            'review_count': self.review_count,
             'condicao': self.condicao,
             'frete_gratis': self.frete_gratis,
             'data': self.data,
@@ -143,15 +149,35 @@ class AmazonScraper:
         log.error('Esgotadas as tentativas para %s', url)
         return ''
 
+    def scrape_categories(self, targets: list[tuple]) -> list[dict]:
+        """Versão Sprint 5: itera URLs vindas da configuração por categoria.
+
+        targets: lista de (category_code, label, url) ou
+        (category_code, label, url, trust_hint). Quando trust_hint=False,
+        omite category_hint do payload e deixa o classifier decidir pelo título.
+        """
+        normalized_targets: list[tuple[str, str, str, bool]] = []
+        for target in targets:
+            category_code, label, url, *rest = target
+            trust_hint = rest[0] if rest else True
+            normalized_targets.append((label, url, category_code, bool(trust_hint)))
+
+        return self._scrape_urls(normalized_targets)
+
     def scrape_daily_deals(self, max_pages: int = 5) -> list[dict]:
         # max_pages é mantido por compatibilidade de API, mas Amazon raspa todas as
         # categorias em DEAL_URLS por ciclo (cada URL é uma categoria, não paginação).
         del max_pages
+        return self._scrape_urls(
+            [(label, url, '', True) for label, url in DEAL_URLS],
+        )
+
+    def _scrape_urls(self, items: list[tuple[str, str, str, bool]]) -> list[dict]:
         all_offers: list[dict] = []
         seen_ids: set[str] = set()
-        total = len(DEAL_URLS)
+        total = len(items)
 
-        for idx, (label, url) in enumerate(DEAL_URLS):
+        for idx, (label, url, category_code, trust_hint) in enumerate(items):
             if self.blocked:
                 break
 
@@ -171,7 +197,10 @@ class AmazonScraper:
             page_offers = self._extract_cards(html)
             captured: list[tuple[str, int, float]] = []
             for offer in page_offers:
+                offer.source_label = label
                 data = offer.to_dict()
+                if category_code and trust_hint:
+                    data['category_hint'] = category_code
                 if data['id'] in seen_ids:
                     continue
                 seen_ids.add(data['id'])
@@ -377,6 +406,9 @@ class AmazonScraper:
             # Vendedor / marca (não exposto em cards de evento — usar padrão)
             seller = 'Amazon.com.br'
 
+            # Rating e quantidade de avaliações — listagem expõe sem requests extras.
+            review_rating, review_count = self._extract_reviews(card)
+
             return AmazonOffer(
                 id=asin,
                 nome=title,
@@ -390,10 +422,39 @@ class AmazonScraper:
                 condicao='Novo',
                 frete_gratis=has_free_shipping,
                 data=datetime.now(timezone(BRT_OFFSET)).strftime('%Y-%m-%d'),
+                review_rating=review_rating,
+                review_count=review_count,
             )
         except Exception as exc:
             log.debug('Erro ao parsear card Amazon: %s', exc)
             return None
+
+    def _extract_reviews(self, card) -> tuple[float, int]:
+        # Nota média — texto "4,5 de 5 estrelas" em .a-icon-alt
+        rating = 0.0
+        rating_el = card.select_one('i.a-icon-star-small .a-icon-alt, i.a-icon-star .a-icon-alt, .a-icon-alt')
+        if rating_el:
+            m = re.search(r'(\d+[\.,]\d+)', rating_el.get_text())
+            if m:
+                try:
+                    rating = float(m.group(1).replace(',', '.'))
+                    if rating < 0 or rating > 5:
+                        rating = 0.0
+                except ValueError:
+                    rating = 0.0
+
+        # Quantidade — span perto do rating, ex "(1.234)" ou número solto
+        count = 0
+        count_el = card.select_one('.a-size-base.s-underline-text, .s-underline-link-text, .a-link-normal .a-size-base')
+        if count_el:
+            text = re.sub(r'[^\d]', '', count_el.get_text())
+            if text:
+                try:
+                    count = int(text)
+                except ValueError:
+                    count = 0
+
+        return rating, count
 
     def _parse_brl(self, text: str) -> float:
         text = re.sub(r'[R$\s\xa0]', '', text)

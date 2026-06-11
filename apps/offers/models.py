@@ -2,10 +2,55 @@ import hashlib
 from urllib.parse import parse_qs, parse_qsl, urlencode, urlparse, urlsplit, urlunsplit
 
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from apps._base.models import TimestampedModel
 from apps.marketplaces.models import Marketplace
+
+
+class Category(TimestampedModel):
+    code = models.SlugField(
+        'código',
+        max_length=60,
+        unique=True,
+        help_text='Identificador estável usado pelo classificador e por configurações.',
+    )
+    name = models.CharField(
+        'nome',
+        max_length=120,
+    )
+    weight = models.PositiveSmallIntegerField(
+        'peso',
+        default=5,
+        validators=[MinValueValidator(1), MaxValueValidator(10)],
+        help_text='Peso 1–10. Quanto maior, maior a prioridade na curadoria.',
+    )
+    is_test_controlled = models.BooleanField(
+        'teste controlado',
+        default=False,
+        help_text='Categoria com exposição limitada (ex: suplementos por viés do dono).',
+    )
+    exposure_quota_pct = models.DecimalField(
+        'cota de exposição (%)',
+        max_digits=5,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text='Cota inicial sugerida da fatia de publicação. Usado a partir do controle de exposição.',
+    )
+    is_active = models.BooleanField(
+        'ativo',
+        default=True,
+    )
+
+    class Meta:
+        ordering = ['-weight', 'name']
+        verbose_name = 'categoria'
+        verbose_name_plural = 'categorias'
+
+    def __str__(self):
+        return self.name
 
 
 class Offer(TimestampedModel):
@@ -113,6 +158,35 @@ class Offer(TimestampedModel):
         null=True,
         blank=True,
     )
+    category = models.ForeignKey(
+        Category,
+        verbose_name='categoria',
+        on_delete=models.SET_NULL,
+        related_name='offers',
+        null=True,
+        blank=True,
+    )
+    category_source = models.CharField(
+        'origem da classificação',
+        max_length=60,
+        blank=True,
+        default='',
+        help_text='Como a categoria foi atribuída (ex: keyword:title, hint:source_label, fallback:outros, manual).',
+    )
+    review_rating = models.DecimalField(
+        'nota média',
+        max_digits=3,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text='Nota média (0–5) extraída da listagem do marketplace, quando disponível.',
+    )
+    review_count = models.PositiveIntegerField(
+        'quantidade de avaliações',
+        null=True,
+        blank=True,
+        help_text='Número de avaliações exibido na listagem do marketplace.',
+    )
 
     class Meta:
         ordering = ['-discount_pct', 'title']
@@ -121,6 +195,7 @@ class Offer(TimestampedModel):
             models.Index(fields=['marketplace', 'external_id']),
             models.Index(fields=['is_active', 'discount_pct']),
             models.Index(fields=['last_seen_at']),
+            models.Index(fields=['category']),
         ]
         verbose_name = 'oferta'
         verbose_name_plural = 'ofertas'

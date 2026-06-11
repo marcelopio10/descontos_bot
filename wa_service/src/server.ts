@@ -1,6 +1,7 @@
 import express, { type Request, type Response } from "express";
 import {
   connect,
+  getGroupDebug,
   getStatus,
   listGroups,
   sendBatch,
@@ -105,6 +106,23 @@ app.get("/debug/groups", async (_req: Request, res: Response) => {
 
   try {
     res.json({ groups: await listGroups() });
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ error: errorMessage });
+  }
+});
+
+app.get("/debug/group/:jid", async (req: Request, res: Response) => {
+  const status = getStatus();
+  if (!status.connected) {
+    res
+      .status(503)
+      .json({ error: "WhatsApp não conectado. Aguarde o pareamento via QR." });
+    return;
+  }
+
+  try {
+    res.json(await getGroupDebug(req.params.jid));
   } catch (err: unknown) {
     const errorMessage = err instanceof Error ? err.message : String(err);
     res.status(500).json({ error: errorMessage });

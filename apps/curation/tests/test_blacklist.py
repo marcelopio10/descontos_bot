@@ -55,7 +55,10 @@ class SafetyBlacklistTests(TestCase):
         self.assertIn('usado', terms)
         self.assertIn('super cavalo', terms)
         self.assertIn('torofila', terms)
-        self.assertIn('vibrador', terms)
+        self.assertIn('vibrador sexual', terms)
+        self.assertNotIn('vibrador', terms)
+        self.assertIn('sensual', terms)
+        self.assertIn('lingerie', terms)
 
     def test_adult_supplement_title_is_blacklisted(self):
         offer = self._offer('Aumenta Super Cavalo Torofila Feno Grego 60 Cápsulas Potente Sem Sabor')
@@ -71,6 +74,8 @@ class SafetyBlacklistTests(TestCase):
             marketplace_limit=5,
             min_discount_percentage=Decimal('20.00'),
             min_quality_score=0,
+            priority_quality_score=0,
+            exposure_quota_enabled=False,
         )
 
         selected = select_offers_for_channel(self.channel, config=config)

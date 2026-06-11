@@ -1,9 +1,11 @@
 import express, { type Request, type Response } from "express";
 import {
+  collectObservedMessages,
   connect,
   getGroupDebug,
   getStatus,
   listGroups,
+  listObserverGroups,
   sendBatch,
   sendText,
   type SendItem,
@@ -90,9 +92,43 @@ app.post("/send-message", async (req: Request, res: Response) => {
   }
 });
 
+app.post("/observer/collect", async (_req: Request, res: Response) => {
+  const status = getStatus();
+  if (!status.connected) {
+    res
+      .status(503)
+      .json({ error: "WhatsApp não conectado. Aguarde o pareamento via QR." });
+    return;
+  }
+
+  try {
+    res.json(await collectObservedMessages());
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ error: errorMessage });
+  }
+});
+
+app.get("/observer/groups", async (_req: Request, res: Response) => {
+  const status = getStatus();
+  if (!status.connected) {
+    res
+      .status(503)
+      .json({ error: "WhatsApp não conectado. Aguarde o pareamento via QR." });
+    return;
+  }
+
+  try {
+    res.json(await listObserverGroups());
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    res.status(500).json({ error: errorMessage });
+  }
+});
+
 // Endpoint de debug — últimas N mensagens de um JID (para teste de integração)
-app.get("/debug/last-messages", async (req: Request, res: Response) => {
-  res.status(501).json({ error: "Não implementado nesta versão" });
+app.get("/debug/last-messages", async (_req: Request, res: Response) => {
+  res.json(await collectObservedMessages());
 });
 
 app.get("/debug/groups", async (_req: Request, res: Response) => {

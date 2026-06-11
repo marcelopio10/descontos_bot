@@ -162,6 +162,7 @@ INSTALLED_APPS = [
     'apps.orchestration',
     'apps.social_posts',
     'apps.analytics',
+    'apps.market_intel',
 ]
 
 MIDDLEWARE = [

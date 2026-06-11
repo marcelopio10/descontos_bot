@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "generated_at": null,
+  "date": null,
+  "window": { "start": null, "end": null },
+  "summary": {
+    "groups_analyzed": 0,
+    "messages_analyzed": 0,
+    "top_groups": [],
+    "top_marketplaces": [],
+    "top_labels": [],
+    "image_messages": 0,
+    "coupon_messages": 0
+  },
+  "recommendations": [],
+  "scraper_opportunities": [],
+  "privacy": {
+    "sender_identity": "sha256 hash only in database; omitted from report",
+    "observed_urls": "omitted from report; never publish third-party affiliate links"
+  }
+}

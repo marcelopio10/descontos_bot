@@ -6,6 +6,13 @@ import makeWASocket, {
   type WASocket,
 } from "@whiskeysockets/baileys";
 import { Boom } from "@hapi/boom";
+import {
+  collectObservedMessages as collectObserverBuffer,
+  listObserverGroups as filterObserverGroups,
+  recordObservedMessage,
+  type ObservedMessage,
+  type ObserverGroup,
+} from "./observer.js";
 import { readFile } from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
@@ -90,6 +97,20 @@ export async function connect(): Promise<void> {
 
   sock.ev.on("creds.update", saveCreds);
 
+  sock.ev.on("messages.upsert", async ({ messages }) => {
+    for (const message of messages ?? []) {
+      const groupJid = String(message?.key?.remoteJid ?? "");
+      if (!groupJid.endsWith("@g.us")) continue;
+      let subject: string | undefined;
+      try {
+        subject = (await sock?.groupMetadata(groupJid))?.subject;
+      } catch {
+        subject = undefined;
+      }
+      recordObservedMessage(message as never, subject);
+    }
+  });
+
   sock.ev.on("connection.update", ({ connection, lastDisconnect, qr }) => {
     if (qr) {
       console.log("\n[wa] Escaneie o QR code com seu celular:\n");
@@ -161,6 +182,14 @@ export async function listGroups(sockInstance?: WASocket | null): Promise<WhatsA
       subject: meta.subject ?? "(sem nome)",
     }))
     .sort((a, b) => a.subject.localeCompare(b.subject, "pt-BR"));
+}
+
+export async function listObserverGroups(sockInstance?: WASocket | null): Promise<{ enabled: boolean; groups: ObserverGroup[] }> {
+  return filterObserverGroups(await listGroups(sockInstance));
+}
+
+export async function collectObservedMessages(): Promise<{ enabled: boolean; messages: ObservedMessage[] }> {
+  return collectObserverBuffer();
 }
 
 export async function getGroupDebug(jid: string, sockInstance?: WASocket | null) {

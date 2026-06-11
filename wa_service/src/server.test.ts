@@ -3,18 +3,29 @@ import request from "supertest";
 
 // Mock wa module before importing app
 vi.mock("./wa.js", () => ({
+  collectObservedMessages: vi.fn(),
   connect: vi.fn().mockResolvedValue(undefined),
   getStatus: vi.fn(),
   listGroups: vi.fn(),
+  listObserverGroups: vi.fn(),
   sendBatch: vi.fn(),
   sendText: vi.fn(),
 }));
 
 import { app } from "./server.js";
-import { getStatus, listGroups, sendBatch, sendText } from "./wa.js";
+import {
+  collectObservedMessages,
+  getStatus,
+  listGroups,
+  listObserverGroups,
+  sendBatch,
+  sendText,
+} from "./wa.js";
 
+const mockCollectObservedMessages = vi.mocked(collectObservedMessages);
 const mockGetStatus = vi.mocked(getStatus);
 const mockListGroups = vi.mocked(listGroups);
+const mockListObserverGroups = vi.mocked(listObserverGroups);
 const mockSendBatch = vi.mocked(sendBatch);
 const mockSendText = vi.mocked(sendText);
 
@@ -192,5 +203,51 @@ describe("GET /debug/groups", () => {
     expect(res.body).toEqual({
       groups: [{ jid: "120363000000000001@g.us", subject: "descontos.bot" }],
     });
+  });
+});
+
+describe("observer endpoints", () => {
+  it("GET /observer/groups retorna grupos allowlisted", async () => {
+    mockGetStatus.mockReturnValue({ connected: true, jid: "jid" });
+    mockListObserverGroups.mockResolvedValue({
+      enabled: true,
+      groups: [{ jid: "120363000000000001@g.us", subject: "Ofertas A" }],
+    });
+
+    const res = await request(app).get("/observer/groups");
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({
+      enabled: true,
+      groups: [{ jid: "120363000000000001@g.us", subject: "Ofertas A" }],
+    });
+  });
+
+  it("POST /observer/collect retorna mensagens normalizadas", async () => {
+    mockGetStatus.mockReturnValue({ connected: true, jid: "jid" });
+    mockCollectObservedMessages.mockResolvedValue({
+      enabled: true,
+      messages: [
+        {
+          message_id: "MSG1",
+          group_jid: "120363000000000001@g.us",
+          group_subject: "Ofertas A",
+          sender_hash: "a".repeat(64),
+          sent_at: "2026-06-11T23:20:00.000Z",
+          text: "Oferta Amazon R$ 99",
+          has_image: false,
+          urls: [],
+          raw_type: "conversation",
+          collected_at: "2026-06-11T23:30:00.000Z",
+        },
+      ],
+    });
+
+    const res = await request(app).post("/observer/collect");
+
+    expect(res.status).toBe(200);
+    expect(res.body.messages).toHaveLength(1);
+    expect(res.body.messages[0].sender_hash).toMatch(/^[a-f0-9]{64}$/);
+    expect(JSON.stringify(res.body)).not.toContain("@s.whatsapp.net");
   });
 });

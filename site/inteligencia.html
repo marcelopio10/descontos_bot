@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>descontos.bot — Inteligência de Grupos</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { margin: 0; background: #f7f8fb; color: #151923; }
+    main { max-width: 1040px; margin: 0 auto; padding: 32px 20px 56px; }
+    header { margin-bottom: 28px; }
+    h1 { margin: 0 0 8px; font-size: 32px; }
+    p { line-height: 1.55; }
+    .muted { color: #667085; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
+    .card { background: #fff; border: 1px solid #e6e8ef; border-radius: 16px; padding: 18px; box-shadow: 0 10px 28px rgba(21, 25, 35, .05); }
+    .metric { font-size: 30px; font-weight: 800; margin: 4px 0; }
+    ul { padding-left: 20px; }
+    li { margin: 6px 0; }
+    code { background: #eef2ff; padding: 2px 6px; border-radius: 6px; }
+    .privacy { border-left: 4px solid #1f7aec; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Inteligência de Grupos de Ofertas</h1>
+      <p class="muted">Painel operacional interno para entender padrões agregados de grupos WhatsApp monitorados por allowlist.</p>
+    </header>
+
+    <section class="grid" id="metrics"></section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Marketplaces</h2>
+        <ul id="marketplaces"><li>Carregando...</li></ul>
+      </article>
+      <article class="card">
+        <h2>Labels editoriais</h2>
+        <ul id="labels"><li>Carregando...</li></ul>
+      </article>
+      <article class="card">
+        <h2>Oportunidades para scrapers</h2>
+        <ul id="scrapers"><li>Carregando...</li></ul>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Recomendações</h2>
+      <ul id="recommendations"><li>Carregando...</li></ul>
+    </section>
+
+    <section class="card privacy">
+      <h2>Privacidade e compliance</h2>
+      <p>Este painel não deve exibir telefone, nome de remetente, mídia binária ou links afiliados de terceiros. Use os achados apenas como sinais agregados para melhorar curadoria, copy e scrapers próprios.</p>
+    </section>
+  </main>
+
+  <script>
+    const fmt = new Intl.NumberFormat('pt-BR');
+    function list(items, elementId, render) {
+      const el = document.getElementById(elementId);
+      el.innerHTML = '';
+      if (!items || items.length === 0) {
+        el.innerHTML = '<li>Sem dados ainda.</li>';
+        return;
+      }
+      for (const item of items) {
+        const li = document.createElement('li');
+        li.textContent = render(item);
+        el.appendChild(li);
+      }
+    }
+    fetch('./market-intel.json', { cache: 'no-store' })
+      .then((r) => r.ok ? r.json() : Promise.reject(new Error('JSON não encontrado')))
+      .then((data) => {
+        const summary = data.summary || {};
+        document.getElementById('metrics').innerHTML = `
+          <article class="card"><div class="muted">Data</div><div class="metric">${data.date || '-'}</div></article>
+          <article class="card"><div class="muted">Mensagens</div><div class="metric">${fmt.format(summary.messages_analyzed || 0)}</div></article>
+          <article class="card"><div class="muted">Grupos</div><div class="metric">${fmt.format(summary.groups_analyzed || 0)}</div></article>
+          <article class="card"><div class="muted">Com imagem / cupom</div><div class="metric">${fmt.format(summary.image_messages || 0)} / ${fmt.format(summary.coupon_messages || 0)}</div></article>
+        `;
+        list(summary.top_marketplaces, 'marketplaces', (i) => `${i.marketplace}: ${i.count}`);
+        list(summary.top_labels, 'labels', (i) => `${i.label}: ${i.count}`);
+        list(data.scraper_opportunities, 'scrapers', (i) => `${i.hint || i.marketplace}: ${i.count} — ${i.reason}`);
+        list(data.recommendations, 'recommendations', (i) => `${i.title}: ${i.reason}`);
+      })
+      .catch((err) => {
+        document.getElementById('metrics').innerHTML = `<article class="card"><strong>Sem relatório publicado.</strong><p>${err.message}</p><p>Rode <code>publish_market_intel_report</code>.</p></article>`;
+      });
+  </script>
+</body>
+</html>

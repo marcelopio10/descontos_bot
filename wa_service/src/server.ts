@@ -1,4 +1,5 @@
 import express, { type Request, type Response } from "express";
+import { loadEnvFromNearestFile } from "./env.js";
 import {
   collectObservedMessages,
   connect,
@@ -175,6 +176,10 @@ function startServer() {
 }
 
 if (!process.env.VITEST) {
+  const loadedEnvPath = loadEnvFromNearestFile();
+  if (loadedEnvPath) {
+    console.log(`[server] variáveis carregadas de ${loadedEnvPath}`);
+  }
   startServer();
 }
 

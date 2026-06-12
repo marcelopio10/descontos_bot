@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-12T02:54:31.181096+00:00",
+  "generated_at": "2026-06-12T11:05:32.147476+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,16 +24,6 @@
       "tracked_url": "https://meli.la/2nV5Ews?matt_word=dbot_ig_bio_6034&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6034"
     },
     {
-      "id": 6054,
-      "title": "Caminhao Dinossauro Com 6 Carrinhos E Pista Brinquedo Menino Artezenato Azul",
-      "current_price": "127.00",
-      "original_price": "597.00",
-      "discount_pct": "78.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_956773-MLA112177227323_052026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/16LYjhY?matt_word=dbot_ig_bio_6054&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6054"
-    },
-    {
       "id": 6146,
       "title": "Colchão Solteiro Espuma D33 Inducol Soft 88x188x17cm Cinza Cbp",
       "current_price": "466.00",
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_840067-MLA97214107041_112025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/114drmQ?matt_word=dbot_ig_bio_3698&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3698"
+    },
+    {
+      "id": 2586,
+      "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
+      "current_price": "159.00",
+      "original_price": "699.00",
+      "discount_pct": "77.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
     }
   ]
 }

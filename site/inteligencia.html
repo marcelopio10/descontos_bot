@@ -1,94 +1,355 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>descontos.bot — Inteligência de Grupos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inteligência de Grupos | descontos.bot</title>
+  <meta name="description" content="Painel operacional de inteligência editorial dos grupos de ofertas monitorados pelo descontos.bot.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
   <style>
-    :root { color-scheme: light; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    body { margin: 0; background: #f7f8fb; color: #151923; }
-    main { max-width: 1040px; margin: 0 auto; padding: 32px 20px 56px; }
-    header { margin-bottom: 28px; }
-    h1 { margin: 0 0 8px; font-size: 32px; }
-    p { line-height: 1.55; }
-    .muted { color: #667085; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
-    .card { background: #fff; border: 1px solid #e6e8ef; border-radius: 16px; padding: 18px; box-shadow: 0 10px 28px rgba(21, 25, 35, .05); }
-    .metric { font-size: 30px; font-weight: 800; margin: 4px 0; }
-    ul { padding-left: 20px; }
-    li { margin: 6px 0; }
-    code { background: #eef2ff; padding: 2px 6px; border-radius: 6px; }
-    .privacy { border-left: 4px solid #1f7aec; }
+    .intel-shell {
+      padding: 52px 0 84px;
+    }
+    .intel-hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 340px);
+      gap: 24px;
+      align-items: stretch;
+      margin-bottom: 24px;
+      padding: clamp(24px, 4vw, 42px);
+      background: rgba(22, 26, 34, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+    .intel-hero::after {
+      content: '';
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -80px;
+      top: -90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 201, 177, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+    .intel-hero h1 {
+      margin: 12px 0 0;
+      max-width: 780px;
+      font-size: clamp(38px, 6vw, 76px);
+      font-weight: 700;
+      line-height: 1.02;
+    }
+    .intel-summary-card {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      align-content: center;
+      gap: 12px;
+      padding: 22px;
+      background: var(--dark);
+      border: 1px solid var(--line-strong);
+      border-radius: 16px;
+    }
+    .intel-summary-card strong {
+      display: block;
+      color: var(--yellow);
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(38px, 7vw, 62px);
+      line-height: 1;
+    }
+    .intel-summary-card span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .intel-kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .intel-kpi,
+    .intel-panel {
+      background: rgba(22, 26, 34, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    .intel-kpi {
+      padding: 20px;
+    }
+    .intel-label {
+      display: block;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .intel-value {
+      display: block;
+      margin-top: 10px;
+      color: var(--yellow);
+      font-family: 'Space Mono', monospace;
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .intel-sub {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .intel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .intel-panel {
+      padding: 22px;
+    }
+    .intel-panel h2 {
+      margin: 0 0 16px;
+      color: var(--cyan);
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .intel-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .intel-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--white);
+      line-height: 1.45;
+    }
+    .intel-list li:last-child {
+      border-bottom: 0;
+    }
+    .intel-list .name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .intel-list .count {
+      flex-shrink: 0;
+      color: var(--yellow);
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+    }
+    .intel-recommendations {
+      margin-top: 16px;
+    }
+    .recommendation-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .recommendation-list li {
+      padding: 16px;
+      background: rgba(0, 201, 177, 0.06);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .recommendation-list strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--white);
+    }
+    .privacy-note {
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: rgba(255, 225, 77, 0.08);
+      border: 1px solid rgba(255, 225, 77, 0.24);
+      border-radius: 12px;
+      color: var(--yellow);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .state-message {
+      grid-column: 1 / -1;
+      padding: 24px;
+      background: rgba(22, 26, 34, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      color: var(--muted);
+    }
+    @media (max-width: 880px) {
+      .intel-hero,
+      .intel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
+  <header class="topbar">
+    <a class="brand" href="/">descontos<span>.bot</span></a>
+    <nav class="navlinks" aria-label="Navegação principal">
+      <a href="/">Ofertas</a>
+      <a href="/links">Links</a>
+      <a href="/sobre">Sobre</a>
+      <a href="/disclosure">Disclosure</a>
+    </nav>
+  </header>
+
   <main>
-    <header>
-      <h1>Inteligência de Grupos de Ofertas</h1>
-      <p class="muted">Painel operacional interno para entender padrões agregados de grupos WhatsApp monitorados por allowlist.</p>
-    </header>
+    <section class="intel-shell" aria-live="polite">
+      <div class="intel-hero">
+        <div>
+          <p class="eyebrow">Inteligência editorial</p>
+          <h1>Leitura agregada dos grupos de ofertas.</h1>
+          <p class="lead">Painel operacional interno para entender padrões de copy, marketplace, imagem, cupom e oportunidades de scraper sem expor remetentes ou links de terceiros.</p>
+          <p class="disclosure-inline">Dados agregados para curadoria, não fonte de republicação.</p>
+        </div>
+        <aside class="intel-summary-card" aria-label="Resumo da análise">
+          <span class="panel-label">Mensagens analisadas</span>
+          <strong id="heroMessages">--</strong>
+          <span id="heroWindow">Carregando relatório de inteligência</span>
+        </aside>
+      </div>
 
-    <section class="grid" id="metrics"></section>
+      <div class="intel-kpi-row" id="metrics"></div>
 
-    <section class="grid">
-      <article class="card">
-        <h2>Marketplaces</h2>
-        <ul id="marketplaces"><li>Carregando...</li></ul>
-      </article>
-      <article class="card">
-        <h2>Labels editoriais</h2>
-        <ul id="labels"><li>Carregando...</li></ul>
-      </article>
-      <article class="card">
-        <h2>Oportunidades para scrapers</h2>
-        <ul id="scrapers"><li>Carregando...</li></ul>
-      </article>
-    </section>
+      <section class="intel-grid" aria-label="Sinais agregados">
+        <article class="intel-panel">
+          <h2>Marketplaces</h2>
+          <ul class="intel-list" id="marketplaces"><li>Carregando...</li></ul>
+        </article>
+        <article class="intel-panel">
+          <h2>Labels editoriais</h2>
+          <ul class="intel-list" id="labels"><li>Carregando...</li></ul>
+        </article>
+        <article class="intel-panel">
+          <h2>Oportunidades para scrapers</h2>
+          <ul class="intel-list" id="scrapers"><li>Carregando...</li></ul>
+        </article>
+      </section>
 
-    <section class="card">
-      <h2>Recomendações</h2>
-      <ul id="recommendations"><li>Carregando...</li></ul>
-    </section>
+      <section class="intel-panel intel-recommendations">
+        <h2>Recomendações</h2>
+        <ul class="recommendation-list" id="recommendations"><li>Carregando...</li></ul>
+      </section>
 
-    <section class="card privacy">
-      <h2>Privacidade e compliance</h2>
-      <p>Este painel não deve exibir telefone, nome de remetente, mídia binária ou links afiliados de terceiros. Use os achados apenas como sinais agregados para melhorar curadoria, copy e scrapers próprios.</p>
+      <section class="privacy-note">
+        Este painel não deve exibir telefone, nome de remetente, mídia binária ou links afiliados de terceiros. Use os achados apenas como sinais agregados para melhorar curadoria, copy e scrapers próprios.
+      </section>
     </section>
   </main>
 
+  <footer class="footer">
+    <p>Como Associado da Amazon, ganho por compras qualificadas.</p>
+    <p>Os achados de inteligência são agregados e não devem ser usados para copiar ofertas, textos ou links de terceiros.</p>
+  </footer>
+
   <script>
     const fmt = new Intl.NumberFormat('pt-BR');
+
+    function formatDate(value) {
+      if (!value) return '-';
+      const [year, month, day] = value.split('-');
+      if (!year || !month || !day) return value;
+      return `${day}/${month}/${year}`;
+    }
+
     function list(items, elementId, render) {
       const el = document.getElementById(elementId);
       el.innerHTML = '';
       if (!items || items.length === 0) {
-        el.innerHTML = '<li>Sem dados ainda.</li>';
+        el.innerHTML = '<li><span class="name">Sem dados ainda.</span></li>';
         return;
       }
       for (const item of items) {
         const li = document.createElement('li');
-        li.textContent = render(item);
+        const rendered = render(item);
+        const name = document.createElement('span');
+        name.className = 'name';
+        name.textContent = rendered.name;
+        li.appendChild(name);
+        if (rendered.count !== undefined && rendered.count !== null) {
+          const count = document.createElement('span');
+          count.className = 'count';
+          count.textContent = fmt.format(rendered.count);
+          li.appendChild(count);
+        }
         el.appendChild(li);
       }
     }
+
     fetch('./market-intel.json', { cache: 'no-store' })
       .then((r) => r.ok ? r.json() : Promise.reject(new Error('JSON não encontrado')))
       .then((data) => {
         const summary = data.summary || {};
+        const messages = summary.messages_analyzed || 0;
+        const groups = summary.groups_analyzed || 0;
+        const images = summary.image_messages || 0;
+        const coupons = summary.coupon_messages || 0;
+
+        document.getElementById('heroMessages').textContent = fmt.format(messages);
+        document.getElementById('heroWindow').textContent = data.date
+          ? `Relatório de ${formatDate(data.date)} com ${fmt.format(groups)} grupo(s) analisado(s).`
+          : 'Sem relatório publicado ainda.';
+
         document.getElementById('metrics').innerHTML = `
-          <article class="card"><div class="muted">Data</div><div class="metric">${data.date || '-'}</div></article>
-          <article class="card"><div class="muted">Mensagens</div><div class="metric">${fmt.format(summary.messages_analyzed || 0)}</div></article>
-          <article class="card"><div class="muted">Grupos</div><div class="metric">${fmt.format(summary.groups_analyzed || 0)}</div></article>
-          <article class="card"><div class="muted">Com imagem / cupom</div><div class="metric">${fmt.format(summary.image_messages || 0)} / ${fmt.format(summary.coupon_messages || 0)}</div></article>
+          <article class="intel-kpi"><span class="intel-label">Data</span><span class="intel-value">${formatDate(data.date)}</span><span class="intel-sub">Janela diária em America/Sao_Paulo.</span></article>
+          <article class="intel-kpi"><span class="intel-label">Mensagens</span><span class="intel-value">${fmt.format(messages)}</span><span class="intel-sub">Amostras válidas no dia.</span></article>
+          <article class="intel-kpi"><span class="intel-label">Grupos</span><span class="intel-value">${fmt.format(groups)}</span><span class="intel-sub">Grupos allowlistados com dados.</span></article>
+          <article class="intel-kpi"><span class="intel-label">Imagem / cupom</span><span class="intel-value">${fmt.format(images)} / ${fmt.format(coupons)}</span><span class="intel-sub">Sinais editoriais detectados.</span></article>
         `;
-        list(summary.top_marketplaces, 'marketplaces', (i) => `${i.marketplace}: ${i.count}`);
-        list(summary.top_labels, 'labels', (i) => `${i.label}: ${i.count}`);
-        list(data.scraper_opportunities, 'scrapers', (i) => `${i.hint || i.marketplace}: ${i.count} — ${i.reason}`);
-        list(data.recommendations, 'recommendations', (i) => `${i.title}: ${i.reason}`);
+
+        list(summary.top_marketplaces, 'marketplaces', (i) => ({ name: i.marketplace || 'desconhecido', count: i.count }));
+        list(summary.top_labels, 'labels', (i) => ({ name: i.label || 'sem label', count: i.count }));
+        list(data.scraper_opportunities, 'scrapers', (i) => ({ name: `${i.hint || i.marketplace} — ${i.reason}`, count: i.count }));
+
+        const recommendationEl = document.getElementById('recommendations');
+        recommendationEl.innerHTML = '';
+        const recommendations = data.recommendations || [];
+        if (recommendations.length === 0) {
+          recommendationEl.innerHTML = '<li>Sem dados ainda.</li>';
+          return;
+        }
+        for (const item of recommendations) {
+          const li = document.createElement('li');
+          const title = document.createElement('strong');
+          title.textContent = item.title || 'Recomendação';
+          li.appendChild(title);
+          li.append(document.createTextNode(item.reason || ''));
+          recommendationEl.appendChild(li);
+        }
       })
       .catch((err) => {
-        document.getElementById('metrics').innerHTML = `<article class="card"><strong>Sem relatório publicado.</strong><p>${err.message}</p><p>Rode <code>publish_market_intel_report</code>.</p></article>`;
+        document.getElementById('metrics').innerHTML = `<article class="state-message"><strong>Sem relatório publicado.</strong><p>${err.message}</p><p>Rode <code>publish_market_intel_report</code>.</p></article>`;
+        document.getElementById('heroWindow').textContent = 'Falha ao carregar o relatório publicado.';
       });
   </script>
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

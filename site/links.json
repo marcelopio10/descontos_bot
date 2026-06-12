@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-12T11:05:32.147476+00:00",
+  "generated_at": "2026-06-12T13:40:11.162806+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -34,6 +34,16 @@
       "tracked_url": "https://meli.la/2jwE3u5?matt_word=dbot_ig_bio_6146&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6146"
     },
     {
+      "id": 6242,
+      "title": "Tênis Asics Original Revelation Academia Caminhada Promoção",
+      "current_price": "89.00",
+      "original_price": "399.00",
+      "discount_pct": "77.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_672081-MLB110900515266_052026-AB-tnis-asics-original-revelation-academia-caminhada-promoco.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1behxhR?matt_word=dbot_ig_bio_6242&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6242"
+    },
+    {
       "id": 3698,
       "title": "Omega Plus 120 Cápsulas Ômega 3 Dark Lab Sem Sabor",
       "current_price": "99.00",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_840067-MLA97214107041_112025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/114drmQ?matt_word=dbot_ig_bio_3698&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3698"
-    },
-    {
-      "id": 2586,
-      "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
-      "current_price": "159.00",
-      "original_price": "699.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
     }
   ]
 }

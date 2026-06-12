@@ -1,19 +1,122 @@
 {
   "version": "1.0",
-  "generated_at": null,
-  "date": null,
-  "window": { "start": null, "end": null },
-  "summary": {
-    "groups_analyzed": 0,
-    "messages_analyzed": 0,
-    "top_groups": [],
-    "top_marketplaces": [],
-    "top_labels": [],
-    "image_messages": 0,
-    "coupon_messages": 0
+  "generated_at": "2026-06-12T11:01:53.183020+00:00",
+  "date": "2026-06-12",
+  "window": {
+    "start": "2026-06-12T03:00:00+00:00",
+    "end": "2026-06-13T02:59:59.999999+00:00"
   },
-  "recommendations": [],
-  "scraper_opportunities": [],
+  "summary": {
+    "groups_analyzed": 2,
+    "messages_analyzed": 21,
+    "top_groups": [
+      {
+        "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+        "count": 20
+      },
+      {
+        "group": "#330 Promo Relâmpago MEN",
+        "count": 1
+      }
+    ],
+    "top_marketplaces": [
+      {
+        "marketplace": "amazon",
+        "count": 10
+      },
+      {
+        "marketplace": "mercadolivre",
+        "count": 8
+      },
+      {
+        "marketplace": "desconhecido",
+        "count": 3
+      }
+    ],
+    "top_labels": [
+      {
+        "label": "imagem",
+        "count": 20
+      },
+      {
+        "label": "acima_300",
+        "count": 19
+      },
+      {
+        "label": "cupom",
+        "count": 9
+      },
+      {
+        "label": "urgencia",
+        "count": 4
+      },
+      {
+        "label": "ate_50",
+        "count": 1
+      }
+    ],
+    "image_messages": 20,
+    "coupon_messages": 9
+  },
+  "recommendations": [
+    {
+      "type": "copy",
+      "title": "Destacar cupom quando existir",
+      "reason": "Grupos monitorados usam cupom como gancho editorial recorrente."
+    },
+    {
+      "type": "creative",
+      "title": "Priorizar ofertas com imagem forte",
+      "reason": "Amostra observada contém mensagens com imagem, útil para WhatsApp e Instagram."
+    },
+    {
+      "type": "curation",
+      "title": "Usar achados como sinais agregados, não como fonte de ofertas",
+      "reason": "Mantém compliance e evita copiar links/copy de terceiros."
+    }
+  ],
+  "scraper_opportunities": [
+    {
+      "hint": "faixa_preco:acima_300",
+      "count": 19,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "categoria:moda",
+      "count": 2,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "faixa_preco:ate_100",
+      "count": 1,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "categoria:beleza",
+      "count": 1,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "termo:tenis",
+      "count": 1,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "categoria:casa/cozinha",
+      "count": 1,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "marketplace": "amazon",
+      "count": 10,
+      "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
+    },
+    {
+      "marketplace": "mercadolivre",
+      "count": 8,
+      "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
+    }
+  ],
   "privacy": {
     "sender_identity": "sha256 hash only in database; omitted from report",
     "observed_urls": "omitted from report; never publish third-party affiliate links"

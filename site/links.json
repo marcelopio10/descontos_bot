@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-12T15:38:13.914228+00:00",
+  "generated_at": "2026-06-13T11:05:14.911283+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 6169,
-      "title": "Kit 10 Lampada Led Dicróica Mr16 4,8w 3000k Branco Quente Gu10 110v/220v Branco Cod: Alut001203-10 Alut By Avant 127/220v",
-      "current_price": "53.00",
-      "original_price": "284.00",
-      "discount_pct": "81.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_994318-MLA106544633522_022026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1qYM8RB?matt_word=dbot_ig_bio_6169&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6169"
-    },
     {
       "id": 6034,
       "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
@@ -24,14 +14,14 @@
       "tracked_url": "https://meli.la/2nV5Ews?matt_word=dbot_ig_bio_6034&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6034"
     },
     {
-      "id": 6146,
-      "title": "Colchão Solteiro Espuma D33 Inducol Soft 88x188x17cm Cinza Cbp",
-      "current_price": "466.00",
-      "original_price": "2218.00",
-      "discount_pct": "78.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_693833-MLA107393406650_032026-AB.webp",
+      "id": 5823,
+      "title": "Caminhão De Engolir Dinossauro Transformável Brinquedo 7 Em1 Azul",
+      "current_price": "125.00",
+      "original_price": "600.00",
+      "discount_pct": "79.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_996450-MLB95286940381_102025-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2jwE3u5?matt_word=dbot_ig_bio_6146&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6146"
+      "tracked_url": "https://meli.la/23cTXXC?matt_word=dbot_ig_bio_5823&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5823"
     },
     {
       "id": 6242,
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
+    },
+    {
+      "id": 1330,
+      "title": "Pre Treino Carnage Uva 450g Com Creatina Dark Lab",
+      "current_price": "99.00",
+      "original_price": "399.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_704549-MLA99446265254_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2hkWfs1?matt_word=dbot_ig_bio_1330&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1330"
     }
   ]
 }

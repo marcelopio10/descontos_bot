@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-13T11:05:14.911283+00:00",
+  "generated_at": "2026-06-13T16:19:42.000035+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 6034,
-      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
-      "current_price": "80.00",
-      "original_price": "400.00",
-      "discount_pct": "79.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_907958-MLB110899488495_042026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2nV5Ews?matt_word=dbot_ig_bio_6034&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6034"
-    },
     {
       "id": 5823,
       "title": "Caminhão De Engolir Dinossauro Transformável Brinquedo 7 Em1 Azul",
@@ -34,24 +24,34 @@
       "tracked_url": "https://meli.la/1behxhR?matt_word=dbot_ig_bio_6242&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6242"
     },
     {
-      "id": 2586,
-      "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
-      "current_price": "159.00",
-      "original_price": "699.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
-    },
-    {
-      "id": 1330,
-      "title": "Pre Treino Carnage Uva 450g Com Creatina Dark Lab",
+      "id": 3777,
+      "title": "Pre Treino Venom Underground 300g Mango Loko Dark Lab",
       "current_price": "99.00",
       "original_price": "399.00",
       "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_704549-MLA99446265254_112025-AB.webp",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_999459-MLA99539534758_122025-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2hkWfs1?matt_word=dbot_ig_bio_1330&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1330"
+      "tracked_url": "https://meli.la/1JaKPDA?matt_word=dbot_ig_bio_3777&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3777"
+    },
+    {
+      "id": 5619,
+      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
+      "current_price": "144.00",
+      "original_price": "597.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802771-MLB105838199600_022026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2pK3wDF?matt_word=dbot_ig_bio_5619&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5619"
+    },
+    {
+      "id": 6263,
+      "title": "Caminhão Dinossauro T-rex Que Engole Carros Con 6 Bolinhas Lançador De Carros E Bolas + Garagem Expansível Vermelho",
+      "current_price": "146.00",
+      "original_price": "600.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_938903-MLB110853839706_052026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/11R6GjK?matt_word=dbot_ig_bio_6263&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6263"
     }
   ]
 }

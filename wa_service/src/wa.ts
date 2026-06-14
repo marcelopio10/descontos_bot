@@ -8,6 +8,7 @@ import makeWASocket, {
 import { Boom } from "@hapi/boom";
 import {
   collectObservedMessages as collectObserverBuffer,
+  getObserverConfig,
   listObserverGroups as filterObserverGroups,
   recordObservedMessage,
   type ObservedMessage,
@@ -98,16 +99,20 @@ export async function connect(): Promise<void> {
   sock.ev.on("creds.update", saveCreds);
 
   sock.ev.on("messages.upsert", async ({ messages }) => {
+    const observerConfig = getObserverConfig();
+    if (!observerConfig.enabled || observerConfig.groupJids.length === 0) return;
+
+    const allowedGroups = new Set(observerConfig.groupJids);
     for (const message of messages ?? []) {
       const groupJid = String(message?.key?.remoteJid ?? "");
-      if (!groupJid.endsWith("@g.us")) continue;
+      if (!groupJid.endsWith("@g.us") || !allowedGroups.has(groupJid)) continue;
       let subject: string | undefined;
       try {
         subject = (await sock?.groupMetadata(groupJid))?.subject;
       } catch {
         subject = undefined;
       }
-      recordObservedMessage(message as never, subject);
+      recordObservedMessage(message as never, subject, observerConfig);
     }
   });
 

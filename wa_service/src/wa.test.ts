@@ -17,10 +17,13 @@ vi.mock("@whiskeysockets/baileys", () => ({
 vi.mock("qrcode-terminal", () => ({ default: { generate: vi.fn() } }));
 vi.mock("pino", () => ({ default: vi.fn(() => ({ level: "silent" })) }));
 
-import { getAuthDir, getWaVersionOverride, listGroups, resolveGroupJid, sendImage, sendText } from "./wa.js";
+import makeWASocket from "@whiskeysockets/baileys";
+import { getAuthDir, getWaVersionOverride, listGroups, resolveGroupJid, sendImage, sendText, connect, collectObservedMessages } from "./wa.js";
+import { resetObserverBufferForTests } from "./observer.js";
 
 const mockSock = {
   groupFetchAllParticipating: vi.fn(),
+  groupMetadata: vi.fn(),
   sendMessage: vi.fn().mockResolvedValue(undefined),
   ev: { on: vi.fn() },
   user: { id: "5511999999999@s.whatsapp.net" },
@@ -28,7 +31,15 @@ const mockSock = {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  vi.mocked(makeWASocket).mockReturnValue(mockSock as never);
+  resetObserverBufferForTests();
   delete process.env.WA_AUTH_DIR;
+  delete process.env.WA_VERSION;
+  delete process.env.WA_OBSERVER_ENABLED;
+  delete process.env.WA_OBSERVER_GROUP_JIDS;
+  delete process.env.WA_OBSERVER_LOOKBACK_HOURS;
+  delete process.env.WA_OBSERVER_MAX_MESSAGES_PER_GROUP;
+  delete process.env.WA_OBSERVER_SENDER_HASH_SALT;
 });
 
 describe("getAuthDir", () => {
@@ -101,6 +112,68 @@ describe("listGroups", () => {
       { jid: "120363000000000001@g.us", subject: "Alpha" },
       { jid: "120363000000000002@g.us", subject: "Zulu" },
     ]);
+  });
+});
+
+describe("messages observer", () => {
+  function getMessagesUpsertHandler() {
+    const call = mockSock.ev.on.mock.calls.find(([event]) => event === "messages.upsert");
+    expect(call).toBeTruthy();
+    return call?.[1] as (payload: { messages: Array<Record<string, unknown>> }) => Promise<void>;
+  }
+
+  it("não consulta metadados nem registra mensagens quando o observer está desligado", async () => {
+    await connect();
+    const handler = getMessagesUpsertHandler();
+
+    await handler({
+      messages: [
+        {
+          key: { id: "MSG1", remoteJid: "120363000000000001@g.us", participant: "a@s.whatsapp.net" },
+          messageTimestamp: 1781220000,
+          message: { conversation: "Oferta R$ 99" },
+        },
+      ],
+    });
+
+    expect(mockSock.groupMetadata).not.toHaveBeenCalled();
+    expect(await collectObservedMessages()).toEqual({ enabled: false, messages: [] });
+  });
+
+  it("consulta metadados somente para grupos allowlisted quando o observer está ligado", async () => {
+    process.env.WA_OBSERVER_ENABLED = "true";
+    process.env.WA_OBSERVER_GROUP_JIDS = "120363000000000001@g.us";
+    process.env.WA_OBSERVER_LOOKBACK_HOURS = "9999";
+    process.env.WA_OBSERVER_SENDER_HASH_SALT = "local-salt";
+    mockSock.groupMetadata.mockResolvedValue({ subject: "Ofertas A" });
+
+    await connect();
+    const handler = getMessagesUpsertHandler();
+    await handler({
+      messages: [
+        {
+          key: { id: "MSG1", remoteJid: "120363000000000001@g.us", participant: "a@s.whatsapp.net" },
+          messageTimestamp: 1781220000,
+          message: { conversation: "Oferta R$ 99" },
+        },
+        {
+          key: { id: "MSG2", remoteJid: "120363000000000002@g.us", participant: "b@s.whatsapp.net" },
+          messageTimestamp: 1781220000,
+          message: { conversation: "Outro grupo R$ 88" },
+        },
+      ],
+    });
+
+    expect(mockSock.groupMetadata).toHaveBeenCalledOnce();
+    expect(mockSock.groupMetadata).toHaveBeenCalledWith("120363000000000001@g.us");
+    const collected = await collectObservedMessages();
+    expect(collected.enabled).toBe(true);
+    expect(collected.messages).toHaveLength(1);
+    expect(collected.messages[0]).toMatchObject({
+      message_id: "MSG1",
+      group_jid: "120363000000000001@g.us",
+      group_subject: "Ofertas A",
+    });
   });
 });
 

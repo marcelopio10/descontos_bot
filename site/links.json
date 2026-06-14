@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-13T16:19:42.000035+00:00",
+  "generated_at": "2026-06-14T11:04:36.315609+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,6 +12,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_996450-MLB95286940381_102025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/23cTXXC?matt_word=dbot_ig_bio_5823&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5823"
+    },
+    {
+      "id": 6393,
+      "title": "Kit Álbum Capa Dura + Lata Oficial Copa 2026 +140 Figurinhas",
+      "current_price": "193.00",
+      "original_price": "899.00",
+      "discount_pct": "78.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_610974-MLB111634804743_052026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2Mex3nJ?matt_word=dbot_ig_bio_6393&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6393"
     },
     {
       "id": 6242,
@@ -34,24 +44,14 @@
       "tracked_url": "https://meli.la/1JaKPDA?matt_word=dbot_ig_bio_3777&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3777"
     },
     {
-      "id": 5619,
-      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
-      "current_price": "144.00",
-      "original_price": "597.00",
+      "id": 5795,
+      "title": "Álbum Da Copa Do Mundo 2026 Capa Dura Oficial +140 Figurinha",
+      "current_price": "193.00",
+      "original_price": "799.00",
       "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802771-MLB105838199600_022026-AB.webp",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677281-MLB111538779471_052026-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2pK3wDF?matt_word=dbot_ig_bio_5619&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5619"
-    },
-    {
-      "id": 6263,
-      "title": "Caminhão Dinossauro T-rex Que Engole Carros Con 6 Bolinhas Lançador De Carros E Bolas + Garagem Expansível Vermelho",
-      "current_price": "146.00",
-      "original_price": "600.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_938903-MLB110853839706_052026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/11R6GjK?matt_word=dbot_ig_bio_6263&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6263"
+      "tracked_url": "https://meli.la/2gUbku7?matt_word=dbot_ig_bio_5795&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5795"
     }
   ]
 }

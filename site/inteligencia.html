@@ -228,7 +228,7 @@
           <p class="disclosure-inline">Dados agregados para curadoria, não fonte de republicação.</p>
         </div>
         <aside class="intel-summary-card" aria-label="Resumo da análise">
-          <span class="panel-label">Mensagens analisadas</span>
+          <span class="panel-label">Mensagens analisadas no histórico</span>
           <strong id="heroMessages">--</strong>
           <span id="heroWindow">Carregando relatório de inteligência</span>
         </aside>
@@ -305,21 +305,26 @@
       .then((r) => r.ok ? r.json() : Promise.reject(new Error('JSON não encontrado')))
       .then((data) => {
         const summary = data.summary || {};
+        const cycleSummary = data.cycle_summary || {};
         const messages = summary.messages_analyzed || 0;
         const groups = summary.groups_analyzed || 0;
         const images = summary.image_messages || 0;
         const coupons = summary.coupon_messages || 0;
+        const cycleMessages = cycleSummary.messages_analyzed || 0;
+        const cycleGroups = cycleSummary.groups_analyzed || 0;
+        const cycleImages = cycleSummary.image_messages || 0;
+        const cycleCoupons = cycleSummary.coupon_messages || 0;
 
         document.getElementById('heroMessages').textContent = fmt.format(messages);
         document.getElementById('heroWindow').textContent = data.date
-          ? `Relatório de ${formatDate(data.date)} com ${fmt.format(groups)} grupo(s) analisado(s).`
+          ? `Histórico acumulado até ${formatDate(data.date)}; ciclo do dia com ${fmt.format(cycleMessages)} mensagem(ns) em ${fmt.format(cycleGroups)} grupo(s).`
           : 'Sem relatório publicado ainda.';
 
         document.getElementById('metrics').innerHTML = `
-          <article class="intel-kpi"><span class="intel-label">Data</span><span class="intel-value">${formatDate(data.date)}</span><span class="intel-sub">Janela diária em America/Sao_Paulo.</span></article>
-          <article class="intel-kpi"><span class="intel-label">Mensagens</span><span class="intel-value">${fmt.format(messages)}</span><span class="intel-sub">Amostras válidas no dia.</span></article>
-          <article class="intel-kpi"><span class="intel-label">Grupos</span><span class="intel-value">${fmt.format(groups)}</span><span class="intel-sub">Grupos allowlistados com dados.</span></article>
-          <article class="intel-kpi"><span class="intel-label">Imagem / cupom</span><span class="intel-value">${fmt.format(images)} / ${fmt.format(coupons)}</span><span class="intel-sub">Sinais editoriais detectados.</span></article>
+          <article class="intel-kpi"><span class="intel-label">Atualizado até</span><span class="intel-value">${formatDate(data.date)}</span><span class="intel-sub">JSON incremental com histórico acumulado.</span></article>
+          <article class="intel-kpi"><span class="intel-label">Mensagens</span><span class="intel-value">${fmt.format(messages)}</span><span class="intel-sub">Histórico acumulado; ciclo atual: ${fmt.format(cycleMessages)}.</span></article>
+          <article class="intel-kpi"><span class="intel-label">Grupos</span><span class="intel-value">${fmt.format(groups)}</span><span class="intel-sub">Com dados no histórico; ciclo atual: ${fmt.format(cycleGroups)}.</span></article>
+          <article class="intel-kpi"><span class="intel-label">Imagem / cupom</span><span class="intel-value">${fmt.format(images)} / ${fmt.format(coupons)}</span><span class="intel-sub">No ciclo atual: ${fmt.format(cycleImages)} / ${fmt.format(cycleCoupons)}.</span></article>
         `;
 
         list(summary.top_marketplaces, 'marketplaces', (i) => ({ name: i.marketplace || 'desconhecido', count: i.count }));

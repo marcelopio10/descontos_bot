@@ -1,3 +1,4 @@
+import re
 from collections import Counter
 from datetime import date, datetime, time, timezone as dt_timezone
 from decimal import Decimal
@@ -9,6 +10,37 @@ from django.utils import timezone
 from apps.market_intel.models import MarketIntelDailyReport, ObservedWhatsAppMessage
 
 LOCAL_TZ = ZoneInfo('America/Sao_Paulo')
+ALLOWED_LABELS = {
+    'urgencia',
+    'prova_social',
+    'cupom',
+    'imagem',
+    'ate_50',
+    'ate_100',
+    'ate_300',
+    'acima_300',
+}
+ALLOWED_RAW_TYPES = {'conversation', 'extendedTextMessage', 'imageMessage', 'videoMessage', 'documentMessage'}
+ALLOWED_HINTS = {
+    'categoria:casa/cozinha',
+    'categoria:moda',
+    'categoria:tecnologia',
+    'categoria:beleza',
+    'termo:air fryer',
+    'termo:cafeteira',
+    'termo:fone',
+    'termo:monitor',
+    'termo:tenis',
+    'faixa_preco:ate_100',
+    'faixa_preco:ate_300',
+    'faixa_preco:acima_300',
+}
+ALLOWED_MARKETPLACES = {'amazon', 'mercadolivre', 'shopee', 'magalu', 'aliexpress', 'desconhecido'}
+URL_OR_WHATSAPP_ID_RE = re.compile(
+    r'https?://\S+|www\.\S+|[A-Za-z0-9_:+.-]+@(?:g\.us|s\.whatsapp\.net|lid)',
+    re.IGNORECASE,
+)
+COUPON_RE = re.compile(r'^[A-Z0-9_-]{3,24}$')
 
 
 def generate_daily_report(report_date: date) -> MarketIntelDailyReport:
@@ -38,11 +70,11 @@ def generate_daily_report(report_date: date) -> MarketIntelDailyReport:
 
 def summarize_messages(messages: QuerySet[ObservedWhatsAppMessage]) -> dict:
     rows = list(messages)
-    marketplace_counts = Counter(row.parsed_marketplace or 'desconhecido' for row in rows)
-    group_counts = Counter(row.group.name for row in rows)
+    marketplace_counts = Counter(_sanitize_marketplace(row.parsed_marketplace) for row in rows)
+    group_counts = Counter(_sanitize_public_text(row.group.name) for row in rows)
     label_counts: Counter[str] = Counter()
     for row in rows:
-        label_counts.update(row.editorial_labels or [])
+        label_counts.update(_allowed_values(row.editorial_labels or [], ALLOWED_LABELS))
     return {
         'groups_analyzed': len({row.group_id for row in rows}),
         'messages_analyzed': len(rows),
@@ -80,9 +112,10 @@ def build_scraper_opportunities(messages: QuerySet[ObservedWhatsAppMessage]) -> 
     hint_counts: Counter[str] = Counter()
     marketplace_counts: Counter[str] = Counter()
     for row in messages:
-        hint_counts.update(row.scraper_hints or [])
-        if row.parsed_marketplace:
-            marketplace_counts[row.parsed_marketplace] += 1
+        hint_counts.update(_allowed_values(row.scraper_hints or [], ALLOWED_HINTS))
+        marketplace = _sanitize_marketplace(row.parsed_marketplace)
+        if marketplace != 'desconhecido':
+            marketplace_counts[marketplace] += 1
     opportunities = []
     for hint, count in hint_counts.most_common(10):
         opportunities.append({
@@ -100,23 +133,86 @@ def build_scraper_opportunities(messages: QuerySet[ObservedWhatsAppMessage]) -> 
 
 
 def build_daily_report_payload(report: MarketIntelDailyReport) -> dict:
+    all_messages = ObservedWhatsAppMessage.objects.select_related('group').all()
+    cycle_messages = all_messages.filter(sent_at__gte=report.window_start, sent_at__lte=report.window_end)
+    cumulative_summary = summarize_messages(all_messages)
+    cycle_summary = summarize_messages(cycle_messages)
     return {
-        'version': '1.0',
+        'version': '1.1',
+        'report_type': 'incremental_market_intel',
         'generated_at': timezone.now().isoformat(),
         'date': report.date.isoformat(),
         'window': {
             'start': report.window_start.isoformat(),
             'end': report.window_end.isoformat(),
         },
-        'summary': report.summary_json,
-        'recommendations': report.recommendations_json,
-        'scraper_opportunities': report.scraper_opportunities_json,
+        'summary': cumulative_summary,
+        'cycle_summary': cycle_summary,
+        'recommendations': build_recommendations(cumulative_summary),
+        'cycle_recommendations': build_recommendations(cycle_summary),
+        'scraper_opportunities': build_scraper_opportunities(all_messages),
+        'cycle_scraper_opportunities': build_scraper_opportunities(cycle_messages),
+        'analyzed_offers': build_analyzed_offers(all_messages),
         'privacy': {
             'sender_identity': 'sha256 hash only in database; omitted from report',
+            'message_identity': 'Source message identifiers omitted from report',
+            'group_identity': 'WhatsApp group JIDs omitted from report; group names are kept for operational analysis',
             'observed_urls': 'omitted from report; never publish third-party affiliate links',
+            'raw_text': 'raw third-party copy omitted from report',
         },
     }
 
 
+def build_analyzed_offers(messages: QuerySet[ObservedWhatsAppMessage]) -> list[dict]:
+    rows = list(messages.order_by('-sent_at', '-id'))
+    return [
+        {
+            'observed_at': row.sent_at.isoformat(),
+            'group': _sanitize_public_text(row.group.name),
+            'marketplace': _sanitize_marketplace(row.parsed_marketplace),
+            'price': _decimal_to_str(row.parsed_price),
+            'original_price': _decimal_to_str(row.parsed_original_price),
+            'discount_pct': _decimal_to_str(row.parsed_discount_pct),
+            'coupon': _sanitize_coupon(row.parsed_coupon),
+            'has_coupon': bool(_sanitize_coupon(row.parsed_coupon)),
+            'has_image': row.has_image,
+            'raw_type': row.raw_type if row.raw_type in ALLOWED_RAW_TYPES else '',
+            'labels': _allowed_values(row.editorial_labels or [], ALLOWED_LABELS),
+            'scraper_hints': _allowed_values(row.scraper_hints or [], ALLOWED_HINTS),
+        }
+        for row in rows
+    ]
+
+
 def _counter_items(counter: Counter, key: str) -> list[dict]:
     return [{key: name, 'count': count} for name, count in counter.most_common(10)]
+
+
+def _allowed_values(values: list, allowed: set[str]) -> list[str]:
+    sanitized = []
+    for value in values:
+        text = str(value).strip()
+        if text in allowed and text not in sanitized:
+            sanitized.append(text)
+    return sanitized
+
+
+def _sanitize_coupon(value: str) -> str:
+    coupon = str(value or '').strip().upper()
+    return coupon if COUPON_RE.fullmatch(coupon) else ''
+
+
+def _sanitize_marketplace(value: str) -> str:
+    marketplace = str(value or '').strip().lower()
+    return marketplace if marketplace in ALLOWED_MARKETPLACES else 'desconhecido'
+
+
+def _sanitize_public_text(value: str, max_length: int = 120) -> str:
+    text = str(value or '').strip()
+    text = URL_OR_WHATSAPP_ID_RE.sub('', text)
+    text = re.sub(r'\s+', ' ', text).strip()
+    return text[:max_length]
+
+
+def _decimal_to_str(value: Decimal | None) -> str:
+    return str(value) if value is not None else ''

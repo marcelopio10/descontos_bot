@@ -1,12 +1,73 @@
 {
-  "version": "1.0",
-  "generated_at": "2026-06-12T11:01:53.183020+00:00",
+  "version": "1.1",
+  "report_type": "incremental_market_intel",
+  "generated_at": "2026-06-14T15:10:52.901330+00:00",
   "date": "2026-06-12",
   "window": {
     "start": "2026-06-12T03:00:00+00:00",
     "end": "2026-06-13T02:59:59.999999+00:00"
   },
   "summary": {
+    "groups_analyzed": 2,
+    "messages_analyzed": 33,
+    "top_groups": [
+      {
+        "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+        "count": 20
+      },
+      {
+        "group": "#330 Promo Relâmpago MEN",
+        "count": 13
+      }
+    ],
+    "top_marketplaces": [
+      {
+        "marketplace": "mercadolivre",
+        "count": 19
+      },
+      {
+        "marketplace": "amazon",
+        "count": 10
+      },
+      {
+        "marketplace": "desconhecido",
+        "count": 4
+      }
+    ],
+    "top_labels": [
+      {
+        "label": "acima_300",
+        "count": 21
+      },
+      {
+        "label": "imagem",
+        "count": 20
+      },
+      {
+        "label": "cupom",
+        "count": 18
+      },
+      {
+        "label": "urgencia",
+        "count": 6
+      },
+      {
+        "label": "ate_100",
+        "count": 5
+      },
+      {
+        "label": "ate_50",
+        "count": 3
+      },
+      {
+        "label": "ate_300",
+        "count": 3
+      }
+    ],
+    "image_messages": 20,
+    "coupon_messages": 18
+  },
+  "cycle_summary": {
     "groups_analyzed": 2,
     "messages_analyzed": 21,
     "top_groups": [
@@ -75,7 +136,71 @@
       "reason": "Mantém compliance e evita copiar links/copy de terceiros."
     }
   ],
+  "cycle_recommendations": [
+    {
+      "type": "copy",
+      "title": "Destacar cupom quando existir",
+      "reason": "Grupos monitorados usam cupom como gancho editorial recorrente."
+    },
+    {
+      "type": "creative",
+      "title": "Priorizar ofertas com imagem forte",
+      "reason": "Amostra observada contém mensagens com imagem, útil para WhatsApp e Instagram."
+    },
+    {
+      "type": "curation",
+      "title": "Usar achados como sinais agregados, não como fonte de ofertas",
+      "reason": "Mantém compliance e evita copiar links/copy de terceiros."
+    }
+  ],
   "scraper_opportunities": [
+    {
+      "hint": "faixa_preco:acima_300",
+      "count": 21,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "faixa_preco:ate_100",
+      "count": 8,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "categoria:moda",
+      "count": 7,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "termo:tenis",
+      "count": 5,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "faixa_preco:ate_300",
+      "count": 3,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "categoria:beleza",
+      "count": 1,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "categoria:casa/cozinha",
+      "count": 1,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "marketplace": "mercadolivre",
+      "count": 19,
+      "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
+    },
+    {
+      "marketplace": "amazon",
+      "count": 10,
+      "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
+    }
+  ],
+  "cycle_scraper_opportunities": [
     {
       "hint": "faixa_preco:acima_300",
       "count": 19,
@@ -117,8 +242,662 @@
       "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
     }
   ],
+  "analyzed_offers": [
+    {
+      "observed_at": "2026-06-12T10:45:16+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "25.00",
+      "original_price": "249.99",
+      "discount_pct": "90.00",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "cupom",
+        "ate_50"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "faixa_preco:ate_100"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:18+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "NAMORO20",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem"
+      ],
+      "scraper_hints": []
+    },
+    {
+      "observed_at": "2026-06-12T10:35:17+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "3231.00",
+      "original_price": "3590.00",
+      "discount_pct": "10.00",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "urgencia",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "categoria:beleza",
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:17+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "desconhecido",
+      "price": "51999.00",
+      "original_price": "49399.00",
+      "discount_pct": "",
+      "coupon": "PROMOS10",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:16+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "1614.00",
+      "original_price": "1699.00",
+      "discount_pct": "5.00",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "urgencia",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:15+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "9499.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:15+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "2374.00",
+      "original_price": "2499.00",
+      "discount_pct": "5.00",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "urgencia",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:15+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "mercadolivre",
+      "price": "3690.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:14+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "mercadolivre",
+      "price": "9215.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "MODANOML",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:14+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "1790.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:14+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "14089.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:13+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "676.00",
+      "original_price": "601.00",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "urgencia",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:13+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "mercadolivre",
+      "price": "11808.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "APROVEITA",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:12+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "mercadolivre",
+      "price": "6991.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "MODANOML",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:12+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "mercadolivre",
+      "price": "429900.00",
+      "original_price": "386910.00",
+      "discount_pct": "",
+      "coupon": "TVCASASBAHIA",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:11+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "231990.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "TVPROMO",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:11+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "15499.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "categoria:casa/cozinha",
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:10+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "mercadolivre",
+      "price": "30900.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "APROVEITA",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:09+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "mercadolivre",
+      "price": "193990.00",
+      "original_price": "180411.00",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:09+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "amazon",
+      "price": "27800.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T10:35:08+00:00",
+      "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
+      "marketplace": "desconhecido",
+      "price": "629.00",
+      "original_price": "20.00",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T01:37:41+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "desconhecido",
+      "price": "359.99",
+      "original_price": "699.99",
+      "discount_pct": "48.57",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "urgencia",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T01:25:23+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "69.90",
+      "original_price": "190.00",
+      "discount_pct": "63.21",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "",
+      "labels": [
+        "cupom",
+        "ate_100"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T00:58:04+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "65.99",
+      "original_price": "109.99",
+      "discount_pct": "40.00",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "cupom",
+        "ate_100"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T00:54:39+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "183.99",
+      "original_price": "379.99",
+      "discount_pct": "51.58",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "cupom",
+        "ate_300"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T00:51:10+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "80.99",
+      "original_price": "133.90",
+      "discount_pct": "39.51",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "cupom",
+        "ate_100"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ]
+    },
+    {
+      "observed_at": "2026-06-12T00:37:33+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "50.99",
+      "original_price": "135.41",
+      "discount_pct": "62.34",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "cupom",
+        "ate_100"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "faixa_preco:ate_100"
+      ]
+    },
+    {
+      "observed_at": "2026-06-11T23:54:06+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "2399.99",
+      "original_price": "2749.00",
+      "discount_pct": "12.70",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "cupom",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-11T23:46:56+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "32.31",
+      "original_price": "84.00",
+      "discount_pct": "61.54",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "",
+      "labels": [
+        "ate_50"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ]
+    },
+    {
+      "observed_at": "2026-06-11T23:32:49+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "144.31",
+      "original_price": "249.99",
+      "discount_pct": "42.27",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "cupom",
+        "ate_300"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-11T23:31:19+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "228.96",
+      "original_price": "369.00",
+      "discount_pct": "37.95",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "cupom",
+        "ate_300"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300"
+      ]
+    },
+    {
+      "observed_at": "2026-06-11T23:29:27+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "72.98",
+      "original_price": "184.90",
+      "discount_pct": "60.53",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [
+        "urgencia",
+        "cupom",
+        "ate_100"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ]
+    },
+    {
+      "observed_at": "2026-06-11T23:09:06+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "28.90",
+      "original_price": "41.90",
+      "discount_pct": "31.03",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "",
+      "labels": [
+        "ate_50"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ]
+    }
+  ],
   "privacy": {
     "sender_identity": "sha256 hash only in database; omitted from report",
-    "observed_urls": "omitted from report; never publish third-party affiliate links"
+    "message_identity": "Source message identifiers omitted from report",
+    "group_identity": "WhatsApp group JIDs omitted from report; group names are kept for operational analysis",
+    "observed_urls": "omitted from report; never publish third-party affiliate links",
+    "raw_text": "raw third-party copy omitted from report"
   }
 }

@@ -150,3 +150,41 @@ O novo desenho do site é puramente informacional. Sem forms, sem newsletter, se
 | Site recém-deployado quebrado, grupo já redirecionado para `bridge_url` | Sequência de execução: site reformado MVP (Fase 4 mínima) → push do primeiro `offers.json` → Fase Mitigação ativa o `bridge_only` no grupo. Nunca o inverso. |
 | Vercel está conectado a outro repo | Ajustar o projeto Vercel para apontar para `descontos_bot.git` antes do próximo deploy. |
 | Conflito de merge com mudanças manuais no site | `publish_offers --push` faz `git pull --ff-only` primeiro; se falhar, aborta sem commit e loga para revisão humana. |
+
+## 5. Login do site privado (Sprint 7A)
+
+As páginas analíticas/administrativas e seus dados deixam de ser públicas. Autenticação de **operador único** via Vercel Edge Middleware + Functions, sem banco e sem segredo no código.
+
+### 5.1. Rotas
+
+| Rota | Acesso |
+|---|---|
+| `/`, `/oferta`, `/links`, `/sobre`, `/disclosure`, `/r`, `/api/click`, `/api/clicks`, `/offers.json`, `/links.json`, `/assets/*`, `/og.png` | **Público** |
+| `/dashboard`, `/inteligencia` (com/sem `.html`) | **Privado** |
+| `/affiliate-summary.json`, `/market-intel.json` | **Privado** (JSON sensível) |
+| prefixos `/admin`, `/analise`, `/analysis`, `/ops`, `/private` | **Privado** (reserva futura) |
+
+A proteção é **fail-closed por allowlist de matcher**: `site/middleware.js` só executa nas rotas privadas declaradas em `config.matcher`. Qualquer rota fora do matcher nunca passa pelo middleware e permanece pública.
+
+### 5.2. Componentes
+
+- `site/_auth/token.js` — assina/verifica o cookie de sessão (HMAC-SHA256, Web Crypto) e gera o hash da senha.
+- `site/_auth/cookie.js` — atributos do cookie (`HttpOnly`, `SameSite=Lax`, `Secure` em HTTPS, `Path=/`, `Max-Age`).
+- `site/api/login.js` / `logout.js` / `session.js` — emite/limpa/inspeciona a sessão.
+- `site/middleware.js` — redireciona páginas anônimas para `/login?next=<rota>` e responde `401` para JSON sensível.
+- `site/login.html` + `site/assets/auth.js` — tela de login (pt-BR, anti-open-redirect).
+- `site/assets/logout.js` — botão "Sair" das páginas privadas.
+
+O cookie `descontos_bot_session` é enviado automaticamente no `fetch` same-origin do dashboard/inteligência, então os JSONs protegidos continuam carregando para o operador logado sem alterar o frontend.
+
+### 5.3. Dependência
+
+`@vercel/edge` (helper `next()` do middleware) entra em `site/package.json`. Rodar `npm install` em `site/` antes do `vercel dev`; no deploy a Vercel instala automaticamente.
+
+### 5.4. Variáveis
+
+Ver `docs/ENVIRONMENT.md` e `.env.example`. `SITE_AUTH_PASSWORD_HASH` é hash (não senha pura), gerado por `site/scripts/hash-password.mjs`.
+
+## 6. Endpoints de tracking de clique — STANDBY
+
+`site/api/click.js`, `site/api/clicks.js` e o comando `apps/analytics/management/commands/fetch_clicks.py` permanecem no repo como **fallback em standby**, sem uso operacional. A decisão de 2026-06-02 definiu os relatórios oficiais de afiliados (`AffiliateConversion` → `affiliate-summary.json`) como fonte de verdade de mensuração; o tracking próprio por clique foi abortado por fragilidade (adblock, race condition, infra). Estes endpoints continuam **públicos** (na allowlist do middleware) e dependem do Vercel KV; não removê-los sem antes confirmar que nenhum canal ainda gera links `/r` com beacon.

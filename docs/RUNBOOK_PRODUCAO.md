@@ -109,3 +109,59 @@ Cadência controlada por `Setting`:
 - `cycle_max_minutes` (padrão 180)
 
 A janela 00:00–06:00 BRT continua bloqueando distribuição (silêncio configurado em `apps/distribution/services/execution_window.py`).
+
+---
+
+# Runbook — Ativação do login do site privado (Sprint 7A)
+
+Protege `/dashboard`, `/inteligencia` e os JSONs sensíveis (`affiliate-summary.json`, `market-intel.json`) no deploy Vercel.
+
+## Pré-requisitos
+
+- [ ] Acesso ao painel Vercel do projeto (Root Directory = `site/`).
+- [ ] `npm install` rodado em `site/` (instala `@vercel/edge`); no deploy a Vercel instala sozinha.
+
+## Passo 1 — Gerar segredos
+
+```bash
+openssl rand -hex 32          # use como SITE_AUTH_SECRET
+SITE_AUTH_SECRET='<secret-gerado>' node site/scripts/hash-password.mjs '<senha-do-operador>'
+```
+
+Guarde o secret e a senha no cofre (1Password/Bitwarden). Nunca no vault nem no Git.
+
+## Passo 2 — Configurar Environment Variables no Vercel
+
+No projeto Vercel (Production e Preview):
+
+```
+SITE_AUTH_USER=operador
+SITE_AUTH_PASSWORD_HASH=<saída do hash-password.mjs>
+SITE_AUTH_SECRET=<secret gerado>
+SITE_AUTH_SESSION_TTL_SECONDS=28800
+```
+
+## Passo 3 — Validar em `vercel dev` antes do deploy
+
+```bash
+cd site
+npm install
+vercel dev
+```
+
+- `/` , `/oferta?slug=...`, `/links` abrem sem login.
+- `/dashboard` sem sessão redireciona para `/login?next=/dashboard`.
+- Login válido abre `/dashboard`; `/inteligencia` abre com a mesma sessão.
+- `GET /affiliate-summary.json` e `/market-intel.json` sem sessão retornam 401.
+- "Sair" bloqueia `/dashboard` novamente.
+- `next=https://site-malicioso.com` não redireciona para fora.
+
+## Passo 4 — Deploy e verificação em produção
+
+Após push/deploy, repetir as checagens do Passo 3 na URL pública e confirmar no DevTools que o cookie `descontos_bot_session` está `HttpOnly` e `Secure`.
+
+## Rollback
+
+1. Renomear/remover `site/middleware.js` e reverter os rewrites de auth no `site/vercel.json`.
+2. Redeploy. As páginas voltam ao comportamento público anterior.
+3. (Opcional) Remover as variáveis `SITE_AUTH_*` do Vercel.

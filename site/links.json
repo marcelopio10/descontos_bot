@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-14T23:53:43.891684+00:00",
+  "generated_at": "2026-06-15T02:59:14.257599+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 5823,
-      "title": "Caminhão De Engolir Dinossauro Transformável Brinquedo 7 Em1 Azul",
-      "current_price": "125.00",
-      "original_price": "600.00",
-      "discount_pct": "79.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_996450-MLB95286940381_102025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/23cTXXC?matt_word=dbot_ig_bio_5823&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5823"
-    },
     {
       "id": 6393,
       "title": "Kit Álbum Capa Dura + Lata Oficial Copa 2026 +140 Figurinhas",
@@ -24,14 +14,14 @@
       "tracked_url": "https://meli.la/2Mex3nJ?matt_word=dbot_ig_bio_6393&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6393"
     },
     {
-      "id": 6242,
-      "title": "Tênis Asics Original Revelation Academia Caminhada Promoção",
-      "current_price": "89.00",
-      "original_price": "399.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_672081-MLB110900515266_052026-AB-tnis-asics-original-revelation-academia-caminhada-promoco.webp",
+      "id": 5619,
+      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
+      "current_price": "141.00",
+      "original_price": "597.00",
+      "discount_pct": "76.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802771-MLB105838199600_022026-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1behxhR?matt_word=dbot_ig_bio_6242&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6242"
+      "tracked_url": "https://meli.la/2pK3wDF?matt_word=dbot_ig_bio_5619&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5619"
     },
     {
       "id": 3281,
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677281-MLB111538779471_052026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/2gUbku7?matt_word=dbot_ig_bio_5795&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5795"
+    },
+    {
+      "id": 3646,
+      "title": "Camisa Camiseta Polo Masculina Texturizada Sem Botão",
+      "current_price": "41.00",
+      "original_price": "159.00",
+      "discount_pct": "73.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_711785-MLB108568830450_032026-AB-camisa-camiseta-polo-masculina-texturizada-sem-boto.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1gXykdw?matt_word=dbot_ig_bio_3646&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3646"
     }
   ]
 }

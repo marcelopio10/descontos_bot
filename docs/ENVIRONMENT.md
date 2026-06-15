@@ -18,6 +18,23 @@ PUBLISH_OFFERS_BRANCH=main
 OFFERS_JSON_OUTPUT_PATH=site/offers.json
 ```
 
+## Shopee Affiliate Open API (Sprint 7B)
+
+Conector oficial GraphQL. Detalhes de operação em `docs/SHOPEE_AFFILIATE_API.md`.
+
+```env
+SHOPEE_AFFILIATE_API_URL=https://open-api.affiliate.shopee.com.br/graphql
+SHOPEE_AFFILIATE_APP_ID=
+SHOPEE_AFFILIATE_SECRET=
+SHOPEE_AFFILIATE_DEFAULT_LIMIT=50
+SHOPEE_AFFILIATE_TIMEOUT_SECONDS=20
+SHOPEE_AFFILIATE_MAX_RETRIES=3
+SHOPEE_AFFILIATE_ENABLED=false
+```
+
+- `SHOPEE_AFFILIATE_ENABLED=false` mantém o conector travado: `collect_shopee_offers --save` aborta; `--dry-run` e testes mockados continuam funcionando.
+- `SHOPEE_AFFILIATE_APP_ID`/`SHOPEE_AFFILIATE_SECRET` só no `.env` local, nunca no Git nem no vault.
+
 ## Dados iniciais
 
 Após aplicar migrations, execute:

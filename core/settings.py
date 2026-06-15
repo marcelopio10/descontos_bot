@@ -140,6 +140,29 @@ ALLOW_PRODUCTION_TELEGRAM_SEND = os.environ.get(
 VERCEL_KV_REST_API_URL = os.environ.get('VERCEL_KV_REST_API_URL', '')
 VERCEL_KV_REST_API_TOKEN = os.environ.get('VERCEL_KV_REST_API_TOKEN', '')
 
+# Shopee Affiliate Open API (Sprint 7B) — conector oficial GraphQL.
+# Travado por padrão: com SHOPEE_AFFILIATE_ENABLED=false, comandos reais abortam
+# (exceto --dry-run e testes mockados). Segredos só no .env local, nunca no código.
+SHOPEE_AFFILIATE_API_URL = os.environ.get(
+    'SHOPEE_AFFILIATE_API_URL',
+    'https://open-api.affiliate.shopee.com.br/graphql',
+)
+SHOPEE_AFFILIATE_APP_ID = os.environ.get('SHOPEE_AFFILIATE_APP_ID', '')
+SHOPEE_AFFILIATE_SECRET = os.environ.get('SHOPEE_AFFILIATE_SECRET', '')
+SHOPEE_AFFILIATE_DEFAULT_LIMIT = int(
+    os.environ.get('SHOPEE_AFFILIATE_DEFAULT_LIMIT', '50'),
+)
+SHOPEE_AFFILIATE_TIMEOUT_SECONDS = int(
+    os.environ.get('SHOPEE_AFFILIATE_TIMEOUT_SECONDS', '20'),
+)
+SHOPEE_AFFILIATE_MAX_RETRIES = int(
+    os.environ.get('SHOPEE_AFFILIATE_MAX_RETRIES', '3'),
+)
+SHOPEE_AFFILIATE_ENABLED = os.environ.get(
+    'SHOPEE_AFFILIATE_ENABLED',
+    'false',
+).lower() in ('1', 'true', 'yes', 'on')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

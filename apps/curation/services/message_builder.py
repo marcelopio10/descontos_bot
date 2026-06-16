@@ -4,6 +4,7 @@ import re
 import textwrap
 
 from apps.analytics.services.link_builder import build_referral_suffix, build_tracked_url
+from apps.curation.services.ad_disclosure import ad_disclosure_prefix
 from apps.offers.models import Offer
 from apps.distribution.models import SocialChannel
 
@@ -33,7 +34,9 @@ def build_message(offer: Offer, channel: SocialChannel) -> str:
     badge = _build_badge(discount_pct)
 
     referral_suffix = build_referral_suffix(offer, channel)
+    disclosure = ad_disclosure_prefix(offer.marketplace.code)
     return (
+        f'{disclosure}'
         f'📦 *{short_title}*\n\n'
         f'{badge}\n'
         #f'{SEPARATOR}\n\n'

@@ -5,6 +5,7 @@ import textwrap
 
 from django.conf import settings
 
+from apps.curation.services.ad_disclosure import ad_disclosure_prefix
 from apps.curation.services.message_builder import get_final_url, sanitize_offer_title
 from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
@@ -75,7 +76,9 @@ def _render(offer: Offer, title_width: int) -> str:
         'Como Associado da Amazon, ganho por compras qualificadas.',
     )
 
+    disclosure = ad_disclosure_prefix(offer.marketplace.code)
     return (
+        f'{disclosure}'
         f'<b>📦 {escape(short_title)}</b>\n\n'
         f'{badge}\n\n'
         f'💰 <s>De {_format_brl(original_price)}</s>\n'

@@ -22,6 +22,13 @@ class Command(BaseCommand):
                 'is_active': True,
                 'affiliate_enabled': False,
             },
+            {
+                'name': 'Shopee',
+                'code': 'shopee',
+                'base_url': 'https://shopee.com.br',
+                'is_active': True,
+                'affiliate_enabled': True,
+            },
         ]
 
         for data in marketplaces:

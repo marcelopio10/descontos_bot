@@ -2,8 +2,10 @@
   "name": "descontos-bot-site",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Site público descontos.bot — funções serverless de tracking e dashboard.",
   "dependencies": {
+    "@vercel/edge": "^1.2.1",
     "@vercel/kv": "^3.0.0"
   },
   "devDependencies": {

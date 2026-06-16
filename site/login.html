@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso restrito | descontos.bot</title>
+  <meta name="description" content="Área restrita do descontos.bot.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    .login-shell {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 72px 0 96px;
+    }
+    .login-card {
+      padding: 32px;
+      background: rgba(22, 26, 34, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+    .login-card h1 {
+      margin: 8px 0 4px;
+      font-size: clamp(28px, 5vw, 38px);
+      line-height: 1.05;
+    }
+    .login-field {
+      display: block;
+      margin: 18px 0 0;
+    }
+    .login-field span {
+      display: block;
+      margin-bottom: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .login-field input {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(8, 10, 14, 0.7);
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      color: inherit;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+    }
+    .login-field input:focus {
+      outline: none;
+      border-color: var(--accent, #00C9B1);
+    }
+    .login-submit {
+      width: 100%;
+      margin-top: 24px;
+      padding: 13px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      background: var(--accent, #00C9B1);
+      color: #08110f;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+    }
+    .login-submit:disabled {
+      opacity: 0.6;
+      cursor: progress;
+    }
+    .login-error {
+      display: none;
+      margin-top: 16px;
+      padding: 10px 12px;
+      border: 1px solid rgba(229, 84, 84, 0.4);
+      border-radius: 10px;
+      background: rgba(229, 84, 84, 0.12);
+      color: #f0a6a6;
+      font-size: 14px;
+    }
+    .login-error.is-visible {
+      display: block;
+    }
+    .login-back {
+      display: inline-block;
+      margin-top: 22px;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">descontos<span>.bot</span></a>
+    <nav class="navlinks" aria-label="Navegação principal">
+      <a href="/">Ofertas</a>
+      <a href="/sobre">Sobre</a>
+    </nav>
+  </header>
+
+  <main class="login-shell">
+    <div class="login-card">
+      <p class="eyebrow">Área restrita</p>
+      <h1>Acesso ao painel</h1>
+      <form id="loginForm" autocomplete="off" novalidate>
+        <label class="login-field">
+          <span>Usuário</span>
+          <input id="user" name="user" type="text" required autocomplete="username" autofocus>
+        </label>
+        <label class="login-field">
+          <span>Senha</span>
+          <input id="password" name="password" type="password" required autocomplete="current-password">
+        </label>
+        <div class="login-error" id="loginError" role="alert" aria-live="assertive"></div>
+        <button class="login-submit" id="loginSubmit" type="submit">Entrar</button>
+      </form>
+      <a class="login-back" href="/">← Voltar para a home pública</a>
+    </div>
+  </main>
+
+  <script src="assets/auth.js"></script>
+</body>
+</html>

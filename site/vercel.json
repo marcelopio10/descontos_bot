@@ -7,7 +7,12 @@
     { "source": "/disclosure", "destination": "/disclosure.html" },
     { "source": "/r", "destination": "/r.html" },
     { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/inteligencia", "destination": "/inteligencia.html" },
+    { "source": "/login", "destination": "/login.html" },
     { "source": "/api/click", "destination": "/api/click.js" },
-    { "source": "/api/clicks", "destination": "/api/clicks.js" }
+    { "source": "/api/clicks", "destination": "/api/clicks.js" },
+    { "source": "/api/login", "destination": "/api/login.js" },
+    { "source": "/api/logout", "destination": "/api/logout.js" },
+    { "source": "/api/session", "destination": "/api/session.js" }
   ]
 }

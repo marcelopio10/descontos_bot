@@ -18,6 +18,21 @@ PUBLISH_OFFERS_BRANCH=main
 OFFERS_JSON_OUTPUT_PATH=site/offers.json
 ```
 
+## Login do site privado (Vercel — Sprint 7A)
+
+Protege `/dashboard`, `/inteligencia` e os JSONs sensíveis. Operador único.
+
+```env
+SITE_AUTH_USER=operador
+SITE_AUTH_PASSWORD_HASH=
+SITE_AUTH_SECRET=
+SITE_AUTH_SESSION_TTL_SECONDS=28800
+```
+
+- `SITE_AUTH_SECRET` — segredo forte e aleatório (ex.: `openssl rand -hex 32`).
+- `SITE_AUTH_PASSWORD_HASH` — HMAC-SHA256(senha, SITE_AUTH_SECRET) em hex.
+- Falha fechada: sem essas variáveis, `/api/login` responde 503 e as rotas privadas são bloqueadas.
+
 ## Shopee Affiliate Open API (Sprint 7B)
 
 Conector oficial GraphQL. Detalhes de operação em `docs/SHOPEE_AFFILIATE_API.md`.

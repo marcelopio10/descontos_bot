@@ -1,4 +1,6 @@
 import { createHash } from "crypto";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import path from "path";
 
 export interface ObserverConfig {
   enabled: boolean;
@@ -32,6 +34,52 @@ const DEFAULT_SENDER_HASH_SALT = "descontos-bot-observer";
 const URL_REGEX = /https?:\/\/[^\s)\]}>"]+/gi;
 
 let observedBuffer: ObservedMessage[] = [];
+let bufferDirty = false;
+let saveDebounceTimer: ReturnType<typeof setTimeout> | null = null;
+
+function getBufferPath(): string {
+  const envPath = process.env.WA_OBSERVER_BUFFER_PATH?.trim();
+  if (envPath) return envPath;
+  const authDir = process.env.WA_AUTH_DIR?.trim() || "auth_state";
+  return path.resolve(authDir, "observer_buffer.json");
+}
+
+function loadObserverBuffer(): void {
+  const filePath = getBufferPath();
+  try {
+    if (existsSync(filePath)) {
+      const raw = readFileSync(filePath, "utf-8");
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) {
+        observedBuffer = parsed;
+        console.log(`[observer] Buffer carregado: ${observedBuffer.length} mensagens de ${filePath}`);
+      }
+    }
+  } catch (err) {
+    console.error(`[observer] Erro ao carregar buffer de ${filePath}:`, err);
+  }
+}
+
+function saveObserverBuffer(): void {
+  bufferDirty = true;
+  if (saveDebounceTimer) return;
+  saveDebounceTimer = setTimeout(() => {
+    saveDebounceTimer = null;
+    if (!bufferDirty) return;
+    bufferDirty = false;
+    const filePath = getBufferPath();
+    try {
+      const dir = path.dirname(filePath);
+      if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+      writeFileSync(filePath, JSON.stringify(observedBuffer, null, 2), "utf-8");
+    } catch (err) {
+      console.error(`[observer] Erro ao salvar buffer em ${filePath}:`, err);
+    }
+  }, 1000);
+}
+
+// Carrega buffer do disco na inicializacao
+loadObserverBuffer();
 
 export function getObserverConfig(): ObserverConfig {
   return {
@@ -106,6 +154,7 @@ export function recordObservedMessage(
   if (!duplicate) {
     observedBuffer.push(message);
     trimBuffer(config);
+    saveObserverBuffer();
   }
   return message;
 }
@@ -134,6 +183,15 @@ export function collectObservedMessages(
 
 export function resetObserverBufferForTests() {
   observedBuffer = [];
+  if (saveDebounceTimer) {
+    clearTimeout(saveDebounceTimer);
+    saveDebounceTimer = null;
+  }
+  bufferDirty = false;
+  const filePath = getBufferPath();
+  try {
+    if (existsSync(filePath)) writeFileSync(filePath, "[]", "utf-8");
+  } catch { /* ignora erro em teste */ }
 }
 
 function parseGroupJids(raw: string): string[] {

@@ -16,7 +16,27 @@ export async function GET() {
     secret_len: secret.length,
     secret_first4: secret.substring(0, 4),
     secret_last4: secret.substring(secret.length - 4),
+    computed_test: null  // placeholder
   }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
+  });
+}
+
+/**
+ * POST /api/debug-env
+ * Computes hash of given password for verification.
+ */
+export async function POST(request) {
+  const { hashPassword } = await import('../_auth/token.js');
+  const secret = process.env.SITE_AUTH_SECRET || '';
+  let password = '';
+  try {
+    const body = await request.json();
+    password = body.password || '';
+  } catch {}
+  const h = password ? await hashPassword(password, secret) : 'no_password';
+  return new Response(JSON.stringify({ computed_hash: h, hash_len: h.length }), {
     status: 200,
     headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
   });

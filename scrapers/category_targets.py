@@ -196,6 +196,64 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             'fallback': 'skip',
         },
     },
+    'shopee': {
+        'casa_cozinha': {
+            'urls': [
+                ('Casa e Cozinha', 'utensilios cozinha'),
+                ('Eletrodomésticos', 'eletrodomesticos cozinha'),
+            ],
+            'priority_brands': ('tramontina', 'mondial', 'oster', 'arno', 'electrolux'),
+            'min_discount': 15,
+            'max_price': 600.0,
+            'cycle_limit': 25,
+            'fallback': 'generic',
+        },
+        'tecnologia_cotidiana': {
+            'urls': [
+                ('Eletrônicos', 'fone de ouvido'),
+                ('Celulares', 'carregador celular'),
+                ('Informática', 'mouse teclado'),
+            ],
+            'priority_brands': ('samsung', 'xiaomi', 'jbl', 'sony', 'logitech'),
+            'min_discount': 15,
+            'max_price': 800.0,
+            'cycle_limit': 20,
+            'fallback': 'generic',
+        },
+        'beleza_cuidados': {
+            'urls': [
+                ('Beleza', 'perfume'),
+                ('Cuidados Pessoais', 'skincare'),
+            ],
+            'priority_brands': ('avon', 'natura', 'eudora', 'oral-b'),
+            'min_discount': 20,
+            'max_price': 400.0,
+            'cycle_limit': 15,
+            'fallback': 'generic',
+        },
+        'moda_feminina': {
+            'urls': [
+                ('Moda Feminina', 'moda feminina'),
+                ('Calçados Femininos', 'tenis feminino'),
+            ],
+            'priority_brands': ('nike', 'adidas', 'mizuno', 'havaianas'),
+            'min_discount': 20,
+            'max_price': 500.0,
+            'cycle_limit': 20,
+            'fallback': 'generic',
+        },
+        'infantil': {
+            'urls': [
+                ('Brinquedos', 'brinquedos'),
+                ('Infantil', 'produtos bebe'),
+            ],
+            'priority_brands': ('mattel', 'hasbro', 'lego', 'fisher-price'),
+            'min_discount': 15,
+            'max_price': 400.0,
+            'cycle_limit': 15,
+            'fallback': 'generic',
+        },
+    },
 }
 
 

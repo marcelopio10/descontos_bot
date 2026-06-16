@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from apps.curation.services.settings import get_integer_setting
-from scrapers import amazon, mercado_livre
+from scrapers import amazon, mercado_livre, shopee
 from scrapers.category_targets import flatten_urls, get_targets
 
 
@@ -100,6 +100,7 @@ def build_adapter(marketplace_code: str) -> ScraperAdapter:
     adapters = {
         'mercadolivre': lambda: mercado_livre.build_from_env(),
         'amazon': lambda: amazon.build_from_env(),
+        'shopee': lambda: shopee.build_from_env(),
     }
     try:
         scraper = adapters[marketplace_code]()

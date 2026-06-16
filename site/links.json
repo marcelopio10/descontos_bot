@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-16T11:05:12.721080+00:00",
+  "generated_at": "2026-06-16T15:52:03.482151+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,16 +24,6 @@
       "tracked_url": "https://meli.la/2wvYyHu?matt_word=dbot_ig_bio_4242&utm_source=instagram&utm_medium=bio&utm_campaign=offer_4242"
     },
     {
-      "id": 6393,
-      "title": "Kit Álbum Capa Dura + Lata Oficial Copa 2026 +140 Figurinhas",
-      "current_price": "193.00",
-      "original_price": "899.00",
-      "discount_pct": "78.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_610974-MLB111634804743_052026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2Mex3nJ?matt_word=dbot_ig_bio_6393&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6393"
-    },
-    {
       "id": 6242,
       "title": "Tênis Asics Original Revelation Academia Caminhada Promoção",
       "current_price": "89.00",
@@ -44,14 +34,24 @@
       "tracked_url": "https://meli.la/1behxhR?matt_word=dbot_ig_bio_6242&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6242"
     },
     {
-      "id": 5619,
-      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
-      "current_price": "141.00",
-      "original_price": "597.00",
+      "id": 6560,
+      "title": "Tênis Masculino Flak 365 Ii Lite Oakley Preto Liso 43 Br",
+      "current_price": "179.00",
+      "original_price": "749.00",
       "discount_pct": "76.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802771-MLB105838199600_022026-AB.webp",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_768981-MLB106186188119_012026-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2pK3wDF?matt_word=dbot_ig_bio_5619&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5619"
+      "tracked_url": "https://meli.la/2hcov55?matt_word=dbot_ig_bio_6560&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6560"
+    },
+    {
+      "id": 3281,
+      "title": "Álbum De Figurinhas Colecionáveis Copa Do Mundo Fifa 2026 Capa Dura",
+      "current_price": "49.00",
+      "original_price": "199.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_821169-MLB110559528776_052026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2WpSPkE?matt_word=dbot_ig_bio_3281&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3281"
     }
   ]
 }

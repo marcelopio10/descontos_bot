@@ -9,7 +9,7 @@ Estrutura:
     {
         marketplace_code: {
             category_code: {
-                'urls':           [(rotulo, url), ...],
+                'urls':           [(rotulo, url_ou_product_cat_id), ...],
                 'priority_brands': (str, ...),     # informativo (consumido pelo score)
                 'min_discount':    int,            # filtro pós-extração
                 'max_price':       float | None,
@@ -28,7 +28,7 @@ class CategoryTarget:
     marketplace: str
     category_code: str
     label: str
-    url: str
+    url: str | int
     trust_hint: bool = True
 
 
@@ -199,8 +199,8 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
     'shopee': {
         'casa_cozinha': {
             'urls': [
-                ('Casa e Cozinha', 'utensilios cozinha'),
-                ('Eletrodomésticos', 'eletrodomesticos cozinha'),
+                ('Casa e Cozinha', 100636),
+                ('Eletrodomésticos', 100010),
             ],
             'priority_brands': ('tramontina', 'mondial', 'oster', 'arno', 'electrolux'),
             'min_discount': 15,
@@ -210,9 +210,9 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
         },
         'tecnologia_cotidiana': {
             'urls': [
-                ('Eletrônicos', 'fone de ouvido'),
-                ('Celulares', 'carregador celular'),
-                ('Informática', 'mouse teclado'),
+                ('Celulares e Gadgets', 100013),
+                ('Áudio e Eletrônicos', 100535),
+                ('Computadores e Acessórios', 100644),
             ],
             'priority_brands': ('samsung', 'xiaomi', 'jbl', 'sony', 'logitech'),
             'min_discount': 15,
@@ -222,8 +222,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
         },
         'beleza_cuidados': {
             'urls': [
-                ('Beleza', 'perfume'),
-                ('Cuidados Pessoais', 'skincare'),
+                ('Beleza e Cuidados Pessoais', 100630),
             ],
             'priority_brands': ('avon', 'natura', 'eudora', 'oral-b'),
             'min_discount': 20,
@@ -233,8 +232,8 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
         },
         'moda_feminina': {
             'urls': [
-                ('Moda Feminina', 'moda feminina'),
-                ('Calçados Femininos', 'tenis feminino'),
+                ('Moda Feminina', 100017),
+                ('Calçados e Bolsas', 100532),
             ],
             'priority_brands': ('nike', 'adidas', 'mizuno', 'havaianas'),
             'min_discount': 20,
@@ -244,8 +243,9 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
         },
         'infantil': {
             'urls': [
-                ('Brinquedos', 'brinquedos'),
-                ('Infantil', 'produtos bebe'),
+                ('Brinquedos e Hobbies', 100639),
+                ('Bebês', 100632),
+                ('Moda Bebê', 100633),
             ],
             'priority_brands': ('mattel', 'hasbro', 'lego', 'fisher-price'),
             'min_discount': 15,

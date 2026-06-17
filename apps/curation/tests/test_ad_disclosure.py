@@ -18,13 +18,13 @@ from apps.offers.models import Offer
 
 
 class AdDisclosureHelperTests(SimpleTestCase):
-    def test_requires_disclosure_only_for_shopee(self):
-        self.assertTrue(requires_ad_disclosure('shopee'))
+    def test_requires_disclosure_disabled_for_offer_captions(self):
+        self.assertFalse(requires_ad_disclosure('shopee'))
         self.assertFalse(requires_ad_disclosure('amazon'))
         self.assertFalse(requires_ad_disclosure(''))
 
-    def test_prefix_present_for_shopee_absent_otherwise(self):
-        self.assertTrue(ad_disclosure_prefix('shopee').startswith(AD_DISCLOSURE_TAG))
+    def test_prefix_absent_for_offer_captions(self):
+        self.assertEqual(ad_disclosure_prefix('shopee'), '')
         self.assertEqual(ad_disclosure_prefix('mercadolivre'), '')
 
     def test_find_blocked_copy(self):
@@ -35,10 +35,8 @@ class AdDisclosureHelperTests(SimpleTestCase):
         with self.assertRaises(ValueError):
             assert_copy_compliant('clique obrigatório agora', 'shopee')
 
-    def test_assert_copy_compliant_requires_tag_for_shopee(self):
-        with self.assertRaises(ValueError):
-            assert_copy_compliant('Oferta sem selo', 'shopee')
-        # com o selo, passa
+    def test_assert_copy_compliant_does_not_require_tag_for_shopee_offer_caption(self):
+        assert_copy_compliant('Oferta sem selo', 'shopee')
         assert_copy_compliant(f'{AD_DISCLOSURE_TAG} Oferta com selo', 'shopee')
 
 
@@ -71,22 +69,22 @@ class DisclosureInBuildersTests(TestCase):
             link_strategy='affiliate_direct',
         )
 
-    def test_whatsapp_message_includes_disclosure_for_shopee(self):
+    def test_whatsapp_message_has_no_hashtag_disclosure_for_shopee(self):
         shopee = Marketplace.objects.create(
             name='Shopee', code='shopee', base_url='https://shopee.com.br', affiliate_enabled=True,
         )
         offer = self._make_offer(shopee, 'hash-shopee-1')
         message = build_message(offer, self._channel('whatsapp'))
-        self.assertIn(AD_DISCLOSURE_TAG, message)
-        self.assertTrue(message.startswith(AD_DISCLOSURE_TAG))
+        self.assertNotIn(AD_DISCLOSURE_TAG, message)
+        self.assertFalse(message.startswith(AD_DISCLOSURE_TAG))
 
-    def test_telegram_caption_includes_disclosure_for_shopee(self):
+    def test_telegram_caption_has_no_hashtag_disclosure_for_shopee(self):
         shopee = Marketplace.objects.create(
             name='Shopee', code='shopee', base_url='https://shopee.com.br', affiliate_enabled=True,
         )
         offer = self._make_offer(shopee, 'hash-shopee-2')
         payload = build_telegram_payload(offer, self._channel('telegram_channel'))
-        self.assertIn(AD_DISCLOSURE_TAG, payload.caption)
+        self.assertNotIn(AD_DISCLOSURE_TAG, payload.caption)
 
     def test_non_shopee_message_has_no_disclosure(self):
         ml = Marketplace.objects.create(

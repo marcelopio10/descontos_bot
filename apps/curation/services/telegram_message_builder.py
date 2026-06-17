@@ -77,6 +77,7 @@ def _render(offer: Offer, title_width: int) -> str:
     )
 
     disclosure = ad_disclosure_prefix(offer.marketplace.code)
+    disclosure_footer = f'<i>{escape(disclosure)}</i>\n' if disclosure else ''
     return (
         f'{disclosure}'
         f'<b>📦 {escape(short_title)}</b>\n\n'
@@ -86,7 +87,7 @@ def _render(offer: Offer, title_width: int) -> str:
         f'🏷️ <b>{discount_pct}% OFF</b>\n\n'
         f'⏰ Oferta por tempo limitado!\n'
         f'{SEPARATOR}\n'
-        f'<i>{escape(disclosure)}</i>\n'
+        f'{disclosure_footer}'
         f'🤖 @descontosbotlgm'
     )
 

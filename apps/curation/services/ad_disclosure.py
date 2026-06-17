@@ -1,12 +1,12 @@
 """Disclosure publicitário e bloqueio de clickbait por marketplace.
 
-A Shopee exige identificação publicitária visível (#publicidade / #anúncio /
-#parceriapaga) e proíbe clickbait/alarmismo. Centralizado aqui para WhatsApp,
-Telegram e site aplicarem a mesma regra.
+Centraliza regras de copy para WhatsApp, Telegram e site. A identificação
+publicitária por publicação foi desativada para não inserir hashtag na caption
+da oferta; disclosures permanentes ficam nos canais/site quando aplicável.
 """
 
 # Marketplaces que exigem selo publicitário explícito em toda publicação.
-AD_DISCLOSURE_MARKETPLACES = {'shopee'}
+AD_DISCLOSURE_MARKETPLACES: set[str] = set()
 
 AD_DISCLOSURE_TAG = '#publicidade'
 

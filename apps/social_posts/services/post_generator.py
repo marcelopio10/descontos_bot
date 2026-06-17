@@ -141,9 +141,10 @@ def _get_ranked_offers(limit: int) -> list[Offer]:
         Offer.objects
         .select_related('marketplace')
         .filter(is_active=True, slug__isnull=False)
-        .filter(marketplace__code='amazon')
+        .filter(marketplace__code__in=['amazon', 'shopee', 'mercadolivre'])
         .exclude(slug='')
         .exclude(marketplace__code='amazon', asin='')
+        .exclude(marketplace__code='mercadolivre', external_id='')
         .exclude(id__in=generated_offer_ids)
         .filter(created_at__gte=cutoff)
         .order_by('-discount_pct', 'current_price', 'title')[:limit * 3],

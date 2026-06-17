@@ -20,7 +20,9 @@ from apps.marketplaces.services.shopee_collectors import ProductOfferCollector
 
 log = logging.getLogger(__name__)
 
-DEFAULT_LIMIT = 10  # ofertas por keyword (mantém ciclo rápido)
+DEFAULT_LIMIT = 10  # ofertas por categoria (mantém ciclo rápido)
+DEFAULT_LIST_TYPE = 0
+DEFAULT_SORT_TYPE = 2  # maior comissão; sem keyword para cobrir a categoria inteira
 
 
 class ShopeeScraper:
@@ -38,37 +40,50 @@ class ShopeeScraper:
     # ------------------------------------------------------------------
 
     def scrape_categories(
-        self, targets: list[tuple[str, str, str, bool]]
+        self,
+        targets: list[tuple[str, str, int | str, bool]],
     ) -> list[dict[str, Any]]:
-        """Percorre as keywords das categorias e coleta ofertas via API.
+        """Percorre IDs de categoria e coleta ofertas via API.
 
-        targets: lista de (category_code, label, keyword, trust_hint).
-            - keyword → passado direto para `productOfferV2`.
+        targets: lista de (category_code, label, product_cat_id, trust_hint).
+            - product_cat_id → passado direto para `productOfferV2(productCatId)`.
             - trust_hint → se True, injeta `category_hint` no payload.
         """
         offers: list[dict[str, Any]] = []
         seen: set[str] = set()
 
-        for category_code, label, keyword, trust_hint in targets:
+        for category_code, label, product_cat_id, trust_hint in targets:
             if self.blocked:
                 break
-            if not keyword.strip():
+            try:
+                category_id = int(product_cat_id)
+            except (TypeError, ValueError):
+                log.warning(
+                    'Shopee categoria [%s] ignorada: productCatId inválido=%r',
+                    label,
+                    product_cat_id,
+                )
                 continue
 
             log.info(
-                'Shopee categoria [%s] keyword=%r',
-                label, keyword,
+                'Shopee categoria [%s] productCatId=%s',
+                label,
+                category_id,
             )
 
             try:
                 nodes = self._collector.fetch(
-                    keyword=keyword.strip(),
+                    product_cat_id=category_id,
                     limit=DEFAULT_LIMIT,
+                    sort_type=DEFAULT_SORT_TYPE,
+                    list_type=DEFAULT_LIST_TYPE,
                 )
             except Exception as exc:
                 log.error(
-                    'Shopee erro em categoria=%s keyword=%r: %s',
-                    category_code, keyword, exc,
+                    'Shopee erro em categoria=%s productCatId=%s: %s',
+                    category_code,
+                    category_id,
+                    exc,
                 )
                 continue
 
@@ -82,19 +97,23 @@ class ShopeeScraper:
                     continue
                 seen.add(dedup_key)
 
+                current_price = item.get('priceMin') or item.get('price') or 0
+                product_url = item.get('productLink') or item.get('offerLink') or ''
                 payload: dict[str, Any] = {
                     'marketplace_code': 'shopee',
                     'title': item.get('productName', ''),
-                    'price': item.get('price') or item.get('priceMin') or 0,
+                    'current_price': current_price,
+                    'price': current_price,
                     'original_price': _derive_original_price(item),
                     'discount_pct': item.get('priceDiscountRate') or 0,
-                    'url': item.get('productLink') or item.get('offerLink') or '',
+                    'product_url': product_url,
+                    'url': product_url,
                     'affiliate_url': item.get('offerLink') or '',
                     'image_url': item.get('imageUrl') or '',
                     'external_id': dedup_key,
                     'raw_payload': item,
                     'shop_name': item.get('shopName') or '',
-                    'sales': item.get('sales') or 0,
+                    'sales': item.get('sales') or item.get('soldCount') or 0,
                     'rating': item.get('ratingStar') or 0,
                     'commission_rate': item.get('commissionRate') or 0,
                     'commission': item.get('commission') or 0,

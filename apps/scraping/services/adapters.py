@@ -70,8 +70,8 @@ def _apply_category_filters(marketplace_code: str, payloads: list[dict]) -> list
             out.append(payload)
             continue
 
-        discount = float(payload.get('desconto_pct') or 0)
-        price = float(payload.get('preco') or 0)
+        discount = _payload_number(payload, 'desconto_pct', 'discount_pct')
+        price = _payload_number(payload, 'preco', 'price')
 
         if discount < rules.get('min_discount', 0):
             dropped[f'{category_code}:min_discount'] += 1
@@ -94,6 +94,18 @@ def _apply_category_filters(marketplace_code: str, payloads: list[dict]) -> list
         marketplace_code, len(out), dict(counters), dict(dropped),
     )
     return out
+
+
+def _payload_number(payload: dict, *keys: str) -> float:
+    for key in keys:
+        value = payload.get(key)
+        if value in (None, ''):
+            continue
+        try:
+            return float(value)
+        except (TypeError, ValueError):
+            continue
+    return 0.0
 
 
 def build_adapter(marketplace_code: str) -> ScraperAdapter:

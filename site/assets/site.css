@@ -279,8 +279,8 @@ main {
 }
 
 .filter {
-  min-height: 38px;
-  padding: 0 13px;
+  min-height: 44px;
+  padding: 0 16px;
   background: var(--dark2);
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -311,10 +311,26 @@ main {
   transition: background 0.35s ease, border-color 0.35s ease;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .filter {
+    transition: none;
+    transform: none;
+  }
+  .filter:active {
+    transform: none;
+  }
+}
+
 .offers-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
+  opacity: 1;
+  transition: opacity 0.18s ease-out;
+}
+
+.offers-grid.is-fading {
+  opacity: 0;
 }
 
 .offer-card {
@@ -569,5 +585,11 @@ main {
 
   .card-actions {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offers-grid {
+    transition: none;
   }
 }

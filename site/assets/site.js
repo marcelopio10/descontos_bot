@@ -61,7 +61,8 @@
     });
     container.innerHTML = items.map((m, i) => {
       const accentAttr = m.accent ? ` data-accent="${m.accent}"` : '';
-      return `<button class="filter${i === 0 ? ' is-active' : ''}" type="button" data-marketplace="${text(m.code)}"${accentAttr}>${text(m.label)}</button>`;
+      const pressedAttr = i === 0 ? ' aria-pressed="true"' : ' aria-pressed="false"';
+      return `<button class="filter${i === 0 ? ' is-active' : ''}" type="button" data-marketplace="${text(m.code)}"${accentAttr}${pressedAttr}>${text(m.label)}</button>`;
     }).join('');
     return Array.from(container.querySelectorAll('.filter'));
   }
@@ -109,20 +110,36 @@
       const filtered = activeMarketplace === 'all'
         ? offers
         : offers.filter((offer) => offerMarketplaceCode(offer) === activeMarketplace);
-      grid.innerHTML = filtered.length
-        ? filtered.slice(0, 48).map(renderCard).join('')
-        : '<div class="state-message">Nenhuma oferta encontrada para este filtro.</div>';
+      if (filtered.length) {
+        grid.innerHTML = filtered.slice(0, 48).map(renderCard).join('');
+      } else {
+        grid.innerHTML = '<div class="state-message">Nenhuma oferta encontrada para este filtro.</div>';
+      }
+    }
+
+    function prefersReducedMotion() {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     }
 
     function bindFilters() {
       buttons.forEach((button) => {
         button.addEventListener('click', () => {
-          buttons.forEach((item) => { item.classList.remove('is-active'); item.style.removeProperty('--accent'); });
+          if (button.dataset.marketplace === activeMarketplace) return;
+          buttons.forEach((item) => { item.classList.remove('is-active'); item.style.removeProperty('--accent'); item.setAttribute('aria-pressed', 'false'); });
           button.classList.add('is-active');
+          button.setAttribute('aria-pressed', 'true');
           const accent = button.dataset.accent;
           if (accent) button.style.setProperty('--accent', accent);
           activeMarketplace = button.dataset.marketplace;
-          render();
+          if (prefersReducedMotion()) {
+            render();
+          } else {
+            grid.classList.add('is-fading');
+            setTimeout(() => {
+              render();
+              grid.classList.remove('is-fading');
+            }, 150);
+          }
         });
       });
     }

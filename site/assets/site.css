@@ -161,9 +161,12 @@ main {
 }
 
 .eyebrow,
-.marketplace,
 .section-kicker {
   color: var(--cyan);
+}
+
+.marketplace {
+  color: var(--accent, var(--cyan));
 }
 
 .hero h1,
@@ -284,13 +287,28 @@ main {
   color: var(--muted);
   cursor: pointer;
   font: 700 12px 'Space Mono', monospace;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.18s ease, transform 0.12s ease-out;
+  transform: scale(1);
 }
 
 .filter.is-active,
 .filter:hover {
-  background: var(--cyan);
-  border-color: var(--cyan);
+  background: var(--accent, var(--cyan));
+  border-color: var(--accent, var(--cyan));
   color: var(--dark);
+}
+
+.filter:focus-visible {
+  outline: 2px solid var(--accent, var(--cyan));
+  outline-offset: 2px;
+}
+
+.filter:active {
+  transform: scale(0.96);
+}
+
+.filter.is-active:not(:hover) {
+  transition: background 0.35s ease, border-color 0.35s ease;
 }
 
 .offers-grid {

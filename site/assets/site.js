@@ -42,8 +42,33 @@
     return offer.marketplace && offer.marketplace.code ? offer.marketplace.code : '';
   }
 
+  const MARKETPLACES = {
+    amazon:        { label: 'Amazon',        accent: '#FF9900' },
+    mercadolivre:  { label: 'Mercado Livre', accent: '#FFE14D' },
+    shopee:        { label: 'Shopee',         accent: '#EE4D2D' },
+  };
+
+  function marketplaceAccentAttr(code) {
+    const m = MARKETPLACES[code];
+    return m && m.accent ? ` style="--accent:${m.accent}"` : '';
+  }
+
+  function renderFilters(container, codes) {
+    const items = [{ code: 'all', label: 'Todas', accent: '' }];
+    codes.forEach((code) => {
+      const meta = MARKETPLACES[code] || { label: code, accent: '' };
+      items.push({ code, label: meta.label, accent: meta.accent });
+    });
+    container.innerHTML = items.map((m, i) => {
+      const accentAttr = m.accent ? ` data-accent="${m.accent}"` : '';
+      return `<button class="filter${i === 0 ? ' is-active' : ''}" type="button" data-marketplace="${text(m.code)}"${accentAttr}>${text(m.label)}</button>`;
+    }).join('');
+    return Array.from(container.querySelectorAll('.filter'));
+  }
+
   function renderCard(offer) {
     const detailUrl = offer.detail_url || `/oferta.html?slug=${encodeURIComponent(offer.slug)}`;
+    const code = offerMarketplaceCode(offer);
     const oldPrice = offer.original_price && Number(offer.original_price) > Number(offer.current_price)
       ? `<span class="old-price">${money(offer.original_price)}</span>`
       : '';
@@ -54,7 +79,7 @@
       <article class="offer-card">
         <img src="${text(offer.image_url)}" alt="${text(offer.title)}" loading="lazy">
         <div class="offer-card-body">
-          <span class="marketplace">${text(offerMarketplace(offer))}</span>
+          <span class="marketplace"${marketplaceAccentAttr(code)}>${text(offerMarketplace(offer))}</span>
           <div class="offer-name">${text(offer.title)}</div>
           <div class="price-row">
             <span class="current-price">${money(offer.current_price)}</span>
@@ -75,7 +100,8 @@
     const grid = document.getElementById('offersGrid');
     const count = document.getElementById('offerCount');
     const generated = document.getElementById('generatedAt');
-    const buttons = Array.from(document.querySelectorAll('.filter'));
+    const filtersContainer = document.getElementById('marketplaceFilters');
+    let buttons = [];
     let offers = [];
     let activeMarketplace = 'all';
 
@@ -88,14 +114,18 @@
         : '<div class="state-message">Nenhuma oferta encontrada para este filtro.</div>';
     }
 
-    buttons.forEach((button) => {
-      button.addEventListener('click', () => {
-        buttons.forEach((item) => item.classList.remove('is-active'));
-        button.classList.add('is-active');
-        activeMarketplace = button.dataset.marketplace;
-        render();
+    function bindFilters() {
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          buttons.forEach((item) => { item.classList.remove('is-active'); item.style.removeProperty('--accent'); });
+          button.classList.add('is-active');
+          const accent = button.dataset.accent;
+          if (accent) button.style.setProperty('--accent', accent);
+          activeMarketplace = button.dataset.marketplace;
+          render();
+        });
       });
-    });
+    }
 
     grid.innerHTML = '<div class="state-message">Carregando ofertas...</div>';
     loadPayload()
@@ -107,6 +137,10 @@
         generated.textContent = payload.generated_at
           ? `Atualizado em ${new Date(payload.generated_at).toLocaleString('pt-BR')}`
           : 'Atualização não informada';
+        const codes = [...new Set(offers.map(offerMarketplaceCode).filter(Boolean))];
+        codes.sort();
+        buttons = renderFilters(filtersContainer, codes);
+        bindFilters();
         render();
       })
       .catch(() => {
@@ -132,6 +166,7 @@
           detail.innerHTML = '<div class="state-message">Oferta não encontrada.</div>';
           return;
         }
+        const code = offerMarketplaceCode(offer);
         const oldPrice = offer.original_price && Number(offer.original_price) > Number(offer.current_price)
           ? `<span class="old-price">${money(offer.original_price)}</span>`
           : '';
@@ -141,7 +176,7 @@
         detail.innerHTML = `
           <img class="detail-image" src="${text(offer.image_url)}" alt="${text(offer.title)}">
           <div class="detail-copy">
-            <p class="eyebrow">${text(offerMarketplace(offer))}</p>
+            <p class="eyebrow"${marketplaceAccentAttr(code)}>${text(offerMarketplace(offer))}</p>
             <h1 class="offer-title">${text(offer.title)}</h1>
             <div class="detail-meta">
               <div class="price-row">

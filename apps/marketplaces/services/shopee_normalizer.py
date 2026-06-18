@@ -50,9 +50,20 @@ def _derive_original_price(current, discount_rate) -> Decimal | None:
     return original.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
 
 
+def _has_price_range(item: dict) -> bool:
+    price_min = _to_decimal(item.get('priceMin') or item.get('price'))
+    price_max = _to_decimal(item.get('priceMax'))
+    return price_min is not None and price_max is not None and price_min != price_max
+
+
 def normalize_shopee_item(marketplace: Marketplace, item: dict) -> NormalizedOffer:
     if not item.get('itemId') or not item.get('shopId'):
         raise OfferNormalizationError('Item Shopee sem itemId/shopId.')
+
+    if _has_price_range(item):
+        raise OfferNormalizationError(
+            'Item Shopee rejeitado: faixa de preço sem variação/SKU consistente.',
+        )
 
     external_id = shopee_external_id(item)
     current_price = item.get('priceMin') or item.get('price')

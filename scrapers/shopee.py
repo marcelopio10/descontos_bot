@@ -13,6 +13,7 @@ Mantém compatibilidade com o `ScraperAdapter` (`blocked`, `error_message`,
 from __future__ import annotations
 
 import logging
+from decimal import Decimal, InvalidOperation
 from typing import Any
 
 from apps.marketplaces.services.shopee_affiliate_client import ShopeeAffiliateClient
@@ -90,6 +91,17 @@ class ShopeeScraper:
             self.pages_scraped += 1
 
             for item in nodes:
+                if _has_price_range(item):
+                    log.info(
+                        'Shopee item rejeitado: faixa de preço inconsistente itemId=%s '
+                        'shopId=%s priceMin=%s priceMax=%s',
+                        item.get('itemId'),
+                        item.get('shopId'),
+                        item.get('priceMin'),
+                        item.get('priceMax'),
+                    )
+                    continue
+
                 item_id = str(item.get('itemId', ''))
                 shop_id = str(item.get('shopId', ''))
                 dedup_key = f'{item_id}:{shop_id}'
@@ -149,6 +161,17 @@ class ShopeeScraper:
                 break
 
             for item in nodes:
+                if _has_price_range(item):
+                    log.info(
+                        'Shopee item rejeitado: faixa de preço inconsistente itemId=%s '
+                        'shopId=%s priceMin=%s priceMax=%s',
+                        item.get('itemId'),
+                        item.get('shopId'),
+                        item.get('priceMin'),
+                        item.get('priceMax'),
+                    )
+                    continue
+
                 item_id = str(item.get('itemId', ''))
                 shop_id = str(item.get('shopId', ''))
                 dedup_key = f'{item_id}:{shop_id}'
@@ -184,6 +207,22 @@ def _derive_original_price(item: dict[str, Any]) -> float | None:
     if 0 < float(rate) < 100 and float(price) > 0:
         return round(float(price) / (1 - float(rate) / 100), 2)
     return None
+
+
+def _has_price_range(item: dict[str, Any]) -> bool:
+    """Rejeita produto Shopee com variações de preço sem SKU/imagem consistente."""
+    price_min = _to_decimal(item.get('priceMin') or item.get('price'))
+    price_max = _to_decimal(item.get('priceMax'))
+    return price_min is not None and price_max is not None and price_min != price_max
+
+
+def _to_decimal(value: Any) -> Decimal | None:
+    if value in (None, ''):
+        return None
+    try:
+        return Decimal(str(value).strip())
+    except (InvalidOperation, ValueError):
+        return None
 
 
 def build_from_env() -> ShopeeScraper:

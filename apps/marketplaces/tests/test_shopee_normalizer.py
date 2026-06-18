@@ -72,3 +72,10 @@ class ShopeeNormalizerTests(SimpleTestCase):
     def test_missing_ids_are_rejected(self):
         with self.assertRaises(OfferNormalizationError):
             normalize_shopee_item(self.marketplace, self._item(itemId=None))
+
+    def test_price_range_items_are_rejected_to_avoid_variant_mismatch(self):
+        with self.assertRaisesMessage(OfferNormalizationError, 'faixa de preço'):
+            normalize_shopee_item(
+                self.marketplace,
+                self._item(priceMin='17.99', priceMax='49.99'),
+            )

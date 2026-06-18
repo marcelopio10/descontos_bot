@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-17T20:28:34.012582+00:00",
+  "generated_at": "2026-06-18T17:54:55.404333+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 6798,
-      "title": "Jogo de Lençol 400 fios toque Suave e Acetinado Berço Solteiro Casal Queen King 02 e 03 Peças",
-      "current_price": "14.40",
-      "original_price": "160.00",
-      "discount_pct": "91.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m82atd2bm5f53a",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/8KnDvCi8ao?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6798"
-    },
     {
       "id": 6836,
       "title": "Kit Completo Maca Power karseell Máscara 500 g + condicionador 1L + Shampoo 1L + Óleo P 50ml",
@@ -24,34 +14,44 @@
       "tracked_url": "https://s.shopee.com.br/9UzBJdJE5k?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
     },
     {
-      "id": 6864,
-      "title": "Combo Completo Torcedor Brasileiro Copa 2026 Bandeira, Adesivo, Trompete e Pintura Facial",
-      "current_price": "42.90",
-      "original_price": "286.00",
-      "discount_pct": "85.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m3-mld4xgj3j953b7",
+      "id": 6806,
+      "title": "Batedor Misturador Mixer Elétrico para Bebidas Leite Café Clara de Ovo 2 em 1",
+      "current_price": "19.00",
+      "original_price": "90.48",
+      "discount_pct": "79.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd48-lupf3z3a40mxf1",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/1Vwtmw5Pyf?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6864"
+      "tracked_url": "https://s.shopee.com.br/AKYIIsEfAI?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
     },
     {
-      "id": 6847,
-      "title": "ROMANTIC CROWN Meia-Calça Térmica Forrada Peluciada Translúcida De Lã Quente Feminina Para Inverno",
-      "current_price": "27.99",
-      "original_price": "155.50",
-      "discount_pct": "82.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-lvzh39z154za59",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/7VE6vxVEwp?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6847"
+      "id": 6893,
+      "title": "Trem Elétrico Magnético Para Montar Sr Toys De Blocos 3d De Madeira Com Carregamento Usb Magnético Trem Amarelo",
+      "current_price": "174.00",
+      "original_price": "800.00",
+      "discount_pct": "78.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_712282-MLA106602502356_022026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2KwiEuy?matt_word=dbot_ig_bio_6893&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6893"
     },
     {
-      "id": 6828,
-      "title": "Fone de Ouvido Sem Fio PRO5 airpods Com Cancelamento De Ruído Bluetooth Pop-Up para iOS e Android",
-      "current_price": "42.98",
-      "original_price": "238.78",
-      "discount_pct": "82.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m712dqkqe0xc50",
+      "id": 6830,
+      "title": "Fone Bluetooth Pro5 Premium | Imersão Total c Cancelamento Ruído Qualidade Superior p iPhoneAndroid",
+      "current_price": "66.88",
+      "original_price": "290.78",
+      "discount_pct": "77.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg4gj8nwxkw7e0",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/8KnDvUAftp?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6828"
+      "tracked_url": "https://s.shopee.com.br/80ANWsBwZn?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6830"
+    },
+    {
+      "id": 6881,
+      "title": "Caminhão Dinossauro Brinquedo 19 Ps Pista Carrinho Luz Som Amarelo",
+      "current_price": "94.00",
+      "original_price": "400.00",
+      "discount_pct": "76.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_939819-MLB110691040939_042026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2aDQqjT?matt_word=dbot_ig_bio_6881&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6881"
     }
   ]
 }

@@ -65,10 +65,37 @@ class SafetyBlacklistTests(TestCase):
 
         self.assertTrue(is_blacklisted(offer))
 
+    def test_tadal_male_enhancement_title_is_blacklisted(self):
+        offer = self._offer(
+            'Suplemento Masculino Fila Aumenta Tamanho Natural Tadala 60 Sem Sabor',
+        )
+
+        self.assertTrue(is_blacklisted(offer))
+
     def test_selector_never_returns_adult_safety_blacklisted_offer(self):
         blocked = self._offer('Aumenta Super Cavalo Torofila Feno Grego 60 Cápsulas Potente Sem Sabor')
         allowed = self._offer('Tênis Adidas Runfalcon 5 Corrida De Rua Macio Masculino', Decimal('30.00'))
         Setting.objects.create(key='blacklist_terms', value='["usado"]')
+        config = SelectionConfig(
+            global_limit=5,
+            marketplace_limit=5,
+            min_discount_percentage=Decimal('20.00'),
+            min_quality_score=0,
+            priority_quality_score=0,
+            exposure_quota_enabled=False,
+        )
+
+        selected = select_offers_for_channel(self.channel, config=config)
+
+        self.assertIn(allowed, selected)
+        self.assertNotIn(blocked, selected)
+
+    def test_selector_never_returns_tadal_male_enhancement_offer(self):
+        blocked = self._offer(
+            'Suplemento Masculino Fila Aumenta Tamanho Natural Tadala 60 Sem Sabor',
+        )
+        allowed = self._offer('Tênis Adidas Runfalcon 5 Corrida De Rua Macio Masculino', Decimal('30.00'))
+        Setting.objects.create(key='blacklist_terms', value='[]')
         config = SelectionConfig(
             global_limit=5,
             marketplace_limit=5,

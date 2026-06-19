@@ -26,6 +26,16 @@ export interface ObservedMessage {
   urls: string[];
   raw_type: string;
   collected_at: string;
+  // P0-1: WhatsApp/Baileys does not expose these engagement counters for
+  // regular group messages. Keep them explicit and null so Django ingestion can
+  // distinguish "unavailable" from zero engagement.
+  reacoes: number | null;
+  visualizacoes: number | null;
+  encaminhamentos: number | null;
+  comentarios: number | null;
+  repostado: boolean | null;
+  qtd_repostagens: number | null;
+  fixado: boolean | null;
 }
 
 const DEFAULT_LOOKBACK_HOURS = 24;
@@ -136,6 +146,13 @@ export function normalizeIncomingMessage(
     urls: extractUrls(text),
     raw_type: rawType,
     collected_at: new Date().toISOString(),
+    reacoes: null,
+    visualizacoes: null,
+    encaminhamentos: null,
+    comentarios: null,
+    repostado: null,
+    qtd_repostagens: null,
+    fixado: null,
   };
 }
 

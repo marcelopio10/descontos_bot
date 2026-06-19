@@ -50,6 +50,10 @@ def _upsert_message(item: dict[str, Any]) -> bool:
         jid=group_jid,
         defaults={'name': str(item.get('group_subject') or group_jid)},
     )
+    existing_message = ObservedWhatsAppMessage.objects.filter(
+        group=group,
+        external_message_id=str(item['message_id']),
+    ).only('id').first()
     text = str(item.get('text') or '')
     urls = [str(url) for url in (item.get('urls') or []) if isinstance(url, str)]
     parsed = parse_observed_message(text, has_image=bool(item.get('has_image')), urls=urls)
@@ -85,9 +89,10 @@ def _upsert_message(item: dict[str, Any]) -> bool:
         'repostado', 'qtd_repostagens', 'fixado',
     )
     for field in engagement_fields:
-        value = item.get(field)
-        if value is not None:
-            defaults[field] = value
+        if field in item:
+            value = item[field]
+            if value is not None or existing_message is None:
+                defaults[field] = value
 
     _, created = ObservedWhatsAppMessage.objects.update_or_create(
         group=group,

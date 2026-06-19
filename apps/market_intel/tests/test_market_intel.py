@@ -7,6 +7,8 @@ from django.test import TestCase
 from django.utils import timezone
 
 from apps.market_intel.models import ObservedWhatsAppGroup, ObservedWhatsAppMessage
+from apps.marketplaces.models import Marketplace
+from apps.offers.models import Category, Offer
 from apps.market_intel.services.parser import parse_observed_message
 from apps.market_intel.services.reports import (
     build_cadencia_e_timing,
@@ -389,6 +391,33 @@ class MarketIntelReportV2Tests(TestCase):
         defaults.update(kwargs)
         return ObservedWhatsAppMessage.objects.create(**defaults)
 
+    def _create_offer(self, **kwargs):
+        marketplace, _ = Marketplace.objects.get_or_create(
+            code=kwargs.pop('marketplace_code', 'mercadolivre'),
+            defaults={'name': 'Mercado Livre', 'base_url': 'https://www.mercadolivre.com.br'},
+        )
+        category, _ = Category.objects.get_or_create(
+            code=kwargs.pop('category_code', 'moda'),
+            defaults={'name': 'Moda'},
+        )
+        now = timezone.now()
+        title = kwargs.get('title', 'Tênis Nike Air Max')
+        defaults = {
+            'marketplace': marketplace,
+            'category': category,
+            'external_id': kwargs.pop('external_id', 'OWN1'),
+            'title': title,
+            'normalized_title': kwargs.pop('normalized_title', title.lower()),
+            'offer_hash': kwargs.pop('offer_hash', f'hash-{id(kwargs)}'),
+            'current_price': kwargs.pop('current_price', Decimal('199.90')),
+            'product_url': kwargs.pop('product_url', 'https://www.mercadolivre.com.br/tenis-nike-air-max/p/MLB123'),
+            'first_seen_at': kwargs.pop('first_seen_at', now),
+            'last_seen_at': kwargs.pop('last_seen_at', now),
+            'is_active': kwargs.pop('is_active', True),
+        }
+        defaults.update(kwargs)
+        return Offer.objects.create(**defaults)
+
     def test_mecanica_preco_block(self):
         self._create_message(external_message_id='MEC1')
         msgs = ObservedWhatsAppMessage.objects.all()
@@ -441,6 +470,33 @@ class MarketIntelReportV2Tests(TestCase):
         # Without engagement data, should return note
         self.assertIn('nota', result)
         self.assertTrue(len(result['nota']) > 0)
+        self.assertEqual(result['top_por_engajamento'], [])
+
+    def test_sinais_engajamento_with_partial_data_scores_and_averages(self):
+        self._create_message(
+            external_message_id='ENG2',
+            reacoes=40,
+            visualizacoes=1000,
+            encaminhamentos=5,
+            comentarios=None,
+            repostado=True,
+            qtd_repostagens=2,
+            fixado=True,
+        )
+        self._create_message(
+            external_message_id='ENG3',
+            sender_hash='e' * 64,
+            parsed_marketplace='amazon',
+            reacoes=None,
+            visualizacoes=500,
+            encaminhamentos=None,
+            comentarios=None,
+        )
+        result = build_sinais_engajamento(ObservedWhatsAppMessage.objects.all())
+        self.assertEqual(result['nota'], '')
+        self.assertEqual(result['top_por_engajamento'][0]['marketplace'], 'mercadolivre')
+        self.assertIn('mercadolivre', result['engajamento_medio_por_marketplace'])
+        self.assertIn('moda', result['engajamento_medio_por_categoria'])
 
     def test_cadencia_e_timing_block(self):
         self._create_message(external_message_id='TIME1')
@@ -455,6 +511,77 @@ class MarketIntelReportV2Tests(TestCase):
         self.assertIn('heatmap_horario_dia', result)
         self.assertIn('frequencia_por_grupo', result)
         self.assertIn('intervalo_medio_por_grupo', result)
+        self.assertIn('lag_cobertura', result)
+        self.assertIn('sazonalidade', result)
+
+    def test_cadencia_e_timing_lag_cobertura(self):
+        self._create_offer(
+            product_url='https://www.mercadolivre.com.br/tenis-nike-air-max/p/MLB123',
+            first_seen_at=self.sent_at + timedelta(hours=2),
+        )
+        self._create_message(
+            external_message_id='TIME-LAG',
+            text='Tênis Nike Air Max R$ 199,90 https://www.mercadolivre.com.br/tenis-nike-air-max/p/MLB123?utm=abc',
+            urls=['https://www.mercadolivre.com.br/tenis-nike-air-max/p/MLB123?utm=abc'],
+        )
+        result = build_cadencia_e_timing(ObservedWhatsAppMessage.objects.all())
+        self.assertEqual(result['lag_cobertura']['amostras'], 1)
+        self.assertEqual(result['lag_cobertura']['concorrente_publicou_primeiro'], 1)
+        self.assertEqual(result['lag_cobertura']['lag_medio_horas'], 2.0)
+
+    def test_cadencia_e_timing_detects_accented_sazonalidade(self):
+        self._create_message(
+            external_message_id='TIME-MAES',
+            text='Especial Dia das Mães com ofertas de beleza',
+        )
+        result = build_cadencia_e_timing(ObservedWhatsAppMessage.objects.all())
+        self.assertIn({'evento': 'dia_das_maes', 'count': 1}, result['sazonalidade'])
+
+    def test_cobertura_matches_by_normalized_url_and_title_without_leaking_urls(self):
+        self._create_offer(
+            product_url='https://www.mercadolivre.com.br/tenis-nike-air-max/p/MLB123',
+            normalized_title='tenis nike air max',
+            first_seen_at=self.sent_at - timedelta(hours=1),
+        )
+        self._create_message(
+            external_message_id='COV-URL',
+            text='Tênis Nike Air Max por R$ 199,90 https://www.mercadolivre.com.br/tenis-nike-air-max/p/MLB123?utm=concorrente',
+            urls=['https://www.mercadolivre.com.br/tenis-nike-air-max/p/MLB123?utm=concorrente'],
+        )
+        self._create_message(
+            external_message_id='COV-TITLE',
+            sender_hash='f' * 64,
+            text='Corre! TENIS NIKE AIR MAX caiu de preço',
+            urls=[],
+        )
+        self._create_message(
+            external_message_id='COV-GAP',
+            sender_hash='g' * 64,
+            parsed_marketplace='shopee',
+            text='Oferta exclusiva concorrente R$ 88 https://shopee.com.br/outro',
+            urls=['https://shopee.com.br/outro'],
+        )
+        result = build_cobertura(ObservedWhatsAppMessage.objects.all())
+        self.assertEqual(result['taxa_sobreposicao'], 0.67)
+        self.assertEqual(result['exclusivas_concorrente'], 1)
+        self.assertEqual(result['metodo_match']['url'], 1)
+        self.assertEqual(result['metodo_match']['titulo_normalizado'], 1)
+        self.assertEqual(result['backlog_curadoria'][0]['comb'], 'shopee:moda')
+        self.assertNotIn('https://shopee.com.br/outro', json.dumps(result))
+
+    def test_cobertura_matches_scheme_less_urls(self):
+        self._create_offer(
+            product_url='www.mercadolivre.com.br/tenis-nike-air-max/p/MLB123',
+            normalized_title='tenis nike air max',
+        )
+        self._create_message(
+            external_message_id='COV-SCHEMELESS',
+            text='Tênis Nike Air Max por R$ 199,90 mercadolivre.com.br/tenis-nike-air-max/p/MLB123',
+            urls=['mercadolivre.com.br/tenis-nike-air-max/p/MLB123'],
+        )
+        result = build_cobertura(ObservedWhatsAppMessage.objects.all())
+        self.assertEqual(result['taxa_sobreposicao'], 1.0)
+        self.assertEqual(result['metodo_match']['url'], 1)
 
     def test_v2_payload_includes_new_blocks(self):
         self._create_message(external_message_id='V2FULL')
@@ -466,10 +593,15 @@ class MarketIntelReportV2Tests(TestCase):
         self.assertIn('copy_e_formato', payload)
         self.assertIn('copy_e_formato_acumulada', payload)
         self.assertIn('sinais_engajamento', payload)
+        self.assertIn('sinais_engajamento_acumulado', payload)
         self.assertIn('marketplace_detalhado', payload)
+        self.assertIn('marketplace_detalhado_acumulado', payload)
         self.assertIn('marcas_por_categoria', payload)
+        self.assertIn('marcas_por_categoria_acumulada', payload)
         self.assertIn('cadencia_e_timing', payload)
+        self.assertIn('cadencia_e_timing_acumulada', payload)
         self.assertIn('cobertura', payload)
+        self.assertIn('cobertura_acumulada', payload)
 
     def test_v1_blocks_unchanged(self):
         """Ensure v1 blocks (summary, recommendations, scraper_opportunities) are intact."""

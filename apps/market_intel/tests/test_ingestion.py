@@ -162,3 +162,78 @@ class ImportObservedMessagesTests(TestCase):
         self.assertIsNone(message.reacoes)
         self.assertIsNone(message.visualizacoes)
         self.assertIsNone(message.fixado)
+
+    def test_import_missing_engagement_fields_do_not_erase_existing_metrics(self):
+        """Partial payloads must not clear metrics previously provided by another source."""
+        base_message = {
+            'message_id': 'MSG5',
+            'group_jid': '120363000000000001@g.us',
+            'group_subject': 'Ofertas Multi Fonte',
+            'sender_hash': 'e' * 64,
+            'sent_at': '2026-06-11T23:20:00.000Z',
+            'collected_at': '2026-06-11T23:30:00.000Z',
+            'text': 'Oferta com métrica https://shopee.com.br/x',
+            'has_image': False,
+            'urls': ['https://shopee.com.br/x'],
+            'raw_type': 'conversation',
+        }
+        first_payload = {
+            'enabled': True,
+            'messages': [{**base_message, 'reacoes': 20, 'visualizacoes': 1000, 'fixado': True}],
+        }
+        second_payload = {
+            'enabled': True,
+            'messages': [{**base_message, 'text': 'Oferta atualizada sem métrica https://shopee.com.br/x'}],
+        }
+
+        self.assertEqual(import_observed_messages(first_payload)['created'], 1)
+        result = import_observed_messages(second_payload)
+
+        self.assertEqual(result['updated'], 1)
+        message = ObservedWhatsAppMessage.objects.get(external_message_id='MSG5')
+        self.assertEqual(message.reacoes, 20)
+        self.assertEqual(message.visualizacoes, 1000)
+        self.assertTrue(message.fixado)
+
+    def test_import_null_engagement_update_does_not_erase_existing_metrics(self):
+        """wa_service-shaped null fields must not clear metrics already stored."""
+        base_message = {
+            'message_id': 'MSG6',
+            'group_jid': '120363000000000001@g.us',
+            'group_subject': 'Ofertas Multi Fonte',
+            'sender_hash': 'f' * 64,
+            'sent_at': '2026-06-11T23:20:00.000Z',
+            'collected_at': '2026-06-11T23:30:00.000Z',
+            'text': 'Oferta com métrica https://shopee.com.br/x',
+            'has_image': False,
+            'urls': ['https://shopee.com.br/x'],
+            'raw_type': 'conversation',
+        }
+        first_payload = {
+            'enabled': True,
+            'messages': [{**base_message, 'reacoes': 20, 'visualizacoes': 1000, 'fixado': True}],
+        }
+        null_update_payload = {
+            'enabled': True,
+            'messages': [{
+                **base_message,
+                'text': 'Oferta atualizada com nulls https://shopee.com.br/x',
+                'reacoes': None,
+                'visualizacoes': None,
+                'encaminhamentos': None,
+                'comentarios': None,
+                'repostado': None,
+                'qtd_repostagens': None,
+                'fixado': None,
+            }],
+        }
+
+        self.assertEqual(import_observed_messages(first_payload)['created'], 1)
+        result = import_observed_messages(null_update_payload)
+
+        self.assertEqual(result['updated'], 1)
+        message = ObservedWhatsAppMessage.objects.get(external_message_id='MSG6')
+        self.assertEqual(message.reacoes, 20)
+        self.assertEqual(message.visualizacoes, 1000)
+        self.assertTrue(message.fixado)
+

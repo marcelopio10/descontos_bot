@@ -239,6 +239,13 @@ describe("observer endpoints", () => {
           urls: [],
           raw_type: "conversation",
           collected_at: "2026-06-11T23:30:00.000Z",
+          reacoes: null,
+          visualizacoes: null,
+          encaminhamentos: null,
+          comentarios: null,
+          repostado: null,
+          qtd_repostagens: null,
+          fixado: null,
         },
       ],
     });

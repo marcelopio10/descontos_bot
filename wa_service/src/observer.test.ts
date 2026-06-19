@@ -96,6 +96,13 @@ describe("normalizeIncomingMessage", () => {
       urls: ["https://amzn.to/oferta"],
       raw_type: "imageMessage",
       collected_at: "2026-06-11T23:30:00.000Z",
+      reacoes: null,
+      visualizacoes: null,
+      encaminhamentos: null,
+      comentarios: null,
+      repostado: null,
+      qtd_repostagens: null,
+      fixado: null,
     });
     expect(message?.sender_hash).toMatch(/^[a-f0-9]{64}$/);
     expect(JSON.stringify(message)).not.toContain("556199999999");

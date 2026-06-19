@@ -1,7 +1,9 @@
 import re
+import unicodedata
 from collections import Counter
 from datetime import date, datetime, time, timezone as dt_timezone
 from decimal import Decimal
+from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
 from django.db.models import QuerySet
@@ -77,6 +79,101 @@ URL_OR_WHATSAPP_ID_RE = re.compile(
     re.IGNORECASE,
 )
 COUPON_RE = re.compile(r'^[A-Z0-9_-]{3,24}$')
+PRICE_TEXT_RE = re.compile(r'R\$\s*[0-9\.]+,?\d*', re.IGNORECASE)
+NON_ALNUM_RE = re.compile(r'[^a-z0-9]+')
+
+
+def _normalize_url_for_match(url: str) -> str:
+    raw_url = str(url or '').strip()
+    parsed = urlparse(raw_url)
+    if not parsed.netloc and raw_url and not raw_url.startswith('/'):
+        parsed = urlparse(f'//{raw_url}')
+    host = parsed.netloc.lower().removeprefix('www.')
+    path = parsed.path.rstrip('/').lower()
+    return f'{host}{path}' if host else ''
+
+
+def _normalize_text_for_match(value: str) -> str:
+    text = str(value or '').lower()
+    text = ''.join(
+        c for c in unicodedata.normalize('NFKD', text)
+        if not unicodedata.combining(c)
+    )
+    text = URL_OR_WHATSAPP_ID_RE.sub(' ', text)
+    text = PRICE_TEXT_RE.sub(' ', text)
+    text = NON_ALNUM_RE.sub(' ', text)
+    return re.sub(r'\s+', ' ', text).strip()
+
+
+
+def _extract_category(row: ObservedWhatsAppMessage) -> str:
+    return next(
+        (h.split(':', 1)[1] for h in (row.scraper_hints or []) if str(h).startswith('categoria:')),
+        '',
+    )
+
+
+def _build_offer_index():
+    from apps.offers.models import Offer
+
+    offers = list(
+        Offer.objects.select_related('category')
+        .filter(is_active=True)
+        .only('id', 'product_url', 'normalized_title', 'title', 'first_seen_at', 'category__code')
+    )
+    by_url = {}
+    by_title = []
+    for offer in offers:
+        norm_url = _normalize_url_for_match(offer.product_url)
+        if norm_url:
+            by_url[norm_url] = offer
+        title = _normalize_text_for_match(offer.normalized_title or offer.title)
+        if title and len(title) >= 12:
+            by_title.append((title, offer))
+    return {'by_url': by_url, 'by_title': by_title}
+
+
+def _match_own_offer(row: ObservedWhatsAppMessage, offer_index: dict):
+    for url in row.urls or []:
+        match = offer_index['by_url'].get(_normalize_url_for_match(url))
+        if match:
+            return match, 'url'
+    observed_text = _normalize_text_for_match(row.text)
+    observed_tokens = set(observed_text.split())
+    if observed_text and len(observed_tokens) >= 4:
+        for title, offer in offer_index['by_title']:
+            title_tokens = set(title.split())
+            if len(title_tokens) < 3:
+                continue
+            overlap = observed_tokens & title_tokens
+            overlap_ratio = len(overlap) / len(title_tokens)
+            if title in observed_text or overlap_ratio >= 0.75:
+                return offer, 'titulo_normalizado'
+    return None, ''
+
+
+def _coverage_lag_hours(row: ObservedWhatsAppMessage, offer) -> float | None:
+    if not offer or not getattr(offer, 'first_seen_at', None) or not row.sent_at:
+        return None
+    return round((offer.first_seen_at - row.sent_at).total_seconds() / 3600, 1)
+
+
+def _detect_sazonalidade(rows: list[ObservedWhatsAppMessage]) -> list[dict]:
+    counts = Counter()
+    for row in rows:
+        text = _normalize_text_for_match(row.text)
+        local_date = row.sent_at.astimezone(LOCAL_TZ).date() if row.sent_at else None
+        if 'black friday' in text or (local_date and local_date.month == 11 and local_date.day >= 20):
+            counts['black_friday'] += 1
+        if 'prime day' in text or 'prime ofertas' in text:
+            counts['prime_day'] += 1
+        if 'dia dos pais' in text:
+            counts['dia_dos_pais'] += 1
+        if 'dia das maes' in text:
+            counts['dia_das_maes'] += 1
+        if 'natal' in text or (local_date and local_date.month == 12 and local_date.day >= 10):
+            counts['natal'] += 1
+    return [{'evento': evento, 'count': count} for evento, count in counts.most_common()]
 
 
 def generate_daily_report(report_date: date) -> MarketIntelDailyReport:
@@ -363,75 +460,92 @@ def build_copy_e_formato(messages: QuerySet[ObservedWhatsAppMessage]) -> dict:
 
 
 def build_sinais_engajamento(messages: QuerySet[ObservedWhatsAppMessage]) -> dict:
-    """P0-1: Engagement signals aggregation (mostly null for WhatsApp)."""
+    """P0-1: Engagement signals aggregation with graceful degradation.
+
+    WhatsApp usually returns all fields as null. When another source provides any
+    engagement signal, rank by an additive safe score instead of treating missing
+    fields as zero for averages.
+    """
     rows = list(messages)
-    has_engagement = any(r.reacoes is not None for r in rows)
+    engagement_fields = ('reacoes', 'visualizacoes', 'encaminhamentos', 'comentarios', 'qtd_repostagens')
+    boolean_engagement_fields = ('repostado', 'fixado')
+    has_engagement = any(
+        any(getattr(r, field) is not None for field in engagement_fields)
+        or any(getattr(r, field) is not None for field in boolean_engagement_fields)
+        for r in rows
+    )
     if not has_engagement:
         return {
             'top_por_reacoes': [],
+            'top_por_engajamento': [],
             'engajamento_medio_por_marketplace': {},
             'engajamento_medio_por_categoria': {},
-            'nota': 'Sinais de engajamento indisponíveis para esta fonte (WhatsApp não expõe reações/views). Ative grupos Telegram para dados de engajamento.',
+            'nota': 'Sinais de engajamento indisponíveis para esta fonte (WhatsApp não expõe reações/views). Campos ficam null e são excluídos de médias/rankings.',
         }
 
-    # Build ranking by reacoes
-    with_reacoes = [(r, r.reacoes or 0) for r in rows if r.reacoes is not None]
-    with_reacoes.sort(key=lambda x: x[1], reverse=True)
-    top_por_reacoes = []
-    for row, reacoes in with_reacoes[:10]:
-        marketplace = _sanitize_marketplace(row.parsed_marketplace)
-        entry = {
-            'marketplace': marketplace,
-            'reacoes': reacoes,
-        }
+    ranked = []
+    for row in rows:
+        if (
+            not any(getattr(row, field) is not None for field in engagement_fields)
+            and not any(getattr(row, field) is not None for field in boolean_engagement_fields)
+        ):
+            continue
+        score = (row.reacoes or 0) + (row.comentarios or 0) + (row.encaminhamentos or 0)
         if row.visualizacoes is not None:
-            entry['visualizacoes'] = row.visualizacoes
+            score += round(row.visualizacoes / 100)
         if row.repostado:
-            entry['repostado'] = True
+            score += (row.qtd_repostagens or 1) * 10
         if row.fixado:
-            entry['fixado'] = True
-        top_por_reacoes.append(entry)
+            score += 25
+        ranked.append((row, score))
+    ranked.sort(key=lambda x: x[1], reverse=True)
 
-    # Per marketplace averages
-    mp_groups: dict[str, list] = {}
-    for row in rows:
-        if row.reacoes is None:
-            continue
+    top_por_engajamento = []
+    for row, score in ranked[:10]:
+        entry = {
+            'marketplace': _sanitize_marketplace(row.parsed_marketplace),
+            'score_engajamento': score,
+        }
+        for field in engagement_fields:
+            value = getattr(row, field)
+            if value is not None:
+                entry[field] = value
+        if row.repostado is not None:
+            entry['repostado'] = row.repostado
+        if row.qtd_repostagens is not None:
+            entry['qtd_repostagens'] = row.qtd_repostagens
+        if row.fixado is not None:
+            entry['fixado'] = row.fixado
+        top_por_engajamento.append(entry)
+
+    top_por_reacoes = []
+    for row in sorted([r for r in rows if r.reacoes is not None], key=lambda r: r.reacoes or 0, reverse=True)[:10]:
+        top_por_reacoes.append({
+            'marketplace': _sanitize_marketplace(row.parsed_marketplace),
+            'reacoes': row.reacoes,
+            **({'visualizacoes': row.visualizacoes} if row.visualizacoes is not None else {}),
+            **({'repostado': True} if row.repostado else {}),
+            **({'fixado': True} if row.fixado else {}),
+        })
+
+    mp_groups: dict[str, list[int]] = {}
+    cat_groups: dict[str, list[int]] = {}
+    for row, score in ranked:
         marketplace = _sanitize_marketplace(row.parsed_marketplace)
-        if marketplace not in mp_groups:
-            mp_groups[marketplace] = []
-        mp_groups[marketplace].append(row.reacoes)
-
-    engajamento_por_marketplace = {}
-    for mp, values in mp_groups.items():
-        avg = sum(values) / len(values)
-        engajamento_por_marketplace[mp] = round(avg, 1)
-
-    # Per category averages
-    cat_groups: dict[str, list] = {}
-    for row in rows:
-        if row.reacoes is None:
-            continue
-        category = ''
-        for hint in (row.scraper_hints or []):
-            if hint.startswith('categoria:'):
-                category = hint.split(':', 1)[1]
-                break
-        if not category:
-            continue
-        if category not in cat_groups:
-            cat_groups[category] = []
-        cat_groups[category].append(row.reacoes)
-
-    engajamento_por_categoria = {}
-    for cat, values in cat_groups.items():
-        avg = sum(values) / len(values)
-        engajamento_por_categoria[cat] = round(avg, 1)
+        mp_groups.setdefault(marketplace, []).append(score)
+        category = _extract_category(row)
+        if category:
+            cat_groups.setdefault(category, []).append(score)
 
     return {
         'top_por_reacoes': top_por_reacoes,
-        'engajamento_medio_por_marketplace': engajamento_por_marketplace,
-        'engajamento_medio_por_categoria': engajamento_por_categoria,
+        'top_por_engajamento': top_por_engajamento,
+        'engajamento_medio_por_marketplace': {
+            mp: round(sum(values) / len(values), 1) for mp, values in mp_groups.items()
+        },
+        'engajamento_medio_por_categoria': {
+            cat: round(sum(values) / len(values), 1) for cat, values in cat_groups.items()
+        },
         'nota': '',
     }
 
@@ -486,16 +600,23 @@ def build_marcas_por_categoria(messages: QuerySet[ObservedWhatsAppMessage]) -> d
 
 
 def build_cadencia_e_timing(messages: QuerySet[ObservedWhatsAppMessage]) -> dict:
-    """P1-4: Cadence and timing aggregation."""
+    """P1-4: Cadence, timing and coverage lag aggregation."""
     rows = list(messages)
     if not rows:
         return {
             'heatmap_horario_dia': [],
             'frequencia_por_grupo': [],
             'intervalo_medio_por_grupo': {},
+            'lag_cobertura': {
+                'amostras': 0,
+                'descontos_bot_publicou_primeiro': 0,
+                'concorrente_publicou_primeiro': 0,
+                'empate': 0,
+                'lag_medio_horas': None,
+            },
+            'sazonalidade': [],
         }
 
-    # Heatmap: hour (0-23) × day_of_week (0=mon...6=sun)
     heatmap: dict[tuple[int, int], int] = {}
     for hour in range(24):
         for day in range(7):
@@ -504,7 +625,6 @@ def build_cadencia_e_timing(messages: QuerySet[ObservedWhatsAppMessage]) -> dict
     for row in rows:
         if row.sent_at:
             local_dt = row.sent_at.astimezone(LOCAL_TZ)
-            # Python: weekday() 0=Monday, 6=Sunday
             heatmap[(local_dt.hour, local_dt.weekday())] += 1
 
     heatmap_list = [
@@ -512,12 +632,10 @@ def build_cadencia_e_timing(messages: QuerySet[ObservedWhatsAppMessage]) -> dict
         for (hour, day), count in sorted(heatmap.items())
     ]
 
-    # Frequency per group
     group_freq: dict[str, list] = {}
     for row in rows:
         group_name = _sanitize_public_text(row.group.name, max_length=80)
-        if group_name not in group_freq:
-            group_freq[group_name] = []
+        group_freq.setdefault(group_name, [])
         if row.sent_at:
             group_freq[group_name].append(row.sent_at)
 
@@ -525,16 +643,16 @@ def build_cadencia_e_timing(messages: QuerySet[ObservedWhatsAppMessage]) -> dict
     intervalo_medio_por_grupo = {}
     for group_name, timestamps in group_freq.items():
         posts = len(timestamps)
-        # Calculate days span
         if posts > 1:
             sorted_ts = sorted(timestamps)
-            days_span = max(1, (sorted_ts[-1] - sorted_ts[0]).total_seconds() / 86400)
+            first_day = sorted_ts[0].astimezone(LOCAL_TZ).date()
+            last_day = sorted_ts[-1].astimezone(LOCAL_TZ).date()
+            days_span = max(1, (last_day - first_day).days + 1)
             posts_per_day = round(posts / days_span, 1)
-            # Average interval in hours
-            intervals = []
-            for i in range(1, len(sorted_ts)):
-                delta = (sorted_ts[i] - sorted_ts[i-1]).total_seconds() / 3600
-                intervals.append(delta)
+            intervals = [
+                (sorted_ts[i] - sorted_ts[i - 1]).total_seconds() / 3600
+                for i in range(1, len(sorted_ts))
+            ]
             avg_interval = round(sum(intervals) / len(intervals), 1) if intervals else None
         else:
             posts_per_day = posts
@@ -548,28 +666,59 @@ def build_cadencia_e_timing(messages: QuerySet[ObservedWhatsAppMessage]) -> dict
         if avg_interval is not None:
             intervalo_medio_por_grupo[group_name] = avg_interval
 
+    lag_summary = {
+        'amostras': 0,
+        'descontos_bot_publicou_primeiro': 0,
+        'concorrente_publicou_primeiro': 0,
+        'empate': 0,
+        'lag_medio_horas': None,
+    }
+    try:
+        offer_index = _build_offer_index()
+        lags = []
+        for row in rows:
+            offer, _ = _match_own_offer(row, offer_index)
+            lag = _coverage_lag_hours(row, offer)
+            if lag is None:
+                continue
+            lag_summary['amostras'] += 1
+            lags.append(lag)
+            if lag < 0:
+                lag_summary['descontos_bot_publicou_primeiro'] += 1
+            elif lag > 0:
+                lag_summary['concorrente_publicou_primeiro'] += 1
+            else:
+                lag_summary['empate'] += 1
+        if lags:
+            lag_summary['lag_medio_horas'] = round(sum(lags) / len(lags), 1)
+    except Exception:
+        pass
+
     return {
         'heatmap_horario_dia': heatmap_list,
-        'frequencia_por_grupo': frequencia_por_grupo,
+        'frequencia_por_grupo': sorted(frequencia_por_grupo, key=lambda item: item['posts'], reverse=True),
         'intervalo_medio_por_grupo': intervalo_medio_por_grupo,
+        'lag_cobertura': lag_summary,
+        'sazonalidade': _detect_sazonalidade(rows),
     }
 
 
 def build_cobertura(messages: QuerySet[ObservedWhatsAppMessage]) -> dict:
-    """P1-7: Coverage gap analysis — cross-references with Offer model."""
+    """P1-7: Coverage gap analysis.
+
+    Cross-references competitor messages with our Offer table by normalized URL
+    first, then by normalized title/text. The public payload never exposes raw
+    competitor URLs or copy; backlog entries use aggregated combos and hashes.
+    """
     rows = list(messages)
     try:
-        from apps.offers.models import Offer
-        own_urls = set(
-            Offer.objects.filter(is_active=True)
-            .values_list('product_url', flat=True)
-        )
+        offer_index = _build_offer_index()
     except Exception:
-        # If Offer model is unavailable, return empty coverage
         return {
             'ofertas_nao_cobertas': 0,
             'taxa_sobreposicao': 0,
             'exclusivas_concorrente': 0,
+            'tempo_ate_cobertura_horas_medio': None,
             'backlog_curadoria': [],
             'nota': 'Modelo Offer indisponível; análise de cobertura desabilitada.',
         }
@@ -580,43 +729,35 @@ def build_cobertura(messages: QuerySet[ObservedWhatsAppMessage]) -> dict:
             'ofertas_nao_cobertas': 0,
             'taxa_sobreposicao': 0,
             'exclusivas_concorrente': 0,
+            'tempo_ate_cobertura_horas_medio': None,
             'backlog_curadoria': [],
         }
 
-    # Match by URL presence (normalized domain+path)
-    def _normalize_url(url: str) -> str:
-        from urllib.parse import urlparse
-        parsed = urlparse(url)
-        return f'{parsed.netloc}{parsed.path}'.rstrip('/').lower()
-
-    own_urls_norm = {_normalize_url(u) for u in own_urls if u}
-
     overlap_count = 0
     not_covered = []
+    lag_values = []
+    match_method_counts = Counter()
+
     for row in rows:
-        row_urls = row.urls or []
-        matched = False
-        for url in row_urls:
-            if _normalize_url(url) in own_urls_norm:
-                matched = True
-                break
-        if matched:
+        offer, match_method = _match_own_offer(row, offer_index)
+        if offer:
             overlap_count += 1
-        else:
-            marketplace = _sanitize_marketplace(row.parsed_marketplace)
-            not_covered.append({
-                'marketplace': marketplace,
-                'preco': _decimal_to_str(row.parsed_price),
-                'categoria': next(
-                    (h.split(':', 1)[1] for h in (row.scraper_hints or []) if h.startswith('categoria:')),
-                    '',
-                ),
-            })
+            match_method_counts[match_method] += 1
+            lag = _coverage_lag_hours(row, offer)
+            if lag is not None:
+                lag_values.append(lag)
+            continue
+
+        marketplace = _sanitize_marketplace(row.parsed_marketplace)
+        category = _extract_category(row)
+        not_covered.append({
+            'marketplace': marketplace,
+            'preco': _decimal_to_str(row.parsed_price),
+            'categoria': category,
+        })
 
     taxa_sobreposicao = round(overlap_count / total, 2) if total else 0
     exclusivas_concorrente = total - overlap_count
-
-    # Priority backlog: marketplace + category combos
     backlog_counter = Counter()
     for item in not_covered:
         key = f"{item['marketplace']}:{item['categoria']}" if item['categoria'] else item['marketplace']
@@ -631,6 +772,8 @@ def build_cobertura(messages: QuerySet[ObservedWhatsAppMessage]) -> dict:
         'ofertas_nao_cobertas': exclusivas_concorrente,
         'taxa_sobreposicao': taxa_sobreposicao,
         'exclusivas_concorrente': exclusivas_concorrente,
+        'tempo_ate_cobertura_horas_medio': round(sum(lag_values) / len(lag_values), 1) if lag_values else None,
+        'metodo_match': dict(match_method_counts),
         'backlog_curadoria': backlog_curadoria,
     }
 
@@ -663,10 +806,15 @@ def build_daily_report_payload(report: MarketIntelDailyReport) -> dict:
         'copy_e_formato': build_copy_e_formato(cycle_messages),
         'copy_e_formato_acumulada': build_copy_e_formato(all_messages),
         'sinais_engajamento': build_sinais_engajamento(cycle_messages),
+        'sinais_engajamento_acumulado': build_sinais_engajamento(all_messages),
         'marketplace_detalhado': build_marketplace_detalhado(cycle_messages),
+        'marketplace_detalhado_acumulado': build_marketplace_detalhado(all_messages),
         'marcas_por_categoria': build_marcas_por_categoria(cycle_messages),
+        'marcas_por_categoria_acumulada': build_marcas_por_categoria(all_messages),
         'cadencia_e_timing': build_cadencia_e_timing(cycle_messages),
+        'cadencia_e_timing_acumulada': build_cadencia_e_timing(all_messages),
         'cobertura': build_cobertura(cycle_messages),
+        'cobertura_acumulada': build_cobertura(all_messages),
         'privacy': {
             'sender_identity': 'sha256 hash only in database; omitted from report',
             'message_identity': 'Source message identifiers omitted from report',

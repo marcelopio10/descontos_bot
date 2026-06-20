@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-20T14:04:53.680686+00:00",
+  "generated_at": "2026-06-20T16:33:29.954640+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,6 +24,16 @@
       "tracked_url": "https://s.shopee.com.br/7VEBFVI86l?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
     },
     {
+      "id": 1429,
+      "title": "Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Importad Sabor Creme De Avelã",
+      "current_price": "151.00",
+      "original_price": "699.00",
+      "discount_pct": "78.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_630816-MLA99935887857_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/33ygqki?matt_word=dbot_ig_bio_1429&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1429"
+    },
+    {
       "id": 6830,
       "title": "Fone Bluetooth Pro5 Premium | Imersão Total c Cancelamento Ruído Qualidade Superior p iPhoneAndroid",
       "current_price": "66.88",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_821169-MLB110559528776_052026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/2WpSPkE?matt_word=dbot_ig_bio_3281&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3281"
-    },
-    {
-      "id": 7087,
-      "title": "Fone De Ouvido Bluetooth 5.4 Compatível iPhone AirPods Branco",
-      "current_price": "54.00",
-      "original_price": "229.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_989308-MLB97603150953_112025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1SggXHw?matt_word=dbot_ig_bio_7087&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7087"
     }
   ]
 }

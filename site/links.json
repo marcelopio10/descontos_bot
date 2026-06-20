@@ -1,17 +1,37 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-19T23:38:52.996856+00:00",
+  "generated_at": "2026-06-20T11:09:33.222670+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 6560,
-      "title": "Tênis Masculino Flak 365 Ii Lite Oakley Preto Liso 43 Br",
-      "current_price": "179.00",
-      "original_price": "749.00",
-      "discount_pct": "76.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_768981-MLB106186188119_012026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2hcov55?matt_word=dbot_ig_bio_6560&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6560"
+      "id": 6836,
+      "title": "Kit Completo Maca Power karseell Máscara 500 g + condicionador 1L + Shampoo 1L + Óleo P 50ml",
+      "current_price": "49.00",
+      "original_price": "350.00",
+      "discount_pct": "86.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820ly-mnb7dwwwmo748e",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/110hVZ30jd?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
+    },
+    {
+      "id": 6806,
+      "title": "Batedor Misturador Mixer Elétrico para Bebidas Leite Café Clara de Ovo 2 em 1",
+      "current_price": "19.00",
+      "original_price": "90.48",
+      "discount_pct": "79.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd48-lupf3z3a40mxf1",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/7VEBFVI86l?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
+    },
+    {
+      "id": 6830,
+      "title": "Fone Bluetooth Pro5 Premium | Imersão Total c Cancelamento Ruído Qualidade Superior p iPhoneAndroid",
+      "current_price": "66.88",
+      "original_price": "290.78",
+      "discount_pct": "77.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg4gj8nwxkw7e0",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/8V6iRLRexs?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6830"
     },
     {
       "id": 3281,
@@ -32,26 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_894230-MLA111390627295_052026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/13ujmWR?matt_word=dbot_ig_bio_1940&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1940"
-    },
-    {
-      "id": 3426,
-      "title": "Pre Treino Carnage Pink Lemonade 450g Com Creatina Dark Lab Limonada Rosa",
-      "current_price": "99.00",
-      "original_price": "399.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_910513-MLA99911074229_112025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1utJS1y?matt_word=dbot_ig_bio_3426&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3426"
-    },
-    {
-      "id": 5619,
-      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
-      "current_price": "144.00",
-      "original_price": "597.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802771-MLB105838199600_022026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2pK3wDF?matt_word=dbot_ig_bio_5619&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5619"
     }
   ]
 }

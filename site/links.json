@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-20T16:33:29.954640+00:00",
+  "generated_at": "2026-06-20T19:41:04.788354+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,6 +24,26 @@
       "tracked_url": "https://s.shopee.com.br/7VEBFVI86l?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
     },
     {
+      "id": 7106,
+      "title": "Caminhão Dinossauro Pista Com Carrinhos Maleta Transporte",
+      "current_price": "80.00",
+      "original_price": "400.00",
+      "discount_pct": "79.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_948327-MLB104929140435_012026-AB-caminho-dinossauro-pista-com-carrinhos-maleta-transporte.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/24D7PgV?matt_word=dbot_ig_bio_7106&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7106"
+    },
+    {
+      "id": 2586,
+      "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
+      "current_price": "151.00",
+      "original_price": "699.00",
+      "discount_pct": "78.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
+    },
+    {
       "id": 1429,
       "title": "Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Importad Sabor Creme De Avelã",
       "current_price": "151.00",
@@ -32,26 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_630816-MLA99935887857_112025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/33ygqki?matt_word=dbot_ig_bio_1429&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1429"
-    },
-    {
-      "id": 6830,
-      "title": "Fone Bluetooth Pro5 Premium | Imersão Total c Cancelamento Ruído Qualidade Superior p iPhoneAndroid",
-      "current_price": "66.88",
-      "original_price": "290.78",
-      "discount_pct": "77.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg4gj8nwxkw7e0",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/8V6iRLRexs?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6830"
-    },
-    {
-      "id": 3281,
-      "title": "Álbum De Figurinhas Colecionáveis Copa Do Mundo Fifa 2026 Capa Dura",
-      "current_price": "49.00",
-      "original_price": "199.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_821169-MLB110559528776_052026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2WpSPkE?matt_word=dbot_ig_bio_3281&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3281"
     }
   ]
 }

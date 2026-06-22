@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-21T00:34:18.573683+00:00",
+  "generated_at": "2026-06-22T11:05:56.683213+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,16 +24,6 @@
       "tracked_url": "https://s.shopee.com.br/7VEBFVI86l?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
     },
     {
-      "id": 7106,
-      "title": "Caminhão Dinossauro Pista Com Carrinhos Maleta Transporte",
-      "current_price": "80.00",
-      "original_price": "400.00",
-      "discount_pct": "79.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_948327-MLB104929140435_012026-AB-caminho-dinossauro-pista-com-carrinhos-maleta-transporte.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/24D7PgV?matt_word=dbot_ig_bio_7106&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7106"
-    },
-    {
       "id": 6034,
       "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
       "current_price": "82.00",
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959030-MLA99595836842_122025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1Uwr2aE?matt_word=dbot_ig_bio_2586&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2586"
+    },
+    {
+      "id": 1429,
+      "title": "Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Importad Sabor Creme De Avelã",
+      "current_price": "151.00",
+      "original_price": "699.00",
+      "discount_pct": "78.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_630816-MLA99935887857_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/33ygqki?matt_word=dbot_ig_bio_1429&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1429"
     }
   ]
 }

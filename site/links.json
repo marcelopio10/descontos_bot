@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-22T11:05:56.683213+00:00",
+  "generated_at": "2026-06-22T13:08:26.733338+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,16 +24,6 @@
       "tracked_url": "https://s.shopee.com.br/7VEBFVI86l?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
     },
     {
-      "id": 6034,
-      "title": "Caminhão Dinossauro Pista Com 6 Carrinhos Maleta Transporte Azul",
-      "current_price": "82.00",
-      "original_price": "400.00",
-      "discount_pct": "79.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_907958-MLB110899488495_042026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2nV5Ews?matt_word=dbot_ig_bio_6034&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6034"
-    },
-    {
       "id": 2586,
       "title": "Whey Isolate Protein Fuse 1,8kg Chocolate Dark Lab",
       "current_price": "151.00",
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_630816-MLA99935887857_112025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/33ygqki?matt_word=dbot_ig_bio_1429&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1429"
+    },
+    {
+      "id": 6830,
+      "title": "Fone Bluetooth Pro5 Premium | Imersão Total c Cancelamento Ruído Qualidade Superior p iPhoneAndroid",
+      "current_price": "66.88",
+      "original_price": "290.78",
+      "discount_pct": "77.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg4gj8nwxkw7e0",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/8V6iRLRexs?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6830"
     }
   ]
 }

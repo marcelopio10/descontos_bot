@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-23T13:30:06.662943+00:00",
+  "generated_at": "2026-06-23T16:10:39.384801+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -34,6 +34,16 @@
       "tracked_url": "https://s.shopee.com.br/3LOh5GTWU7?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
     },
     {
+      "id": 1429,
+      "title": "Whey Isolate Protein Fuse Refil 1,8kg Dark Lab - Mp Importad Sabor Creme De Avelã",
+      "current_price": "151.00",
+      "original_price": "699.00",
+      "discount_pct": "78.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_630816-MLA99935887857_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/33ygqki?matt_word=dbot_ig_bio_1429&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1429"
+    },
+    {
       "id": 6393,
       "title": "Kit Álbum Capa Dura + Lata Oficial Copa 2026 +140 Figurinhas",
       "current_price": "193.00",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_610974-MLB111634804743_052026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/2Mex3nJ?matt_word=dbot_ig_bio_6393&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6393"
-    },
-    {
-      "id": 6830,
-      "title": "Fone Bluetooth Pro5 Premium | Imersão Total c Cancelamento Ruído Qualidade Superior p iPhoneAndroid",
-      "current_price": "66.88",
-      "original_price": "290.78",
-      "discount_pct": "77.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg4gj8nwxkw7e0",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/1LdchaiyVf?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6830"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-06-26T11:05:06.576701+00:00",
+  "generated_at": "2026-06-26T16:29:36.247844+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,6 +12,16 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820ly-mnb7dwwwmo748e",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/9KfxQ5Bh48?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
+    },
+    {
+      "id": 3281,
+      "title": "Álbum De Figurinhas Colecionáveis Copa Do Mundo Fifa 2026 Capa Dura",
+      "current_price": "39.00",
+      "original_price": "199.00",
+      "discount_pct": "80.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_821169-MLB110559528776_052026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2WpSPkE?matt_word=dbot_ig_bio_3281&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3281"
     },
     {
       "id": 6806,
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_676481-MLB108626083553_032026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1Ekwhhq?matt_word=dbot_ig_bio_5772&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5772"
-    },
-    {
-      "id": 7319,
-      "title": "Kit 6 Cuecas Boxer Reebok Microfibra Sem Costura Original",
-      "current_price": "65.00",
-      "original_price": "299.00",
-      "discount_pct": "78.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_667459-MLB104967777921_012026-AB-kit-6-cuecas-boxer-reebok-microfibra-sem-costura-original.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1FRA9zP?matt_word=dbot_ig_bio_7319&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7319"
     }
   ]
 }

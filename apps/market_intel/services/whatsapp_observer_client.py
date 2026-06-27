@@ -5,6 +5,7 @@ from urllib.request import Request, urlopen
 from django.conf import settings
 
 DEFAULT_TIMEOUT_SECONDS = 30
+DEFAULT_WA_SERVICE_URL = 'http://127.0.0.1:8787'
 
 
 class WhatsAppObserverClientError(Exception):
@@ -13,8 +14,21 @@ class WhatsAppObserverClientError(Exception):
 
 class WhatsAppObserverClient:
     def __init__(self, base_url: str | None = None, timeout: int = DEFAULT_TIMEOUT_SECONDS):
-        self.base_url = (base_url or getattr(settings, 'WA_SERVICE_URL', '') or 'http://127.0.0.1:8787').rstrip('/')
+        self.base_url = self._resolve_base_url(base_url)
         self.timeout = timeout
+
+    def _resolve_base_url(self, base_url: str | None) -> str:
+        if base_url:
+            return base_url.rstrip('/')
+
+        provider = getattr(settings, 'WA_PROVIDER', 'baileys')
+        if str(provider).strip().lower() == 'evolution':
+            evolution_url = getattr(settings, 'EVOLUTION_ADAPTER_URL', '')
+            if evolution_url:
+                return str(evolution_url).rstrip('/')
+
+        service_url = getattr(settings, 'WA_SERVICE_URL', DEFAULT_WA_SERVICE_URL)
+        return str(service_url or DEFAULT_WA_SERVICE_URL).rstrip('/')
 
     def groups(self) -> dict:
         return self._request('GET', '/observer/groups')

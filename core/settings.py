@@ -115,6 +115,12 @@ ALLOW_PRODUCTION_WHATSAPP_SEND = os.environ.get(
     'ALLOW_PRODUCTION_WHATSAPP_SEND',
     'false',
 ).lower() in ('1', 'true', 'yes', 'on')
+WA_PROVIDER = os.environ.get('WA_PROVIDER', 'baileys').strip().lower() or 'baileys'
+WA_SERVICE_URL = os.environ.get('WA_SERVICE_URL', 'http://127.0.0.1:8787')
+EVOLUTION_ADAPTER_URL = os.environ.get('EVOLUTION_ADAPTER_URL', '')
+EVOLUTION_BASE_URL = os.environ.get('EVOLUTION_BASE_URL', '')
+EVOLUTION_INSTANCIA_ENVIO = os.environ.get('EVOLUTION_INSTANCIA_ENVIO', 'descontos_envio')
+EVOLUTION_INSTANCIA_OBSERVER = os.environ.get('EVOLUTION_INSTANCIA_OBSERVER', 'descontos_observer')
 
 TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN', '')
 TELEGRAM_CHANNEL_ID_HOMOLOG = os.environ.get(

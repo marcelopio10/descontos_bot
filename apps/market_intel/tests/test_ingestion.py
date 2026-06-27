@@ -3,7 +3,7 @@ from datetime import datetime
 from decimal import Decimal
 from unittest.mock import patch
 
-from django.test import TestCase
+from django.test import TestCase, override_settings
 
 from apps.market_intel.models import ObservedWhatsAppGroup, ObservedWhatsAppMessage
 from apps.market_intel.services.whatsapp_observer_client import WhatsAppObserverClient
@@ -34,6 +34,36 @@ class WhatsAppObserverClientTests(TestCase):
         request = mocked.call_args.args[0]
         self.assertEqual(request.full_url, 'http://127.0.0.1:8787/observer/collect')
         self.assertEqual(request.method, 'POST')
+
+    @override_settings(
+        WA_PROVIDER='baileys',
+        WA_SERVICE_URL='http://127.0.0.1:8787',
+        EVOLUTION_ADAPTER_URL='http://127.0.0.1:8788',
+    )
+    def test_default_provider_uses_baileys_service_url(self):
+        client = WhatsAppObserverClient()
+
+        self.assertEqual(client.base_url, 'http://127.0.0.1:8787')
+
+    @override_settings(
+        WA_PROVIDER='evolution',
+        WA_SERVICE_URL='http://127.0.0.1:8787',
+        EVOLUTION_ADAPTER_URL='http://127.0.0.1:8788',
+    )
+    def test_evolution_provider_uses_adapter_url(self):
+        client = WhatsAppObserverClient()
+
+        self.assertEqual(client.base_url, 'http://127.0.0.1:8788')
+
+    @override_settings(
+        WA_PROVIDER='evolution',
+        WA_SERVICE_URL='http://127.0.0.1:8787',
+        EVOLUTION_ADAPTER_URL='http://127.0.0.1:8788',
+    )
+    def test_explicit_base_url_overrides_provider(self):
+        client = WhatsAppObserverClient(base_url='http://127.0.0.1:9999/')
+
+        self.assertEqual(client.base_url, 'http://127.0.0.1:9999')
 
 
 class ImportObservedMessagesTests(TestCase):

@@ -27,6 +27,11 @@ wa_service/wa_session/
 wa_service/dist/
 wa_session/
 node_modules/
+evolution_adapter/node_modules/
+evolution_adapter/node_modules
+evolution_adapter/dist/
+evolution_adapter/dist
+evolution_adapter/config/group_map.json
 /.publish-worktree/
 
 # Posts gerados localmente para publicação manual no Instagram

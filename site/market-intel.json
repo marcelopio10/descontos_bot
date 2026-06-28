@@ -1,15 +1,15 @@
 {
   "version": "2.0",
   "report_type": "incremental_market_intel",
-  "generated_at": "2026-06-25T01:00:49.773049+00:00",
-  "date": "2026-06-24",
+  "generated_at": "2026-06-28T01:00:56.653852+00:00",
+  "date": "2026-06-27",
   "window": {
-    "start": "2026-06-24T03:00:00+00:00",
-    "end": "2026-06-25T02:59:59.999999+00:00"
+    "start": "2026-06-27T03:00:00+00:00",
+    "end": "2026-06-28T02:59:59.999999+00:00"
   },
   "summary": {
-    "groups_analyzed": 3,
-    "messages_analyzed": 618,
+    "groups_analyzed": 9,
+    "messages_analyzed": 713,
     "top_groups": [
       {
         "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
@@ -17,17 +17,41 @@
       },
       {
         "group": "#330 Promo Relâmpago MEN",
-        "count": 195
+        "count": 212
       },
       {
         "group": "descontos.bot - Homologação",
-        "count": 20
+        "count": 33
+      },
+      {
+        "group": "originalnapromo 88",
+        "count": 24
+      },
+      {
+        "group": "🛑 OFERTAS SECRETAS 204 🛑",
+        "count": 12
+      },
+      {
+        "group": "Novos Produtos 101",
+        "count": 11
+      },
+      {
+        "group": "Grupo 039 Vitrine",
+        "count": 7
+      },
+      {
+        "group": "VERSÁTIL OFERTAS | 05",
+        "count": 6
+      },
+      {
+        "group": "Tênis Ofertas | 273",
+        "count": 5
       }
     ],
     "top_marketplaces": [
       {
         "marketplace": "mercadolivre",
-        "count": 270
+        "count": 341
       },
       {
         "marketplace": "amazon",
@@ -35,141 +59,165 @@
       },
       {
         "marketplace": "desconhecido",
-        "count": 88
+        "count": 109
       },
       {
         "marketplace": "shopee",
-        "count": 33
+        "count": 35
       },
       {
         "marketplace": "magalu",
         "count": 5
+      },
+      {
+        "marketplace": "centauro",
+        "count": 1
       }
     ],
     "top_labels": [
       {
         "label": "imagem",
-        "count": 425
+        "count": 454
       },
       {
         "label": "cupom",
-        "count": 403
+        "count": 443
       },
       {
         "label": "acima_300",
-        "count": 349
-      },
-      {
-        "label": "pix",
-        "count": 191
+        "count": 369
       },
       {
         "label": "desconto_30",
-        "count": 171
+        "count": 236
+      },
+      {
+        "label": "pix",
+        "count": 220
       },
       {
         "label": "parcelado_sem_juros",
-        "count": 161
+        "count": 163
       },
       {
         "label": "ate_300",
-        "count": 112
+        "count": 143
+      },
+      {
+        "label": "desconto_50",
+        "count": 130
       },
       {
         "label": "frete_gratis",
         "count": 107
       },
       {
-        "label": "desconto_50",
-        "count": 92
-      },
-      {
-        "label": "urgencia",
-        "count": 82
+        "label": "ate_100",
+        "count": 90
       }
     ],
-    "image_messages": 425,
-    "coupon_messages": 403
+    "image_messages": 454,
+    "coupon_messages": 443
   },
   "cycle_summary": {
-    "groups_analyzed": 2,
-    "messages_analyzed": 35,
+    "groups_analyzed": 8,
+    "messages_analyzed": 95,
     "top_groups": [
       {
-        "group": "#330 Promo Relâmpago MEN",
-        "count": 26
+        "group": "originalnapromo 88",
+        "count": 24
       },
       {
-        "group": "💥💥TÁ BUGADO!!! 4⃣6⃣",
-        "count": 9
+        "group": "#330 Promo Relâmpago MEN",
+        "count": 17
+      },
+      {
+        "group": "descontos.bot - Homologação",
+        "count": 13
+      },
+      {
+        "group": "🛑 OFERTAS SECRETAS 204 🛑",
+        "count": 12
+      },
+      {
+        "group": "Novos Produtos 101",
+        "count": 11
+      },
+      {
+        "group": "Grupo 039 Vitrine",
+        "count": 7
+      },
+      {
+        "group": "VERSÁTIL OFERTAS | 05",
+        "count": 6
+      },
+      {
+        "group": "Tênis Ofertas | 273",
+        "count": 5
       }
     ],
     "top_marketplaces": [
       {
         "marketplace": "mercadolivre",
-        "count": 19
+        "count": 71
       },
       {
         "marketplace": "desconhecido",
-        "count": 13
-      },
-      {
-        "marketplace": "amazon",
-        "count": 1
+        "count": 21
       },
       {
         "marketplace": "shopee",
-        "count": 1
+        "count": 2
       },
       {
-        "marketplace": "magalu",
+        "marketplace": "centauro",
         "count": 1
       }
     ],
     "top_labels": [
       {
-        "label": "cupom",
-        "count": 32
-      },
-      {
         "label": "desconto_30",
-        "count": 19
+        "count": 65
       },
       {
-        "label": "pix",
-        "count": 17
-      },
-      {
-        "label": "imagem",
-        "count": 11
-      },
-      {
-        "label": "ate_100",
-        "count": 10
-      },
-      {
-        "label": "ate_300",
-        "count": 10
-      },
-      {
-        "label": "acima_300",
-        "count": 9
+        "label": "cupom",
+        "count": 40
       },
       {
         "label": "desconto_50",
-        "count": 9
+        "count": 38
       },
       {
-        "label": "urgencia",
-        "count": 8
+        "label": "ate_300",
+        "count": 31
+      },
+      {
+        "label": "imagem",
+        "count": 29
+      },
+      {
+        "label": "pix",
+        "count": 29
+      },
+      {
+        "label": "acima_300",
+        "count": 20
       },
       {
         "label": "ate_50",
-        "count": 4
+        "count": 18
+      },
+      {
+        "label": "ate_100",
+        "count": 16
+      },
+      {
+        "label": "desconto_70",
+        "count": 8
       }
     ],
-    "image_messages": 11,
-    "coupon_messages": 32
+    "image_messages": 29,
+    "coupon_messages": 40
   },
   "recommendations": [
     {
@@ -208,57 +256,57 @@
   "scraper_opportunities": [
     {
       "hint": "faixa_preco:acima_300",
-      "count": 349,
+      "count": 369,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "desconto:desconto_30",
-      "count": 171,
+      "count": 236,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "faixa_preco:ate_100",
-      "count": 145,
-      "reason": "Recorrência nos grupos monitorados."
-    },
-    {
-      "hint": "categoria:moda",
-      "count": 112,
+      "count": 179,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "faixa_preco:ate_300",
-      "count": 112,
+      "count": 143,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "categoria:moda",
+      "count": 131,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "desconto:desconto_50",
-      "count": 92,
+      "count": 130,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "termo:tenis",
-      "count": 62,
+      "count": 74,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "categoria:beleza",
-      "count": 62,
+      "count": 66,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "categoria:tecnologia",
-      "count": 54,
+      "count": 64,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
-      "hint": "categoria:casa/cozinha",
-      "count": 23,
+      "hint": "desconto:desconto_70",
+      "count": 29,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "marketplace": "mercadolivre",
-      "count": 270,
+      "count": 341,
       "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
     },
     {
@@ -268,88 +316,3087 @@
     },
     {
       "marketplace": "shopee",
-      "count": 33,
+      "count": 35,
       "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
     },
     {
       "marketplace": "magalu",
       "count": 5,
       "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
+    },
+    {
+      "marketplace": "centauro",
+      "count": 1,
+      "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
     }
   ],
   "cycle_scraper_opportunities": [
     {
       "hint": "desconto:desconto_30",
-      "count": 19,
-      "reason": "Recorrência nos grupos monitorados."
-    },
-    {
-      "hint": "faixa_preco:ate_100",
-      "count": 14,
-      "reason": "Recorrência nos grupos monitorados."
-    },
-    {
-      "hint": "categoria:moda",
-      "count": 13,
-      "reason": "Recorrência nos grupos monitorados."
-    },
-    {
-      "hint": "faixa_preco:ate_300",
-      "count": 10,
-      "reason": "Recorrência nos grupos monitorados."
-    },
-    {
-      "hint": "faixa_preco:acima_300",
-      "count": 9,
+      "count": 65,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "desconto:desconto_50",
-      "count": 9,
+      "count": 38,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "faixa_preco:ate_100",
+      "count": 34,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "faixa_preco:ate_300",
+      "count": 31,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "faixa_preco:acima_300",
+      "count": 20,
+      "reason": "Recorrência nos grupos monitorados."
+    },
+    {
+      "hint": "categoria:moda",
+      "count": 19,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "termo:tenis",
-      "count": 7,
+      "count": 12,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "hint": "categoria:tecnologia",
-      "count": 2,
+      "count": 10,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
-      "hint": "categoria:casa/cozinha",
-      "count": 1,
+      "hint": "desconto:desconto_70",
+      "count": 8,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
-      "hint": "termo:air fryer",
-      "count": 1,
+      "hint": "categoria:beleza",
+      "count": 4,
       "reason": "Recorrência nos grupos monitorados."
     },
     {
       "marketplace": "mercadolivre",
-      "count": 19,
-      "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
-    },
-    {
-      "marketplace": "amazon",
-      "count": 1,
+      "count": 71,
       "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
     },
     {
       "marketplace": "shopee",
-      "count": 1,
+      "count": 2,
       "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
     },
     {
-      "marketplace": "magalu",
+      "marketplace": "centauro",
       "count": 1,
       "reason": "Marketplace aparece nos grupos monitorados e deve ser comparado com cobertura própria."
     }
   ],
   "analyzed_offers": [
+    {
+      "observed_at": "2026-06-27T20:38:07+00:00",
+      "group": "Grupo 039 Vitrine",
+      "marketplace": "mercadolivre",
+      "price": "490.00",
+      "original_price": "125.00",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "categoria:esporte",
+        "faixa_preco:acima_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:38:05+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "158.44",
+      "original_price": "299.99",
+      "discount_pct": "47.18",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:35:39+00:00",
+      "group": "Grupo 039 Vitrine",
+      "marketplace": "mercadolivre",
+      "price": "349.00",
+      "original_price": "699.00",
+      "discount_pct": "50.07",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "mizuno",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:32:37+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "70.30",
+      "original_price": "149.00",
+      "discount_pct": "52.82",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_100",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:31:46+00:00",
+      "group": "Grupo 039 Vitrine",
+      "marketplace": "mercadolivre",
+      "price": "132.00",
+      "original_price": "339.00",
+      "discount_pct": "61.06",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:31:27+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "shopee",
+      "price": "17.60",
+      "original_price": "22.00",
+      "discount_pct": "20.00",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_50"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:31:22+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "mercadolivre",
+      "price": "512.00",
+      "original_price": "1111.00",
+      "discount_pct": "53.92",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:esporte",
+        "faixa_preco:acima_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:31:17+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "79.00",
+      "original_price": "139.00",
+      "discount_pct": "43.17",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_100",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:27:09+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "125.09",
+      "original_price": "138.99",
+      "discount_pct": "10.00",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300"
+      ],
+      "scraper_hints": [
+        "categoria:beleza",
+        "faixa_preco:ate_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:25:18+00:00",
+      "group": "Grupo 039 Vitrine",
+      "marketplace": "mercadolivre",
+      "price": "296.00",
+      "original_price": "529.00",
+      "discount_pct": "44.05",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:beleza",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:23:25+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:21:47+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "21.49",
+      "original_price": "78.99",
+      "discount_pct": "72.79",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_50",
+        "desconto_70",
+        "desconto_50",
+        "desconto_30",
+        "parcelado_sem_juros"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_70",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": 3,
+      "parcelado_sem_juros": true,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:21:13+00:00",
+      "group": "Grupo 039 Vitrine",
+      "marketplace": "mercadolivre",
+      "price": "147.00",
+      "original_price": "249.00",
+      "discount_pct": "40.96",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "puma",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:16:04+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "7.89",
+      "original_price": "78.90",
+      "discount_pct": "90.00",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50",
+        "desconto_70",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "faixa_preco:ate_100",
+        "desconto:desconto_70",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:13:40+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:13:25+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "desconhecido",
+      "price": "564.90",
+      "original_price": "1008.00",
+      "discount_pct": "43.96",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "acima_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:13:12+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem"
+      ],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:12:13+00:00",
+      "group": "Grupo 039 Vitrine",
+      "marketplace": "mercadolivre",
+      "price": "509.00",
+      "original_price": "102.00",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "categoria:beleza",
+        "faixa_preco:acima_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:10:51+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "134.29",
+      "original_price": "259.00",
+      "discount_pct": "48.15",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_30",
+        "parcelado_sem_juros"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": 5,
+      "parcelado_sem_juros": true,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:09:26+00:00",
+      "group": "Grupo 039 Vitrine",
+      "marketplace": "mercadolivre",
+      "price": "147.00",
+      "original_price": "379.00",
+      "discount_pct": "61.21",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "puma",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:06:35+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "218.00",
+      "original_price": "359.99",
+      "discount_pct": "39.44",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "mizuno",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:05:58+00:00",
+      "group": "VERSÁTIL OFERTAS | 05",
+      "marketplace": "mercadolivre",
+      "price": "218.00",
+      "original_price": "359.00",
+      "discount_pct": "39.28",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "foto_oficial",
+      "marca": "mizuno",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:05:24+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "extendedTextMessage",
+      "labels": [],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:04:47+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "",
+      "labels": [],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:04:19+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "desconhecido",
+      "price": "27.90",
+      "original_price": "74.90",
+      "discount_pct": "62.75",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T20:04:18+00:00",
+      "group": "VERSÁTIL OFERTAS | 05",
+      "marketplace": "mercadolivre",
+      "price": "1563.08",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "acima_300",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "foto_oficial",
+      "marca": "lg",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:58:46+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "134.00",
+      "original_price": "259.00",
+      "discount_pct": "48.26",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": 5,
+      "parcelado_sem_juros": false,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:57:29+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:57:26+00:00",
+      "group": "VERSÁTIL OFERTAS | 05",
+      "marketplace": "shopee",
+      "price": "142.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "faixa_preco:ate_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "samsung",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:43:47+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "92.53",
+      "original_price": "195.00",
+      "discount_pct": "52.55",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_100",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "mondial",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:40:02+00:00",
+      "group": "VERSÁTIL OFERTAS | 05",
+      "marketplace": "mercadolivre",
+      "price": "649.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "acima_300",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "faixa_preco:acima_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "foto_oficial",
+      "marca": "samsung",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:38:32+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "1559.00",
+      "original_price": "2479.00",
+      "discount_pct": "37.11",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "acima_300",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "lg",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:37:27+00:00",
+      "group": "VERSÁTIL OFERTAS | 05",
+      "marketplace": "mercadolivre",
+      "price": "299.00",
+      "original_price": "499.00",
+      "discount_pct": "40.08",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "foto_oficial",
+      "marca": "adidas",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:36:11+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "",
+      "labels": [],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:33:15+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "647.77",
+      "original_price": "1855.00",
+      "discount_pct": "65.08",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "urgencia",
+        "cupom",
+        "acima_300",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "faixa_preco:acima_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "samsung",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:32:11+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "661.00",
+      "original_price": "1849.00",
+      "discount_pct": "64.25",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "acima_300",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "faixa_preco:acima_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "samsung",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:30:01+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "156.00",
+      "original_price": "247.00",
+      "discount_pct": "36.84",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "lg",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:29:25+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "89.10",
+      "original_price": "119.00",
+      "discount_pct": "25.13",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_100"
+      ],
+      "scraper_hints": [
+        "categoria:casa/cozinha",
+        "faixa_preco:ate_100"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:28:04+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "",
+      "labels": [],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:27:53+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "80.20",
+      "original_price": "119.00",
+      "discount_pct": "32.61",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_100",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:casa/cozinha",
+        "faixa_preco:ate_100",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "percentual",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:27:32+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "78.00",
+      "original_price": "195.00",
+      "discount_pct": "60.00",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_100",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "mondial",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:27:27+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "661.00",
+      "original_price": "185.00",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "acima_300",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "faixa_preco:acima_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "samsung",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:26:21+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "82.00",
+      "original_price": "249.90",
+      "discount_pct": "67.19",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_100",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:23:50+00:00",
+      "group": "Tênis Ofertas | 273",
+      "marketplace": "mercadolivre",
+      "price": "27.00",
+      "original_price": "55.00",
+      "discount_pct": "50.91",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_50",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:22:12+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "82.36",
+      "original_price": "249.90",
+      "discount_pct": "67.04",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_100",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "percentual",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:21:56+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:21:53+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "91.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_100"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:20:30+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "89.00",
+      "original_price": "119.00",
+      "discount_pct": "25.21",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_100"
+      ],
+      "scraper_hints": [
+        "categoria:casa/cozinha",
+        "faixa_preco:ate_100"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:18:23+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "78.00",
+      "original_price": "184.00",
+      "discount_pct": "57.61",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_100",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "mondial",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:17:32+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "1109.00",
+      "original_price": "1569.00",
+      "discount_pct": "29.32",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:17:05+00:00",
+      "group": "descontos.bot - Homologação",
+      "marketplace": "desconhecido",
+      "price": "",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "",
+      "labels": [],
+      "scraper_hints": [],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:16:32+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "82.00",
+      "original_price": "249.00",
+      "discount_pct": "67.07",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_100",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:16:30+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "1109.00",
+      "original_price": "1569.00",
+      "discount_pct": "29.32",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:12:09+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "71.94",
+      "original_price": "149.90",
+      "discount_pct": "52.01",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_100",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:11:52+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "desconhecido",
+      "price": "303.99",
+      "original_price": "449.99",
+      "discount_pct": "32.45",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "urgencia",
+        "acima_300",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:acima_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "nike",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:11:16+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "71.00",
+      "original_price": "149.90",
+      "discount_pct": "52.64",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_100",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:11:08+00:00",
+      "group": "VERSÁTIL OFERTAS | 05",
+      "marketplace": "mercadolivre",
+      "price": "114.00",
+      "original_price": "",
+      "discount_pct": "",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "ate_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "foto_oficial",
+      "marca": "samsung",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:09:19+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "110.00",
+      "original_price": "156.00",
+      "discount_pct": "29.49",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:06:00+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "6.36",
+      "original_price": "119.99",
+      "discount_pct": "94.70",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50",
+        "desconto_70",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_70",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:04:12+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "71.00",
+      "original_price": "149.00",
+      "discount_pct": "52.35",
+      "coupon": "OFF",
+      "has_coupon": true,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "cupom",
+        "imagem",
+        "ate_100",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:02:29+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "18.20",
+      "original_price": "69.99",
+      "discount_pct": "74.00",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50",
+        "desconto_70",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_70",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:02:10+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "18.00",
+      "original_price": "69.00",
+      "discount_pct": "73.91",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_50",
+        "desconto_70",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_70",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T19:00:51+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "47.59",
+      "original_price": "74.90",
+      "discount_pct": "36.46",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "faixa_preco:ate_100",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:57:04+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "299.00",
+      "original_price": "499.99",
+      "discount_pct": "40.20",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "adidas",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:55:02+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "251.60",
+      "original_price": "539.90",
+      "discount_pct": "53.40",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "philco",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:49:51+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "144.34",
+      "original_price": "349.99",
+      "discount_pct": "58.76",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "percentual",
+      "tipo_midia": "texto",
+      "marca": "puma",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:47:42+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "mercadolivre",
+      "price": "344.99",
+      "original_price": "549.99",
+      "discount_pct": "37.27",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "acima_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:acima_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "nike",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:44:30+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "139.69",
+      "original_price": "349.99",
+      "discount_pct": "60.09",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "puma",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:42:29+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "mercadolivre",
+      "price": "49.90",
+      "original_price": "57.90",
+      "discount_pct": "13.82",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:40:04+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "desconhecido",
+      "price": "0.03",
+      "original_price": "449.99",
+      "discount_pct": "99.99",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50",
+        "desconto_70",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_100",
+        "desconto:desconto_70",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "nike",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:39:17+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "38.79",
+      "original_price": "89.56",
+      "discount_pct": "56.69",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:38:22+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "desconhecido",
+      "price": "40.41",
+      "original_price": "47.35",
+      "discount_pct": "14.66",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "lg",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:33:43+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "303.82",
+      "original_price": "1099.00",
+      "discount_pct": "72.35",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "acima_300",
+        "desconto_70",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300",
+        "desconto:desconto_70",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:32:48+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "desconhecido",
+      "price": "156.39",
+      "original_price": "277.78",
+      "discount_pct": "43.70",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:28:54+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "147.98",
+      "original_price": "249.99",
+      "discount_pct": "40.81",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "puma",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:28:32+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "133.45",
+      "original_price": "299.00",
+      "discount_pct": "55.37",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "termo:fone",
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:28:16+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "mercadolivre",
+      "price": "232.47",
+      "original_price": "427.16",
+      "discount_pct": "45.58",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:27:43+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "139.99",
+      "original_price": "349.99",
+      "discount_pct": "60.00",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:23:59+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "147.00",
+      "original_price": "249.00",
+      "discount_pct": "40.96",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "puma",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:23:02+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "139.00",
+      "original_price": "349.00",
+      "discount_pct": "60.17",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "puma",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:23:01+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "desconhecido",
+      "price": "579.90",
+      "original_price": "799.90",
+      "discount_pct": "27.50",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "acima_300"
+      ],
+      "scraper_hints": [
+        "categoria:casa/cozinha",
+        "faixa_preco:acima_300"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:22:44+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "4.35",
+      "original_price": "87.88",
+      "discount_pct": "95.05",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50",
+        "desconto_70",
+        "desconto_50",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_70",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:22:06+00:00",
+      "group": "Tênis Ofertas | 273",
+      "marketplace": "desconhecido",
+      "price": "303.00",
+      "original_price": "449.00",
+      "discount_pct": "32.52",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "acima_300",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:acima_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "nike",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:20:45+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "244.93",
+      "original_price": "399.99",
+      "discount_pct": "38.77",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "adidas",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:20:41+00:00",
+      "group": "Tênis Ofertas | 273",
+      "marketplace": "centauro",
+      "price": "186.00",
+      "original_price": "349.00",
+      "discount_pct": "46.70",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:moda",
+        "termo:tenis",
+        "faixa_preco:ate_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "nike",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:19:16+00:00",
+      "group": "Tênis Ofertas | 273",
+      "marketplace": "mercadolivre",
+      "price": "311.00",
+      "original_price": "519.00",
+      "discount_pct": "40.08",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "acima_300",
+        "desconto_30",
+        "pix"
+      ],
+      "scraper_hints": [
+        "faixa_preco:acima_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": true,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:17:45+00:00",
+      "group": "Tênis Ofertas | 273",
+      "marketplace": "mercadolivre",
+      "price": "38.00",
+      "original_price": "89.00",
+      "discount_pct": "57.30",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:17:45+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "39.00",
+      "original_price": "68.90",
+      "discount_pct": "43.40",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:beleza",
+        "faixa_preco:ate_100",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:17:41+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "desconhecido",
+      "price": "23.99",
+      "original_price": "26.89",
+      "discount_pct": "10.78",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_50"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:14:04+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "133.98",
+      "original_price": "299.00",
+      "discount_pct": "55.19",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "termo:fone",
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:12:19+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "desconhecido",
+      "price": "54.81",
+      "original_price": "70.33",
+      "discount_pct": "22.07",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "ate_100"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:11:58+00:00",
+      "group": "originalnapromo 88",
+      "marketplace": "mercadolivre",
+      "price": "773.52",
+      "original_price": "1299.00",
+      "discount_pct": "40.45",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "acima_300",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "faixa_preco:acima_300",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:10:53+00:00",
+      "group": "🛑 OFERTAS SECRETAS 204 🛑",
+      "marketplace": "mercadolivre",
+      "price": "133.00",
+      "original_price": "299.00",
+      "discount_pct": "55.52",
+      "coupon": "",
+      "has_coupon": false,
+      "has_image": true,
+      "raw_type": "imageMessage",
+      "labels": [
+        "imagem",
+        "ate_300",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "categoria:tecnologia",
+        "termo:fone",
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "",
+      "tipo_midia": "foto_oficial",
+      "marca": "",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:08:06+00:00",
+      "group": "Novos Produtos 101",
+      "marketplace": "mercadolivre",
+      "price": "261.00",
+      "original_price": "574.00",
+      "discount_pct": "54.53",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_300",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_300",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "philco",
+      "programa_entrega": ""
+    },
+    {
+      "observed_at": "2026-06-27T18:07:41+00:00",
+      "group": "#330 Promo Relâmpago MEN",
+      "marketplace": "mercadolivre",
+      "price": "49.98",
+      "original_price": "99.99",
+      "discount_pct": "50.02",
+      "coupon": "CUPOM",
+      "has_coupon": true,
+      "has_image": false,
+      "raw_type": "conversation",
+      "labels": [
+        "cupom",
+        "ate_50",
+        "desconto_50",
+        "desconto_30"
+      ],
+      "scraper_hints": [
+        "faixa_preco:ate_100",
+        "desconto:desconto_50",
+        "desconto:desconto_30"
+      ],
+      "parcelamento": null,
+      "parcelado_sem_juros": null,
+      "pix": null,
+      "pix_desconto_pct": "",
+      "cashback": null,
+      "menor_preco": null,
+      "cupom_tipo": "valor_fixo",
+      "tipo_midia": "texto",
+      "marca": "",
+      "programa_entrega": ""
+    },
     {
       "observed_at": "2026-06-25T00:53:20+00:00",
       "group": "#330 Promo Relâmpago MEN",
@@ -19898,41 +22945,25 @@
     }
   ],
   "mecanica_preco": {
-    "desconto_30": 19,
-    "desconto_50": 9,
-    "desconto_70": 0,
-    "pix": 17,
+    "desconto_30": 65,
+    "desconto_50": 38,
+    "desconto_70": 8,
+    "pix": 29,
     "parcelado_sem_juros": 2,
     "cashback": 0,
     "menor_preco": 0,
     "frete_gratis": 0,
     "cupom_por_tipo": {
-      "valor_fixo": 26,
-      "percentual": 6
+      "valor_fixo": 37,
+      "percentual": 3
     },
     "por_marketplace": {
-      "desconhecido": {
-        "desconto_30": 8,
-        "desconto_50": 3,
-        "desconto_70": 0,
-        "pix": 5,
-        "parcelado_sem_juros": 0,
-        "cashback": 0
-      },
       "mercadolivre": {
-        "desconto_30": 10,
-        "desconto_50": 5,
-        "desconto_70": 0,
-        "pix": 10,
-        "parcelado_sem_juros": 1,
-        "cashback": 0
-      },
-      "amazon": {
-        "desconto_30": 1,
-        "desconto_50": 1,
-        "desconto_70": 0,
-        "pix": 0,
-        "parcelado_sem_juros": 0,
+        "desconto_30": 57,
+        "desconto_50": 36,
+        "desconto_70": 7,
+        "pix": 25,
+        "parcelado_sem_juros": 2,
         "cashback": 0
       },
       "shopee": {
@@ -19940,28 +22971,28 @@
         "desconto_50": 0,
         "desconto_70": 0,
         "pix": 1,
-        "parcelado_sem_juros": 1,
+        "parcelado_sem_juros": 0,
         "cashback": 0
       },
-      "magalu": {
-        "desconto_30": 0,
+      "desconhecido": {
+        "desconto_30": 7,
+        "desconto_50": 2,
+        "desconto_70": 1,
+        "pix": 3,
+        "parcelado_sem_juros": 0,
+        "cashback": 0
+      },
+      "centauro": {
+        "desconto_30": 1,
         "desconto_50": 0,
         "desconto_70": 0,
-        "pix": 1,
+        "pix": 0,
         "parcelado_sem_juros": 0,
         "cashback": 0
       }
     },
     "por_categoria": {
-      "moda": {
-        "desconto_30": 11,
-        "desconto_50": 5,
-        "desconto_70": 0,
-        "pix": 8,
-        "parcelado_sem_juros": 0,
-        "cashback": 0
-      },
-      "casa/cozinha": {
+      "esporte": {
         "desconto_30": 1,
         "desconto_50": 1,
         "desconto_70": 0,
@@ -19969,45 +23000,85 @@
         "parcelado_sem_juros": 0,
         "cashback": 0
       },
-      "tecnologia": {
-        "desconto_30": 0,
+      "moda": {
+        "desconto_30": 19,
+        "desconto_50": 5,
+        "desconto_70": 2,
+        "pix": 10,
+        "parcelado_sem_juros": 0,
+        "cashback": 0
+      },
+      "beleza": {
+        "desconto_30": 2,
         "desconto_50": 0,
         "desconto_70": 0,
-        "pix": 2,
-        "parcelado_sem_juros": 2,
+        "pix": 0,
+        "parcelado_sem_juros": 0,
+        "cashback": 0
+      },
+      "tecnologia": {
+        "desconto_30": 7,
+        "desconto_50": 5,
+        "desconto_70": 0,
+        "pix": 5,
+        "parcelado_sem_juros": 0,
+        "cashback": 0
+      },
+      "casa/cozinha": {
+        "desconto_30": 1,
+        "desconto_50": 0,
+        "desconto_70": 0,
+        "pix": 0,
+        "parcelado_sem_juros": 0,
         "cashback": 0
       }
     }
   },
   "mecanica_preco_acumulada": {
-    "desconto_30": 171,
-    "desconto_50": 92,
-    "desconto_70": 21,
-    "pix": 191,
-    "parcelado_sem_juros": 161,
+    "desconto_30": 236,
+    "desconto_50": 130,
+    "desconto_70": 29,
+    "pix": 220,
+    "parcelado_sem_juros": 163,
     "cashback": 0,
     "menor_preco": 2,
     "frete_gratis": 107,
     "cupom_por_tipo": {
-      "valor_fixo": 288,
-      "percentual": 46,
+      "valor_fixo": 325,
+      "percentual": 49,
       "frete_gratis": 51
     },
     "por_marketplace": {
+      "mercadolivre": {
+        "desconto_30": 163,
+        "desconto_50": 90,
+        "desconto_70": 13,
+        "pix": 102,
+        "parcelado_sem_juros": 34,
+        "cashback": 0
+      },
+      "shopee": {
+        "desconto_30": 17,
+        "desconto_50": 13,
+        "desconto_70": 8,
+        "pix": 16,
+        "parcelado_sem_juros": 3,
+        "cashback": 0
+      },
       "desconhecido": {
-        "desconto_30": 38,
-        "desconto_50": 19,
-        "desconto_70": 3,
-        "pix": 40,
+        "desconto_30": 45,
+        "desconto_50": 21,
+        "desconto_70": 4,
+        "pix": 43,
         "parcelado_sem_juros": 11,
         "cashback": 0
       },
-      "mercadolivre": {
-        "desconto_30": 106,
-        "desconto_50": 54,
-        "desconto_70": 6,
-        "pix": 77,
-        "parcelado_sem_juros": 32,
+      "centauro": {
+        "desconto_30": 1,
+        "desconto_50": 0,
+        "desconto_70": 0,
+        "pix": 0,
+        "parcelado_sem_juros": 0,
         "cashback": 0
       },
       "amazon": {
@@ -20018,14 +23089,6 @@
         "parcelado_sem_juros": 113,
         "cashback": 0
       },
-      "shopee": {
-        "desconto_30": 17,
-        "desconto_50": 13,
-        "desconto_70": 8,
-        "pix": 15,
-        "parcelado_sem_juros": 3,
-        "cashback": 0
-      },
       "magalu": {
         "desconto_30": 0,
         "desconto_50": 0,
@@ -20036,44 +23099,44 @@
       }
     },
     "por_categoria": {
+      "esporte": {
+        "desconto_30": 2,
+        "desconto_50": 2,
+        "desconto_70": 0,
+        "pix": 1,
+        "parcelado_sem_juros": 1,
+        "cashback": 0
+      },
       "moda": {
-        "desconto_30": 65,
-        "desconto_50": 27,
-        "desconto_70": 2,
-        "pix": 40,
+        "desconto_30": 84,
+        "desconto_50": 32,
+        "desconto_70": 4,
+        "pix": 50,
         "parcelado_sem_juros": 12,
         "cashback": 0
       },
-      "casa/cozinha": {
-        "desconto_30": 1,
-        "desconto_50": 1,
-        "desconto_70": 0,
-        "pix": 7,
-        "parcelado_sem_juros": 16,
-        "cashback": 0
-      },
-      "tecnologia": {
-        "desconto_30": 9,
-        "desconto_50": 6,
-        "desconto_70": 2,
-        "pix": 28,
-        "parcelado_sem_juros": 27,
-        "cashback": 0
-      },
       "beleza": {
-        "desconto_30": 15,
+        "desconto_30": 17,
         "desconto_50": 9,
         "desconto_70": 1,
         "pix": 21,
         "parcelado_sem_juros": 9,
         "cashback": 0
       },
-      "esporte": {
-        "desconto_30": 1,
+      "tecnologia": {
+        "desconto_30": 16,
+        "desconto_50": 11,
+        "desconto_70": 2,
+        "pix": 33,
+        "parcelado_sem_juros": 27,
+        "cashback": 0
+      },
+      "casa/cozinha": {
+        "desconto_30": 2,
         "desconto_50": 1,
         "desconto_70": 0,
-        "pix": 1,
-        "parcelado_sem_juros": 1,
+        "pix": 7,
+        "parcelado_sem_juros": 16,
         "cashback": 0
       },
       "pet": {
@@ -20087,60 +23150,72 @@
     }
   },
   "copy_e_formato": {
-    "emoji_densidade_media": 0.07,
+    "emoji_densidade_media": 0.09,
     "emojis_top": [
       {
-        "emoji": "🔗",
-        "count": 22
-      },
-      {
-        "emoji": "🔝",
-        "count": 7
-      },
-      {
-        "emoji": "😱",
-        "count": 6
-      },
-      {
         "emoji": "🔥",
-        "count": 3
+        "count": 55
       },
       {
-        "emoji": "🎟",
-        "count": 3
-      },
-      {
-        "emoji": "🚨",
-        "count": 3
+        "emoji": "🔗",
+        "count": 41
       },
       {
         "emoji": "️",
+        "count": 39
+      },
+      {
+        "emoji": "⚠",
+        "count": 26
+      },
+      {
+        "emoji": "🚨",
+        "count": 20
+      },
+      {
+        "emoji": "🎟",
+        "count": 18
+      },
+      {
+        "emoji": "✅",
+        "count": 14
+      },
+      {
+        "emoji": "💰",
+        "count": 9
+      },
+      {
+        "emoji": "👉",
+        "count": 7
+      },
+      {
+        "emoji": "🛒",
+        "count": 6
+      }
+    ],
+    "tem_headline_pct": 0.77,
+    "tem_cta_pct": 0.04,
+    "cta_termos_top": [
+      {
+        "termo": "garante_ja",
         "count": 2
       },
       {
-        "emoji": "👇",
+        "termo": "corre",
         "count": 2
       }
     ],
-    "tem_headline_pct": 1.0,
-    "tem_cta_pct": 0.03,
-    "cta_termos_top": [
-      {
-        "termo": "corre",
-        "count": 1
-      }
-    ],
     "tipo_midia": {
-      "texto": 24,
-      "foto_oficial": 11
+      "foto_oficial": 29,
+      "texto": 66
     },
-    "tamanho_mensagem_media": 175,
-    "usa_caixa_alta_pct": 0.09,
+    "tamanho_mensagem_media": 198,
+    "usa_caixa_alta_pct": 0.0,
     "usa_negrito_pct": 1.0,
     "engajamento_por_copy": []
   },
   "copy_e_formato_acumulada": {
-    "emoji_densidade_media": 0.15,
+    "emoji_densidade_media": 0.14,
     "emojis_top": [
       {
         "emoji": "🔝",
@@ -20152,43 +23227,47 @@
       },
       {
         "emoji": "👉",
-        "count": 215
+        "count": 222
+      },
+      {
+        "emoji": "🔗",
+        "count": 214
       },
       {
         "emoji": "🏻",
         "count": 214
       },
       {
-        "emoji": "🔗",
-        "count": 173
+        "emoji": "🚨",
+        "count": 136
       },
       {
-        "emoji": "🚨",
-        "count": 116
+        "emoji": "🔥",
+        "count": 73
       },
       {
         "emoji": "💰",
-        "count": 59
+        "count": 68
       },
       {
-        "emoji": "🏷",
-        "count": 24
+        "emoji": "️",
+        "count": 53
       },
       {
-        "emoji": "📦",
-        "count": 20
-      },
-      {
-        "emoji": "✅",
-        "count": 20
+        "emoji": "🎟",
+        "count": 35
       }
     ],
-    "tem_headline_pct": 0.94,
-    "tem_cta_pct": 0.09,
+    "tem_headline_pct": 0.91,
+    "tem_cta_pct": 0.08,
     "cta_termos_top": [
       {
         "termo": "corre",
-        "count": 52
+        "count": 54
+      },
+      {
+        "termo": "garante_ja",
+        "count": 2
       },
       {
         "termo": "ultimas_unidades",
@@ -20196,13 +23275,13 @@
       }
     ],
     "tipo_midia": {
-      "texto": 212,
-      "foto_oficial": 398,
+      "foto_oficial": 427,
+      "texto": 278,
       "video": 1,
       "banner_proprio": 7
     },
-    "tamanho_mensagem_media": 183,
-    "usa_caixa_alta_pct": 0.06,
+    "tamanho_mensagem_media": 185,
+    "usa_caixa_alta_pct": 0.05,
     "usa_negrito_pct": 1.0,
     "engajamento_por_copy": []
   },
@@ -20222,37 +23301,38 @@
   },
   "marketplace_detalhado": {
     "contagem": {
-      "desconhecido": 13,
-      "mercadolivre": 19,
-      "amazon": 1,
-      "shopee": 1,
-      "magalu": 1
+      "mercadolivre": 71,
+      "shopee": 2,
+      "desconhecido": 21,
+      "centauro": 1
     },
     "dominios_desconhecidos": [
-      "com.br",
-      "tabuga.do",
-      "link.amazon"
+      "vercel.app",
+      "amzlink.to",
+      "on.ltk.com",
+      "com.br"
     ],
     "programa_entrega": {}
   },
   "marketplace_detalhado_acumulado": {
     "contagem": {
-      "desconhecido": 88,
-      "mercadolivre": 270,
+      "mercadolivre": 341,
+      "shopee": 35,
+      "desconhecido": 109,
+      "centauro": 1,
       "amazon": 222,
-      "shopee": 33,
       "magalu": 5
     },
     "dominios_desconhecidos": [
+      "vercel.app",
+      "amzlink.to",
+      "on.ltk.com",
       "com.br",
       "tabuga.do",
       "link.amazon",
       "is.gd",
       "tabara.to",
-      "on.ltk.com",
-      "tidd.ly",
-      "amzlink.to",
-      "vercel.app"
+      "tidd.ly"
     ],
     "programa_entrega": {
       "prime": 81,
@@ -20261,52 +23341,54 @@
     }
   },
   "marcas_por_categoria": {
-    "casa/cozinha": [
-      {
-        "marca": "lg",
-        "count": 1
-      }
-    ],
     "moda": [
       {
-        "marca": "asics",
+        "marca": "puma",
+        "count": 5
+      },
+      {
+        "marca": "nike",
+        "count": 5
+      },
+      {
+        "marca": "adidas",
         "count": 3
       },
       {
-        "marca": "new balance",
-        "count": 1
+        "marca": "mizuno",
+        "count": 2
+      }
+    ],
+    "sem_categoria": [
+      {
+        "marca": "lg",
+        "count": 4
+      },
+      {
+        "marca": "mondial",
+        "count": 3
+      },
+      {
+        "marca": "puma",
+        "count": 2
+      },
+      {
+        "marca": "philco",
+        "count": 2
       },
       {
         "marca": "mizuno",
         "count": 1
       },
       {
-        "marca": "adidas",
-        "count": 1
-      },
-      {
-        "marca": "acer",
-        "count": 1
-      }
-    ],
-    "sem_categoria": [
-      {
         "marca": "samsung",
-        "count": 2
-      },
-      {
-        "marca": "adidas",
-        "count": 1
-      },
-      {
-        "marca": "lg",
         "count": 1
       }
     ],
     "tecnologia": [
       {
-        "marca": "motorola",
-        "count": 2
+        "marca": "samsung",
+        "count": 5
       }
     ]
   },
@@ -20335,24 +23417,24 @@
     ],
     "moda": [
       {
-        "marca": "adidas",
-        "count": 13
+        "marca": "nike",
+        "count": 18
       },
       {
-        "marca": "nike",
-        "count": 13
+        "marca": "adidas",
+        "count": 16
+      },
+      {
+        "marca": "puma",
+        "count": 10
+      },
+      {
+        "marca": "mizuno",
+        "count": 6
       },
       {
         "marca": "asics",
         "count": 5
-      },
-      {
-        "marca": "puma",
-        "count": 5
-      },
-      {
-        "marca": "mizuno",
-        "count": 4
       },
       {
         "marca": "acer",
@@ -20374,15 +23456,19 @@
     "sem_categoria": [
       {
         "marca": "lg",
-        "count": 17
+        "count": 21
       },
       {
         "marca": "philco",
-        "count": 14
+        "count": 16
       },
       {
         "marca": "samsung",
-        "count": 12
+        "count": 13
+      },
+      {
+        "marca": "mondial",
+        "count": 5
       },
       {
         "marca": "adidas",
@@ -20391,6 +23477,10 @@
       {
         "marca": "electrolux",
         "count": 4
+      },
+      {
+        "marca": "puma",
+        "count": 3
       },
       {
         "marca": "apple",
@@ -20403,17 +23493,13 @@
       {
         "marca": "arno",
         "count": 2
-      },
-      {
-        "marca": "mondial",
-        "count": 2
-      },
-      {
-        "marca": "consul",
-        "count": 1
       }
     ],
     "tecnologia": [
+      {
+        "marca": "samsung",
+        "count": 10
+      },
       {
         "marca": "motorola",
         "count": 10
@@ -20425,10 +23511,6 @@
       {
         "marca": "lg",
         "count": 6
-      },
-      {
-        "marca": "samsung",
-        "count": 5
       },
       {
         "marca": "xiaomi",
@@ -21003,7 +24085,7 @@
       {
         "hora": 15,
         "dia_semana": 5,
-        "count": 0
+        "count": 32
       },
       {
         "hora": 15,
@@ -21038,7 +24120,7 @@
       {
         "hora": 16,
         "dia_semana": 5,
-        "count": 0
+        "count": 37
       },
       {
         "hora": 16,
@@ -21073,7 +24155,7 @@
       {
         "hora": 17,
         "dia_semana": 5,
-        "count": 0
+        "count": 26
       },
       {
         "hora": 17,
@@ -21093,7 +24175,7 @@
       {
         "hora": 18,
         "dia_semana": 2,
-        "count": 9
+        "count": 0
       },
       {
         "hora": 18,
@@ -21128,7 +24210,7 @@
       {
         "hora": 19,
         "dia_semana": 2,
-        "count": 7
+        "count": 0
       },
       {
         "hora": 19,
@@ -21163,7 +24245,7 @@
       {
         "hora": 20,
         "dia_semana": 2,
-        "count": 12
+        "count": 0
       },
       {
         "hora": 20,
@@ -21198,7 +24280,7 @@
       {
         "hora": 21,
         "dia_semana": 2,
-        "count": 7
+        "count": 0
       },
       {
         "hora": 21,
@@ -21293,26 +24375,62 @@
     ],
     "frequencia_por_grupo": [
       {
-        "grupo": "#330 Promo Relâmpago MEN",
-        "posts": 26,
-        "posts_por_dia": 26.0
+        "grupo": "originalnapromo 88",
+        "posts": 24,
+        "posts_por_dia": 24.0
       },
       {
-        "grupo": "💥💥TÁ BUGADO!!! 4⃣6⃣",
-        "posts": 9,
-        "posts_por_dia": 9.0
+        "grupo": "#330 Promo Relâmpago MEN",
+        "posts": 17,
+        "posts_por_dia": 17.0
+      },
+      {
+        "grupo": "descontos.bot - Homologação",
+        "posts": 13,
+        "posts_por_dia": 13.0
+      },
+      {
+        "grupo": "🛑 OFERTAS SECRETAS 204 🛑",
+        "posts": 12,
+        "posts_por_dia": 12.0
+      },
+      {
+        "grupo": "Novos Produtos 101",
+        "posts": 11,
+        "posts_por_dia": 11.0
+      },
+      {
+        "grupo": "Grupo 039 Vitrine",
+        "posts": 7,
+        "posts_por_dia": 7.0
+      },
+      {
+        "grupo": "VERSÁTIL OFERTAS | 05",
+        "posts": 6,
+        "posts_por_dia": 6.0
+      },
+      {
+        "grupo": "Tênis Ofertas | 273",
+        "posts": 5,
+        "posts_por_dia": 5.0
       }
     ],
     "intervalo_medio_por_grupo": {
+      "Grupo 039 Vitrine": 0.1,
+      "originalnapromo 88": 0.1,
+      "descontos.bot - Homologação": 0.1,
+      "Novos Produtos 101": 0.2,
       "#330 Promo Relâmpago MEN": 0.1,
-      "💥💥TÁ BUGADO!!! 4⃣6⃣": 0.2
+      "VERSÁTIL OFERTAS | 05": 0.2,
+      "🛑 OFERTAS SECRETAS 204 🛑": 0.1,
+      "Tênis Ofertas | 273": 0.3
     },
     "lag_cobertura": {
-      "amostras": 13,
-      "descontos_bot_publicou_primeiro": 13,
-      "concorrente_publicou_primeiro": 0,
+      "amostras": 39,
+      "descontos_bot_publicou_primeiro": 38,
+      "concorrente_publicou_primeiro": 1,
       "empate": 0,
-      "lag_medio_horas": -655.8
+      "lag_medio_horas": -857.6
     },
     "sazonalidade": []
   },
@@ -21871,7 +24989,7 @@
       {
         "hora": 15,
         "dia_semana": 5,
-        "count": 0
+        "count": 32
       },
       {
         "hora": 15,
@@ -21906,7 +25024,7 @@
       {
         "hora": 16,
         "dia_semana": 5,
-        "count": 0
+        "count": 37
       },
       {
         "hora": 16,
@@ -21941,7 +25059,7 @@
       {
         "hora": 17,
         "dia_semana": 5,
-        "count": 0
+        "count": 26
       },
       {
         "hora": 17,
@@ -22167,104 +25285,152 @@
       },
       {
         "grupo": "#330 Promo Relâmpago MEN",
-        "posts": 195,
-        "posts_por_dia": 13.9
+        "posts": 212,
+        "posts_por_dia": 12.5
       },
       {
         "grupo": "descontos.bot - Homologação",
-        "posts": 20,
-        "posts_por_dia": 20.0
+        "posts": 33,
+        "posts_por_dia": 3.0
+      },
+      {
+        "grupo": "originalnapromo 88",
+        "posts": 24,
+        "posts_por_dia": 24.0
+      },
+      {
+        "grupo": "🛑 OFERTAS SECRETAS 204 🛑",
+        "posts": 12,
+        "posts_por_dia": 12.0
+      },
+      {
+        "grupo": "Novos Produtos 101",
+        "posts": 11,
+        "posts_por_dia": 11.0
+      },
+      {
+        "grupo": "Grupo 039 Vitrine",
+        "posts": 7,
+        "posts_por_dia": 7.0
+      },
+      {
+        "grupo": "VERSÁTIL OFERTAS | 05",
+        "posts": 6,
+        "posts_por_dia": 6.0
+      },
+      {
+        "grupo": "Tênis Ofertas | 273",
+        "posts": 5,
+        "posts_por_dia": 5.0
       }
     ],
     "intervalo_medio_por_grupo": {
-      "#330 Promo Relâmpago MEN": 1.6,
-      "💥💥TÁ BUGADO!!! 4⃣6⃣": 0.7,
-      "descontos.bot - Homologação": 0.0
+      "Grupo 039 Vitrine": 0.1,
+      "originalnapromo 88": 0.1,
+      "descontos.bot - Homologação": 7.6,
+      "Novos Produtos 101": 0.2,
+      "#330 Promo Relâmpago MEN": 1.8,
+      "VERSÁTIL OFERTAS | 05": 0.2,
+      "🛑 OFERTAS SECRETAS 204 🛑": 0.1,
+      "Tênis Ofertas | 273": 0.3,
+      "💥💥TÁ BUGADO!!! 4⃣6⃣": 0.7
     },
     "lag_cobertura": {
-      "amostras": 279,
-      "descontos_bot_publicou_primeiro": 257,
-      "concorrente_publicou_primeiro": 22,
+      "amostras": 320,
+      "descontos_bot_publicou_primeiro": 294,
+      "concorrente_publicou_primeiro": 26,
       "empate": 0,
-      "lag_medio_horas": -685.9
+      "lag_medio_horas": -699.2
     },
     "sazonalidade": []
   },
   "cobertura": {
-    "ofertas_nao_cobertas": 22,
-    "taxa_sobreposicao": 0.37,
-    "exclusivas_concorrente": 22,
-    "tempo_ate_cobertura_horas_medio": -655.8,
+    "ofertas_nao_cobertas": 56,
+    "taxa_sobreposicao": 0.41,
+    "exclusivas_concorrente": 56,
+    "tempo_ate_cobertura_horas_medio": -857.6,
     "metodo_match": {
-      "titulo_normalizado": 13
+      "titulo_normalizado": 39
     },
     "backlog_curadoria": [
       {
         "comb": "mercadolivre",
-        "count": 7
+        "count": 23
       },
       {
         "comb": "desconhecido",
-        "count": 6
+        "count": 14
       },
       {
         "comb": "mercadolivre:moda",
-        "count": 3
+        "count": 6
       },
       {
-        "comb": "desconhecido:moda",
-        "count": 2
+        "comb": "mercadolivre:tecnologia",
+        "count": 5
       },
       {
         "comb": "mercadolivre:casa/cozinha",
+        "count": 3
+      },
+      {
+        "comb": "mercadolivre:esporte",
         "count": 1
       },
       {
-        "comb": "amazon",
+        "comb": "mercadolivre:beleza",
         "count": 1
       },
       {
-        "comb": "shopee:tecnologia",
+        "comb": "desconhecido:tecnologia",
         "count": 1
       },
       {
-        "comb": "magalu",
+        "comb": "desconhecido:moda",
+        "count": 1
+      },
+      {
+        "comb": "centauro:moda",
         "count": 1
       }
     ]
   },
   "cobertura_acumulada": {
-    "ofertas_nao_cobertas": 339,
+    "ofertas_nao_cobertas": 393,
     "taxa_sobreposicao": 0.45,
-    "exclusivas_concorrente": 339,
-    "tempo_ate_cobertura_horas_medio": -685.9,
+    "exclusivas_concorrente": 393,
+    "tempo_ate_cobertura_horas_medio": -699.2,
     "metodo_match": {
-      "titulo_normalizado": 279
+      "titulo_normalizado": 320
     },
     "backlog_curadoria": [
+      {
+        "comb": "mercadolivre",
+        "count": 101
+      },
       {
         "comb": "amazon",
         "count": 93
       },
       {
-        "comb": "mercadolivre",
-        "count": 78
-      },
-      {
         "comb": "desconhecido",
-        "count": 47
+        "count": 61
       },
       {
         "comb": "mercadolivre:moda",
-        "count": 21
+        "count": 27
       },
       {
         "comb": "desconhecido:moda",
-        "count": 18
+        "count": 19
       },
       {
         "comb": "shopee",
-        "count": 16
+        "count": 14
+      },
+      {
+        "comb": "mercadolivre:beleza",
+        "count": 12
       },
       {
         "comb": "amazon:beleza",
@@ -22272,10 +25438,6 @@
       },
       {
         "comb": "amazon:casa/cozinha",
-        "count": 11
-      },
-      {
-        "comb": "mercadolivre:beleza",
         "count": 11
       },
       {

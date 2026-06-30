@@ -1,11 +1,11 @@
 {
   "version": "2.0",
   "report_type": "incremental_market_intel",
-  "generated_at": "2026-06-29T01:00:27.565174+00:00",
-  "date": "2026-06-28",
+  "generated_at": "2026-06-30T01:01:02.487517+00:00",
+  "date": "2026-06-29",
   "window": {
-    "start": "2026-06-28T03:00:00+00:00",
-    "end": "2026-06-29T02:59:59.999999+00:00"
+    "start": "2026-06-29T03:00:00+00:00",
+    "end": "2026-06-30T02:59:59.999999+00:00"
   },
   "summary": {
     "groups_analyzed": 9,
@@ -24087,11 +24087,11 @@
       "💥💥TÁ BUGADO!!! 4⃣6⃣": 0.7
     },
     "lag_cobertura": {
-      "amostras": 320,
-      "descontos_bot_publicou_primeiro": 294,
-      "concorrente_publicou_primeiro": 26,
+      "amostras": 321,
+      "descontos_bot_publicou_primeiro": 293,
+      "concorrente_publicou_primeiro": 28,
       "empate": 0,
-      "lag_medio_horas": -699.2
+      "lag_medio_horas": -690.6
     },
     "sazonalidade": []
   },
@@ -24103,17 +24103,17 @@
     "backlog_curadoria": []
   },
   "cobertura_acumulada": {
-    "ofertas_nao_cobertas": 393,
+    "ofertas_nao_cobertas": 392,
     "taxa_sobreposicao": 0.45,
-    "exclusivas_concorrente": 393,
-    "tempo_ate_cobertura_horas_medio": -699.2,
+    "exclusivas_concorrente": 392,
+    "tempo_ate_cobertura_horas_medio": -690.6,
     "metodo_match": {
-      "titulo_normalizado": 320
+      "titulo_normalizado": 321
     },
     "backlog_curadoria": [
       {
         "comb": "mercadolivre",
-        "count": 101
+        "count": 100
       },
       {
         "comb": "amazon",

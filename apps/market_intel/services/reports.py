@@ -1,7 +1,7 @@
 import re
 import unicodedata
 from collections import Counter
-from datetime import date, datetime, time, timezone as dt_timezone
+from datetime import date, datetime, time, timedelta, timezone as dt_timezone
 from decimal import Decimal
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
@@ -778,6 +778,156 @@ def build_cobertura(messages: QuerySet[ObservedWhatsAppMessage]) -> dict:
     }
 
 
+def build_intelligent_insights(report: MarketIntelDailyReport, messages: QuerySet[ObservedWhatsAppMessage]) -> dict:
+    """Turn observer counters into a concise executive/action readout.
+
+    No LLM and no raw third-party copy/URLs: this block is safe for the public
+    JSON and for the no-agent cron notification.
+    """
+    rows = list(messages)
+    total = len(rows)
+    previous_total = ObservedWhatsAppMessage.objects.filter(
+        sent_at__gte=report.window_start - timedelta(days=1),
+        sent_at__lte=report.window_end - timedelta(days=1),
+    ).count()
+
+    if not total:
+        return {
+            'status': 'sem_dados',
+            'resumo_executivo': 'Nenhuma mensagem observada no ciclo. O problema mais provável é coleta/webhook/buffer, não inteligência de mercado.',
+            'variacao_vs_dia_anterior_pct': -100 if previous_total else 0,
+            'alertas': [{
+                'severidade': 'critico',
+                'titulo': 'Observer sem dados no ciclo',
+                'detalhe': 'Validar adapter Evolution/wa_service, allowlist de grupos, buffer e cron antes de interpretar tendências.',
+            }],
+            'oportunidades_prioritarias': [],
+            'janelas_recomendadas': [],
+            'acoes_recomendadas': [
+                'Executar coleta manual e confirmar created/updated maior que zero.',
+                'Validar /observer/groups e /observer/collect no provider ativo.',
+                'Verificar se site/market-intel.json foi commitado e publicado após a geração.',
+            ],
+        }
+
+    summary = summarize_messages(rows)
+    coverage = build_cobertura(messages)
+    copy = build_copy_e_formato(messages)
+    mecanica = build_mecanica_preco(messages)
+    timing = build_cadencia_e_timing(messages)
+
+    top_marketplace = (summary.get('top_marketplaces') or [{}])[0]
+    top_labels = summary.get('top_labels') or []
+    marketplace_counts = {item['marketplace']: item['count'] for item in summary.get('top_marketplaces', [])}
+    unknown_count = marketplace_counts.get('desconhecido', 0)
+    unknown_pct = round(unknown_count / total, 2) if total else 0
+    coupon_pct = round(summary.get('coupon_messages', 0) / total, 2)
+    image_pct = round(summary.get('image_messages', 0) / total, 2)
+    overlap = coverage.get('taxa_sobreposicao', 0) or 0
+    backlog = coverage.get('backlog_curadoria') or []
+
+    if previous_total:
+        variation = round(((total - previous_total) / previous_total) * 100, 1)
+    else:
+        variation = 100 if total else 0
+
+    heatmap = timing.get('heatmap_horario_dia') or []
+    peak_slots = sorted(heatmap, key=lambda item: item.get('count', 0), reverse=True)[:3]
+    weekday_names = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom']
+    windows = [
+        {
+            'dia_semana': weekday_names[slot['dia_semana']],
+            'hora': slot['hora'],
+            'count': slot['count'],
+            'recomendacao': f"Testar publicação/curadoria perto de {slot['hora']:02d}h em {weekday_names[slot['dia_semana']]}",
+        }
+        for slot in peak_slots
+        if slot.get('count', 0) > 0
+    ]
+
+    alerts = []
+    if unknown_pct >= 0.15:
+        alerts.append({
+            'severidade': 'alto',
+            'titulo': 'Muitos marketplaces desconhecidos',
+            'detalhe': f'{unknown_count}/{total} mensagens ({unknown_pct:.0%}) não tiveram marketplace identificado; isso reduz a qualidade das recomendações.',
+        })
+    if overlap < 0.2:
+        alerts.append({
+            'severidade': 'medio',
+            'titulo': 'Baixa sobreposição com o catálogo próprio',
+            'detalhe': f'Taxa de cobertura {overlap:.0%}; priorizar lacunas recorrentes antes de aumentar volume de disparos.',
+        })
+    if variation <= -50:
+        alerts.append({
+            'severidade': 'alto',
+            'titulo': 'Queda forte de volume observado',
+            'detalhe': f'Volume caiu {abs(variation):.1f}% contra o dia anterior; checar coleta antes de concluir mudança de mercado.',
+        })
+
+    opportunities = []
+    if backlog:
+        top_gap = backlog[0]
+        opportunities.append({
+            'prioridade': 1,
+            'tema': 'cobertura_de_catalogo',
+            'sinal': top_gap['comb'],
+            'impacto': top_gap['count'],
+            'acao': 'Criar/ajustar scraper ou regra de curadoria para a lacuna mais recorrente.',
+        })
+    if coupon_pct >= 0.35:
+        opportunities.append({
+            'prioridade': 2,
+            'tema': 'copy_e_oferta',
+            'sinal': 'cupom_recorrente',
+            'impacto': summary.get('coupon_messages', 0),
+            'acao': 'Dar peso maior para ofertas com cupom explícito e destacar o cupom no criativo.',
+        })
+    if image_pct >= 0.5:
+        opportunities.append({
+            'prioridade': 3,
+            'tema': 'criativo',
+            'sinal': 'imagem_forte',
+            'impacto': summary.get('image_messages', 0),
+            'acao': 'Priorizar cards/imagens nativas e evitar ofertas sem mídia quando houver concorrência visual forte.',
+        })
+    if mecanica.get('pix', 0) or mecanica.get('parcelado_sem_juros', 0):
+        opportunities.append({
+            'prioridade': 4,
+            'tema': 'mecanica_de_preco',
+            'sinal': 'pix_ou_parcelamento',
+            'impacto': mecanica.get('pix', 0) + mecanica.get('parcelado_sem_juros', 0),
+            'acao': 'Exibir Pix/parcelamento como metadado de ranking, não só dentro do texto.',
+        })
+
+    top_label_text = ', '.join(f"{item['label']} ({item['count']})" for item in top_labels[:3]) or 'sem labels dominantes'
+    resumo = (
+        f"{total} mensagens no ciclo ({variation:+.1f}% vs dia anterior). "
+        f"Marketplace líder: {top_marketplace.get('marketplace', 'n/d')} ({top_marketplace.get('count', 0)} menções). "
+        f"Sinais dominantes: {top_label_text}. Cobertura própria estimada: {overlap:.0%}."
+    )
+
+    actions = [item['acao'] for item in opportunities[:4]] or ['Manter coleta diária e acumular mais dados antes de mudar estratégia.']
+    return {
+        'status': 'ok',
+        'resumo_executivo': resumo,
+        'variacao_vs_dia_anterior_pct': variation,
+        'alertas': alerts,
+        'oportunidades_prioritarias': opportunities,
+        'janelas_recomendadas': windows,
+        'metricas_chave': {
+            'mensagens': total,
+            'marketplace_lider': top_marketplace,
+            'cupom_pct': coupon_pct,
+            'imagem_pct': image_pct,
+            'marketplace_desconhecido_pct': unknown_pct,
+            'taxa_sobreposicao': overlap,
+            'tem_cta_pct': copy.get('tem_cta_pct', 0),
+        },
+        'acoes_recomendadas': actions,
+    }
+
+
 def build_daily_report_payload(report: MarketIntelDailyReport) -> dict:
     all_messages = ObservedWhatsAppMessage.objects.select_related('group').all()
     cycle_messages = all_messages.filter(sent_at__gte=report.window_start, sent_at__lte=report.window_end)
@@ -815,6 +965,7 @@ def build_daily_report_payload(report: MarketIntelDailyReport) -> dict:
         'cadencia_e_timing_acumulada': build_cadencia_e_timing(all_messages),
         'cobertura': build_cobertura(cycle_messages),
         'cobertura_acumulada': build_cobertura(all_messages),
+        'insights_inteligentes': build_intelligent_insights(report, cycle_messages),
         'privacy': {
             'sender_identity': 'sha256 hash only in database; omitted from report',
             'message_identity': 'Source message identifiers omitted from report',

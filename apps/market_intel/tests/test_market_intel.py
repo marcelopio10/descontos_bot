@@ -15,6 +15,7 @@ from apps.market_intel.services.reports import (
     build_copy_e_formato,
     build_cobertura,
     build_daily_report_payload,
+    build_intelligent_insights,
     build_marcas_por_categoria,
     build_mecanica_preco,
     build_marketplace_detalhado,
@@ -602,6 +603,35 @@ class MarketIntelReportV2Tests(TestCase):
         self.assertIn('cadencia_e_timing_acumulada', payload)
         self.assertIn('cobertura', payload)
         self.assertIn('cobertura_acumulada', payload)
+        self.assertIn('insights_inteligentes', payload)
+        self.assertEqual(payload['insights_inteligentes']['status'], 'ok')
+
+    def test_intelligent_insights_turns_counts_into_actions(self):
+        self._create_message(
+            external_message_id='INSIGHT1',
+            parsed_marketplace='desconhecido',
+            editorial_labels=['cupom', 'imagem', 'pix'],
+            has_image=True,
+            parsed_coupon='PROMO10',
+            urls=['https://lojaexemplo.com/oferta'],
+        )
+        report = generate_daily_report(date.today())
+        result = build_intelligent_insights(report, ObservedWhatsAppMessage.objects.all())
+        serialized = json.dumps(result, ensure_ascii=False)
+
+        self.assertEqual(result['status'], 'ok')
+        self.assertIn('resumo_executivo', result)
+        self.assertTrue(result['oportunidades_prioritarias'])
+        self.assertTrue(result['acoes_recomendadas'])
+        self.assertNotIn('https://lojaexemplo.com/oferta', serialized)
+
+    def test_intelligent_insights_alerts_when_cycle_has_no_data(self):
+        report = generate_daily_report(date.today())
+        result = build_intelligent_insights(report, ObservedWhatsAppMessage.objects.none())
+
+        self.assertEqual(result['status'], 'sem_dados')
+        self.assertEqual(result['alertas'][0]['severidade'], 'critico')
+        self.assertTrue(result['acoes_recomendadas'])
 
     def test_v1_blocks_unchanged(self):
         """Ensure v1 blocks (summary, recommendations, scraper_opportunities) are intact."""

@@ -58,6 +58,7 @@ class SocialChannel(TimestampedModel):
 
 class Delivery(TimestampedModel):
     class DeliveryStatus(models.TextChoices):
+        PENDING = 'pending', 'Em envio'
         SENT = 'sent', 'Enviado'
         FAILED = 'failed', 'Falhou'
         SKIPPED = 'skipped', 'Ignorado'

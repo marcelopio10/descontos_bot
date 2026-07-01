@@ -88,6 +88,17 @@ SAFETY_BLACKLIST_TERMS: tuple[str, ...] = (
     'lubrificante intimo',
     'sutia',
     'calcinha',
+    # Produtos de pegadinha/zoeira escatológica deterioram a curadoria editorial.
+    'peido alemao',
+    'peido pronto',
+    'pum pegadinha',
+    'zoeira pegadinha',
+    # Itens sem apelo editorial para grupo de ofertas ao consumidor.
+    'cabeca p/ treino',
+    'cabeca para treino',
+    'cabeca de treino',
+    'cabeca treino',
+    'manequim treino cabelo',
 )
 
 

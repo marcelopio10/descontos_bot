@@ -17,6 +17,7 @@ from apps.offers.services.normalizer import (
 )
 
 SHOPEE_CODE = 'shopee'
+MAX_SAFE_PRICE_RANGE_RATIO = Decimal('3')
 
 
 def shopee_external_id(item: dict) -> str:
@@ -56,15 +57,43 @@ def _has_price_range(item: dict) -> bool:
     return price_min is not None and price_max is not None and price_min != price_max
 
 
+def _has_unsafe_price_range(item: dict) -> bool:
+    price_min = _to_decimal(item.get('priceMin') or item.get('price'))
+    price_max = _to_decimal(item.get('priceMax'))
+    if price_min is None or price_max is None or price_min == price_max:
+        return False
+    if price_min <= 0 or price_max <= 0:
+        return True
+    if price_max / price_min > MAX_SAFE_PRICE_RANGE_RATIO:
+        return True
+    if not str(item.get('productName') or '').strip():
+        return True
+    if not str(item.get('imageUrl') or '').strip():
+        return True
+    if not str(item.get('productLink') or item.get('offerLink') or '').strip():
+        return True
+    return False
+
+
+def _with_price_variation_flag(item: dict) -> dict:
+    if not _has_price_range(item):
+        return item
+    flagged = dict(item)
+    flagged['has_price_variation'] = True
+    flagged['published_price_source'] = 'priceMin'
+    return flagged
+
+
 def normalize_shopee_item(marketplace: Marketplace, item: dict) -> NormalizedOffer:
     if not item.get('itemId') or not item.get('shopId'):
         raise OfferNormalizationError('Item Shopee sem itemId/shopId.')
 
-    if _has_price_range(item):
+    if _has_unsafe_price_range(item):
         raise OfferNormalizationError(
-            'Item Shopee rejeitado: faixa de preço sem variação/SKU consistente.',
+            'Item Shopee rejeitado: faixa de preço insegura.',
         )
 
+    item = _with_price_variation_flag(item)
     external_id = shopee_external_id(item)
     current_price = item.get('priceMin') or item.get('price')
     discount_rate = item.get('priceDiscountRate')
@@ -78,6 +107,8 @@ def normalize_shopee_item(marketplace: Marketplace, item: dict) -> NormalizedOff
         'affiliate_url': item.get('offerLink') or '',
         'image_url': item.get('imageUrl') or '',
         'rating': item.get('ratingStar'),
+        'has_price_variation': bool(item.get('has_price_variation')),
+        'published_price_source': item.get('published_price_source') or '',
         # Item bruto preservado para auditoria/score futuro (comissão, vendas...).
         'shopee': item,
     }

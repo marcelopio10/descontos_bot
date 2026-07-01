@@ -1,0 +1,14 @@
+{
+  "name": "evolution-adapter",
+  "version": "0.1.0",
+  "description": "Adapter compatível com wa_service para Evolution API",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

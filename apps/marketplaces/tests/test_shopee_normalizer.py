@@ -73,9 +73,27 @@ class ShopeeNormalizerTests(SimpleTestCase):
         with self.assertRaises(OfferNormalizationError):
             normalize_shopee_item(self.marketplace, self._item(itemId=None))
 
-    def test_price_range_items_are_rejected_to_avoid_variant_mismatch(self):
-        with self.assertRaisesMessage(OfferNormalizationError, 'faixa de preço'):
+    def test_price_range_items_are_allowed_when_metadata_is_consistent(self):
+        normalized = normalize_shopee_item(
+            self.marketplace,
+            self._item(priceMin='17.99', priceMax='49.99'),
+        )
+
+        self.assertEqual(normalized.current_price, Decimal('17.99'))
+        self.assertTrue(normalized.raw_payload['has_price_variation'])
+        self.assertEqual(normalized.raw_payload['published_price_source'], 'priceMin')
+        self.assertTrue(normalized.raw_payload['shopee']['has_price_variation'])
+
+    def test_absurd_price_range_items_are_rejected_to_avoid_variant_mismatch(self):
+        with self.assertRaisesMessage(OfferNormalizationError, 'faixa de preço insegura'):
             normalize_shopee_item(
                 self.marketplace,
-                self._item(priceMin='17.99', priceMax='49.99'),
+                self._item(priceMin='17.99', priceMax='79.99'),
+            )
+
+    def test_price_range_items_without_image_are_rejected(self):
+        with self.assertRaisesMessage(OfferNormalizationError, 'faixa de preço insegura'):
+            normalize_shopee_item(
+                self.marketplace,
+                self._item(priceMin='17.99', priceMax='49.99', imageUrl=''),
             )

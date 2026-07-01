@@ -9,6 +9,7 @@ from django.utils.dateparse import parse_datetime
 
 
 DEFAULT_TIMEOUT_SECONDS = 15
+DEFAULT_WA_SERVICE_URL = 'http://127.0.0.1:8787'
 
 
 class WhatsAppClientError(Exception):
@@ -31,10 +32,10 @@ class WhatsAppSendResult:
 
 class WhatsAppClient:
     def __init__(self, base_url: str | None = None, timeout: int = DEFAULT_TIMEOUT_SECONDS):
-        self.base_url = (base_url or getattr(settings, 'WA_SERVICE_URL', '')).rstrip('/')
+        self.base_url = (base_url or resolve_whatsapp_base_url()).rstrip('/')
         self.timeout = timeout
         if not self.base_url:
-            self.base_url = 'http://127.0.0.1:8787'
+            self.base_url = DEFAULT_WA_SERVICE_URL
 
     def get_status(self) -> WhatsAppStatus:
         payload = self._request('GET', '/status')
@@ -105,3 +106,10 @@ class WhatsAppClient:
             raise WhatsAppClientError('Resposta inesperada do wa_service.')
 
         return payload
+
+
+def resolve_whatsapp_base_url() -> str:
+    provider = str(getattr(settings, 'WA_PROVIDER', 'baileys') or 'baileys').strip().lower()
+    if provider == 'evolution':
+        return str(getattr(settings, 'EVOLUTION_ADAPTER_URL', '') or 'http://127.0.0.1:8788')
+    return str(getattr(settings, 'WA_SERVICE_URL', '') or DEFAULT_WA_SERVICE_URL)

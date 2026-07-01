@@ -25,6 +25,8 @@ wa_service/auth_state.bak.*/
 wa_service/auth_state_backup_*/
 wa_service/wa_session/
 wa_service/dist/
+evolution_adapter/config/group_map.json
+evolution_adapter/data/
 wa_session/
 node_modules/
 /.publish-worktree/

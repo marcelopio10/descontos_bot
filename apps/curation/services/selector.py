@@ -1,5 +1,7 @@
 import logging
 import math
+import re
+import unicodedata
 from collections import defaultdict
 from dataclasses import dataclass
 from decimal import Decimal
@@ -30,6 +32,18 @@ CANDIDATE_POOL_MULTIPLIER = 5
 CANDIDATE_POOL_FLOOR = 60
 EXPOSURE_QUOTA_FLAG = 'exposure_quota_enabled'
 SIMILAR_TITLE_PREFIX = 50
+SIMILAR_TITLE_MIN_TOKENS = 4
+SIMILAR_TITLE_JACCARD_THRESHOLD = 0.75
+TITLE_STOPWORDS = frozenset({
+    'com',
+    'para',
+    'por',
+    'sem',
+    'masculino',
+    'masculina',
+    'feminino',
+    'feminina',
+})
 
 
 @dataclass(frozen=True)
@@ -128,6 +142,7 @@ def select_offers_for_channel(
     per_marketplace_count: dict[int, int] = defaultdict(int)
     per_category_count: dict[str, int] = defaultdict(int)
     seen_prefixes: set[str] = set()
+    selected_token_sets: list[tuple[int, set[str]]] = []
 
     def _category_of(offer: Offer) -> str:
         return offer.category.code if offer.category_id else 'sem_categoria'
@@ -141,6 +156,17 @@ def select_offers_for_channel(
             log.info(
                 'selector_drop offer_id=%s reason=similar_title prefix=%r',
                 offer.id, prefix,
+            )
+            return False
+
+        tokens = _title_tokens(offer)
+        similar_offer_id = _find_similar_selected_offer(tokens, selected_token_sets)
+        if similar_offer_id is not None:
+            log.info(
+                'selector_drop offer_id=%s reason=similar_title_tokens similar_offer_id=%s tokens=%s',
+                offer.id,
+                similar_offer_id,
+                sorted(tokens),
             )
             return False
 
@@ -168,6 +194,8 @@ def select_offers_for_channel(
         per_category_count[category_code] += 1
         if prefix:
             seen_prefixes.add(prefix)
+        if len(tokens) >= SIMILAR_TITLE_MIN_TOKENS:
+            selected_token_sets.append((offer.id, tokens))
 
         log.info(
             'selector_pick offer_id=%s score=%.2f classification=%s decision=%s '
@@ -205,6 +233,36 @@ def select_offers_for_channel(
         )
 
     return selected
+
+
+def _title_tokens(offer: Offer) -> set[str]:
+    text = _strip_accents(offer.normalized_title or offer.title or '').lower()
+    return {
+        token
+        for token in re.findall(r'[a-z0-9]+', text)
+        if len(token) >= 3 and token not in TITLE_STOPWORDS
+    }
+
+
+def _find_similar_selected_offer(
+    tokens: set[str],
+    selected_token_sets: list[tuple[int, set[str]]],
+) -> int | None:
+    if len(tokens) < SIMILAR_TITLE_MIN_TOKENS:
+        return None
+    for offer_id, selected_tokens in selected_token_sets:
+        union = tokens | selected_tokens
+        if not union:
+            continue
+        similarity = len(tokens & selected_tokens) / len(union)
+        if similarity >= SIMILAR_TITLE_JACCARD_THRESHOLD:
+            return offer_id
+    return None
+
+
+def _strip_accents(text: str) -> str:
+    decomposed = unicodedata.normalize('NFKD', text)
+    return ''.join(ch for ch in decomposed if not unicodedata.combining(ch))
 
 
 def _resolve_category_quotas(config: SelectionConfig) -> dict[str, int]:

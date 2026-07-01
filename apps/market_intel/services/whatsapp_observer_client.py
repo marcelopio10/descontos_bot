@@ -5,6 +5,7 @@ from urllib.request import Request, urlopen
 from django.conf import settings
 
 DEFAULT_TIMEOUT_SECONDS = 30
+DEFAULT_WA_SERVICE_URL = 'http://127.0.0.1:8787'
 
 
 class WhatsAppObserverClientError(Exception):
@@ -13,7 +14,7 @@ class WhatsAppObserverClientError(Exception):
 
 class WhatsAppObserverClient:
     def __init__(self, base_url: str | None = None, timeout: int = DEFAULT_TIMEOUT_SECONDS):
-        self.base_url = (base_url or getattr(settings, 'WA_SERVICE_URL', '') or 'http://127.0.0.1:8787').rstrip('/')
+        self.base_url = (base_url or resolve_whatsapp_observer_base_url()).rstrip('/')
         self.timeout = timeout
 
     def groups(self) -> dict:
@@ -49,3 +50,10 @@ class WhatsAppObserverClient:
         if not isinstance(payload, dict):
             raise WhatsAppObserverClientError('Resposta inesperada do wa_service observer.')
         return payload
+
+
+def resolve_whatsapp_observer_base_url() -> str:
+    provider = str(getattr(settings, 'WA_PROVIDER', 'baileys') or 'baileys').strip().lower()
+    if provider == 'evolution':
+        return str(getattr(settings, 'EVOLUTION_ADAPTER_URL', '') or 'http://127.0.0.1:8788')
+    return str(getattr(settings, 'WA_SERVICE_URL', '') or DEFAULT_WA_SERVICE_URL)

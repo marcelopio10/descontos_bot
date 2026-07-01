@@ -51,3 +51,16 @@ class SitePublisherSafetyTests(TestCase):
 
         self.assertIn(allowed, publishable)
         self.assertNotIn(blocked, publishable)
+
+    def test_publishable_offers_exclude_editorially_irrelevant_training_head(self):
+        Setting.objects.create(key='blacklist_terms', value='[]')
+        blocked = self._offer(
+            'Cabeça P/ Treino Com Barba Lisa Masculina 100% Natural C Suporte Cor Castanho Zhang Hair',
+            'cabeca-treino',
+        )
+        allowed = self._offer('Cafeteira Elétrica Inox 30 Cafés', 'cafeteira')
+
+        publishable = list(_get_publishable_offers())
+
+        self.assertIn(allowed, publishable)
+        self.assertNotIn(blocked, publishable)

@@ -24,6 +24,7 @@ log = logging.getLogger(__name__)
 DEFAULT_LIMIT = 10  # ofertas por categoria (mantém ciclo rápido)
 DEFAULT_LIST_TYPE = 0
 DEFAULT_SORT_TYPE = 2  # maior comissão; sem keyword para cobrir a categoria inteira
+MAX_SAFE_PRICE_RANGE_RATIO = Decimal('3')
 
 
 class ShopeeScraper:
@@ -91,9 +92,9 @@ class ShopeeScraper:
             self.pages_scraped += 1
 
             for item in nodes:
-                if _has_price_range(item):
+                if _has_unsafe_price_range(item):
                     log.info(
-                        'Shopee item rejeitado: faixa de preço inconsistente itemId=%s '
+                        'Shopee item rejeitado: faixa de preço insegura itemId=%s '
                         'shopId=%s priceMin=%s priceMax=%s',
                         item.get('itemId'),
                         item.get('shopId'),
@@ -101,6 +102,8 @@ class ShopeeScraper:
                         item.get('priceMax'),
                     )
                     continue
+
+                item = _with_price_variation_flag(item)
 
                 item_id = str(item.get('itemId', ''))
                 shop_id = str(item.get('shopId', ''))
@@ -161,9 +164,9 @@ class ShopeeScraper:
                 break
 
             for item in nodes:
-                if _has_price_range(item):
+                if _has_unsafe_price_range(item):
                     log.info(
-                        'Shopee item rejeitado: faixa de preço inconsistente itemId=%s '
+                        'Shopee item rejeitado: faixa de preço insegura itemId=%s '
                         'shopId=%s priceMin=%s priceMax=%s',
                         item.get('itemId'),
                         item.get('shopId'),
@@ -171,6 +174,8 @@ class ShopeeScraper:
                         item.get('priceMax'),
                     )
                     continue
+
+                item = _with_price_variation_flag(item)
 
                 item_id = str(item.get('itemId', ''))
                 shop_id = str(item.get('shopId', ''))
@@ -210,10 +215,43 @@ def _derive_original_price(item: dict[str, Any]) -> float | None:
 
 
 def _has_price_range(item: dict[str, Any]) -> bool:
-    """Rejeita produto Shopee com variações de preço sem SKU/imagem consistente."""
     price_min = _to_decimal(item.get('priceMin') or item.get('price'))
     price_max = _to_decimal(item.get('priceMax'))
     return price_min is not None and price_max is not None and price_min != price_max
+
+
+def _has_unsafe_price_range(item: dict[str, Any]) -> bool:
+    """Rejeita só faixas de preço que ainda são inseguras para publicação.
+
+    Shopee usa `priceMin != priceMax` para variações legítimas (cor/tamanho/kit).
+    Publicamos `priceMin` como preço base e marcamos a variação, mas bloqueamos
+    ranges absurdos ou payloads sem título/imagem/link, que podem induzir clique
+    para uma variação diferente da exibida.
+    """
+    price_min = _to_decimal(item.get('priceMin') or item.get('price'))
+    price_max = _to_decimal(item.get('priceMax'))
+    if price_min is None or price_max is None or price_min == price_max:
+        return False
+    if price_min <= 0 or price_max <= 0:
+        return True
+    if price_max / price_min > MAX_SAFE_PRICE_RANGE_RATIO:
+        return True
+    if not str(item.get('productName') or '').strip():
+        return True
+    if not str(item.get('imageUrl') or '').strip():
+        return True
+    if not str(item.get('productLink') or item.get('offerLink') or '').strip():
+        return True
+    return False
+
+
+def _with_price_variation_flag(item: dict[str, Any]) -> dict[str, Any]:
+    if not _has_price_range(item):
+        return item
+    flagged = dict(item)
+    flagged['has_price_variation'] = True
+    flagged['published_price_source'] = 'priceMin'
+    return flagged
 
 
 def _to_decimal(value: Any) -> Decimal | None:

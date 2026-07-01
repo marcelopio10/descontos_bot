@@ -10,6 +10,7 @@ from django.utils.dateparse import parse_datetime
 
 DEFAULT_TIMEOUT_SECONDS = 15
 DEFAULT_WA_SERVICE_URL = 'http://127.0.0.1:8787'
+DEFAULT_EVOLUTION_ADAPTER_URL = 'http://127.0.0.1:8788'
 
 
 class WhatsAppClientError(Exception):
@@ -32,28 +33,11 @@ class WhatsAppSendResult:
 
 class WhatsAppClient:
     def __init__(self, base_url: str | None = None, timeout: int = DEFAULT_TIMEOUT_SECONDS):
-        self.base_url = self._resolve_base_url(base_url)
+        self.base_url = (base_url or resolve_whatsapp_base_url()).rstrip('/')
+        if not self.base_url:
+            self.base_url = DEFAULT_WA_SERVICE_URL
         self.timeout = timeout
-        self.service_label = self._resolve_service_label()
-
-    def _resolve_base_url(self, base_url: str | None) -> str:
-        if base_url:
-            return base_url.rstrip('/')
-
-        provider = getattr(settings, 'WA_PROVIDER', 'baileys')
-        if str(provider).strip().lower() == 'evolution':
-            evolution_url = getattr(settings, 'EVOLUTION_ADAPTER_URL', '')
-            if evolution_url:
-                return str(evolution_url).rstrip('/')
-
-        service_url = getattr(settings, 'WA_SERVICE_URL', DEFAULT_WA_SERVICE_URL)
-        return str(service_url or DEFAULT_WA_SERVICE_URL).rstrip('/')
-
-    def _resolve_service_label(self) -> str:
-        provider = str(getattr(settings, 'WA_PROVIDER', 'baileys')).strip().lower()
-        if provider == 'evolution':
-            return 'Evolution adapter'
-        return 'wa_service'
+        self.service_label = resolve_whatsapp_service_label()
 
     def get_status(self) -> WhatsAppStatus:
         payload = self._request('GET', '/status')
@@ -124,3 +108,17 @@ class WhatsAppClient:
             raise WhatsAppClientError(f'Resposta inesperada do {self.service_label}.')
 
         return payload
+
+
+def resolve_whatsapp_base_url() -> str:
+    provider = str(getattr(settings, 'WA_PROVIDER', 'baileys') or 'baileys').strip().lower()
+    if provider == 'evolution':
+        return str(getattr(settings, 'EVOLUTION_ADAPTER_URL', '') or DEFAULT_EVOLUTION_ADAPTER_URL)
+    return str(getattr(settings, 'WA_SERVICE_URL', '') or DEFAULT_WA_SERVICE_URL)
+
+
+def resolve_whatsapp_service_label() -> str:
+    provider = str(getattr(settings, 'WA_PROVIDER', 'baileys') or 'baileys').strip().lower()
+    if provider == 'evolution':
+        return 'Evolution adapter'
+    return 'wa_service'

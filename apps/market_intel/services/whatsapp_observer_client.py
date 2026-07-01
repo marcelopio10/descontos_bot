@@ -6,6 +6,7 @@ from django.conf import settings
 
 DEFAULT_TIMEOUT_SECONDS = 30
 DEFAULT_WA_SERVICE_URL = 'http://127.0.0.1:8787'
+DEFAULT_EVOLUTION_ADAPTER_URL = 'http://127.0.0.1:8788'
 
 
 class WhatsAppObserverClientError(Exception):
@@ -14,28 +15,11 @@ class WhatsAppObserverClientError(Exception):
 
 class WhatsAppObserverClient:
     def __init__(self, base_url: str | None = None, timeout: int = DEFAULT_TIMEOUT_SECONDS):
-        self.base_url = self._resolve_base_url(base_url)
+        self.base_url = (base_url or resolve_whatsapp_observer_base_url()).rstrip('/')
+        if not self.base_url:
+            self.base_url = DEFAULT_WA_SERVICE_URL
         self.timeout = timeout
-        self.service_label = self._resolve_service_label()
-
-    def _resolve_base_url(self, base_url: str | None) -> str:
-        if base_url:
-            return base_url.rstrip('/')
-
-        provider = getattr(settings, 'WA_PROVIDER', 'baileys')
-        if str(provider).strip().lower() == 'evolution':
-            evolution_url = getattr(settings, 'EVOLUTION_ADAPTER_URL', '')
-            if evolution_url:
-                return str(evolution_url).rstrip('/')
-
-        service_url = getattr(settings, 'WA_SERVICE_URL', DEFAULT_WA_SERVICE_URL)
-        return str(service_url or DEFAULT_WA_SERVICE_URL).rstrip('/')
-
-    def _resolve_service_label(self) -> str:
-        provider = str(getattr(settings, 'WA_PROVIDER', 'baileys')).strip().lower()
-        if provider == 'evolution':
-            return 'Evolution adapter'
-        return 'wa_service'
+        self.service_label = resolve_whatsapp_observer_service_label()
 
     def groups(self) -> dict:
         return self._request('GET', '/observer/groups')
@@ -54,7 +38,8 @@ class WhatsAppObserverClient:
                 return self._decode(response.read())
         except HTTPError as exc:
             payload = self._decode(exc.read())
-            raise WhatsAppObserverClientError(str(payload.get('error') or f'HTTP {exc.code}')) from exc
+            message = payload.get('error') or f'{self.service_label} observer retornou HTTP {exc.code}.'
+            raise WhatsAppObserverClientError(str(message)) from exc
         except URLError as exc:
             raise WhatsAppObserverClientError(f'{self.service_label} indisponível: {exc.reason}') from exc
         except TimeoutError as exc:
@@ -70,3 +55,17 @@ class WhatsAppObserverClient:
         if not isinstance(payload, dict):
             raise WhatsAppObserverClientError(f'Resposta inesperada do {self.service_label} observer.')
         return payload
+
+
+def resolve_whatsapp_observer_base_url() -> str:
+    provider = str(getattr(settings, 'WA_PROVIDER', 'baileys') or 'baileys').strip().lower()
+    if provider == 'evolution':
+        return str(getattr(settings, 'EVOLUTION_ADAPTER_URL', '') or DEFAULT_EVOLUTION_ADAPTER_URL)
+    return str(getattr(settings, 'WA_SERVICE_URL', '') or DEFAULT_WA_SERVICE_URL)
+
+
+def resolve_whatsapp_observer_service_label() -> str:
+    provider = str(getattr(settings, 'WA_PROVIDER', 'baileys') or 'baileys').strip().lower()
+    if provider == 'evolution':
+        return 'Evolution adapter'
+    return 'wa_service'

@@ -117,7 +117,7 @@ ALLOW_PRODUCTION_WHATSAPP_SEND = os.environ.get(
 ).lower() in ('1', 'true', 'yes', 'on')
 WA_PROVIDER = os.environ.get('WA_PROVIDER', 'baileys').strip().lower() or 'baileys'
 WA_SERVICE_URL = os.environ.get('WA_SERVICE_URL', 'http://127.0.0.1:8787')
-EVOLUTION_ADAPTER_URL = os.environ.get('EVOLUTION_ADAPTER_URL', '')
+EVOLUTION_ADAPTER_URL = os.environ.get('EVOLUTION_ADAPTER_URL', 'http://127.0.0.1:8788')
 EVOLUTION_BASE_URL = os.environ.get('EVOLUTION_BASE_URL', '')
 EVOLUTION_INSTANCIA_ENVIO = os.environ.get('EVOLUTION_INSTANCIA_ENVIO', 'descontos_envio')
 EVOLUTION_INSTANCIA_OBSERVER = os.environ.get('EVOLUTION_INSTANCIA_OBSERVER', 'descontos_observer')

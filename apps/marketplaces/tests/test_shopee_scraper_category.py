@@ -42,7 +42,7 @@ class ShopeeScraperCategoryTests(SimpleTestCase):
         self.assertEqual(offer['product_url'], 'https://shopee.com.br/product/456/123')
         self.assertEqual(offer['discount_pct'], 30)
 
-    def test_scrape_categories_rejects_items_with_price_range(self):
+    def test_scrape_categories_allows_safe_price_range_and_flags_variation(self):
         scraper = ShopeeScraper(client=None)
         fake = FakeCollector()
         fake.fetch = lambda **kwargs: [{
@@ -51,6 +51,32 @@ class ShopeeScraperCategoryTests(SimpleTestCase):
             'productName': 'Percarbonato 500g/1kg',
             'priceMin': '17.99',
             'priceMax': '49.99',
+            'priceDiscountRate': 45,
+            'productLink': 'https://shopee.com.br/product/456/123',
+            'offerLink': 'https://s.shopee.com.br/abc',
+            'imageUrl': 'https://cf.shopee.com.br/img-1kg.jpg',
+        }]
+        scraper._collector = fake
+
+        offers = scraper.scrape_categories([
+            ('casa_cozinha', 'Casa e Cozinha', 100636, True),
+        ])
+
+        self.assertEqual(len(offers), 1)
+        offer = offers[0]
+        self.assertEqual(offer['current_price'], '17.99')
+        self.assertTrue(offer['raw_payload']['has_price_variation'])
+        self.assertEqual(offer['raw_payload']['published_price_source'], 'priceMin')
+
+    def test_scrape_categories_rejects_absurd_price_range(self):
+        scraper = ShopeeScraper(client=None)
+        fake = FakeCollector()
+        fake.fetch = lambda **kwargs: [{
+            'itemId': 123,
+            'shopId': 456,
+            'productName': 'Percarbonato 500g/1kg',
+            'priceMin': '17.99',
+            'priceMax': '79.99',
             'priceDiscountRate': 45,
             'productLink': 'https://shopee.com.br/product/456/123',
             'offerLink': 'https://s.shopee.com.br/abc',

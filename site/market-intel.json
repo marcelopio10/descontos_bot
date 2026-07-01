@@ -1,11 +1,11 @@
 {
   "version": "2.0",
   "report_type": "incremental_market_intel",
-  "generated_at": "2026-06-30T01:01:02.487517+00:00",
-  "date": "2026-06-29",
+  "generated_at": "2026-07-01T01:01:27.550991+00:00",
+  "date": "2026-06-30",
   "window": {
-    "start": "2026-06-29T03:00:00+00:00",
-    "end": "2026-06-30T02:59:59.999999+00:00"
+    "start": "2026-06-30T03:00:00+00:00",
+    "end": "2026-07-01T02:59:59.999999+00:00"
   },
   "summary": {
     "groups_analyzed": 9,
@@ -24088,10 +24088,10 @@
     },
     "lag_cobertura": {
       "amostras": 321,
-      "descontos_bot_publicou_primeiro": 293,
-      "concorrente_publicou_primeiro": 28,
+      "descontos_bot_publicou_primeiro": 292,
+      "concorrente_publicou_primeiro": 29,
       "empate": 0,
-      "lag_medio_horas": -690.6
+      "lag_medio_horas": -691.1
     },
     "sazonalidade": []
   },
@@ -24106,7 +24106,7 @@
     "ofertas_nao_cobertas": 392,
     "taxa_sobreposicao": 0.45,
     "exclusivas_concorrente": 392,
-    "tempo_ate_cobertura_horas_medio": -690.6,
+    "tempo_ate_cobertura_horas_medio": -691.1,
     "metodo_match": {
       "titulo_normalizado": 321
     },

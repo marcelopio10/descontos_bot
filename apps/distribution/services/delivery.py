@@ -58,7 +58,7 @@ def deliver_offer_to_channel(
                 channel=channel,
                 message=message,
                 status=Delivery.DeliveryStatus.FAILED,
-                error_message='WhatsApp não conectado. Pareie a sessão no wa_service.',
+                error_message='WhatsApp não conectado. Verifique a sessão do provedor configurado.',
             )
             return DeliveryResult(delivery=delivery, sent=False)
 

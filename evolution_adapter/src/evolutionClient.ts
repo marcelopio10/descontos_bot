@@ -69,15 +69,17 @@ export async function sendMedia(
   config: AdapterConfig,
   number: string,
   caption: string,
-  media: string
+  media: string,
+  fileName?: string
 ): Promise<EvolutionSendResult> {
+  const mediaInput = await prepareMediaInput(media, fileName);
   const payload = await evolutionRequest(config, "POST", `/message/sendMedia/${config.instanciaEnvio}`, {
     number,
     mediatype: "image",
-    mimetype: inferImageMimeType(media),
+    mimetype: mediaInput.mimetype,
     caption,
-    media,
-    fileName: inferFileName(media),
+    media: mediaInput.media,
+    fileName: mediaInput.fileName,
   });
   return normalizeSendResult(payload);
 }
@@ -101,6 +103,52 @@ function inferImageMimeType(media: string): string {
   if (lower.endsWith(".png")) return "image/png";
   if (lower.endsWith(".webp")) return "image/webp";
   return "image/jpeg";
+}
+
+async function prepareMediaInput(media: string, fileName?: string): Promise<{ media: string; mimetype: string; fileName: string }> {
+  if (fileName || hasExplicitImageExtension(media)) {
+    const mediaName = fileName || inferFileName(media);
+    return {
+      media,
+      mimetype: inferImageMimeType(mediaName),
+      fileName: mediaName,
+    };
+  }
+
+  const response = await fetch(media, {
+    headers: {
+      Accept: "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+      "User-Agent": "Mozilla/5.0 (compatible; descontos.bot/evolution-adapter)",
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`Falha ao baixar mídia da oferta: HTTP ${response.status}`);
+  }
+  const mimetype = normalizeImageContentType(response.headers.get("content-type"));
+  const buffer = Buffer.from(await response.arrayBuffer());
+  return {
+    media: buffer.toString("base64"),
+    mimetype,
+    fileName: `offer.${extensionFromMimeType(mimetype)}`,
+  };
+}
+
+function hasExplicitImageExtension(media: string): boolean {
+  const lower = media.toLowerCase().split("?")[0];
+  return lower.endsWith(".jpg") || lower.endsWith(".jpeg") || lower.endsWith(".png") || lower.endsWith(".webp");
+}
+
+function normalizeImageContentType(value: string | null): string {
+  const contentType = String(value || "").split(";")[0].trim().toLowerCase();
+  if (contentType === "image/png") return "image/png";
+  if (contentType === "image/webp") return "image/webp";
+  return "image/jpeg";
+}
+
+function extensionFromMimeType(mimetype: string): string {
+  if (mimetype === "image/png") return "png";
+  if (mimetype === "image/webp") return "webp";
+  return "jpg";
 }
 
 function inferFileName(media: string): string {

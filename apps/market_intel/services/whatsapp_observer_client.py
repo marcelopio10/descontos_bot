@@ -16,6 +16,7 @@ class WhatsAppObserverClient:
     def __init__(self, base_url: str | None = None, timeout: int = DEFAULT_TIMEOUT_SECONDS):
         self.base_url = self._resolve_base_url(base_url)
         self.timeout = timeout
+        self.service_label = self._resolve_service_label()
 
     def _resolve_base_url(self, base_url: str | None) -> str:
         if base_url:
@@ -29,6 +30,12 @@ class WhatsAppObserverClient:
 
         service_url = getattr(settings, 'WA_SERVICE_URL', DEFAULT_WA_SERVICE_URL)
         return str(service_url or DEFAULT_WA_SERVICE_URL).rstrip('/')
+
+    def _resolve_service_label(self) -> str:
+        provider = str(getattr(settings, 'WA_PROVIDER', 'baileys')).strip().lower()
+        if provider == 'evolution':
+            return 'Evolution adapter'
+        return 'wa_service'
 
     def groups(self) -> dict:
         return self._request('GET', '/observer/groups')
@@ -49,9 +56,9 @@ class WhatsAppObserverClient:
             payload = self._decode(exc.read())
             raise WhatsAppObserverClientError(str(payload.get('error') or f'HTTP {exc.code}')) from exc
         except URLError as exc:
-            raise WhatsAppObserverClientError(f'wa_service indisponível: {exc.reason}') from exc
+            raise WhatsAppObserverClientError(f'{self.service_label} indisponível: {exc.reason}') from exc
         except TimeoutError as exc:
-            raise WhatsAppObserverClientError('Tempo esgotado ao chamar wa_service observer.') from exc
+            raise WhatsAppObserverClientError(f'Tempo esgotado ao chamar {self.service_label} observer.') from exc
 
     def _decode(self, raw_body: bytes) -> dict:
         if not raw_body:
@@ -59,7 +66,7 @@ class WhatsAppObserverClient:
         try:
             payload = json.loads(raw_body.decode('utf-8'))
         except json.JSONDecodeError as exc:
-            raise WhatsAppObserverClientError('Resposta inválida do wa_service observer.') from exc
+            raise WhatsAppObserverClientError(f'Resposta inválida do {self.service_label} observer.') from exc
         if not isinstance(payload, dict):
-            raise WhatsAppObserverClientError('Resposta inesperada do wa_service observer.')
+            raise WhatsAppObserverClientError(f'Resposta inesperada do {self.service_label} observer.')
         return payload

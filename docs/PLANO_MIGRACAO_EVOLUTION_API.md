@@ -1,6 +1,6 @@
 # Plano de Migração — wa_service/Baileys → evolution_api
 
-> Status: **Sprint 0 executada localmente em 2026-06-27**. Base técnica validada; próximas atividades entram em Sprint 1/Sprint 2 do adapter.
+> Status: **Migração Evolution API homologada e cutover local aplicado em 2026-07-01**. Envio real validado no grupo `descontos.bot - Homologação` com Amazon, Mercado Livre e Shopee; Shopee requer conversão de URLs de imagem sem extensão para base64 no adapter. `wa_service` permanece como fallback.
 > Repositórios: `descontos.bot` (consumidor) e `evolution_api` (provedor).
 
 ## 1. Análise do estado atual
@@ -114,6 +114,15 @@ Observação operacional: os dados brutos de webhook e o mapa de grupos podem co
 
 ### Sprint 1 — Adapter (envio)
 
+Status técnico em 2026-06-27:
+
+| ID | Resultado |
+|----|-----------|
+| S1.1 | Concluído: `evolution_adapter` Node sobe em porta dedicada e expõe `/health`. |
+| S1.2 | Concluído em código: `/send-message` envia texto/imagem por URL; `/send` converte arquivo local para base64 e envia via `sendMedia`. Homologação real em 2026-06-27 bloqueada na Evolution/Baileys: `descontos_envio` recriada e `open`, grupo resolvido, mas `sendText/sendMedia` retornam `SessionError: No sessions`. |
+| S1.3 | Concluído: resolução nome→JID via `EVOLUTION_GROUP_MAP_JSON` ou arquivo local ignorado pelo Git. |
+| S1.4 | Concluído: chamada Evolution usa header `apikey` vindo de env; nenhum segredo versionado. |
+
 | ID | Atividade | Projeto | Dep | Critério |
 |----|-----------|---------|-----|----------|
 | S1.1 | Criar serviço `evolution_adapter` (Node, reuso da base HTTP do wa_service) sem Baileys | descontos.bot | S0.4 | sobe em porta dedicada, `/health` ok |
@@ -123,6 +132,15 @@ Observação operacional: os dados brutos de webhook e o mapa de grupos podem co
 
 ### Sprint 2 — Adapter (observer)
 
+Status técnico em 2026-06-27:
+
+| ID | Resultado |
+|----|-----------|
+| S2.1 | Concluído e validado com webhook real em 2026-06-27: `descontos_observer` recebeu mensagens reais do grupo homologação via `MESSAGES_UPSERT`, adapter gravou buffer normalizado e `/observer/collect` retornou mensagens sanitizadas. |
+| S2.2 | Concluído: `/observer/collect` e `/observer/groups` mantêm contrato compatível com `wa_service`; buffer persiste em JSON local ignorado. |
+| S2.3 | Concluído: dedup por `(group_jid, message_id)` e coleta ordenada por `sent_at`. |
+| S2.4 | Concluído: allowlist por `WA_OBSERVER_GROUP_JIDS`; `pushName` não é usado como nome de grupo. |
+
 | ID | Atividade | Projeto | Dep | Critério |
 |----|-----------|---------|-----|----------|
 | S2.1 | Impl `/webhook/whatsapp` recebendo `MESSAGES_UPSERT`; mapear payload Evolution→entrada de `normalizeIncomingMessage` (reuso) | descontos.bot | S0.2, S1.1 | webhook grava no buffer |
@@ -131,6 +149,14 @@ Observação operacional: os dados brutos de webhook e o mapa de grupos podem co
 | S2.4 | Filtro allowlist de grupos (`numero_observer` só grupos monitorados) | descontos.bot | S2.2 | só JIDs allowlisted entram |
 
 ### Sprint 3 — Integração Django + feature flag
+
+Status técnico em 2026-06-27:
+
+| ID | Resultado |
+|----|-----------|
+| S3.1 | Concluído em código: `WhatsAppClient` e `WhatsAppObserverClient` selecionam `EVOLUTION_ADAPTER_URL` quando `WA_PROVIDER=evolution`; default segue `baileys`. |
+| S3.2 | Parcial: nomes das instâncias são parametrizados no adapter por env (`EVOLUTION_INSTANCIA_ENVIO`, `EVOLUTION_INSTANCIA_OBSERVER`). |
+| S3.3 | Pendente: teste E2E real homologação envio→grupo e observer→collect com `WA_PROVIDER=evolution`. |
 
 | ID | Atividade | Projeto | Dep | Critério |
 |----|-----------|---------|-----|----------|

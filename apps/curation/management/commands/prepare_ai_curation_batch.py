@@ -3,10 +3,12 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
+from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 from apps.curation.models import CurationRun
 from apps.curation.services.ai_curator import prepare_ai_curation_batch
+from apps.curation.services.image_processing import process_selected_batch_images
 from apps.curation.services.selector import _eligible_offers, get_selection_config
 from apps.distribution.models import SocialChannel
 
@@ -70,6 +72,16 @@ class Command(BaseCommand):
         if result.batch:
             self.stdout.write(f'Batch #{result.batch.id}: status={result.batch.status} items={result.batch.items.count()}')
             self.stdout.write(f'Distribuição: {result.batch.actual_distribution_json}')
+            if options['skip_images']:
+                self.stdout.write('Imagens: puladas por --skip-images')
+            else:
+                image_result = process_selected_batch_images(
+                    result.batch,
+                    media_root=Path(getattr(settings, 'MEDIA_ROOT', 'media')),
+                )
+                self.stdout.write(
+                    f'Imagens: processed={image_result.processed} failed={image_result.failed} skipped={image_result.skipped}'
+                )
         if run.public_json_path:
             self.stdout.write(f'JSON público: {run.public_json_path}')
         if run.error_message:

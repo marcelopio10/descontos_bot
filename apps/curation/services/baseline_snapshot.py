@@ -49,6 +49,12 @@ def serialize_offer_for_ai(offer: Offer) -> dict[str, Any]:
         'review_rating': _decimal_to_float(offer.review_rating),
         'review_count': offer.review_count,
         'has_image': bool((offer.image_url or '').strip()),
+        'multimodal_image': {
+            'available': bool((offer.image_url or '').strip()),
+            'source_url_present': bool((offer.image_url or '').strip()),
+            'analysis_required_if_selected': True,
+            'local_processing_stage': 'post_selection',
+        },
         'has_bridge_url': bool((offer.slug or '').strip()),
         'baseline': {
             'score': breakdown.as_dict()['score'],

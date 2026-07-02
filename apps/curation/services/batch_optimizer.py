@@ -164,6 +164,9 @@ def _is_eligible(decision: dict[str, Any], *, min_ai_score: float | Decimal | No
         return False
     if set(decision.get('risk_flags') or []) & SAFETY_RISK_FLAGS:
         return False
+    image_decision = str(decision.get('image_decision') or '').strip().lower()
+    if image_decision in {'improper', 'adult_content', 'obscene', 'blocked'}:
+        return False
     if _contains_blocked_editorial_theme(decision):
         return False
     if not str(decision.get('rewritten_caption_whatsapp') or '').strip():

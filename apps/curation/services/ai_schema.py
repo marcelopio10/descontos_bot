@@ -99,6 +99,9 @@ def validate_agent_output(payload: dict[str, Any], *, expected_offer_ids: set[in
             errors.append(f'decisions[{index}].classification inválida: {classification}')
         if classification == 'improper' and selected:
             errors.append(f'decisions[{index}] imprópria não pode ser selecionada')
+        image_decision = str(decision.get('image_decision') or '').strip().lower()
+        if selected and image_decision in {'improper', 'adult_content', 'obscene', 'blocked'}:
+            errors.append(f'decisions[{index}] imagem imprópria não pode ser selecionada')
         if risk_flags & SAFETY_RISK_FLAGS and selected:
             errors.append(f'decisions[{index}] risco proibido não pode ser selecionado')
         if selected:

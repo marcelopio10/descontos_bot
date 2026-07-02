@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 from django.test import TestCase
 from django.utils import timezone
 
-from apps.curation.models import CuratedBatch, CurationDecision, CurationRun
+from apps.curation.models import CuratedBatch, CurationBlacklistTerm, CurationDecision, CurationRun
 from apps.curation.services.ai_curator import prepare_ai_curation_batch
 from apps.curation.services.hermes_runner import FakeHermesRunner
 from apps.distribution.models import SocialChannel
@@ -176,3 +176,6 @@ class AICuratorTests(TestCase):
         improper = CurationDecision.objects.get(run=result.run, offer=self.offers[0])
         self.assertEqual(improper.ai_classification, CurationDecision.Classification.IMPROPER)
         self.assertFalse(improper.is_selected_for_batch)
+        audit = CurationBlacklistTerm.objects.get(decision=improper)
+        self.assertEqual(audit.normalized_term, 'arma de brinquedo')
+        self.assertEqual(audit.run, result.run)

@@ -10,10 +10,11 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.utils import timezone
 
-from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationDecision, CurationRun
+from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationBlacklistTerm, CurationDecision, CurationRun
 from apps.curation.services.ai_prompt import build_ai_curation_payload
 from apps.curation.services.ai_schema import validate_agent_input, validate_agent_output
 from apps.curation.services.batch_optimizer import DEFAULT_TARGET_DISTRIBUTION, optimize_curation_batch
+from apps.curation.services.blacklist_updates import add_curation_blacklist_term
 from apps.curation.services.hermes_runner import FakeHermesRunner, HermesRunner, HermesRunnerError
 from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
@@ -185,8 +186,28 @@ def _persist_decisions(
             raw_ai_json=raw_decision,
             is_selected_for_batch=False,
         )
+        _apply_blacklist_actions(run, decision, raw_decision)
         decisions_by_offer_id[offer_id] = decision
     return decisions_by_offer_id
+
+
+def _apply_blacklist_actions(run: CurationRun, decision: CurationDecision, raw_decision: dict[str, Any]) -> None:
+    for action in raw_decision.get('blacklist_actions') or []:
+        if isinstance(action, dict):
+            term = str(action.get('term') or action.get('normalized_term') or '').strip()
+            source = action.get('source') or CurationBlacklistTerm.Source.AI_TEXT_MODERATION
+        else:
+            term = str(action or '').strip()
+            source = CurationBlacklistTerm.Source.AI_TEXT_MODERATION
+        if not term:
+            continue
+        add_curation_blacklist_term(
+            term=term,
+            source=source,
+            offer=decision.offer,
+            decision=decision,
+            run=run,
+        )
 
 
 def _decision_score(raw_decision: dict[str, Any]) -> Decimal | None:

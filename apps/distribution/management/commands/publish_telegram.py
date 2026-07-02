@@ -19,6 +19,7 @@ from apps.orchestration.services.scheduler import (
 
 HOMOLOG_CODE = 'telegram_homolog'
 MAIN_CODE = 'telegram_main'
+AI_PRODUCTION_CONFIRMATION = 'CONFIRM_AI_PRODUCTION'
 
 logger = logging.getLogger('apps.distribution.telegram')
 
@@ -54,11 +55,22 @@ class Command(BaseCommand):
             action='store_true',
             help='Usa lote curado por IA em vez do selector determinístico.',
         )
+        parser.add_argument(
+            '--ai-curation-required',
+            action='store_true',
+            help='Exige lote curado pronto; se ausente, pausa sem fallback.',
+        )
+        parser.add_argument(
+            '--confirm-ai-production',
+            default='',
+            help='Confirma envio assistido em produção. Valor exigido: CONFIRM_AI_PRODUCTION.',
+        )
 
     def handle(self, *args, **options):
         channel_code = options['channel']
         dry_run = options['dry_run']
         limit = options['limit']
+        ai_curation = options['ai_curation'] or options['ai_curation_required']
 
         if channel_code == MAIN_CODE and not settings.ALLOW_PRODUCTION_TELEGRAM_SEND:
             raise CommandError(
@@ -75,9 +87,14 @@ class Command(BaseCommand):
 
         if not channel.is_enabled:
             raise CommandError(f'Canal {channel_code} desabilitado.')
+        if channel_code == MAIN_CODE and ai_curation and not dry_run:
+            if options['confirm_ai_production'] != AI_PRODUCTION_CONFIRMATION:
+                raise CommandError(
+                    '--confirm-ai-production CONFIRM_AI_PRODUCTION é obrigatório para envio IA em produção.',
+                )
 
         if options['once']:
-            self._run_cycle(channel=channel, dry_run=dry_run, limit=limit, ai_curation=options['ai_curation'])
+            self._run_cycle(channel=channel, dry_run=dry_run, limit=limit, ai_curation=ai_curation)
             return
 
         self.stdout.write('Scheduler Telegram iniciado. Use Ctrl+C para parar.')
@@ -86,7 +103,7 @@ class Command(BaseCommand):
             while True:
                 if not dry_run:
                     wait_until_distribution_window()
-                self._run_cycle(channel=channel, dry_run=dry_run, limit=limit, ai_curation=options['ai_curation'])
+                self._run_cycle(channel=channel, dry_run=dry_run, limit=limit, ai_curation=ai_curation)
                 seconds = sleep_between_cycles()
                 self.stdout.write(f'Próximo ciclo em {seconds // 60} minutos.')
         except KeyboardInterrupt:

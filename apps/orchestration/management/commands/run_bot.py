@@ -38,6 +38,8 @@ from apps.social_posts.services.post_generator import generate_story_for_offer
 log = logging.getLogger(__name__)
 DEFAULT_CHANNEL_CODE = 'whatsapp_main'
 PRODUCTION_WHATSAPP_TARGET = 'descontos.bot'
+PRODUCTION_WHATSAPP_CHANNEL_CODES = {'whatsapp_principal'}
+AI_PRODUCTION_CONFIRMATION = 'CONFIRM_AI_PRODUCTION'
 INSTAGRAM_GENERATION_WINDOW_HOURS = 36
 HEALTHCHECK_FILE = Path(settings.BASE_DIR) / 'data' / 'last_cycle.txt'
 
@@ -92,6 +94,17 @@ class Command(BaseCommand):
             action='store_true',
             help='Prepara lote de curadoria IA antes de consumir.',
         )
+        parser.add_argument(
+            '--confirm-ai-production',
+            default='',
+            help='Confirma envio assistido em produção. Valor exigido: CONFIRM_AI_PRODUCTION.',
+        )
+        parser.add_argument(
+            '--ai-curation-limit',
+            type=int,
+            default=None,
+            help='Limita quantidade de itens curados consumidos neste ciclo.',
+        )
 
     def handle(self, *args, **options):
         max_pages = options['max_pages']
@@ -99,9 +112,15 @@ class Command(BaseCommand):
             raise CommandError('--max-pages deve ficar entre 1 e 5.')
 
         dry_run = options['dry_run']
+        ai_curation = options['ai_curation'] or options['ai_curation_required']
+        ai_curation_limit = options['ai_curation_limit']
+        if ai_curation_limit is not None and ai_curation_limit < 1:
+            raise CommandError('--ai-curation-limit deve ser maior que zero.')
         channel = self._get_channel(options['channel'])
         if not dry_run:
             self._validate_channel_for_real_delivery(channel)
+            if ai_curation:
+                self._validate_ai_production_confirmation(channel, options['confirm_ai_production'])
 
         if options['once']:
             self._run_cycle(
@@ -109,9 +128,10 @@ class Command(BaseCommand):
                 dry_run=dry_run,
                 max_pages=max_pages,
                 skip_scraping=options['skip_scraping'],
-                ai_curation=options['ai_curation'] or options['ai_curation_required'],
+                ai_curation=ai_curation,
                 ai_curation_required=options['ai_curation_required'],
                 prepare_ai_curation=options['prepare_ai_curation'],
+                ai_curation_limit=ai_curation_limit,
             )
             if options['show_next_interval']:
                 self._write_next_interval()
@@ -130,9 +150,10 @@ class Command(BaseCommand):
                     dry_run=dry_run,
                     max_pages=max_pages,
                     skip_scraping=options['skip_scraping'],
-                    ai_curation=options['ai_curation'] or options['ai_curation_required'],
+                    ai_curation=ai_curation,
                     ai_curation_required=options['ai_curation_required'],
                     prepare_ai_curation=options['prepare_ai_curation'],
+                    ai_curation_limit=ai_curation_limit,
                 )
                 seconds = sleep_between_cycles()
                 self.stdout.write(
@@ -152,6 +173,7 @@ class Command(BaseCommand):
         ai_curation: bool,
         ai_curation_required: bool,
         prepare_ai_curation: bool,
+        ai_curation_limit: int | None = None,
     ) -> None:
         log.info('Ciclo iniciado. dry_run=%s canal=%s', dry_run, channel.code)
         self.stdout.write('Início do ciclo local.')
@@ -184,7 +206,7 @@ class Command(BaseCommand):
         if ai_curation:
             if not dry_run and ai_curation_required:
                 self.stdout.write(self.style.WARNING('ai-curation-required ativo: fallback para selector legado bloqueado.'))
-            if self._run_ai_curation_cycle(channel=channel, dry_run=dry_run):
+            if self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=ai_curation_limit):
                 return
             if ai_curation_required or dry_run:
                 self._write_healthcheck()
@@ -245,7 +267,7 @@ class Command(BaseCommand):
         log.info('Ciclo finalizado. ofertas_selecionadas=%s', len(offers))
         self._write_healthcheck()
 
-    def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool) -> bool:
+    def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool, limit: int | None = None) -> bool:
         result = get_ready_curated_batch(channel)
         if not result.has_batch:
             self.stdout.write(self.style.WARNING(result.reason or 'Nenhum lote curado pronto.'))
@@ -254,6 +276,8 @@ class Command(BaseCommand):
 
         batch = result.batch
         items = result.items
+        if limit is not None:
+            items = items[:limit]
         mode = 'dry_run' if dry_run else 'homologação/envio real'
         self.stdout.write(f'Ciclo do descontos.bot em {mode} com curadoria IA')
         self.stdout.write(f'Canal: {channel.name} ({channel.code})')
@@ -530,4 +554,17 @@ class Command(BaseCommand):
                 f'Use o canal "{DEFAULT_CHANNEL_CODE}" para homologação ou defina '
                 'ALLOW_PRODUCTION_WHATSAPP_SEND=true quando produção for liberada.'
             ),
+        )
+
+    def _validate_ai_production_confirmation(self, channel: SocialChannel, confirmation: str) -> None:
+        is_production_channel = (
+            channel.code in PRODUCTION_WHATSAPP_CHANNEL_CODES
+            or channel.target.strip().lower() == PRODUCTION_WHATSAPP_TARGET
+        )
+        if not is_production_channel:
+            return
+        if confirmation == AI_PRODUCTION_CONFIRMATION:
+            return
+        raise CommandError(
+            '--confirm-ai-production CONFIRM_AI_PRODUCTION é obrigatório para envio IA em produção.',
         )

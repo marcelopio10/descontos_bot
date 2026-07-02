@@ -20,6 +20,7 @@ data/logs/
 data/last_cycle.txt
 logs/
 runtime/
+.backup/
 *.log
 wa_service/auth_state/
 wa_service/auth_state.bak.*/

@@ -4,11 +4,14 @@ from dataclasses import dataclass
 from django.db import IntegrityError, transaction
 from django.utils import timezone
 
+from apps.curation.models import CuratedBatchItem
 from apps.curation.services.telegram_message_builder import (
     TelegramMessagePayload,
+    build_curated_telegram_payload,
     build_telegram_payload,
 )
 from apps.distribution.models import Delivery, SocialChannel
+from apps.distribution.services.delivery import mark_curated_item_delivery
 from apps.distribution.services.execution_window import (
     get_silence_error_message,
     is_distribution_silenced,
@@ -114,6 +117,80 @@ def deliver_offer_to_telegram(
             offer.id, channel.code, result.error_message,
         )
 
+    return TelegramDeliveryResult(delivery=delivery, sent=result.success)
+
+
+def deliver_curated_item_to_telegram(
+    item: CuratedBatchItem,
+    channel: SocialChannel,
+    client: TelegramClient | None = None,
+    rate_limiter: TelegramRateLimiter | None = None,
+) -> TelegramDeliveryResult:
+    payload = build_curated_telegram_payload(item, channel)
+    offer = item.offer
+
+    existing_delivery = Delivery.objects.filter(
+        offer=offer,
+        social_channel=channel,
+    ).first()
+    if (
+        existing_delivery
+        and existing_delivery.delivery_status == Delivery.DeliveryStatus.SENT
+    ):
+        mark_curated_item_delivery(item, existing_delivery, CuratedBatchItem.SendStatus.SKIPPED)
+        return TelegramDeliveryResult(delivery=existing_delivery, sent=False)
+
+    if is_distribution_silenced():
+        delivery = _save_delivery(
+            existing_delivery=existing_delivery,
+            offer=offer,
+            channel=channel,
+            message=payload.caption,
+            status=Delivery.DeliveryStatus.SKIPPED,
+            error_message=get_silence_error_message(),
+        )
+        mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.SKIPPED)
+        return TelegramDeliveryResult(delivery=delivery, sent=False)
+
+    client = client or TelegramClient()
+    limiter = rate_limiter or get_default_limiter()
+    limiter.wait_for_send(channel.target)
+
+    result = _try_send(client, channel.target, payload)
+    fallback_used = False
+    if payload.use_photo and not result.success:
+        logger.warning(
+            'telegram.curated.fallback=text_only item_id=%s channel=%s error=%s',
+            item.id, channel.code, result.error_message,
+        )
+        limiter.wait_for_send(channel.target)
+        result = _send_text(client, channel.target, payload)
+        fallback_used = True
+
+    status = (
+        Delivery.DeliveryStatus.SENT
+        if result.success
+        else Delivery.DeliveryStatus.FAILED
+    )
+    delivery = _save_delivery(
+        existing_delivery=existing_delivery,
+        offer=offer,
+        channel=channel,
+        message=payload.caption,
+        status=status,
+        external_message_id=result.message_id,
+        error_message=result.error_message,
+        sent_at=(result.sent_at or timezone.now()) if result.success else None,
+    )
+    mark_curated_item_delivery(
+        item,
+        delivery,
+        CuratedBatchItem.SendStatus.SENT if result.success else CuratedBatchItem.SendStatus.FAILED,
+    )
+    logger.info(
+        'telegram.curated.send.finished item_id=%s channel=%s sent=%s fallback=%s',
+        item.id, channel.code, result.success, fallback_used,
+    )
     return TelegramDeliveryResult(delivery=delivery, sent=result.success)
 
 

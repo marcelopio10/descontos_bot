@@ -12,7 +12,7 @@ from apps.curation.services.curated_batch_reader import get_ready_curated_batch
 from apps.curation.services.message_builder import build_offer_message, get_final_url
 from apps.curation.services.selector import get_selection_config, select_offers_for_channel
 from apps.distribution.models import SocialChannel
-from apps.distribution.services.delivery import deliver_offer_to_channel
+from apps.distribution.services.delivery import deliver_curated_item_to_whatsapp, deliver_offer_to_channel
 from apps.distribution.services.execution_window import (
     get_silence_error_message,
     is_distribution_silenced,
@@ -254,7 +254,7 @@ class Command(BaseCommand):
 
         batch = result.batch
         items = result.items
-        mode = 'dry_run' if dry_run else 'envio real bloqueado'
+        mode = 'dry_run' if dry_run else 'homologação/envio real'
         self.stdout.write(f'Ciclo do descontos.bot em {mode} com curadoria IA')
         self.stdout.write(f'Canal: {channel.name} ({channel.code})')
         self.stdout.write(f'Lote curado #{batch.id}: run={batch.run_id}; itens={len(items)}')
@@ -269,6 +269,16 @@ class Command(BaseCommand):
             self.stdout.write('Mensagem:')
             self.stdout.write(item.final_caption_whatsapp or build_offer_message(offer, channel))
 
+            if not dry_run:
+                delivery_result = deliver_curated_item_to_whatsapp(item=item, channel=channel)
+                delivery = delivery_result.delivery
+                self.stdout.write(
+                    f'Entrega: {delivery.delivery_status} '
+                    f'(id={delivery.id}, externo={delivery.external_message_id or "-"})',
+                )
+                if delivery.error_message:
+                    self.stdout.write(self.style.WARNING(delivery.error_message))
+
         self.stdout.write('')
         if dry_run:
             self.stdout.write(
@@ -277,7 +287,8 @@ class Command(BaseCommand):
                 ),
             )
         else:
-            self.stdout.write(self.style.WARNING('Envio real por lote curado ainda não habilitado nesta sprint.'))
+            sent_count = sum(1 for item in items if item.send_status == item.SendStatus.SENT)
+            self.stdout.write(self.style.SUCCESS(f'Enviadas {sent_count}/{len(items)} com curadoria IA.'))
         log.info('ai_curation.cycle_finished batch_id=%s items=%s dry_run=%s', batch.id, len(items), dry_run)
         self._write_healthcheck()
         return True

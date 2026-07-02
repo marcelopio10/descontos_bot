@@ -10,7 +10,7 @@ from apps.curation.services.selector import (
 )
 from apps.curation.services.telegram_message_builder import build_curated_telegram_payload, build_telegram_payload
 from apps.distribution.models import SocialChannel
-from apps.distribution.services.telegram_delivery import deliver_offer_to_telegram
+from apps.distribution.services.telegram_delivery import deliver_curated_item_to_telegram, deliver_offer_to_telegram
 from apps.orchestration.services.scheduler import (
     sleep_between_cycles,
     wait_until_distribution_window,
@@ -162,4 +162,13 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING('dry_run ativo: nenhuma mensagem real enviada.'))
             return
 
-        self.stdout.write(self.style.WARNING('Envio real por lote curado Telegram ainda não habilitado nesta sprint.'))
+        sent_count = 0
+        for item in items:
+            result = deliver_curated_item_to_telegram(item=item, channel=channel)
+            if result.sent:
+                sent_count += 1
+            self.stdout.write(
+                f'item_id={item.id} entrega={result.delivery.delivery_status} '
+                f'externo={result.delivery.external_message_id or "-"}',
+            )
+        self.stdout.write(self.style.SUCCESS(f'Enviadas {sent_count}/{len(items)} com curadoria IA.'))

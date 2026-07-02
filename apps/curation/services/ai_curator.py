@@ -37,6 +37,7 @@ def prepare_ai_curation_batch(
     mode: str = CurationRun.Mode.DRY_RUN,
     batch_size: int = 20,
     audit_dir: Path | str | None = None,
+    public_json_dir: Path | str | None = None,
     observer_context: dict[str, Any] | None = None,
     target_distribution: dict[str, float] | None = None,
     profile_name: str = 'descontos.bot',
@@ -51,6 +52,7 @@ def prepare_ai_curation_batch(
     target = target_distribution or DEFAULT_TARGET_DISTRIBUTION
     runner = runner or FakeHermesRunner()
     audit_path = Path(audit_dir) if audit_dir is not None else DEFAULT_AUDIT_DIR
+    public_path = Path(public_json_dir) if public_json_dir is not None else None
 
     run = CurationRun.objects.create(
         channel=channel,
@@ -135,6 +137,10 @@ def prepare_ai_curation_batch(
 
     run.refresh_from_db()
     batch.refresh_from_db()
+    if public_path is not None:
+        run.public_json_path = str(_write_public_json(public_path, run, batch))
+        run.save(update_fields=['public_json_path', 'updated_at'])
+        run.refresh_from_db()
     return AICurationResult(run=run, batch=batch, input_payload=input_payload, output_payload=output_payload)
 
 
@@ -200,6 +206,49 @@ def _decimal_or_none(value: Any) -> Decimal | None:
     if value is None or value == '':
         return None
     return Decimal(str(value))
+
+
+def _write_public_json(public_dir: Path, run: CurationRun, batch: CuratedBatch) -> Path:
+    public_dir.mkdir(parents=True, exist_ok=True)
+    decisions = []
+    for decision in run.decisions.select_related('offer').order_by('-is_selected_for_batch', '-ai_score', 'offer_id'):
+        batch_item = getattr(decision, 'batch_item', None)
+        decisions.append(
+            {
+                'offer_id': decision.offer_id,
+                'marketplace_code': decision.marketplace_code,
+                'classification': decision.ai_classification,
+                'selected': decision.is_selected_for_batch,
+                'position': batch_item.position if batch_item else None,
+                'score': float(decision.ai_score) if decision.ai_score is not None else None,
+                'title': decision.title_rewritten or decision.title_original,
+                'reason': decision.decision_reason,
+                'risk_flags': decision.risk_flags_json,
+            }
+        )
+    payload = {
+        'schema_version': run.schema_version,
+        'generated_at': timezone.now().isoformat(),
+        'run': {
+            'id': run.id,
+            'status': run.status,
+            'mode': run.mode,
+            'channel_code': run.channel.code,
+            'candidate_count': run.candidate_count,
+            'selected_count': run.selected_count,
+        },
+        'batch': {
+            'id': batch.id,
+            'status': batch.status,
+            'batch_size': batch.batch_size,
+            'target_distribution': batch.target_distribution_json,
+            'actual_distribution': batch.actual_distribution_json,
+        },
+        'decisions': decisions,
+    }
+    path = public_dir / f'curation-run-{run.id}.json'
+    path.write_text(json.dumps(payload, cls=DjangoJSONEncoder, ensure_ascii=False, indent=2, sort_keys=True), encoding='utf-8')
+    return path
 
 
 def _write_audit_json(audit_dir: Path, run_id: int | None, label: str, payload: dict[str, Any]) -> Path:

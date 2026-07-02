@@ -20,6 +20,9 @@ data/logs/
 data/last_cycle.txt
 logs/
 runtime/
+# Auditorias locais da curadoria IA — nunca versionar input/output bruto.
+runtime/curation/
+site/curation-public/
 .backup/
 *.log
 wa_service/auth_state/

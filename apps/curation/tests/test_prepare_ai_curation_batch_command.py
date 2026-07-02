@@ -3,6 +3,7 @@ from decimal import Decimal
 from io import StringIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 from django.core.management import call_command
 from django.test import TestCase
@@ -104,10 +105,11 @@ class PrepareAICurationBatchCommandTests(TestCase):
             self.assertNotIn('afiliado-sensivel', serialized)
 
             inspect_out = StringIO()
-            call_command('inspect_ai_curation_batch', '--channel', 'whatsapp_main', stdout=inspect_out)
+            call_command('inspect_ai_curation_batch', '--channel', 'whatsapp_main', '--compare-selector', stdout=inspect_out)
             inspect_text = inspect_out.getvalue()
             self.assertIn(f'Run #{run.id}', inspect_text)
             self.assertIn('Distribuição', inspect_text)
+            self.assertIn('Comparação selector atual vs agente', inspect_text)
             self.assertIn('Decisões', inspect_text)
             self.assertIn('Rejeições', inspect_text)
 
@@ -132,3 +134,76 @@ class PrepareAICurationBatchCommandTests(TestCase):
         run = CurationRun.objects.latest('id')
         self.assertEqual(run.mode, CurationRun.Mode.SHADOW)
         self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_real_runner_flag_uses_hermes_profile_and_persists_metadata_without_sending(self):
+        class RecordingRunner:
+            instances = []
+
+            def __init__(self, *, profile_name, timeout_seconds=180):
+                self.profile_name = profile_name
+                self.timeout_seconds = timeout_seconds
+                self.payloads = []
+                self.instances.append(self)
+
+            def run(self, payload):
+                self.payloads.append(payload)
+                decisions = []
+                actual_distribution = {}
+                for index, offer in enumerate(payload['offers'], start=1):
+                    actual_distribution[offer['marketplace_code']] = actual_distribution.get(offer['marketplace_code'], 0) + 1
+                    decisions.append(
+                        {
+                            'offer_id': offer['offer_id'],
+                            'marketplace_code': offer['marketplace_code'],
+                            'classification': 'approved',
+                            'selected_for_batch': True,
+                            'batch_position': index,
+                            'conversion_score': 90,
+                            'relevance_score': 90,
+                            'discount_quality_score': 90,
+                            'audience_fit_score': 90,
+                            'reason': 'Oferta validada pelo runner real simulado.',
+                            'rewritten_title': offer['title'],
+                            'rewritten_caption_whatsapp': 'Caption WhatsApp',
+                            'rewritten_caption_telegram': 'Caption Telegram',
+                            'image_required': False,
+                            'image_decision': 'skip',
+                            'blacklist_actions': [],
+                            'risk_flags': [],
+                        }
+                    )
+                return {'schema_version': '1.0', 'decisions': decisions, 'actual_distribution': actual_distribution}
+
+        with TemporaryDirectory() as tmpdir:
+            out = StringIO()
+            with patch(
+                'apps.curation.management.commands.prepare_ai_curation_batch.HermesProfileRunner',
+                RecordingRunner,
+            ):
+                call_command(
+                    'prepare_ai_curation_batch',
+                    '--channel',
+                    'whatsapp_main',
+                    '--runner',
+                    'real',
+                    '--profile',
+                    'descontos-bot',
+                    '--candidate-limit',
+                    '2',
+                    '--dry-run',
+                    '--skip-images',
+                    '--audit-dir',
+                    str(Path(tmpdir) / 'audit'),
+                    '--public-dir',
+                    str(Path(tmpdir) / 'public'),
+                    stdout=out,
+                )
+
+        run = CurationRun.objects.latest('id')
+        self.assertEqual(run.profile_name, 'descontos-bot')
+        self.assertEqual(run.model_provider, 'openai-codex')
+        self.assertEqual(run.model_name, 'gpt-5.5')
+        self.assertEqual(run.status, CurationRun.Status.COMPLETED)
+        self.assertEqual(Delivery.objects.count(), 0)
+        self.assertEqual(RecordingRunner.instances[0].profile_name, 'descontos-bot')
+        self.assertIn('runner=real', out.getvalue())

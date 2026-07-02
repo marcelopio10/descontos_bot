@@ -8,6 +8,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from apps.curation.models import CurationRun
 from apps.curation.services.ai_curator import prepare_ai_curation_batch
+from apps.curation.services.hermes_runner import HermesProfileRunner
 from apps.curation.services.image_processing import process_selected_batch_images
 from apps.curation.services.selector import _eligible_offers, get_selection_config
 from apps.distribution.models import SocialChannel
@@ -32,6 +33,9 @@ class Command(BaseCommand):
         parser.add_argument('--shadow', action='store_true', help='Força modo shadow. Não envia nada.')
         parser.add_argument('--candidate-limit', type=int, default=50, help='Quantidade máxima de candidatas.')
         parser.add_argument('--skip-images', action='store_true', help='Não preparar análise/processamento de imagens nesta etapa.')
+        parser.add_argument('--runner', choices=['mock', 'real'], default='mock', help='Runner Hermes: mock determinístico ou profile real.')
+        parser.add_argument('--profile', default='descontos-bot', help='Profile Hermes usado quando --runner=real.')
+        parser.add_argument('--runner-timeout', type=int, default=180, help='Timeout em segundos para Hermes CLI real.')
         parser.add_argument('--audit-dir', default=os.environ.get('AI_CURATION_AUDIT_DIR', DEFAULT_AUDIT_DIR))
         parser.add_argument('--public-dir', default=os.environ.get('AI_CURATION_PUBLIC_DIR', DEFAULT_PUBLIC_DIR))
 
@@ -56,18 +60,32 @@ class Command(BaseCommand):
             'skip_images': bool(options['skip_images']),
             'real_send_enabled': False,
         }
+        runner = None
+        profile_name = 'mock'
+        model_provider = 'mock'
+        model_name = 'fake-hermes-runner'
+        if options['runner'] == 'real':
+            profile_name = options['profile']
+            model_provider = 'openai-codex'
+            model_name = 'gpt-5.5'
+            runner = HermesProfileRunner(profile_name=profile_name, timeout_seconds=options['runner_timeout'])
+
         result = prepare_ai_curation_batch(
             channel=channel,
             offers=offers,
+            runner=runner,
             mode=mode,
             batch_size=min(20, len(offers)),
             audit_dir=Path(options['audit_dir']),
             public_json_dir=Path(options['public_dir']),
             observer_context=observer_context,
+            profile_name=profile_name,
+            model_provider=model_provider,
+            model_name=model_name,
         )
 
         run = result.run
-        self.stdout.write(f'Run #{run.id}: status={run.status} mode={run.mode} channel={channel.code}')
+        self.stdout.write(f'Run #{run.id}: status={run.status} mode={run.mode} channel={channel.code} runner={options["runner"]}')
         self.stdout.write(f'Candidatas: {run.candidate_count}; selecionadas: {run.selected_count}')
         if result.batch:
             self.stdout.write(f'Batch #{result.batch.id}: status={result.batch.status} items={result.batch.items.count()}')

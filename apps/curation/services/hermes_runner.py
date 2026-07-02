@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import json
+import subprocess
 from dataclasses import dataclass
 from typing import Any, Protocol
+
+from django.core.serializers.json import DjangoJSONEncoder
 
 from apps.curation.services.ai_schema import OUTPUT_SCHEMA_VERSION
 
@@ -14,6 +18,91 @@ class HermesRunner(Protocol):
     def run(self, payload: dict[str, Any]) -> dict[str, Any]:
         """Return structured JSON for the curation payload."""
         ...
+
+
+@dataclass(frozen=True)
+class HermesProfileRunner:
+    """Calls the real Hermes CLI profile and extracts a JSON curation payload."""
+
+    profile_name: str = 'descontos-bot'
+    timeout_seconds: int = 180
+    hermes_binary: str = 'hermes'
+
+    def run(self, payload: dict[str, Any]) -> dict[str, Any]:
+        prompt = build_curation_prompt(payload)
+        command = [self.hermes_binary, '-p', self.profile_name, 'chat', '-Q', '-q', prompt]
+        try:
+            completed = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                timeout=self.timeout_seconds,
+                check=False,
+            )
+        except subprocess.TimeoutExpired as exc:
+            raise HermesRunnerError(f'Hermes CLI excedeu timeout de {self.timeout_seconds}s') from exc
+        except OSError as exc:
+            raise HermesRunnerError(f'Hermes CLI indisponível: {exc}') from exc
+
+        if completed.returncode != 0:
+            detail = (completed.stderr or completed.stdout or '').strip()[:1000]
+            raise HermesRunnerError(f'Hermes CLI falhou com código {completed.returncode}: {detail}')
+        return extract_json_payload((completed.stdout or '') + '\n' + (completed.stderr or ''))
+
+
+def build_curation_prompt(payload: dict[str, Any]) -> str:
+    serialized = json.dumps(payload, cls=DjangoJSONEncoder, ensure_ascii=False, sort_keys=True)
+    return (
+        'Você é o profile Hermes de curadoria IA do descontos.bot. '\
+        'Responda SOMENTE JSON puro, sem markdown, sem comentários e sem texto extra.\n'
+        f'O JSON de saída deve ter schema_version "{OUTPUT_SCHEMA_VERSION}", actual_distribution e decisions.\n'
+        'Cada item em decisions DEVE conter exatamente estes campos compatíveis com o validador: '
+        'offer_id, marketplace_code, classification, selected_for_batch, batch_position, '
+        'conversion_score, relevance_score, discount_quality_score, audience_fit_score, reason, '
+        'rewritten_title, rewritten_caption_whatsapp, rewritten_caption_telegram, image_required, '
+        'image_decision, blacklist_actions, risk_flags.\n'
+        'classification deve ser approved, rejected ou improper. '\
+        'Itens improper, com risk_flags adult_content/weapon/obscene ou image_decision improper/adult_content/obscene/blocked nunca podem ser selected_for_batch=true. '\
+        'Use batch_position inteiro positivo somente para selecionados; use null para não selecionados.\n'
+        'Payload de entrada:\n'
+        f'{serialized}'
+    )
+
+
+def extract_json_payload(text: str) -> dict[str, Any]:
+    for candidate in reversed(_json_object_candidates(text)):
+        try:
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            continue
+        if isinstance(parsed, dict):
+            return parsed
+    raise HermesRunnerError('Hermes não retornou JSON objeto válido')
+
+
+def _json_object_candidates(text: str) -> list[str]:
+    candidates: list[str] = []
+    starts: list[int] = []
+    in_string = False
+    escape = False
+    for index, char in enumerate(text):
+        if in_string:
+            if escape:
+                escape = False
+            elif char == '\\':
+                escape = True
+            elif char == '"':
+                in_string = False
+            continue
+        if char == '"':
+            in_string = True
+        elif char == '{':
+            starts.append(index)
+        elif char == '}' and starts:
+            start = starts.pop()
+            if not starts:
+                candidates.append(text[start:index + 1])
+    return candidates
 
 
 @dataclass

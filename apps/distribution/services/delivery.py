@@ -4,7 +4,8 @@ from datetime import timedelta
 from django.db import IntegrityError, transaction
 from django.utils import timezone
 
-from apps.curation.services.message_builder import build_offer_message
+from apps.curation.models import CuratedBatch, CuratedBatchItem
+from apps.curation.services.message_builder import build_curated_offer_message, build_offer_message
 from apps.distribution.models import Delivery, SocialChannel
 from apps.distribution.services.execution_window import (
     get_silence_error_message,
@@ -91,6 +92,107 @@ def deliver_offer_to_channel(
         sent_at=(result.sent_at or timezone.now()) if result.success else None,
     )
     return DeliveryResult(delivery=delivery, sent=result.success)
+
+
+def deliver_curated_item_to_whatsapp(
+    item: CuratedBatchItem,
+    channel: SocialChannel,
+    client: WhatsAppClient | None = None,
+) -> DeliveryResult:
+    offer = item.offer
+    message = build_curated_offer_message(item, channel).strip()
+    image_url = (item.local_image_path or item.final_image_url or offer.image_url or '').strip()
+
+    if is_distribution_silenced():
+        existing_delivery = Delivery.objects.filter(
+            offer=offer,
+            social_channel=channel,
+        ).first()
+        delivery = _save_delivery(
+            existing_delivery=existing_delivery,
+            offer=offer,
+            channel=channel,
+            message=message,
+            status=Delivery.DeliveryStatus.SKIPPED,
+            error_message=get_silence_error_message(),
+        )
+        mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.SKIPPED)
+        return DeliveryResult(delivery=delivery, sent=False)
+
+    delivery, should_send = _reserve_delivery_for_send(
+        offer=offer,
+        channel=channel,
+        message=message,
+    )
+    if not should_send:
+        mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.SKIPPED)
+        return DeliveryResult(delivery=delivery, sent=False)
+
+    client = client or WhatsAppClient()
+    try:
+        status = client.get_status()
+        if not status.connected:
+            delivery = _save_delivery(
+                existing_delivery=delivery,
+                offer=offer,
+                channel=channel,
+                message=message,
+                status=Delivery.DeliveryStatus.FAILED,
+                error_message='WhatsApp não conectado. Verifique a sessão do provedor configurado.',
+            )
+            mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.FAILED)
+            return DeliveryResult(delivery=delivery, sent=False)
+
+        result = client.send_message(channel.target, message, image_url)
+    except WhatsAppClientError as exc:
+        delivery = _save_delivery(
+            existing_delivery=delivery,
+            offer=offer,
+            channel=channel,
+            message=message,
+            status=Delivery.DeliveryStatus.FAILED,
+            error_message=str(exc),
+        )
+        mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.FAILED)
+        return DeliveryResult(delivery=delivery, sent=False)
+
+    status = Delivery.DeliveryStatus.SENT if result.success else Delivery.DeliveryStatus.FAILED
+    delivery = _save_delivery(
+        existing_delivery=delivery,
+        offer=offer,
+        channel=channel,
+        message=message,
+        status=status,
+        external_message_id=result.message_id,
+        error_message=result.error_message,
+        sent_at=(result.sent_at or timezone.now()) if result.success else None,
+    )
+    mark_curated_item_delivery(
+        item,
+        delivery,
+        CuratedBatchItem.SendStatus.SENT if result.success else CuratedBatchItem.SendStatus.FAILED,
+    )
+    return DeliveryResult(delivery=delivery, sent=result.success)
+
+
+def mark_curated_item_delivery(
+    item: CuratedBatchItem,
+    delivery: Delivery,
+    status: str,
+) -> None:
+    item.delivery = delivery
+    item.send_status = status
+    item.save(update_fields=['delivery', 'send_status', 'updated_at'])
+
+    batch = item.batch
+    statuses = list(batch.items.values_list('send_status', flat=True))
+    if statuses and all(value == CuratedBatchItem.SendStatus.SENT for value in statuses):
+        batch.status = CuratedBatch.Status.SENT
+        batch.consumed_at = timezone.now()
+        batch.save(update_fields=['status', 'consumed_at', 'updated_at'])
+    elif any(value == CuratedBatchItem.SendStatus.FAILED for value in statuses):
+        batch.status = CuratedBatch.Status.FAILED
+        batch.save(update_fields=['status', 'updated_at'])
 
 
 def _reserve_delivery_for_send(

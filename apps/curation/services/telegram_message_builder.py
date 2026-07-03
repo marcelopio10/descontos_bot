@@ -6,7 +6,8 @@ import textwrap
 from django.conf import settings
 
 from apps.curation.services.ad_disclosure import ad_disclosure_prefix
-from apps.curation.services.message_builder import get_final_url, sanitize_offer_title
+from apps.curation.services.message_builder import _build_agent_highlight, get_final_url, sanitize_offer_title
+from apps.curation.models import CuratedBatchItem
 from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
 
@@ -50,6 +51,63 @@ def build_telegram_payload(
         use_photo=use_photo,
         photo_url=photo_url if use_photo else '',
     )
+
+
+def build_curated_telegram_payload(
+    item: CuratedBatchItem,
+    channel: SocialChannel,
+) -> TelegramMessagePayload:
+    offer = item.offer
+    final_url = get_final_url(offer, channel)
+    caption = _build_curated_caption(item, CAPTION_MAX)
+    photo_url = (item.local_image_path or item.final_image_url or offer.image_url or '').strip()
+    use_photo = bool(photo_url)
+    keyboard = [[{'text': '🛒 Comprar agora', 'url': final_url}]]
+    return TelegramMessagePayload(
+        caption=caption,
+        inline_keyboard=keyboard,
+        final_url=final_url,
+        use_photo=use_photo,
+        photo_url=photo_url if use_photo else '',
+    )
+
+
+def _build_curated_caption(item: CuratedBatchItem, max_len: int) -> str:
+    offer = item.offer
+    title = textwrap.shorten(
+        sanitize_offer_title(item.final_title or item.decision.title_rewritten or offer.title) or 'Oferta curada',
+        width=DEFAULT_TITLE_WIDTH,
+        placeholder='...',
+    )
+    original_price = offer.original_price or offer.current_price
+    discount_pct = _format_percent_as_integer(offer.discount_pct)
+    badge = _build_badge(discount_pct)
+    agent_highlight = escape(_build_agent_highlight(item, raw=item.final_caption_telegram or item.final_caption_whatsapp or item.decision.caption_rewritten or ''))
+    caption = (
+        f'<b>📦 {escape(title)}</b>\n\n'
+        f'{badge}\n'
+        f'✨ {agent_highlight}\n\n'
+        f'💰 <s>De {_format_brl(original_price)}</s>\n'
+        f'✅ <b>Por apenas {_format_brl(offer.current_price)}</b>\n'
+        f'🏷️ <b>{discount_pct}% OFF</b>\n\n'
+        f'⏰ Oferta por tempo limitado!\n'
+        f'{SEPARATOR}\n'
+        f'🤖 @descontosbotlgm'
+    )
+    return _truncate_caption(caption, max_len)
+
+
+def _truncate_caption(caption: str, max_len: int) -> str:
+    if len(caption) <= max_len:
+        return caption
+    return caption[: max(0, max_len - 1)].rstrip() + '…'
+
+
+def _sanitize_curated_caption(raw_caption: str, max_len: int) -> str:
+    caption = escape(raw_caption.strip())
+    if len(caption) <= max_len:
+        return caption
+    return caption[: max(0, max_len - 1)].rstrip() + '…'
 
 
 def _build_caption(offer: Offer, max_len: int) -> str:

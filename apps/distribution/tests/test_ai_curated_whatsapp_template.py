@@ -104,3 +104,25 @@ class AICuratedWhatsAppTemplateTests(TestCase):
 
         self.assertNotEqual(message, self.item.final_caption_whatsapp)
         self.assertLess(message.index('🛒 Compre aqui 👇'), message.index('⏰ Oferta por tempo limitado!'))
+
+    def test_agent_highlight_removes_repetitive_title_price_and_discount(self):
+        self.item.final_title = 'Kit 7 Camisetas Masculina Manga Curta Lisa Algodão Premium com 19% OFF'
+        self.item.final_caption_whatsapp = (
+            '🤖 Trecho do agente descontos-bot: Anúncio patrocinado – Kit 7 Camisetas '
+            'Masculina Manga Curta Lisa Algodão Premium por R$ 125,30, com 19% OFF. '
+            'Curadoria destacou a oportunidade pelo preço e desconto do marketplace Amazon.'
+        )
+        self.item.offer.title = 'Anúncio patrocinado – Kit 7 Camisetas Masculina Manga Curta Lisa Algodão Premium'
+        self.item.offer.current_price = Decimal('125.30')
+        self.item.offer.original_price = Decimal('155.44')
+        self.item.offer.discount_pct = Decimal('19.00')
+
+        message = build_curated_offer_message(self.item, self.channel)
+        highlight = message.split('✨ ', 1)[1].split('\n\n💰', 1)[0]
+
+        self.assertIn('🤖 Trecho do agente descontos-bot:', highlight)
+        self.assertNotIn('Kit 7 Camisetas', highlight)
+        self.assertNotIn('R$ 125,30', highlight)
+        self.assertNotIn('19% OFF', highlight)
+        self.assertNotIn('preço e desconto', highlight.lower())
+        self.assertIn('boa opção', highlight.lower())

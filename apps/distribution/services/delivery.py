@@ -5,7 +5,7 @@ from django.db import IntegrityError, transaction
 from django.utils import timezone
 
 from apps.curation.models import CuratedBatch, CuratedBatchItem
-from apps.curation.services.message_builder import build_offer_message
+from apps.curation.services.message_builder import build_curated_offer_message, build_offer_message
 from apps.distribution.models import Delivery, SocialChannel
 from apps.distribution.services.execution_window import (
     get_silence_error_message,
@@ -100,7 +100,7 @@ def deliver_curated_item_to_whatsapp(
     client: WhatsAppClient | None = None,
 ) -> DeliveryResult:
     offer = item.offer
-    message = (item.final_caption_whatsapp or build_offer_message(offer, channel)).strip()
+    message = build_curated_offer_message(item, channel).strip()
     image_url = (item.local_image_path or item.final_image_url or offer.image_url or '').strip()
 
     if is_distribution_silenced():

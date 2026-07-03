@@ -23,15 +23,26 @@ def sanitize_offer_title(raw: str | None) -> str:
 
 
 def build_message(offer: Offer, channel: SocialChannel) -> str:
+    return _build_offer_template(offer, channel, title=offer.title)
+
+
+def _build_offer_template(
+    offer: Offer,
+    channel: SocialChannel,
+    *,
+    title: str | None = None,
+    highlight: str | None = None,
+) -> str:
     final_url = get_final_url(offer, channel)
     original_price = offer.original_price or offer.current_price
     discount_pct = _format_percent_as_integer(offer.discount_pct)
     short_title = textwrap.shorten(
-        sanitize_offer_title(offer.title) or 'Produto',
+        sanitize_offer_title(title or offer.title) or 'Produto',
         width=80,
         placeholder='...',
     )
     badge = _build_badge(discount_pct)
+    highlight_block = _build_highlight_block(highlight)
 
     referral_suffix = build_referral_suffix(offer, channel)
     disclosure = ad_disclosure_prefix(offer.marketplace.code)
@@ -39,7 +50,7 @@ def build_message(offer: Offer, channel: SocialChannel) -> str:
         f'{disclosure}'
         f'📦 *{short_title}*\n\n'
         f'{badge}\n'
-        #f'{SEPARATOR}\n\n'
+        f'{highlight_block}'
         f'💰 ~De {_format_brl(original_price)}~\n'
         f'✅ *Por apenas {_format_brl(offer.current_price)}*\n'
         f'🏷️ *{discount_pct}% OFF*\n\n'
@@ -50,6 +61,26 @@ def build_message(offer: Offer, channel: SocialChannel) -> str:
         f'🤖 @descontos.bot'
         f'{referral_suffix}'
     )
+
+
+def build_curated_offer_message(item, channel: SocialChannel) -> str:
+    """Preserve the WhatsApp sales template while applying curated title.
+
+    The AI caption is editorial input, not a full message replacement: replacing
+    the template removes price hierarchy, CTA link and footer, making homolog
+    messages less attractive and less trackable.
+    """
+    title = item.final_title or item.decision.title_rewritten or item.offer.title
+    highlight = item.final_caption_whatsapp or item.decision.caption_rewritten or ''
+    return _build_offer_template(item.offer, channel, title=title, highlight=highlight)
+
+
+def _build_highlight_block(raw: str | None) -> str:
+    text = ' '.join((raw or '').split())
+    if not text:
+        return ''
+    text = textwrap.shorten(text, width=180, placeholder='...')
+    return f'✨ {text}\n\n'
 
 
 def _build_badge(discount_pct: int) -> str:

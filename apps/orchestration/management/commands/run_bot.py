@@ -9,7 +9,7 @@ from django.utils import timezone
 
 from apps.curation.services.blacklist import filter_blacklisted_offers
 from apps.curation.services.curated_batch_reader import get_ready_curated_batch
-from apps.curation.services.message_builder import build_offer_message, get_final_url
+from apps.curation.services.message_builder import build_curated_offer_message, build_offer_message, get_final_url
 from apps.curation.services.selector import get_selection_config, select_offers_for_channel
 from apps.distribution.models import SocialChannel
 from apps.distribution.services.delivery import deliver_curated_item_to_whatsapp, deliver_offer_to_channel
@@ -291,7 +291,7 @@ class Command(BaseCommand):
             self.stdout.write(f'Link final: {get_final_url(offer, channel)}')
             self.stdout.write(f'Título: {item.final_title}')
             self.stdout.write('Mensagem:')
-            self.stdout.write(item.final_caption_whatsapp or build_offer_message(offer, channel))
+            self.stdout.write(build_curated_offer_message(item, channel))
 
             if not dry_run:
                 delivery_result = deliver_curated_item_to_whatsapp(item=item, channel=channel)

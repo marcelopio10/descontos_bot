@@ -112,10 +112,11 @@ class AICuratedWhatsAppTemplateTests(TestCase):
             'Masculina Manga Curta Lisa Algodão Premium por R$ 125,30, com 19% OFF. '
             'Curadoria destacou a oportunidade pelo preço e desconto do marketplace Amazon.'
         )
-        self.item.offer.title = 'Anúncio patrocinado – Kit 7 Camisetas Masculina Manga Curta Lisa Algodão Premium'
-        self.item.offer.current_price = Decimal('125.30')
-        self.item.offer.original_price = Decimal('155.44')
-        self.item.offer.discount_pct = Decimal('19.00')
+        self.offer.title = 'Anúncio patrocinado – Kit 7 Camisetas Masculina Manga Curta Lisa Algodão Premium'
+        self.offer.current_price = Decimal('125.30')
+        self.offer.original_price = Decimal('155.44')
+        self.offer.discount_pct = Decimal('19.00')
+        self.offer.save(update_fields=['title', 'current_price', 'original_price', 'discount_pct'])
 
         message = build_curated_offer_message(self.item, self.channel)
         highlight = message.split('✨ ', 1)[1].split('\n\n💰', 1)[0]
@@ -124,5 +125,20 @@ class AICuratedWhatsAppTemplateTests(TestCase):
         self.assertNotIn('Kit 7 Camisetas', highlight)
         self.assertNotIn('R$ 125,30', highlight)
         self.assertNotIn('19% OFF', highlight)
-        self.assertNotIn('preço e desconto', highlight.lower())
         self.assertIn('boa opção', highlight.lower())
+
+    def test_agent_highlight_avoids_formal_marketing_language(self):
+        self.offer.title = 'Kit 8 peças Mordedor para Bebe Sensorial Macio com Chocalho'
+        self.offer.save(update_fields=['title'])
+        self.item.final_caption_whatsapp = (
+            '🤖 Trecho do agente descontos-bot: Kit 8 peças Mordedor para Bebe Sensorial '
+            'Macio com Chocalho por R$ 22,80, com 43% OFF. Curadoria destacou a oportunidade '
+            'pelo preço e desconto do marketplace Shopee.'
+        )
+
+        message = build_curated_offer_message(self.item, self.channel)
+        highlight = message.split('✨ ', 1)[1].split('\n\n💰', 1)[0]
+
+        self.assertNotIn('apelo', highlight.lower())
+        self.assertNotIn('uso diário', highlight.lower())
+        self.assertIn('dentinhos', highlight.lower())

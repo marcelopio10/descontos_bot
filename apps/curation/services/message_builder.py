@@ -126,7 +126,7 @@ def _fallback_agent_highlight(offer: Offer) -> str:
     if any(term in title for term in ['mesa', 'maleta', 'camping', 'jardim']):
         return 'útil para casa, área externa ou viagens por ser portátil e fácil de guardar.'
     if any(term in title for term in ['mordedor', 'bebê', 'bebe']):
-        return 'item prático para rotina com bebê, com apelo de uso diário.'
+        return 'bom para deixar por perto na fase dos dentinhos.'
     return 'boa oportunidade para quem já estava procurando este tipo de produto.'
 
 

@@ -1,5 +1,6 @@
 from decimal import Decimal
 from io import StringIO
+from unittest.mock import patch
 
 from django.core.management import call_command
 from django.test import TestCase
@@ -182,7 +183,33 @@ class PublishTelegramAICurationTests(TestCase):
         self.assertIn('💰 <s>De R$ 155,44</s>', payload.caption)
         self.assertIn('✅ <b>Por apenas R$ 125,30</b>', payload.caption)
 
-    def test_without_ai_curation_keeps_legacy_selector_flow(self):
+    def test_default_flow_prepares_ai_curation_and_blocks_legacy_selector_fallback(self):
+        out = StringIO()
+
+        with patch('apps.distribution.management.commands.publish_telegram.call_command') as prepare:
+            call_command(
+                'publish_telegram',
+                '--once',
+                '--channel',
+                'telegram_homolog',
+                '--dry-run',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        prepare.assert_called_once()
+        args = prepare.call_args.args
+        self.assertEqual(args[:3], ('prepare_ai_curation_batch', '--channel', 'telegram_homolog'))
+        self.assertIn('--runner', args)
+        self.assertIn('real', args)
+        self.assertIn('--profile', args)
+        self.assertIn('descontos-bot', args)
+        self.assertIn('--dry-run', args)
+        self.assertIn('Nenhum lote curado pronto', text)
+        self.assertNotIn('Título selector antigo Telegram', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_legacy_selector_flag_keeps_old_selector_flow(self):
         out = StringIO()
 
         call_command(
@@ -191,6 +218,7 @@ class PublishTelegramAICurationTests(TestCase):
             '--channel',
             'telegram_homolog',
             '--dry-run',
+            '--legacy-selector',
             stdout=out,
         )
 

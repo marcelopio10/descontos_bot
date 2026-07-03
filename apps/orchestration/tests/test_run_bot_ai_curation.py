@@ -137,7 +137,34 @@ class RunBotAICurationTests(TestCase):
         self.assertNotIn('Título selector antigo', text)
         self.assertEqual(Delivery.objects.count(), 0)
 
-    def test_without_ai_curation_keeps_legacy_selector_flow(self):
+    def test_default_flow_prepares_ai_curation_and_blocks_legacy_selector_fallback(self):
+        out = StringIO()
+
+        with patch('apps.orchestration.management.commands.run_bot.call_command') as prepare:
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        prepare.assert_called_once()
+        args = prepare.call_args.args
+        self.assertEqual(args[:3], ('prepare_ai_curation_batch', '--channel', 'whatsapp_main'))
+        self.assertIn('--runner', args)
+        self.assertIn('real', args)
+        self.assertIn('--profile', args)
+        self.assertIn('descontos-bot', args)
+        self.assertIn('--dry-run', args)
+        self.assertIn('Nenhum lote curado pronto', text)
+        self.assertNotIn('Título selector antigo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_legacy_selector_flag_keeps_old_selector_flow(self):
         out = StringIO()
 
         call_command(
@@ -147,6 +174,7 @@ class RunBotAICurationTests(TestCase):
             '--skip-scraping',
             '--channel',
             'whatsapp_main',
+            '--legacy-selector',
             stdout=out,
         )
 

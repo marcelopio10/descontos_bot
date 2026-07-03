@@ -1,6 +1,7 @@
 import logging
 
 from django.conf import settings
+from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
 from apps.curation.services.curated_batch_reader import get_ready_curated_batch
@@ -53,7 +54,17 @@ class Command(BaseCommand):
         parser.add_argument(
             '--ai-curation',
             action='store_true',
-            help='Usa lote curado por IA em vez do selector determinístico.',
+            help='Usa lote curado por IA em vez do selector determinístico. Mantido por compatibilidade; agora é o padrão.',
+        )
+        parser.add_argument(
+            '--legacy-selector',
+            action='store_true',
+            help='Opt-out explícito: usa o selector determinístico legado sem curadoria IA.',
+        )
+        parser.add_argument(
+            '--prepare-ai-curation',
+            action='store_true',
+            help='Prepara lote de curadoria IA antes de consumir. Mantido por compatibilidade; agora é o padrão.',
         )
         parser.add_argument(
             '--ai-curation-required',
@@ -70,7 +81,9 @@ class Command(BaseCommand):
         channel_code = options['channel']
         dry_run = options['dry_run']
         limit = options['limit']
-        ai_curation = options['ai_curation'] or options['ai_curation_required']
+        legacy_selector = options['legacy_selector']
+        ai_curation = not legacy_selector or options['ai_curation'] or options['ai_curation_required']
+        prepare_ai_curation = options['prepare_ai_curation'] or (ai_curation and not legacy_selector)
 
         if channel_code == MAIN_CODE and not settings.ALLOW_PRODUCTION_TELEGRAM_SEND:
             raise CommandError(
@@ -94,7 +107,13 @@ class Command(BaseCommand):
                 )
 
         if options['once']:
-            self._run_cycle(channel=channel, dry_run=dry_run, limit=limit, ai_curation=ai_curation)
+            self._run_cycle(
+                channel=channel,
+                dry_run=dry_run,
+                limit=limit,
+                ai_curation=ai_curation,
+                prepare_ai_curation=prepare_ai_curation,
+            )
             return
 
         self.stdout.write('Scheduler Telegram iniciado. Use Ctrl+C para parar.')
@@ -103,7 +122,13 @@ class Command(BaseCommand):
             while True:
                 if not dry_run:
                     wait_until_distribution_window()
-                self._run_cycle(channel=channel, dry_run=dry_run, limit=limit, ai_curation=ai_curation)
+                self._run_cycle(
+                    channel=channel,
+                    dry_run=dry_run,
+                    limit=limit,
+                    ai_curation=ai_curation,
+                    prepare_ai_curation=prepare_ai_curation,
+                )
                 seconds = sleep_between_cycles()
                 self.stdout.write(f'Próximo ciclo em {seconds // 60} minutos.')
         except KeyboardInterrupt:
@@ -111,7 +136,32 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING('Scheduler Telegram interrompido pelo operador.'))
             logger.info('Scheduler Telegram interrompido pelo operador.')
 
-    def _run_cycle(self, channel: SocialChannel, dry_run: bool, limit: int | None, ai_curation: bool = False) -> None:
+    def _run_cycle(
+        self,
+        channel: SocialChannel,
+        dry_run: bool,
+        limit: int | None,
+        ai_curation: bool = False,
+        prepare_ai_curation: bool = False,
+    ) -> None:
+        if prepare_ai_curation:
+            self.stdout.write('Preparando lote de curadoria IA antes do consumo.')
+            prepare_args = [
+                'prepare_ai_curation_batch',
+                '--channel',
+                channel.code,
+                '--mode',
+                'dry_run' if dry_run else 'homolog',
+                '--runner',
+                'real',
+                '--profile',
+                'descontos-bot',
+                '--skip-images',
+            ]
+            if dry_run:
+                prepare_args.append('--dry-run')
+            call_command(*prepare_args, stdout=self.stdout)
+
         if ai_curation:
             self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=limit)
             return

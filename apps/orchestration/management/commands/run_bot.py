@@ -82,7 +82,12 @@ class Command(BaseCommand):
         parser.add_argument(
             '--ai-curation',
             action='store_true',
-            help='Usa lote curado por IA em vez do selector determinístico.',
+            help='Usa lote curado por IA em vez do selector determinístico. Mantido por compatibilidade; agora é o padrão.',
+        )
+        parser.add_argument(
+            '--legacy-selector',
+            action='store_true',
+            help='Opt-out explícito: usa o selector determinístico legado sem curadoria IA.',
         )
         parser.add_argument(
             '--ai-curation-required',
@@ -112,7 +117,10 @@ class Command(BaseCommand):
             raise CommandError('--max-pages deve ficar entre 1 e 5.')
 
         dry_run = options['dry_run']
-        ai_curation = options['ai_curation'] or options['ai_curation_required']
+        legacy_selector = options['legacy_selector']
+        ai_curation = not legacy_selector or options['ai_curation'] or options['ai_curation_required']
+        ai_curation_required = options['ai_curation_required'] or (ai_curation and not legacy_selector)
+        prepare_ai_curation = options['prepare_ai_curation'] or (ai_curation and not legacy_selector)
         ai_curation_limit = options['ai_curation_limit']
         if ai_curation_limit is not None and ai_curation_limit < 1:
             raise CommandError('--ai-curation-limit deve ser maior que zero.')
@@ -129,8 +137,8 @@ class Command(BaseCommand):
                 max_pages=max_pages,
                 skip_scraping=options['skip_scraping'],
                 ai_curation=ai_curation,
-                ai_curation_required=options['ai_curation_required'],
-                prepare_ai_curation=options['prepare_ai_curation'],
+                ai_curation_required=ai_curation_required,
+                prepare_ai_curation=prepare_ai_curation,
                 ai_curation_limit=ai_curation_limit,
             )
             if options['show_next_interval']:
@@ -151,8 +159,8 @@ class Command(BaseCommand):
                     max_pages=max_pages,
                     skip_scraping=options['skip_scraping'],
                     ai_curation=ai_curation,
-                    ai_curation_required=options['ai_curation_required'],
-                    prepare_ai_curation=options['prepare_ai_curation'],
+                    ai_curation_required=ai_curation_required,
+                    prepare_ai_curation=prepare_ai_curation,
                     ai_curation_limit=ai_curation_limit,
                 )
                 seconds = sleep_between_cycles()
@@ -197,6 +205,10 @@ class Command(BaseCommand):
                 channel.code,
                 '--mode',
                 'dry_run' if dry_run else 'homolog',
+                '--runner',
+                'real',
+                '--profile',
+                'descontos-bot',
                 '--skip-images',
             ]
             if dry_run:

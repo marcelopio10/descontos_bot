@@ -18,8 +18,11 @@ Confirmar serviços externos:
 
 ### 2. Preparar e revisar lote
 
+O fluxo padrão de `run_bot` e `publish_telegram` já prepara/consome curadoria IA com o profile real `descontos-bot`.
+Use os comandos explícitos abaixo quando quiser revisar antes de enviar:
+
 ```bash
-python manage.py prepare_ai_curation_batch --channel whatsapp_principal --mode production --runner real --candidate-limit 200
+python manage.py prepare_ai_curation_batch --channel whatsapp_principal --mode production --runner real --profile descontos-bot --candidate-limit 200
 python manage.py inspect_ai_curation_batch --channel whatsapp_principal
 ```
 
@@ -39,7 +42,7 @@ Revisar:
 Primeiro item:
 
 ```bash
-python manage.py run_bot --once --skip-scraping --channel whatsapp_principal --ai-curation-required --confirm-ai-production CONFIRM_AI_PRODUCTION --ai-curation-limit 1
+python manage.py run_bot --once --skip-scraping --channel whatsapp_principal --confirm-ai-production CONFIRM_AI_PRODUCTION --ai-curation-limit 1
 ```
 
 Se visualmente aprovado, continuar com limites pequenos ou remover limite apenas após validação humana.
@@ -47,10 +50,12 @@ Se visualmente aprovado, continuar com limites pequenos ou remover limite apenas
 Telegram segue o mesmo padrão:
 
 ```bash
-python manage.py prepare_ai_curation_batch --channel telegram_main --mode production --runner real --candidate-limit 200
+python manage.py prepare_ai_curation_batch --channel telegram_main --mode production --runner real --profile descontos-bot --candidate-limit 200
 python manage.py inspect_ai_curation_batch --channel telegram_main
-python manage.py publish_telegram --once --channel telegram_main --ai-curation-required --confirm-ai-production CONFIRM_AI_PRODUCTION --limit 1
+python manage.py publish_telegram --once --channel telegram_main --confirm-ai-production CONFIRM_AI_PRODUCTION --limit 1
 ```
+
+Para usar o selector antigo deliberadamente, passe `--legacy-selector`.
 
 ## Incidente / rollback
 

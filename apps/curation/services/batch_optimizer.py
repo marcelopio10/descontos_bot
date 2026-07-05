@@ -62,60 +62,33 @@ def optimize_curation_batch(
     target_distribution: dict[str, float] | None = None,
     min_ai_score: float | Decimal | None = None,
 ) -> OptimizedBatch:
-    """Build a safe, balanced and deterministic curation batch from AI decisions.
+    """Build a safe batch from AI decisions without replacing AI selection.
 
-    The optimizer is intentionally deterministic and conservative: only approved
-    decisions with captions and without blocked safety/editorial signals can enter
-    the batch. It first reserves the target marketplace quotas, then redistributes
-    missing stock to the best remaining safe offers.
+    The AI is the curator: only decisions explicitly marked
+    selected_for_batch=true can enter the final batch. This function is a safety
+    gate and persistence normalizer, not a deterministic selector. It removes
+    unsafe/invalid selected items, caps the batch size, normalizes positions, and
+    recomputes the final distribution from the surviving AI-selected items.
     """
     if batch_size <= 0:
         return OptimizedBatch(selected=[], rejected=list(decisions), target_distribution=_target(target_distribution), actual_distribution={})
 
     target = _target(target_distribution)
-    quotas = _quota_counts(batch_size, target)
-    eligible_by_marketplace: dict[str, list[dict[str, Any]]] = {marketplace: [] for marketplace in target}
-    overflow_marketplaces: dict[str, list[dict[str, Any]]] = {}
+    selected_candidates: list[dict[str, Any]] = []
     rejected: list[dict[str, Any]] = []
 
     for original in decisions:
         decision = dict(original)
         decision['marketplace_code'] = _normalize_marketplace_code(decision.get('marketplace_code'))
-        decision['selected_for_batch'] = False
-        decision['batch_position'] = None
-        if _is_eligible(decision, min_ai_score=min_ai_score):
-            marketplace = decision['marketplace_code']
-            target_bucket = eligible_by_marketplace if marketplace in target else overflow_marketplaces
-            target_bucket.setdefault(marketplace, []).append(decision)
+        ai_selected = bool(decision.get('selected_for_batch'))
+        if ai_selected and _is_eligible(decision, min_ai_score=min_ai_score):
+            selected_candidates.append(decision)
         else:
+            decision['selected_for_batch'] = False
+            decision['batch_position'] = None
             rejected.append(decision)
 
-    for bucket in (eligible_by_marketplace, overflow_marketplaces):
-        for marketplace in bucket:
-            bucket[marketplace].sort(key=_sort_key)
-
-    selected: list[dict[str, Any]] = []
-    selected_offer_ids: set[Any] = set()
-    for marketplace, quota in quotas.items():
-        for decision in eligible_by_marketplace.get(marketplace, [])[:quota]:
-            selected.append(decision)
-            selected_offer_ids.add(decision.get('offer_id'))
-
-    remaining_slots = batch_size - len(selected)
-    if remaining_slots > 0:
-        pool = [
-            decision
-            for bucket in (eligible_by_marketplace, overflow_marketplaces)
-            for decisions_for_marketplace in bucket.values()
-            for decision in decisions_for_marketplace
-            if decision.get('offer_id') not in selected_offer_ids
-        ]
-        pool.sort(key=_sort_key)
-        for decision in pool[:remaining_slots]:
-            selected.append(decision)
-            selected_offer_ids.add(decision.get('offer_id'))
-
-    selected.sort(key=_sort_key)
+    selected = sorted(selected_candidates, key=_ai_selection_key)[:batch_size]
     for position, decision in enumerate(selected, start=1):
         decision['selected_for_batch'] = True
         decision['batch_position'] = position
@@ -192,6 +165,15 @@ def _contains_blocked_editorial_theme(decision: dict[str, Any]) -> bool:
             haystack_parts.append(action)
     haystack = _normalize_text(' '.join(str(part or '') for part in haystack_parts))
     return any(_normalize_text(term) in haystack for term in BLOCKED_EDITORIAL_TERMS)
+
+
+def _ai_selection_key(decision: dict[str, Any]) -> tuple[int, float, int]:
+    position = decision.get('batch_position')
+    if isinstance(position, int) and position > 0:
+        normalized_position = position
+    else:
+        normalized_position = 1_000_000
+    return (normalized_position, -_score(decision), int(decision.get('offer_id') or 0))
 
 
 def _sort_key(decision: dict[str, Any]) -> tuple[float, int, int]:

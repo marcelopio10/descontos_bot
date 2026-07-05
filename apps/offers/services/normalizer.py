@@ -12,6 +12,7 @@ from apps.marketplaces.models import Marketplace
 
 ASIN_RE = re.compile(r'/(?:dp|gp/product|exec/obidos/ASIN)/([A-Z0-9]{10})')
 PLAIN_ASIN_RE = re.compile(r'^[A-Z0-9]{10}$')
+MAX_REVIEW_COUNT = 2_147_483_647
 
 
 @dataclass(frozen=True)
@@ -190,9 +191,12 @@ def _to_optional_count(value: Any) -> int | None:
     if not text:
         return None
     try:
-        return int(text)
+        count = int(text)
     except ValueError:
         return None
+    if count > MAX_REVIEW_COUNT:
+        return None
+    return count
 
 
 def _to_decimal(value: Any) -> Decimal | None:

@@ -46,6 +46,11 @@ class HermesProfileRunner:
 
         if completed.returncode != 0:
             detail = (completed.stderr or completed.stdout or '').strip()[:1000]
+            if any(kw in detail.lower() for kw in ('session', 'auth', 'login', 'expired')):
+                raise HermesRunnerError(
+                    f'Hermes CLI falhou com código {completed.returncode} (sessão/autenticação inválida): '
+                    f'renove a autenticação do profile "{self.profile_name}" e tente novamente. Detalhe: {detail}'
+                )
             raise HermesRunnerError(f'Hermes CLI falhou com código {completed.returncode}: {detail}')
         return extract_json_payload((completed.stdout or '') + '\n' + (completed.stderr or ''))
 
@@ -64,6 +69,13 @@ def build_curation_prompt(payload: dict[str, Any]) -> str:
         'classification deve ser approved, rejected ou improper. '\
         'Itens improper, com risk_flags adult_content/weapon/obscene ou image_decision improper/adult_content/obscene/blocked nunca podem ser selected_for_batch=true. '\
         'Use batch_position inteiro positivo somente para selecionados; use null para não selecionados.\n'
+        'Nas captions reescritas, escreva como uma pessoa real de grupo de ofertas, não como chatbot. '
+        'Aplique os princípios da skill humanizer: corte frases com cara de IA, varie ritmo e estrutura, prefira linguagem simples e específica, e evite tom formal/promocional. '
+        'Não use fórmulas repetidas entre ofertas, principalmente começos iguais como "Boa para", "Vale para", "Oferta para", "Quem procura" ou "Se você". '
+        'Alterne naturalmente o ponto de entrada: às vezes destaque preço, às vezes uso prático, marca, urgência leve, presente, reposição ou comparação com preço normal. '
+        'Evite repetir título, preço, percentual de desconto, marketplace ou CTA; esses dados já aparecem no template final. '
+        'Não use labels internos, markdown, emojis decorativos, hashtags, "Trecho do agente", "curadoria" ou frases com cara de assistente. '
+        'Cada rewritten_caption_* deve ter 1 frase curta, natural e diferente das demais, com no máximo 140 caracteres.\n'
         'Payload de entrada:\n'
         f'{serialized}'
     )
@@ -123,19 +135,28 @@ class FakeHermesRunner:
         if self.forced_payload is not None:
             return self.forced_payload
 
+        offers = list(payload.get('offers') or [])
+        batch_size = int((payload.get('run') or {}).get('batch_size') or len(offers))
+
+        # Deterministic top-N selection by score descending
+        scored = sorted(offers, key=lambda o: -_score_from_offer(o))
+        selected_offer_ids = {o.get('offer_id') for o in scored[:batch_size]}
+        offer_to_position = {o.get('offer_id'): pos for pos, o in enumerate(scored[:batch_size], start=1)}
+
         decisions: list[dict[str, Any]] = []
-        for offer in payload.get('offers') or []:
+        for offer in offers:
             score = _score_from_offer(offer)
             offer_id = offer.get('offer_id')
             title = str(offer.get('title') or '').strip() or f'Oferta {offer_id}'
             marketplace_code = str(offer.get('marketplace_code') or '').strip()
+            is_selected = offer_id in selected_offer_ids
             decisions.append(
                 {
                     'offer_id': offer_id,
                     'marketplace_code': marketplace_code,
                     'classification': 'approved',
-                    'selected_for_batch': False,
-                    'batch_position': None,
+                    'selected_for_batch': is_selected,
+                    'batch_position': offer_to_position.get(offer_id) if is_selected else None,
                     'conversion_score': score,
                     'relevance_score': score,
                     'discount_quality_score': score,

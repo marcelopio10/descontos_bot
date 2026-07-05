@@ -19,16 +19,17 @@ class CuratedBatchReadResult:
         return self.batch is not None
 
 
-def get_ready_curated_batch(channel: SocialChannel) -> CuratedBatchReadResult:
+def get_ready_curated_batch(channel: SocialChannel, *, allowed_modes: list[str] | None = None) -> CuratedBatchReadResult:
     now = timezone.now()
-    batch = (
+    qs = (
         CuratedBatch.objects
         .select_related('run', 'channel')
         .filter(channel=channel, status=CuratedBatch.Status.READY)
         .filter(expires_at__gt=now)
-        .order_by('created_at')
-        .first()
     )
+    if allowed_modes:
+        qs = qs.filter(run__mode__in=allowed_modes)
+    batch = qs.order_by('created_at').first()
     if batch is None:
         return CuratedBatchReadResult(batch=None, items=[], reason='Nenhum lote curado pronto para este canal.')
 

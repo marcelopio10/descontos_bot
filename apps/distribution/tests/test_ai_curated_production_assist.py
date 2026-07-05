@@ -148,7 +148,10 @@ class AICuratedProductionAssistTests(TestCase):
         batch = self._ready_batch(channel)
         fake_client = FakeWhatsAppClient()
 
-        with patch('apps.distribution.services.delivery.WhatsAppClient', return_value=fake_client):
+        with (
+            patch('apps.distribution.services.delivery.WhatsAppClient', return_value=fake_client),
+            patch('apps.distribution.services.delivery.is_distribution_silenced', return_value=False),
+        ):
             out = StringIO()
             call_command(
                 'run_bot',
@@ -200,7 +203,10 @@ class AICuratedProductionAssistTests(TestCase):
         batch = self._ready_batch(channel)
         fake_client = FakeTelegramClient()
 
-        with patch('apps.distribution.services.telegram_delivery.TelegramClient', return_value=fake_client):
+        with (
+            patch('apps.distribution.services.telegram_delivery.TelegramClient', return_value=fake_client),
+            patch('apps.distribution.services.telegram_delivery.is_distribution_silenced', return_value=False),
+        ):
             out = StringIO()
             call_command(
                 'publish_telegram',

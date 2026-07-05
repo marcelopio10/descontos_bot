@@ -3,6 +3,7 @@ from io import StringIO
 from unittest.mock import patch
 
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TestCase
 from django.utils import timezone
 
@@ -97,16 +98,17 @@ class RunBotAICurationTests(TestCase):
         batch = self._create_ready_batch()
         out = StringIO()
 
-        call_command(
-            'run_bot',
-            '--dry-run',
-            '--once',
-            '--skip-scraping',
-            '--channel',
-            'whatsapp_main',
-            '--ai-curation',
-            stdout=out,
-        )
+        with patch('apps.orchestration.management.commands.run_bot.call_command'):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                '--ai-curation',
+                stdout=out,
+            )
 
         text = out.getvalue()
         self.assertIn(f'Lote curado #{batch.id}', text)
@@ -121,16 +123,17 @@ class RunBotAICurationTests(TestCase):
     def test_ai_curation_without_ready_batch_pauses_without_selector_fallback(self):
         out = StringIO()
 
-        call_command(
-            'run_bot',
-            '--dry-run',
-            '--once',
-            '--skip-scraping',
-            '--channel',
-            'whatsapp_main',
-            '--ai-curation',
-            stdout=out,
-        )
+        with patch('apps.orchestration.management.commands.run_bot.call_command'):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                '--ai-curation',
+                stdout=out,
+            )
 
         text = out.getvalue()
         self.assertIn('Nenhum lote curado pronto', text)
@@ -187,20 +190,71 @@ class RunBotAICurationTests(TestCase):
     def test_ai_curation_required_pauses_without_selector_fallback(self):
         out = StringIO()
 
-        call_command(
-            'run_bot',
-            '--dry-run',
-            '--once',
-            '--skip-scraping',
-            '--channel',
-            'whatsapp_main',
-            '--ai-curation-required',
-            stdout=out,
-        )
+        with patch('apps.orchestration.management.commands.run_bot.call_command'):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                '--ai-curation-required',
+                stdout=out,
+            )
 
         text = out.getvalue()
         self.assertIn('Nenhum lote curado pronto', text)
         self.assertNotIn('Título selector antigo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_command_error_when_ai_required_aborts_without_legacy_fallback(self):
+        out = StringIO()
+
+        with patch(
+            'apps.orchestration.management.commands.run_bot.call_command',
+            side_effect=CommandError('runner falhou: sessão expirada'),
+        ):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        self.assertIn('Preparação IA falhou', text)
+        self.assertIn('Nenhum lote curado pronto', text)
+        self.assertIn('ai-curation-required: abortando ciclo', text)
+        self.assertNotIn('Ofertas selecionadas:', text)
+        self.assertNotIn('Título selector antigo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_command_error_with_ready_batch_still_consumes_batch(self):
+        batch = self._create_ready_batch()
+        out = StringIO()
+
+        with patch(
+            'apps.orchestration.management.commands.run_bot.call_command',
+            side_effect=CommandError('runner falhou: sessão expirada'),
+        ):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        self.assertIn('Preparação IA falhou', text)
+        self.assertIn(f'Lote curado #{batch.id}', text)
+        self.assertIn('Título curado pela IA', text)
+        self.assertNotIn('ai-curation-required: abortando ciclo', text)
         self.assertEqual(Delivery.objects.count(), 0)
 
     def test_prepare_ai_curation_invokes_prepare_command_before_reading_batch(self):

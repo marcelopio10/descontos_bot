@@ -7,6 +7,7 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 
+from apps.curation.models import CurationRun
 from apps.curation.services.blacklist import filter_blacklisted_offers
 from apps.curation.services.curated_batch_reader import get_ready_curated_batch
 from apps.curation.services.message_builder import build_curated_offer_message, build_offer_message, get_final_url
@@ -213,14 +214,20 @@ class Command(BaseCommand):
             ]
             if dry_run:
                 prepare_args.append('--dry-run')
-            call_command(*prepare_args, stdout=self.stdout)
+            try:
+                call_command(*prepare_args, stdout=self.stdout)
+            except CommandError as exc:
+                log.error('ai_curation.prepare_failed canal=%s erro=%s', channel.code, exc)
+                self.stdout.write(self.style.ERROR(f'Preparação IA falhou: {exc}'))
 
         if ai_curation:
+            allowed_modes = [CurationRun.Mode.DRY_RUN] if dry_run else [CurationRun.Mode.HOMOLOG, CurationRun.Mode.PRODUCTION]
             if not dry_run and ai_curation_required:
                 self.stdout.write(self.style.WARNING('ai-curation-required ativo: fallback para selector legado bloqueado.'))
-            if self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=ai_curation_limit):
+            if self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=ai_curation_limit, allowed_modes=allowed_modes):
                 return
             if ai_curation_required or dry_run:
+                self.stdout.write(self.style.ERROR('ai-curation-required: abortando ciclo sem fallback para selector legado.'))
                 self._write_healthcheck()
                 return
 
@@ -279,8 +286,8 @@ class Command(BaseCommand):
         log.info('Ciclo finalizado. ofertas_selecionadas=%s', len(offers))
         self._write_healthcheck()
 
-    def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool, limit: int | None = None) -> bool:
-        result = get_ready_curated_batch(channel)
+    def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool, limit: int | None = None, allowed_modes: list[str] | None = None) -> bool:
+        result = get_ready_curated_batch(channel, allowed_modes=allowed_modes)
         if not result.has_batch:
             self.stdout.write(self.style.WARNING(result.reason or 'Nenhum lote curado pronto.'))
             log.info('ai_curation.paused channel=%s reason=%s', channel.code, result.reason)

@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 
+from apps.curation.models import CurationRun
 from apps.curation.services.curated_batch_reader import get_ready_curated_batch
 from apps.curation.services.selector import (
     get_selection_config,
@@ -83,6 +84,7 @@ class Command(BaseCommand):
         limit = options['limit']
         legacy_selector = options['legacy_selector']
         ai_curation = not legacy_selector or options['ai_curation'] or options['ai_curation_required']
+        ai_curation_required = options['ai_curation_required'] or (ai_curation and not legacy_selector)
         prepare_ai_curation = options['prepare_ai_curation'] or (ai_curation and not legacy_selector)
 
         if channel_code == MAIN_CODE and not settings.ALLOW_PRODUCTION_TELEGRAM_SEND:
@@ -112,6 +114,7 @@ class Command(BaseCommand):
                 dry_run=dry_run,
                 limit=limit,
                 ai_curation=ai_curation,
+                ai_curation_required=ai_curation_required,
                 prepare_ai_curation=prepare_ai_curation,
             )
             return
@@ -127,6 +130,7 @@ class Command(BaseCommand):
                     dry_run=dry_run,
                     limit=limit,
                     ai_curation=ai_curation,
+                    ai_curation_required=ai_curation_required,
                     prepare_ai_curation=prepare_ai_curation,
                 )
                 seconds = sleep_between_cycles()
@@ -142,6 +146,7 @@ class Command(BaseCommand):
         dry_run: bool,
         limit: int | None,
         ai_curation: bool = False,
+        ai_curation_required: bool = False,
         prepare_ai_curation: bool = False,
     ) -> None:
         if prepare_ai_curation:
@@ -160,10 +165,15 @@ class Command(BaseCommand):
             ]
             if dry_run:
                 prepare_args.append('--dry-run')
-            call_command(*prepare_args, stdout=self.stdout)
+            try:
+                call_command(*prepare_args, stdout=self.stdout)
+            except CommandError as exc:
+                logger.error('telegram.ai_curation.prepare_failed channel=%s erro=%s', channel.code, exc)
+                self.stdout.write(self.style.ERROR(f'Preparação IA falhou: {exc}'))
 
         if ai_curation:
-            self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=limit)
+            allowed_modes = [CurationRun.Mode.DRY_RUN] if dry_run else [CurationRun.Mode.HOMOLOG, CurationRun.Mode.PRODUCTION]
+            self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=limit, allowed_modes=allowed_modes)
             return
 
         offers = select_offers_for_channel(channel, get_selection_config())
@@ -200,8 +210,8 @@ class Command(BaseCommand):
             ),
         )
 
-    def _run_ai_curation_cycle(self, channel: SocialChannel, dry_run: bool, limit: int | None) -> None:
-        result = get_ready_curated_batch(channel)
+    def _run_ai_curation_cycle(self, channel: SocialChannel, dry_run: bool, limit: int | None, allowed_modes: list[str] | None = None) -> None:
+        result = get_ready_curated_batch(channel, allowed_modes=allowed_modes)
         if not result.has_batch:
             self.stdout.write(self.style.WARNING(result.reason or 'Nenhum lote curado pronto para este canal.'))
             logger.info('telegram.ai_curation.paused channel=%s reason=%s', channel.code, result.reason)

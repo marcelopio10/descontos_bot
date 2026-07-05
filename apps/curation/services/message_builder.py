@@ -80,7 +80,7 @@ def _build_agent_highlight(item, raw: str | None = None) -> str:
     text = _clean_agent_highlight_text(raw, item.offer)
     if not text:
         text = _fallback_agent_highlight(item.offer)
-    return f'🤖 Trecho do agente descontos-bot: {text}'
+    return text
 
 
 def _clean_agent_highlight_text(raw: str | None, offer: Offer) -> str:
@@ -135,7 +135,7 @@ def _build_highlight_block(raw: str | None) -> str:
     if not text:
         return ''
     text = textwrap.shorten(text, width=180, placeholder='...')
-    return f'✨ {text}\n\n'
+    return f'{text}\n\n'
 
 
 def _build_badge(discount_pct: int) -> str:

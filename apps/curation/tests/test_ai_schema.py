@@ -96,7 +96,7 @@ class AISchemaTests(SimpleTestCase):
         self.assertFalse(result.is_valid)
         self.assertIn('selecionada sem caption WhatsApp', '; '.join(result.errors))
 
-    def test_invalid_agent_output_fails_for_duplicate_positions(self):
+    def test_agent_output_allows_duplicate_positions_because_optimizer_normalizes_final_order(self):
         def decision(offer_id):
             return {
                 'offer_id': offer_id,
@@ -120,5 +120,63 @@ class AISchemaTests(SimpleTestCase):
 
         result = validate_agent_output({'schema_version': '1.0', 'decisions': [decision(1), decision(2)]})
 
-        self.assertFalse(result.is_valid)
-        self.assertIn('duplicada', '; '.join(result.errors))
+        self.assertTrue(result.is_valid, result.errors)
+
+    def test_agent_output_allows_empty_or_null_actual_distribution_because_optimizer_recomputes_it(self):
+        def decision(offer_id, marketplace):
+            return {
+                'offer_id': offer_id,
+                'marketplace_code': marketplace,
+                'classification': 'approved',
+                'selected_for_batch': True,
+                'batch_position': offer_id,
+                'conversion_score': 90,
+                'relevance_score': 90,
+                'discount_quality_score': 90,
+                'audience_fit_score': 90,
+                'reason': 'ok',
+                'rewritten_title': 'Título',
+                'rewritten_caption_whatsapp': 'Caption',
+                'rewritten_caption_telegram': 'Caption',
+                'image_required': False,
+                'image_decision': 'skip',
+                'blacklist_actions': [],
+                'risk_flags': [],
+            }
+
+        result = validate_agent_output(
+            {
+                'schema_version': '1.0',
+                'actual_distribution': {'mercadolivre': None, 'amazon': None, 'shopee': None},
+                'decisions': [decision(1, 'mercadolivre'), decision(2, 'amazon')],
+            }
+        )
+
+        self.assertTrue(result.is_valid, result.errors)
+
+    def test_agent_output_allows_numeric_actual_distribution_mismatch_because_optimizer_recomputes_it(self):
+        decision = {
+            'offer_id': 1,
+            'marketplace_code': 'mercadolivre',
+            'classification': 'approved',
+            'selected_for_batch': True,
+            'batch_position': 1,
+            'conversion_score': 90,
+            'relevance_score': 90,
+            'discount_quality_score': 90,
+            'audience_fit_score': 90,
+            'reason': 'ok',
+            'rewritten_title': 'Título',
+            'rewritten_caption_whatsapp': 'Caption',
+            'rewritten_caption_telegram': 'Caption',
+            'image_required': False,
+            'image_decision': 'skip',
+            'blacklist_actions': [],
+            'risk_flags': [],
+        }
+
+        result = validate_agent_output(
+            {'schema_version': '1.0', 'actual_distribution': {'mercadolivre': 2}, 'decisions': [decision]}
+        )
+
+        self.assertTrue(result.is_valid, result.errors)

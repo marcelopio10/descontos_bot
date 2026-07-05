@@ -117,6 +117,7 @@ class AICuratorTests(TestCase):
         self.assertFalse(CuratedBatch.objects.filter(run=result.run, status=CuratedBatch.Status.READY).exists())
 
     def test_improper_output_is_persisted_but_not_selected(self):
+        # AI rejects improper offer and selects the approved one
         forced_payload = {
             'schema_version': '1.0',
             'actual_distribution': {},
@@ -144,8 +145,8 @@ class AICuratorTests(TestCase):
                     'offer_id': self.offers[1].id,
                     'marketplace_code': 'mercadolivre',
                     'classification': 'approved',
-                    'selected_for_batch': False,
-                    'batch_position': None,
+                    'selected_for_batch': True,
+                    'batch_position': 1,
                     'conversion_score': 90,
                     'relevance_score': 90,
                     'discount_quality_score': 90,
@@ -179,3 +180,44 @@ class AICuratorTests(TestCase):
         audit = CurationBlacklistTerm.objects.get(decision=improper)
         self.assertEqual(audit.normalized_term, 'arma de brinquedo')
         self.assertEqual(audit.run, result.run)
+
+    def test_zero_selected_does_not_create_ready_batch_and_marks_run_failed(self):
+        # AI returns all offers with selected_for_batch=False → safety gate produces empty batch
+        forced_payload = {
+            'schema_version': '1.0',
+            'actual_distribution': {},
+            'decisions': [
+                {
+                    'offer_id': self.offers[0].id,
+                    'marketplace_code': 'mercadolivre',
+                    'classification': 'approved',
+                    'selected_for_batch': False,
+                    'batch_position': None,
+                    'conversion_score': 70,
+                    'relevance_score': 70,
+                    'discount_quality_score': 70,
+                    'audience_fit_score': 70,
+                    'reason': 'Não selecionada pela IA.',
+                    'rewritten_title': 'Oferta não selecionada',
+                    'rewritten_caption_whatsapp': 'Caption W',
+                    'rewritten_caption_telegram': 'Caption T',
+                    'image_required': False,
+                    'image_decision': 'skip',
+                    'blacklist_actions': [],
+                    'risk_flags': [],
+                },
+            ],
+        }
+
+        result = prepare_ai_curation_batch(
+            channel=self.channel,
+            offers=self.offers[:1],
+            runner=FakeHermesRunner(forced_payload=forced_payload),
+            mode=CurationRun.Mode.DRY_RUN,
+            batch_size=1,
+        )
+
+        self.assertEqual(result.run.status, CurationRun.Status.FAILED)
+        self.assertIn('Nenhum item aprovado e selecionado', result.run.error_message)
+        self.assertIsNone(result.batch)
+        self.assertFalse(CuratedBatch.objects.filter(run=result.run, status=CuratedBatch.Status.READY).exists())

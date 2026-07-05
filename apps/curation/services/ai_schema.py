@@ -77,7 +77,6 @@ def validate_agent_output(payload: dict[str, Any], *, expected_offer_ids: set[in
         errors.append('decisions deve ser lista')
         return ValidationResult(False, errors)
 
-    seen_positions: set[int] = set()
     selected_marketplaces: dict[str, int] = {}
     for index, decision in enumerate(decisions):
         if not isinstance(decision, dict):
@@ -109,21 +108,15 @@ def validate_agent_output(payload: dict[str, Any], *, expected_offer_ids: set[in
                 errors.append(f'decisions[{index}] selecionada sem caption WhatsApp')
             if not str(decision.get('rewritten_caption_telegram') or '').strip():
                 errors.append(f'decisions[{index}] selecionada sem caption Telegram')
-            position = decision.get('batch_position')
-            if not isinstance(position, int) or position <= 0:
-                errors.append(f'decisions[{index}].batch_position inválida')
-            elif position in seen_positions:
-                errors.append(f'decisions[{index}].batch_position duplicada: {position}')
-            else:
-                seen_positions.add(position)
+            # batch_position is treated as an ordering hint only. The optimizer
+            # normalizes final positions after applying safety gates, so duplicate
+            # or missing positions from the agent must not block a valid AI
+            # selection.
             marketplace_code = str(decision.get('marketplace_code') or '').strip()
             if marketplace_code:
                 selected_marketplaces[marketplace_code] = selected_marketplaces.get(marketplace_code, 0) + 1
-    declared_distribution = payload.get('actual_distribution')
-    if isinstance(declared_distribution, dict) and selected_marketplaces:
-        for marketplace, count in selected_marketplaces.items():
-            if declared_distribution.get(marketplace) != count:
-                errors.append(
-                    f'actual_distribution.{marketplace}={declared_distribution.get(marketplace)} não bate com selecionados={count}'
-                )
+    # actual_distribution is informational output from the agent. The persisted
+    # batch distribution is recomputed by optimize_curation_batch() from the
+    # validated selected decisions, so a stale/missing agent summary must not
+    # invalidate an otherwise safe curation run.
     return ValidationResult(not errors, errors)

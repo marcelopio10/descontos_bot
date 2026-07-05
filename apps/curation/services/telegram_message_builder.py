@@ -86,7 +86,7 @@ def _build_curated_caption(item: CuratedBatchItem, max_len: int) -> str:
     caption = (
         f'<b>📦 {escape(title)}</b>\n\n'
         f'{badge}\n'
-        f'✨ {agent_highlight}\n\n'
+        f'{agent_highlight}\n\n'
         f'💰 <s>De {_format_brl(original_price)}</s>\n'
         f'✅ <b>Por apenas {_format_brl(offer.current_price)}</b>\n'
         f'🏷️ <b>{discount_pct}% OFF</b>\n\n'

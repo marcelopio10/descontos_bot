@@ -106,6 +106,11 @@ def prepare_ai_curation_batch(
     with transaction.atomic():
         decisions_by_offer_id = _persist_decisions(run, offers, output_payload, input_payload)
         optimized = optimize_curation_batch(output_payload.get('decisions') or [], batch_size=batch_size, target_distribution=target)
+
+        if not optimized.selected:
+            _fail_run(run, f'Nenhum item aprovado e selecionado pela IA para o lote (candidatas={len(offers)}; gate de segurança ou IA não selecionou itens)')
+            return AICurationResult(run=run, batch=None, input_payload=input_payload, output_payload=output_payload)
+
         batch = CuratedBatch.objects.create(
             run=run,
             channel=channel,

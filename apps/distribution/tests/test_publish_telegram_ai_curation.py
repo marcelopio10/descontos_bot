@@ -3,6 +3,7 @@ from io import StringIO
 from unittest.mock import patch
 
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TestCase
 from django.utils import timezone
 
@@ -175,8 +176,9 @@ class PublishTelegramAICurationTests(TestCase):
         payload = build_curated_telegram_payload(item, self.channel)
 
         self.assertIn('<b>📦 Kit 7 Camisetas Masculina Manga Curta Lisa Algodão Premium com 19% OFF</b>', payload.caption)
-        self.assertIn('🤖 Trecho do agente descontos-bot:', payload.caption)
-        highlight = payload.caption.split('🤖 Trecho do agente descontos-bot:', 1)[1].split('\n\n💰', 1)[0]
+        self.assertNotIn('🤖 Trecho do agente descontos-bot:', payload.caption)
+        self.assertNotIn('✨', payload.caption)
+        highlight = payload.caption.split('⚡ <b>BOT ACHOU DESCONTO</b> ⚡', 1)[1].split('\n\n💰', 1)[0]
         self.assertNotIn('Kit 7 Camisetas', highlight)
         self.assertNotIn('R$ 125,30', highlight)
         self.assertNotIn('19% OFF', highlight)
@@ -226,4 +228,50 @@ class PublishTelegramAICurationTests(TestCase):
         self.assertIn('Selecionadas', text)
         self.assertIn('Título selector antigo Telegram', text)
         self.assertNotIn('Lote curado #', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_command_error_with_ready_batch_still_consumes_batch(self):
+        batch, _item = self._create_ready_batch()
+        out = StringIO()
+
+        with patch(
+            'apps.distribution.management.commands.publish_telegram.call_command',
+            side_effect=CommandError('runner falhou: sessão expirada'),
+        ):
+            call_command(
+                'publish_telegram',
+                '--once',
+                '--channel',
+                'telegram_homolog',
+                '--dry-run',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        self.assertIn('Preparação IA falhou', text)
+        self.assertIn(f'Lote curado #{batch.id}', text)
+        self.assertIn('Título curado Telegram', text)
+        self.assertIn('dry_run ativo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_command_error_without_batch_shows_error_and_no_selector_fallback(self):
+        out = StringIO()
+
+        with patch(
+            'apps.distribution.management.commands.publish_telegram.call_command',
+            side_effect=CommandError('runner falhou: sessão expirada'),
+        ):
+            call_command(
+                'publish_telegram',
+                '--once',
+                '--channel',
+                'telegram_homolog',
+                '--dry-run',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        self.assertIn('Preparação IA falhou', text)
+        self.assertIn('Nenhum lote curado pronto', text)
+        self.assertNotIn('Título selector antigo Telegram', text)
         self.assertEqual(Delivery.objects.count(), 0)

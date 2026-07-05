@@ -119,9 +119,10 @@ class AICuratedWhatsAppTemplateTests(TestCase):
         self.offer.save(update_fields=['title', 'current_price', 'original_price', 'discount_pct'])
 
         message = build_curated_offer_message(self.item, self.channel)
-        highlight = message.split('✨ ', 1)[1].split('\n\n💰', 1)[0]
+        highlight = message.split('⚡ *BOT ACHOU DESCONTO* ⚡\n', 1)[1].split('\n\n💰', 1)[0]
 
-        self.assertIn('🤖 Trecho do agente descontos-bot:', highlight)
+        self.assertNotIn('✨', highlight)
+        self.assertNotIn('🤖 Trecho do agente descontos-bot:', highlight)
         self.assertNotIn('Kit 7 Camisetas', highlight)
         self.assertNotIn('R$ 125,30', highlight)
         self.assertNotIn('19% OFF', highlight)
@@ -137,8 +138,10 @@ class AICuratedWhatsAppTemplateTests(TestCase):
         )
 
         message = build_curated_offer_message(self.item, self.channel)
-        highlight = message.split('✨ ', 1)[1].split('\n\n💰', 1)[0]
+        highlight = message.split('⚡ *BOT ACHOU DESCONTO* ⚡\n', 1)[1].split('\n\n💰', 1)[0]
 
+        self.assertNotIn('✨', highlight)
+        self.assertNotIn('🤖 Trecho do agente descontos-bot:', highlight)
         self.assertNotIn('apelo', highlight.lower())
         self.assertNotIn('uso diário', highlight.lower())
         self.assertIn('dentinhos', highlight.lower())

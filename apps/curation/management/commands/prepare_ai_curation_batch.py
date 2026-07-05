@@ -105,6 +105,10 @@ class Command(BaseCommand):
         if run.error_message:
             self.stdout.write(self.style.ERROR(run.error_message))
         self.stdout.write(self.style.WARNING('dry-run/controlado: nenhum envio real foi chamado.'))
+        if run.status == CurationRun.Status.FAILED:
+            raise CommandError(
+                f'prepare_ai_curation_batch falhou (run #{run.id}): {run.error_message or "run com status failed"}'
+            )
 
     def _get_channel(self, code: str) -> SocialChannel:
         try:

@@ -1,13 +1,13 @@
 {
   "version": "1.1",
-  "generated_at": "2026-07-06T22:16:15.633412+00:00",
+  "generated_at": "2026-07-07T11:05:45.510890+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
       "id": 6798,
       "title": "Jogo de Lençol 400 fios toque Suave e Acetinado Berço Solteiro Casal Queen King 02 e 03 Peças",
-      "current_price": "14.40",
-      "original_price": "160.00",
+      "current_price": "14.25",
+      "original_price": "158.33",
       "discount_pct": "91.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m82atd2bm5f53a",
       "marketplace_code": "shopee",
@@ -34,24 +34,24 @@
       "tracked_url": "https://s.shopee.com.br/70IKaiSsS5?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
     },
     {
+      "id": 8453,
+      "title": "Kit Torcedor Brasil 12 Itens Copa 2026 Festa Futebol Adesivo Corneta Bandeira Oculos Brasil",
+      "current_price": "29.00",
+      "original_price": "181.25",
+      "discount_pct": "84.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820me-mp3siy57hyiu98",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/60PoafJJ3p?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8453"
+    },
+    {
       "id": 8366,
       "title": "Kit 10 Panos De Limpeza Microfibra alta absorção Multiuso",
-      "current_price": "16.88",
-      "original_price": "99.29",
+      "current_price": "16.49",
+      "original_price": "97.00",
       "discount_pct": "83.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rffl-m3zbdqna4dhzc0",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/qhhGG7vmf?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8366"
-    },
-    {
-      "id": 8365,
-      "title": "Kit 10 Panos De Limpeza Microfibra alta absorção Multiuso",
-      "current_price": "17.49",
-      "original_price": "102.88",
-      "discount_pct": "83.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m3rseadtr5fc80",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/gOH3x8Z7c?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8365"
     }
   ]
 }

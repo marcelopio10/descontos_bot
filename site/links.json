@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-07-08T19:30:13.127886+00:00",
+  "generated_at": "2026-07-08T22:28:21.802697+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -34,6 +34,16 @@
       "tracked_url": "https://s.shopee.com.br/7fY3FOoj9j?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
     },
     {
+      "id": 8366,
+      "title": "Kit 10 Panos De Limpeza Microfibra alta absorção Multiuso",
+      "current_price": "14.97",
+      "original_price": "99.80",
+      "discount_pct": "85.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rffl-m3zbdqna4dhzc0",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/qhhGG7vmf?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8366"
+    },
+    {
       "id": 8453,
       "title": "Kit Torcedor Brasil 12 Itens Copa 2026 Festa Futebol Adesivo Corneta Bandeira Oculos Brasil",
       "current_price": "29.00",
@@ -42,16 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820me-mp3siy57hyiu98",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/60PoafJJ3p?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8453"
-    },
-    {
-      "id": 8366,
-      "title": "Kit 10 Panos De Limpeza Microfibra alta absorção Multiuso",
-      "current_price": "16.88",
-      "original_price": "99.29",
-      "discount_pct": "83.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rffl-m3zbdqna4dhzc0",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/qhhGG7vmf?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8366"
     }
   ]
 }

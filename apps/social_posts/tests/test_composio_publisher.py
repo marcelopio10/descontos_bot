@@ -11,7 +11,7 @@ from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
 from apps.social_posts.models import InstagramPost
 from apps.social_posts.services import composio_publisher
-from apps.social_posts.services.composio_publisher import publish_post
+from apps.social_posts.services.composio_publisher import ComposioPublishError, publish_post, publish_story
 
 
 class ComposioPublisherTests(TestCase):
@@ -116,3 +116,17 @@ class ComposioPublisherTests(TestCase):
         post.refresh_from_db()
         self.assertEqual(post.status, InstagramPost.Status.POSTED)
         self.assertEqual(post.instagram_media_id, 'media-story')
+
+    def test_publish_story_rejects_feed_post_even_as_compatibility_wrapper(self):
+        with TemporaryDirectory() as tmpdir:
+            post = self._post(
+                post_format=InstagramPost.Format.FEED,
+                status=InstagramPost.Status.READY,
+                asset_path=self._image(tmpdir),
+            )
+
+            with self.assertRaises(ComposioPublishError) as ctx:
+                publish_story(post, dry_run=True)
+
+        self.assertEqual(ctx.exception.stage, 'precheck')
+        self.assertIn('STORY', str(ctx.exception))

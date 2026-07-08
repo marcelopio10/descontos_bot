@@ -2,9 +2,8 @@
 Scraper Shopee via Affiliate Open API (GraphQL).
 
 Implementa a interface `scrape_categories` para busca por categoria usando
-keywords mapeadas no `category_targets.py`. A API `productOfferV2` aceita
-apenas keyword (não categoryId), então cada categoria contribui com palavras-chave
-específicas que simulam a segmentação.
+`productCatId` do `category_targets.py`. A API `productOfferV2` é chamada
+por categoria e página, sem keyword, para cobrir melhor o catálogo disponível.
 
 Mantém compatibilidade com o `ScraperAdapter` (`blocked`, `error_message`,
 `pages_scraped`) e com o pipeline de ingestão existente.
@@ -29,7 +28,7 @@ MAX_SAFE_PRICE_RANGE_RATIO = Decimal('3')
 
 
 class ShopeeScraper:
-    """Scraper que consulta a Shopee Affiliate API por categoria (keyword)."""
+    """Scraper que consulta a Shopee Affiliate API por `productCatId`."""
 
     def __init__(self, client: ShopeeAffiliateClient | None = None) -> None:
         self._client = client or ShopeeAffiliateClient()

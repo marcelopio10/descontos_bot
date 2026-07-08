@@ -9,6 +9,7 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.utils import timezone
 
+from apps.curation.management.commands.prepare_ai_curation_batch import _balanced_marketplace_candidates
 from apps.curation.models import CuratedBatch, CurationRun
 from apps.distribution.models import Delivery, SocialChannel
 from apps.marketplaces.models import Marketplace
@@ -311,3 +312,39 @@ class PrepareAICurationBatchCommandTests(TestCase):
 
         marketplace_codes = [offer['marketplace_code'] for offer in RecordingRunner.payloads[0]['offers']]
         self.assertEqual(marketplace_codes.count('shopee'), 3)
+
+    def test_balanced_candidate_selection_fills_shortage_from_available_marketplaces(self):
+        Offer.objects.all().delete()
+        now = timezone.now()
+        offer_id = 1
+        for marketplace_code, total in (('mercadolivre', 8), ('amazon', 8), ('shopee', 1)):
+            for index in range(total):
+                Offer.objects.create(
+                    marketplace=self.marketplaces[marketplace_code],
+                    external_id=f'{marketplace_code}-shortage-{index}',
+                    title=f'Oferta shortage {marketplace_code} {index}',
+                    normalized_title=f'oferta shortage {marketplace_code} {index}',
+                    offer_hash=f'hash-shortage-{offer_id}',
+                    slug=f'oferta-shortage-{marketplace_code}-{index}',
+                    current_price=Decimal('99.90'),
+                    original_price=Decimal('199.80'),
+                    discount_pct=Decimal('50.00'),
+                    product_url='https://example.com/produto',
+                    affiliate_url='https://example.com/afiliado',
+                    image_url='https://example.com/img.jpg',
+                    is_active=True,
+                    first_seen_at=now,
+                    last_seen_at=now,
+                    price_collected_at=now,
+                )
+                offer_id += 1
+
+        selected = _balanced_marketplace_candidates(
+            Offer.objects.select_related('marketplace').order_by('-discount_pct', '-current_price', 'title'),
+            limit=10,
+        )
+
+        marketplace_codes = [offer.marketplace.code for offer in selected]
+        self.assertEqual(len(selected), 10)
+        self.assertEqual(marketplace_codes.count('shopee'), 1)
+        self.assertEqual(marketplace_codes.count('mercadolivre') + marketplace_codes.count('amazon'), 9)

@@ -37,7 +37,12 @@ class PublishResult:
 
 
 def publish_story(post: InstagramPost, *, dry_run: bool = False) -> PublishResult:
-    """Compatibilidade: publica um InstagramPost formato Story via Composio."""
+    """Compatibilidade: publica somente InstagramPost formato Story via Composio."""
+    if post.format != InstagramPost.Format.STORY:
+        raise ComposioPublishError(
+            f'Apenas formato STORY suportado. Recebido: {post.format}',
+            stage='precheck',
+        )
     return publish_post(post, dry_run=dry_run)
 
 

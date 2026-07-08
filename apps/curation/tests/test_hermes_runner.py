@@ -109,6 +109,9 @@ class HermesProfileRunnerTests(SimpleTestCase):
         self.assertIn('skill humanizer', prompt)
         self.assertIn('Não use fórmulas repetidas', prompt)
         self.assertIn('Evite repetir título, preço', prompt)
+        self.assertIn('40% Mercado Livre, 30% Amazon e 30% Shopee', prompt)
+        self.assertIn('low_priority_book', prompt)
+        self.assertIn('livros têm baixa conversão', prompt)
         self.assertIn('"offer_id": 101', prompt)
 
     def test_profile_runner_raises_on_nonzero_exit(self):

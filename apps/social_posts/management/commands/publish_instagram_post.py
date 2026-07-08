@@ -5,13 +5,13 @@ from django.core.management.base import BaseCommand, CommandError
 from apps.social_posts.models import InstagramPost
 from apps.social_posts.services.composio_publisher import (
     ComposioPublishError,
-    publish_story,
+    publish_post,
     record_failure,
 )
 
 
 class Command(BaseCommand):
-    help = 'Publica um InstagramPost no Instagram via Composio (apenas formato story por enquanto).'
+    help = 'Publica um InstagramPost no Instagram via Composio (feed ou story).'
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -33,13 +33,13 @@ class Command(BaseCommand):
         except InstagramPost.DoesNotExist:
             raise CommandError(f'InstagramPost #{post_id} não encontrado.')
 
-        if post.format != InstagramPost.Format.STORY:
+        if post.format not in (InstagramPost.Format.FEED, InstagramPost.Format.STORY):
             raise CommandError(
-                f'Apenas formato STORY suportado. Post #{post_id} é {post.format}.'
+                f'Apenas formatos FEED e STORY suportados. Post #{post_id} é {post.format}.'
             )
 
         try:
-            result = publish_story(post, dry_run=options['dry_run'])
+            result = publish_post(post, dry_run=options['dry_run'])
         except ComposioPublishError as exc:
             error = f'[{exc.stage}] {exc}'
             self.stderr.write(self.style.ERROR(error))

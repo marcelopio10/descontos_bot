@@ -24,7 +24,48 @@ class FakeCollector:
         ]
 
 
+class PagedFakeCollector:
+    def __init__(self):
+        self.calls = []
+
+    def fetch(self, **kwargs):
+        self.calls.append(kwargs)
+        page = kwargs.get('page')
+        return [
+            {
+                'itemId': 123 if page == 1 else 789,
+                'shopId': 456,
+                'productName': f'Oferta página {page}',
+                'priceMin': '48.99',
+                'priceDiscountRate': 30,
+                'productLink': f'https://shopee.com.br/product/456/{123 if page == 1 else 789}',
+                'offerLink': 'https://s.shopee.com.br/abc',
+                'imageUrl': 'https://cf.shopee.com.br/img.jpg',
+                'productCatIds': [100636, 100717, 101219],
+            },
+        ]
+
+
 class ShopeeScraperCategoryTests(SimpleTestCase):
+    def test_scrape_categories_fetches_multiple_pages_per_category(self):
+        scraper = ShopeeScraper(client=None)
+        fake = PagedFakeCollector()
+        scraper._collector = fake
+
+        offers = scraper.scrape_categories([
+            ('casa_cozinha', 'Casa e Cozinha', 100636, True),
+        ])
+
+        self.assertEqual(
+            fake.calls,
+            [
+                {'product_cat_id': 100636, 'limit': 10, 'page': 1, 'sort_type': 2, 'list_type': 0},
+                {'product_cat_id': 100636, 'limit': 10, 'page': 2, 'sort_type': 2, 'list_type': 0},
+            ],
+        )
+        self.assertEqual([offer['external_id'] for offer in offers], ['123:456', '789:456'])
+        self.assertEqual(scraper.pages_scraped, 2)
+
     def test_scrape_categories_uses_category_id_not_keyword_and_emits_normalizer_keys(self):
         scraper = ShopeeScraper(client=None)
         fake = FakeCollector()
@@ -34,7 +75,13 @@ class ShopeeScraperCategoryTests(SimpleTestCase):
             ('casa_cozinha', 'Casa e Cozinha', 100636, True),
         ])
 
-        self.assertEqual(fake.calls, [{'product_cat_id': 100636, 'limit': 10, 'sort_type': 2, 'list_type': 0}])
+        self.assertEqual(
+            fake.calls,
+            [
+                {'product_cat_id': 100636, 'limit': 10, 'page': 1, 'sort_type': 2, 'list_type': 0},
+                {'product_cat_id': 100636, 'limit': 10, 'page': 2, 'sort_type': 2, 'list_type': 0},
+            ],
+        )
         self.assertEqual(len(offers), 1)
         offer = offers[0]
         self.assertEqual(offer['category_hint'], 'casa_cozinha')

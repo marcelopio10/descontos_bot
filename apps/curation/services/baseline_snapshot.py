@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from decimal import Decimal
+import re
 from typing import Any
 
 from apps.curation.services.quality_score import quality_score_breakdown
@@ -38,6 +39,7 @@ def build_baseline_snapshot(
 def serialize_offer_for_ai(offer: Offer) -> dict[str, Any]:
     breakdown = quality_score_breakdown(offer)
     marketplace_code = offer.marketplace.code if offer.marketplace_id else ''
+    editorial_flags = _editorial_flags(offer)
     return {
         'offer_id': offer.id,
         'title': offer.title,
@@ -65,7 +67,32 @@ def serialize_offer_for_ai(offer: Offer) -> dict[str, Any]:
             'multipliers': breakdown.as_dict()['multipliers'],
             'notes': list(breakdown.notes),
         },
+        'editorial_flags': editorial_flags,
     }
+
+
+def _editorial_flags(offer: Offer) -> list[str]:
+    flags: list[str] = []
+    if _is_low_priority_book(offer):
+        flags.append('low_priority_book')
+    return flags
+
+
+def _is_low_priority_book(offer: Offer) -> bool:
+    text = ' '.join(
+        str(part or '')
+        for part in (
+            offer.title,
+            offer.normalized_title,
+            offer.category.code if offer.category_id else '',
+            offer.category.name if offer.category_id else '',
+            (offer.raw_payload or {}).get('source_label'),
+            (offer.raw_payload or {}).get('category_hint'),
+        )
+    ).lower()
+    return bool(
+        re.search(r'\b(livro|livros|capa comum|capa dura|kindle|ebook|e-book)\b', text)
+    )
 
 
 def summarize_quality(offers: list[dict[str, Any]]) -> dict[str, Any]:

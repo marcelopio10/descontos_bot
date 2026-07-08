@@ -207,3 +207,107 @@ class PrepareAICurationBatchCommandTests(TestCase):
         self.assertEqual(Delivery.objects.count(), 0)
         self.assertEqual(RecordingRunner.instances[0].profile_name, 'descontos-bot')
         self.assertIn('runner=real', out.getvalue())
+
+    def test_candidate_selection_balances_shopee_into_agent_payload(self):
+        Offer.objects.all().delete()
+        now = timezone.now()
+        offer_id = 1
+        for marketplace_code in ('mercadolivre', 'amazon'):
+            for index in range(9):
+                Offer.objects.create(
+                    marketplace=self.marketplaces[marketplace_code],
+                    external_id=f'{marketplace_code}-balanced-{index}',
+                    title=f'Oferta forte {marketplace_code} {index}',
+                    normalized_title=f'oferta forte {marketplace_code} {index}',
+                    offer_hash=f'hash-balanced-{offer_id}',
+                    slug=f'oferta-forte-{marketplace_code}-{index}',
+                    current_price=Decimal('99.90'),
+                    original_price=Decimal('999.00'),
+                    discount_pct=Decimal('90.00'),
+                    product_url='https://example.com/produto',
+                    affiliate_url='https://example.com/afiliado',
+                    image_url='https://example.com/img.jpg',
+                    is_active=True,
+                    first_seen_at=now,
+                    last_seen_at=now,
+                    price_collected_at=now,
+                )
+                offer_id += 1
+        for index in range(4):
+            Offer.objects.create(
+                marketplace=self.marketplaces['shopee'],
+                external_id=f'shopee-balanced-{index}',
+                title=f'Oferta Shopee segura {index}',
+                normalized_title=f'oferta shopee segura {index}',
+                offer_hash=f'hash-balanced-{offer_id}',
+                slug=f'oferta-shopee-segura-{index}',
+                current_price=Decimal('99.90'),
+                original_price=Decimal('199.80'),
+                discount_pct=Decimal('50.00'),
+                product_url='https://example.com/produto',
+                affiliate_url='https://example.com/afiliado',
+                image_url='https://example.com/img.jpg',
+                is_active=True,
+                first_seen_at=now,
+                last_seen_at=now,
+                price_collected_at=now,
+            )
+            offer_id += 1
+
+        class RecordingRunner:
+            payloads = []
+
+            def __init__(self, *args, **kwargs):
+                pass
+
+            def run(self, payload):
+                self.payloads.append(payload)
+                decisions = []
+                for index, offer in enumerate(payload['offers'], start=1):
+                    decisions.append(
+                        {
+                            'offer_id': offer['offer_id'],
+                            'marketplace_code': offer['marketplace_code'],
+                            'classification': 'approved',
+                            'selected_for_batch': True,
+                            'batch_position': index,
+                            'conversion_score': 90,
+                            'relevance_score': 90,
+                            'discount_quality_score': 90,
+                            'audience_fit_score': 90,
+                            'reason': 'Oferta validada.',
+                            'rewritten_title': offer['title'],
+                            'rewritten_caption_whatsapp': 'Caption WhatsApp',
+                            'rewritten_caption_telegram': 'Caption Telegram',
+                            'image_required': False,
+                            'image_decision': 'skip',
+                            'blacklist_actions': [],
+                            'risk_flags': [],
+                        }
+                    )
+                return {'schema_version': '1.0', 'decisions': decisions, 'actual_distribution': {}}
+
+        with TemporaryDirectory() as tmpdir:
+            with patch(
+                'apps.curation.management.commands.prepare_ai_curation_batch.HermesProfileRunner',
+                RecordingRunner,
+            ):
+                call_command(
+                    'prepare_ai_curation_batch',
+                    '--channel',
+                    'whatsapp_main',
+                    '--runner',
+                    'real',
+                    '--candidate-limit',
+                    '10',
+                    '--dry-run',
+                    '--skip-images',
+                    '--audit-dir',
+                    str(Path(tmpdir) / 'audit'),
+                    '--public-dir',
+                    str(Path(tmpdir) / 'public'),
+                    stdout=StringIO(),
+                )
+
+        marketplace_codes = [offer['marketplace_code'] for offer in RecordingRunner.payloads[0]['offers']]
+        self.assertEqual(marketplace_codes.count('shopee'), 3)

@@ -144,7 +144,7 @@ Pra usar outra janela: `INSTAGRAM_HANDOFF_QUIET_HOURS_BRT=23:00-07:00`.
 ## 9. Fluxos paralelos não impactados
 
 - WhatsApp (`wa_service`) e Telegram channel (`@descontosbotlgm`) continuam usando o `TELEGRAM_BOT_TOKEN` original. Sem conflito.
-- O Composio publisher (`publish_instagram_post`, action "Publicar via Composio") continua disponível como fallback técnico no Admin — útil pra testes ou se você quiser publicar via API alguma exceção. Não é o fluxo principal.
+- O Composio publisher (`publish_instagram_post`, action "Publicar via Composio") fica disponível como fluxo técnico para publicar `feed` ou `story` já gerado. Em Stories, a API publica a imagem, mas não adiciona Link Sticker; para link clicável no Story, mantenha o handoff manual.
 
 ## 10. Troubleshooting
 

@@ -190,3 +190,38 @@ class SafetyBlacklistTests(TestCase):
         selected = select_offers_for_channel(self.channel, config=config)
 
         self.assertIn(sent_elsewhere, selected)
+
+    def test_selector_allows_offer_failed_in_channel_even_if_sent_elsewhere(self):
+        retriable = self._offer('Relógio Led Digital Esportivo Promoção Especial')
+        other_channel = SocialChannel.objects.create(
+            name='Telegram',
+            code='telegram_main',
+            target='@descontosbot',
+            channel_type=SocialChannel.ChannelType.TELEGRAM_CHANNEL,
+            link_strategy=SocialChannel.LinkStrategy.BRIDGE_ONLY,
+        )
+        Delivery.objects.create(
+            offer=retriable,
+            social_channel=other_channel,
+            message='mensagem enviada no telegram',
+            delivery_status=Delivery.DeliveryStatus.SENT,
+            sent_at=timezone.now(),
+        )
+        Delivery.objects.create(
+            offer=retriable,
+            social_channel=self.channel,
+            message='falha anterior no whatsapp',
+            delivery_status=Delivery.DeliveryStatus.FAILED,
+        )
+        config = SelectionConfig(
+            global_limit=5,
+            marketplace_limit=5,
+            min_discount_percentage=Decimal('20.00'),
+            min_quality_score=0,
+            priority_quality_score=0,
+            exposure_quota_enabled=False,
+        )
+
+        selected = select_offers_for_channel(self.channel, config=config)
+
+        self.assertIn(retriable, selected)

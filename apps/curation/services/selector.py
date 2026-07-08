@@ -6,7 +6,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from decimal import Decimal
 
-from django.db.models import Q, QuerySet
+from django.db.models import QuerySet
 
 from apps.curation.services.blacklist import (
     apply_blacklist_exclusion,
@@ -283,10 +283,10 @@ def _resolve_category_quotas(config: SelectionConfig) -> dict[str, int]:
 
 
 def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySet[Offer]:
-    sent_delivery_filter = Q(
-        deliveries__social_channel=channel,
-        deliveries__delivery_status=Delivery.DeliveryStatus.SENT,
-    )
+    sent_offer_ids = Delivery.objects.filter(
+        social_channel=channel,
+        delivery_status=Delivery.DeliveryStatus.SENT,
+    ).values('offer_id')
 
     queryset = (
         Offer.objects.select_related('marketplace')
@@ -299,7 +299,7 @@ def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySe
             discount_pct__gte=config.min_discount_percentage,
             last_seen_at__gte=get_freshness_cutoff(),
         )
-        .exclude(sent_delivery_filter)
+        .exclude(id__in=sent_offer_ids)
         .order_by('-discount_pct', '-current_price', 'title')
     )
 

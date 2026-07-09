@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 from dataclasses import dataclass
 from typing import Any, Protocol
@@ -22,22 +23,33 @@ class HermesRunner(Protocol):
 
 @dataclass(frozen=True)
 class HermesProfileRunner:
-    """Calls the real Hermes CLI profile and extracts a JSON curation payload."""
+    """Calls the real Hermes CLI profile and extracts a JSON curation payload.
+
+    Passes the prompt via -q (query flag) for clean stdout output.
+    """
 
     profile_name: str = 'descontos-bot'
-    timeout_seconds: int = 180
+    timeout_seconds: int = 600
     hermes_binary: str = 'hermes'
+    model_override: str | None = None
+    provider_override: str | None = None
 
     def run(self, payload: dict[str, Any]) -> dict[str, Any]:
         prompt = build_curation_prompt(payload)
-        command = [self.hermes_binary, '-p', self.profile_name, 'chat', '-Q', '-q', prompt]
+        env = {**os.environ}
+        command = [self.hermes_binary, 'chat', '-Q', '--profile', self.profile_name]
+        if self.model_override:
+            command += ['-m', self.model_override]
+        if self.provider_override:
+            command += ['--provider', self.provider_override]
+        command += ['-q', prompt]
         try:
             completed = subprocess.run(
                 command,
                 capture_output=True,
                 text=True,
                 timeout=self.timeout_seconds,
-                check=False,
+                env=env,
             )
         except subprocess.TimeoutExpired as exc:
             raise HermesRunnerError(f'Hermes CLI excedeu timeout de {self.timeout_seconds}s') from exc

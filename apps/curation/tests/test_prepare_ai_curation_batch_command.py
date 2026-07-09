@@ -140,9 +140,11 @@ class PrepareAICurationBatchCommandTests(TestCase):
         class RecordingRunner:
             instances = []
 
-            def __init__(self, *, profile_name, timeout_seconds=180):
+            def __init__(self, *, profile_name, timeout_seconds=180, model_override=None, provider_override=None):
                 self.profile_name = profile_name
                 self.timeout_seconds = timeout_seconds
+                self.model_override = model_override
+                self.provider_override = provider_override
                 self.payloads = []
                 self.instances.append(self)
 
@@ -207,7 +209,83 @@ class PrepareAICurationBatchCommandTests(TestCase):
         self.assertEqual(run.status, CurationRun.Status.COMPLETED)
         self.assertEqual(Delivery.objects.count(), 0)
         self.assertEqual(RecordingRunner.instances[0].profile_name, 'descontos-bot')
+        self.assertIsNone(RecordingRunner.instances[0].model_override)
         self.assertIn('runner=real', out.getvalue())
+
+    def test_model_override_passes_to_runner_and_records_metadata(self):
+        class RecordingRunner:
+            instances = []
+
+            def __init__(self, *, profile_name, timeout_seconds=180, model_override=None, provider_override=None):
+                self.profile_name = profile_name
+                self.model_override = model_override
+                self.provider_override = provider_override
+                self.instances.append(self)
+
+            def run(self, payload):
+                decisions = []
+                actual_distribution = {}
+                for index, offer in enumerate(payload['offers'], start=1):
+                    actual_distribution[offer['marketplace_code']] = actual_distribution.get(offer['marketplace_code'], 0) + 1
+                    decisions.append(
+                        {
+                            'offer_id': offer['offer_id'],
+                            'marketplace_code': offer['marketplace_code'],
+                            'classification': 'approved',
+                            'selected_for_batch': True,
+                            'batch_position': index,
+                            'conversion_score': 90,
+                            'relevance_score': 90,
+                            'discount_quality_score': 90,
+                            'audience_fit_score': 90,
+                            'reason': 'Oferta validada pelo runner de fallback simulado.',
+                            'rewritten_title': offer['title'],
+                            'rewritten_caption_whatsapp': 'Caption WhatsApp',
+                            'rewritten_caption_telegram': 'Caption Telegram',
+                            'image_required': False,
+                            'image_decision': 'skip',
+                            'blacklist_actions': [],
+                            'risk_flags': [],
+                        }
+                    )
+                return {'schema_version': '1.0', 'decisions': decisions, 'actual_distribution': actual_distribution}
+
+        with TemporaryDirectory() as tmpdir:
+            with patch(
+                'apps.curation.management.commands.prepare_ai_curation_batch.HermesProfileRunner',
+                RecordingRunner,
+            ):
+                call_command(
+                    'prepare_ai_curation_batch',
+                    '--channel',
+                    'whatsapp_main',
+                    '--runner',
+                    'real',
+                    '--profile',
+                    'descontos-bot',
+                    '--model',
+                    'glm-5.2',
+                    '--provider',
+                    'zai',
+                    '--candidate-limit',
+                    '2',
+                    '--dry-run',
+                    '--skip-images',
+                    '--audit-dir',
+                    str(Path(tmpdir) / 'audit'),
+                    '--public-dir',
+                    str(Path(tmpdir) / 'public'),
+                    stdout=StringIO(),
+                )
+
+        runner = RecordingRunner.instances[0]
+        self.assertEqual(runner.profile_name, 'descontos-bot')
+        self.assertEqual(runner.model_override, 'glm-5.2')
+        self.assertEqual(runner.provider_override, 'zai')
+        run = CurationRun.objects.latest('id')
+        self.assertEqual(run.profile_name, 'descontos-bot')
+        self.assertEqual(run.model_name, 'glm-5.2')
+        self.assertEqual(run.model_provider, 'zai')
 
     def test_candidate_selection_balances_shopee_into_agent_payload(self):
         Offer.objects.all().delete()

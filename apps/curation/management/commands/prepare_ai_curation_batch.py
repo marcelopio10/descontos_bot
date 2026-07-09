@@ -36,7 +36,9 @@ class Command(BaseCommand):
         parser.add_argument('--skip-images', action='store_true', help='Não preparar análise/processamento de imagens nesta etapa.')
         parser.add_argument('--runner', choices=['mock', 'real'], default='mock', help='Runner Hermes: mock determinístico ou profile real.')
         parser.add_argument('--profile', default='descontos-bot', help='Profile Hermes usado quando --runner=real.')
-        parser.add_argument('--runner-timeout', type=int, default=180, help='Timeout em segundos para Hermes CLI real.')
+        parser.add_argument('--model', default='', help='Sobrescreve o modelo do profile Hermes (ex.: glm-5.2). Vazio = modelo padrão do profile.')
+        parser.add_argument('--provider', default='', help='Sobrescreve o provider de inferência do Hermes (opcional).')
+        parser.add_argument('--runner-timeout', type=int, default=600, help='Timeout em segundos para Hermes CLI real.')
         parser.add_argument('--audit-dir', default=os.environ.get('AI_CURATION_AUDIT_DIR', DEFAULT_AUDIT_DIR))
         parser.add_argument('--public-dir', default=os.environ.get('AI_CURATION_PUBLIC_DIR', DEFAULT_PUBLIC_DIR))
 
@@ -67,9 +69,16 @@ class Command(BaseCommand):
         model_name = 'fake-hermes-runner'
         if options['runner'] == 'real':
             profile_name = options['profile']
-            model_provider = 'openai-codex'
-            model_name = 'gpt-5.5'
-            runner = HermesProfileRunner(profile_name=profile_name, timeout_seconds=options['runner_timeout'])
+            model_override = options['model'].strip() or None
+            provider_override = options['provider'].strip() or None
+            model_provider = provider_override or 'openai-codex'
+            model_name = model_override or 'gpt-5.5'
+            runner = HermesProfileRunner(
+                profile_name=profile_name,
+                timeout_seconds=options['runner_timeout'],
+                model_override=model_override,
+                provider_override=provider_override,
+            )
 
         result = prepare_ai_curation_batch(
             channel=channel,

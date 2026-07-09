@@ -102,9 +102,12 @@ class HermesProfileRunnerTests(SimpleTestCase):
 
         self.assertEqual(output, expected)
         command = run.call_args.args[0]
-        self.assertEqual(command[:5], ['hermes', '-p', 'descontos-bot', 'chat', '-Q'])
-        self.assertIn('-q', command)
-        prompt = command[command.index('-q') + 1]
+        self.assertEqual(command[:5], ['hermes', 'chat', '-Q', '--profile', 'descontos-bot'])
+        query_index = command.index('-q')
+        prompt = command[query_index + 1]
+        # Sem override de modelo, nenhuma flag -m/--provider é injetada.
+        self.assertNotIn('-m', command)
+        self.assertNotIn('--provider', command)
         self.assertIn('JSON puro', prompt)
         self.assertIn('skill humanizer', prompt)
         self.assertIn('Não use fórmulas repetidas', prompt)
@@ -113,6 +116,34 @@ class HermesProfileRunnerTests(SimpleTestCase):
         self.assertIn('low_priority_book', prompt)
         self.assertIn('livros têm baixa conversão', prompt)
         self.assertIn('"offer_id": 101', prompt)
+        # profile is passed via --profile CLI flag
+        self.assertIn('--profile', command)
+        self.assertIn('descontos-bot', command)
+
+    def test_profile_runner_injects_model_and_provider_override_keeping_profile(self):
+        completed = subprocess.CompletedProcess(
+            args=['hermes'],
+            returncode=0,
+            stdout='{"schema_version": "1.0", "decisions": [], "actual_distribution": {}}',
+            stderr='',
+        )
+
+        with patch('apps.curation.services.hermes_runner.subprocess.run', return_value=completed) as run:
+            HermesProfileRunner(
+                profile_name='descontos-bot',
+                model_override='glm-5.2',
+                provider_override='zai',
+            ).run({'offers': []})
+
+        command = run.call_args.args[0]
+        # Profile permanece o mesmo; só o modelo/provider são sobrescritos.
+        self.assertEqual(command[:5], ['hermes', 'chat', '-Q', '--profile', 'descontos-bot'])
+        self.assertIn('-m', command)
+        self.assertEqual(command[command.index('-m') + 1], 'glm-5.2')
+        self.assertIn('--provider', command)
+        self.assertEqual(command[command.index('--provider') + 1], 'zai')
+        # A flag -m vem antes do prompt (-q é o último par).
+        self.assertLess(command.index('-m'), command.index('-q'))
 
     def test_profile_runner_raises_on_nonzero_exit(self):
         completed = subprocess.CompletedProcess(args=['hermes'], returncode=2, stdout='', stderr='boom')

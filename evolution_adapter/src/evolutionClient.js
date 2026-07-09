@@ -65,10 +65,21 @@ function safeJson(text) {
 }
 
 function toSendMessageResult(payload) {
+  // Sucesso real = a Evolution devolveu uma key/id da mensagem (aceita e enfileirada
+  // para envio). Antes isto era hardcoded como true, o que marcava "enviado" mesmo
+  // quando a Evolution não confirmava nada. `status` PENDING/SERVER_ACK/etc é normal;
+  // apenas ERROR (ou ausência de id) indica falha. `payload.message` é o CONTEÚDO da
+  // mensagem, não um erro — não usar como mensagem de erro.
+  const messageId = String(payload?.key?.id || payload?.id || payload?.messageId || payload?.data?.key?.id || '');
+  const status = String(payload?.status || payload?.data?.status || '');
+  const success = Boolean(messageId) && status.toUpperCase() !== 'ERROR';
   return {
-    success: true,
-    message_id: String(payload?.key?.id || payload?.id || payload?.messageId || payload?.data?.key?.id || ''),
+    success,
+    message_id: messageId,
     sent_at: new Date().toISOString(),
+    error: success
+      ? ''
+      : String(payload?.error || `Evolution não confirmou envio (status=${status || 'desconhecido'}, sem message id)`),
   };
 }
 

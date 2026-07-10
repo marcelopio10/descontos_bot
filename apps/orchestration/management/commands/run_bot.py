@@ -1,4 +1,5 @@
 import logging
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -43,6 +44,31 @@ PRODUCTION_WHATSAPP_CHANNEL_CODES = {'whatsapp_principal'}
 AI_PRODUCTION_CONFIRMATION = 'CONFIRM_AI_PRODUCTION'
 INSTAGRAM_GENERATION_WINDOW_HOURS = 36
 HEALTHCHECK_FILE = Path(settings.BASE_DIR) / 'data' / 'last_cycle.txt'
+
+# Curadoria IA: mesmo profile em todas as tentativas; muda apenas o modelo/provider.
+# O modelo padrão do profile (gpt-5.5) costuma estourar limite de token/latência; o
+# fallback força um modelo mais leve/estável de outro provider (glm-5.2), sem trocar
+# de profile. Sobrescrevível por env para operação sem deploy.
+AI_CURATION_PROFILE = 'descontos-bot'
+AI_CURATION_FALLBACK_MODELS = ('glm-5.2',)
+AI_CURATION_RUNNER_TIMEOUT = 600
+
+
+def _ai_curation_attempts() -> list[tuple[str, str | None]]:
+    """Tentativas de curadoria IA no MESMO profile, na ordem de execução.
+
+    Cada item é (label, model_override): o primário usa o modelo padrão do profile
+    (model_override=None) e os fallbacks forçam outro modelo via `hermes -m <modelo>`.
+    Env override: AI_CURATION_FALLBACK_MODELS="glm-5.2,glm-4.6" (CSV de modelos de fallback).
+    """
+    raw = os.environ.get('AI_CURATION_FALLBACK_MODELS', '').strip()
+    if raw:
+        fallback_models: tuple[str, ...] = tuple(item.strip() for item in raw.split(',') if item.strip())
+    else:
+        fallback_models = AI_CURATION_FALLBACK_MODELS
+    attempts: list[tuple[str, str | None]] = [('primário (modelo padrão do profile)', None)]
+    attempts.extend((f'fallback IA ({model})', model) for model in fallback_models)
+    return attempts
 
 
 class Command(BaseCommand):
@@ -120,7 +146,9 @@ class Command(BaseCommand):
         dry_run = options['dry_run']
         legacy_selector = options['legacy_selector']
         ai_curation = not legacy_selector or options['ai_curation'] or options['ai_curation_required']
-        ai_curation_required = options['ai_curation_required'] or (ai_curation and not legacy_selector)
+        # Só bloqueia o fallback legado quando o operador exige explicitamente lote curado.
+        # No fluxo padrão, a IA falhando cai no selector legado como segundo fallback.
+        ai_curation_required = options['ai_curation_required']
         prepare_ai_curation = options['prepare_ai_curation'] or (ai_curation and not legacy_selector)
         ai_curation_limit = options['ai_curation_limit']
         if ai_curation_limit is not None and ai_curation_limit < 1:
@@ -199,37 +227,25 @@ class Command(BaseCommand):
             self._generate_instagram_posts_for_new_offers()
 
         if prepare_ai_curation:
-            self.stdout.write('Preparando lote de curadoria IA antes do consumo.')
-            prepare_args = [
-                'prepare_ai_curation_batch',
-                '--channel',
-                channel.code,
-                '--mode',
-                'dry_run' if dry_run else 'homolog',
-                '--runner',
-                'real',
-                '--profile',
-                'descontos-bot',
-                '--skip-images',
-            ]
-            if dry_run:
-                prepare_args.append('--dry-run')
-            try:
-                call_command(*prepare_args, stdout=self.stdout)
-            except CommandError as exc:
-                log.error('ai_curation.prepare_failed canal=%s erro=%s', channel.code, exc)
-                self.stdout.write(self.style.ERROR(f'Preparação IA falhou: {exc}'))
+            self._prepare_ai_curation(channel=channel, dry_run=dry_run)
 
         if ai_curation:
             allowed_modes = [CurationRun.Mode.DRY_RUN] if dry_run else [CurationRun.Mode.HOMOLOG, CurationRun.Mode.PRODUCTION]
-            if not dry_run and ai_curation_required:
+            if ai_curation_required:
                 self.stdout.write(self.style.WARNING('ai-curation-required ativo: fallback para selector legado bloqueado.'))
             if self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=ai_curation_limit, allowed_modes=allowed_modes):
                 return
-            if ai_curation_required or dry_run:
+            if ai_curation_required:
                 self.stdout.write(self.style.ERROR('ai-curation-required: abortando ciclo sem fallback para selector legado.'))
                 self._write_healthcheck()
                 return
+            self.stdout.write(
+                self.style.WARNING(
+                    'Curadoria IA indisponível (tentativas de IA falharam). '
+                    'Usando selector legado por lógica como segundo fallback.',
+                ),
+            )
+            log.warning('ai_curation.fallback_to_legacy canal=%s', channel.code)
 
         config = get_selection_config()
         offers = select_offers_for_channel(channel=channel, config=config)
@@ -285,6 +301,50 @@ class Command(BaseCommand):
             )
         log.info('Ciclo finalizado. ofertas_selecionadas=%s', len(offers))
         self._write_healthcheck()
+
+    def _prepare_ai_curation(self, *, channel: SocialChannel, dry_run: bool) -> bool:
+        """Prepara o lote de curadoria IA tentando o profile primário e, se falhar,
+        o mesmo profile com um modelo de fallback (outro provider).
+
+        Retorna True na primeira tentativa que preparar o lote sem erro; False se
+        todas falharem (o chamador então cai no selector legado).
+        """
+        for label, model_override in _ai_curation_attempts():
+            prepare_args = [
+                'prepare_ai_curation_batch',
+                '--channel',
+                channel.code,
+                '--mode',
+                'dry_run' if dry_run else 'homolog',
+                '--runner',
+                'real',
+                '--profile',
+                AI_CURATION_PROFILE,
+                '--skip-images',
+                '--runner-timeout',
+                str(AI_CURATION_RUNNER_TIMEOUT),
+            ]
+            if model_override:
+                prepare_args += ['--model', model_override]
+            if dry_run:
+                prepare_args.append('--dry-run')
+
+            self.stdout.write(f'Preparando lote de curadoria IA ({label}, profile={AI_CURATION_PROFILE}).')
+            try:
+                call_command(*prepare_args, stdout=self.stdout)
+            except CommandError as exc:
+                log.error(
+                    'ai_curation.prepare_failed canal=%s profile=%s modelo=%s erro=%s',
+                    channel.code, AI_CURATION_PROFILE, model_override or 'default', exc,
+                )
+                self.stdout.write(self.style.ERROR(f'Preparação IA falhou ({label}): {exc}'))
+                continue
+            log.info(
+                'ai_curation.prepare_ok canal=%s profile=%s modelo=%s',
+                channel.code, AI_CURATION_PROFILE, model_override or 'default',
+            )
+            return True
+        return False
 
     def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool, limit: int | None = None, allowed_modes: list[str] | None = None) -> bool:
         result = get_ready_curated_batch(channel, allowed_modes=allowed_modes)
@@ -423,6 +483,15 @@ class Command(BaseCommand):
         return summary
 
     def _generate_instagram_posts_for_new_offers(self) -> None:
+        self.stdout.write(
+            self.style.WARNING(
+                'Geração automática de posts no Instagram está desativada. '
+                'Nenhum post foi gerado e nenhum handoff pro Telegram foi disparado.',
+            ),
+        )
+        log.info('instagram_posts.generation_disabled scope=new_offers')
+        return
+
         cutoff = timezone.now() - timedelta(hours=INSTAGRAM_GENERATION_WINDOW_HOURS)
         posted_offer_ids = set(
             InstagramPost.objects
@@ -496,6 +565,15 @@ class Command(BaseCommand):
         )
 
     def _generate_instagram_story(self, offer) -> None:
+        self.stdout.write(
+            self.style.WARNING(
+                'Geração automática de story no Instagram está desativada. '
+                'Nenhuma story foi gerada e nenhum handoff pro Telegram foi disparado.',
+            ),
+        )
+        log.info('instagram_story.generation_disabled offer_id=%s', offer.id)
+        return
+
         try:
             post = generate_story_for_offer(offer)
         except Exception as exc:

@@ -1,3 +1,4 @@
+import './env.js';
 import http from 'node:http';
 import { getConfig } from './config.js';
 import { getConnectionStatus, sendMedia, sendText } from './evolutionClient.js';

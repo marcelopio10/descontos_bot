@@ -120,7 +120,7 @@ class RunBotAICurationTests(TestCase):
         self.assertIsNone(batch.consumed_at)
         self.assertEqual(batch.status, CuratedBatch.Status.READY)
 
-    def test_ai_curation_without_ready_batch_pauses_without_selector_fallback(self):
+    def test_ai_curation_without_ready_batch_falls_back_to_legacy_selector(self):
         out = StringIO()
 
         with patch('apps.orchestration.management.commands.run_bot.call_command'):
@@ -137,10 +137,13 @@ class RunBotAICurationTests(TestCase):
 
         text = out.getvalue()
         self.assertIn('Nenhum lote curado pronto', text)
-        self.assertNotIn('Título selector antigo', text)
+        self.assertIn('selector legado por lógica como segundo fallback', text)
+        self.assertIn('Ofertas selecionadas:', text)
+        self.assertIn('Título selector antigo', text)
+        self.assertNotIn('ai-curation-required: abortando ciclo', text)
         self.assertEqual(Delivery.objects.count(), 0)
 
-    def test_default_flow_prepares_ai_curation_and_blocks_legacy_selector_fallback(self):
+    def test_default_flow_prepares_ai_curation_then_falls_back_to_legacy_selector(self):
         out = StringIO()
 
         with patch('apps.orchestration.management.commands.run_bot.call_command') as prepare:
@@ -155,6 +158,7 @@ class RunBotAICurationTests(TestCase):
             )
 
         text = out.getvalue()
+        # Primária prepara com sucesso (call_command mockado); sem lote pronto cai no legado.
         prepare.assert_called_once()
         args = prepare.call_args.args
         self.assertEqual(args[:3], ('prepare_ai_curation_batch', '--channel', 'whatsapp_main'))
@@ -164,7 +168,9 @@ class RunBotAICurationTests(TestCase):
         self.assertIn('descontos-bot', args)
         self.assertIn('--dry-run', args)
         self.assertIn('Nenhum lote curado pronto', text)
-        self.assertNotIn('Título selector antigo', text)
+        self.assertIn('selector legado por lógica como segundo fallback', text)
+        self.assertIn('Ofertas selecionadas:', text)
+        self.assertIn('Título selector antigo', text)
         self.assertEqual(Delivery.objects.count(), 0)
 
     def test_legacy_selector_flag_keeps_old_selector_flow(self):
@@ -221,6 +227,7 @@ class RunBotAICurationTests(TestCase):
                 '--skip-scraping',
                 '--channel',
                 'whatsapp_main',
+                '--ai-curation-required',
                 stdout=out,
             )
 
@@ -230,6 +237,41 @@ class RunBotAICurationTests(TestCase):
         self.assertIn('ai-curation-required: abortando ciclo', text)
         self.assertNotIn('Ofertas selecionadas:', text)
         self.assertNotIn('Título selector antigo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_primary_failure_retries_same_profile_with_fallback_model(self):
+        out = StringIO()
+
+        with patch(
+            'apps.orchestration.management.commands.run_bot.call_command',
+            side_effect=CommandError('runner falhou: timeout'),
+        ) as prepare:
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                '--ai-curation',
+                stdout=out,
+            )
+
+        # Primária (modelo padrão) falha e o fallback tenta o MESMO profile com -m glm-5.2.
+        self.assertEqual(prepare.call_count, 2)
+        primary_args = prepare.call_args_list[0].args
+        fallback_args = prepare.call_args_list[1].args
+        self.assertIn('--profile', primary_args)
+        self.assertIn('descontos-bot', primary_args)
+        self.assertNotIn('--model', primary_args)
+        self.assertIn('--profile', fallback_args)
+        self.assertIn('descontos-bot', fallback_args)
+        self.assertIn('--model', fallback_args)
+        self.assertEqual(fallback_args[fallback_args.index('--model') + 1], 'glm-5.2')
+        # Ambas falham → cai no selector legado.
+        text = out.getvalue()
+        self.assertIn('selector legado por lógica como segundo fallback', text)
+        self.assertIn('Título selector antigo', text)
         self.assertEqual(Delivery.objects.count(), 0)
 
     def test_prepare_command_error_with_ready_batch_still_consumes_batch(self):

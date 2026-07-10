@@ -37,21 +37,40 @@ class PublishResult:
 
 
 def publish_story(post: InstagramPost, *, dry_run: bool = False) -> PublishResult:
-    """Publica um InstagramPost (formato=story) via Composio.
-
-    Fluxo:
-    1. Pega o primeiro asset_path do post (PNG gerado pelo image_renderer)
-    2. Converte pra JPEG (Meta exige) em arquivo temporário
-    3. CREATE_ACTION: cria container com media_type=STORIES + upload local
-    4. PUBLISH_ACTION: publica o container
-    5. Atualiza InstagramPost: status=posted, posted_at, instagram_media_id
-    """
+    """Compatibilidade: publica somente InstagramPost formato Story via Composio."""
     if post.format != InstagramPost.Format.STORY:
         raise ComposioPublishError(
             f'Apenas formato STORY suportado. Recebido: {post.format}',
             stage='precheck',
         )
-    if post.status not in (InstagramPost.Status.READY, InstagramPost.Status.DRAFT):
+    return publish_post(post, dry_run=dry_run)
+
+
+def publish_post(post: InstagramPost, *, dry_run: bool = False) -> PublishResult:
+    """Publica um InstagramPost de feed ou story via Composio CLI.
+
+    Fluxo:
+    1. Pega o primeiro asset_path do post (PNG gerado pelo image_renderer)
+    2. Converte pra JPEG temporário (formato aceito pelo Instagram Graph)
+    3. INSTAGRAM_POST_IG_USER_MEDIA cria o container
+       - feed: image_file + caption
+       - story: media_type=STORIES + image_file + caption
+    4. INSTAGRAM_POST_IG_USER_MEDIA_PUBLISH publica o container
+    5. Atualiza InstagramPost: status=posted, posted_at, instagram_media_id
+
+    Observação: a API do Instagram publica o Story, mas não cria Link Sticker.
+    O link fica registrado em sticker_target_url para auditoria/fallback manual.
+    """
+    if post.format not in (InstagramPost.Format.FEED, InstagramPost.Format.STORY):
+        raise ComposioPublishError(
+            f'Apenas formatos FEED e STORY suportados. Recebido: {post.format}',
+            stage='precheck',
+        )
+    if post.status not in (
+        InstagramPost.Status.READY,
+        InstagramPost.Status.DRAFT,
+        InstagramPost.Status.AWAITING_POST,
+    ):
         raise ComposioPublishError(
             f'Post #{post.id} já está em status "{post.status}".',
             stage='precheck',
@@ -73,13 +92,7 @@ def publish_story(post: InstagramPost, *, dry_run: bool = False) -> PublishResul
     try:
         _convert_to_jpeg(asset_path, jpeg_path)
 
-        create_payload = {
-            'ig_user_id': ig_user_id,
-            'media_type': 'STORIES',
-            'image_file': str(jpeg_path),
-        }
-        if post.caption:
-            create_payload['caption'] = post.caption[:2200]
+        create_payload = _build_create_payload(post, ig_user_id, jpeg_path)
 
         if effective_dry_run:
             log.info('DRY-RUN: container payload=%s', create_payload)
@@ -97,6 +110,8 @@ def publish_story(post: InstagramPost, *, dry_run: bool = False) -> PublishResul
         publish_payload = {
             'ig_user_id': ig_user_id,
             'creation_id': container_id,
+            'max_wait_seconds': 60,
+            'poll_interval_seconds': 3,
         }
         publish_result = _composio_execute(PUBLISH_ACTION, publish_payload)
         media_id = _extract_id(publish_result, stage='publish')
@@ -161,6 +176,19 @@ def _convert_to_jpeg(source: Path, target: Path) -> None:
             Image.LANCZOS,
         )
         rgb.save(target, format='JPEG', quality=JPEG_QUALITY, optimize=True)
+
+
+def _build_create_payload(post: InstagramPost, ig_user_id: str, jpeg_path: Path) -> dict:
+    payload = {
+        'ig_user_id': ig_user_id,
+        'image_file': str(jpeg_path),
+    }
+    if post.format == InstagramPost.Format.STORY:
+        payload['media_type'] = 'STORIES'
+    caption = str(post.caption or '')
+    if caption:
+        payload['caption'] = caption[:2200]
+    return payload
 
 
 def _composio_execute(action: str, payload: dict) -> dict:

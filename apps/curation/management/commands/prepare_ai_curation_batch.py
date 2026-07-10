@@ -8,6 +8,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from apps.curation.models import CurationRun
 from apps.curation.services.ai_curator import prepare_ai_curation_batch
+from apps.curation.services.batch_optimizer import DEFAULT_TARGET_DISTRIBUTION
 from apps.curation.services.hermes_runner import HermesProfileRunner
 from apps.curation.services.image_processing import process_selected_batch_images
 from apps.curation.services.selector import _eligible_offers, get_selection_config
@@ -35,7 +36,9 @@ class Command(BaseCommand):
         parser.add_argument('--skip-images', action='store_true', help='Não preparar análise/processamento de imagens nesta etapa.')
         parser.add_argument('--runner', choices=['mock', 'real'], default='mock', help='Runner Hermes: mock determinístico ou profile real.')
         parser.add_argument('--profile', default='descontos-bot', help='Profile Hermes usado quando --runner=real.')
-        parser.add_argument('--runner-timeout', type=int, default=180, help='Timeout em segundos para Hermes CLI real.')
+        parser.add_argument('--model', default='', help='Sobrescreve o modelo do profile Hermes (ex.: glm-5.2). Vazio = modelo padrão do profile.')
+        parser.add_argument('--provider', default='', help='Sobrescreve o provider de inferência do Hermes (opcional).')
+        parser.add_argument('--runner-timeout', type=int, default=600, help='Timeout em segundos para Hermes CLI real.')
         parser.add_argument('--audit-dir', default=os.environ.get('AI_CURATION_AUDIT_DIR', DEFAULT_AUDIT_DIR))
         parser.add_argument('--public-dir', default=os.environ.get('AI_CURATION_PUBLIC_DIR', DEFAULT_PUBLIC_DIR))
 
@@ -66,9 +69,16 @@ class Command(BaseCommand):
         model_name = 'fake-hermes-runner'
         if options['runner'] == 'real':
             profile_name = options['profile']
-            model_provider = 'openai-codex'
-            model_name = 'gpt-5.5'
-            runner = HermesProfileRunner(profile_name=profile_name, timeout_seconds=options['runner_timeout'])
+            model_override = options['model'].strip() or None
+            provider_override = options['provider'].strip() or None
+            model_provider = provider_override or 'openai-codex'
+            model_name = model_override or 'gpt-5.5'
+            runner = HermesProfileRunner(
+                profile_name=profile_name,
+                timeout_seconds=options['runner_timeout'],
+                model_override=model_override,
+                provider_override=provider_override,
+            )
 
         result = prepare_ai_curation_batch(
             channel=channel,
@@ -119,4 +129,37 @@ class Command(BaseCommand):
     def _get_candidates(self, *, channel: SocialChannel, limit: int):
         config = get_selection_config()
         queryset = _eligible_offers(channel, config).select_related('marketplace', 'category')
-        return list(queryset[:limit])
+        return _balanced_marketplace_candidates(queryset, limit=limit)
+
+
+def _balanced_marketplace_candidates(queryset, *, limit: int):
+    """Build the AI candidate pool with marketplace coverage before the agent runs.
+
+    The AI remains the curator, but it cannot pick Shopee if the candidate payload
+    is filled by higher-discount ML/Amazon rows before Shopee appears. Seed the
+    payload near the target mix, then fill shortages from the global order.
+    """
+    if limit <= 0:
+        return []
+    quotas = _target_counts(limit, DEFAULT_TARGET_DISTRIBUTION)
+    selected = []
+    selected_ids: set[int] = set()
+    for marketplace_code in DEFAULT_TARGET_DISTRIBUTION:
+        for offer in queryset.filter(marketplace__code=marketplace_code)[:quotas.get(marketplace_code, 0)]:
+            selected.append(offer)
+            selected_ids.add(offer.id)
+    if len(selected) < limit:
+        for offer in queryset.exclude(id__in=selected_ids)[: limit - len(selected)]:
+            selected.append(offer)
+            selected_ids.add(offer.id)
+    return selected[:limit]
+
+
+def _target_counts(limit: int, target_distribution: dict[str, float]) -> dict[str, int]:
+    raw = {marketplace: limit * weight for marketplace, weight in target_distribution.items()}
+    counts = {marketplace: int(value) for marketplace, value in raw.items()}
+    missing = limit - sum(counts.values())
+    remainders = sorted(raw.items(), key=lambda item: (-(item[1] - int(item[1])), item[0]))
+    for marketplace, _ in remainders[:missing]:
+        counts[marketplace] += 1
+    return counts

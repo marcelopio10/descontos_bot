@@ -2,9 +2,8 @@
 Scraper Shopee via Affiliate Open API (GraphQL).
 
 Implementa a interface `scrape_categories` para busca por categoria usando
-keywords mapeadas no `category_targets.py`. A API `productOfferV2` aceita
-apenas keyword (não categoryId), então cada categoria contribui com palavras-chave
-específicas que simulam a segmentação.
+`productCatId` do `category_targets.py`. A API `productOfferV2` é chamada
+por categoria e página, sem keyword, para cobrir melhor o catálogo disponível.
 
 Mantém compatibilidade com o `ScraperAdapter` (`blocked`, `error_message`,
 `pages_scraped`) e com o pipeline de ingestão existente.
@@ -21,14 +20,15 @@ from apps.marketplaces.services.shopee_collectors import ProductOfferCollector
 
 log = logging.getLogger(__name__)
 
-DEFAULT_LIMIT = 10  # ofertas por categoria (mantém ciclo rápido)
+DEFAULT_LIMIT = 10  # ofertas por página/categoria (mantém ciclo rápido)
+DEFAULT_CATEGORY_PAGES = 2  # evita repetir sempre o topo estável da Shopee
 DEFAULT_LIST_TYPE = 0
 DEFAULT_SORT_TYPE = 2  # maior comissão; sem keyword para cobrir a categoria inteira
 MAX_SAFE_PRICE_RANGE_RATIO = Decimal('3')
 
 
 class ShopeeScraper:
-    """Scraper que consulta a Shopee Affiliate API por categoria (keyword)."""
+    """Scraper que consulta a Shopee Affiliate API por `productCatId`."""
 
     def __init__(self, client: ShopeeAffiliateClient | None = None) -> None:
         self._client = client or ShopeeAffiliateClient()
@@ -73,71 +73,76 @@ class ShopeeScraper:
                 category_id,
             )
 
-            try:
-                nodes = self._collector.fetch(
-                    product_cat_id=category_id,
-                    limit=DEFAULT_LIMIT,
-                    sort_type=DEFAULT_SORT_TYPE,
-                    list_type=DEFAULT_LIST_TYPE,
-                )
-            except Exception as exc:
-                log.error(
-                    'Shopee erro em categoria=%s productCatId=%s: %s',
-                    category_code,
-                    category_id,
-                    exc,
-                )
-                continue
-
-            self.pages_scraped += 1
-
-            for item in nodes:
-                if _has_unsafe_price_range(item):
-                    log.info(
-                        'Shopee item rejeitado: faixa de preço insegura itemId=%s '
-                        'shopId=%s priceMin=%s priceMax=%s',
-                        item.get('itemId'),
-                        item.get('shopId'),
-                        item.get('priceMin'),
-                        item.get('priceMax'),
+            for page in range(1, DEFAULT_CATEGORY_PAGES + 1):
+                try:
+                    nodes = self._collector.fetch(
+                        product_cat_id=category_id,
+                        limit=DEFAULT_LIMIT,
+                        page=page,
+                        sort_type=DEFAULT_SORT_TYPE,
+                        list_type=DEFAULT_LIST_TYPE,
+                    )
+                except Exception as exc:
+                    log.error(
+                        'Shopee erro em categoria=%s productCatId=%s page=%s: %s',
+                        category_code,
+                        category_id,
+                        page,
+                        exc,
                     )
                     continue
 
-                item = _with_price_variation_flag(item)
+                self.pages_scraped += 1
+                if not nodes:
+                    break
 
-                item_id = str(item.get('itemId', ''))
-                shop_id = str(item.get('shopId', ''))
-                dedup_key = f'{item_id}:{shop_id}'
-                if dedup_key in seen:
-                    continue
-                seen.add(dedup_key)
+                for item in nodes:
+                    if _has_unsafe_price_range(item):
+                        log.info(
+                            'Shopee item rejeitado: faixa de preço insegura itemId=%s '
+                            'shopId=%s priceMin=%s priceMax=%s',
+                            item.get('itemId'),
+                            item.get('shopId'),
+                            item.get('priceMin'),
+                            item.get('priceMax'),
+                        )
+                        continue
 
-                current_price = item.get('priceMin') or item.get('price') or 0
-                product_url = item.get('productLink') or item.get('offerLink') or ''
-                payload: dict[str, Any] = {
-                    'marketplace_code': 'shopee',
-                    'title': item.get('productName', ''),
-                    'current_price': current_price,
-                    'price': current_price,
-                    'original_price': _derive_original_price(item),
-                    'discount_pct': item.get('priceDiscountRate') or 0,
-                    'product_url': product_url,
-                    'url': product_url,
-                    'affiliate_url': item.get('offerLink') or '',
-                    'image_url': item.get('imageUrl') or '',
-                    'external_id': dedup_key,
-                    'raw_payload': item,
-                    'shop_name': item.get('shopName') or '',
-                    'sales': item.get('sales') or item.get('soldCount') or 0,
-                    'rating': item.get('ratingStar') or 0,
-                    'commission_rate': item.get('commissionRate') or 0,
-                    'commission': item.get('commission') or 0,
-                }
+                    item = _with_price_variation_flag(item)
 
-                if trust_hint:
-                    payload['category_hint'] = category_code
+                    item_id = str(item.get('itemId', ''))
+                    shop_id = str(item.get('shopId', ''))
+                    dedup_key = f'{item_id}:{shop_id}'
+                    if dedup_key in seen:
+                        continue
+                    seen.add(dedup_key)
 
-                offers.append(payload)
+                    current_price = item.get('priceMin') or item.get('price') or 0
+                    product_url = item.get('productLink') or item.get('offerLink') or ''
+                    payload: dict[str, Any] = {
+                        'marketplace_code': 'shopee',
+                        'title': item.get('productName', ''),
+                        'current_price': current_price,
+                        'price': current_price,
+                        'original_price': _derive_original_price(item),
+                        'discount_pct': item.get('priceDiscountRate') or 0,
+                        'product_url': product_url,
+                        'url': product_url,
+                        'affiliate_url': item.get('offerLink') or '',
+                        'image_url': item.get('imageUrl') or '',
+                        'external_id': dedup_key,
+                        'raw_payload': item,
+                        'shop_name': item.get('shopName') or '',
+                        'sales': item.get('sales') or item.get('soldCount') or 0,
+                        'rating': item.get('ratingStar') or 0,
+                        'commission_rate': item.get('commissionRate') or 0,
+                        'commission': item.get('commission') or 0,
+                    }
+
+                    if trust_hint:
+                        payload['category_hint'] = category_code
+
+                    offers.append(payload)
 
         log.info(
             'Shopee category scraping concluído: ofertas=%d categorias=%d',

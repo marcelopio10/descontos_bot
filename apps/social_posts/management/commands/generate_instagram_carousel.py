@@ -10,6 +10,14 @@ class Command(BaseCommand):
         parser.add_argument('--count', type=int, default=5, help='Quantidade de ofertas no carrossel.')
 
     def handle(self, *args, **options):
+        self.stdout.write(
+            self.style.WARNING(
+                'Geração manual de carrossel no Instagram está desativada. '
+                'Nenhum post foi gerado. A geração automática (run_bot) segue ativa.',
+            ),
+        )
+        return
+
         try:
             post = generate_carousel(count=options['count'])
         except Exception as exc:

@@ -6,7 +6,7 @@ Arquitetura escolhida: Opção 2 — Curadoria IA assíncrona em duas etapas
 
 ## Objetivo
 
-Substituir gradualmente a curadoria hard-coded por uma curadoria inteligente executada por um profile Hermes chamado `descontos.bot`, mantendo o fluxo atual como baseline/contexto e sem remover o código de curadoria existente.
+Substituir gradualmente a curadoria hard-coded por uma curadoria inteligente executada por um profile Hermes chamado `descontos-bot`, mantendo o fluxo atual como baseline/contexto e sem remover o código de curadoria existente.
 
 O novo fluxo deve aumentar a conversão das ofertas enviadas, reduzir churn, balancear marketplaces e bloquear conteúdo impróprio antes do envio.
 
@@ -19,7 +19,7 @@ prepare_ai_curation_batch
   ↓
 carrega ofertas elegíveis + baseline atual + observer + histórico
   ↓
-Hermes profile descontos.bot
+Hermes profile descontos-bot
   ↓
 JSON estruturado validado
   ↓
@@ -90,13 +90,6 @@ Delivery WhatsApp/Telegram existente
 - `.gitignore`
 
 ### Profile Hermes
-
-Preferencial:
-
-- `/home/marce/.hermes/profiles/descontos.bot/SOUL.md`
-- `/home/marce/.hermes/profiles/descontos.bot/config.yaml`
-
-Fallback, se Hermes não aceitar ponto no nome:
 
 - `/home/marce/.hermes/profiles/descontos-bot/SOUL.md`
 - `/home/marce/.hermes/profiles/descontos-bot/config.yaml`
@@ -633,46 +626,8 @@ Critério de aceite:
 
 ---
 
-### Sprint 8 — Profile Hermes real `descontos.bot`
 
-Objetivo: criar e validar profile Hermes real antes de acoplar ao envio.
-
-Tasks:
-
-1. Criar profile `descontos.bot`; se falhar, `descontos-bot`.
-2. Clonar do profile default.
-3. Criar/ajustar `SOUL.md`.
-4. Ajustar `config.yaml` preservando formato real do Hermes.
-5. Validar chamada simples retornando JSON.
-6. Validar chamada com payload pequeno de curadoria.
-
-Comandos:
-
-```bash
-hermes profile create descontos.bot --clone default
-hermes profile show descontos.bot
-hermes --profile descontos.bot chat -q 'Responda apenas {"ok": true}'
-```
-
-Fallback:
-
-```bash
-hermes profile create descontos-bot --clone default
-hermes profile show descontos-bot
-hermes --profile descontos-bot chat -q 'Responda apenas {"ok": true}'
-```
-
-Critério de aceite:
-
-- Profile existe.
-- Usa OpenAI Codex atual.
-- Responde JSON puro em teste simples.
-- Não expõe credenciais.
-- Está com cwd apontando para o projeto.
-
----
-
-### Sprint 9 — Hermes real em dry-run/shadow mode
+### Sprint 8 — Hermes real em dry-run/shadow mode
 
 Objetivo: executar curadoria real com Hermes, sem envio.
 
@@ -712,7 +667,7 @@ Critério de aceite:
 
 ---
 
-### Sprint 10 — Consumo de batch curado no WhatsApp em dry-run
+### Sprint 9 — Consumo de batch curado no WhatsApp em dry-run
 
 Objetivo: integrar `run_bot` ao lote curado, sem envio real.
 
@@ -752,7 +707,7 @@ Critério de aceite:
 
 ---
 
-### Sprint 11 — Consumo de batch curado no Telegram em dry-run
+### Sprint 10 — Consumo de batch curado no Telegram em dry-run
 
 Objetivo: integrar Telegram ao lote curado, sem envio real.
 
@@ -789,7 +744,7 @@ Critério de aceite:
 
 ---
 
-### Sprint 12 — Homologação visual controlada
+### Sprint 11 — Homologação visual controlada
 
 Objetivo: enviar lote curado para canais de homologação, com validação humana.
 
@@ -797,7 +752,7 @@ Pré-requisitos:
 
 - Sprint 9 aprovada.
 - Sprint 10 aprovada.
-- Sprint 11 aprovada.
+- Sprint 8 aprovada.
 - Nenhuma oferta imprópria no batch.
 - Captions revisadas.
 
@@ -829,7 +784,7 @@ Critério de aceite:
 
 ---
 
-### Sprint 13 — Produção assistida
+### Sprint 12 — Produção assistida
 
 Objetivo: rodar IA em produção de forma limitada e monitorada.
 
@@ -863,7 +818,7 @@ Rollback:
 
 ---
 
-### Sprint 14 — Produção plena e limpeza
+### Sprint 13 — Produção plena e limpeza
 
 Objetivo: estabilizar operação recorrente.
 

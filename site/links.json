@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-07-09T16:02:34.616226+00:00",
+  "generated_at": "2026-07-10T02:24:51.293621+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 8705,
-      "title": "Ventosa De Silicone Dupla Face Suporte De Telefone Capa Adesivo Para selfies Streaming De Vídeo",
-      "current_price": "3.29",
-      "original_price": "54.83",
-      "discount_pct": "94.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134301-7rdvu-mcrmnh6av13o50",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/30mGXIeNca?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8705"
-    },
     {
       "id": 6798,
       "title": "Jogo de Lençol 400 fios toque Suave e Acetinado Berço Solteiro Casal Queen King 02 e 03 Peças",
@@ -22,6 +12,16 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m82atd2bm5f53a",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/BS4peUbMb?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6798"
+    },
+    {
+      "id": 8705,
+      "title": "Ventosa De Silicone Dupla Face Suporte De Telefone Capa Adesivo Para selfies Streaming De Vídeo",
+      "current_price": "5.47",
+      "original_price": "54.70",
+      "discount_pct": "90.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134301-7rdvu-mcrmnh6av13o50",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/30mGXIeNca?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8705"
     },
     {
       "id": 8679,

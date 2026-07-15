@@ -1,11 +1,11 @@
 {
   "version": "2.0",
   "report_type": "incremental_market_intel",
-  "generated_at": "2026-07-14T01:01:09.224419+00:00",
-  "date": "2026-07-13",
+  "generated_at": "2026-07-15T01:00:48.653005+00:00",
+  "date": "2026-07-14",
   "window": {
-    "start": "2026-07-13T03:00:00+00:00",
-    "end": "2026-07-14T02:59:59.999999+00:00"
+    "start": "2026-07-14T03:00:00+00:00",
+    "end": "2026-07-15T02:59:59.999999+00:00"
   },
   "summary": {
     "groups_analyzed": 9,
@@ -60735,11 +60735,11 @@
       "Tênis Ofertas | 273": 0.3
     },
     "lag_cobertura": {
-      "amostras": 876,
-      "descontos_bot_publicou_primeiro": 775,
-      "concorrente_publicou_primeiro": 101,
+      "amostras": 878,
+      "descontos_bot_publicou_primeiro": 770,
+      "concorrente_publicou_primeiro": 108,
       "empate": 0,
-      "lag_medio_horas": -834.1
+      "lag_medio_horas": -823.1
     },
     "sazonalidade": [
       {
@@ -60756,12 +60756,12 @@
     "backlog_curadoria": []
   },
   "cobertura_acumulada": {
-    "ofertas_nao_cobertas": 991,
+    "ofertas_nao_cobertas": 989,
     "taxa_sobreposicao": 0.47,
-    "exclusivas_concorrente": 991,
-    "tempo_ate_cobertura_horas_medio": -834.1,
+    "exclusivas_concorrente": 989,
+    "tempo_ate_cobertura_horas_medio": -823.1,
     "metodo_match": {
-      "titulo_normalizado": 876
+      "titulo_normalizado": 878
     },
     "backlog_curadoria": [
       {
@@ -60778,7 +60778,7 @@
       },
       {
         "comb": "mercadolivre:moda",
-        "count": 79
+        "count": 77
       },
       {
         "comb": "amazon:casa/cozinha",

@@ -12,6 +12,10 @@ from apps.curation.services.selector import (
 )
 from apps.curation.services.telegram_message_builder import build_curated_telegram_payload, build_telegram_payload
 from apps.distribution.models import SocialChannel
+from apps.distribution.services.execution_window import (
+    get_silence_error_message,
+    is_distribution_silenced,
+)
 from apps.distribution.services.telegram_delivery import deliver_curated_item_to_telegram, deliver_offer_to_telegram
 from apps.orchestration.services.scheduler import (
     sleep_between_cycles,
@@ -149,6 +153,11 @@ class Command(BaseCommand):
         ai_curation_required: bool = False,
         prepare_ai_curation: bool = False,
     ) -> None:
+        if not dry_run and is_distribution_silenced():
+            self.stdout.write(self.style.WARNING(get_silence_error_message()))
+            logger.info('telegram.cycle_skipped_silence channel=%s', channel.code)
+            return
+
         if prepare_ai_curation:
             self.stdout.write('Preparando lote de curadoria IA antes do consumo.')
             prepare_args = [

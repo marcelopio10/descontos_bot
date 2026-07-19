@@ -165,3 +165,57 @@ Após push/deploy, repetir as checagens do Passo 3 na URL pública e confirmar n
 1. Renomear/remover `site/middleware.js` e reverter os rewrites de auth no `site/vercel.json`.
 2. Redeploy. As páginas voltam ao comportamento público anterior.
 3. (Opcional) Remover as variáveis `SITE_AUTH_*` do Vercel.
+
+---
+
+# Runbook — Automação do canal Telegram principal (`publish-telegram.timer`)
+
+O comando `manage.py publish_telegram` nunca foi automatizado — dependia de execução
+manual, e ficou sem rodar a partir de 2026-07-03 até a criação deste timer (Sprint 1,
+Tarefa 1.1 do plano de refatoração pós-diagnóstico). A partir de agora, a publicação no
+canal Telegram principal (`SocialChannel` code=`telegram_main`, target `@descontosbotlgm`)
+é disparada automaticamente por `scripts/publish-telegram.service` +
+`scripts/publish-telegram.timer`, seguindo o mesmo padrão do `fetch-clicks.timer`.
+
+## Cadência-alvo
+
+- Timer dispara a cada 30 minutos (`OnUnitActiveSec=30min`), com `OnBootSec=5min` e
+  `Persistent=true` (recupera o ciclo perdido se a máquina estava desligada no horário).
+- Isso equivale a até ~48 ciclos/dia; o volume real de mensagens publicadas por dia
+  depende do número de ofertas elegíveis retornadas pela curadoria IA em cada ciclo
+  (`--ai-curation`, padrão do comando) — o timer só garante que o ciclo rode, não força
+  volume fixo de posts.
+- Cada execução é `Type=oneshot` com `--once`: um ciclo por disparo, sem loop contínuo.
+
+## Instalação (systemd --user)
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now publish-telegram.timer
+```
+
+Verificar:
+
+```bash
+systemctl --user list-timers publish-telegram.timer
+journalctl --user -u publish-telegram.service -n 50
+tail -f ~/descontos.bot/logs/publish-telegram.log
+```
+
+## Guard de produção
+
+O `ExecStart` já inclui `--confirm-ai-production CONFIRM_AI_PRODUCTION`, exigido pelo
+próprio comando para publicar de fato no canal (confirmar com
+`python3 manage.py publish_telegram --help`). Validar sintaxe sem enviar nada:
+
+```bash
+python3 manage.py publish_telegram --dry-run --once --channel telegram_main --confirm-ai-production CONFIRM_AI_PRODUCTION
+```
+
+## Rollback rápido
+
+```bash
+systemctl --user disable --now publish-telegram.timer
+```
+
+Isso interrompe os disparos futuros sem afetar entregas já registradas.

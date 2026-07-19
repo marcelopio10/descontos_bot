@@ -1,0 +1,11 @@
+[Unit]
+Description=descontos.bot - Publica ofertas curadas no canal Telegram principal
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/descontos.bot
+EnvironmentFile=%h/descontos.bot/.env
+ExecStart=%h/descontos.bot/.venv/bin/python3 manage.py publish_telegram --once --channel telegram_main --confirm-ai-production CONFIRM_AI_PRODUCTION
+StandardOutput=append:%h/descontos.bot/logs/publish-telegram.log
+StandardError=append:%h/descontos.bot/logs/publish-telegram.log

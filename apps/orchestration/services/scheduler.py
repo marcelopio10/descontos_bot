@@ -18,8 +18,15 @@ DEFAULT_CYCLE_MAX_MINUTES = 180
 # Teto/piso de itens por ciclo por canal (Tarefa 1.4 / achado C3, H3): evita
 # rajada (muitos itens de uma vez) e evita ciclo "zero" quando há itens
 # elegíveis. O piso é só informativo — não força itens inexistentes a existir.
+# Teto calibrado contra o volume real observado em produção (canal WhatsApp
+# principal, últimos 7 dias): lotes de 15-20 itens são comuns em dias de pico
+# (maior lote observado: 20). Um teto de 8 cortaria ~metade dos lotes normais
+# e reduziria o volume diário atual — contrário ao objetivo da Sprint 1
+# ("parar a sangria de volume"). 25 dá margem sobre o pico observado mantendo
+# proteção contra rajada patológica (ex.: centenas de itens após uma queda
+# prolongada de canal).
 DEFAULT_CHANNEL_ITEMS_MIN_PER_CYCLE = 1
-DEFAULT_CHANNEL_ITEMS_MAX_PER_CYCLE = 8
+DEFAULT_CHANNEL_ITEMS_MAX_PER_CYCLE = 25
 
 
 @dataclass(frozen=True)

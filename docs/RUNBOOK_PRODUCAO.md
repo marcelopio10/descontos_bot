@@ -243,7 +243,7 @@ Duas proteções complementares no caminho de envio WhatsApp
 | `wa_min_interval_seconds` | `10` (segundos) | Intervalo mínimo entre um `send_message` e o próximo, por destino. |
 | `wa_max_sends_per_hour` | `0` (desativado) | Teto opcional de envios/hora por destino; `0` = sem teto. |
 | `channel_items_min_per_cycle` | `1` | Piso informativo: loga aviso se o lote elegível ficar abaixo disso (não força itens inexistentes). |
-| `channel_items_max_per_cycle` | `8` | Teto: corta o lote do ciclo nesse tamanho antes de iniciar o envio. |
+| `channel_items_max_per_cycle` | `25` | Teto: corta o lote do ciclo nesse tamanho antes de iniciar o envio. Calibrado contra o volume real observado (lotes de 15-20 itens são comuns em dias de pico, maior lote observado: 20) — um teto menor cortaria volume normal, não só rajada patológica. |
 
 Ajustar via painel/shell, ex.:
 
@@ -257,9 +257,14 @@ Com os padrões acima e o intervalo entre ciclos do scheduler
 (`cycle_min_minutes=90`, `cycle_max_minutes=180`, média ~135min):
 
 - ~8 a 11 ciclos por dia (`1440min / ~135min`).
-- Até 8 itens por ciclo (teto padrão) → **teto diário de referência: ~65-85 itens/dia**
+- Até 25 itens por ciclo (teto padrão) → **teto diário de referência: ~200-275 itens/dia**
   no canal WhatsApp principal, sem estourar o intervalo mínimo de 10s entre envios
-  dentro do mesmo ciclo (8 itens × 10s ≈ 80s, desprezível frente aos 90-180min entre ciclos).
+  dentro do mesmo ciclo (25 itens × 10s ≈ 250s, desprezível frente aos 90-180min entre ciclos).
+- O teto de 25 foi calibrado contra o volume real dos últimos 7 dias (medido diretamente
+  no banco, agrupando `sent_at` por janelas de 5min): lotes de 15-20 itens são comuns em
+  dias de pico, maior lote observado = 20. Volume diário observado no período: 20-95
+  itens/dia. Um teto de 8 (valor inicial da implementação) cortaria cerca de metade dos
+  lotes normais — corrigido antes de ir para produção.
 - Volume real fica abaixo do teto na prática: depende de quantas ofertas a curadoria IA
   aprova e seleciona por ciclo — o teto só evita rajada quando há muitas ofertas elegíveis
   de uma vez (ex.: após reativar um canal parado).

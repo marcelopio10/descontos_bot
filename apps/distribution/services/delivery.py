@@ -12,6 +12,10 @@ from apps.distribution.services.execution_window import (
     is_distribution_silenced,
 )
 from apps.distribution.services.whatsapp_client import WhatsAppClient, WhatsAppClientError
+from apps.distribution.services.whatsapp_rate_limiter import (
+    WhatsAppRateLimiter,
+    get_default_limiter as get_default_whatsapp_rate_limiter,
+)
 from apps.offers.models import Offer
 
 PENDING_STALE_AFTER = timedelta(minutes=15)
@@ -27,6 +31,7 @@ def deliver_offer_to_channel(
     offer: Offer,
     channel: SocialChannel,
     client: WhatsAppClient | None = None,
+    rate_limiter: WhatsAppRateLimiter | None = None,
 ) -> DeliveryResult:
     message = build_offer_message(offer, channel)
 
@@ -68,6 +73,9 @@ def deliver_offer_to_channel(
             )
             return DeliveryResult(delivery=delivery, sent=False)
 
+        limiter = rate_limiter or get_default_whatsapp_rate_limiter()
+        limiter.wait_for_send(channel.target)
+
         result = client.send_message(channel.target, message, offer.image_url)
     except WhatsAppClientError as exc:
         delivery = _save_delivery(
@@ -98,6 +106,7 @@ def deliver_curated_item_to_whatsapp(
     item: CuratedBatchItem,
     channel: SocialChannel,
     client: WhatsAppClient | None = None,
+    rate_limiter: WhatsAppRateLimiter | None = None,
 ) -> DeliveryResult:
     offer = item.offer
     message = build_curated_offer_message(item, channel).strip()
@@ -142,6 +151,9 @@ def deliver_curated_item_to_whatsapp(
             )
             mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.FAILED)
             return DeliveryResult(delivery=delivery, sent=False)
+
+        limiter = rate_limiter or get_default_whatsapp_rate_limiter()
+        limiter.wait_for_send(channel.target)
 
         result = client.send_message(channel.target, message, image_url)
     except WhatsAppClientError as exc:

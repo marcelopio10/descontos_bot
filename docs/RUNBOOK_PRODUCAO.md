@@ -219,3 +219,61 @@ systemctl --user disable --now publish-telegram.timer
 ```
 
 Isso interrompe os disparos futuros sem afetar entregas já registradas.
+
+---
+
+# Runbook — Throttle e cadência de envio no WhatsApp (Sprint 1, Tarefas 1.2 e 1.4)
+
+Duas proteções complementares no caminho de envio WhatsApp
+(`apps/distribution/services/delivery.py`,
+`apps/orchestration/management/commands/run_bot.py`), ambas configuráveis via
+`panel.Setting` (chave-valor, sem precisar de deploy):
+
+1. **Throttle entre mensagens** (`apps/distribution/services/whatsapp_rate_limiter.py`):
+   intervalo mínimo entre envios consecutivos ao mesmo destino, para evitar
+   `rate-overlimit` no provedor (achado D/H3).
+2. **Cadência por ciclo** (`apps/orchestration/services/scheduler.py::get_channel_cadence_config`):
+   teto/piso de itens enviados por ciclo por canal, para evitar rajada e evitar
+   ciclo "zero" quando há itens elegíveis (achado C3/H3).
+
+## Configuração (Settings)
+
+| Setting | Padrão | Efeito |
+|---|---|---|
+| `wa_min_interval_seconds` | `10` (segundos) | Intervalo mínimo entre um `send_message` e o próximo, por destino. |
+| `wa_max_sends_per_hour` | `0` (desativado) | Teto opcional de envios/hora por destino; `0` = sem teto. |
+| `channel_items_min_per_cycle` | `1` | Piso informativo: loga aviso se o lote elegível ficar abaixo disso (não força itens inexistentes). |
+| `channel_items_max_per_cycle` | `8` | Teto: corta o lote do ciclo nesse tamanho antes de iniciar o envio. |
+
+Ajustar via painel/shell, ex.:
+
+```bash
+python3 manage.py shell -c "from apps.panel.models import Setting; Setting.objects.update_or_create(key='wa_min_interval_seconds', defaults={'value': '12'})"
+```
+
+## Cadência-alvo diária (canal WhatsApp)
+
+Com os padrões acima e o intervalo entre ciclos do scheduler
+(`cycle_min_minutes=90`, `cycle_max_minutes=180`, média ~135min):
+
+- ~8 a 11 ciclos por dia (`1440min / ~135min`).
+- Até 8 itens por ciclo (teto padrão) → **teto diário de referência: ~65-85 itens/dia**
+  no canal WhatsApp principal, sem estourar o intervalo mínimo de 10s entre envios
+  dentro do mesmo ciclo (8 itens × 10s ≈ 80s, desprezível frente aos 90-180min entre ciclos).
+- Volume real fica abaixo do teto na prática: depende de quantas ofertas a curadoria IA
+  aprova e seleciona por ciclo — o teto só evita rajada quando há muitas ofertas elegíveis
+  de uma vez (ex.: após reativar um canal parado).
+- O piso (`channel_items_min_per_cycle=1`) é apenas informativo: se não houver itens
+  elegíveis, o ciclo não força envio — só registra `channel_cadence.below_floor` no log.
+
+## Verificação
+
+- Rodar um ciclo real pequeno e medir o intervalo entre `sent_at` consecutivos:
+  `select sent_at from distribution_delivery where social_channel_id=2 order by sent_at desc limit 5`
+  — a diferença entre linhas deve respeitar `wa_min_interval_seconds`.
+- Forçar um lote grande (mais itens elegíveis que `channel_items_max_per_cycle`) e conferir
+  no stdout a mensagem `Cadência: lote reduzido de N para M`.
+- Derrubar a sessão do WhatsApp (parar o Evolution adapter) e rodar 1 ciclo: o log deve
+  mostrar `whatsapp_session.precheck_failed` (ou `whatsapp_session.dropped_mid_batch` se a
+  queda ocorrer no meio do lote) e **não** uma sequência de dezenas de `FAILED` contíguos —
+  ver Tarefa 1.3 (`SessaoIndisponivelError`).

@@ -33,6 +33,7 @@ from apps.orchestration.services.offer_publication import (
 )
 from apps.orchestration.services.scheduler import (
     calculate_next_sleep_seconds,
+    get_channel_cadence_config,
     get_scheduler_config,
     sleep_between_cycles,
     wait_until_distribution_window,
@@ -255,6 +256,7 @@ class Command(BaseCommand):
 
         config = get_selection_config()
         offers = select_offers_for_channel(channel=channel, config=config)
+        offers = self._apply_channel_cadence(channel=channel, items=offers)
 
         mode = 'dry_run' if dry_run else 'envio real'
         self.stdout.write(f'Ciclo do descontos.bot em {mode}')
@@ -377,6 +379,8 @@ class Command(BaseCommand):
         items = result.items
         if limit is not None:
             items = items[:limit]
+        else:
+            items = self._apply_channel_cadence(channel=channel, items=items)
         mode = 'dry_run' if dry_run else 'homologação/envio real'
         self.stdout.write(f'Ciclo do descontos.bot em {mode} com curadoria IA')
         self.stdout.write(f'Canal: {channel.name} ({channel.code})')
@@ -454,6 +458,40 @@ class Command(BaseCommand):
             log.error('whatsapp_session.precheck_failed motivo=nao_conectado')
             return False
         return True
+
+    def _apply_channel_cadence(self, *, channel: SocialChannel, items: list) -> list:
+        """Aplica o teto/piso de cadência configurado para o canal (Tarefa 1.4).
+
+        Teto: corta rajadas limitando itens/ciclo. Piso: não força itens
+        inexistentes a aparecer — apenas registra quando o lote elegível fica
+        abaixo do piso configurado (não há o que enviar além do que existe).
+        """
+        cadence = get_channel_cadence_config()
+        total = len(items)
+        capped = items[: cadence.max_items_per_cycle]
+        if len(capped) < total:
+            self.stdout.write(
+                self.style.WARNING(
+                    f'Cadência: lote reduzido de {total} para {len(capped)} '
+                    f'(teto configurado: {cadence.max_items_per_cycle}/ciclo, canal={channel.code}).',
+                ),
+            )
+            log.info(
+                'channel_cadence.capped canal=%s total=%s teto=%s',
+                channel.code, total, cadence.max_items_per_cycle,
+            )
+        elif 0 < total < cadence.min_items_per_cycle:
+            self.stdout.write(
+                self.style.WARNING(
+                    f'Cadência abaixo do piso configurado ({total} < {cadence.min_items_per_cycle}) '
+                    f'para o canal={channel.code}: não há itens elegíveis suficientes.',
+                ),
+            )
+            log.info(
+                'channel_cadence.below_floor canal=%s total=%s piso=%s',
+                channel.code, total, cadence.min_items_per_cycle,
+            )
+        return capped
 
     def _write_healthcheck(self) -> None:
         try:

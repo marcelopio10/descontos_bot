@@ -14,11 +14,17 @@ from apps.curation.services.curated_batch_reader import get_ready_curated_batch
 from apps.curation.services.message_builder import build_curated_offer_message, build_offer_message, get_final_url
 from apps.curation.services.selector import get_selection_config, select_offers_for_channel
 from apps.distribution.models import SocialChannel
-from apps.distribution.services.delivery import deliver_curated_item_to_whatsapp, deliver_offer_to_channel
+from apps.distribution.services.delivery import (
+    SessaoIndisponivelError,
+    deliver_curated_item_to_whatsapp,
+    deliver_offer_to_channel,
+    get_whatsapp_session_status,
+)
 from apps.distribution.services.execution_window import (
     get_silence_error_message,
     is_distribution_silenced,
 )
+from apps.distribution.services.whatsapp_client import WhatsAppClientError
 from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
 from apps.orchestration.services.offer_publication import (
@@ -271,6 +277,10 @@ class Command(BaseCommand):
         if not dry_run and is_distribution_silenced():
             self.stdout.write(self.style.WARNING(get_silence_error_message()))
 
+        if not dry_run and not self._check_whatsapp_session():
+            self._write_healthcheck()
+            return
+
         for index, offer in enumerate(offers, start=1):
             message = build_offer_message(offer, channel)
             self.stdout.write('')
@@ -281,7 +291,17 @@ class Command(BaseCommand):
             self.stdout.write(message)
 
             if not dry_run:
-                result = deliver_offer_to_channel(offer=offer, channel=channel)
+                try:
+                    result = deliver_offer_to_channel(offer=offer, channel=channel)
+                except SessaoIndisponivelError as exc:
+                    self.stdout.write(
+                        self.style.ERROR(f'Sessão do WhatsApp caiu durante o envio: {exc}'),
+                    )
+                    log.error(
+                        'whatsapp_session.dropped_mid_batch offer_id=%s motivo=%s',
+                        offer.id, exc,
+                    )
+                    break
                 delivery = result.delivery
                 self.stdout.write(
                     f'Entrega: {delivery.delivery_status} '
@@ -362,6 +382,10 @@ class Command(BaseCommand):
         self.stdout.write(f'Canal: {channel.name} ({channel.code})')
         self.stdout.write(f'Lote curado #{batch.id}: run={batch.run_id}; itens={len(items)}')
 
+        if not dry_run and not self._check_whatsapp_session():
+            self._write_healthcheck()
+            return True
+
         for index, item in enumerate(items, start=1):
             offer = item.offer
             self.stdout.write('')
@@ -373,7 +397,17 @@ class Command(BaseCommand):
             self.stdout.write(build_curated_offer_message(item, channel))
 
             if not dry_run:
-                delivery_result = deliver_curated_item_to_whatsapp(item=item, channel=channel)
+                try:
+                    delivery_result = deliver_curated_item_to_whatsapp(item=item, channel=channel)
+                except SessaoIndisponivelError as exc:
+                    self.stdout.write(
+                        self.style.ERROR(f'Sessão do WhatsApp caiu durante o envio: {exc}'),
+                    )
+                    log.error(
+                        'whatsapp_session.dropped_mid_batch offer_id=%s item_id=%s motivo=%s',
+                        offer.id, item.id, exc,
+                    )
+                    break
                 delivery = delivery_result.delivery
                 self.stdout.write(
                     f'Entrega: {delivery.delivery_status} '
@@ -394,6 +428,31 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f'Enviadas {sent_count}/{len(items)} com curadoria IA.'))
         log.info('ai_curation.cycle_finished batch_id=%s items=%s dry_run=%s', batch.id, len(items), dry_run)
         self._write_healthcheck()
+        return True
+
+    def _check_whatsapp_session(self) -> bool:
+        """Checa a sessão do WhatsApp uma única vez antes de iniciar o loop de envio.
+
+        Evita o cenário do achado C3: se a sessão já está indisponível antes do
+        ciclo começar a enviar, não iteramos as ofertas nem marcamos nada como
+        FAILED — apenas registramos o motivo e saímos cedo. As ofertas seguem
+        elegíveis para o próximo ciclo.
+        """
+        try:
+            status = get_whatsapp_session_status()
+        except WhatsAppClientError as exc:
+            self.stdout.write(self.style.ERROR(f'Sessão do WhatsApp indisponível: {exc}'))
+            log.error('whatsapp_session.precheck_failed motivo=%s', exc)
+            return False
+        if not status.connected:
+            self.stdout.write(
+                self.style.ERROR(
+                    'Sessão do WhatsApp não conectada. Ciclo abortado antes do envio; '
+                    'as ofertas continuam elegíveis no próximo ciclo.',
+                ),
+            )
+            log.error('whatsapp_session.precheck_failed motivo=nao_conectado')
+            return False
         return True
 
     def _write_healthcheck(self) -> None:

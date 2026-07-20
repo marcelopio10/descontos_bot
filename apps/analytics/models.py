@@ -8,6 +8,7 @@ from apps.offers.models import Offer
 class AffiliateSource(models.TextChoices):
     AMAZON = 'amazon', 'Amazon Associates'
     MERCADO_LIVRE = 'mercado_livre', 'Mercado Livre Afiliados'
+    SHOPEE = 'shopee', 'Shopee Afiliados'
 
 
 class AffiliateImportBatch(TimestampedModel):

@@ -13,6 +13,7 @@ from apps.curation.services.blacklist import filter_blacklisted_offers
 from apps.curation.services.curated_batch_reader import get_ready_curated_batch
 from apps.curation.services.message_builder import build_curated_offer_message, build_offer_message, get_final_url
 from apps.curation.services.selector import get_selection_config, select_offers_for_channel
+from apps.curation.services.settings import get_bool_setting
 from apps.distribution.models import SocialChannel
 from apps.distribution.services.delivery import (
     SessaoIndisponivelError,
@@ -59,6 +60,12 @@ HEALTHCHECK_FILE = Path(settings.BASE_DIR) / 'data' / 'last_cycle.txt'
 AI_CURATION_PROFILE = 'descontos-bot'
 AI_CURATION_FALLBACK_MODELS = ('glm-5.2',)
 AI_CURATION_RUNNER_TIMEOUT = 600
+
+# Sprint 3 - Tarefa 3.3: com esta Setting ligada, `run_bot` só coleta e prepara o
+# lote de curadoria IA (enfileira); o consumo/envio passa a rodar em processo
+# separado via `manage.py consumir_fila_whatsapp`. Default off: comportamento
+# idêntico ao atual (preparar + consumir no mesmo ciclo). Rollback = desligar.
+DECOUPLED_QUEUE_SETTING_KEY = 'usa_fila_desacoplada'
 
 
 def _ai_curation_attempts() -> list[tuple[str, str | None]]:
@@ -237,6 +244,17 @@ class Command(BaseCommand):
             self._prepare_ai_curation(channel=channel, dry_run=dry_run)
 
         if ai_curation:
+            if self._usa_fila_desacoplada():
+                self.stdout.write(
+                    self.style.WARNING(
+                        'Fila desacoplada ativa (Setting usa_fila_desacoplada=on): ciclo só '
+                        'coleta e prepara o lote. Consumo/envio roda em processo separado '
+                        '(`manage.py consumir_fila_whatsapp`).',
+                    ),
+                )
+                log.info('ai_curation.decoupled_queue_prepare_only canal=%s', channel.code)
+                self._write_healthcheck()
+                return
             allowed_modes = [CurationRun.Mode.DRY_RUN] if dry_run else [CurationRun.Mode.HOMOLOG, CurationRun.Mode.PRODUCTION]
             if ai_curation_required:
                 self.stdout.write(self.style.WARNING('ai-curation-required ativo: fallback para selector legado bloqueado.'))
@@ -367,6 +385,12 @@ class Command(BaseCommand):
             )
             return True
         return False
+
+    def _usa_fila_desacoplada(self) -> bool:
+        """Setting `usa_fila_desacoplada` (Sprint 3 - Tarefa 3.3). Default False:
+        mantém o comportamento atual (preparar + consumir no mesmo ciclo).
+        """
+        return get_bool_setting(DECOUPLED_QUEUE_SETTING_KEY, False)
 
     def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool, limit: int | None = None, allowed_modes: list[str] | None = None) -> bool:
         result = get_ready_curated_batch(channel, allowed_modes=allowed_modes)

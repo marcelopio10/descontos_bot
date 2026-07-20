@@ -1,0 +1,11 @@
+[Unit]
+Description=descontos.bot - Coleta e publica o relatório diário de market intel (observer WhatsApp)
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
+ExecStart=/bin/bash /mnt/c/Users/marce/Documents/Projetos/descontos.bot/scripts/market_intel_daily.sh
+StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/market-intel.log
+StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/market-intel.log

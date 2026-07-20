@@ -189,3 +189,114 @@ para mudar a janela mostrada no dashboard.
   WhatsApp vs Telegram, será necessário (a) rodar relatórios separados por
   SubID no painel ML e adicionar campo no Admin pra informar manualmente o
   canal; ou (b) mudar processo de envio para usar links curtos rastreados.
+
+---
+
+## Shopee Afiliados (ingestão automática — RESTR-04)
+
+Diferente de Amazon e Mercado Livre, o **Shopee Affiliate Program** é a
+**única fonte com relatório de conversão exportável oficialmente** pelo
+próprio portal (RESTR-04 do laudo). Por isso só a Shopee tem um comando de
+ingestão dedicado; ML/Amazon continuam manuais (seções acima).
+
+### ⚠️ Aviso — schema de colunas é melhor estimativa, não validada
+
+Este parser foi escrito **sem acesso a um export real** do painel Shopee
+Affiliate. As colunas aceitas (`COLUMN_ALIASES` em
+`apps/analytics/services/affiliate_parsers/shopee.py`) são a melhor hipótese
+com base na nomenclatura pública do programa (Order ID, Item ID, Shop ID,
+Item Name, Click Time, Conversion Time, Status, Sub ID 1-5, Actual
+Amount/GMV, Commission). **Na primeira vez que alguém for usar isso com um
+arquivo real**: baixe o relatório de conversão do portal, rode com
+`--dry-run` e confira o cabeçalho contra `COLUMN_ALIASES` antes de confiar no
+resultado. Se algum nome de coluna divergir, adicione o alias correspondente
+no dicionário (mesmo padrão tolerante usado no parser da Amazon) — não é
+necessário mudar a estrutura do comando.
+
+### 1. Exportar o relatório de conversão
+
+1. Entrar no painel do [Shopee Affiliate Program](https://affiliate.shopee.com.br/)
+   (ou `https://affiliate.shopee.com.br/offer/list` dependendo da conta).
+2. **Relatórios → Relatório de Conversão** (Conversion Report) — não usar o
+   relatório de cliques isolado, que não tem valor de comissão por item.
+3. Selecionar o período desejado e exportar em CSV/XLSX (o parser lê
+   CSV/TSV; se só houver XLSX, salvar como CSV antes de importar).
+
+Colunas esperadas (tolerante a aliases pt-BR/en — ver aviso acima):
+
+```
+Order ID | Item ID | Shop ID | Item Name | Click Time | Conversion Time |
+Status | Sub ID 1..5 | Actual Amount | Commission | (Quantity opcional)
+```
+
+Só **Item ID** e **Commission** são obrigatórias — as demais são usadas
+quando presentes (Shop ID melhora a resolução do produto, ver observações).
+
+### 2. Importar via CLI
+
+```bash
+# dry-run primeiro, sempre — confere cabeçalho, período detectado e warnings
+python manage.py ingest_affiliate_shopee \
+    --file /caminho/relatorio_conversao_shopee.csv \
+    --dry-run
+
+# commit
+python manage.py ingest_affiliate_shopee \
+    --file /caminho/relatorio_conversao_shopee.csv
+```
+
+Não existe fluxo Admin dedicado para Shopee nesta versão (só CLI) — o
+formulário de upload do Admin cobre hoje apenas Amazon e Mercado Livre.
+
+Período (`period_start`/`period_end`): diferente do Amazon (sempre manual)
+e mais parecido com o ML (vem do próprio payload), o comando **tenta
+derivar automaticamente** o período do min/max das colunas `Conversion
+Time`/`Click Time` presentes no arquivo. Informe manualmente só se o
+arquivo não tiver essas colunas ou se quiser forçar uma janela específica:
+
+```bash
+python manage.py ingest_affiliate_shopee \
+    --file /caminho/relatorio.csv \
+    --period-start 2026-07-13 \
+    --period-end 2026-07-19
+```
+
+Status: por padrão só linhas com status "confirmado"/"confirmed" (ou sem
+coluna de status — assume-se que o export já é só de confirmadas) entram na
+agregação. Linhas "cancelado"/"inválido" são sempre ignoradas. Use
+`--include-pending` para também contar conversões "pendente"/"pending":
+
+```bash
+python manage.py ingest_affiliate_shopee --file /caminho/relatorio.csv --include-pending
+```
+
+`--dry-run` roda o parser sem persistir. `--no-publish` pula a atualização
+automática de `affiliate-summary.json` após a importação.
+
+### Observações
+
+- **Chave de produto**: `Offer.external_id` da Shopee é
+  `"{itemId}:{shopId}"` (ver `apps/marketplaces/services/shopee_normalizer.py`).
+  Quando o relatório traz Shop ID, o parser casa exato. Quando só traz Item
+  ID (comum em exports resumidos), a resolução é **best-effort**: só resolve
+  se aquele Item ID for inequívoco entre as ofertas Shopee já cadastradas;
+  caso contrário fica marcado como não resolvido (órfão), sem adivinhar.
+- **Itens órfãos**: Item IDs sem oferta cadastrada (ou ambíguos por falta de
+  Shop ID) viram conversões "órfãs" (`offer=null`, `external_ref` com a
+  chave usada), do mesmo jeito que Amazon/ML — continuam agregando no
+  dashboard.
+- **SubID não persistido nesta versão**: o link Shopee gerado por
+  `shopee_link_generator.py` grava `subId1=descontosbot`,
+  `subId2=canal` (whatsapp/telegram/instagram/site), `subId3=campanha`,
+  `subId4=categoria`, `subId5=lote/data`. O parser **lê** as colunas Sub ID
+  1-5 quando presentes só para logar quantos itens têm SubID no relatório —
+  **não grava** em `AffiliateConversion.social_channel`, que fica `null`
+  igual Amazon/ML por enquanto. Popular o canal a partir do SubID é escopo
+  da Sprint 4 (Tarefa 4.1 do plano de refatoração), fora desta tarefa.
+- **Idempotência**: mesmo padrão das outras fontes — hash SHA-256 do arquivo
+  bloqueia reimportar o payload idêntico; reimportar um período com dados
+  diferentes sobrescreve via `update_or_create`.
+- **Cancelamento tardio**: a Shopee pode cancelar uma conversão depois do
+  fechamento (devolução, fraude). Reimportar o relatório atualizado do
+  mesmo período sobrescreve os números — mesmo comportamento do Amazon
+  quando ajusta comissão pós-fechamento.

@@ -14,10 +14,20 @@ from apps.analytics.models import (
     AffiliateSource,
 )
 from apps.analytics.services.affiliate_parsers import BatchResult, DuplicatePayloadError
+from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
 
 
 SHOPEE_MARKETPLACE_CODE = 'shopee'
+
+# Prefixo curto -> prefixo completo do SocialChannel.code, mesma convenção de
+# `_short_channel_code()` em `apps/analytics/services/link_builder.py`
+# (replicada aqui, sem importar entre apps, para reconstruir o canal a partir
+# do subId2 gravado no link Shopee no momento do envio — Tarefa 4.1).
+_SUBID_CHANNEL_PREFIX_MAP = {
+    'wa': 'whatsapp',
+    'tg': 'telegram',
+}
 
 # ATENÇÃO — melhor estimativa, não validada contra um export real:
 # não tivemos acesso a um relatório de conversão real da Shopee ao escrever
@@ -112,12 +122,17 @@ def parse_shopee_report(
     inclui também linhas "pendente"/"pending". Linhas canceladas/inválidas
     são sempre ignoradas.
 
-    SubID: se o arquivo tiver colunas subId1..subId5 (ver
+    SubID: se o arquivo tiver a coluna subId2 (ver
     `apps/marketplaces/services/shopee_link_generator.py` para o esquema de
-    canal/campanha), os valores são só contabilizados num warning
-    informativo — `AffiliateConversion.social_channel` fica `null` nesta
-    versão. Popular o canal a partir do SubID é escopo da Sprint 4
-    (Tarefa 4.1), fora desta tarefa.
+    canal/campanha — `subId2 = canal`), o parser tenta reconstruir
+    `AffiliateConversion.social_channel` a partir dela: prefixo curto
+    `wa_`/`tg_` (mesmo formato gerado por `_short_channel_code()` em
+    `apps/analytics/services/link_builder.py` no momento do envio) vira
+    `whatsapp_`/`telegram_`, e o resultado é buscado em `SocialChannel.code`.
+    Quando resolve, o canal é persistido; quando não (subId2 ausente, prefixo
+    desconhecido — ex. `ig_`/`site` — ou código sem `SocialChannel`
+    correspondente), `social_channel` fica `null` — degradação aceitável, não
+    erro. O resumo do batch reporta quantos itens resolveram canal vs não.
 
     Chave de agregação: `Offer.external_id` da Shopee é `"{itemId}:{shopId}"`
     (ver `apps/marketplaces/services/shopee_normalizer.py`). Se o relatório
@@ -161,7 +176,7 @@ def parse_shopee_report(
             'commission_brl': Decimal('0'),
             'title': '',
             'shop_id': '',
-            'sub_ids_seen': False,
+            'sub_id2': '',
         }
     )
     date_values: list[date] = []
@@ -210,8 +225,9 @@ def parse_shopee_report(
         if title and not bucket['title']:
             bucket['title'] = title
 
-        if any(_get(row, field_map, f'sub_id{i}').strip() for i in range(1, 6)):
-            bucket['sub_ids_seen'] = True
+        sub_id2 = _get(row, field_map, 'sub_id2').strip()
+        if sub_id2 and not bucket['sub_id2']:
+            bucket['sub_id2'] = sub_id2
 
         row_date = _parse_row_date(row, field_map)
         if row_date is not None:
@@ -249,18 +265,12 @@ def parse_shopee_report(
     if rows_without_item_id:
         warnings.append(f'Linhas sem Item ID ignoradas: {rows_without_item_id}')
 
-    subid_bucket_count = sum(1 for bucket in aggregated.values() if bucket['sub_ids_seen'])
-    if subid_bucket_count:
-        warnings.append(
-            f'{subid_bucket_count} item(ns) com SubID no relatório — não persistido '
-            'nesta versão (social_channel permanece null; atribuição por SubID é '
-            'escopo da Sprint 4, Tarefa 4.1).'
-        )
-
     imported = 0
     skipped = 0
     unresolved: list[str] = []
     ambiguous: list[str] = []
+    channel_resolved_count = 0
+    channel_unresolved_count = 0
 
     with transaction.atomic():
         batch = AffiliateImportBatch.objects.create(
@@ -281,6 +291,14 @@ def parse_shopee_report(
             if offer is None:
                 unresolved.append(key)
 
+            social_channel = None
+            if bucket['sub_id2']:
+                social_channel = _resolve_social_channel_from_subid(bucket['sub_id2'])
+                if social_channel is not None:
+                    channel_resolved_count += 1
+                else:
+                    channel_unresolved_count += 1
+
             lookup = {
                 'source': AffiliateSource.SHOPEE,
                 'period_start': resolved_period_start,
@@ -295,7 +313,7 @@ def parse_shopee_report(
 
             AffiliateConversion.objects.update_or_create(
                 defaults={
-                    'social_channel': None,
+                    'social_channel': social_channel,
                     'product_title': bucket['title'][:255],
                     'clicks': bucket['clicks'],
                     'conversions': bucket['conversions'],
@@ -319,6 +337,13 @@ def parse_shopee_report(
                 f'cadastrada (ambíguo, tratado como não resolvido): '
                 + ', '.join(sorted(ambiguous)[:20])
             )
+        if channel_resolved_count or channel_unresolved_count:
+            warnings.append(
+                f'SubID de canal (subId2): {channel_resolved_count} item(ns) '
+                f'resolveram social_channel, {channel_unresolved_count} não '
+                'resolveram (subId2 ausente/prefixo desconhecido/canal não '
+                'encontrado — social_channel permanece null nesses casos).'
+            )
 
         batch.rows_imported = imported
         batch.rows_skipped = skipped
@@ -336,6 +361,34 @@ def parse_shopee_report(
         period_start=resolved_period_start,
         period_end=resolved_period_end,
     )
+
+
+def _resolve_social_channel_from_subid(sub_id2: str) -> SocialChannel | None:
+    """Reconstrói o `SocialChannel` a partir do subId2 (canal) do relatório.
+
+    O subId2 é gravado no momento do envio no formato curto produzido por
+    `_short_channel_code()` em `apps/analytics/services/link_builder.py`
+    (ex.: `wa_principal`, `tg_homolog`). Replica a mesma regra aqui — sem
+    importar entre apps — para não acoplar `apps.analytics` a
+    `apps.analytics.services.link_builder` por um detalhe de formatação:
+    prefixo `wa_` vira `whatsapp_`, `tg_` vira `telegram_`, e o resultado é
+    buscado em `SocialChannel.code`.
+
+    Retorna `None` (degradação aceitável, não erro) quando o subId2 está
+    vazio, tem prefixo desconhecido (ex.: `ig_`, `site`, campanhas sem
+    canal) ou não casa com nenhum `SocialChannel` cadastrado.
+    """
+    value = (sub_id2 or '').strip().lower()
+    if not value:
+        return None
+    prefix, separator, rest = value.partition('_')
+    if not separator or not rest:
+        return None
+    full_prefix = _SUBID_CHANNEL_PREFIX_MAP.get(prefix)
+    if not full_prefix:
+        return None
+    candidate_code = f'{full_prefix}_{rest}'
+    return SocialChannel.objects.filter(code=candidate_code).first()
 
 
 def _resolve_period(

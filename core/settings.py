@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 
+from django.core.exceptions import ImproperlyConfigured
 from django.db.backends.signals import connection_created
 from dotenv import load_dotenv
 
@@ -29,13 +30,37 @@ LOG_DIR.mkdir(exist_ok=True)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-$k5_iwy1)-(2)&p0*w5qx9p2mz(npagl(eo9j*xinhlk&kn9u2'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Lido do ambiente; default seguro é False (produção). Para desenvolvimento local,
+# defina DEBUG=True no .env.
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = []
+# SECURITY WARNING: keep the secret key used in production secret!
+# Obrigatória via variável de ambiente. Em produção (DEBUG=False), a ausência da
+# variável é um erro alto (ImproperlyConfigured) — não há fallback inseguro nesse
+# caso. Em desenvolvimento (DEBUG=True), um fallback óbvio evita travar o setup
+# local de quem ainda não configurou o .env.
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = 'dev-insecure-key-only-for-local'
+    else:
+        raise ImproperlyConfigured(
+            'SECRET_KEY não definida. Configure a variável de ambiente SECRET_KEY '
+            '(veja .env.example — gere com '
+            '`python -c "from django.core.management.utils import get_random_secret_key; '
+            'print(get_random_secret_key())"`) antes de rodar com DEBUG=False (produção).'
+        )
+
+# Esta aplicação Django não serve HTTP externo em produção (sem gunicorn/nginx/wsgi
+# configurados nos scripts de deploy — apenas `manage.py run_bot` e comandos de
+# management rodando via systemd). O admin/ só é acessado localmente (runserver)
+# quando necessário. Por isso o default é local-only; ajuste via env se isso mudar.
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+    if host.strip()
+]
 
 PUBLIC_SITE_BASE_URL = os.environ.get(
     'PUBLIC_SITE_BASE_URL',

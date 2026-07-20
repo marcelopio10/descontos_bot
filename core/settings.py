@@ -256,6 +256,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': DATA_DIR / 'descontos_bot.db',
+        # Timeout (segundos) que o driver sqlite3 do Python espera por um lock antes
+        # de levantar "database is locked". Reforçado também via PRAGMA busy_timeout
+        # abaixo, pois nem todo driver repassa esta OPTION corretamente.
+        'OPTIONS': {
+            'timeout': 30,
+        },
     }
 }
 
@@ -267,6 +273,9 @@ def configure_sqlite_connection(sender, connection, **kwargs):
     with connection.cursor() as cursor:
         cursor.execute('PRAGMA foreign_keys=ON')
         cursor.execute('PRAGMA journal_mode=WAL')
+        # 30000ms — mesmo valor do OPTIONS['timeout'] acima, garantido explicitamente
+        # via PRAGMA para não depender do repasse da OPTION pelo driver.
+        cursor.execute('PRAGMA busy_timeout=30000')
 
 
 connection_created.connect(configure_sqlite_connection)
@@ -322,10 +331,14 @@ LOGGING = {
             'formatter': 'standard',
         },
         'bot_file': {
-            'class': 'logging.FileHandler',
+            'class': 'logging.handlers.RotatingFileHandler',
             'filename': LOG_DIR / 'bot.log',
             'formatter': 'standard',
             'encoding': 'utf-8',
+            # 30MB por arquivo, 7 backups (bot.log.1 .. bot.log.7) — ~210MB no pior
+            # caso. bot.log chegou a 65MB sem rotação antes desta mudança.
+            'maxBytes': 30 * 1024 * 1024,
+            'backupCount': 7,
         },
     },
     'loggers': {

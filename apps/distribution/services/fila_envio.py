@@ -88,6 +88,16 @@ MAX_RETRIES = 5
 BACKOFF_BASE_MINUTES = 2
 BACKOFF_CAP_MINUTES = 60
 
+# Idade máxima (horas) de uma Delivery para ainda ser elegível a retry.
+# Configurável via `panel.Setting` (chave 'fila_envio_max_idade_horas'); default 72h.
+# Achado real ao ligar esta fila pela primeira vez: 162 Delivery FAILED
+# acumuladas de maio/junho (antes do throttle da Sprint 1 e da migração do
+# wa_service pro Evolution), todas com motivos já corrigidos. Reenviar
+# ofertas de semanas atrás divulgaria preço/desconto desatualizado — pior
+# que não reenviar. Sem esse teto, a fila tentaria reenviar esse lixo
+# histórico (e qualquer backlog futuro parecido) indefinidamente.
+MAX_AGE_HOURS = 72
+
 WHATSAPP_CHANNEL_TYPES = {
     SocialChannel.ChannelType.WHATSAPP,
     SocialChannel.ChannelType.WHATSAPP_GROUP,
@@ -100,6 +110,10 @@ TELEGRAM_CHANNEL_TYPES = {
 
 def get_max_retries() -> int:
     return get_integer_setting('fila_envio_max_retries', MAX_RETRIES)
+
+
+def get_max_age_hours() -> int:
+    return get_integer_setting('fila_envio_max_idade_horas', MAX_AGE_HOURS)
 
 
 @dataclass(frozen=True)
@@ -168,13 +182,20 @@ class QueueProcessingSummary:
 
 
 def get_eligible_deliveries(limit: int | None = None) -> list[Delivery]:
-    """`Delivery` FAILED, com tentativas restantes e fora (ou sem) backoff."""
+    """`Delivery` FAILED, com tentativas restantes, fora (ou sem) backoff, e recente.
+
+    O teto de idade (`get_max_age_hours`) existe porque ofertas são
+    perecíveis: reenviar uma `Delivery` de semanas atrás divulgaria preço/
+    desconto desatualizado, o que é pior do que simplesmente não reenviar.
+    """
     now = timezone.now()
     max_retries = get_max_retries()
+    cutoff = now - timedelta(hours=get_max_age_hours())
     qs = (
         Delivery.objects.filter(
             delivery_status=Delivery.DeliveryStatus.FAILED,
             retry_count__lt=max_retries,
+            created_at__gte=cutoff,
         )
         .filter(Q(next_retry_at__isnull=True) | Q(next_retry_at__lte=now))
         .select_related('offer', 'social_channel')

@@ -1,6 +1,7 @@
 import json
 from dataclasses import asdict
 from datetime import date, datetime
+from decimal import Decimal
 from pathlib import Path
 
 from django.conf import settings
@@ -8,6 +9,7 @@ from django.core.management.base import BaseCommand
 
 from apps.analytics.services.operational_metrics import (
     DEFAULT_DAYS,
+    DEFAULT_WEEKS,
     OperationalPanel,
     build_operational_panel,
 )
@@ -20,7 +22,8 @@ class Command(BaseCommand):
     help = (
         'Imprime o painel operacional mínimo (envios/dia por canal, '
         'ofertas coletadas/válidas por marketplace, runs FAILED de scraping '
-        'e curadoria, última coleta do observer) e grava '
+        'e curadoria, última coleta do observer, correlação envios x '
+        'comissão por marketplace/semana) e grava '
         f'site/{PANEL_FILENAME}.'
     )
 
@@ -31,10 +34,20 @@ class Command(BaseCommand):
             default=DEFAULT_DAYS,
             help=f'Janela de análise em dias (default {DEFAULT_DAYS}).',
         )
+        parser.add_argument(
+            '--weeks',
+            type=int,
+            default=DEFAULT_WEEKS,
+            help=(
+                'Janela em semanas para a correlação envios x comissão '
+                f'por marketplace (default {DEFAULT_WEEKS}).'
+            ),
+        )
 
     def handle(self, *args, **options):
         days = options['days']
-        panel = build_operational_panel(days=days)
+        weeks = options['weeks']
+        panel = build_operational_panel(days=days, weeks=weeks)
 
         self._print_panel(panel)
 
@@ -55,6 +68,7 @@ class Command(BaseCommand):
         self._print_scraping(panel)
         self._print_curation(panel)
         self._print_observer(panel)
+        self._print_commission_correlation(panel)
 
     def _print_deliveries(self, panel: OperationalPanel) -> None:
         deliveries = panel.deliveries
@@ -143,6 +157,28 @@ class Command(BaseCommand):
         style = self.style.WARNING if observer.is_stale else self.style.SUCCESS
         self.stdout.write(f'  Status: {style(status_label)}')
 
+    def _print_commission_correlation(self, panel: OperationalPanel) -> None:
+        report = panel.commission_correlation
+        self.stdout.write('')
+        self.stdout.write(
+            f'Envios x comissão por marketplace/semana (janela de {report.weeks} semana(s))'
+        )
+        self.stdout.write('-' * 78)
+        if not report.rows:
+            self.stdout.write('  (sem envios ou comissão no período)')
+        else:
+            self.stdout.write(
+                f'  {"semana":12} {"marketplace":16} {"enviados":>10} '
+                f'{"comissão (R$)":>14} {"conversões":>11}  rótulo'
+            )
+            for row in report.rows:
+                self.stdout.write(
+                    f'  {row.week_start.isoformat():12} {row.marketplace_name[:16]:16} '
+                    f'{row.sent_count:>10} {row.commission_brl:>14} '
+                    f'{row.conversions:>11}  {row.label}'
+                )
+        self.stdout.write(f'  Nota: {report.note}')
+
     # -- gravação do JSON -------------------------------------------------------
 
     def _write_json(self, panel: OperationalPanel) -> Path:
@@ -170,4 +206,6 @@ def _json_default(value):
         return value.isoformat()
     if isinstance(value, date):
         return value.isoformat()
+    if isinstance(value, Decimal):
+        return float(value)
     raise TypeError(f'Tipo não serializável: {type(value)}')

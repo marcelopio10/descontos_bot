@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from django.db import transaction
 from django.utils import timezone
 
+from apps.analytics.services.alertas import alertar_scraper_zero_ofertas
 from apps.marketplaces.models import Marketplace
 from apps.offers.services.normalizer import OfferNormalizationError, normalize_offer
 from apps.offers.services.repository import save_normalized_offer
@@ -60,9 +61,15 @@ def run_marketplace_scraping(marketplace: Marketplace, max_pages: int) -> Scrapi
 
         if adapter.blocked:
             errors.append(adapter.error_message or 'CAPTCHA ou HTML bloqueado detectado.')
-        if marketplace.code == 'amazon' and total_valid == 0 and not adapter.blocked:
-            errors.append(
-                'Amazon retornou 0 ofertas válidas; verificar seletor, bloqueio silencioso ou execução do marketplace.',
+        if total_valid == 0 and not adapter.blocked:
+            zero_offers_message = (
+                f'{marketplace.name} retornou 0 ofertas válidas; '
+                'verificar seletor, bloqueio silencioso ou execução do marketplace.'
+            )
+            errors.append(zero_offers_message)
+            log.error(
+                'scraping.zero_valid_offers marketplace=%s run_id=%s collected=%s',
+                marketplace.code, run.id, len(payloads),
             )
 
         status = ScrapingRun.RunStatus.SUCCESS
@@ -76,6 +83,13 @@ def run_marketplace_scraping(marketplace: Marketplace, max_pages: int) -> Scrapi
             total_valid=total_valid,
             error_message=' | '.join(errors[:5]),
         )
+
+        if status == ScrapingRun.RunStatus.FAILED:
+            alertar_scraper_zero_ofertas(
+                marketplace_code=marketplace.code,
+                run_id=run.id,
+                detalhe=' | '.join(errors[:3]),
+            )
     except Exception as exc:
         log.exception('Falha ao coletar marketplace %s.', marketplace.code)
         _finish_run(
@@ -84,6 +98,11 @@ def run_marketplace_scraping(marketplace: Marketplace, max_pages: int) -> Scrapi
             total_collected=0,
             total_valid=0,
             error_message=str(exc),
+        )
+        alertar_scraper_zero_ofertas(
+            marketplace_code=marketplace.code,
+            run_id=run.id,
+            detalhe=f'Exceção durante a coleta: {exc}',
         )
 
     return ScrapingResult(

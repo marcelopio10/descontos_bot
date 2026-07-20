@@ -1,6 +1,7 @@
 from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
 from django.test import TestCase
 from django.utils import timezone
@@ -87,7 +88,8 @@ class AICuratorTests(TestCase):
         self.assertEqual(batch.items.count(), 6)
         self.assertEqual(list(batch.items.values_list('position', flat=True)), [1, 2, 3, 4, 5, 6])
 
-    def test_runner_failure_marks_run_failed_and_does_not_create_ready_batch(self):
+    @patch('apps.curation.services.ai_curator.alertar_curadoria_falhas_consecutivas')
+    def test_runner_failure_marks_run_failed_and_does_not_create_ready_batch(self, mock_alert):
         result = prepare_ai_curation_batch(
             channel=self.channel,
             offers=self.offers[:2],
@@ -100,8 +102,11 @@ class AICuratorTests(TestCase):
         self.assertIn('falha simulada', result.run.error_message)
         self.assertIsNone(result.batch)
         self.assertFalse(CuratedBatch.objects.filter(run=result.run, status=CuratedBatch.Status.READY).exists())
+        # Uma única falha ainda não atinge o limiar de alerta (2 seguidas).
+        mock_alert.assert_not_called()
 
-    def test_invalid_runner_output_marks_run_failed_and_does_not_create_ready_batch(self):
+    @patch('apps.curation.services.ai_curator.alertar_curadoria_falhas_consecutivas')
+    def test_invalid_runner_output_marks_run_failed_and_does_not_create_ready_batch(self, mock_alert):
         result = prepare_ai_curation_batch(
             channel=self.channel,
             offers=self.offers[:2],
@@ -115,6 +120,33 @@ class AICuratorTests(TestCase):
         self.assertIsNone(result.batch)
         self.assertFalse(CurationDecision.objects.filter(run=result.run).exists())
         self.assertFalse(CuratedBatch.objects.filter(run=result.run, status=CuratedBatch.Status.READY).exists())
+        mock_alert.assert_not_called()
+
+    @patch('apps.curation.services.ai_curator.alertar_curadoria_falhas_consecutivas')
+    def test_second_consecutive_failure_for_same_channel_triggers_operator_alert(self, mock_alert):
+        first = prepare_ai_curation_batch(
+            channel=self.channel,
+            offers=self.offers[:2],
+            runner=FakeHermesRunner(should_fail=True),
+            mode=CurationRun.Mode.DRY_RUN,
+            batch_size=2,
+        )
+        self.assertEqual(first.run.status, CurationRun.Status.FAILED)
+        mock_alert.assert_not_called()
+
+        second = prepare_ai_curation_batch(
+            channel=self.channel,
+            offers=self.offers[:2],
+            runner=FakeHermesRunner(should_fail=True),
+            mode=CurationRun.Mode.DRY_RUN,
+            batch_size=2,
+        )
+        self.assertEqual(second.run.status, CurationRun.Status.FAILED)
+        mock_alert.assert_called_once_with(
+            channel_code=self.channel.code,
+            run_id=second.run.id,
+            total_falhas=2,
+        )
 
     def test_improper_output_is_persisted_but_not_selected(self):
         # AI rejects improper offer and selects the approved one

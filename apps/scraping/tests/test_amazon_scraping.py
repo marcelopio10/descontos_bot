@@ -33,10 +33,13 @@ class EmptyAmazonScrapeStatusTests(TestCase):
             def collect(self, max_pages):
                 return []
 
-        with patch('apps.scraping.services.runner.build_adapter', return_value=EmptyAdapter()):
+        with patch('apps.scraping.services.runner.build_adapter', return_value=EmptyAdapter()), \
+                patch('apps.scraping.services.runner.alertar_scraper_zero_ofertas') as mock_alert:
             result = run_marketplace_scraping(marketplace, max_pages=1)
 
         self.assertEqual(result.total_collected, 0)
         self.assertEqual(result.total_valid, 0)
         self.assertEqual(result.run.status, ScrapingRun.RunStatus.FAILED)
         self.assertIn('Amazon retornou 0 ofertas', result.run.error_message)
+        # Guarda: nunca deve disparar um envio real de Telegram durante os testes.
+        mock_alert.assert_called_once()

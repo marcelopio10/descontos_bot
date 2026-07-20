@@ -10,6 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.utils import timezone
 
+from apps.analytics.services.alertas import alertar_curadoria_falhas_consecutivas
 from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationBlacklistTerm, CurationDecision, CurationRun
 from apps.curation.services.ai_prompt import build_ai_curation_payload
 from apps.curation.services.ai_schema import validate_agent_input, validate_agent_output
@@ -284,8 +285,33 @@ def _write_audit_json(audit_dir: Path, run_id: int | None, label: str, payload: 
     return path
 
 
+CONSECUTIVE_FAILURE_ALERT_THRESHOLD = 2
+
+
 def _fail_run(run: CurationRun, message: str) -> None:
     run.status = CurationRun.Status.FAILED
     run.error_message = message[:4000]
     run.selected_count = 0
     run.save(update_fields=['status', 'error_message', 'selected_count', 'updated_at'])
+    _alert_if_consecutive_failures(run)
+
+
+def _alert_if_consecutive_failures(run: CurationRun, threshold: int = CONSECUTIVE_FAILURE_ALERT_THRESHOLD) -> None:
+    """Alerta o operador quando as últimas `threshold` execuções do canal falharam em sequência.
+
+    Nota: dispara a cada run FAILED enquanto a sequência se mantiver (não só na
+    transição para o limiar) — simples e suficiente dado o volume baixo de runs.
+    """
+    recent_statuses = list(
+        CurationRun.objects.filter(channel=run.channel)
+        .order_by('-created_at')
+        .values_list('status', flat=True)[:threshold],
+    )
+    if len(recent_statuses) < threshold:
+        return
+    if all(status == CurationRun.Status.FAILED for status in recent_statuses):
+        alertar_curadoria_falhas_consecutivas(
+            channel_code=run.channel.code,
+            run_id=run.id,
+            total_falhas=threshold,
+        )

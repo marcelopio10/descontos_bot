@@ -285,14 +285,23 @@ automática de `affiliate-summary.json` após a importação.
   Shop ID) viram conversões "órfãs" (`offer=null`, `external_ref` com a
   chave usada), do mesmo jeito que Amazon/ML — continuam agregando no
   dashboard.
-- **SubID não persistido nesta versão**: o link Shopee gerado por
+- **SubID popula o canal (Sprint 4, Tarefa 4.1)**: o link Shopee gerado por
   `shopee_link_generator.py` grava `subId1=descontosbot`,
-  `subId2=canal` (whatsapp/telegram/instagram/site), `subId3=campanha`,
-  `subId4=categoria`, `subId5=lote/data`. O parser **lê** as colunas Sub ID
-  1-5 quando presentes só para logar quantos itens têm SubID no relatório —
-  **não grava** em `AffiliateConversion.social_channel`, que fica `null`
-  igual Amazon/ML por enquanto. Popular o canal a partir do SubID é escopo
-  da Sprint 4 (Tarefa 4.1 do plano de refatoração), fora desta tarefa.
+  `subId2=canal` (formato curto — `wa_<canal>`/`tg_<canal>`, mesma convenção
+  gerada por `_short_channel_code()` em
+  `apps/analytics/services/link_builder.py` no momento do envio),
+  `subId3=campanha`, `subId4=categoria`, `subId5=lote/data`. O parser lê a
+  coluna **Sub ID 2** e reconstrói `AffiliateConversion.social_channel`:
+  `wa_` vira `whatsapp_`, `tg_` vira `telegram_`, e o resultado é buscado em
+  `SocialChannel.code`. Isso só passa a acontecer de fato quando
+  `SHOPEE_AFFILIATE_ENABLED=true` estiver ligado no envio (hoje desligado
+  por padrão em produção) — com a flag desligada, os links Shopee enviados
+  não carregam SubID de canal e o `subId2` do relatório fica vazio para
+  essas conversões. Quando o subId2 está ausente, tem prefixo desconhecido
+  (ex. `ig_`/`site` — Instagram e outros canais não mapeados) ou não casa
+  com nenhum `SocialChannel` cadastrado, `social_channel` continua `null`
+  — degradação aceitável, não erro. O resumo do batch (`AffiliateImportBatch.notes`)
+  reporta quantos itens resolveram canal vs não.
 - **Idempotência**: mesmo padrão das outras fontes — hash SHA-256 do arquivo
   bloqueia reimportar o payload idêntico; reimportar um período com dados
   diferentes sobrescreve via `update_or_create`.

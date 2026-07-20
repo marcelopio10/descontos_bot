@@ -11,7 +11,7 @@ from apps.curation.services.telegram_message_builder import (
     build_telegram_payload,
 )
 from apps.distribution.models import Delivery, SocialChannel
-from apps.distribution.services.delivery import mark_curated_item_delivery
+from apps.distribution.services.delivery import _reserve_delivery_for_send, mark_curated_item_delivery
 from apps.distribution.services.execution_window import (
     get_silence_error_message,
     is_distribution_silenced,
@@ -45,25 +45,15 @@ def deliver_offer_to_telegram(
 ) -> TelegramDeliveryResult:
     payload = build_telegram_payload(offer, channel)
 
-    existing_delivery = Delivery.objects.filter(
-        offer=offer,
-        social_channel=channel,
-    ).first()
-    if (
-        existing_delivery
-        and existing_delivery.delivery_status == Delivery.DeliveryStatus.SENT
-    ):
-        logger.info(
-            'telegram.send.skipped offer_id=%s channel=%s reason=already_sent',
-            offer.id, channel.code,
-        )
-        return TelegramDeliveryResult(delivery=existing_delivery, sent=False)
-
     if is_distribution_silenced():
         logger.info(
             'telegram.send.silence offer_id=%s channel=%s reason=window',
             offer.id, channel.code,
         )
+        existing_delivery = Delivery.objects.filter(
+            offer=offer,
+            social_channel=channel,
+        ).first()
         delivery = _save_delivery(
             existing_delivery=existing_delivery,
             offer=offer,
@@ -71,6 +61,18 @@ def deliver_offer_to_telegram(
             message=payload.caption,
             status=Delivery.DeliveryStatus.SKIPPED,
             error_message=get_silence_error_message(),
+        )
+        return TelegramDeliveryResult(delivery=delivery, sent=False)
+
+    delivery, should_send = _reserve_delivery_for_send(
+        offer=offer,
+        channel=channel,
+        message=payload.caption,
+    )
+    if not should_send:
+        logger.info(
+            'telegram.send.skipped offer_id=%s channel=%s reason=already_sent_or_in_progress',
+            offer.id, channel.code,
         )
         return TelegramDeliveryResult(delivery=delivery, sent=False)
 
@@ -95,7 +97,7 @@ def deliver_offer_to_telegram(
         else Delivery.DeliveryStatus.FAILED
     )
     delivery = _save_delivery(
-        existing_delivery=existing_delivery,
+        existing_delivery=delivery,
         offer=offer,
         channel=channel,
         message=payload.caption,
@@ -129,18 +131,11 @@ def deliver_curated_item_to_telegram(
     payload = build_curated_telegram_payload(item, channel)
     offer = item.offer
 
-    existing_delivery = Delivery.objects.filter(
-        offer=offer,
-        social_channel=channel,
-    ).first()
-    if (
-        existing_delivery
-        and existing_delivery.delivery_status == Delivery.DeliveryStatus.SENT
-    ):
-        mark_curated_item_delivery(item, existing_delivery, CuratedBatchItem.SendStatus.SKIPPED)
-        return TelegramDeliveryResult(delivery=existing_delivery, sent=False)
-
     if is_distribution_silenced():
+        existing_delivery = Delivery.objects.filter(
+            offer=offer,
+            social_channel=channel,
+        ).first()
         delivery = _save_delivery(
             existing_delivery=existing_delivery,
             offer=offer,
@@ -149,6 +144,15 @@ def deliver_curated_item_to_telegram(
             status=Delivery.DeliveryStatus.SKIPPED,
             error_message=get_silence_error_message(),
         )
+        mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.SKIPPED)
+        return TelegramDeliveryResult(delivery=delivery, sent=False)
+
+    delivery, should_send = _reserve_delivery_for_send(
+        offer=offer,
+        channel=channel,
+        message=payload.caption,
+    )
+    if not should_send:
         mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.SKIPPED)
         return TelegramDeliveryResult(delivery=delivery, sent=False)
 
@@ -173,7 +177,7 @@ def deliver_curated_item_to_telegram(
         else Delivery.DeliveryStatus.FAILED
     )
     delivery = _save_delivery(
-        existing_delivery=existing_delivery,
+        existing_delivery=delivery,
         offer=offer,
         channel=channel,
         message=payload.caption,

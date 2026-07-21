@@ -4,7 +4,11 @@ from django.test import TestCase
 from django.utils import timezone
 
 from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationDecision, CurationRun
-from apps.curation.services.message_builder import build_curated_offer_message
+from apps.curation.services.message_builder import (
+    _FALLBACK_HIGHLIGHT_VARIANTS,
+    _select_badge_variant,
+    build_curated_offer_message,
+)
 from apps.distribution.models import SocialChannel
 from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
@@ -85,11 +89,18 @@ class AICuratedWhatsAppTemplateTests(TestCase):
             ),
         )
 
+    def _expected_badge_markdown(self) -> str:
+        """Tarefa 5.3: o badge agora varia deterministicamente por offer.id (achado
+        P9), então os testes calculam o badge esperado em vez de fixar um texto único.
+        """
+        lead, label, trail = _select_badge_variant(int(self.offer.discount_pct), self.offer.id)
+        return f'{lead} *{label}* {trail}'
+
     def test_curated_whatsapp_caption_preserves_original_sales_template_with_link(self):
         message = build_curated_offer_message(self.item, self.channel)
 
         self.assertIn('📦 *Sabão Líquido Omo 5L com 22% OFF*', message)
-        self.assertIn('⚡ *BOT ACHOU DESCONTO* ⚡', message)
+        self.assertIn(self._expected_badge_markdown(), message)
         self.assertIn('💰 ~De R$ 63,00~', message)
         self.assertIn('✅ *Por apenas R$ 48,00*', message)
         self.assertIn('🏷️ *22% OFF*', message)
@@ -119,14 +130,16 @@ class AICuratedWhatsAppTemplateTests(TestCase):
         self.offer.save(update_fields=['title', 'current_price', 'original_price', 'discount_pct'])
 
         message = build_curated_offer_message(self.item, self.channel)
-        highlight = message.split('⚡ *BOT ACHOU DESCONTO* ⚡\n', 1)[1].split('\n\n💰', 1)[0]
+        highlight = message.split(f'{self._expected_badge_markdown()}\n', 1)[1].split('\n\n💰', 1)[0]
 
         self.assertNotIn('✨', highlight)
         self.assertNotIn('🤖 Trecho do agente descontos-bot:', highlight)
         self.assertNotIn('Kit 7 Camisetas', highlight)
         self.assertNotIn('R$ 125,30', highlight)
         self.assertNotIn('19% OFF', highlight)
-        self.assertIn('boa opção', highlight.lower())
+        # A legenda da IA foi descartada (fallback bateu no clichê antigo de curadoria);
+        # o highlight cai numa das variações da categoria "roupa básica" (Tarefa 5.3).
+        self.assertIn(highlight, _FALLBACK_HIGHLIGHT_VARIANTS['roupa_basica'])
 
     def test_agent_highlight_avoids_formal_marketing_language(self):
         self.offer.title = 'Kit 8 peças Mordedor para Bebe Sensorial Macio com Chocalho'
@@ -138,10 +151,12 @@ class AICuratedWhatsAppTemplateTests(TestCase):
         )
 
         message = build_curated_offer_message(self.item, self.channel)
-        highlight = message.split('⚡ *BOT ACHOU DESCONTO* ⚡\n', 1)[1].split('\n\n💰', 1)[0]
+        highlight = message.split(f'{self._expected_badge_markdown()}\n', 1)[1].split('\n\n💰', 1)[0]
 
         self.assertNotIn('✨', highlight)
         self.assertNotIn('🤖 Trecho do agente descontos-bot:', highlight)
         self.assertNotIn('apelo', highlight.lower())
         self.assertNotIn('uso diário', highlight.lower())
-        self.assertIn('dentinhos', highlight.lower())
+        # A legenda da IA foi descartada (fallback bateu no clichê antigo de curadoria);
+        # o highlight cai numa das variações da categoria "bebê" (Tarefa 5.3).
+        self.assertIn(highlight, _FALLBACK_HIGHLIGHT_VARIANTS['bebe'])

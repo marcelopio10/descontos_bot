@@ -41,7 +41,7 @@ def _build_offer_template(
         width=80,
         placeholder='...',
     )
-    badge = _build_badge(discount_pct)
+    badge = _build_badge(discount_pct, offer.id)
     highlight_block = _build_highlight_block(highlight)
 
     referral_suffix = build_referral_suffix(offer, channel)
@@ -117,17 +117,71 @@ def _remove_title_fragments(text: str, title: str | None) -> str:
     return re.sub(r'\s{2,}', ' ', text).strip()
 
 
+# Tarefa 5.3 (achado P9): o fallback antigo retornava sempre a MESMA frase fixa por
+# categoria (e uma frase genérica única para qualquer título sem categoria reconhecida),
+# o que fazia o mesmo clichê aparecer em dezenas de mensagens seguidas. Optamos por
+# manter o highlight (não deixá-lo vazio) porque ele preenche um bloco visual do
+# template que os usuários já esperam ver — mas com 3-4 variações por categoria.
+# A escolha da variação usa `offer.id % len(variantes)`, não `random`: é determinística
+# (mesma oferta sempre renderiza a mesma frase, útil para reprocessamento/testes) e varia
+# entre ofertas diferentes o suficiente para quebrar o padrão repetitivo apontado no laudo.
+_FALLBACK_HIGHLIGHT_VARIANTS: dict[str, tuple[str, ...]] = {
+    'roupa_basica': (
+        'boa opção para renovar peças básicas do dia a dia sem gastar muito.',
+        'dá pra aproveitar para repor o guarda-roupa com preço mais em conta.',
+        'preço bom para quem precisa trocar essas peças básicas.',
+        'vale a pena para quem já tava adiando essa troca no guarda-roupa.',
+    ),
+    'suplemento': (
+        'boa opção para quem já usa suplemento e quer repor o estoque.',
+        'preço bom para quem já é da rotina de suplemento e precisa repor.',
+        'dá pra aproveitar para deixar o estoque de suplemento em dia.',
+    ),
+    'utilidade_casa_externa': (
+        'útil para casa, área externa ou viagens por ser portátil e fácil de guardar.',
+        'prático para levar em viagem ou usar na área externa de casa.',
+        'boa pedida para quem precisa de algo fácil de guardar e transportar.',
+    ),
+    'bebe': (
+        'bom para deixar por perto na fase dos dentinhos.',
+        'útil para ter à mão nessa fase do bebê.',
+        'ajuda bastante nessa fase de dentição do bebê.',
+    ),
+}
+
+_GENERIC_FALLBACK_HIGHLIGHT_VARIANTS: tuple[str, ...] = (
+    'boa oportunidade para quem já estava procurando este tipo de produto.',
+    'preço bom para quem já tava de olho nesse tipo de produto.',
+    'vale a pena conferir se esse já era um item na sua lista.',
+    'dá pra aproveitar se você já queria um produto desse.',
+)
+
+
+def _variant_index(seed: int | None, count: int) -> int:
+    """Índice determinístico (não aleatório) de 0..count-1 a partir de um seed.
+
+    Usar `offer.id` como seed garante que a MESMA oferta sempre produza a MESMA
+    variação (reprodutível em reprocessamento e em teste), enquanto ofertas
+    diferentes tendem a cair em índices diferentes.
+    """
+    if count <= 0:
+        return 0
+    return (seed or 0) % count
+
+
 def _fallback_agent_highlight(offer: Offer) -> str:
     title = sanitize_offer_title(offer.title).lower()
     if any(term in title for term in ['camiseta', 'calça', 'bota', 'meia']):
-        return 'boa opção para renovar peças básicas do dia a dia sem gastar muito.'
-    if any(term in title for term in ['creatina', 'beta alanina', 'suplemento']):
-        return 'boa opção para quem já usa suplemento e quer repor o estoque.'
-    if any(term in title for term in ['mesa', 'maleta', 'camping', 'jardim']):
-        return 'útil para casa, área externa ou viagens por ser portátil e fácil de guardar.'
-    if any(term in title for term in ['mordedor', 'bebê', 'bebe']):
-        return 'bom para deixar por perto na fase dos dentinhos.'
-    return 'boa oportunidade para quem já estava procurando este tipo de produto.'
+        variants = _FALLBACK_HIGHLIGHT_VARIANTS['roupa_basica']
+    elif any(term in title for term in ['creatina', 'beta alanina', 'suplemento']):
+        variants = _FALLBACK_HIGHLIGHT_VARIANTS['suplemento']
+    elif any(term in title for term in ['mesa', 'maleta', 'camping', 'jardim']):
+        variants = _FALLBACK_HIGHLIGHT_VARIANTS['utilidade_casa_externa']
+    elif any(term in title for term in ['mordedor', 'bebê', 'bebe']):
+        variants = _FALLBACK_HIGHLIGHT_VARIANTS['bebe']
+    else:
+        variants = _GENERIC_FALLBACK_HIGHLIGHT_VARIANTS
+    return variants[_variant_index(offer.id, len(variants))]
 
 
 def _build_highlight_block(raw: str | None) -> str:
@@ -138,12 +192,54 @@ def _build_highlight_block(raw: str | None) -> str:
     return f'{text}\n\n'
 
 
-def _build_badge(discount_pct: int) -> str:
+# Tarefa 5.3 (achado P9): a faixa de badge era um texto fixo por nível de desconto
+# ("⚡ BOT ACHOU DESCONTO ⚡" sempre para <30% OFF etc.), repetindo em toda mensagem
+# de baixo desconto. Damos algumas variações por faixa (mantendo a faixa alta com
+# o tom de urgência mais forte, mas também variada). `_select_badge_variant` é a
+# fonte única de verdade do texto+índice para WhatsApp e Telegram: ambos os
+# builders chamam a MESMA função (mesmo offer_id → mesmo índice → mesmo badge
+# conceitual), só o formato de negrito muda (`*texto*` Markdown vs `<b>texto</b>` HTML).
+BADGE_VARIANTS: dict[str, tuple[tuple[str, str, str], ...]] = {
+    'high': (
+        ('🚨', 'OFERTA IMPERDÍVEL', '🚨'),
+        ('💥', 'DESCONTÃO CONFIRMADO', '💥'),
+        ('🔥', 'CORRE QUE ACABA', '🔥'),
+    ),
+    'mid': (
+        ('🔥', 'ALERTA DO BOT', '🔥'),
+        ('📉', 'PREÇO DESPENCOU', '📉'),
+        ('🔥', 'BOT FLAGROU DESCONTO', '🔥'),
+    ),
+    'low': (
+        ('⚡', 'BOT ACHOU DESCONTO', '⚡'),
+        ('👀', 'BOT DE OLHO NESSA', '👀'),
+        ('✅', 'VALE A PENA CONFERIR', '✅'),
+        ('🔎', 'BOT GARIMPOU ESSA', '🔎'),
+    ),
+}
+
+
+def _badge_tier(discount_pct: int) -> str:
     if discount_pct >= 50:
-        return '🚨 *OFERTA IMPERDÍVEL* 🚨'
+        return 'high'
     if discount_pct >= 30:
-        return '🔥 *ALERTA DO BOT* 🔥'
-    return '⚡ *BOT ACHOU DESCONTO* ⚡'
+        return 'mid'
+    return 'low'
+
+
+def _select_badge_variant(discount_pct: int, offer_id: int | None) -> tuple[str, str, str]:
+    """Retorna (emoji_esquerda, texto, emoji_direita) para a faixa de desconto.
+
+    Compartilhado entre `message_builder.py` (WhatsApp) e `telegram_message_builder.py`
+    para garantir o mesmo critério/índice de variação nos dois canais.
+    """
+    variants = BADGE_VARIANTS[_badge_tier(discount_pct)]
+    return variants[_variant_index(offer_id, len(variants))]
+
+
+def _build_badge(discount_pct: int, offer_id: int | None = None) -> str:
+    lead, label, trail = _select_badge_variant(discount_pct, offer_id)
+    return f'{lead} *{label}* {trail}'
 
 
 def build_offer_message(offer: Offer, channel: SocialChannel) -> str:

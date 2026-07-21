@@ -6,7 +6,12 @@ import textwrap
 from django.conf import settings
 
 from apps.curation.services.ad_disclosure import ad_disclosure_prefix
-from apps.curation.services.message_builder import _build_agent_highlight, get_final_url, sanitize_offer_title
+from apps.curation.services.message_builder import (
+    _build_agent_highlight,
+    _select_badge_variant,
+    get_final_url,
+    sanitize_offer_title,
+)
 from apps.curation.models import CuratedBatchItem
 from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
@@ -81,7 +86,7 @@ def _build_curated_caption(item: CuratedBatchItem, max_len: int) -> str:
     )
     original_price = offer.original_price or offer.current_price
     discount_pct = _format_percent_as_integer(offer.discount_pct)
-    badge = _build_badge(discount_pct)
+    badge = _build_badge(discount_pct, offer.id)
     agent_highlight = escape(_build_agent_highlight(item, raw=item.final_caption_telegram or item.final_caption_whatsapp or item.decision.caption_rewritten or ''))
     caption = (
         f'<b>📦 {escape(title)}</b>\n\n'
@@ -127,7 +132,7 @@ def _render(offer: Offer, title_width: int) -> str:
     )
     original_price = offer.original_price or offer.current_price
     discount_pct = _format_percent_as_integer(offer.discount_pct)
-    badge = _build_badge(discount_pct)
+    badge = _build_badge(discount_pct, offer.id)
     disclosure = getattr(
         settings,
         'TELEGRAM_DISCLOSURE_MESSAGE',
@@ -150,12 +155,12 @@ def _render(offer: Offer, title_width: int) -> str:
     )
 
 
-def _build_badge(discount_pct: int) -> str:
-    if discount_pct >= 50:
-        return '🚨 <b>OFERTA IMPERDÍVEL</b> 🚨'
-    if discount_pct >= 30:
-        return '🔥 <b>ALERTA DO BOT</b> 🔥'
-    return '⚡ <b>BOT ACHOU DESCONTO</b> ⚡'
+# Tarefa 5.3 (achado P9): mesma lógica/índice de variação do badge do WhatsApp
+# (`_select_badge_variant` em message_builder.py) — só o formato de negrito muda
+# aqui para HTML (`<b>texto</b>`) em vez de Markdown (`*texto*`).
+def _build_badge(discount_pct: int, offer_id: int | None = None) -> str:
+    lead, label, trail = _select_badge_variant(discount_pct, offer_id)
+    return f'{lead} <b>{label}</b> {trail}'
 
 
 def _format_brl(value: Decimal) -> str:

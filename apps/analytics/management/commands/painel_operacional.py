@@ -9,6 +9,7 @@ from django.core.management.base import BaseCommand
 
 from apps.analytics.services.operational_metrics import (
     DEFAULT_DAYS,
+    DEFAULT_MEMBERSHIP_DAYS,
     DEFAULT_WEEKS,
     OperationalPanel,
     build_operational_panel,
@@ -23,7 +24,8 @@ class Command(BaseCommand):
         'Imprime o painel operacional mínimo (envios/dia por canal, '
         'ofertas coletadas/válidas por marketplace, runs FAILED de scraping '
         'e curadoria, última coleta do observer, correlação envios x '
-        'comissão por marketplace/semana) e grava '
+        'comissão por marketplace/semana, curva de membros/seguidores por '
+        'canal) e grava '
         f'site/{PANEL_FILENAME}.'
     )
 
@@ -43,11 +45,21 @@ class Command(BaseCommand):
                 f'por marketplace (default {DEFAULT_WEEKS}).'
             ),
         )
+        parser.add_argument(
+            '--membership-days',
+            type=int,
+            default=DEFAULT_MEMBERSHIP_DAYS,
+            help=(
+                'Janela em dias para a curva de membros/seguidores por canal '
+                f'(default {DEFAULT_MEMBERSHIP_DAYS}).'
+            ),
+        )
 
     def handle(self, *args, **options):
         days = options['days']
         weeks = options['weeks']
-        panel = build_operational_panel(days=days, weeks=weeks)
+        membership_days = options['membership_days']
+        panel = build_operational_panel(days=days, weeks=weeks, membership_days=membership_days)
 
         self._print_panel(panel)
 
@@ -69,6 +81,7 @@ class Command(BaseCommand):
         self._print_curation(panel)
         self._print_observer(panel)
         self._print_commission_correlation(panel)
+        self._print_membership(panel)
 
     def _print_deliveries(self, panel: OperationalPanel) -> None:
         deliveries = panel.deliveries
@@ -178,6 +191,36 @@ class Command(BaseCommand):
                     f'{row.conversions:>11}  {row.label}'
                 )
         self.stdout.write(f'  Nota: {report.note}')
+
+    def _print_membership(self, panel: OperationalPanel) -> None:
+        membership = panel.membership
+        self.stdout.write('')
+        self.stdout.write(
+            f'Membros/seguidores por canal (janela de {membership.days} dia(s), '
+            'entrada manual periódica)'
+        )
+        self.stdout.write('-' * 78)
+        if not membership.series:
+            self.stdout.write('  (nenhuma métrica registrada no período — ver registrar_metrica_canal)')
+        else:
+            for serie in membership.series:
+                self.stdout.write(f'  {serie.channel_name} ({serie.channel_code})')
+                self.stdout.write(
+                    f'    {"data":12} {"membros":>10} {"posts":>8} {"cliques est.":>13}'
+                )
+                for point in serie.points:
+                    cliques = point.cliques_estimados if point.cliques_estimados is not None else '-'
+                    self.stdout.write(
+                        f'    {point.data.isoformat():12} {point.membros:>10} '
+                        f'{point.posts_publicados:>8} {cliques!s:>13}'
+                    )
+                primeiro, ultimo = serie.points[0], serie.points[-1]
+                variacao = ultimo.membros - primeiro.membros
+                sinal = '+' if variacao >= 0 else ''
+                self.stdout.write(
+                    f'    Variação no período: {sinal}{variacao} membros '
+                    f'({primeiro.membros} -> {ultimo.membros})'
+                )
 
     # -- gravação do JSON -------------------------------------------------------
 

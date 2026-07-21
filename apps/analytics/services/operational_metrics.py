@@ -15,8 +15,11 @@ de forma rápida e observável, cinco perguntas:
    — Tarefa 4.2. Para ML/Amazon isso é **correlação temporal**, não
    atribuição exata — RESTR-03: nenhum dos dois expõe clique por canal de
    forma confiável. Para Shopee já é atribuição real via subId, Tarefa 4.1.)
+6. Como está crescendo cada canal (membros/seguidores) ao longo do tempo?
+   (`channel_membership_series` — Tarefa 7.3, achado H9. Dado é entrada
+   manual periódica, `MetricaCanalDiaria` — LGPD: só contagem agregada.)
 
-`build_operational_panel()` combina as cinco em um único snapshot, usado
+`build_operational_panel()` combina as seis em um único snapshot, usado
 pelo comando `painel_operacional`.
 """
 
@@ -28,7 +31,7 @@ from django.db.models import Count, Sum
 from django.db.models.functions import TruncDate, TruncWeek
 from django.utils import timezone
 
-from apps.analytics.models import AffiliateConversion, AffiliateSource
+from apps.analytics.models import AffiliateConversion, AffiliateSource, MetricaCanalDiaria
 from apps.curation.models import CurationRun
 from apps.distribution.models import Delivery
 from apps.market_intel.models import MarketIntelDailyReport, ObservedWhatsAppMessage
@@ -38,6 +41,10 @@ from apps.scraping.models import ScrapingRun
 DEFAULT_DAYS = 7
 DEFAULT_WEEKS = 8
 OBSERVER_STALE_HOURS = 24
+# Membros/seguidores são registrados por entrada manual periódica (não diária
+# como os envios), então a janela padrão é mais larga para não mostrar uma
+# curva vazia entre duas medições espaçadas.
+DEFAULT_MEMBERSHIP_DAYS = 90
 
 
 # --------------------------------------------------------------------------
@@ -397,6 +404,84 @@ def deliveries_vs_commission_by_marketplace_week(
 
 
 # --------------------------------------------------------------------------
+# Crescimento: membros/seguidores por canal (Tarefa 7.3, achado H9)
+# --------------------------------------------------------------------------
+
+@dataclass(frozen=True)
+class ChannelMembershipPoint:
+    data: date
+    membros: int
+    posts_publicados: int
+    cliques_estimados: int | None
+
+
+@dataclass(frozen=True)
+class ChannelMembershipSeries:
+    channel_code: str
+    channel_name: str
+    points: list[ChannelMembershipPoint] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class MembershipGrowthReport:
+    days: int
+    since: date
+    series: list[ChannelMembershipSeries] = field(default_factory=list)
+
+
+def channel_membership_series(days: int = DEFAULT_MEMBERSHIP_DAYS) -> MembershipGrowthReport:
+    """Série temporal de membros/seguidores por canal, a partir de
+    `MetricaCanalDiaria` (entrada manual periódica — LGPD: só contagem
+    agregada, nunca dado individual de terceiro).
+
+    Quando `posts_publicados` não foi preenchido manualmente na medição, esta
+    função completa o ponto com a contagem real de envios (`Delivery`
+    sent) do canal naquele dia — mesma fonte de `deliveries_per_day_by_channel`
+    — em vez de forçar uma segunda entrada manual redundante.
+    """
+    since_date = timezone.now().date() - timedelta(days=days)
+
+    sent_by_channel_day = {
+        (row.channel_code, row.day): row.sent_count
+        for row in deliveries_per_day_by_channel(days=days).rows
+    }
+
+    queryset = (
+        MetricaCanalDiaria.objects.filter(data__gte=since_date)
+        .select_related('canal')
+        .order_by('canal__code', 'data')
+    )
+
+    points_by_channel: dict[str, list[ChannelMembershipPoint]] = {}
+    channel_names: dict[str, str] = {}
+    for row in queryset:
+        posts_publicados = row.posts_publicados
+        if posts_publicados is None:
+            posts_publicados = sent_by_channel_day.get((row.canal.code, row.data), 0)
+
+        points_by_channel.setdefault(row.canal.code, []).append(
+            ChannelMembershipPoint(
+                data=row.data,
+                membros=row.membros,
+                posts_publicados=posts_publicados,
+                cliques_estimados=row.cliques_estimados,
+            )
+        )
+        channel_names[row.canal.code] = row.canal.name
+
+    series = [
+        ChannelMembershipSeries(
+            channel_code=code,
+            channel_name=channel_names[code],
+            points=points,
+        )
+        for code, points in sorted(points_by_channel.items())
+    ]
+
+    return MembershipGrowthReport(days=days, since=since_date, series=series)
+
+
+# --------------------------------------------------------------------------
 # Painel combinado
 # --------------------------------------------------------------------------
 
@@ -409,11 +494,13 @@ class OperationalPanel:
     curation: CurationSummaryReport
     observer: ObserverStatus
     commission_correlation: DeliveryCommissionCorrelationReport
+    membership: MembershipGrowthReport
 
 
 def build_operational_panel(
     days: int = DEFAULT_DAYS,
     weeks: int = DEFAULT_WEEKS,
+    membership_days: int = DEFAULT_MEMBERSHIP_DAYS,
 ) -> OperationalPanel:
     return OperationalPanel(
         generated_at=timezone.now(),
@@ -423,4 +510,5 @@ def build_operational_panel(
         curation=curation_summary(days=days),
         observer=observer_last_collection(),
         commission_correlation=deliveries_vs_commission_by_marketplace_week(weeks=weeks),
+        membership=channel_membership_series(days=membership_days),
     )

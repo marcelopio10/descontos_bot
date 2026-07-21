@@ -59,7 +59,36 @@ HEALTHCHECK_FILE = Path(settings.BASE_DIR) / 'data' / 'last_cycle.txt'
 # de profile. Sobrescrevível por env para operação sem deploy.
 AI_CURATION_PROFILE = 'descontos-bot'
 AI_CURATION_FALLBACK_MODELS = ('glm-5.2',)
-AI_CURATION_RUNNER_TIMEOUT = 600
+
+# Tarefa 5.4 (achado E) — baseline medido em 2026-07-21 via `manage.py painel_operacional
+# --days 7` e reconfirmado por query direta em `CurationRun` (últimos 7 dias, janela
+# 2026-07-14..07-21): 109 runs, 103 completed / 6 failed (5.5% FAILED — já abaixo da
+# meta de <10% do plano). Médias saudáveis: candidate_count≈38.5, selected_count≈15
+# nos runs completos (não reproduz mais o "12→4" do laudo original).
+#
+# Das 6 falhas: 3 foram timeout de 600s (candidate_count 13, 25 e 25 — SEM correlação
+# com tamanho de lote: a faixa mais comum entre os runs bem-sucedidos é justamente
+# candidate_count=50, a maior possível hoje), 1 foi "hermes" ausente do PATH (transitório;
+# o binário resolve normalmente no processo run_bot ao vivo), 1 foi JSON inválido devolvido
+# pelo Hermes, e 1 foi "nenhum item aprovado" (resultado legítimo, não bug).
+#
+# Decisão: **não mexer em `--candidate-limit`** (apps/curation/management/commands/
+# prepare_ai_curation_batch.py) — os dados não mostram lotes grandes causando timeout;
+# reduzir o limite só encolheria o funil de seleção sem ganho medido.
+#
+# Decisão: **reduzir o timeout de 600s para 450s.** Duração total (created_at→updated_at,
+# superset do tempo real gasto na chamada ao Hermes CLI) dos 103 runs completed da mesma
+# janela: p50=143s, p75=157s, p90=166s, p95=173s, p99=245s, max=303s. 450s mantém >45% de
+# folga sobre o pior caso observado de sucesso legítimo (praticamente zero risco de virar
+# falso-positivo de timeout), e ainda corta até 150s por tentativa quando o timeout é real
+# — inclusive no pior cenário já observado (runs #109/#110: primário gpt-5.5 e fallback
+# glm-5.2 estouraram os dois o timeout completo em sequência no mesmo ciclo), o que reduzia
+# um ciclo inteiro de `run_bot` a ~1200s perdidos; com 450s, o mesmo cenário cai para ~900s.
+# Não foi criado um timeout diferente por tentativa (primário vs. fallback): o fallback
+# glm-5.2 também já tomou o timeout cheio numa falha real observada, então não há evidência
+# de que ele mereça uma janela mais curta — o ganho já vem de encurtar a constante única
+# compartilhada pelas duas tentativas em `_ai_curation_attempts()`.
+AI_CURATION_RUNNER_TIMEOUT = 450
 
 # Sprint 3 - Tarefa 3.3: com esta Setting ligada, `run_bot` só coleta e prepara o
 # lote de curadoria IA (enfileira); o consumo/envio passa a rodar em processo

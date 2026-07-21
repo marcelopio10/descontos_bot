@@ -7,10 +7,46 @@ from typing import Any, Iterable
 
 from apps.curation.services.ai_schema import SAFETY_RISK_FLAGS
 
+# Sprint 6 / Tarefa 6.4 (item 20 do backlog, achado do laudo diagnóstico
+# externo 4.5): reponderação por receita real, tratada como EXPERIMENTO
+# controlado — não é decisão permanente. Distribuição anterior (Sprints 3-5):
+# ml=0.40 / amazon=0.30 / shopee=0.30.
+#
+# Base factual (laudo externo, doc fora deste repositório — os dados deste
+# banco hoje são insuficientes para rederivar os percentuais: só ~1 mês de
+# comissão ML e ZERO registros Amazon/Shopee, ver baseline abaixo):
+#   - Mercado Livre = 92% da comissão real reportada.
+#   - Amazon converte melhor por clique (20,7%) mas com volume de cliques
+#     baixo — a distribuição anterior (30% dos slots) sub-representava o
+#     que paga (ML) e não validava o potencial de Amazon com mais exposição.
+#   - Shopee: Affiliate API ainda travada por padrão em produção
+#     (SHOPEE_AFFILIATE_ENABLED=false) — sem nenhuma comissão real
+#     mensurada até hoje, mesmo recebendo ~30% dos slots.
+#
+# Baseline ANTES desta mudança (registrado em 2026-07-21, para comparação
+# futura — apps.analytics.services.operational_metrics.
+# deliveries_vs_commission_by_marketplace_week(weeks=12), já usando o fix de
+# apps/analytics/services/operational_metrics.py que passou a agrupar por
+# period_end em vez de period_start, commit 9627599):
+#   - Only mercadolivre teve comissão registrada em toda a janela de 12
+#     semanas: R$ 234,73 / 14 conversões, na semana de 2026-06-01, contra
+#     ~1018 envios ML naquela mesma semana.
+#   - amazon: R$ 0,00 de comissão em todas as 12 semanas, apesar de volumes
+#     de envio de dezenas a centenas por semana (ex.: 695 envios na semana
+#     de 2026-05-18).
+#   - shopee: R$ 0,00 de comissão nas semanas em que já havia envio
+#     (a partir de meados de junho/2026; 10 a 120 envios/semana).
+#
+# Nova distribuição-alvo: aumenta ML (a fonte de receita real hoje),
+# aumenta levemente Amazon (aposta controlada — converte bem por clique,
+# vale testar mais exposição para ver se a comissão acompanha) e reduz
+# Shopee (sem receita real mensurada e com o afiliado ainda desligado em
+# produção). Não é um corte a zero — mantém Shopee como fatia pequena para
+# não perder cobertura/aprendizado desse marketplace.
 DEFAULT_TARGET_DISTRIBUTION: dict[str, float] = {
-    'mercadolivre': 0.4,
-    'amazon': 0.3,
-    'shopee': 0.3,
+    'mercadolivre': 0.55,
+    'amazon': 0.35,
+    'shopee': 0.10,
 }
 
 MARKETPLACE_ALIASES = {

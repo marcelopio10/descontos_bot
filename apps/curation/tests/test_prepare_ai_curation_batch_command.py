@@ -485,7 +485,12 @@ class PrepareAICurationBatchCommandTests(TestCase):
                 )
 
         marketplace_codes = [offer['marketplace_code'] for offer in RecordingRunner.payloads[0]['offers']]
-        self.assertEqual(marketplace_codes.count('shopee'), 3)
+        # Sprint 6 / Tarefa 6.4: DEFAULT_TARGET_DISTRIBUTION reponderada por
+        # receita real (ml=0.55/amazon=0.35/shopee=0.10, era 0.4/0.3/0.3) —
+        # a cota justa da Shopee em candidate_limit=10 caiu de 3 para 1. O
+        # ponto do teste (Shopee não fica de fora só por ter desconto menor
+        # que ML/Amazon) continua válido com o novo número.
+        self.assertEqual(marketplace_codes.count('shopee'), 1)
 
     def test_balanced_candidate_selection_fills_shortage_from_available_marketplaces(self):
         Offer.objects.all().delete()
@@ -595,7 +600,8 @@ class PrepareAICurationBatchCommandTests(TestCase):
         self.assertEqual(len(selected), 10)
         self.assertIn(best.id, selected_ids)
         self.assertNotIn(duplicate.id, selected_ids)
-        # A cota do ML é 4: best + os 3 melhores distintos preenchem a cota
-        # sem precisar do 4º distinto (a duplicata é que sobrou de fora).
+        # A cota do ML é 5 (Sprint 6 / Tarefa 6.4: DEFAULT_TARGET_DISTRIBUTION
+        # ml=0.55, era 0.4): best + os 4 melhores distintos preenchem a cota
+        # (a duplicata é que sobrou de fora).
         self.assertIn(distinct_offers[0].id, selected_ids)
         self.assertEqual(ml_canonicos.count('mercadolivre:MLBSAME'), 1)

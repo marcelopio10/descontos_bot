@@ -335,13 +335,22 @@ def deliveries_vs_commission_by_marketplace_week(
             'marketplace_name': row['offer__marketplace__name'] or 'Sem marketplace',
         }
 
+    # Usa `period_end` (não `period_start`) para filtrar e para o bucket semanal.
+    # Relatórios manuais de ML/Amazon (RESTR-04) cobrem períodos longos (ex.: um
+    # mês inteiro) — um relatório cujo `period_start` é anterior à janela de
+    # lookback mas que ainda está em vigor (period_end dentro da janela) não pode
+    # ser descartado, senão a comissão real desaparece silenciosamente do painel
+    # (achado real: 10 conversões ML reais, period_start=2026-05-03/period_end=
+    # 2026-06-02, ficavam de fora com `period_start__gte=since_date`). Atribuir
+    # a comissão à semana de `period_end` (fechamento/reporte) evita fabricar uma
+    # distribuição diária/semanal que os dados não sustentam.
     commission_by_week_marketplace: dict[tuple[date, str], dict] = {}
     commission_queryset = (
         AffiliateConversion.objects.filter(
             source__in=list(_SOURCE_TO_MARKETPLACE_CODE),
-            period_start__gte=since_date,
+            period_end__gte=since_date,
         )
-        .annotate(week=TruncWeek('period_start'))
+        .annotate(week=TruncWeek('period_end'))
         .values('week', 'source')
         .annotate(commission_brl=Sum('commission_brl'), conversions=Sum('conversions'))
     )

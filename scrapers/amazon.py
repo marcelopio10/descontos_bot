@@ -26,6 +26,17 @@ MIN_DISCOUNT = 5
 DELAY_MIN = 3.0
 DELAY_MAX = 6.0
 
+# Backoff exponencial com jitter para `get_html`: tentativa N (N>1) espera
+# min(2**(N-1), BACKOFF_CAP_SECONDS) segundos + jitter aleatório uniforme em
+# [0, BACKOFF_JITTER_SECONDS) — ex.: tentativas 2/3/4 esperam ~2s/~4s/~8s de
+# base. O jitter evita que retries de várias categorias/execuções fiquem
+# sincronizados no mesmo instante (efeito manada) e reduz a regularidade de
+# timing que sistemas anti-bot usam como sinal. `AmazonScraper(rng=...)`
+# aceita um `random.Random` injetável para tornar o teste determinístico.
+BACKOFF_CAP_SECONDS = 30.0
+BACKOFF_JITTER_SECONDS = 1.0
+MAX_ATTEMPTS = 4
+
 ASIN_RE = re.compile(r'/dp/([A-Z0-9]{10})')
 
 # Páginas de ofertas da Amazon, identificadas por categoria.
@@ -92,12 +103,16 @@ class AmazonScraper:
     para contornar bloqueio anti-bot que rejeita o requests padrão com HTTP 503).
     """
 
-    def __init__(self, associate_tag: str = ''):
+    def __init__(self, associate_tag: str = '', rng: Optional[random.Random] = None):
         self.associate_tag = associate_tag
         self.today = datetime.now(timezone(BRT_OFFSET)).date()
         self.pages_scraped = 0
         self.blocked = False
         self.error_message = ''
+        # RNG do jitter de backoff — injetável para tornar testes determinísticos
+        # (ex.: `AmazonScraper(rng=random.Random(42))`); por padrão usa o módulo
+        # `random` global (não determinístico, ok para uso real).
+        self._rng = rng or random
         self.headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
             'Accept-Language': 'pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7',
@@ -120,8 +135,9 @@ class AmazonScraper:
         return any(marker in content for marker in blocked_markers)
 
     def get_html(self, url: str) -> str:
-        for attempt, backoff in enumerate([0, 2, 4, 8], start=1):
-            if backoff:
+        for attempt in range(1, MAX_ATTEMPTS + 1):
+            if attempt > 1:
+                backoff = min(2 ** (attempt - 1), BACKOFF_CAP_SECONDS) + self._rng.uniform(0, BACKOFF_JITTER_SECONDS)
                 time.sleep(backoff)
             try:
                 resp = self.session.get(url, headers=self.headers, timeout=25)

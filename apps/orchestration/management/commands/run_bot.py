@@ -42,6 +42,7 @@ from apps.orchestration.services.scheduler import (
 from apps.scraping.models import ScrapingRun
 from apps.scraping.services.runner import run_marketplace_scraping
 from apps.social_posts.models import InstagramPost
+from apps.social_posts.services.politica_cadencia import CadenciaExcedidaError
 from apps.social_posts.services.post_generator import generate_story_for_offer
 
 
@@ -633,15 +634,6 @@ class Command(BaseCommand):
         return summary
 
     def _generate_instagram_posts_for_new_offers(self) -> None:
-        self.stdout.write(
-            self.style.WARNING(
-                'Geração automática de posts no Instagram está desativada. '
-                'Nenhum post foi gerado e nenhum handoff pro Telegram foi disparado.',
-            ),
-        )
-        log.info('instagram_posts.generation_disabled scope=new_offers')
-        return
-
         cutoff = timezone.now() - timedelta(hours=INSTAGRAM_GENERATION_WINDOW_HOURS)
         posted_offer_ids = set(
             InstagramPost.objects
@@ -688,6 +680,13 @@ class Command(BaseCommand):
         for offer in offers:
             try:
                 post = generate_story_for_offer(offer)
+            except CadenciaExcedidaError as exc:
+                # Teto diário atingido (Tarefa 7.2): as próximas ofertas também
+                # seriam recusadas pelo mesmo motivo, então paramos aqui em vez
+                # de logar o mesmo aviso oferta a oferta até o fim da lista.
+                self.stdout.write(self.style.WARNING(f'Cadência Instagram: {exc}'))
+                log.info('instagram_posts.generation_stopped_by_cadencia motivo=%s', exc)
+                break
             except Exception as exc:
                 skipped += 1
                 self.stdout.write(
@@ -715,15 +714,6 @@ class Command(BaseCommand):
         )
 
     def _generate_instagram_story(self, offer) -> None:
-        self.stdout.write(
-            self.style.WARNING(
-                'Geração automática de story no Instagram está desativada. '
-                'Nenhuma story foi gerada e nenhum handoff pro Telegram foi disparado.',
-            ),
-        )
-        log.info('instagram_story.generation_disabled offer_id=%s', offer.id)
-        return
-
         try:
             post = generate_story_for_offer(offer)
         except Exception as exc:

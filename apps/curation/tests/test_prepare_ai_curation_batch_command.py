@@ -12,6 +12,7 @@ from django.utils import timezone
 from apps.curation.management.commands.prepare_ai_curation_batch import _balanced_marketplace_candidates
 from apps.curation.models import CuratedBatch, CurationRun
 from apps.distribution.models import Delivery, SocialChannel
+from apps.market_intel.models import ObservedWhatsAppGroup, ObservedWhatsAppMessage
 from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
 
@@ -113,6 +114,101 @@ class PrepareAICurationBatchCommandTests(TestCase):
             self.assertIn('Comparação selector atual vs agente', inspect_text)
             self.assertIn('Decisões', inspect_text)
             self.assertIn('Rejeições', inspect_text)
+
+    def test_observer_context_is_real_sanitized_signal_not_the_old_static_dict(self):
+        """Sprint 6 / Tarefa 6.2 (achado P3): antes, observer_context_json era
+        sempre {'source': ..., 'skip_images': ..., 'real_send_enabled': False}
+        — nunca refletia nada do que o observer via de fato. Agora precisa
+        conter o resultado real (e sanitizado) de build_observer_context(),
+        mesclado com esses 3 campos de metadado do comando, e nunca dado
+        bruto/sensível (jid, texto, sender_hash, URL).
+        """
+        group = ObservedWhatsAppGroup.objects.create(name='Grupo Ofertas', jid='999@g.us')
+        now = timezone.now()
+        ObservedWhatsAppMessage.objects.create(
+            group=group,
+            external_message_id='msg-radar-1',
+            sender_hash='hash-sender-secreto',
+            sent_at=now,
+            collected_at=now,
+            text='Texto bruto com https://example.com/oferta-secreta',
+            urls=['https://example.com/oferta-secreta'],
+            has_image=True,
+            parsed_marketplace='mercadolivre',
+            editorial_labels=['cupom', 'desconto_50'],
+        )
+
+        with TemporaryDirectory() as tmpdir:
+            call_command(
+                'prepare_ai_curation_batch',
+                '--channel',
+                'whatsapp_main',
+                '--mode',
+                'dry_run',
+                '--candidate-limit',
+                '3',
+                '--dry-run',
+                '--skip-images',
+                '--audit-dir',
+                str(Path(tmpdir) / 'audit'),
+                '--public-dir',
+                str(Path(tmpdir) / 'public'),
+                stdout=StringIO(),
+            )
+
+        run = CurationRun.objects.latest('id')
+        context = run.observer_context_json
+
+        # sinal real de build_observer_context(), não o dict estático antigo.
+        self.assertEqual(context['marketplace_counts'], {'mercadolivre': 1})
+        self.assertEqual(context['editorial_label_counts'], {'cupom': 1, 'desconto_50': 1})
+        self.assertEqual(context['messages_analyzed'], 1)
+        self.assertIn('lookback_hours', context)
+
+        # metadados do comando (existiam antes desta tarefa) continuam presentes.
+        self.assertEqual(context['source'], 'prepare_ai_curation_batch_command')
+        self.assertTrue(context['skip_images'])
+        self.assertFalse(context['real_send_enabled'])
+
+        # LGPD: nunca dado bruto/sensível no contexto persistido.
+        serialized = json.dumps(context, ensure_ascii=False)
+        self.assertNotIn('999@g.us', serialized)
+        self.assertNotIn('hash-sender-secreto', serialized)
+        self.assertNotIn('example.com', serialized)
+        self.assertNotIn('Texto bruto', serialized)
+
+    def test_market_radar_is_neutral_and_present_in_payload_when_shopee_affiliate_disabled(self):
+        """Sprint 6 / Tarefa 6.1 (achado P7): com SHOPEE_AFFILIATE_ENABLED
+        desligado (estado real de produção hoje), o payload da IA ainda tem o
+        campo `market_radar`, mas vazio/neutro — o radar não tentou chamar a
+        API Shopee e não deve mudar nada em relação a hoje.
+        """
+        with TemporaryDirectory() as tmpdir:
+            call_command(
+                'prepare_ai_curation_batch',
+                '--channel',
+                'whatsapp_main',
+                '--mode',
+                'dry_run',
+                '--candidate-limit',
+                '3',
+                '--dry-run',
+                '--skip-images',
+                '--audit-dir',
+                str(Path(tmpdir) / 'audit'),
+                '--public-dir',
+                str(Path(tmpdir) / 'public'),
+                stdout=StringIO(),
+            )
+
+            run = CurationRun.objects.latest('id')
+            input_payload = json.loads(Path(run.input_json_path).read_text(encoding='utf-8'))
+
+        self.assertIn('market_radar', input_payload)
+        self.assertFalse(input_payload['market_radar']['enabled'])
+        self.assertEqual(input_payload['market_radar']['category_scores'], {})
+        for offer in input_payload['offers']:
+            self.assertNotIn('market_radar_bonus', offer['baseline']['multipliers'])
 
     def test_shadow_flag_forces_shadow_mode(self):
         with TemporaryDirectory() as tmpdir:

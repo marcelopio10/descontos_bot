@@ -91,7 +91,19 @@ def get_selection_config() -> SelectionConfig:
 def select_offers_for_channel(
     channel: SocialChannel,
     config: SelectionConfig | None = None,
+    *,
+    observer_context: dict | None = None,
 ) -> list[Offer]:
+    """Seleção determinística legada (usada por `run_bot.py` no canal WhatsApp
+    legado e por `publish_telegram.py`). Aceita `observer_context` opcional
+    (Sprint 6 / Tarefa 6.2, achado P3) só para dar paridade com o fluxo de
+    curadoria IA — hoje nenhum caller de produção passa esse argumento; a
+    correção obrigatória do achado P3 (contexto real em vez de dict estático)
+    é escopo de `prepare_ai_curation_batch.py`, que é o único ponto citado no
+    plano como responsável pela curadoria IA de WhatsApp em produção. Ligar
+    isto também no seletor legado/Telegram é uma decisão futura do dono, não
+    coberta por esta tarefa.
+    """
     config = config or get_selection_config()
     queryset = _eligible_offers(channel, config)
 
@@ -113,7 +125,7 @@ def select_offers_for_channel(
 
     evaluated = []
     for offer in candidates:
-        breakdown = quality_score_breakdown(offer)
+        breakdown = quality_score_breakdown(offer, observer_context=observer_context)
         if breakdown.score < config.min_quality_score:
             log.info(
                 'selector_drop offer_id=%s reason=low_score score=%.2f classification=%s '

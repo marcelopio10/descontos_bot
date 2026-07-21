@@ -42,6 +42,7 @@ def prepare_ai_curation_batch(
     public_json_dir: Path | str | None = None,
     observer_context: dict[str, Any] | None = None,
     target_distribution: dict[str, float] | None = None,
+    market_radar: dict[str, Any] | None = None,
     profile_name: str = 'descontos.bot',
     model_provider: str = 'mock',
     model_name: str = 'fake-hermes-runner',
@@ -76,6 +77,7 @@ def prepare_ai_curation_batch(
         batch_size=batch_size,
         observer_context=observer_context,
         target_distribution=target,
+        market_radar=market_radar,
     )
     input_validation = validate_agent_input(input_payload)
     if not input_validation.is_valid:

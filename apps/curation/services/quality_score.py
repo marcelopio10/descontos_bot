@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from decimal import Decimal
 from math import log10
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from django.utils import timezone
 
@@ -76,6 +76,25 @@ BESTSELLER_LABELS: frozenset[str] = frozenset(
     for s in ('mais vendidos', 'maiores altas', 'goldbox', 'ofertas do dia')
 )
 
+# Sprint 6 / Tarefa 6.2 (achado P3): bônus modesto quando a categoria/marketplace
+# da oferta aparece com frequência alta no que o observer viu de fato circulando
+# nos grupos WhatsApp monitorados nas últimas ~24h
+# (apps.curation.services.observer_context.build_observer_context). Sem
+# contexto (None/vazio, o padrão) o comportamento é idêntico ao de antes desta
+# tarefa — nenhum multiplicador extra é computado. É o "rollback" natural.
+OBSERVER_BONUS_TOP_N = 3
+OBSERVER_MARKETPLACE_BONUS = 1.05
+OBSERVER_DISCOUNT_LABEL_BONUS = 1.03
+
+# Sprint 6 / Tarefa 6.1 (achado P7): bônus modesto quando a categoria da oferta
+# aparece bem posicionada no radar de vendas Shopee do dia
+# (apps.marketplaces.services.radar_mercado.collect_radar_mercado). Só aplica
+# acima de um limiar — presença fraca no radar não deve inflar o score. Sem
+# radar (desligado/não rodou, o padrão) o comportamento é idêntico ao de antes
+# desta tarefa.
+MARKET_RADAR_TOP_SCORE_THRESHOLD = 0.6
+MARKET_RADAR_MAX_BONUS = 1.08
+
 
 @dataclass(frozen=True)
 class ScoreBreakdown:
@@ -99,19 +118,34 @@ class ScoreBreakdown:
         }
 
 
-def quality_score(offer: 'Offer') -> float:
-    return quality_score_breakdown(offer).score
+def quality_score(
+    offer: 'Offer',
+    *,
+    observer_context: dict[str, Any] | None = None,
+    market_radar: dict[str, Any] | None = None,
+) -> float:
+    return quality_score_breakdown(offer, observer_context=observer_context, market_radar=market_radar).score
 
 
-def quality_score_breakdown(offer: 'Offer') -> ScoreBreakdown:
+def quality_score_breakdown(
+    offer: 'Offer',
+    *,
+    observer_context: dict[str, Any] | None = None,
+    market_radar: dict[str, Any] | None = None,
+) -> ScoreBreakdown:
     if _category_scoring_enabled():
-        return _category_aware_breakdown(offer)
+        return _category_aware_breakdown(offer, observer_context=observer_context, market_radar=market_radar)
     return _legacy_breakdown(offer)
 
 
 # --- algoritmo Sprint 2 ---------------------------------------------------
 
-def _category_aware_breakdown(offer: 'Offer') -> ScoreBreakdown:
+def _category_aware_breakdown(
+    offer: 'Offer',
+    *,
+    observer_context: dict[str, Any] | None = None,
+    market_radar: dict[str, Any] | None = None,
+) -> ScoreBreakdown:
     component_discount = _score_discount(offer.discount_pct) * WEIGHT_DISCOUNT
     component_popularity = _score_popularity(offer) * WEIGHT_POPULARITY
     component_reviews = _score_reviews(offer) * WEIGHT_REVIEWS
@@ -133,6 +167,14 @@ def _category_aware_breakdown(offer: 'Offer') -> ScoreBreakdown:
     }
     if _is_test_controlled(offer):
         multipliers['test_controlled_confidence'] = PENALTY_TEST_CONTROLLED_CONFIDENCE
+
+    observer_bonus = _observer_bonus_multiplier(offer, observer_context)
+    if observer_bonus != 1.0:
+        multipliers['observer_bonus'] = observer_bonus
+
+    market_radar_bonus = _market_radar_bonus_multiplier(offer, market_radar)
+    if market_radar_bonus != 1.0:
+        multipliers['market_radar_bonus'] = market_radar_bonus
 
     penalties: dict[str, float] = {}
     if not (offer.image_url or '').strip():
@@ -201,6 +243,16 @@ def _build_notes(penalties: dict[str, float], multipliers: dict[str, float]) -> 
         )
     if multipliers.get('recency', 1.0) < 0.5:
         notes.append(f'oferta antiga (recency x{multipliers["recency"]:.2f})')
+    if multipliers.get('observer_bonus', 1.0) > 1.0:
+        notes.append(
+            f'sinal do observer: categoria/marketplace recorrente nos grupos '
+            f'monitorados (x{multipliers["observer_bonus"]:.2f})'
+        )
+    if multipliers.get('market_radar_bonus', 1.0) > 1.0:
+        notes.append(
+            f'radar de mercado: categoria bem posicionada em vendas Shopee do '
+            f'dia (x{multipliers["market_radar_bonus"]:.2f})'
+        )
     return notes
 
 
@@ -313,6 +365,83 @@ def _is_test_controlled(offer: 'Offer') -> bool:
 def _marketplace_trust(offer: 'Offer') -> float:
     code = (offer.marketplace.code or '').lower() if offer.marketplace_id else ''
     return MARKETPLACE_TRUST.get(code, DEFAULT_MARKETPLACE_TRUST)
+
+
+def _observer_bonus_multiplier(offer: 'Offer', observer_context: dict[str, Any] | None) -> float:
+    """Sprint 6 / Tarefa 6.2 (achado P3): bônus se a oferta ecoa o que o
+    observer viu circulando de fato (marketplace ou faixa de desconto entre
+    os mais frequentes nas últimas ~24h). `observer_context` é o dicionário
+    sanitizado de `build_observer_context()` — nunca dados brutos. Ausência
+    de contexto (None/vazio) devolve 1.0 (sem efeito), preservando o
+    comportamento anterior a esta tarefa.
+    """
+    if not observer_context:
+        return 1.0
+    bonus = 1.0
+
+    marketplace_counts = observer_context.get('marketplace_counts') or {}
+    if marketplace_counts and getattr(offer, 'marketplace_id', None):
+        code = (offer.marketplace.code or '').strip().lower()
+        if code and code in _top_n_keys(marketplace_counts, OBSERVER_BONUS_TOP_N):
+            bonus *= OBSERVER_MARKETPLACE_BONUS
+
+    label_counts = observer_context.get('editorial_label_counts') or {}
+    if label_counts:
+        offer_labels = _discount_tier_labels(offer.discount_pct)
+        if offer_labels & _top_n_keys(label_counts, OBSERVER_BONUS_TOP_N):
+            bonus *= OBSERVER_DISCOUNT_LABEL_BONUS
+
+    return bonus
+
+
+def _market_radar_bonus_multiplier(offer: 'Offer', market_radar: dict[str, Any] | None) -> float:
+    """Sprint 6 / Tarefa 6.1 (achado P7): bônus se a categoria da oferta
+    aparece bem posicionada no `escore_venda` do radar de vendas Shopee do
+    dia (`apps.marketplaces.services.radar_mercado`). Sem radar (desligado
+    ou não rodou) devolve 1.0 (sem efeito).
+    """
+    if not market_radar:
+        return 1.0
+    category_scores = market_radar.get('category_scores') or {}
+    if not category_scores or not getattr(offer, 'category_id', None):
+        return 1.0
+    score = _safe_count(category_scores.get(offer.category.code))
+    if score < MARKET_RADAR_TOP_SCORE_THRESHOLD:
+        return 1.0
+    span = 1.0 - MARKET_RADAR_TOP_SCORE_THRESHOLD
+    fraction = 1.0 if span <= 0 else min(1.0, (score - MARKET_RADAR_TOP_SCORE_THRESHOLD) / span)
+    return 1.0 + (MARKET_RADAR_MAX_BONUS - 1.0) * fraction
+
+
+def _top_n_keys(counts: dict[str, Any], n: int) -> set[str]:
+    ranked = sorted(counts.items(), key=lambda item: -_safe_count(item[1]))
+    return {str(key).strip().lower() for key, _ in ranked[:n]}
+
+
+def _safe_count(value: Any) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _discount_tier_labels(discount_pct: Decimal | None) -> set[str]:
+    """Mesmos limiares/nomes de `apps.market_intel.services.parser._labels`
+    (desconto_30/50/70, cumulativo — um desconto de 80% marca as três), para
+    comparar contra `observer_context['editorial_label_counts']` sem inventar
+    uma taxonomia paralela.
+    """
+    if discount_pct is None:
+        return set()
+    pct = Decimal(discount_pct)
+    labels: set[str] = set()
+    if pct >= Decimal('70'):
+        labels.add('desconto_70')
+    if pct >= Decimal('50'):
+        labels.add('desconto_50')
+    if pct >= Decimal('30'):
+        labels.add('desconto_30')
+    return labels
 
 
 def _score_recency(last_seen_at) -> float:

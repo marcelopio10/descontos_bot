@@ -20,6 +20,7 @@ def save_normalized_offer(normalized_offer: NormalizedOffer) -> tuple[Offer, boo
         'external_id': normalized_offer.external_id,
         'title': normalized_offer.title,
         'normalized_title': normalized_offer.normalized_title,
+        'produto_canonico_id': normalized_offer.produto_canonico_id,
         'current_price': normalized_offer.current_price,
         'original_price': normalized_offer.original_price,
         'discount_pct': normalized_offer.discount_pct,

@@ -132,27 +132,57 @@ class Command(BaseCommand):
         return _balanced_marketplace_candidates(queryset, limit=limit)
 
 
+CANDIDATE_OVERFETCH_MULTIPLIER = 3  # margem para compensar itens descartados pelo dedup de produto canônico
+
+
 def _balanced_marketplace_candidates(queryset, *, limit: int):
     """Build the AI candidate pool with marketplace coverage before the agent runs.
 
     The AI remains the curator, but it cannot pick Shopee if the candidate payload
     is filled by higher-discount ML/Amazon rows before Shopee appears. Seed the
     payload near the target mix, then fill shortages from the global order.
+
+    Also applies a light pre-filter (Sprint 5 / achado P8) that skips offers
+    whose `produto_canonico_id` already appears earlier in the pool (queryset
+    ordering already favors higher discount first, so "earlier" means "best"),
+    so we don't waste candidate slots sending the AI an obvious duplicate
+    (e.g. the same Amazon ASIN via two sellers). This is only a pool-shaping
+    optimization — the actual source of truth for dedup is
+    apps.curation.services.batch_optimizer.optimize_curation_batch, which runs
+    after the AI decides and is what final selection actually depends on.
     """
     if limit <= 0:
         return []
     quotas = _target_counts(limit, DEFAULT_TARGET_DISTRIBUTION)
     selected = []
     selected_ids: set[int] = set()
+    seen_canonicos: set[str] = set()
     for marketplace_code in DEFAULT_TARGET_DISTRIBUTION:
-        for offer in queryset.filter(marketplace__code=marketplace_code)[:quotas.get(marketplace_code, 0)]:
-            selected.append(offer)
-            selected_ids.add(offer.id)
+        quota = quotas.get(marketplace_code, 0)
+        if quota <= 0:
+            continue
+        candidates = queryset.filter(marketplace__code=marketplace_code)[: quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_canonicos)
     if len(selected) < limit:
-        for offer in queryset.exclude(id__in=selected_ids)[: limit - len(selected)]:
-            selected.append(offer)
-            selected_ids.add(offer.id)
+        remaining_quota = limit - len(selected)
+        remaining = queryset.exclude(id__in=selected_ids)[: remaining_quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        _append_deduped_by_canonico(remaining, remaining_quota, selected, selected_ids, seen_canonicos)
     return selected[:limit]
+
+
+def _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_canonicos):
+    added = 0
+    for offer in candidates:
+        if added >= quota:
+            break
+        canonico = (offer.produto_canonico_id or '').strip()
+        if canonico and canonico in seen_canonicos:
+            continue
+        selected.append(offer)
+        selected_ids.add(offer.id)
+        if canonico:
+            seen_canonicos.add(canonico)
+        added += 1
 
 
 def _target_counts(limit: int, target_distribution: dict[str, float]) -> dict[str, int]:

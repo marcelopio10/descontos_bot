@@ -94,6 +94,21 @@ class Offer(TimestampedModel):
         db_index=True,
         help_text='ASIN extraído da URL Amazon. Obrigatório para ofertas Amazon compliance.',
     )
+    produto_canonico_id = models.CharField(
+        'produto canônico',
+        max_length=200,
+        blank=True,
+        db_index=True,
+        help_text=(
+            'Identificador best-effort do produto físico, usado para dedup interna na '
+            'curadoria (Sprint 5 / achado P8). Amazon usa o ASIN (exato). Mercado Livre e '
+            'Shopee não têm GTIN disponível no payload: Shopee usa o itemId (sem o '
+            'shopId, pois o mesmo item pode ter vários vendedores); Mercado Livre cai '
+            'para o external_id do próprio anúncio (limitação conhecida — não deduplica '
+            'o mesmo produto vendido por lojistas diferentes). Calculado em '
+            'apps.offers.services.normalizer.'
+        ),
+    )
     current_price = models.DecimalField(
         'preço atual',
         max_digits=12,

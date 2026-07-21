@@ -74,14 +74,26 @@ def optimize_curation_batch(
         return OptimizedBatch(selected=[], rejected=list(decisions), target_distribution=_target(target_distribution), actual_distribution={})
 
     target = _target(target_distribution)
-    selected_candidates: list[dict[str, Any]] = []
-    rejected: list[dict[str, Any]] = []
-
+    normalized_decisions: list[dict[str, Any]] = []
     for original in decisions:
         decision = dict(original)
         decision['marketplace_code'] = _normalize_marketplace_code(decision.get('marketplace_code'))
-        ai_selected = bool(decision.get('selected_for_batch'))
-        if ai_selected and _is_eligible(decision, min_ai_score=min_ai_score):
+        normalized_decisions.append(decision)
+
+    eligibility = [_is_eligible(decision, min_ai_score=min_ai_score) for decision in normalized_decisions]
+    ai_selected_flags = [bool(decision.get('selected_for_batch')) for decision in normalized_decisions]
+    canonical_duplicate_indices = _canonical_duplicate_indices(normalized_decisions, eligibility, ai_selected_flags)
+
+    selected_candidates: list[dict[str, Any]] = []
+    approved_candidates: list[dict[str, Any]] = []
+    rejected: list[dict[str, Any]] = []
+
+    for index, decision in enumerate(normalized_decisions):
+        ai_selected = ai_selected_flags[index]
+        eligible = eligibility[index] and index not in canonical_duplicate_indices
+        if eligible:
+            approved_candidates.append(decision)
+        if ai_selected and eligible:
             selected_candidates.append(decision)
         else:
             decision['selected_for_batch'] = False
@@ -89,6 +101,23 @@ def optimize_curation_batch(
             rejected.append(decision)
 
     selected = sorted(selected_candidates, key=_ai_selection_key)[:batch_size]
+    if batch_size >= 3:
+        # Keep the AI's safety/editorial gate, but repair a missing marketplace
+        # slot when the model approved a safe candidate and selected none from
+        # that marketplace. Without this floor, the target mix is only advice
+        # and production batches can silently become 100% ML/Amazon.
+        selected_codes = {item['marketplace_code'] for item in selected}
+        available_codes = {item['marketplace_code'] for item in approved_candidates}
+        for marketplace_code in target:
+            if marketplace_code in selected_codes or marketplace_code not in available_codes:
+                continue
+            replacement = next(
+                item for item in approved_candidates
+                if item['marketplace_code'] == marketplace_code
+            )
+            selected.append(replacement)
+            selected_codes.add(marketplace_code)
+        selected = sorted(selected, key=_ai_selection_key)[:batch_size]
     for position, decision in enumerate(selected, start=1):
         decision['selected_for_batch'] = True
         decision['batch_position'] = position
@@ -149,6 +178,66 @@ def _is_eligible(decision: dict[str, Any], *, min_ai_score: float | Decimal | No
     if min_ai_score is not None and _score(decision) < float(min_ai_score):
         return False
     return True
+
+
+def _canonical_duplicate_indices(
+    decisions: list[dict[str, Any]],
+    eligibility: list[bool],
+    ai_selected_flags: list[bool],
+) -> set[int]:
+    """Indices to drop so at most one candidate survives per produto_canonico_id (achado P8).
+
+    `produto_canonico_id` is computed at ingestion time (see
+    apps.offers.services.normalizer.build_produto_canonico_id) and is expected
+    to already be attached to each decision dict by the caller (e.g.
+    ai_curator._enrich_decisions_with_offer_fields), since the AI output
+    itself doesn't carry it. An empty/missing value never triggers dedup —
+    only decisions sharing the same non-empty canonical id compete.
+
+    Only decisions that are otherwise eligible compete for the canonical slot:
+    an ineligible duplicate (e.g. safety-blocked, missing captions) never
+    blocks its eligible sibling from surviving. Among competing duplicates the
+    winner is chosen, in order: (1) AI-selected beats not-selected — we never
+    want to discard the only viable AI-selected candidate for a product just
+    because a higher-scored but unselected/ineligible duplicate exists; (2)
+    higher ai_score; (3) lower current_price (cheaper is the better deal for
+    the reader); (4) lower offer_id, purely for determinism. Losers are folded
+    into the normal `rejected` bucket exactly like any other ineligible
+    decision.
+    """
+    indices_by_canonico: dict[str, list[int]] = {}
+    for index, decision in enumerate(decisions):
+        if not eligibility[index]:
+            continue
+        canonico = str(decision.get('produto_canonico_id') or '').strip()
+        if not canonico:
+            continue
+        indices_by_canonico.setdefault(canonico, []).append(index)
+
+    duplicate_indices: set[int] = set()
+    for indices in indices_by_canonico.values():
+        if len(indices) < 2:
+            continue
+        winner = min(
+            indices,
+            key=lambda idx: _canonical_priority(decisions[idx], ai_selected_flags[idx]),
+        )
+        duplicate_indices.update(idx for idx in indices if idx != winner)
+    return duplicate_indices
+
+
+def _canonical_priority(decision: dict[str, Any], ai_selected: bool) -> tuple[int, float, float, int]:
+    price = decision.get('current_price')
+    try:
+        price_value = float(price) if price not in (None, '') else float('inf')
+    except (TypeError, ValueError):
+        price_value = float('inf')
+    return (
+        0 if ai_selected else 1,
+        -_score(decision),
+        price_value,
+        int(decision.get('offer_id') or 0),
+    )
 
 
 def _contains_blocked_editorial_theme(decision: dict[str, Any]) -> bool:

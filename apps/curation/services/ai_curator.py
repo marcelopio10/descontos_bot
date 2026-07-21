@@ -106,7 +106,8 @@ def prepare_ai_curation_batch(
 
     with transaction.atomic():
         decisions_by_offer_id = _persist_decisions(run, offers, output_payload, input_payload)
-        optimized = optimize_curation_batch(output_payload.get('decisions') or [], batch_size=batch_size, target_distribution=target)
+        enriched_decisions = _enrich_decisions_with_offer_fields(output_payload.get('decisions') or [], offers)
+        optimized = optimize_curation_batch(enriched_decisions, batch_size=batch_size, target_distribution=target)
 
         if not optimized.selected:
             _fail_run(run, f'Nenhum item aprovado e selecionado pela IA para o lote (candidatas={len(offers)}; gate de segurança ou IA não selecionou itens)')
@@ -195,6 +196,44 @@ def _persist_decisions(
         _apply_blacklist_actions(run, decision, raw_decision)
         decisions_by_offer_id[offer_id] = decision
     return decisions_by_offer_id
+
+
+def _enrich_decisions_with_offer_fields(
+    decisions: list[dict[str, Any]],
+    offers: list[Offer],
+) -> list[dict[str, Any]]:
+    """Attach Offer-only fields the AI never sees, needed by the batch optimizer's dedup gate.
+
+    `produto_canonico_id` (Sprint 5 / achado P8) is computed at ingestion time
+    in apps.offers.services.normalizer — it is not part of the AI decision
+    schema, so optimize_curation_batch can't dedupe by canonical product
+    unless we attach it here first. `current_price` rides along only as a
+    tie-break signal (cheaper wins between two duplicates of the same
+    product); neither value is exposed back to the AI or to any rendered
+    message.
+    """
+    offers_by_id = {offer.id: offer for offer in offers}
+    enriched: list[dict[str, Any]] = []
+    for raw_decision in decisions:
+        decision = dict(raw_decision)
+        offer = _lookup_offer(offers_by_id, decision.get('offer_id'))
+        if offer is not None:
+            decision.setdefault('produto_canonico_id', offer.produto_canonico_id)
+            decision.setdefault(
+                'current_price',
+                float(offer.current_price) if offer.current_price is not None else None,
+            )
+        enriched.append(decision)
+    return enriched
+
+
+def _lookup_offer(offers_by_id: dict[int, Offer], offer_id: Any) -> Offer | None:
+    if offer_id is None:
+        return None
+    try:
+        return offers_by_id.get(int(offer_id))
+    except (TypeError, ValueError):
+        return None
 
 
 def _apply_blacklist_actions(run: CurationRun, decision: CurationDecision, raw_decision: dict[str, Any]) -> None:

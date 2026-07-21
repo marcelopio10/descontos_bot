@@ -3,9 +3,40 @@ import logging
 import time
 
 import requests
+try:
+    from curl_cffi import requests as cffi_requests
+    from curl_cffi.requests.exceptions import RequestException as CffiRequestException
+    CURL_CFFI_AVAILABLE = True
+except ImportError:
+    cffi_requests = requests  # fallback; pode falhar em TLS fingerprinting
+    CffiRequestException = requests.RequestException
+    CURL_CFFI_AVAILABLE = False
 
 
 log = logging.getLogger(__name__)
+
+# `requests` e `curl_cffi` têm hierarquias de exceção independentes (uma não é
+# subclasse da outra), então os scrapers que podem rodar sobre qualquer uma das
+# duas libs (via `build_impersonated_session`) precisam capturar as duas.
+HTTP_EXCEPTIONS = (requests.RequestException, CffiRequestException)
+
+
+def build_impersonated_session(impersonate: str = 'chrome124'):
+    """Cria uma sessão HTTP com impersonação de TLS via curl_cffi (contorna
+    bloqueio anti-bot que identifica `requests` puro pelo fingerprint TLS do
+    handshake, independente de User-Agent/headers).
+
+    Fallback gracioso para `requests.Session()` puro se curl_cffi não estiver
+    instalado — loga aviso porque o scraper fica mais vulnerável a bloqueio
+    por fingerprint nesse modo.
+    """
+    if CURL_CFFI_AVAILABLE:
+        return cffi_requests.Session(impersonate=impersonate)
+    log.warning(
+        'curl_cffi não disponível — usando requests padrão '
+        '(mais vulnerável a bloqueio por TLS fingerprint).',
+    )
+    return cffi_requests.Session()
 
 
 class BaseScraper(ABC):
@@ -39,7 +70,7 @@ class BaseScraper(ABC):
                     return response
                 last_exc = requests.HTTPError(f'HTTP {response.status_code}')
                 log.warning('Tentativa %d falhou para %s: HTTP %s', attempt, url, response.status_code)
-            except requests.RequestException as exc:
+            except HTTP_EXCEPTIONS as exc:
                 last_exc = exc
                 log.warning('Tentativa %d falhou para %s: %s', attempt, url, exc)
         if last_exc:

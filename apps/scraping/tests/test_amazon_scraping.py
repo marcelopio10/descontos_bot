@@ -1,12 +1,12 @@
 import os
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from django.test import SimpleTestCase, TestCase
 
 from apps.marketplaces.models import Marketplace
 from apps.scraping.models import ScrapingRun
 from apps.scraping.services.runner import run_marketplace_scraping
-from scrapers.amazon import build_from_env
+from scrapers.amazon import AmazonScraper, build_from_env
 
 
 class AmazonScraperConfigTests(SimpleTestCase):
@@ -15,6 +15,18 @@ class AmazonScraperConfigTests(SimpleTestCase):
             scraper = build_from_env()
 
         self.assertEqual(scraper.associate_tag, 'tag-correta-20')
+
+
+class AmazonScraperSessionTests(SimpleTestCase):
+    def test_session_is_built_via_shared_impersonation_helper(self):
+        """AmazonScraper deve delegar a criação da sessão HTTP ao helper
+        compartilhado de scrapers/base.py (curl_cffi com impersonação
+        'chrome124', fallback gracioso para requests puro)."""
+        with patch('scrapers.amazon.build_impersonated_session') as mock_builder:
+            mock_builder.return_value = MagicMock()
+            AmazonScraper()
+
+        mock_builder.assert_called_once_with('chrome124')
 
 
 class EmptyAmazonScrapeStatusTests(TestCase):

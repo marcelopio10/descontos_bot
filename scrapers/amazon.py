@@ -12,16 +12,12 @@ from typing import Optional
 
 from bs4 import BeautifulSoup
 try:
-    from curl_cffi import requests as cffi_requests
-    _CURL_CFFI_AVAILABLE = True
-except ImportError:
-    import requests as cffi_requests  # fallback; pode falhar em TLS fingerprinting
-    _CURL_CFFI_AVAILABLE = False
-try:
     from dotenv import load_dotenv
     load_dotenv(Path(__file__).resolve().parent.parent / '.env', override=True)
 except ImportError:
     pass
+
+from scrapers.base import build_impersonated_session
 
 log = logging.getLogger(__name__)
 
@@ -110,11 +106,7 @@ class AmazonScraper:
             'Sec-Ch-Ua-Platform': '"Windows"',
             'Upgrade-Insecure-Requests': '1',
         }
-        if _CURL_CFFI_AVAILABLE:
-            self.session = cffi_requests.Session(impersonate='chrome124')
-        else:
-            log.warning('curl_cffi não disponível — usando requests padrão (Amazon pode bloquear por TLS).')
-            self.session = cffi_requests.Session()
+        self.session = build_impersonated_session('chrome124')
 
     @staticmethod
     def is_blocked(html: str) -> bool:

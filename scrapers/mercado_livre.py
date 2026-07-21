@@ -9,7 +9,6 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
-import requests
 from bs4 import BeautifulSoup
 try:
     from dotenv import load_dotenv
@@ -17,7 +16,7 @@ try:
 except ImportError:
     pass
 
-from scrapers.base import BaseScraper
+from scrapers.base import HTTP_EXCEPTIONS, BaseScraper, build_impersonated_session
 
 log = logging.getLogger(__name__)
 
@@ -97,7 +96,10 @@ class MercadoLivreScraper(BaseScraper):
             'Sec-Fetch-User': '?1',
             'Upgrade-Insecure-Requests': '1',
         }
-        self.session = requests.Session()
+        # curl_cffi impersona o TLS fingerprint do Chrome para reduzir bloqueio
+        # anti-bot (mesma abordagem do scrapers/amazon.py); fallback gracioso
+        # para requests puro se curl_cffi não estiver instalado.
+        self.session = build_impersonated_session('chrome124')
 
     def get_html(self, url: str) -> str:
         try:
@@ -109,7 +111,7 @@ class MercadoLivreScraper(BaseScraper):
                 return ''
             resp.raise_for_status()
             return resp.text
-        except requests.RequestException as exc:
+        except HTTP_EXCEPTIONS as exc:
             self.error_message = f'Erro ao acessar {url}: {exc}'
             log.error('Erro ao acessar %s: %s', url, exc)
             return ''

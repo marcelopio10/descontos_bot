@@ -3,7 +3,7 @@ import logging
 from django.utils import timezone
 from django.utils.text import slugify
 
-from apps.offers.models import Offer
+from apps.offers.models import Offer, PriceHistoryEntry
 from apps.offers.services.normalizer import NormalizedOffer
 
 
@@ -46,6 +46,7 @@ def save_normalized_offer(normalized_offer: NormalizedOffer) -> tuple[Offer, boo
     if created:
         _ensure_public_slug(offer)
         _classify(offer)
+        _record_price_history(offer, collected_at=defaults['price_collected_at'])
         return offer, created
 
     update_fields = [*defaults.keys(), 'updated_at']
@@ -56,7 +57,27 @@ def save_normalized_offer(normalized_offer: NormalizedOffer) -> tuple[Offer, boo
 
     offer.save(update_fields=update_fields)
     _classify(offer)
+    _record_price_history(offer, collected_at=defaults['price_collected_at'])
     return offer, created
+
+
+def _record_price_history(offer: Offer, *, collected_at) -> None:
+    """Grava um ponto da série de preço interna (RESTR-05: uso só interno).
+
+    Só cria uma entrada nova se o preço mudou desde a última coleta registrada,
+    ou se ainda não existe nenhum histórico para a oferta. Isso evita explodir
+    a tabela com uma linha idêntica a cada ciclo de scraping em que o preço
+    simplesmente não mudou (o scraping roda com frequência bem maior do que a
+    frequência real de variação de preço na maioria das ofertas).
+    """
+    last_entry = offer.price_history.order_by('-collected_at').first()
+    if last_entry is not None and last_entry.price == offer.current_price:
+        return
+    PriceHistoryEntry.objects.create(
+        offer=offer,
+        price=offer.current_price,
+        collected_at=collected_at,
+    )
 
 
 def _classify(offer: Offer) -> None:

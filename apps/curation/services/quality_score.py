@@ -39,8 +39,17 @@ EXTREME_DISCOUNT_THRESHOLD = Decimal('99')
 SUSPECT_DISCOUNT_THRESHOLD = Decimal('85')
 SUSPECT_PRICE_RATIO = Decimal('20')
 
+# Sprint 5 / achado F, H5 (RESTR-05): agora que existe histórico de preço interno real
+# (apps.offers.models.PriceHistoryEntry), reforçamos a heurística acima (que não tinha
+# nenhum dado real por trás) com um sinal baseado em observação real: o "De R$" anunciado
+# não pode estar muito acima do menor preço que essa oferta já teve de fato. Limiar bem
+# mais apertado que SUSPECT_PRICE_RATIO porque aqui há dado real, não só suposição.
+HISTORY_MIN_ENTRIES_FOR_SIGNAL = 2  # 1 coleta só = sem dado suficiente pra comparar; não penaliza
+HISTORY_SUSPECT_PRICE_RATIO = Decimal('1.3')  # De R$ 30%+ acima do mínimo já visto = suspeito
+
 PENALTY_NO_IMAGE = 0.7
 PENALTY_SUSPECT_PRICE = 0.5
+PENALTY_HISTORY_SUSPECT_PRICE = 0.4
 PENALTY_EXTREME_DISCOUNT = 0.0
 PENALTY_TEST_CONTROLLED_CONFIDENCE = 0.85  # suplementos: viés do dono → fator de confiança
 
@@ -130,6 +139,8 @@ def _category_aware_breakdown(offer: 'Offer') -> ScoreBreakdown:
         penalties['no_image'] = PENALTY_NO_IMAGE
     if _has_suspect_original_price(offer):
         penalties['suspect_original_price'] = PENALTY_SUSPECT_PRICE
+    if _has_history_suspect_original_price(offer):
+        penalties['history_suspect_price'] = PENALTY_HISTORY_SUSPECT_PRICE
     if _is_extreme_discount(offer.discount_pct):
         penalties['extreme_discount'] = PENALTY_EXTREME_DISCOUNT
 
@@ -166,6 +177,11 @@ def _build_notes(penalties: dict[str, float], multipliers: dict[str, float]) -> 
             notes.append(f'sem imagem (x{value:.2f})')
         elif key == 'suspect_original_price':
             notes.append(f'preço original suspeito (x{value:.2f})')
+        elif key == 'history_suspect_price':
+            # RESTR-05: nota descritiva só para avaliação interna/IA — nunca inclui o
+            # valor histórico em si, só o efeito (multiplicador), para não vazar dado
+            # de histórico de preço para nenhum texto citável.
+            notes.append(f'"De R$" acima do menor preço já observado internamente (x{value:.2f})')
         elif key == 'extreme_discount':
             notes.append(f'desconto extremo >99% (x{value:.2f})')
         elif key == 'weak_signal':
@@ -321,6 +337,31 @@ def _has_suspect_original_price(offer: 'Offer') -> bool:
     return ratio >= SUSPECT_PRICE_RATIO
 
 
+def _has_history_suspect_original_price(offer: 'Offer') -> bool:
+    """Sinal anti-desconto-falso baseado em dado real (Sprint 5 / achado F, H5).
+
+    Reforça `_has_suspect_original_price` (heurística cega, sem dado) com o
+    histórico de preço interno de fato coletado: se o "De R$" anunciado está
+    bem acima de qualquer preço já observado para essa oferta, o desconto
+    provavelmente é inflado. Sem histórico suficiente (oferta nova, uma coleta
+    só) não há base de comparação — não penaliza, mantém o comportamento
+    anterior a esta tarefa. RESTR-05: usado só para pontuação interna; o
+    valor histórico em si nunca é exposto (ver `_build_notes`).
+    """
+    if offer.original_price is None:
+        return False
+    if offer.pk is None:
+        return False
+    history_prices = list(offer.price_history.values_list('price', flat=True))
+    if len(history_prices) < HISTORY_MIN_ENTRIES_FOR_SIGNAL:
+        return False
+    minimum_observed = min(history_prices)
+    if minimum_observed is None or minimum_observed <= 0:
+        return False
+    ratio = Decimal(offer.original_price) / Decimal(minimum_observed)
+    return ratio >= HISTORY_SUSPECT_PRICE_RATIO
+
+
 def _is_extreme_discount(discount_pct: Decimal | None) -> bool:
     if discount_pct is None:
         return False
@@ -367,6 +408,8 @@ def _legacy_breakdown(offer: 'Offer') -> ScoreBreakdown:
         penalties['no_image'] = PENALTY_NO_IMAGE
     if _has_suspect_original_price(offer):
         penalties['suspect_original_price'] = PENALTY_SUSPECT_PRICE
+    if _has_history_suspect_original_price(offer):
+        penalties['history_suspect_price'] = PENALTY_HISTORY_SUSPECT_PRICE
     if _is_extreme_discount(offer.discount_pct):
         penalties['extreme_discount'] = PENALTY_EXTREME_DISCOUNT
 
@@ -376,6 +419,7 @@ def _legacy_breakdown(offer: 'Offer') -> ScoreBreakdown:
 
     final = max(0.0, min(100.0, base * multiplier))
     classification, decision = _classify_score(final)
+    notes = _build_notes(penalties, {})
     return ScoreBreakdown(
         score=final,
         components=components,
@@ -383,6 +427,7 @@ def _legacy_breakdown(offer: 'Offer') -> ScoreBreakdown:
         multipliers={},
         classification=classification,
         decision=decision,
+        notes=notes,
     )
 
 

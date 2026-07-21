@@ -281,3 +281,40 @@ class Offer(TimestampedModel):
         if self.original_price and self.current_price:
             return float(self.original_price) - float(self.current_price)
         return 0.0
+
+
+class PriceHistoryEntry(TimestampedModel):
+    """Série interna de preços coletados por oferta (Sprint 5 / achado F, H5).
+
+    RESTR-05: este histórico é **exclusivamente interno**. Ele alimenta o score
+    de curadoria (apps.curation.services.quality_score) para detectar desconto
+    anunciado ("De R$") acima de qualquer preço já observado. Nenhum valor
+    aqui pode ser citado nas mensagens publicadas (message_builder.py /
+    telegram_message_builder.py) — o único carimbo permitido no texto final é
+    "preço coletado em DD/MM", já derivado de `Offer.price_collected_at`.
+    """
+    offer = models.ForeignKey(
+        Offer,
+        verbose_name='oferta',
+        on_delete=models.CASCADE,
+        related_name='price_history',
+    )
+    price = models.DecimalField(
+        'preço',
+        max_digits=12,
+        decimal_places=2,
+    )
+    collected_at = models.DateTimeField(
+        'coletado em',
+    )
+
+    class Meta:
+        ordering = ['-collected_at']
+        indexes = [
+            models.Index(fields=['offer', 'collected_at']),
+        ]
+        verbose_name = 'histórico de preço'
+        verbose_name_plural = 'histórico de preços'
+
+    def __str__(self):
+        return f'oferta #{self.offer_id} — R$ {self.price} em {self.collected_at:%Y-%m-%d}'

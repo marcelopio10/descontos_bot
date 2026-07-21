@@ -426,3 +426,80 @@ class PrepareAICurationBatchCommandTests(TestCase):
         self.assertEqual(len(selected), 10)
         self.assertEqual(marketplace_codes.count('shopee'), 1)
         self.assertEqual(marketplace_codes.count('mercadolivre') + marketplace_codes.count('amazon'), 9)
+
+    def test_candidate_pool_skips_obvious_canonical_duplicate_and_fills_from_next_best(self):
+        # Sprint 5 / achado P8: o pool de candidatas não deve gastar cota de
+        # marketplace com duas ofertas do mesmo produto_canonico_id quando há
+        # outra oferta distinta disponível para preencher a cota.
+        Offer.objects.all().delete()
+        now = timezone.now()
+        offer_id = 1
+
+        def _make_ml_offer(index, discount_pct, canonico=''):
+            nonlocal offer_id
+            offer = Offer.objects.create(
+                marketplace=self.marketplaces['mercadolivre'],
+                external_id=f'ml-canon-{index}',
+                title=f'Oferta ML canon {index}',
+                normalized_title=f'oferta ml canon {index}',
+                offer_hash=f'hash-canon-{offer_id}',
+                slug=f'oferta-ml-canon-{index}',
+                produto_canonico_id=canonico,
+                current_price=Decimal('99.90'),
+                original_price=Decimal('199.80'),
+                discount_pct=Decimal(discount_pct),
+                product_url='https://example.com/produto',
+                affiliate_url='https://example.com/afiliado',
+                image_url='https://example.com/img.jpg',
+                is_active=True,
+                first_seen_at=now,
+                last_seen_at=now,
+                price_collected_at=now,
+            )
+            offer_id += 1
+            return offer
+
+        # Duas primeiras (melhor desconto) são o mesmo produto canônico —
+        # a segunda deveria ser descartada do pool em favor de uma das
+        # próximas (distintas) para não desperdiçar a cota do ML.
+        best = _make_ml_offer(0, '95.00', canonico='mercadolivre:MLBSAME')
+        duplicate = _make_ml_offer(1, '90.00', canonico='mercadolivre:MLBSAME')
+        distinct_offers = [_make_ml_offer(i, str(80 - i * 5), canonico='') for i in range(2, 6)]
+
+        for marketplace_code in ('amazon', 'shopee'):
+            for index in range(5):
+                Offer.objects.create(
+                    marketplace=self.marketplaces[marketplace_code],
+                    external_id=f'{marketplace_code}-canon-{index}',
+                    title=f'Oferta {marketplace_code} canon {index}',
+                    normalized_title=f'oferta {marketplace_code} canon {index}',
+                    offer_hash=f'hash-canon-{offer_id}',
+                    slug=f'oferta-{marketplace_code}-canon-{index}',
+                    current_price=Decimal('99.90'),
+                    original_price=Decimal('199.80'),
+                    discount_pct=Decimal('70.00'),
+                    product_url='https://example.com/produto',
+                    affiliate_url='https://example.com/afiliado',
+                    image_url='https://example.com/img.jpg',
+                    is_active=True,
+                    first_seen_at=now,
+                    last_seen_at=now,
+                    price_collected_at=now,
+                )
+                offer_id += 1
+
+        selected = _balanced_marketplace_candidates(
+            Offer.objects.select_related('marketplace').order_by('-discount_pct', '-current_price', 'title'),
+            limit=10,
+        )
+
+        selected_ids = {offer.id for offer in selected}
+        ml_canonicos = [offer.produto_canonico_id for offer in selected if offer.marketplace.code == 'mercadolivre']
+
+        self.assertEqual(len(selected), 10)
+        self.assertIn(best.id, selected_ids)
+        self.assertNotIn(duplicate.id, selected_ids)
+        # A cota do ML é 4: best + os 3 melhores distintos preenchem a cota
+        # sem precisar do 4º distinto (a duplicata é que sobrou de fora).
+        self.assertIn(distinct_offers[0].id, selected_ids)
+        self.assertEqual(ml_canonicos.count('mercadolivre:MLBSAME'), 1)

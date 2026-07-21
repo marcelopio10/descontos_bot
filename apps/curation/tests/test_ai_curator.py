@@ -213,6 +213,73 @@ class AICuratorTests(TestCase):
         self.assertEqual(audit.normalized_term, 'arma de brinquedo')
         self.assertEqual(audit.run, result.run)
 
+    def test_two_offers_same_produto_canonico_id_only_one_enters_batch(self):
+        # Sprint 5 / achado P8: mesmo produto (ex. mesmo ASIN), dois "vendedores"/
+        # capturas diferentes — a IA aprova e seleciona as duas, mas o batch
+        # optimizer deve manter só uma (maior ai_score) no lote final.
+        offer_a, offer_b = self.offers[0], self.offers[1]
+        offer_a.produto_canonico_id = 'amazon:B0SAMEPROD'
+        offer_a.save(update_fields=['produto_canonico_id'])
+        offer_b.produto_canonico_id = 'amazon:B0SAMEPROD'
+        offer_b.save(update_fields=['produto_canonico_id'])
+
+        forced_payload = {
+            'schema_version': '1.0',
+            'actual_distribution': {},
+            'decisions': [
+                {
+                    'offer_id': offer_a.id,
+                    'marketplace_code': 'mercadolivre',
+                    'classification': 'approved',
+                    'selected_for_batch': True,
+                    'batch_position': 1,
+                    'conversion_score': 95,
+                    'relevance_score': 95,
+                    'discount_quality_score': 95,
+                    'audience_fit_score': 95,
+                    'reason': 'Melhor preço entre os vendedores.',
+                    'rewritten_title': 'Oferta vendedor A',
+                    'rewritten_caption_whatsapp': 'Caption W A',
+                    'rewritten_caption_telegram': 'Caption T A',
+                    'image_required': False,
+                    'image_decision': 'skip',
+                    'blacklist_actions': [],
+                    'risk_flags': [],
+                },
+                {
+                    'offer_id': offer_b.id,
+                    'marketplace_code': 'mercadolivre',
+                    'classification': 'approved',
+                    'selected_for_batch': True,
+                    'batch_position': 2,
+                    'conversion_score': 60,
+                    'relevance_score': 60,
+                    'discount_quality_score': 60,
+                    'audience_fit_score': 60,
+                    'reason': 'Mesmo produto, vendedor B.',
+                    'rewritten_title': 'Oferta vendedor B',
+                    'rewritten_caption_whatsapp': 'Caption W B',
+                    'rewritten_caption_telegram': 'Caption T B',
+                    'image_required': False,
+                    'image_decision': 'skip',
+                    'blacklist_actions': [],
+                    'risk_flags': [],
+                },
+            ],
+        }
+
+        result = prepare_ai_curation_batch(
+            channel=self.channel,
+            offers=[offer_a, offer_b],
+            runner=FakeHermesRunner(forced_payload=forced_payload),
+            mode=CurationRun.Mode.DRY_RUN,
+            batch_size=2,
+        )
+
+        self.assertEqual(result.run.status, CurationRun.Status.COMPLETED)
+        self.assertEqual(result.batch.items.count(), 1)
+        self.assertEqual(result.batch.items.get().offer_id, offer_a.id)
+
     def test_zero_selected_does_not_create_ready_batch_and_marks_run_failed(self):
         # AI returns all offers with selected_for_batch=False → safety gate produces empty batch
         forced_payload = {

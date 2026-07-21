@@ -1,15 +1,27 @@
 {
-  "generated_at": "2026-07-20T11:53:24.225231+00:00",
+  "generated_at": "2026-07-21T14:22:24.555513+00:00",
   "days": 7,
   "deliveries": {
     "days": 7,
-    "since": "2026-07-13T11:53:24.225248+00:00",
+    "since": "2026-07-14T14:22:24.555522+00:00",
     "rows": [
+      {
+        "day": "2026-07-21",
+        "channel_code": "telegram_main",
+        "channel_name": "Telegram principal",
+        "sent_count": 4
+      },
+      {
+        "day": "2026-07-20",
+        "channel_code": "telegram_main",
+        "channel_name": "Telegram principal",
+        "sent_count": 49
+      },
       {
         "day": "2026-07-20",
         "channel_code": "whatsapp_principal",
         "channel_name": "WhatsApp principal",
-        "sent_count": 11
+        "sent_count": 20
       },
       {
         "day": "2026-07-19",
@@ -51,72 +63,326 @@
         "day": "2026-07-14",
         "channel_code": "whatsapp_principal",
         "channel_name": "WhatsApp principal",
-        "sent_count": 40
-      },
-      {
-        "day": "2026-07-13",
-        "channel_code": "whatsapp_principal",
-        "channel_name": "WhatsApp principal",
-        "sent_count": 68
+        "sent_count": 25
       }
     ],
     "totals_by_channel": {
-      "whatsapp_principal": 382,
-      "telegram_main": 18
+      "telegram_main": 71,
+      "whatsapp_principal": 308
     },
-    "total_sent": 400
+    "total_sent": 379
   },
   "scraping": {
     "days": 7,
-    "since": "2026-07-13T11:53:24.379088+00:00",
+    "since": "2026-07-14T14:22:24.665548+00:00",
     "by_marketplace": [
       {
         "marketplace_code": "amazon",
         "marketplace_name": "Amazon",
-        "total_collected": 3539,
-        "total_valid": 3539,
-        "run_count": 43
+        "total_collected": 3602,
+        "total_valid": 3602,
+        "run_count": 46
       },
       {
         "marketplace_code": "mercadolivre",
         "marketplace_name": "Mercado Livre",
-        "total_collected": 4704,
-        "total_valid": 4704,
-        "run_count": 43
+        "total_collected": 5012,
+        "total_valid": 5012,
+        "run_count": 46
       },
       {
         "marketplace_code": "shopee",
         "marketplace_name": "Shopee",
-        "total_collected": 3834,
-        "total_valid": 3834,
-        "run_count": 42
+        "total_collected": 4104,
+        "total_valid": 4104,
+        "run_count": 45
       }
     ],
     "runs_by_status": {
-      "failed": 9,
+      "failed": 11,
       "running": 2,
-      "success": 117
+      "success": 124
     },
-    "total_runs": 128,
-    "failed_runs": 9,
-    "failed_rate_pct": 7.0
+    "total_runs": 137,
+    "failed_runs": 11,
+    "failed_rate_pct": 8.0
   },
   "curation": {
     "days": 7,
-    "since": "2026-07-13T11:53:24.439880+00:00",
+    "since": "2026-07-14T14:22:24.694358+00:00",
     "runs_by_status": {
-      "completed": 74,
-      "failed": 4
+      "completed": 108,
+      "failed": 6,
+      "running": 1
     },
-    "total_runs": 78,
-    "failed_runs": 4,
-    "failed_rate_pct": 5.1
+    "total_runs": 115,
+    "failed_runs": 6,
+    "failed_rate_pct": 5.2
   },
   "observer": {
     "last_message_collected_at": "2026-07-03T00:56:54.570000+00:00",
     "last_message_group_name": "#330 Promo Relâmpago MEN",
-    "last_daily_report_date": "2026-07-19",
-    "hours_since_last_collection": 418.9,
+    "last_daily_report_date": "2026-07-20",
+    "hours_since_last_collection": 445.4,
     "is_stale": true
+  },
+  "commission_correlation": {
+    "weeks": 8,
+    "since": "2026-05-26T14:22:24.832460+00:00",
+    "note": "Para Mercado Livre e Amazon (RESTR-03), envios x comissão na mesma semana é correlação temporal, não atribuição exata por clique/envio. Para Shopee, a comissão já é atribuída por canal via subId (Tarefa 4.1).",
+    "rows": [
+      {
+        "week_start": "2026-05-25",
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "sent_count": 131,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-05-25",
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "sent_count": 818,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-01",
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "sent_count": 215,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-01",
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "sent_count": 1018,
+        "commission_brl": 234.73,
+        "conversions": 14,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-08",
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "sent_count": 295,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-08",
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "sent_count": 801,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-15",
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "sent_count": 196,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-15",
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "sent_count": 740,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-15",
+        "marketplace_code": "shopee",
+        "marketplace_name": "Shopee",
+        "sent_count": 120,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "atribuição (Shopee, via subId)"
+      },
+      {
+        "week_start": "2026-06-22",
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "sent_count": 66,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-22",
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "sent_count": 824,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-22",
+        "marketplace_code": "shopee",
+        "marketplace_name": "Shopee",
+        "sent_count": 74,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "atribuição (Shopee, via subId)"
+      },
+      {
+        "week_start": "2026-06-29",
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "sent_count": 156,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-29",
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "sent_count": 619,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-06-29",
+        "marketplace_code": "shopee",
+        "marketplace_name": "Shopee",
+        "sent_count": 20,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "atribuição (Shopee, via subId)"
+      },
+      {
+        "week_start": "2026-07-06",
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "sent_count": 130,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-07-06",
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "sent_count": 356,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-07-06",
+        "marketplace_code": "shopee",
+        "marketplace_name": "Shopee",
+        "sent_count": 68,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "atribuição (Shopee, via subId)"
+      },
+      {
+        "week_start": "2026-07-13",
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "sent_count": 88,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-07-13",
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "sent_count": 300,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-07-13",
+        "marketplace_code": "shopee",
+        "marketplace_name": "Shopee",
+        "sent_count": 12,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "atribuição (Shopee, via subId)"
+      },
+      {
+        "week_start": "2026-07-20",
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "sent_count": 20,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-07-20",
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "sent_count": 43,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "correlação (ML/Amazon)"
+      },
+      {
+        "week_start": "2026-07-20",
+        "marketplace_code": "shopee",
+        "marketplace_name": "Shopee",
+        "sent_count": 10,
+        "commission_brl": 0.0,
+        "conversions": 0,
+        "label": "atribuição (Shopee, via subId)"
+      }
+    ]
+  },
+  "membership": {
+    "days": 90,
+    "since": "2026-04-22",
+    "series": [
+      {
+        "channel_code": "telegram_main",
+        "channel_name": "Telegram principal",
+        "points": [
+          {
+            "data": "2026-07-21",
+            "membros": 860,
+            "posts_publicados": 4,
+            "cliques_estimados": null
+          }
+        ]
+      },
+      {
+        "channel_code": "whatsapp_principal",
+        "channel_name": "WhatsApp principal",
+        "points": [
+          {
+            "data": "2026-07-14",
+            "membros": 1180,
+            "posts_publicados": 40,
+            "cliques_estimados": null
+          },
+          {
+            "data": "2026-07-21",
+            "membros": 1240,
+            "posts_publicados": 0,
+            "cliques_estimados": null
+          }
+        ]
+      }
+    ]
   }
 }

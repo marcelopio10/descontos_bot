@@ -2,6 +2,48 @@
 
 > Status: Sprint 5 (handoff manual via Telegram) entregue em 2026-06-03.
 > Escopo original: salvar plano técnico (Cloudinary + Meta Graph direto). Implementação real adotou Composio CLI no Sprint 4 e, no Sprint 5, virou estratégia para **publicação manual com handoff por Telegram** — ver seções 2.bis e 2.ter abaixo.
+>
+> ⚠️ Numeração de Sprint deste documento é **antiga** e não tem relação com as
+> Sprints 0-8 do plano de refatoração pós-diagnóstico
+> (`docs/PLANO_REFATORACAO_POS_DIAGNOSTICO_2026-07-18.md`). Onde este arquivo
+> falar em "Sprint 4/5", é a numeração original deste plano de automação.
+
+## Atualização de execução (2026-07-21) — Sprint 7 do plano de refatoração pós-diagnóstico (achado C4)
+
+Entre 2026-07-09 (commit `f359320`) e 2026-07-21 a geração de conteúdo Instagram
+esteve **de fato desativada** tanto na via automática (`run_bot`) quanto nos
+comandos manuais (`generate_instagram_story`/`generate_instagram_post`/
+`generate_instagram_carousel`): um `return` antecipado foi inserido no início
+de cada função/comando, deixando toda a lógica de geração (inclusive o
+handoff automático pro Telegram descrito em 2.ter abaixo) como código morto
+por 12 dias. As seções "entregue"/"operacional" deste documento descreviam um
+estado que não refletia mais a realidade nesse intervalo — esse era o achado
+C4 do plano de refatoração pós-diagnóstico.
+
+Reativação (Tarefa 7.1) + política de cadência (Tarefa 7.2):
+
+- Os `return` prematuros foram removidos; a geração automática e manual
+  voltam a criar `InstagramPost` de verdade, e o handoff automático pro
+  Telegram (`_trigger_handoff` em `apps/social_posts/services/post_generator.py`)
+  volta a disparar normalmente quando um novo `story` é criado.
+- A reativação ficou **obrigatoriamente** atrás de um teto diário aplicado em
+  código: `apps/social_posts/services/politica_cadencia.py` (mesmo padrão de
+  `apps.orchestration.services.scheduler.get_channel_cadence_config`). Default
+  3 stories/dia + 1 feed-ou-carrossel/dia — os mesmos volumes já documentados
+  em `docs/ROTINA_EDITORIAL_INSTAGRAM.md` seção 2, mas que até aqui eram só
+  recomendação manual. Ver seção "Enforcement automático (Sprint 7)" naquele
+  documento para detalhes.
+- A mensagem falsa em `generate_instagram_story` ("A geração automática
+  (run_bot) segue ativa") foi removida — ela alegava que a via automática
+  continuava ativa quando, na verdade, ambas estavam desativadas pelo mesmo
+  commit.
+- O radar de mercado Shopee (Sprint 6, `apps.marketplaces.services.radar_mercado`)
+  passou a ser usado como pauta preferencial na escolha de qual oferta virar
+  story/post/carrossel, com fallback silencioso (sem quebrar a geração) quando
+  desligado, sem cobertura ou em erro.
+- O backlog de `InstagramPost` acumulado com status `ready`/`awaiting_post`
+  antes de 2026-07-09 **não** foi migrado nem reenviado — o handoff só dispara
+  na criação de um post novo, não retroativamente.
 
 ## Atualização de execução (2026-06-03) — Sprint 5
 

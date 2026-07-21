@@ -20,14 +20,17 @@ export function loadGroupMap(config) {
 
   return {
     resolve(target) {
+      return this.resolveTarget(target).jid;
+    },
+    resolveTarget(target) {
       if (typeof target !== 'string' || !target.trim()) {
         throw new Error('Destino inválido');
       }
       const trimmed = target.trim();
-      if (trimmed.endsWith('@g.us')) return trimmed;
+      if (trimmed.endsWith('@g.us')) return byJid.get(trimmed) || { jid: trimmed, senderInstance: 'envio' };
       const item = byName.get(trimmed);
       if (!item) throw new Error(`Grupo "${trimmed}" não encontrado no mapa Evolution`);
-      return item.jid;
+      return item;
     },
     subjectFor(jid) {
       return byJid.get(jid)?.subject || jid;
@@ -43,10 +46,14 @@ export function loadGroupMap(config) {
 
 function normalizeGroupEntry(name, value) {
   if (typeof value === 'string' && value.endsWith('@g.us')) {
-    return { jid: value, subject: name };
+    return { jid: value, subject: name, senderInstance: 'envio' };
   }
   if (value && typeof value === 'object' && typeof value.jid === 'string' && value.jid.endsWith('@g.us')) {
-    return { jid: value.jid, subject: typeof value.subject === 'string' ? value.subject : name };
+    return {
+      jid: value.jid,
+      subject: typeof value.subject === 'string' ? value.subject : name,
+      senderInstance: value.sender_instance === 'observer' ? 'observer' : 'envio',
+    };
   }
   return null;
 }

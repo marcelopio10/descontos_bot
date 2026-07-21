@@ -50,8 +50,13 @@ async function callEvolution(config, path, body) {
   const text = await response.text();
   const payload = text ? safeJson(text) : {};
   if (!response.ok) {
-    const message = payload?.error || payload?.message || `Evolution API retornou HTTP ${response.status}`;
-    throw new Error(String(message));
+    const detail = payload?.error ?? payload?.message;
+    const message = typeof detail === 'string'
+      ? detail
+      : detail
+        ? JSON.stringify(detail)
+        : `Evolution API retornou HTTP ${response.status}`;
+    throw new Error(message);
   }
   return payload;
 }

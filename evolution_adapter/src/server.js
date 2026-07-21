@@ -16,13 +16,16 @@ export function createApp({ config = getConfig(), groupMap = loadGroupMap(config
         return json(res, 200, await getConnectionStatus(config));
       }
       if (req.method === 'POST' && url.pathname === '/send-message') {
-        return handleSendMessage(req, res, config, groupMap);
+        await handleSendMessage(req, res, config, groupMap);
+        return;
       }
       if (req.method === 'POST' && url.pathname === '/send') {
-        return handleSendBatch(req, res, config, groupMap);
+        await handleSendBatch(req, res, config, groupMap);
+        return;
       }
       if (req.method === 'POST' && url.pathname === '/webhook/whatsapp') {
-        return handleWebhook(req, res, observer);
+        await handleWebhook(req, res, observer);
+        return;
       }
       if (req.method === 'POST' && url.pathname === '/observer/collect') {
         await readJson(req).catch(() => ({}));
@@ -48,8 +51,11 @@ async function handleSendMessage(req, res, config, groupMap) {
   if (!message || typeof message !== 'string') return json(res, 400, { error: "Campo 'message' é obrigatório (string)" });
   if (image_url !== undefined && typeof image_url !== 'string') return json(res, 400, { error: "Campo 'image_url' deve ser string quando informado" });
 
-  const number = groupMap.resolve(destination);
-  const result = image_url ? await sendMedia(config, number, message, image_url) : await sendText(config, number, message);
+  const target = groupMap.resolveTarget(destination);
+  const senderConfig = await configForTarget(config, target);
+  const result = image_url
+    ? await sendMedia(senderConfig, target.jid, message, image_url)
+    : await sendText(senderConfig, target.jid, message);
   return json(res, 200, result);
 }
 
@@ -59,14 +65,15 @@ async function handleSendBatch(req, res, config, groupMap) {
   if (!target || typeof target !== 'string') return json(res, 400, { error: "Campo 'target' é obrigatório (string)" });
   if (!Array.isArray(items) || items.length === 0) return json(res, 400, { error: "Campo 'items' deve ser array não-vazio" });
 
-  const number = groupMap.resolve(target);
+  const resolvedTarget = groupMap.resolveTarget(target);
+  const senderConfig = await configForTarget(config, resolvedTarget);
   const result = { sent: 0, errors: 0, failures: [] };
   for (const item of items) {
     try {
       const caption = resolveItemText(item);
       const mediaUrl = item.image_url || item.media_url;
       if (!mediaUrl) throw new Error('item sem image_url/media_url para Evolution');
-      await sendMedia(config, number, caption, mediaUrl);
+      await sendMedia(senderConfig, resolvedTarget.jid, caption, mediaUrl);
       result.sent += 1;
     } catch (error) {
       result.errors += 1;
@@ -74,6 +81,16 @@ async function handleSendBatch(req, res, config, groupMap) {
     }
   }
   return json(res, 200, result);
+}
+
+async function configForTarget(config, target) {
+  if (target.senderInstance !== 'observer') return config;
+  const observerConfig = { ...config, instanciaEnvio: config.instanciaObserver };
+  const status = await getConnectionStatus(observerConfig);
+  if (!status.connected) {
+    throw new Error('Instância descontos_observer não está conectada para envio das agendas');
+  }
+  return observerConfig;
 }
 
 function resolveItemText(item) {

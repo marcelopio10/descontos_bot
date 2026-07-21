@@ -58,6 +58,19 @@ class BaselineSnapshotTests(TestCase):
         self.assertIn('classification', payload['baseline'])
         self.assertIsInstance(payload['baseline']['score'], float)
 
+    def test_serialize_offer_forwards_observer_context_and_market_radar_to_score(self):
+        """Sprint 6 / Tarefa 6.2 e 6.1: serialize_offer_for_ai precisa repassar
+        os sinais opcionais para quality_score_breakdown, senão o bônus fica
+        'morto' (nunca chega no baseline usado pela IA).
+        """
+        observer_context = {'marketplace_counts': {'amazon': 10}, 'editorial_label_counts': {}}
+        market_radar = {'category_scores': {'tecnologia': 0.9}}
+
+        payload = serialize_offer_for_ai(self.offer, observer_context=observer_context, market_radar=market_radar)
+
+        self.assertIn('observer_bonus', payload['baseline']['multipliers'])
+        self.assertIn('market_radar_bonus', payload['baseline']['multipliers'])
+
     def test_serialize_offer_marks_books_as_low_priority(self):
         self.offer.title = 'Livro Hábitos Atômicos capa comum'
         self.offer.normalized_title = 'livro habitos atomicos capa comum'

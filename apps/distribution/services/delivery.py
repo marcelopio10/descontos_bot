@@ -11,10 +11,30 @@ from apps.distribution.services.execution_window import (
     get_silence_error_message,
     is_distribution_silenced,
 )
-from apps.distribution.services.whatsapp_client import WhatsAppClient, WhatsAppClientError
+from apps.distribution.services.whatsapp_client import (
+    WhatsAppClient,
+    WhatsAppClientError,
+    WhatsAppStatus,
+)
+from apps.distribution.services.whatsapp_rate_limiter import (
+    WhatsAppRateLimiter,
+    get_default_limiter as get_default_whatsapp_rate_limiter,
+)
 from apps.offers.models import Offer
 
 PENDING_STALE_AFTER = timedelta(minutes=15)
+
+
+class SessaoIndisponivelError(Exception):
+    """Levantada quando a sessão do WhatsApp cai durante o envio de um lote.
+
+    Distinta de uma falha pontual de uma oferta específica: sinaliza ao
+    chamador (loops de `run_bot`) que a sessão está indisponível e o restante
+    do lote deve ser interrompido (break), em vez de continuar tentando enviar
+    e marcando cada oferta seguinte como FAILED individualmente (achado C3).
+    A oferta que estava em processamento no momento da queda já foi salva
+    (normalmente como FAILED) antes desta exceção ser levantada.
+    """
 
 
 @dataclass(frozen=True)
@@ -23,10 +43,24 @@ class DeliveryResult:
     sent: bool
 
 
+def get_whatsapp_session_status(client: WhatsAppClient | None = None) -> WhatsAppStatus:
+    """Consulta o status da sessão do WhatsApp usando o mesmo `WhatsAppClient`
+    dos caminhos de envio (`deliver_offer_to_channel`/`deliver_curated_item_to_whatsapp`).
+
+    Existe para que o pre-check de sessão do `run_bot` (Tarefa 1.3, antes do
+    loop de envio) reutilize a mesma fábrica de client deste módulo — inclusive
+    em testes, que fazem `patch('apps.distribution.services.delivery.WhatsAppClient', ...)`.
+    Levanta `WhatsAppClientError` se a consulta falhar (adapter indisponível).
+    """
+    client = client or WhatsAppClient()
+    return client.get_status()
+
+
 def deliver_offer_to_channel(
     offer: Offer,
     channel: SocialChannel,
     client: WhatsAppClient | None = None,
+    rate_limiter: WhatsAppRateLimiter | None = None,
 ) -> DeliveryResult:
     message = build_offer_message(offer, channel)
 
@@ -66,7 +100,12 @@ def deliver_offer_to_channel(
                 status=Delivery.DeliveryStatus.FAILED,
                 error_message='WhatsApp não conectado. Verifique a sessão do provedor configurado.',
             )
-            return DeliveryResult(delivery=delivery, sent=False)
+            raise SessaoIndisponivelError(
+                'WhatsApp não conectado. Verifique a sessão do provedor configurado.',
+            )
+
+        limiter = rate_limiter or get_default_whatsapp_rate_limiter()
+        limiter.wait_for_send(channel.target)
 
         result = client.send_message(channel.target, message, offer.image_url)
     except WhatsAppClientError as exc:
@@ -78,7 +117,7 @@ def deliver_offer_to_channel(
             status=Delivery.DeliveryStatus.FAILED,
             error_message=str(exc),
         )
-        return DeliveryResult(delivery=delivery, sent=False)
+        raise SessaoIndisponivelError(str(exc)) from exc
 
     status = Delivery.DeliveryStatus.SENT if result.success else Delivery.DeliveryStatus.FAILED
     delivery = _save_delivery(
@@ -98,6 +137,7 @@ def deliver_curated_item_to_whatsapp(
     item: CuratedBatchItem,
     channel: SocialChannel,
     client: WhatsAppClient | None = None,
+    rate_limiter: WhatsAppRateLimiter | None = None,
 ) -> DeliveryResult:
     offer = item.offer
     message = build_curated_offer_message(item, channel).strip()
@@ -141,7 +181,12 @@ def deliver_curated_item_to_whatsapp(
                 error_message='WhatsApp não conectado. Verifique a sessão do provedor configurado.',
             )
             mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.FAILED)
-            return DeliveryResult(delivery=delivery, sent=False)
+            raise SessaoIndisponivelError(
+                'WhatsApp não conectado. Verifique a sessão do provedor configurado.',
+            )
+
+        limiter = rate_limiter or get_default_whatsapp_rate_limiter()
+        limiter.wait_for_send(channel.target)
 
         result = client.send_message(channel.target, message, image_url)
     except WhatsAppClientError as exc:
@@ -154,7 +199,7 @@ def deliver_curated_item_to_whatsapp(
             error_message=str(exc),
         )
         mark_curated_item_delivery(item, delivery, CuratedBatchItem.SendStatus.FAILED)
-        return DeliveryResult(delivery=delivery, sent=False)
+        raise SessaoIndisponivelError(str(exc)) from exc
 
     status = Delivery.DeliveryStatus.SENT if result.success else Delivery.DeliveryStatus.FAILED
     delivery = _save_delivery(

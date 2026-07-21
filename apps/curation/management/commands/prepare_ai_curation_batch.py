@@ -11,8 +11,10 @@ from apps.curation.services.ai_curator import prepare_ai_curation_batch
 from apps.curation.services.batch_optimizer import DEFAULT_TARGET_DISTRIBUTION
 from apps.curation.services.hermes_runner import HermesProfileRunner
 from apps.curation.services.image_processing import process_selected_batch_images
+from apps.curation.services.observer_context import assert_sanitized_context, build_observer_context
 from apps.curation.services.selector import _eligible_offers, get_selection_config
 from apps.distribution.models import SocialChannel
+from apps.marketplaces.services.radar_mercado import collect_radar_mercado
 
 DEFAULT_CHANNEL_CODE = 'whatsapp_main'
 DEFAULT_AUDIT_DIR = 'runtime/curation/ai_runs'
@@ -58,11 +60,35 @@ class Command(BaseCommand):
         if not offers:
             raise CommandError(f'Nenhuma oferta elegível encontrada para channel={channel.code}.')
 
-        observer_context = {
+        # Sprint 6 / Tarefa 6.2 (achado P3): antes disto era um dict estático
+        # (nunca refletia o que o observer via de fato); agora é
+        # build_observer_context() de verdade — mesclado com os 3 campos que
+        # já existiam antes desta tarefa. `source`/`skip_images`/
+        # `real_send_enabled` são metadados DESTE comando (não são sinal do
+        # observer), por isso ficam por cima do spread: se algum dia um campo
+        # colidir, o metadado explícito do comando vence sobre o agregado
+        # genérico. `assert_sanitized_context` reaplica a validação
+        # anti-vazamento (LGPD) sobre o dict final já mesclado — defesa extra
+        # e barata contra um futuro campo de metadado sensível ser adicionado
+        # aqui sem passar pela sanitização de `build_observer_context`.
+        observer_context = assert_sanitized_context({
+            **build_observer_context(),
             'source': 'prepare_ai_curation_batch_command',
             'skip_images': bool(options['skip_images']),
             'real_send_enabled': False,
-        }
+        })
+
+        # Sprint 6 / Tarefa 6.1 (achado P7): ranking de vendas Shopee do dia.
+        # `collect_radar_mercado()` já se auto-protege por
+        # `settings.SHOPEE_AFFILIATE_ENABLED` (off por padrão em produção
+        # hoje) e devolve um resultado vazio/neutro sem chamar a API nesse
+        # caso — não muda nada em produção enquanto a flag estiver desligada.
+        # Nota para quando a flag for ligada: este comando roda a cada ciclo
+        # de curadoria (não só 1x/dia), então religar a flag reabre a
+        # pergunta de cadência de chamadas à API Shopee aqui — decisão futura
+        # do dono, fora do escopo desta tarefa.
+        market_radar = collect_radar_mercado().as_dict()
+
         runner = None
         profile_name = 'mock'
         model_provider = 'mock'
@@ -89,6 +115,7 @@ class Command(BaseCommand):
             audit_dir=Path(options['audit_dir']),
             public_json_dir=Path(options['public_dir']),
             observer_context=observer_context,
+            market_radar=market_radar,
             profile_name=profile_name,
             model_provider=model_provider,
             model_name=model_name,
@@ -132,27 +159,57 @@ class Command(BaseCommand):
         return _balanced_marketplace_candidates(queryset, limit=limit)
 
 
+CANDIDATE_OVERFETCH_MULTIPLIER = 3  # margem para compensar itens descartados pelo dedup de produto canônico
+
+
 def _balanced_marketplace_candidates(queryset, *, limit: int):
     """Build the AI candidate pool with marketplace coverage before the agent runs.
 
     The AI remains the curator, but it cannot pick Shopee if the candidate payload
     is filled by higher-discount ML/Amazon rows before Shopee appears. Seed the
     payload near the target mix, then fill shortages from the global order.
+
+    Also applies a light pre-filter (Sprint 5 / achado P8) that skips offers
+    whose `produto_canonico_id` already appears earlier in the pool (queryset
+    ordering already favors higher discount first, so "earlier" means "best"),
+    so we don't waste candidate slots sending the AI an obvious duplicate
+    (e.g. the same Amazon ASIN via two sellers). This is only a pool-shaping
+    optimization — the actual source of truth for dedup is
+    apps.curation.services.batch_optimizer.optimize_curation_batch, which runs
+    after the AI decides and is what final selection actually depends on.
     """
     if limit <= 0:
         return []
     quotas = _target_counts(limit, DEFAULT_TARGET_DISTRIBUTION)
     selected = []
     selected_ids: set[int] = set()
+    seen_canonicos: set[str] = set()
     for marketplace_code in DEFAULT_TARGET_DISTRIBUTION:
-        for offer in queryset.filter(marketplace__code=marketplace_code)[:quotas.get(marketplace_code, 0)]:
-            selected.append(offer)
-            selected_ids.add(offer.id)
+        quota = quotas.get(marketplace_code, 0)
+        if quota <= 0:
+            continue
+        candidates = queryset.filter(marketplace__code=marketplace_code)[: quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_canonicos)
     if len(selected) < limit:
-        for offer in queryset.exclude(id__in=selected_ids)[: limit - len(selected)]:
-            selected.append(offer)
-            selected_ids.add(offer.id)
+        remaining_quota = limit - len(selected)
+        remaining = queryset.exclude(id__in=selected_ids)[: remaining_quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        _append_deduped_by_canonico(remaining, remaining_quota, selected, selected_ids, seen_canonicos)
     return selected[:limit]
+
+
+def _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_canonicos):
+    added = 0
+    for offer in candidates:
+        if added >= quota:
+            break
+        canonico = (offer.produto_canonico_id or '').strip()
+        if canonico and canonico in seen_canonicos:
+            continue
+        selected.append(offer)
+        selected_ids.add(offer.id)
+        if canonico:
+            seen_canonicos.add(canonico)
+        added += 1
 
 
 def _target_counts(limit: int, target_distribution: dict[str, float]) -> dict[str, int]:

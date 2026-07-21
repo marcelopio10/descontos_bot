@@ -1,0 +1,11 @@
+[Unit]
+Description=descontos.bot - Disparo periódico de publish_telegram (telegram_main)
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=30min
+Persistent=true
+Unit=publish-telegram.service
+
+[Install]
+WantedBy=timers.target

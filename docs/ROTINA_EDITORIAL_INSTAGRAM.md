@@ -27,6 +27,47 @@ Respeitar a janela de silêncio do projeto (00:00-06:00 BRT).
 
 ---
 
+## 2.1 Enforcement automático (Sprint 7)
+
+> Sprint 7 aqui é do plano de refatoração pós-diagnóstico
+> (`docs/PLANO_REFATORACAO_POS_DIAGNOSTICO_2026-07-18.md`), não a numeração
+> antiga usada em `PLANO_AUTOMACAO_INSTAGRAM.md`.
+
+Até 2026-07-21 os volumes da tabela acima eram só recomendação: nada no
+código impedia rodar `generate_instagram_story`/`generate_instagram_post`
+mais vezes que o previsto num mesmo dia (o teto dependia só de o operador
+não rodar o gerador demais vezes). Além disso, a geração automática
+(`run_bot`) e os três comandos manuais ficaram **totalmente desativados**
+entre 2026-07-09 e 2026-07-21 (achado C4 do plano de refatoração).
+
+A partir da Sprint 7 (Tarefa 7.2), esse teto é **aplicado em código** por
+`apps/social_posts/services/politica_cadencia.py`:
+
+- Teto diário de stories (default `3`, Setting `instagram_story_daily_limit`).
+- Teto diário combinado de feed-ou-carrossel (default `1`, Setting
+  `instagram_feed_or_carousel_daily_limit` — feed e carrossel dividem o
+  mesmo teto, não é 1 de cada).
+- Contagem por `InstagramPost` criado **hoje** (fuso `America/Sao_Paulo`) no
+  formato correspondente; ao atingir o teto, a geração recusa/pula com log
+  claro do motivo (`instagram_cadencia.*` no log, mensagem no stdout do
+  comando) em vez de lançar erro genérico.
+- Vale tanto para a via automática (`run_bot`) quanto para os comandos
+  manuais desta rotina — nenhum caminho de entrada contorna o teto.
+- Ajustável sem redeploy via `Setting` do painel (mesmo mecanismo de
+  `apps.curation.services.settings.get_integer_setting` já usado pelo
+  scheduler do WhatsApp).
+
+Como pauta preferencial, a escolha de qual oferta virar story/post/carrossel
+passou a considerar também o radar de mercado Shopee (Sprint 6,
+`apps.marketplaces.services.radar_mercado.collect_radar_mercado`): categorias
+com `escore_venda` alto no dia ganham prioridade sobre o ranking padrão por
+desconto/preço. Com o radar desligado (`SHOPEE_AFFILIATE_ENABLED=false`,
+default de produção hoje), sem cobertura da categoria ou em caso de erro, a
+geração cai de volta silenciosamente no ranking original — o radar nunca
+bloqueia nem quebra a geração.
+
+---
+
 ## 3. Critérios de Priorização de Ofertas
 
 Aplicar na ordem abaixo ao escolher qual oferta publicar:

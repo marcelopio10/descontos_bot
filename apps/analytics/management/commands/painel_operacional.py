@@ -1,0 +1,254 @@
+import json
+from dataclasses import asdict
+from datetime import date, datetime
+from decimal import Decimal
+from pathlib import Path
+
+from django.conf import settings
+from django.core.management.base import BaseCommand
+
+from apps.analytics.services.operational_metrics import (
+    DEFAULT_DAYS,
+    DEFAULT_MEMBERSHIP_DAYS,
+    DEFAULT_WEEKS,
+    OperationalPanel,
+    build_operational_panel,
+)
+
+
+PANEL_FILENAME = 'painel-operacional.json'
+
+
+class Command(BaseCommand):
+    help = (
+        'Imprime o painel operacional mínimo (envios/dia por canal, '
+        'ofertas coletadas/válidas por marketplace, runs FAILED de scraping '
+        'e curadoria, última coleta do observer, correlação envios x '
+        'comissão por marketplace/semana, curva de membros/seguidores por '
+        'canal) e grava '
+        f'site/{PANEL_FILENAME}.'
+    )
+
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--days',
+            type=int,
+            default=DEFAULT_DAYS,
+            help=f'Janela de análise em dias (default {DEFAULT_DAYS}).',
+        )
+        parser.add_argument(
+            '--weeks',
+            type=int,
+            default=DEFAULT_WEEKS,
+            help=(
+                'Janela em semanas para a correlação envios x comissão '
+                f'por marketplace (default {DEFAULT_WEEKS}).'
+            ),
+        )
+        parser.add_argument(
+            '--membership-days',
+            type=int,
+            default=DEFAULT_MEMBERSHIP_DAYS,
+            help=(
+                'Janela em dias para a curva de membros/seguidores por canal '
+                f'(default {DEFAULT_MEMBERSHIP_DAYS}).'
+            ),
+        )
+
+    def handle(self, *args, **options):
+        days = options['days']
+        weeks = options['weeks']
+        membership_days = options['membership_days']
+        panel = build_operational_panel(days=days, weeks=weeks, membership_days=membership_days)
+
+        self._print_panel(panel)
+
+        output_path = self._write_json(panel)
+        self.stdout.write('')
+        self.stdout.write(self.style.SUCCESS(f'JSON gravado em {output_path}'))
+
+    # -- impressão no terminal -------------------------------------------------
+
+    def _print_panel(self, panel: OperationalPanel) -> None:
+        self.stdout.write(
+            f'Painel operacional — janela de {panel.days} dia(s) '
+            f'(gerado em {panel.generated_at:%d/%m/%Y %H:%M})'
+        )
+        self.stdout.write('=' * 78)
+
+        self._print_deliveries(panel)
+        self._print_scraping(panel)
+        self._print_curation(panel)
+        self._print_observer(panel)
+        self._print_commission_correlation(panel)
+        self._print_membership(panel)
+
+    def _print_deliveries(self, panel: OperationalPanel) -> None:
+        deliveries = panel.deliveries
+        self.stdout.write('')
+        self.stdout.write('Envios por dia/canal (delivery_status=sent)')
+        self.stdout.write('-' * 78)
+        if not deliveries.rows:
+            self.stdout.write('  (nenhum envio no período)')
+        else:
+            self.stdout.write(f'  {"dia":12} {"canal":30} {"enviados":>10}')
+            for row in deliveries.rows:
+                self.stdout.write(
+                    f'  {row.day.isoformat():12} {row.channel_name[:30]:30} '
+                    f'{row.sent_count:>10}'
+                )
+            self.stdout.write('')
+            self.stdout.write('  Totais por canal:')
+            for channel_code, total in sorted(
+                deliveries.totals_by_channel.items(), key=lambda kv: -kv[1]
+            ):
+                self.stdout.write(f'    {channel_code:30} {total:>10}')
+        self.stdout.write(f'  Total geral enviado no período: {deliveries.total_sent}')
+
+    def _print_scraping(self, panel: OperationalPanel) -> None:
+        scraping = panel.scraping
+        self.stdout.write('')
+        self.stdout.write('Scraping — coletado/válido por marketplace')
+        self.stdout.write('-' * 78)
+        if not scraping.by_marketplace:
+            self.stdout.write('  (nenhum run de scraping no período)')
+        else:
+            self.stdout.write(
+                f'  {"marketplace":22} {"runs":>6} {"coletado":>10} {"válido":>10}'
+            )
+            for row in scraping.by_marketplace:
+                self.stdout.write(
+                    f'  {row.marketplace_name[:22]:22} {row.run_count:>6} '
+                    f'{row.total_collected:>10} {row.total_valid:>10}'
+                )
+        self.stdout.write('')
+        self.stdout.write(
+            f'  Runs por status: '
+            + (', '.join(f'{k}={v}' for k, v in sorted(scraping.runs_by_status.items())) or '-')
+        )
+        self.stdout.write(
+            f'  Total de runs: {scraping.total_runs} | FAILED: {scraping.failed_runs} '
+            f'({scraping.failed_rate_pct}%)'
+        )
+
+    def _print_curation(self, panel: OperationalPanel) -> None:
+        curation = panel.curation
+        self.stdout.write('')
+        self.stdout.write('Curadoria — runs por status')
+        self.stdout.write('-' * 78)
+        self.stdout.write(
+            '  '
+            + (', '.join(f'{k}={v}' for k, v in sorted(curation.runs_by_status.items())) or '(nenhum run no período)')
+        )
+        self.stdout.write(
+            f'  Total de runs: {curation.total_runs} | FAILED: {curation.failed_runs} '
+            f'({curation.failed_rate_pct}%)'
+        )
+
+    def _print_observer(self, panel: OperationalPanel) -> None:
+        observer = panel.observer
+        self.stdout.write('')
+        self.stdout.write('Observer (market intel) — última coleta')
+        self.stdout.write('-' * 78)
+        if observer.last_message_collected_at:
+            self.stdout.write(
+                f'  Última mensagem coletada: '
+                f'{observer.last_message_collected_at:%d/%m/%Y %H:%M} '
+                f'(grupo: {observer.last_message_group_name}) '
+                f'— há {observer.hours_since_last_collection}h'
+            )
+        else:
+            self.stdout.write('  Nenhuma mensagem observada registrada.')
+        if observer.last_daily_report_date:
+            self.stdout.write(
+                f'  Último relatório diário: {observer.last_daily_report_date.isoformat()}'
+            )
+        else:
+            self.stdout.write('  Nenhum relatório diário (MarketIntelDailyReport) registrado.')
+
+        status_label = 'ATRASADO (>24h sem coleta)' if observer.is_stale else 'OK'
+        style = self.style.WARNING if observer.is_stale else self.style.SUCCESS
+        self.stdout.write(f'  Status: {style(status_label)}')
+
+    def _print_commission_correlation(self, panel: OperationalPanel) -> None:
+        report = panel.commission_correlation
+        self.stdout.write('')
+        self.stdout.write(
+            f'Envios x comissão por marketplace/semana (janela de {report.weeks} semana(s))'
+        )
+        self.stdout.write('-' * 78)
+        if not report.rows:
+            self.stdout.write('  (sem envios ou comissão no período)')
+        else:
+            self.stdout.write(
+                f'  {"semana":12} {"marketplace":16} {"enviados":>10} '
+                f'{"comissão (R$)":>14} {"conversões":>11}  rótulo'
+            )
+            for row in report.rows:
+                self.stdout.write(
+                    f'  {row.week_start.isoformat():12} {row.marketplace_name[:16]:16} '
+                    f'{row.sent_count:>10} {row.commission_brl:>14} '
+                    f'{row.conversions:>11}  {row.label}'
+                )
+        self.stdout.write(f'  Nota: {report.note}')
+
+    def _print_membership(self, panel: OperationalPanel) -> None:
+        membership = panel.membership
+        self.stdout.write('')
+        self.stdout.write(
+            f'Membros/seguidores por canal (janela de {membership.days} dia(s), '
+            'entrada manual periódica)'
+        )
+        self.stdout.write('-' * 78)
+        if not membership.series:
+            self.stdout.write('  (nenhuma métrica registrada no período — ver registrar_metrica_canal)')
+        else:
+            for serie in membership.series:
+                self.stdout.write(f'  {serie.channel_name} ({serie.channel_code})')
+                self.stdout.write(
+                    f'    {"data":12} {"membros":>10} {"posts":>8} {"cliques est.":>13}'
+                )
+                for point in serie.points:
+                    cliques = point.cliques_estimados if point.cliques_estimados is not None else '-'
+                    self.stdout.write(
+                        f'    {point.data.isoformat():12} {point.membros:>10} '
+                        f'{point.posts_publicados:>8} {cliques!s:>13}'
+                    )
+                primeiro, ultimo = serie.points[0], serie.points[-1]
+                variacao = ultimo.membros - primeiro.membros
+                sinal = '+' if variacao >= 0 else ''
+                self.stdout.write(
+                    f'    Variação no período: {sinal}{variacao} membros '
+                    f'({primeiro.membros} -> {ultimo.membros})'
+                )
+
+    # -- gravação do JSON -------------------------------------------------------
+
+    def _write_json(self, panel: OperationalPanel) -> Path:
+        payload = _panel_to_dict(panel)
+        output_path = Path(settings.SITE_PUBLIC_DIR) / PANEL_FILENAME
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(
+            json.dumps(payload, ensure_ascii=False, indent=2, default=_json_default),
+            encoding='utf-8',
+        )
+        return output_path
+
+
+def _panel_to_dict(panel: OperationalPanel) -> dict:
+    """Converte o dataclass aninhado em dict serializável.
+
+    Só contagens/agregados operacionais (envios, runs, timestamps) — sem
+    tokens, credenciais ou preço histórico individual.
+    """
+    return asdict(panel)
+
+
+def _json_default(value):
+    if isinstance(value, datetime):
+        return value.isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
+    if isinstance(value, Decimal):
+        return float(value)
+    raise TypeError(f'Tipo não serializável: {type(value)}')

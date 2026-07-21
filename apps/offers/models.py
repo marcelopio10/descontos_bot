@@ -94,6 +94,21 @@ class Offer(TimestampedModel):
         db_index=True,
         help_text='ASIN extraído da URL Amazon. Obrigatório para ofertas Amazon compliance.',
     )
+    produto_canonico_id = models.CharField(
+        'produto canônico',
+        max_length=200,
+        blank=True,
+        db_index=True,
+        help_text=(
+            'Identificador best-effort do produto físico, usado para dedup interna na '
+            'curadoria (Sprint 5 / achado P8). Amazon usa o ASIN (exato). Mercado Livre e '
+            'Shopee não têm GTIN disponível no payload: Shopee usa o itemId (sem o '
+            'shopId, pois o mesmo item pode ter vários vendedores); Mercado Livre cai '
+            'para o external_id do próprio anúncio (limitação conhecida — não deduplica '
+            'o mesmo produto vendido por lojistas diferentes). Calculado em '
+            'apps.offers.services.normalizer.'
+        ),
+    )
     current_price = models.DecimalField(
         'preço atual',
         max_digits=12,
@@ -266,3 +281,40 @@ class Offer(TimestampedModel):
         if self.original_price and self.current_price:
             return float(self.original_price) - float(self.current_price)
         return 0.0
+
+
+class PriceHistoryEntry(TimestampedModel):
+    """Série interna de preços coletados por oferta (Sprint 5 / achado F, H5).
+
+    RESTR-05: este histórico é **exclusivamente interno**. Ele alimenta o score
+    de curadoria (apps.curation.services.quality_score) para detectar desconto
+    anunciado ("De R$") acima de qualquer preço já observado. Nenhum valor
+    aqui pode ser citado nas mensagens publicadas (message_builder.py /
+    telegram_message_builder.py) — o único carimbo permitido no texto final é
+    "preço coletado em DD/MM", já derivado de `Offer.price_collected_at`.
+    """
+    offer = models.ForeignKey(
+        Offer,
+        verbose_name='oferta',
+        on_delete=models.CASCADE,
+        related_name='price_history',
+    )
+    price = models.DecimalField(
+        'preço',
+        max_digits=12,
+        decimal_places=2,
+    )
+    collected_at = models.DateTimeField(
+        'coletado em',
+    )
+
+    class Meta:
+        ordering = ['-collected_at']
+        indexes = [
+            models.Index(fields=['offer', 'collected_at']),
+        ]
+        verbose_name = 'histórico de preço'
+        verbose_name_plural = 'histórico de preços'
+
+    def __str__(self):
+        return f'oferta #{self.offer_id} — R$ {self.price} em {self.collected_at:%Y-%m-%d}'

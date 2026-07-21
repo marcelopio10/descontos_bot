@@ -180,6 +180,7 @@ class AICuratedHomologDeliveryTests(TestCase):
         with (
             patch('apps.distribution.services.telegram_delivery.TelegramClient', return_value=fake_client),
             patch('apps.distribution.services.telegram_delivery.is_distribution_silenced', return_value=False),
+            patch('apps.distribution.management.commands.publish_telegram.is_distribution_silenced', return_value=False),
         ):
             out = StringIO()
             call_command(

@@ -47,8 +47,12 @@ def build_ai_curation_payload(
     batch_size: int,
     observer_context: dict[str, Any] | None = None,
     target_distribution: dict[str, float] | None = None,
+    market_radar: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    serialized_offers = [serialize_offer_for_ai(offer) for offer in offers]
+    serialized_offers = [
+        serialize_offer_for_ai(offer, observer_context=observer_context, market_radar=market_radar)
+        for offer in offers
+    ]
     target = target_distribution or DEFAULT_TARGET_DISTRIBUTION
     return {
         'schema_version': INPUT_SCHEMA_VERSION,
@@ -62,6 +66,10 @@ def build_ai_curation_payload(
         'editorial_policy': EDITORIAL_POLICY,
         'baseline_rules': BASELINE_RULES,
         'observer_context': observer_context or {},
+        # Sprint 6 / Tarefa 6.1 (achado P7): ranking de vendas Shopee do dia
+        # (apps.marketplaces.services.radar_mercado), vazio por padrão quando o
+        # radar não rodou/está desligado (SHOPEE_AFFILIATE_ENABLED=false).
+        'market_radar': market_radar or {},
         'baseline_summary': {
             'candidate_count': len(serialized_offers),
             'marketplace_counts': _count_by(serialized_offers, 'marketplace_code'),

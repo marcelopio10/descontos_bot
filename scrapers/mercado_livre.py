@@ -9,7 +9,6 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
-import requests
 from bs4 import BeautifulSoup
 try:
     from dotenv import load_dotenv
@@ -17,7 +16,8 @@ try:
 except ImportError:
     pass
 
-from scrapers.base import BaseScraper
+from apps.analytics.services.alertas import enviar_alerta_operador
+from scrapers.base import HTTP_EXCEPTIONS, BaseScraper, build_impersonated_session
 
 log = logging.getLogger(__name__)
 
@@ -97,7 +97,10 @@ class MercadoLivreScraper(BaseScraper):
             'Sec-Fetch-User': '?1',
             'Upgrade-Insecure-Requests': '1',
         }
-        self.session = requests.Session()
+        # curl_cffi impersona o TLS fingerprint do Chrome para reduzir bloqueio
+        # anti-bot (mesma abordagem do scrapers/amazon.py); fallback gracioso
+        # para requests puro se curl_cffi não estiver instalado.
+        self.session = build_impersonated_session('chrome124')
 
     def get_html(self, url: str) -> str:
         try:
@@ -109,7 +112,7 @@ class MercadoLivreScraper(BaseScraper):
                 return ''
             resp.raise_for_status()
             return resp.text
-        except requests.RequestException as exc:
+        except HTTP_EXCEPTIONS as exc:
             self.error_message = f'Erro ao acessar {url}: {exc}'
             log.error('Erro ao acessar %s: %s', url, exc)
             return ''
@@ -376,20 +379,25 @@ class MercadoLivreScraper(BaseScraper):
 
         return rating, count
 
-    def _exibir_alerta_cookie(self) -> None:
+    def _exibir_alerta_cookie(self, motivo: str = 'expirado_ou_ausente') -> None:
+        # Dispara no máximo 1x por ciclo de scraping (uma instância de
+        # MercadoLivreScraper = um ciclo) — evita floodar o operador com um
+        # alerta por oferta quando o cookie está inválido para o ciclo inteiro.
         if getattr(self, '_alerta_exibido', False):
             return
         self._alerta_exibido = True
-        log.error(
-            'ATENÇÃO: cookie/token do Mercado Livre expirou ou está ausente. '
-            'Renove ML_COOKIE e ML_CSRF_TOKEN no .env.'
+        mensagem = (
+            'Cookie/token do Mercado Livre expirou, foi rejeitado ou está ausente '
+            f'(motivo: {motivo}). Renove ML_COOKIE e ML_CSRF_TOKEN no .env.'
         )
+        log.error('ATENÇÃO: %s', mensagem)
+        enviar_alerta_operador(mensagem, categoria='ml_cookie_expirado')
 
     def _gerar_link_afiliado_oficial(self, permalink: str) -> str:
         if not permalink:
             return permalink
         if not self.ml_cookie or not self.ml_csrf or not self.affiliate_tag:
-            self._exibir_alerta_cookie()
+            self._exibir_alerta_cookie(motivo='credenciais_nao_configuradas')
             return permalink
 
         url_api = 'https://www.mercadolivre.com.br/affiliate-program/api/v2/stripe/user/links'
@@ -416,7 +424,7 @@ class MercadoLivreScraper(BaseScraper):
             if resp.ok:
                 return resp.json().get('short_url', permalink)
             if resp.status_code in (401, 403):
-                self._exibir_alerta_cookie()
+                self._exibir_alerta_cookie(motivo=f'rejeitado_pelo_ml_http_{resp.status_code}')
             else:
                 log.error('Erro na API de afiliados HTTP %s: %s', resp.status_code, resp.text)
         except Exception as exc:

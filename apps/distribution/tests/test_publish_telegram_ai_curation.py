@@ -8,6 +8,7 @@ from django.test import TestCase
 from django.utils import timezone
 
 from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationDecision, CurationRun
+from apps.curation.services.message_builder import _FALLBACK_HIGHLIGHT_VARIANTS, _select_badge_variant
 from apps.curation.services.telegram_message_builder import CAPTION_MAX, build_curated_telegram_payload
 from apps.distribution.models import Delivery, SocialChannel
 from apps.marketplaces.models import Marketplace
@@ -178,10 +179,16 @@ class PublishTelegramAICurationTests(TestCase):
         self.assertIn('<b>📦 Kit 7 Camisetas Masculina Manga Curta Lisa Algodão Premium com 19% OFF</b>', payload.caption)
         self.assertNotIn('🤖 Trecho do agente descontos-bot:', payload.caption)
         self.assertNotIn('✨', payload.caption)
-        highlight = payload.caption.split('⚡ <b>BOT ACHOU DESCONTO</b> ⚡', 1)[1].split('\n\n💰', 1)[0]
+        # Tarefa 5.3: o badge agora varia deterministicamente por offer.id (achado P9).
+        lead, label, trail = _select_badge_variant(19, item.offer.id)
+        badge_html = f'{lead} <b>{label}</b> {trail}'
+        highlight = payload.caption.split(badge_html, 1)[1].split('\n\n💰', 1)[0]
         self.assertNotIn('Kit 7 Camisetas', highlight)
         self.assertNotIn('R$ 125,30', highlight)
         self.assertNotIn('19% OFF', highlight)
+        # A legenda da IA foi descartada (fallback bateu no clichê antigo de curadoria);
+        # o highlight cai numa das variações da categoria "roupa básica" (Tarefa 5.3).
+        self.assertIn(highlight.strip(), _FALLBACK_HIGHLIGHT_VARIANTS['roupa_basica'])
         self.assertIn('💰 <s>De R$ 155,44</s>', payload.caption)
         self.assertIn('✅ <b>Por apenas R$ 125,30</b>', payload.caption)
 

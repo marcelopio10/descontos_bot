@@ -8,6 +8,7 @@ from apps.analytics.models import (
     AffiliateConversion,
     AffiliateImportBatch,
     ClickEvent,
+    MetricaCanalDiaria,
 )
 from apps.analytics.services.affiliate_parsers.amazon import parse_amazon_tsv
 from apps.analytics.services.affiliate_parsers.mercadolivre import (
@@ -194,6 +195,34 @@ class AffiliateImportBatchAdmin(admin.ModelAdmin):
         )
         for warning in result.warnings:
             messages.warning(request, warning)
+
+
+@admin.register(MetricaCanalDiaria)
+class MetricaCanalDiariaAdmin(admin.ModelAdmin):
+    list_display = (
+        'data',
+        'canal',
+        'membros',
+        'posts_publicados',
+        'cliques_estimados',
+    )
+    list_filter = (
+        'canal',
+        ('data', admin.DateFieldListFilter),
+    )
+    search_fields = (
+        'canal__name',
+        'canal__code',
+    )
+    readonly_fields = (
+        'created_at',
+        'updated_at',
+    )
+    autocomplete_fields = (
+        'canal',
+    )
+    date_hierarchy = 'data'
+    ordering = ('-data', 'canal__name')
 
 
 @admin.register(AffiliateConversion)

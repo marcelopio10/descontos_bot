@@ -8,6 +8,7 @@ from apps.offers.models import Offer
 class AffiliateSource(models.TextChoices):
     AMAZON = 'amazon', 'Amazon Associates'
     MERCADO_LIVRE = 'mercado_livre', 'Mercado Livre Afiliados'
+    SHOPEE = 'shopee', 'Shopee Afiliados'
 
 
 class AffiliateImportBatch(TimestampedModel):
@@ -155,6 +156,63 @@ class AffiliateConversion(TimestampedModel):
             f'{ref} — {self.get_source_display()} — '
             f'{self.period_start}..{self.period_end} — R$ {self.commission_brl}'
         )
+
+
+class MetricaCanalDiaria(TimestampedModel):
+    """Contagem agregada de membros/seguidores por canal e por dia (Sprint 7 -
+    Tarefa 7.3, achado H9). Entrada manual periódica (admin ou comando
+    `registrar_metrica_canal`) — LGPD (doc 24): só contagem agregada, nunca
+    dado individual de terceiro (nome, telefone etc.)."""
+
+    canal = models.ForeignKey(
+        SocialChannel,
+        verbose_name='canal',
+        on_delete=models.PROTECT,
+        related_name='metricas_diarias',
+    )
+    data = models.DateField(
+        'data',
+    )
+    membros = models.PositiveIntegerField(
+        'membros/seguidores',
+        help_text='Contagem agregada de membros/seguidores do canal nesta data.',
+    )
+    posts_publicados = models.PositiveIntegerField(
+        'posts publicados',
+        null=True,
+        blank=True,
+        help_text=(
+            'Quantos posts/stories saíram neste canal nesta data. Deixe em '
+            'branco para o painel calcular automaticamente a partir dos '
+            'envios (Delivery) registrados no dia.'
+        ),
+    )
+    cliques_estimados = models.PositiveIntegerField(
+        'cliques estimados',
+        null=True,
+        blank=True,
+        help_text=(
+            'Medição indireta/manual — preencher só se houver dado futuro de '
+            'clique agregado por canal. Não é fonte de clique nova.'
+        ),
+    )
+
+    class Meta:
+        ordering = ['-data', 'canal__name']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['canal', 'data'],
+                name='uniq_metricacanaldiaria_canal_data',
+            ),
+        ]
+        indexes = [
+            models.Index(fields=['canal', 'data']),
+        ]
+        verbose_name = 'métrica diária de canal'
+        verbose_name_plural = 'métricas diárias de canal'
+
+    def __str__(self):
+        return f'{self.canal} — {self.data.isoformat()} — {self.membros} membros'
 
 
 class ClickEvent(TimestampedModel):

@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-07-20T11:53:24.225231+00:00",
+  "days": 7,
+  "deliveries": {
+    "days": 7,
+    "since": "2026-07-13T11:53:24.225248+00:00",
+    "rows": [
+      {
+        "day": "2026-07-20",
+        "channel_code": "whatsapp_principal",
+        "channel_name": "WhatsApp principal",
+        "sent_count": 11
+      },
+      {
+        "day": "2026-07-19",
+        "channel_code": "telegram_main",
+        "channel_name": "Telegram principal",
+        "sent_count": 18
+      },
+      {
+        "day": "2026-07-19",
+        "channel_code": "whatsapp_principal",
+        "channel_name": "WhatsApp principal",
+        "sent_count": 59
+      },
+      {
+        "day": "2026-07-18",
+        "channel_code": "whatsapp_principal",
+        "channel_name": "WhatsApp principal",
+        "sent_count": 35
+      },
+      {
+        "day": "2026-07-17",
+        "channel_code": "whatsapp_principal",
+        "channel_name": "WhatsApp principal",
+        "sent_count": 58
+      },
+      {
+        "day": "2026-07-16",
+        "channel_code": "whatsapp_principal",
+        "channel_name": "WhatsApp principal",
+        "sent_count": 74
+      },
+      {
+        "day": "2026-07-15",
+        "channel_code": "whatsapp_principal",
+        "channel_name": "WhatsApp principal",
+        "sent_count": 37
+      },
+      {
+        "day": "2026-07-14",
+        "channel_code": "whatsapp_principal",
+        "channel_name": "WhatsApp principal",
+        "sent_count": 40
+      },
+      {
+        "day": "2026-07-13",
+        "channel_code": "whatsapp_principal",
+        "channel_name": "WhatsApp principal",
+        "sent_count": 68
+      }
+    ],
+    "totals_by_channel": {
+      "whatsapp_principal": 382,
+      "telegram_main": 18
+    },
+    "total_sent": 400
+  },
+  "scraping": {
+    "days": 7,
+    "since": "2026-07-13T11:53:24.379088+00:00",
+    "by_marketplace": [
+      {
+        "marketplace_code": "amazon",
+        "marketplace_name": "Amazon",
+        "total_collected": 3539,
+        "total_valid": 3539,
+        "run_count": 43
+      },
+      {
+        "marketplace_code": "mercadolivre",
+        "marketplace_name": "Mercado Livre",
+        "total_collected": 4704,
+        "total_valid": 4704,
+        "run_count": 43
+      },
+      {
+        "marketplace_code": "shopee",
+        "marketplace_name": "Shopee",
+        "total_collected": 3834,
+        "total_valid": 3834,
+        "run_count": 42
+      }
+    ],
+    "runs_by_status": {
+      "failed": 9,
+      "running": 2,
+      "success": 117
+    },
+    "total_runs": 128,
+    "failed_runs": 9,
+    "failed_rate_pct": 7.0
+  },
+  "curation": {
+    "days": 7,
+    "since": "2026-07-13T11:53:24.439880+00:00",
+    "runs_by_status": {
+      "completed": 74,
+      "failed": 4
+    },
+    "total_runs": 78,
+    "failed_runs": 4,
+    "failed_rate_pct": 5.1
+  },
+  "observer": {
+    "last_message_collected_at": "2026-07-03T00:56:54.570000+00:00",
+    "last_message_group_name": "#330 Promo Relâmpago MEN",
+    "last_daily_report_date": "2026-07-19",
+    "hours_since_last_collection": 418.9,
+    "is_stale": true
+  }
+}

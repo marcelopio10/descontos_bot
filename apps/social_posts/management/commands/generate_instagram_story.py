@@ -12,14 +12,6 @@ class Command(BaseCommand):
         parser.add_argument('--top', type=int, default=1, help='Ranking da oferta a usar.')
 
     def handle(self, *args, **options):
-        self.stdout.write(
-            self.style.WARNING(
-                'Geração manual de story no Instagram está desativada. '
-                'Nenhum post foi gerado. A geração automática (run_bot) segue ativa.',
-            ),
-        )
-        return
-
         try:
             post = generate_story(top=options['top'])
         except Exception as exc:

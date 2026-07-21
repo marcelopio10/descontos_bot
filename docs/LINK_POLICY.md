@@ -14,6 +14,7 @@ Hoje só a Amazon exige interposição (compliance Amazon TOS, diversidade de or
 |---|---|---|
 | Amazon (`amazon`) | `https://descontos.bot/r?slug=<slug>&utm_*` | Compliance Amazon TOS exige diversidade de origem. Tracking via `ClickEvent` é efeito colateral. |
 | Mercado Livre (`mercadolivre`) | `https://meli.la/...?utm_*` (link direto + SubID nativo ML) | Política "sempre usar link do marketplace". Tracking via painel oficial Mercado Livre Afiliados (SubID). |
+| Shopee (`shopee`) | Link direto (`offer.affiliate_link`); ou short link Shopee com SubID de canal quando `SHOPEE_AFFILIATE_ENABLED=true` (default hoje: desligado) | Política "sempre usar link do marketplace". Tracking via SubID nativo no Conversion Report oficial da Shopee (Tarefa 4.1). |
 
 A constante que controla a regra fica em `apps/analytics/services/link_builder.py`:
 
@@ -37,6 +38,13 @@ Para incluir novo marketplace no bridge (caso compliance exija), adicione o `Mar
 - ML faz o redirect interno e registra o clique no painel oficial **Mercado Livre Afiliados > Relatórios**
 - UTMs Google-style (`utm_source` etc.) **não** são interpretados pelo painel ML — quem entrega a granularidade por canal é o **SubID nativo ML**, anexado pelo Bloco A.6 (pendente)
 - Para consolidar com Amazon: ver Bloco G+ (opcional) ou reconciliação manual semanal
+
+### Shopee
+- Cliente abre o link de afiliado Shopee (`offer.affiliate_link`, sem passar pelo `/r`)
+- Com `SHOPEE_AFFILIATE_ENABLED=true` (default hoje: **desligado** — em produção o comportamento é idêntico ao link direto, sem chamar a API Shopee), `resolve_destination_url()` gera um short link via **Shopee Affiliate Open API** (`generateShortLink`), gravando o canal no **SubID nativo** (`subId2`) — ver `apps/marketplaces/services/shopee_link_generator.py`
+- Shopee registra a conversão com o SubID no próprio **Conversion Report** do Shopee Affiliate Program
+- A ingestão (`ingest_affiliate_shopee`, `apps/analytics/services/affiliate_parsers/shopee.py`) lê `subId2` e reconstrói `AffiliateConversion.social_channel` — ver `docs/AFFILIATE_REPORTS_INGESTION.md` (seção Shopee) para o fluxo completo
+- Salvaguardas de produção (Tarefa 4.1): client dedicado com timeout curto (5s) e 1 retry (não os defaults globais de até ~60s), e qualquer falha da API cai no link direto (`offer.affiliate_link`) via `log.warning`, nunca bloqueia o envio
 
 ## Mapa SubID Mercado Livre
 
@@ -62,6 +70,15 @@ A função `_short_channel_code()` em `link_builder.py` mapeia prefixo `whatsapp
 
 **Validação obrigatória pelo PO após primeiro envio real:** abrir painel Mercado Livre Afiliados > Relatórios e confirmar que SubIDs como `dbot_wa_main_4061` aparecem segmentados. Se o painel não interpretar `matt_word`, alterar `ML_SUBID_PARAM` para o parâmetro correto (alternativas conhecidas: `label`, `sub_id`, `tracking_id`).
 
+## Decisão RESTR-03 — click tracking próprio não será expandido
+
+Registro da decisão (Sprint 4, Tarefa 4.3, `docs/PLANO_REFATORACAO_POS_DIAGNOSTICO_2026-07-18.md`):
+
+- O `ClickEvent`/`/api/click` (ver seção "Amazon" acima) é **best-effort e específico da Amazon**, mantido por exigência de compliance Amazon TOS (o bridge `/r` já precisa existir para diversidade de origem; o tracking de clique é só um efeito colateral aproveitando esse redirect).
+- Essa interceptação de clique **não será expandida para outros marketplaces** — nem Mercado Livre, nem Shopee. Interpor domínio próprio no link de um marketplace que não exige (violando o Princípio no topo deste documento) só para ganhar tracking é desencorajado.
+- ML e Shopee já têm mecanismos **nativos e melhores** para medir por canal: SubID. ML usa `matt_word` (Marketing Toolbox, ver "Mapa SubID Mercado Livre" acima); Shopee usa `subId2` no Conversion Report oficial (ver seção "Shopee" acima e Tarefa 4.1). Ambos evitam o redirect extra e não dependem de o cliente não bloquear `sendBeacon`/JS.
+- Para Amazon, na ausência de SubID nativo equivalente, o cruzamento por canal continua sendo **correlação temporal** (envios × comissão na mesma semana, não atribuição exata por clique) — ver `apps/analytics/services/operational_metrics.py::deliveries_vs_commission_by_marketplace_week` (Tarefa 4.2) e o painel operacional (`site/painel-operacional.json`).
+
 ## Onde está implementado
 
 | Função | Arquivo | Uso |
@@ -82,6 +99,7 @@ Call sites:
 - **Não bypassar o `/r` para Amazon** — viola compliance Amazon TOS e quebra o rastreamento de cliques no nosso dashboard.
 - **Não usar `SocialChannel.link_strategy` para decidir destino** — após esta política, o campo é informativo; quem decide é o marketplace.
 - **Não construir URL de oferta fora de `link_builder.py`** — todas as inserções de URL em mensagens, posts e bio devem passar pelas três funções acima.
+- **Não expandir o `ClickEvent`/`/api/click` para ML ou Shopee** — decisão RESTR-03 (ver seção acima); esses marketplaces já têm SubID nativo.
 
 ## Validação manual
 
@@ -93,12 +111,15 @@ from apps.distribution.models import SocialChannel
 
 o_amz = Offer.objects.filter(marketplace__code='amazon', slug__isnull=False).exclude(slug='').first()
 o_ml  = Offer.objects.filter(marketplace__code='mercadolivre').first()
+o_shp = Offer.objects.filter(marketplace__code='shopee').first()
 ch_wa = SocialChannel.objects.filter(channel_type__startswith='whatsapp').first()
 
 print('amazon →', resolve_destination_url(o_amz))   # /r?slug=...
 print('ml →',     resolve_destination_url(o_ml))     # https://meli.la/...
+print('shopee →', resolve_destination_url(o_shp))    # link direto (SHOPEE_AFFILIATE_ENABLED off por padrão)
 print('amz+wa →', build_tracked_url(o_amz, ch_wa))   # /r?slug=...&utm_source=whatsapp...
 print('ml+wa →',  build_tracked_url(o_ml, ch_wa))    # https://meli.la/...?utm_source=whatsapp...
+print('shopee+wa →', build_tracked_url(o_shp, ch_wa))  # idem link direto + utm_source=whatsapp (sem SubID Shopee enquanto a flag estiver off)
 print('amz/ig →', build_instagram_tracked_url(o_amz, 'story'))  # /r?slug=...&utm_source=instagram...
 print('ml/ig →',  build_instagram_tracked_url(o_ml, 'story'))    # https://meli.la/...?utm_source=instagram...
 "

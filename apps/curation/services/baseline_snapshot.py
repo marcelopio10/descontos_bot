@@ -15,11 +15,16 @@ def build_baseline_snapshot(
     *,
     config: SelectionConfig | None = None,
     candidate_limit: int | None = None,
+    observer_context: dict[str, Any] | None = None,
+    market_radar: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     config = config or get_selection_config()
     limit = candidate_limit or config.global_limit * 5
     candidates = list(_eligible_offers(channel, config).select_related('marketplace', 'category')[:limit])
-    offers = [serialize_offer_for_ai(offer) for offer in candidates]
+    offers = [
+        serialize_offer_for_ai(offer, observer_context=observer_context, market_radar=market_radar)
+        for offer in candidates
+    ]
     return {
         'config': {
             'global_limit': config.global_limit,
@@ -36,8 +41,13 @@ def build_baseline_snapshot(
     }
 
 
-def serialize_offer_for_ai(offer: Offer) -> dict[str, Any]:
-    breakdown = quality_score_breakdown(offer)
+def serialize_offer_for_ai(
+    offer: Offer,
+    *,
+    observer_context: dict[str, Any] | None = None,
+    market_radar: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    breakdown = quality_score_breakdown(offer, observer_context=observer_context, market_radar=market_radar)
     marketplace_code = offer.marketplace.code if offer.marketplace_id else ''
     editorial_flags = _editorial_flags(offer)
     return {

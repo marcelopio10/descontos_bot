@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-07-28T00:57:27.060747+00:00",
+  "generated_at": "2026-07-28T21:35:24.244041+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -34,6 +34,16 @@
       "tracked_url": "https://s.shopee.com.br/qiEKuTx7D?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
     },
     {
+      "id": 10006,
+      "title": "Hoygi Retinal Eye Cream Suave Nutritivo Firmador Hidratante Cuidados Com Os Olhos",
+      "current_price": "7.88",
+      "original_price": "46.35",
+      "discount_pct": "83.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82619-mjl7s667d7uq27",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/6pzTm7ntAk?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10006"
+    },
+    {
       "id": 8366,
       "title": "Kit 10 Panos De Limpeza Microfibra alta absorção Multiuso",
       "current_price": "16.49",
@@ -42,16 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rffl-m3zbdqna4dhzc0",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/60QItUfRy2?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8366"
-    },
-    {
-      "id": 3426,
-      "title": "Pre Treino Carnage Pink Lemonade 450g com Creatina Dark Lab",
-      "current_price": "75.00",
-      "original_price": "399.00",
-      "discount_pct": "81.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_910513-MLA99911074229_112025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1utJS1y?matt_word=dbot_ig_bio_3426&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3426"
     }
   ]
 }

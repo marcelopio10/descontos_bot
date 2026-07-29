@@ -7,7 +7,9 @@ from dataclasses import dataclass
 from decimal import Decimal
 
 from django.db.models import QuerySet
+from django.utils import timezone
 
+from apps.curation.models import CuratedBatch, CuratedBatchItem
 from apps.curation.services.blacklist import (
     apply_blacklist_exclusion,
     get_blacklist_terms,
@@ -300,6 +302,20 @@ def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySe
         delivery_status=Delivery.DeliveryStatus.SENT,
     ).values('offer_id')
 
+    # Achado 2026-07-22: sem isso, uma oferta com envio pendente num lote ainda
+    # ativo (curado mas não consumido) continuava elegível — cada novo ciclo de
+    # preparo reordenava o pool por desconto e pegava de novo o mesmo topo do
+    # ranking, gerando lotes com 80-90% de duplicatas (skipped) quando o
+    # consumo atrasa. Só existe efeito prático desde que a fila desacoplada
+    # (`usa_fila_desacoplada`) virou padrão: no fluxo síncrono antigo (seleciona
+    # e envia no mesmo ciclo) não havia essa janela de "pendente entre ciclos".
+    pending_offer_ids = CuratedBatchItem.objects.filter(
+        batch__channel=channel,
+        batch__status=CuratedBatch.Status.READY,
+        batch__expires_at__gt=timezone.now(),
+        send_status=CuratedBatchItem.SendStatus.PENDING,
+    ).values('offer_id')
+
     queryset = (
         Offer.objects.select_related('marketplace')
         .filter(
@@ -312,6 +328,7 @@ def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySe
             last_seen_at__gte=get_freshness_cutoff(),
         )
         .exclude(id__in=sent_offer_ids)
+        .exclude(id__in=pending_offer_ids)
         .order_by('-discount_pct', '-current_price', 'title')
     )
 

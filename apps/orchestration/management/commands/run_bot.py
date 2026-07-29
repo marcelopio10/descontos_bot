@@ -33,6 +33,7 @@ from apps.orchestration.services.offer_publication import (
     publish_offers_after_capture,
 )
 from apps.orchestration.services.scheduler import (
+    apply_channel_cadence,
     calculate_next_sleep_seconds,
     get_channel_cadence_config,
     get_scheduler_config,
@@ -274,7 +275,13 @@ class Command(BaseCommand):
             self._prepare_ai_curation(channel=channel, dry_run=dry_run)
 
         if ai_curation:
-            if self._usa_fila_desacoplada():
+            allowed_modes = [CurationRun.Mode.DRY_RUN] if dry_run else [CurationRun.Mode.HOMOLOG, CurationRun.Mode.PRODUCTION]
+            if self._usa_fila_desacoplada() and get_ready_curated_batch(channel, allowed_modes=allowed_modes).has_batch:
+                # Só desvia para o fluxo desacoplado quando HÁ de fato lote pronto para
+                # entregar (achado 2026-07-21): interceptar sempre, mesmo sem lote,
+                # eliminaria o fallback para o selector legado logo abaixo — o canal
+                # ficaria mudo em qualquer ciclo em que a curadoria IA não produzisse
+                # nada, o que hoje é coberto pelo selector legado como rede de segurança.
                 self.stdout.write(
                     self.style.WARNING(
                         'Fila desacoplada ativa (Setting usa_fila_desacoplada=on): ciclo só '
@@ -285,7 +292,6 @@ class Command(BaseCommand):
                 log.info('ai_curation.decoupled_queue_prepare_only canal=%s', channel.code)
                 self._write_healthcheck()
                 return
-            allowed_modes = [CurationRun.Mode.DRY_RUN] if dry_run else [CurationRun.Mode.HOMOLOG, CurationRun.Mode.PRODUCTION]
             if ai_curation_required:
                 self.stdout.write(self.style.WARNING('ai-curation-required ativo: fallback para selector legado bloqueado.'))
             if self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=ai_curation_limit, allowed_modes=allowed_modes):
@@ -417,10 +423,14 @@ class Command(BaseCommand):
         return False
 
     def _usa_fila_desacoplada(self) -> bool:
-        """Setting `usa_fila_desacoplada` (Sprint 3 - Tarefa 3.3). Default False:
-        mantém o comportamento atual (preparar + consumir no mesmo ciclo).
+        """Setting `usa_fila_desacoplada` (Sprint 3 - Tarefa 3.3). Default True desde
+        2026-07-21 (decisão do dono): quando HÁ lote pronto, `run_bot` só coleta e
+        prepara; consumo/envio roda via `consumir-fila-whatsapp-v2.timer` (systemd
+        --user, intervalo aleatório de 90-240min, com teto de cadência). Só desvia
+        para esse fluxo se houver lote pronto de fato — sem isso, o ciclo cai no
+        fallback do selector legado como sempre.
         """
-        return get_bool_setting(DECOUPLED_QUEUE_SETTING_KEY, False)
+        return get_bool_setting(DECOUPLED_QUEUE_SETTING_KEY, True)
 
     def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool, limit: int | None = None, allowed_modes: list[str] | None = None) -> bool:
         result = get_ready_curated_batch(channel, allowed_modes=allowed_modes)
@@ -520,32 +530,30 @@ class Command(BaseCommand):
         inexistentes a aparecer — apenas registra quando o lote elegível fica
         abaixo do piso configurado (não há o que enviar além do que existe).
         """
-        cadence = get_channel_cadence_config()
-        total = len(items)
-        capped = items[: cadence.max_items_per_cycle]
-        if len(capped) < total:
+        result = apply_channel_cadence(items)
+        if result.capped:
             self.stdout.write(
                 self.style.WARNING(
-                    f'Cadência: lote reduzido de {total} para {len(capped)} '
-                    f'(teto configurado: {cadence.max_items_per_cycle}/ciclo, canal={channel.code}).',
+                    f'Cadência: lote reduzido de {result.total} para {len(result.items)} '
+                    f'(teto configurado: {result.limit}/ciclo, canal={channel.code}).',
                 ),
             )
             log.info(
                 'channel_cadence.capped canal=%s total=%s teto=%s',
-                channel.code, total, cadence.max_items_per_cycle,
+                channel.code, result.total, result.limit,
             )
-        elif 0 < total < cadence.min_items_per_cycle:
+        elif result.below_floor:
             self.stdout.write(
                 self.style.WARNING(
-                    f'Cadência abaixo do piso configurado ({total} < {cadence.min_items_per_cycle}) '
+                    f'Cadência abaixo do piso configurado ({result.total} < {result.floor}) '
                     f'para o canal={channel.code}: não há itens elegíveis suficientes.',
                 ),
             )
             log.info(
                 'channel_cadence.below_floor canal=%s total=%s piso=%s',
-                channel.code, total, cadence.min_items_per_cycle,
+                channel.code, result.total, result.floor,
             )
-        return capped
+        return result.items
 
     def _write_healthcheck(self) -> None:
         try:

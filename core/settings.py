@@ -110,6 +110,15 @@ COMPOSIO_BIN = os.environ.get(
     'COMPOSIO_BIN',
     str(Path.home() / '.composio' / 'composio'),
 )
+COMPOSIO_API_KEY = os.environ.get('COMPOSIO_API_KEY', '')
+COMPOSIO_PROJECT_NAME = os.environ.get('COMPOSIO_PROJECT_NAME', '')
+COMPOSIO_USER_ID = os.environ.get('COMPOSIO_USER_ID', '')
+COMPOSIO_INSTAGRAM_ACCOUNT_ID = os.environ.get('COMPOSIO_INSTAGRAM_ACCOUNT_ID', '')
+COMPOSIO_INSTAGRAM_TOOLKIT_VERSION = os.environ.get(
+    'COMPOSIO_INSTAGRAM_TOOLKIT_VERSION',
+    '20260708_00',
+)
+INSTAGRAM_EXPECTED_USERNAME = os.environ.get('INSTAGRAM_EXPECTED_USERNAME', '')
 INSTAGRAM_PUBLISH_DRY_RUN = os.environ.get(
     'INSTAGRAM_PUBLISH_DRY_RUN',
     'false',
@@ -172,8 +181,9 @@ VERCEL_KV_REST_API_URL = os.environ.get('VERCEL_KV_REST_API_URL', '')
 VERCEL_KV_REST_API_TOKEN = os.environ.get('VERCEL_KV_REST_API_TOKEN', '')
 
 # Shopee Affiliate Open API (Sprint 7B) — conector oficial GraphQL.
-# Travado por padrão: com SHOPEE_AFFILIATE_ENABLED=false, comandos reais abortam
-# (exceto --dry-run e testes mockados). Segredos só no .env local, nunca no código.
+# Ligado por padrão desde 2026-07-21 (decisão do dono, pós-diagnóstico). Com
+# SHOPEE_AFFILIATE_ENABLED=false, comandos reais abortam (exceto --dry-run e
+# testes mockados). Segredos só no .env local, nunca no código.
 SHOPEE_AFFILIATE_API_URL = os.environ.get(
     'SHOPEE_AFFILIATE_API_URL',
     'https://open-api.affiliate.shopee.com.br/graphql',
@@ -191,7 +201,7 @@ SHOPEE_AFFILIATE_MAX_RETRIES = int(
 )
 SHOPEE_AFFILIATE_ENABLED = os.environ.get(
     'SHOPEE_AFFILIATE_ENABLED',
-    'false',
+    'true',
 ).lower() in ('1', 'true', 'yes', 'on')
 
 MEDIA_URL = '/media/'

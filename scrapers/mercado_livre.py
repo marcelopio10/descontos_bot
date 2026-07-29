@@ -420,7 +420,15 @@ class MercadoLivreScraper(BaseScraper):
         }
 
         try:
-            resp = self.session.post(url_api, headers=headers, json=data, timeout=10)
+            # Sessão dedicada, isolada de `self.session` (achado 2026-07-22): a
+            # sessão de raspagem acumula cookies novos a cada página de listagem
+            # visitada — inclusive um `_csrf` fresco do próprio Mercado Livre, que
+            # não bate mais com o `ML_CSRF_TOKEN` estático do `.env`. Reusar
+            # `self.session.post` aqui mescla esse cookie novo por cima do
+            # `cookie` explícito acima, quebrando o CSRF e derrubando a chamada em
+            # 401/403 mesmo com credenciais válidas — isolado numa sessão nova,
+            # sem esse acúmulo, a mesma credencial funciona de forma consistente.
+            resp = build_impersonated_session('chrome124').post(url_api, headers=headers, json=data, timeout=10)
             if resp.ok:
                 return resp.json().get('short_url', permalink)
             if resp.status_code in (401, 403):

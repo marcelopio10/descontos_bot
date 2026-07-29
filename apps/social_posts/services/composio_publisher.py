@@ -1,10 +1,11 @@
+import hashlib
 import json
 import logging
 import subprocess
 import tempfile
-import time
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 from django.conf import settings
 from django.utils import timezone
@@ -17,9 +18,18 @@ log = logging.getLogger(__name__)
 
 CREATE_ACTION = 'INSTAGRAM_POST_IG_USER_MEDIA'
 PUBLISH_ACTION = 'INSTAGRAM_POST_IG_USER_MEDIA_PUBLISH'
+PROFILE_ACTION = 'INSTAGRAM_GET_USER_INFO'
+MEDIA_ACTION = 'INSTAGRAM_GET_IG_MEDIA'
 
-JPEG_QUALITY = 90
-MAX_STORY_DIMENSION = 1920  # Instagram story 1080x1920
+JPEG_QUALITY = 95
+MAX_IMAGE_DIMENSION = 1920
+PUBLISH_STATES = {
+    'not_started',
+    'started',
+    'confirmed',
+    'unknown',
+    'failed',
+}
 
 
 class ComposioPublishError(RuntimeError):
@@ -29,15 +39,19 @@ class ComposioPublishError(RuntimeError):
         self.payload = payload or {}
 
 
+class ComposioPublishUnknownError(ComposioPublishError):
+    """The external provider may have performed an effect that we could not verify."""
+
+
 @dataclass(frozen=True)
 class PublishResult:
     container_id: str
     media_id: str
     asset_path: str
+    permalink: str = ''
 
 
 def publish_story(post: InstagramPost, *, dry_run: bool = False) -> PublishResult:
-    """Compatibilidade: publica somente InstagramPost formato Story via Composio."""
     if post.format != InstagramPost.Format.STORY:
         raise ComposioPublishError(
             f'Apenas formato STORY suportado. Recebido: {post.format}',
@@ -47,28 +61,26 @@ def publish_story(post: InstagramPost, *, dry_run: bool = False) -> PublishResul
 
 
 def publish_post(post: InstagramPost, *, dry_run: bool = False) -> PublishResult:
-    """Publica um InstagramPost de feed ou story via Composio CLI.
+    """Publish one Feed or Story and confirm the resulting Instagram media.
 
-    Fluxo:
-    1. Pega o primeiro asset_path do post (PNG gerado pelo image_renderer)
-    2. Converte pra JPEG temporário (formato aceito pelo Instagram Graph)
-    3. INSTAGRAM_POST_IG_USER_MEDIA cria o container
-       - feed: image_file + caption
-       - story: media_type=STORIES + image_file + caption
-    4. INSTAGRAM_POST_IG_USER_MEDIA_PUBLISH publica o container
-    5. Atualiza InstagramPost: status=posted, posted_at, instagram_media_id
-
-    Observação: a API do Instagram publica o Story, mas não cria Link Sticker.
-    O link fica registrado em sticker_target_url para auditoria/fallback manual.
+    The connected account is always selected explicitly. The local database is only
+    marked as posted after `INSTAGRAM_GET_IG_MEDIA` confirms the returned media.
     """
     if post.format not in (InstagramPost.Format.FEED, InstagramPost.Format.STORY):
         raise ComposioPublishError(
             f'Apenas formatos FEED e STORY suportados. Recebido: {post.format}',
             stage='precheck',
         )
+    if post.publication_receipt.get('status') == 'PUBLICADA' and post.instagram_permalink:
+        return PublishResult(
+            container_id=post.instagram_container_id,
+            media_id=post.instagram_media_id,
+            asset_path=_resolve_asset_path(post).as_posix(),
+            permalink=post.instagram_permalink,
+        )
     if post.status not in (
-        InstagramPost.Status.READY,
         InstagramPost.Status.DRAFT,
+        InstagramPost.Status.READY,
         InstagramPost.Status.AWAITING_POST,
     ):
         raise ComposioPublishError(
@@ -77,202 +89,317 @@ def publish_post(post: InstagramPost, *, dry_run: bool = False) -> PublishResult
         )
 
     asset_path = _resolve_asset_path(post)
-    ig_user_id = settings.INSTAGRAM_USER_ID
-    if not ig_user_id:
-        raise ComposioPublishError(
-            'IG_USER_ID não configurado no settings.',
-            stage='config',
+    source_hash = _sha256(asset_path)
+    effective_dry_run = dry_run or settings.INSTAGRAM_PUBLISH_DRY_RUN
+    ig_user_id = str(getattr(settings, 'INSTAGRAM_USER_ID', '') or '')
+
+    if effective_dry_run:
+        jpeg_path = _make_temp_jpeg(asset_path)
+        try:
+            payload = _build_create_payload(post, ig_user_id or 'dry-run-user', jpeg_path)
+            log.info(
+                'Instagram dry-run post_id=%s format=%s payload_keys=%s',
+                post.id,
+                post.format,
+                sorted(payload),
+            )
+        finally:
+            jpeg_path.unlink(missing_ok=True)
+        return PublishResult(
+            container_id='dry-run-container',
+            media_id='dry-run-media',
+            asset_path=str(asset_path),
         )
 
-    effective_dry_run = dry_run or settings.INSTAGRAM_PUBLISH_DRY_RUN
+    profile = _preflight_account()
+    ig_user_id = str(profile.get('id') or '')
+    if not ig_user_id:
+        raise ComposioPublishError('Instagram account ID não retornado no preflight.', 'preflight')
 
-    with tempfile.NamedTemporaryFile(suffix='.jpg', delete=False) as tmp:
-        jpeg_path = Path(tmp.name)
-
+    jpeg_path = _make_temp_jpeg(asset_path)
+    create_started = False
     try:
-        _convert_to_jpeg(asset_path, jpeg_path)
-
+        _mark_started(post, source_hash)
         create_payload = _build_create_payload(post, ig_user_id, jpeg_path)
+        create_started = True
+        container = _composio_execute(CREATE_ACTION, create_payload)
+        container_id = _extract_id(container, stage='create')
+        post.instagram_container_id = container_id
+        post.save(update_fields=['instagram_container_id', 'updated_at'])
 
-        if effective_dry_run:
-            log.info('DRY-RUN: container payload=%s', create_payload)
-            return PublishResult(
-                container_id='dry-run-container',
-                media_id='dry-run-media',
-                asset_path=str(jpeg_path),
-            )
-
-        create_result = _composio_execute(CREATE_ACTION, create_payload)
-        container_id = _extract_id(create_result, stage='create')
-
-        time.sleep(2)
-
-        publish_payload = {
-            'ig_user_id': ig_user_id,
-            'creation_id': container_id,
-            'max_wait_seconds': 60,
-            'poll_interval_seconds': 3,
-        }
-        publish_result = _composio_execute(PUBLISH_ACTION, publish_payload)
-        media_id = _extract_id(publish_result, stage='publish')
-
+        published = _composio_execute(
+            PUBLISH_ACTION,
+            {
+                'ig_user_id': ig_user_id,
+                'creation_id': container_id,
+                'max_wait_seconds': 60,
+                'poll_interval_seconds': 3,
+            },
+        )
+        media_id = _extract_id(published, stage='publish')
+        media = _composio_execute(
+            MEDIA_ACTION,
+            {
+                'ig_media_id': media_id,
+                'fields': 'id,caption,media_type,permalink,timestamp,username',
+            },
+        )
+        permalink = _verify_media(media, media_id, post.caption)
+        _mark_confirmed(
+            post,
+            source_hash=source_hash,
+            container_id=container_id,
+            media_id=media_id,
+            permalink=permalink,
+            media=media,
+        )
+        return PublishResult(
+            container_id=container_id,
+            media_id=media_id,
+            asset_path=str(asset_path),
+            permalink=permalink,
+        )
+    except ComposioPublishUnknownError as exc:
+        _mark_unknown(post, str(exc))
+        raise
+    except ComposioPublishError:
+        if create_started and post.publish_state == 'started':
+            _mark_unknown(post, 'Falha após iniciar operação externa; reconciliação necessária.')
+        raise
+    except Exception as exc:  # noqa: BLE001
+        if create_started:
+            _mark_unknown(post, f'Falha inesperada após iniciar operação externa: {exc}')
+            raise ComposioPublishUnknownError(
+                'Resultado externo desconhecido; reconcilie antes de repetir.',
+                stage='unknown',
+            ) from exc
+        raise ComposioPublishError(str(exc), stage='local') from exc
     finally:
-        try:
-            jpeg_path.unlink(missing_ok=True)
-        except OSError:
-            pass
+        jpeg_path.unlink(missing_ok=True)
 
-    post.instagram_media_id = media_id
-    post.status = InstagramPost.Status.POSTED
-    post.posted_at = timezone.now()
-    post.published_error = ''
-    post.save(
-        update_fields=[
-            'instagram_media_id',
-            'status',
-            'posted_at',
-            'published_error',
-            'updated_at',
-        ]
-    )
 
-    return PublishResult(
-        container_id=container_id,
-        media_id=media_id,
-        asset_path=str(asset_path),
-    )
+def preflight_account() -> dict[str, Any]:
+    """Run the live account identity check without creating or publishing media."""
+    return _preflight_account()
 
 
 def record_failure(post: InstagramPost, error: str) -> None:
-    """Marca post como rejeitado com o erro completo gravado."""
     post.published_error = error[:4000]
+    post.publish_state = 'failed'
     post.status = InstagramPost.Status.REJECTED
-    post.save(update_fields=['published_error', 'status', 'updated_at'])
+    post.save(update_fields=['published_error', 'publish_state', 'status', 'updated_at'])
 
 
-def _resolve_asset_path(post: InstagramPost) -> Path:
-    if not post.asset_paths:
+def record_unknown_failure(post: InstagramPost, error: str) -> None:
+    post.published_error = error[:4000]
+    post.publish_state = 'unknown'
+    post.save(update_fields=['published_error', 'publish_state', 'updated_at'])
+
+
+def _preflight_account() -> dict[str, Any]:
+    account_id = getattr(settings, 'COMPOSIO_INSTAGRAM_ACCOUNT_ID', '')
+    expected_username = getattr(settings, 'INSTAGRAM_EXPECTED_USERNAME', '')
+    project_name = getattr(settings, 'COMPOSIO_PROJECT_NAME', '')
+    user_id = getattr(settings, 'COMPOSIO_USER_ID', '')
+    missing = [
+        name for name, value in (
+            ('COMPOSIO_PROJECT_NAME', project_name),
+            ('COMPOSIO_USER_ID', user_id),
+            ('COMPOSIO_INSTAGRAM_ACCOUNT_ID', account_id),
+            ('INSTAGRAM_EXPECTED_USERNAME', expected_username),
+        ) if not value
+    ]
+    if missing:
         raise ComposioPublishError(
-            f'Post #{post.id} sem asset_paths.',
-            stage='precheck',
+            f'Configuração Composio incompleta: {", ".join(missing)}',
+            stage='config',
         )
-    raw = post.asset_paths[0]
-    path = Path(raw)
-    if not path.is_absolute():
-        path = Path(settings.BASE_DIR) / path
-    if not path.exists():
+    profile = _composio_execute(PROFILE_ACTION, {})
+    username = profile.get('username')
+    if username != expected_username:
         raise ComposioPublishError(
-            f'Asset não existe no disco: {path}',
-            stage='precheck',
+            f'Conta Instagram divergente: esperado @{expected_username}, retornado @{username}.',
+            stage='preflight',
         )
-    return path
+    return profile
 
 
-def _convert_to_jpeg(source: Path, target: Path) -> None:
-    with Image.open(source) as img:
-        rgb = img.convert('RGB')
-        rgb.thumbnail(
-            (MAX_STORY_DIMENSION, MAX_STORY_DIMENSION),
-            Image.LANCZOS,
+def _composio_execute(action: str, payload: dict[str, Any]) -> dict[str, Any]:
+    """Execute a Composio action through the SDK with explicit account pinning."""
+    account_id = getattr(settings, 'COMPOSIO_INSTAGRAM_ACCOUNT_ID', '')
+    user_id = getattr(settings, 'COMPOSIO_USER_ID', '')
+    project_name = getattr(settings, 'COMPOSIO_PROJECT_NAME', '')
+    if not account_id or not user_id or not project_name:
+        raise ComposioPublishError('Configuração Composio ausente.', stage='config')
+    try:
+        from composio import Composio
+    except ImportError as exc:
+        raise ComposioPublishError(
+            'Dependência composio não instalada; execute pip install -r requirements.txt.',
+            stage='dependency',
+        ) from exc
+
+    try:
+        result = Composio(
+            dangerously_allow_auto_upload_download_files=True,
+            file_upload_dirs=[str(settings.BASE_DIR / 'media')],
+        ).tools.execute(
+            action,
+            arguments=payload,
+            connected_account_id=account_id,
+            user_id=user_id,
+            version=getattr(settings, 'COMPOSIO_INSTAGRAM_TOOLKIT_VERSION', '20260708_00'),
         )
-        rgb.save(target, format='JPEG', quality=JPEG_QUALITY, optimize=True)
+    except Exception as exc:  # noqa: BLE001
+        raise ComposioPublishError(f'Composio {action} falhou: {exc}', stage=action) from exc
+    if not isinstance(result, dict):
+        try:
+            result = dict(result)
+        except (TypeError, ValueError) as exc:
+            raise ComposioPublishError(
+                f'Composio {action} retornou formato inválido.',
+                stage=action,
+            ) from exc
+    if 'successful' in result:
+        if not result.get('successful') or result.get('error'):
+            raise ComposioPublishError(
+                f'Composio {action} retornou falha.',
+                stage=action,
+                payload=result,
+            )
+        data = result.get('data')
+        if isinstance(data, dict):
+            return data
+    return result
 
 
-def _build_create_payload(post: InstagramPost, ig_user_id: str, jpeg_path: Path) -> dict:
-    payload = {
+def _build_create_payload(post: InstagramPost, ig_user_id: str, jpeg_path: Path) -> dict[str, Any]:
+    payload: dict[str, Any] = {
         'ig_user_id': ig_user_id,
         'image_file': str(jpeg_path),
     }
     if post.format == InstagramPost.Format.STORY:
         payload['media_type'] = 'STORIES'
-    caption = str(post.caption or '')
-    if caption:
-        payload['caption'] = caption[:2200]
+    if post.caption:
+        payload['caption'] = post.caption[:2200]
     return payload
 
 
-def _composio_execute(action: str, payload: dict) -> dict:
-    cmd = [
-        settings.COMPOSIO_BIN,
-        'execute',
-        action,
-        '-d',
-        json.dumps(payload),
-    ]
+def _resolve_asset_path(post: InstagramPost) -> Path:
+    if not post.asset_paths:
+        raise ComposioPublishError(f'Post #{post.id} sem asset_paths.', stage='precheck')
+    path = Path(post.asset_paths[0])
+    if not path.is_absolute():
+        path = Path(settings.BASE_DIR) / path
+    if not path.exists():
+        raise ComposioPublishError(f'Asset não existe no disco: {path}', stage='precheck')
+    return path
 
-    log.info('Composio execute: %s payload=%s', action, payload)
 
-    try:
-        proc = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=180,
-            check=False,
+def _make_temp_jpeg(source: Path) -> Path:
+    upload_dir = Path(settings.MEDIA_ROOT) / 'instagram' / 'composio_uploads'
+    upload_dir.mkdir(parents=True, exist_ok=True)
+    handle = tempfile.NamedTemporaryFile(suffix='.jpg', dir=upload_dir, delete=False)
+    target = Path(handle.name)
+    handle.close()
+    with Image.open(source) as original:
+        rgb = original.convert('RGB')
+        rgb.thumbnail((MAX_IMAGE_DIMENSION, MAX_IMAGE_DIMENSION), Image.Resampling.LANCZOS)
+        rgb.save(target, format='JPEG', quality=JPEG_QUALITY, optimize=True)
+    return target
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open('rb') as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _mark_started(post: InstagramPost, source_hash: str) -> None:
+    post.publish_attempts += 1
+    post.publish_state = 'started'
+    post.published_error = ''
+    post.publication_receipt = {
+        'status': 'INICIADA',
+        'asset_sha256': source_hash,
+        'started_at': timezone.now().isoformat(),
+    }
+    post.save(update_fields=['publish_attempts', 'publish_state', 'published_error', 'publication_receipt', 'updated_at'])
+
+
+def _mark_unknown(post: InstagramPost, error: str) -> None:
+    post.publish_state = 'unknown'
+    post.published_error = error[:4000]
+    post.save(update_fields=['publish_state', 'published_error', 'updated_at'])
+
+
+def _mark_confirmed(
+    post: InstagramPost,
+    *,
+    source_hash: str,
+    container_id: str,
+    media_id: str,
+    permalink: str,
+    media: dict[str, Any],
+) -> None:
+    now = timezone.now()
+    post.instagram_container_id = container_id
+    post.instagram_media_id = media_id
+    post.instagram_permalink = permalink
+    post.publish_state = 'confirmed'
+    post.published_error = ''
+    post.posted_at = now
+    post.status = InstagramPost.Status.POSTED
+    post.publication_receipt = {
+        'status': 'PUBLICADA',
+        'asset_sha256': source_hash,
+        'instagram_username': media.get('username'),
+        'instagram_media_id': media_id,
+        'permalink': permalink,
+        'caption_verified': media.get('caption') == post.caption,
+        'media_type': media.get('media_type'),
+        'timestamp': media.get('timestamp'),
+        'confirmed_at': now.isoformat(),
+    }
+    post.save(update_fields=[
+        'instagram_container_id',
+        'instagram_media_id',
+        'instagram_permalink',
+        'publish_state',
+        'published_error',
+        'posted_at',
+        'status',
+        'publication_receipt',
+        'updated_at',
+    ])
+
+
+def _verify_media(media: dict[str, Any], media_id: str, caption: str) -> str:
+    permalink = media.get('permalink')
+    expected_username = getattr(settings, 'INSTAGRAM_EXPECTED_USERNAME', '')
+    if (
+        str(media.get('id') or media_id) != media_id
+        or media.get('username') != expected_username
+        or not isinstance(permalink, str)
+        or not permalink.startswith('https://')
+        or media.get('caption') != caption
+    ):
+        raise ComposioPublishUnknownError(
+            'Mídia publicada não pôde ser reconciliada com a conta/caption esperadas.',
+            stage='reconcile',
+            payload=media,
         )
-    except FileNotFoundError as exc:
-        raise ComposioPublishError(
-            f'Binário Composio não encontrado em {settings.COMPOSIO_BIN}: {exc}',
-            stage='subprocess',
-        ) from exc
-    except subprocess.TimeoutExpired as exc:
-        raise ComposioPublishError(
-            f'Timeout no {action} (>180s).',
-            stage=action,
-        ) from exc
-
-    if proc.returncode != 0:
-        raise ComposioPublishError(
-            f'{action} retornou exit={proc.returncode}: {proc.stderr or proc.stdout}',
-            stage=action,
-        )
-
-    data = _parse_composio_output(proc.stdout)
-    if not data.get('successful'):
-        err = data.get('error') or data.get('data', {}).get('composio_execution_message')
-        raise ComposioPublishError(
-            f'{action} falhou: {err}',
-            stage=action,
-            payload=data,
-        )
-    return data
+    return permalink
 
 
-def _parse_composio_output(stdout: str) -> dict:
-    """Composio CLI mistura logs com JSON final. Pega o último bloco JSON válido."""
-    candidates = []
-    buffer = []
-    depth = 0
-    for line in stdout.splitlines():
-        stripped = line.strip()
-        if not buffer and not stripped.startswith('{'):
-            continue
-        buffer.append(line)
-        depth += stripped.count('{') - stripped.count('}')
-        if buffer and depth <= 0:
-            candidates.append('\n'.join(buffer))
-            buffer = []
-            depth = 0
-    for candidate in reversed(candidates):
-        try:
-            return json.loads(candidate)
-        except json.JSONDecodeError:
-            continue
-    try:
-        return json.loads(stdout)
-    except json.JSONDecodeError as exc:
-        raise ComposioPublishError(
-            f'Resposta Composio não é JSON válido: {stdout[:500]}',
-            stage='parse',
-        ) from exc
-
-
-def _extract_id(result: dict, *, stage: str) -> str:
-    data = result.get('data') or {}
-    media_id = data.get('id') or data.get('response_data', {}).get('id')
+def _extract_id(result: dict[str, Any], *, stage: str) -> str:
+    data = result.get('data') or result
+    media_id = data.get('id') if isinstance(data, dict) else None
     if not media_id:
-        raise ComposioPublishError(
-            f'{stage}: resposta sem campo id. data={data}',
+        raise ComposioPublishUnknownError(
+            f'{stage}: resposta sem campo id.',
             stage=stage,
             payload=result,
         )

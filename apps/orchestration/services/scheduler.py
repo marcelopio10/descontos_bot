@@ -79,6 +79,37 @@ def get_channel_cadence_config() -> ChannelCadenceConfig:
     )
 
 
+@dataclass(frozen=True)
+class CadenceApplication:
+    items: list
+    total: int
+    capped: bool
+    limit: int
+    below_floor: bool
+    floor: int
+
+
+def apply_channel_cadence(items: list, config: ChannelCadenceConfig | None = None) -> CadenceApplication:
+    """Aplica o teto/piso de cadência do canal (Tarefa 1.4) a uma lista de itens.
+
+    Compartilhado por `run_bot` e `consumir_fila_whatsapp` (achado 2026-07-21):
+    qualquer ponto que consuma/envie itens de um lote precisa do mesmo teto,
+    senão um consumidor sem essa trava pode drenar um lote inteiro de uma vez
+    (rajada) em vez de respeitar o ritmo configurado por ciclo.
+    """
+    config = config or get_channel_cadence_config()
+    total = len(items)
+    capped_items = items[: config.max_items_per_cycle]
+    return CadenceApplication(
+        items=capped_items,
+        total=total,
+        capped=len(capped_items) < total,
+        limit=config.max_items_per_cycle,
+        below_floor=0 < total < config.min_items_per_cycle,
+        floor=config.min_items_per_cycle,
+    )
+
+
 def calculate_next_sleep_seconds(config: SchedulerConfig | None = None) -> int:
     config = config or get_scheduler_config()
     return random.randint(config.min_minutes * 60, config.max_minutes * 60)

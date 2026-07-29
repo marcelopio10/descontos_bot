@@ -1,5 +1,6 @@
 asgiref==3.11.1
 beautifulsoup4==4.13.4
+composio>=0.18,<1
 curl-cffi==0.7.4
 Django==6.0.4
 Pillow==12.2.0

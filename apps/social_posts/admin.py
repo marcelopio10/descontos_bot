@@ -153,6 +153,10 @@ class InstagramPostAdmin(admin.ModelAdmin):
         'status',
         'primary_offer',
         'instagram_media_id',
+        'instagram_container_id',
+        'instagram_permalink',
+        'publish_state',
+        'publish_attempts',
         'telegram_handoff_message_id',
         'posted_at',
         'created_at',
@@ -169,6 +173,11 @@ class InstagramPostAdmin(admin.ModelAdmin):
     )
     readonly_fields = (
         'instagram_media_id',
+        'instagram_container_id',
+        'instagram_permalink',
+        'publish_state',
+        'publish_attempts',
+        'publication_receipt',
         'telegram_handoff_message_id',
         'posted_at',
         'published_error',

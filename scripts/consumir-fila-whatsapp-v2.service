@@ -1,0 +1,21 @@
+[Unit]
+# Nome "-v2" é proposital (achado 2026-07-21): a unidade "consumir-fila-whatsapp"
+# (sem sufixo) ficou com estado interno corrompido no systemd --user desta
+# máquina — LastTriggerUSecMonotonic zerado, timer preso em "elapsed"/"Trigger:
+# n/a", sobrevivendo a stop+disable+rm dos arquivos+daemon-reload. Renomear a
+# unidade foi o único jeito de obter um agendamento válido sem reiniciar o
+# systemd --user (que derrubaria evolution-adapter e os gateways hermes). Não
+# reciclar o nome antigo nesta máquina.
+Description=descontos.bot - Consome fila desacoplada (CuratedBatch ready) e envia ao WhatsApp
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
+# systemd --user usa um PATH mínimo que não inclui ~/.local/bin, onde o CLI
+# `hermes` (curadoria IA, --runner real) está instalado.
+Environment=PATH=/home/marce/.local/bin:/home/marce/.nvm/versions/node/v24.15.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py consumir_fila_whatsapp --channel whatsapp_principal --confirm-ai-production CONFIRM_AI_PRODUCTION
+StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/consumir-fila-whatsapp.log
+StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/consumir-fila-whatsapp.log

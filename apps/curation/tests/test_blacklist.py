@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.test import TestCase
 from django.utils import timezone
 
+from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationDecision, CurationRun
 from apps.curation.services.blacklist import get_blacklist_terms, is_blacklisted
 from apps.curation.services.selector import SelectionConfig, select_offers_for_channel
 from apps.distribution.models import Delivery, SocialChannel
@@ -225,3 +226,90 @@ class SafetyBlacklistTests(TestCase):
         selected = select_offers_for_channel(self.channel, config=config)
 
         self.assertIn(retriable, selected)
+
+    def _pending_batch_item(self, offer: Offer, channel: SocialChannel, *, expires_at=None) -> CuratedBatchItem:
+        run = CurationRun.objects.create(channel=channel, status=CurationRun.Status.COMPLETED)
+        batch = CuratedBatch.objects.create(
+            run=run,
+            channel=channel,
+            status=CuratedBatch.Status.READY,
+            expires_at=expires_at if expires_at is not None else timezone.now() + timezone.timedelta(hours=24),
+        )
+        decision = CurationDecision.objects.create(
+            run=run,
+            offer=offer,
+            ai_classification=CurationDecision.Classification.APPROVED,
+            is_selected_for_batch=True,
+        )
+        return CuratedBatchItem.objects.create(
+            batch=batch,
+            decision=decision,
+            offer=offer,
+            position=1,
+            final_title=offer.title,
+            send_status=CuratedBatchItem.SendStatus.PENDING,
+        )
+
+    def test_selector_excludes_offer_pending_in_active_batch_same_channel(self):
+        """Achado 2026-07-22: sem essa exclusão, o mesmo topo do ranking por
+        desconto era reselecionado a cada ciclo de preparo enquanto o lote
+        anterior ainda não tinha sido consumido, gerando lotes com 80-90% de
+        duplicatas descartadas (`skipped`) quando o consumo atrasa.
+        """
+        queued = self._offer('Fone Bluetooth Esportivo Recarregável Prova D\'água')
+        self._pending_batch_item(queued, self.channel)
+        config = SelectionConfig(
+            global_limit=5,
+            marketplace_limit=5,
+            min_discount_percentage=Decimal('20.00'),
+            min_quality_score=0,
+            priority_quality_score=0,
+            exposure_quota_enabled=False,
+        )
+
+        selected = select_offers_for_channel(self.channel, config=config)
+
+        self.assertNotIn(queued, selected)
+
+    def test_selector_allows_offer_pending_in_active_batch_of_a_different_channel(self):
+        queued_elsewhere = self._offer('Panela de Pressão Elétrica Digital 5 Litros')
+        other_channel = SocialChannel.objects.create(
+            name='Telegram',
+            code='telegram_main',
+            target='@descontosbot',
+            channel_type=SocialChannel.ChannelType.TELEGRAM_CHANNEL,
+            link_strategy=SocialChannel.LinkStrategy.BRIDGE_ONLY,
+        )
+        self._pending_batch_item(queued_elsewhere, other_channel)
+        config = SelectionConfig(
+            global_limit=5,
+            marketplace_limit=5,
+            min_discount_percentage=Decimal('20.00'),
+            min_quality_score=0,
+            priority_quality_score=0,
+            exposure_quota_enabled=False,
+        )
+
+        selected = select_offers_for_channel(self.channel, config=config)
+
+        self.assertIn(queued_elsewhere, selected)
+
+    def test_selector_allows_offer_pending_in_expired_batch(self):
+        expired_hold = self._offer('Cadeira Gamer Ergonômica Reclinável Preta')
+        self._pending_batch_item(
+            expired_hold,
+            self.channel,
+            expires_at=timezone.now() - timezone.timedelta(hours=1),
+        )
+        config = SelectionConfig(
+            global_limit=5,
+            marketplace_limit=5,
+            min_discount_percentage=Decimal('20.00'),
+            min_quality_score=0,
+            priority_quality_score=0,
+            exposure_quota_enabled=False,
+        )
+
+        selected = select_offers_for_channel(self.channel, config=config)
+
+        self.assertIn(expired_hold, selected)

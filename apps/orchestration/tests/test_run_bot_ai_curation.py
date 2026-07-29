@@ -11,6 +11,7 @@ from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationDecisio
 from apps.distribution.models import Delivery, SocialChannel
 from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
+from apps.panel.models import Setting
 
 
 class RunBotAICurationTests(TestCase):
@@ -96,6 +97,10 @@ class RunBotAICurationTests(TestCase):
 
     def test_dry_run_ai_curation_prints_ready_batch_without_delivery(self):
         batch = self._create_ready_batch()
+        # `usa_fila_desacoplada` é True por padrão desde 2026-07-21; este teste
+        # cobre o consumo/print no mesmo ciclo, então precisa desligar
+        # explicitamente (o caso decoupled já é coberto em test_decoupled_queue.py).
+        Setting.objects.create(key='usa_fila_desacoplada', value='false')
         out = StringIO()
 
         with patch('apps.orchestration.management.commands.run_bot.call_command'):
@@ -276,6 +281,8 @@ class RunBotAICurationTests(TestCase):
 
     def test_prepare_command_error_with_ready_batch_still_consumes_batch(self):
         batch = self._create_ready_batch()
+        # Ver comentário em test_dry_run_ai_curation_prints_ready_batch_without_delivery.
+        Setting.objects.create(key='usa_fila_desacoplada', value='false')
         out = StringIO()
 
         with patch(

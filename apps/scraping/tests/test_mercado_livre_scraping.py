@@ -24,22 +24,31 @@ class MercadoLivreScraperSessionTests(SimpleTestCase):
 
 
 class MercadoLivreCookieAlertTests(SimpleTestCase):
+    """`_gerar_link_afiliado_oficial` usa uma sessão ISOLADA (achado 2026-07-22:
+    `self.session`, compartilhada com a raspagem de listagem, acumula cookies
+    novos — inclusive um `_csrf` fresco do ML — que quebram o CSRF estático do
+    `.env` e derrubam a chamada mesmo com credenciais válidas). Por isso os
+    testes aqui mockam `build_impersonated_session` (o construtor da sessão
+    isolada), não mais `scraper.session` diretamente.
+    """
+
     def _build_scraper_with_fake_credentials(self) -> MercadoLivreScraper:
-        scraper = MercadoLivreScraper(
+        return MercadoLivreScraper(
             affiliate_tag=FAKE_AFFILIATE_TAG,
             ml_cookie=FAKE_ML_COOKIE,
             ml_csrf=FAKE_ML_CSRF,
         )
-        scraper.session = MagicMock()
-        return scraper
+
+    def _patch_affiliate_session(self, response: MagicMock):
+        return patch('scrapers.mercado_livre.build_impersonated_session', return_value=MagicMock(post=MagicMock(return_value=response)))
 
     def test_reactive_alert_fires_once_per_cycle_not_per_offer(self):
         """Simula 3 ofertas no mesmo ciclo, todas rejeitadas com HTTP 401
         (cookie expirado). O alerta ao operador deve disparar só na primeira."""
         scraper = self._build_scraper_with_fake_credentials()
-        scraper.session.post.return_value = MagicMock(ok=False, status_code=401)
+        response = MagicMock(ok=False, status_code=401)
 
-        with patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
+        with self._patch_affiliate_session(response), patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
             resultados = [
                 scraper._gerar_link_afiliado_oficial(f'https://produto.mercadolivre.com.br/x{i}')
                 for i in range(3)
@@ -56,9 +65,9 @@ class MercadoLivreCookieAlertTests(SimpleTestCase):
 
     def test_reactive_alert_never_leaks_the_real_cookie_or_csrf_value(self):
         scraper = self._build_scraper_with_fake_credentials()
-        scraper.session.post.return_value = MagicMock(ok=False, status_code=403)
+        response = MagicMock(ok=False, status_code=403)
 
-        with patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
+        with self._patch_affiliate_session(response), patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
             scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/y')
 
         mensagem = mock_alert.call_args.args[0]
@@ -69,25 +78,25 @@ class MercadoLivreCookieAlertTests(SimpleTestCase):
         """Sem ML_COOKIE/ML_CSRF_TOKEN/tag configurados, o alerta também
         dispara (via _exibir_alerta_cookie), mas só uma vez por instância."""
         scraper = MercadoLivreScraper()
-        scraper.session = MagicMock()
 
-        with patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
+        with patch('scrapers.mercado_livre.build_impersonated_session') as mock_builder, \
+                patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
             scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/a')
             scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/b')
 
         mock_alert.assert_called_once()
         self.assertEqual(mock_alert.call_args.kwargs.get('categoria'), 'ml_cookie_expirado')
-        # a chamada HTTP nunca deveria ter sido tentada sem credenciais
-        scraper.session.post.assert_not_called()
+        # a sessão de afiliado nunca deveria ter sido criada sem credenciais
+        mock_builder.assert_not_called()
 
     def test_successful_affiliate_response_does_not_alert(self):
         scraper = self._build_scraper_with_fake_credentials()
-        scraper.session.post.return_value = MagicMock(
+        response = MagicMock(
             ok=True,
             json=lambda: {'short_url': 'https://mercadolivre.com/sec/fake-short'},
         )
 
-        with patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
+        with self._patch_affiliate_session(response), patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
             resultado = scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/c')
 
         self.assertEqual(resultado, 'https://mercadolivre.com/sec/fake-short')
@@ -97,9 +106,9 @@ class MercadoLivreCookieAlertTests(SimpleTestCase):
         """A dedupe é por instância (= por ciclo, já que cada ciclo cria um
         scraper novo via build_from_env()) — uma nova instância deve poder
         alertar de novo."""
+        response = MagicMock(ok=False, status_code=401)
         for _ in range(2):
             scraper = self._build_scraper_with_fake_credentials()
-            scraper.session.post.return_value = MagicMock(ok=False, status_code=401)
-            with patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
+            with self._patch_affiliate_session(response), patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
                 scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/d')
             mock_alert.assert_called_once()

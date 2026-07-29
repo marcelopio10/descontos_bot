@@ -70,6 +70,31 @@ class InstagramPost(TimestampedModel):
         'erro de publicação',
         blank=True,
     )
+    instagram_container_id = models.CharField(
+        'ID do container no Instagram',
+        max_length=128,
+        blank=True,
+        db_index=True,
+    )
+    instagram_permalink = models.URLField(
+        'permalink no Instagram',
+        max_length=1200,
+        blank=True,
+    )
+    publish_attempts = models.PositiveIntegerField(
+        'tentativas de publicação',
+        default=0,
+    )
+    publish_state = models.CharField(
+        'estado técnico da publicação',
+        max_length=20,
+        default='not_started',
+    )
+    publication_receipt = models.JSONField(
+        'recibo de publicação',
+        default=dict,
+        blank=True,
+    )
     telegram_handoff_message_id = models.CharField(
         'ID da mensagem de handoff Telegram',
         max_length=64,

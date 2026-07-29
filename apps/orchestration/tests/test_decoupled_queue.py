@@ -1,10 +1,11 @@
 """Sprint 3 - Tarefa 3.3: flag `usa_fila_desacoplada`.
 
-Com a flag desligada (default), `run_bot` continua preparando e consumindo o
-lote de curadoria IA no mesmo ciclo (comportamento coberto por
-`test_run_bot_ai_curation.py`, que não é tocado aqui). Com a flag ligada,
-`run_bot` deve só preparar o lote e parar; o consumo passa a ser
-responsabilidade do comando novo `consumir_fila_whatsapp`.
+Default True desde 2026-07-21 (decisão do dono, pós-diagnóstico): `run_bot` só
+prepara o lote de curadoria IA e para; o consumo/envio roda em processo
+separado (`consumir_fila_whatsapp`, via `consumir-fila-whatsapp-v2.timer`). Só com
+a Setting explicitamente `false` é que `run_bot` volta a preparar e consumir no
+mesmo ciclo (comportamento coberto por `test_run_bot_ai_curation.py`, que não é
+tocado aqui).
 """
 from decimal import Decimal
 from io import StringIO
@@ -137,9 +138,10 @@ class RunBotDecoupledQueueFlagTests(DecoupledQueueFlagTestsMixin, TestCase):
         self.channel = self._make_channel(code='whatsapp_homolog_flag', target='grupo-homolog-flag')
         self.offer = self._make_offer(self.marketplace, 'flag-1')
 
-    def test_flag_off_default_keeps_prepare_and_consume_in_same_cycle(self):
-        """Prova de rollback: sem Setting (default), o ciclo chama consumo como hoje."""
+    def test_flag_explicitly_off_keeps_prepare_and_consume_in_same_cycle(self):
+        """Prova de rollback: com Setting explicitamente `false`, o ciclo chama consumo como antes de 2026-07-21."""
         batch = self._create_ready_batch(self.channel, self.offer)
+        Setting.objects.create(key='usa_fila_desacoplada', value='false')
         out = StringIO()
 
         with (
@@ -166,9 +168,9 @@ class RunBotDecoupledQueueFlagTests(DecoupledQueueFlagTestsMixin, TestCase):
         batch.refresh_from_db()
         self.assertEqual(batch.status, CuratedBatch.Status.READY)
 
-    def test_flag_on_prepares_but_does_not_consume(self):
+    def test_flag_default_prepares_but_does_not_consume(self):
+        """Sem Setting (default desde 2026-07-21), o ciclo só prepara e para."""
         batch = self._create_ready_batch(self.channel, self.offer)
-        Setting.objects.create(key='usa_fila_desacoplada', value='true')
         out = StringIO()
 
         with (
@@ -265,9 +267,10 @@ class ConsumirFilaWhatsappCommandTests(DecoupledQueueFlagTestsMixin, TestCase):
         """Fim-a-fim mockado: run_bot (flag on) prepara e para; consumir_fila_whatsapp
         (mockado, sem envio real) consegue consumir o lote que ficou pronto.
         """
-        # mode=HOMOLOG porque o consumo (abaixo) roda sem --dry-run, e
-        # consumir_fila_whatsapp só enxerga lotes HOMOLOG/PRODUCTION nesse caso
-        # (mesma regra de allowed_modes que run_bot._run_ai_curation_cycle já usa).
+        # mode=HOMOLOG porque tanto o peek do run_bot (achado 2026-07-21: só desvia
+        # para o fluxo desacoplado se houver lote pronto) quanto o consumo real
+        # (abaixo) rodam sem --dry-run, e ambos só enxergam lotes HOMOLOG/PRODUCTION
+        # nesse caso (mesma regra de allowed_modes).
         batch = self._create_ready_batch(self.channel, self.offer, mode=CurationRun.Mode.HOMOLOG)
         Setting.objects.create(key='usa_fila_desacoplada', value='true')
         prepare_out = StringIO()
@@ -280,7 +283,6 @@ class ConsumirFilaWhatsappCommandTests(DecoupledQueueFlagTestsMixin, TestCase):
         ):
             call_command(
                 'run_bot',
-                '--dry-run',
                 '--once',
                 '--skip-scraping',
                 '--channel',
@@ -341,3 +343,70 @@ class ConsumirFilaWhatsappCommandTests(DecoupledQueueFlagTestsMixin, TestCase):
         out = StringIO()
         call_command('consumir_fila_whatsapp', '--dry-run', '--channel', self.channel.code, stdout=out)
         self.assertIn('Nenhum lote curado pronto', out.getvalue())
+
+    def test_channel_cadence_caps_items_per_run(self):
+        """Achado 2026-07-21: sem essa trava, este comando rodando num timer
+        periódico drena o lote inteiro de uma vez (rajada real de envio) em vez
+        de respeitar o teto de itens/ciclo do canal — foi o que causou o
+        incidente na primeira ativação do consumir-fila-whatsapp.timer.
+        """
+        run = CurationRun.objects.create(
+            channel=self.channel,
+            status=CurationRun.Status.COMPLETED,
+            mode=CurationRun.Mode.DRY_RUN,
+            profile_name='descontos-bot',
+            model_provider='openai-codex',
+            model_name='gpt-5.5',
+            candidate_count=3,
+            selected_count=3,
+        )
+        batch = CuratedBatch.objects.create(
+            run=run,
+            channel=self.channel,
+            status=CuratedBatch.Status.READY,
+            batch_size=3,
+            expires_at=timezone.now() + timezone.timedelta(hours=1),
+        )
+        for position, offer in enumerate(
+            (self._make_offer(self.marketplace, f'cadencia-{i}') for i in range(3)),
+            start=1,
+        ):
+            decision = CurationDecision.objects.create(
+                run=run,
+                offer=offer,
+                marketplace_code=offer.marketplace.code,
+                ai_score=Decimal('90'),
+                ai_classification=CurationDecision.Classification.APPROVED,
+                conversion_score=Decimal('90'),
+                relevance_score=Decimal('90'),
+                discount_quality_score=Decimal('90'),
+                audience_fit_score=Decimal('90'),
+                decision_reason='Boa oferta curada.',
+                title_original=offer.title,
+                title_rewritten=f'Título curado {position}',
+                caption_rewritten=f'Caption curada {position}',
+                raw_ai_json={},
+                is_selected_for_batch=True,
+            )
+            CuratedBatchItem.objects.create(
+                batch=batch,
+                decision=decision,
+                offer=offer,
+                position=position,
+                final_title=f'Título curado {position}',
+                final_caption_whatsapp=f'Caption WhatsApp curada {position}',
+                final_caption_telegram=f'Caption Telegram curada {position}',
+                final_image_url='https://example.com/img-final.jpg',
+            )
+
+        Setting.objects.create(key='channel_items_max_per_cycle', value='2')
+        out = StringIO()
+        call_command('consumir_fila_whatsapp', '--dry-run', '--channel', self.channel.code, stdout=out)
+
+        text = out.getvalue()
+        self.assertIn('Cadência: lote reduzido de 3 para 2', text)
+        self.assertIn('Oferta curada 1/2', text)
+        self.assertIn('Oferta curada 2/2', text)
+        self.assertNotIn('Oferta curada 3', text)
+        batch.refresh_from_db()
+        self.assertEqual(batch.items.filter(send_status=CuratedBatchItem.SendStatus.PENDING).count(), 3)

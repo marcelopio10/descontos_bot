@@ -13,6 +13,7 @@ from apps.distribution.services.telegram_client import TelegramSendResult
 from apps.distribution.services.whatsapp_client import WhatsAppSendResult, WhatsAppStatus
 from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
+from apps.panel.models import Setting
 
 
 class FakeWhatsAppClient:
@@ -147,6 +148,10 @@ class AICuratedProductionAssistTests(TestCase):
         channel = self._channel('whatsapp_principal', SocialChannel.ChannelType.WHATSAPP_GROUP, 'descontos.bot')
         batch = self._ready_batch(channel)
         fake_client = FakeWhatsAppClient()
+        # `usa_fila_desacoplada` é True por padrão desde 2026-07-21: este teste cobre
+        # o envio assistido SÍNCRONO (mesmo comando), então desliga explicitamente —
+        # o fluxo desacoplado real usa `consumir_fila_whatsapp` em processo separado.
+        Setting.objects.create(key='usa_fila_desacoplada', value='false')
 
         with (
             patch('apps.distribution.services.delivery.WhatsAppClient', return_value=fake_client),

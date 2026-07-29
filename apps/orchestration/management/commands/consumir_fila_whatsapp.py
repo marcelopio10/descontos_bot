@@ -13,6 +13,7 @@ from apps.distribution.services.delivery import (
     get_whatsapp_session_status,
 )
 from apps.distribution.services.whatsapp_client import WhatsAppClientError
+from apps.orchestration.services.scheduler import apply_channel_cadence
 
 
 log = logging.getLogger(__name__)
@@ -31,17 +32,12 @@ class Command(BaseCommand):
         '(prepare_ai_curation_batch); quando a Setting `usa_fila_desacoplada` está ligada, '
         'ele para depois de preparar, e este comando passa a ser quem lê o lote pronto '
         '(get_ready_curated_batch) e chama deliver_curated_item_to_whatsapp por item — a '
-        'mesma lógica que hoje roda embutida em run_bot._run_ai_curation_cycle. '
-        'Pensado para rodar sozinho, via um timer systemd PRÓPRIO (não instalado por esta '
-        'tarefa) — igual ao padrão já usado pelo publish_telegram (scripts/publish-telegram.'
-        '{service,timer}). Instalação sugerida (revisar antes de habilitar): criar '
-        'scripts/consumir-fila-whatsapp.service com '
-        '"ExecStart=.venv/bin/python3 manage.py consumir_fila_whatsapp --channel '
-        'whatsapp_principal --confirm-ai-production CONFIRM_AI_PRODUCTION" (Type=oneshot, '
-        'nos moldes de publish-telegram.service) e scripts/consumir-fila-whatsapp.timer '
-        '(OnUnitActiveSec=Xmin, Unit=consumir-fila-whatsapp.service), depois '
-        '`systemctl --user daemon-reload && systemctl --user enable --now '
-        'consumir-fila-whatsapp.timer`.'
+        'mesma lógica que hoje roda embutida em run_bot._run_ai_curation_cycle. Aplica o '
+        'mesmo teto de cadência do run_bot (achado 2026-07-21: sem isso, um timer periódico '
+        'drena o lote inteiro de uma vez). '
+        'Instalado via scripts/consumir-fila-whatsapp-v2.{service,timer} (nome com sufixo '
+        '"-v2" de propósito — ver comentário no .service; "consumir-fila-whatsapp" sem '
+        'sufixo ficou com estado systemd corrompido nesta máquina, não reciclar).'
     )
 
     def add_arguments(self, parser):
@@ -101,6 +97,8 @@ class Command(BaseCommand):
         items = result.items
         if limit is not None:
             items = items[:limit]
+        else:
+            items = self._apply_channel_cadence(channel=channel, items=items)
         mode = 'dry_run' if dry_run else 'homologação/envio real'
         self.stdout.write(f'Consumo da fila desacoplada em {mode}')
         self.stdout.write(f'Canal: {channel.name} ({channel.code})')
@@ -159,6 +157,33 @@ class Command(BaseCommand):
             'consumir_fila_whatsapp.cycle_finished batch_id=%s items=%s dry_run=%s',
             batch.id, len(items), dry_run,
         )
+
+    def _apply_channel_cadence(self, *, channel: SocialChannel, items: list) -> list:
+        """Mesmo teto/piso de cadência do `run_bot` (achado 2026-07-21): sem isso,
+        este comando rodando num timer periódico drena o lote inteiro a cada
+        disparo em vez de respeitar o ritmo configurado por ciclo — foi o que
+        causou envio em rajada real na primeira ativação do timer (então chamado
+        `consumir-fila-whatsapp.timer`; ver scripts/consumir-fila-whatsapp-v2.service
+        sobre a renomeação).
+        """
+        result = apply_channel_cadence(items)
+        if result.capped:
+            self.stdout.write(
+                self.style.WARNING(
+                    f'Cadência: lote reduzido de {result.total} para {len(result.items)} '
+                    f'(teto configurado: {result.limit}/ciclo, canal={channel.code}).',
+                ),
+            )
+            log.info(
+                'channel_cadence.capped canal=%s total=%s teto=%s',
+                channel.code, result.total, result.limit,
+            )
+        elif result.below_floor:
+            log.info(
+                'channel_cadence.below_floor canal=%s total=%s piso=%s',
+                channel.code, result.total, result.floor,
+            )
+        return result.items
 
     def _check_whatsapp_session(self) -> bool:
         """Checa a sessão do WhatsApp uma única vez antes de iniciar o consumo do lote.

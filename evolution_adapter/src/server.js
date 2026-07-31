@@ -37,7 +37,8 @@ export function createApp({ config = getConfig(), groupMap = loadGroupMap(config
       }
       return json(res, 404, { error: 'not found' });
     } catch (error) {
-      return json(res, 500, { error: error instanceof Error ? error.message : String(error) });
+      const status = error instanceof ObserverReadOnlyError ? 403 : 500;
+      return json(res, status, { error: error instanceof Error ? error.message : String(error) });
     }
   }
 
@@ -85,12 +86,14 @@ async function handleSendBatch(req, res, config, groupMap) {
 
 async function configForTarget(config, target) {
   if (target.senderInstance !== 'observer') return config;
-  const observerConfig = { ...config, instanciaEnvio: config.instanciaObserver };
-  const status = await getConnectionStatus(observerConfig);
-  if (!status.connected) {
-    throw new Error('Instância descontos_observer não está conectada para envio das agendas');
+  throw new ObserverReadOnlyError();
+}
+
+class ObserverReadOnlyError extends Error {
+  constructor() {
+    super('A instância descontos_observer é somente leitura; migre o destino para descontos_envio');
+    this.name = 'ObserverReadOnlyError';
   }
-  return observerConfig;
 }
 
 function resolveItemText(item) {

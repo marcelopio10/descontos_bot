@@ -80,7 +80,7 @@ test('POST /send-message resolve nome para JID e chama sendText', async () => {
   assert.deepEqual(call.body, { number: '120363000000001@g.us', text: 'Oferta' });
 });
 
-test('POST /send-message roteia grupo marcado para a instância observer', async () => {
+test('POST /send-message rejeita destino observer sem chamar a Evolution', async () => {
   const observerConfig = getConfig({
     EVOLUTION_BASE_URL: fakeEvolutionUrl,
     EVOLUTION_API_KEY: 'test-key',
@@ -92,13 +92,15 @@ test('POST /send-message roteia grupo marcado para a instância observer', async
   const observerAdapter = createApp({ config: observerConfig });
   await listen(observerAdapter, '127.0.0.1', 0);
   try {
+    const callsBeforeRequest = calls.length;
     const response = await fetch(`http://127.0.0.1:${observerAdapter.address().port}/send-message`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ destination: 'Agenda', message: 'Agenda do dia' }),
     });
-    assert.equal(response.status, 200);
-    assert.equal(calls.at(-1).url, '/message/sendText/descontos_observer');
+    assert.equal(response.status, 403);
+    assert.match((await response.json()).error, /descontos_observer.*somente leitura.*descontos_envio/);
+    assert.equal(calls.length, callsBeforeRequest);
   } finally {
     await close(observerAdapter);
   }

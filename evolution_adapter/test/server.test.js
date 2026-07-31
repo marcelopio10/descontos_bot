@@ -10,10 +10,13 @@ import { createApp } from '../src/server.js';
 
 let fakeEvolution;
 let fakeEvolutionUrl;
+let fakeRouter;
+let fakeRouterUrl;
 let adapter;
 let adapterUrl;
 let tmp;
 const calls = [];
+const routerCalls = [];
 
 before(async () => {
   tmp = await mkdtemp(path.join(tmpdir(), 'evolution-adapter-test-'));
@@ -37,6 +40,17 @@ before(async () => {
   await listen(fakeEvolution, '127.0.0.1', 0);
   fakeEvolutionUrl = `http://127.0.0.1:${fakeEvolution.address().port}`;
 
+  fakeRouter = http.createServer(async (req, res) => {
+    const chunks = [];
+    for await (const chunk of req) chunks.push(chunk);
+    const body = Buffer.concat(chunks).toString('utf-8');
+    routerCalls.push({ method: req.method, url: req.url, headers: req.headers, body: body ? JSON.parse(body) : null });
+    res.writeHead(202, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ queued: true, priority: 3 }));
+  });
+  await listen(fakeRouter, '127.0.0.1', 0);
+  fakeRouterUrl = `http://127.0.0.1:${fakeRouter.address().port}`;
+
   const config = getConfig({
     EVOLUTION_BASE_URL: fakeEvolutionUrl,
     EVOLUTION_API_KEY: 'test-key',
@@ -53,6 +67,7 @@ before(async () => {
 
 after(async () => {
   await close(adapter);
+  await close(fakeRouter);
   await close(fakeEvolution);
   await rm(tmp, { recursive: true, force: true });
 });
@@ -78,6 +93,141 @@ test('POST /send-message resolve nome para JID e chama sendText', async () => {
   assert.equal(call.url, '/message/sendText/descontos_envio');
   assert.equal(call.headers.apikey, 'test-key');
   assert.deepEqual(call.body, { number: '120363000000001@g.us', text: 'Oferta' });
+});
+
+test('provider evolution é o default e preserva envio direto', () => {
+  assert.equal(getConfig({}).outboundProvider, 'evolution');
+});
+
+test('provider router enfileira type=offer sem fallback para Evolution', async () => {
+  const routerConfig = createRouterConfig('observer_buffer_router.json');
+  const routerAdapter = createApp({ config: routerConfig });
+  await listen(routerAdapter, '127.0.0.1', 0);
+  try {
+    const evolutionCallsBefore = calls.length;
+    const response = await fetch(`http://127.0.0.1:${routerAdapter.address().port}/send-message`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        destination: 'Grupo Teste',
+        message: 'Oferta roteada',
+        image_url: 'https://example.com/roteada.jpg',
+        idempotency_key: 'offer:server:1',
+      }),
+    });
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), { queued: true, priority: 3 });
+    assert.equal(calls.length, evolutionCallsBefore);
+    assert.deepEqual(routerCalls.at(-1).body, {
+      type: 'offer',
+      destination: 'group-fixture',
+      idempotency_key: 'offer:server:1',
+      text: 'Oferta roteada',
+      media_url: 'https://example.com/roteada.jpg',
+    });
+  } finally {
+    await close(routerAdapter);
+  }
+});
+
+test('provider router enfileira lote com chave por oferta', async () => {
+  const routerConfig = createRouterConfig('observer_buffer_router_batch.json');
+  const routerAdapter = createApp({ config: routerConfig });
+  await listen(routerAdapter, '127.0.0.1', 0);
+  try {
+    const response = await fetch(`http://127.0.0.1:${routerAdapter.address().port}/send`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        target: 'Grupo Teste',
+        items: [{
+          id: '42',
+          idempotency_key: 'offer:batch:42',
+          text: 'Oferta em lote',
+          image_url: 'https://example.com/lote.jpg',
+        }],
+      }),
+    });
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), { sent: 1, errors: 0, failures: [] });
+    assert.equal(routerCalls.at(-1).body.idempotency_key, 'offer:batch:42');
+    assert.equal(routerCalls.at(-1).body.type, 'offer');
+  } finally {
+    await close(routerAdapter);
+  }
+});
+
+test('falha do roteador retorna erro controlado sem fallback direto', async () => {
+  const failingRouter = http.createServer(async (req, res) => {
+    for await (const _chunk of req) {
+      // Drena a requisição sem registrar payload.
+    }
+    res.writeHead(503, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'detalhe interno sensível' }));
+  });
+  await listen(failingRouter, '127.0.0.1', 0);
+  const routerConfig = createRouterConfig(
+    'observer_buffer_router_failure.json',
+    `http://127.0.0.1:${failingRouter.address().port}`,
+  );
+  const routerAdapter = createApp({ config: routerConfig });
+  await listen(routerAdapter, '127.0.0.1', 0);
+  try {
+    const evolutionCallsBefore = calls.length;
+    const response = await fetch(`http://127.0.0.1:${routerAdapter.address().port}/send-message`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ destination: 'Grupo Teste', message: 'Oferta', idempotency_key: 'offer:server:2' }),
+    });
+    assert.equal(response.status, 502);
+    assert.deepEqual(await response.json(), { error: 'Falha ao enfileirar oferta no roteador' });
+    assert.equal(calls.length, evolutionCallsBefore);
+  } finally {
+    await close(routerAdapter);
+    await close(failingRouter);
+  }
+});
+
+test('provider router exige idempotency_key e não chama nenhum transporte', async () => {
+  const routerConfig = createRouterConfig('observer_buffer_router_key.json');
+  const routerAdapter = createApp({ config: routerConfig });
+  await listen(routerAdapter, '127.0.0.1', 0);
+  try {
+    const evolutionCallsBefore = calls.length;
+    const routerCallsBefore = routerCalls.length;
+    const response = await fetch(`http://127.0.0.1:${routerAdapter.address().port}/send-message`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ destination: 'Grupo Teste', message: 'Oferta' }),
+    });
+    assert.equal(response.status, 400);
+    assert.match((await response.json()).error, /idempotency_key/);
+    assert.equal(calls.length, evolutionCallsBefore);
+    assert.equal(routerCalls.length, routerCallsBefore);
+  } finally {
+    await close(routerAdapter);
+  }
+});
+
+test('observer collect permanece inalterado com provider router', async () => {
+  const routerConfig = createRouterConfig('observer_buffer_router_collect.json');
+  routerConfig.observerEnabled = true;
+  routerConfig.observerGroupJids = ['group-fixture@g.us'];
+  const routerAdapter = createApp({ config: routerConfig });
+  await listen(routerAdapter, '127.0.0.1', 0);
+  try {
+    const routerCallsBefore = routerCalls.length;
+    const response = await fetch(`http://127.0.0.1:${routerAdapter.address().port}/observer/collect`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: '{}',
+    });
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), { enabled: true, messages: [] });
+    assert.equal(routerCalls.length, routerCallsBefore);
+  } finally {
+    await close(routerAdapter);
+  }
 });
 
 test('POST /send-message rejeita destino observer sem chamar a Evolution', async () => {
@@ -233,6 +383,20 @@ test('GET /observer/groups retorna lista vazia quando observer está desabilitad
     await close(disabledAdapter);
   }
 });
+
+function createRouterConfig(bufferName, routerBaseUrl = fakeRouterUrl) {
+  return getConfig({
+    EVOLUTION_BASE_URL: fakeEvolutionUrl,
+    EVOLUTION_API_KEY: 'test-key',
+    EVOLUTION_GROUP_MAP_JSON: JSON.stringify({
+      'Grupo Teste': { jid: 'group-fixture@g.us', subject: 'Grupo Teste', router_alias: 'group-fixture' },
+    }),
+    EVOLUTION_OBSERVER_BUFFER_PATH: path.join(tmp, bufferName),
+    WA_OUTBOUND_PROVIDER: 'router',
+    WA_ROUTER_BASE_URL: routerBaseUrl,
+    WA_ROUTER_TOKEN: 'router-token',
+  });
+}
 
 async function post(pathname, body) {
   return fetch(`${adapterUrl}${pathname}`, {

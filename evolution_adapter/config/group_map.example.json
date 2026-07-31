@@ -1,7 +1,8 @@
 {
   "Grupo Homologação": {
-    "jid": "120363000000000000@g.us",
+    "jid": "group-fixture@g.us",
     "subject": "Grupo Homologação",
-    "sender_instance": "envio"
+    "sender_instance": "envio",
+    "router_alias": "group-fixture"
   }
 }

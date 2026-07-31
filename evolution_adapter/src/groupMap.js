@@ -53,6 +53,7 @@ function normalizeGroupEntry(name, value) {
       jid: value.jid,
       subject: typeof value.subject === 'string' ? value.subject : name,
       senderInstance: value.sender_instance === 'observer' ? 'observer' : 'envio',
+      ...(typeof value.router_alias === 'string' ? { router_alias: value.router_alias } : {}),
     };
   }
   return null;

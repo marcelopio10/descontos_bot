@@ -4,6 +4,7 @@ import { getConfig } from './config.js';
 import { getConnectionStatus, sendMedia, sendText } from './evolutionClient.js';
 import { loadGroupMap } from './groupMap.js';
 import { extractWebhookMessages, ObserverBuffer } from './observerBuffer.js';
+import { enqueueOffer, RouterRequestError } from './routerClient.js';
 
 export function createApp({ config = getConfig(), groupMap = loadGroupMap(config), observer = new ObserverBuffer(config, groupMap) } = {}) {
   async function route(req, res) {
@@ -37,7 +38,11 @@ export function createApp({ config = getConfig(), groupMap = loadGroupMap(config
       }
       return json(res, 404, { error: 'not found' });
     } catch (error) {
-      const status = error instanceof ObserverReadOnlyError ? 403 : 500;
+      const status = error instanceof ObserverReadOnlyError
+        ? 403
+        : error instanceof RouterRequestError
+          ? error.statusCode
+          : 500;
       return json(res, status, { error: error instanceof Error ? error.message : String(error) });
     }
   }
@@ -47,13 +52,25 @@ export function createApp({ config = getConfig(), groupMap = loadGroupMap(config
 
 async function handleSendMessage(req, res, config, groupMap) {
   const body = await readJson(req);
-  const { destination, message, image_url } = body;
+  const { destination, message, image_url, idempotency_key } = body;
   if (!destination || typeof destination !== 'string') return json(res, 400, { error: "Campo 'destination' é obrigatório (string)" });
   if (!message || typeof message !== 'string') return json(res, 400, { error: "Campo 'message' é obrigatório (string)" });
   if (image_url !== undefined && typeof image_url !== 'string') return json(res, 400, { error: "Campo 'image_url' deve ser string quando informado" });
+  if (config.outboundProvider === 'router' && (typeof idempotency_key !== 'string' || !idempotency_key.trim())) {
+    return json(res, 400, { error: "Campo 'idempotency_key' é obrigatório para o roteador" });
+  }
 
   const target = groupMap.resolveTarget(destination);
   const senderConfig = await configForTarget(config, target);
+  if (config.outboundProvider === 'router') {
+    const result = await enqueueOffer(config, groupMap, destination, {
+      idempotencyKey: idempotency_key,
+      text: message,
+      mediaUrl: image_url,
+    });
+    return json(res, 200, result);
+  }
+
   const result = image_url
     ? await sendMedia(senderConfig, target.jid, message, image_url)
     : await sendText(senderConfig, target.jid, message);
@@ -73,12 +90,25 @@ async function handleSendBatch(req, res, config, groupMap) {
     try {
       const caption = resolveItemText(item);
       const mediaUrl = item.image_url || item.media_url;
-      if (!mediaUrl) throw new Error('item sem image_url/media_url para Evolution');
-      await sendMedia(senderConfig, resolvedTarget.jid, caption, mediaUrl);
+      if (config.outboundProvider === 'router') {
+        await enqueueOffer(config, groupMap, target, {
+          idempotencyKey: item.idempotency_key,
+          text: caption,
+          mediaUrl,
+        });
+      } else {
+        if (!mediaUrl) throw new Error('item sem image_url/media_url para Evolution');
+        await sendMedia(senderConfig, resolvedTarget.jid, caption, mediaUrl);
+      }
       result.sent += 1;
     } catch (error) {
       result.errors += 1;
-      result.failures.push({ id: String(item?.id || ''), reason: error instanceof Error ? error.message : String(error) });
+      const reason = error instanceof RouterRequestError
+        ? error.message
+        : error instanceof Error
+          ? error.message
+          : String(error);
+      result.failures.push({ id: String(item?.id || ''), reason });
     }
   }
   return json(res, 200, result);

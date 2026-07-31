@@ -183,12 +183,57 @@ Evite copiar a frase exata da imagem para não soar redundante.
 ## 13. Onde rodar o gerador
 
 ```bash
-# Story top 1 (maior desconto entre ofertas Amazon publicáveis)
+# Story top 1 (maior desconto entre ofertas publicáveis)
 python3 manage.py generate_instagram_story --top 1
 
 # Story top 3 (terceiro maior desconto, etc.)
 python3 manage.py generate_instagram_story --top 3
+
+# Feed top 1
+python3 manage.py generate_instagram_post --top 1
 ```
 
-O comando imprime no terminal o caminho da imagem (`.png`) e do `.txt`. Esses
-são os arquivos que você vai abrir para publicar.
+O comando imprime no terminal o caminho da imagem (`.png`) e registra um
+`InstagramPost` no banco.
+
+## 14. Publicação via Composio CLI
+
+A conta `@descontos.bot` está conectada no Composio como Instagram Business:
+
+```bash
+composio execute INSTAGRAM_GET_USER_INFO -d '{"ig_user_id":"me"}'
+```
+
+Config atual no Django:
+
+```env
+IG_USER_ID=27176727021981283
+COMPOSIO_BIN=/home/marce/.composio/composio
+INSTAGRAM_PUBLISH_DRY_RUN=false
+```
+
+Publicar um `InstagramPost` já gerado pelo `run_bot`/gerador:
+
+```bash
+# Teste seguro: não chama a API do Instagram
+python3 manage.py publish_instagram_post --post-id <ID> --dry-run
+
+# Publicação real: cria container no Instagram via Composio e publica
+python3 manage.py publish_instagram_post --post-id <ID>
+```
+
+Formatos suportados por esse comando:
+
+- `feed`: publica imagem no feed com legenda.
+- `story`: publica imagem no story via Graph API.
+
+Observações importantes:
+
+- O `run_bot` gera stories como `InstagramPost(status=awaiting_post)` depois do
+  handoff Telegram; esse status também é aceito pelo publisher Composio.
+- A API do Instagram/Composio publica o Story, mas não adiciona Link Sticker.
+  O link da oferta fica em `sticker_target_url` para auditoria/fallback manual.
+- Para evitar publicação acidental, sempre rode `--dry-run` primeiro e confira o
+  payload, asset e `post-id`.
+- Publicação real é pública e irreversível; se falhar, o erro fica salvo em
+  `published_error` e o post vira `rejected`.

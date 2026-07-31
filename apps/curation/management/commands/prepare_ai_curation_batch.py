@@ -8,10 +8,13 @@ from django.core.management.base import BaseCommand, CommandError
 
 from apps.curation.models import CurationRun
 from apps.curation.services.ai_curator import prepare_ai_curation_batch
+from apps.curation.services.batch_optimizer import DEFAULT_TARGET_DISTRIBUTION
 from apps.curation.services.hermes_runner import HermesProfileRunner
 from apps.curation.services.image_processing import process_selected_batch_images
+from apps.curation.services.observer_context import assert_sanitized_context, build_observer_context
 from apps.curation.services.selector import _eligible_offers, get_selection_config
 from apps.distribution.models import SocialChannel
+from apps.marketplaces.services.radar_mercado import collect_radar_mercado
 
 DEFAULT_CHANNEL_CODE = 'whatsapp_main'
 DEFAULT_AUDIT_DIR = 'runtime/curation/ai_runs'
@@ -35,7 +38,9 @@ class Command(BaseCommand):
         parser.add_argument('--skip-images', action='store_true', help='Não preparar análise/processamento de imagens nesta etapa.')
         parser.add_argument('--runner', choices=['mock', 'real'], default='mock', help='Runner Hermes: mock determinístico ou profile real.')
         parser.add_argument('--profile', default='descontos-bot', help='Profile Hermes usado quando --runner=real.')
-        parser.add_argument('--runner-timeout', type=int, default=180, help='Timeout em segundos para Hermes CLI real.')
+        parser.add_argument('--model', default='', help='Sobrescreve o modelo do profile Hermes (ex.: glm-5.2). Vazio = modelo padrão do profile.')
+        parser.add_argument('--provider', default='', help='Sobrescreve o provider de inferência do Hermes (opcional).')
+        parser.add_argument('--runner-timeout', type=int, default=600, help='Timeout em segundos para Hermes CLI real.')
         parser.add_argument('--audit-dir', default=os.environ.get('AI_CURATION_AUDIT_DIR', DEFAULT_AUDIT_DIR))
         parser.add_argument('--public-dir', default=os.environ.get('AI_CURATION_PUBLIC_DIR', DEFAULT_PUBLIC_DIR))
 
@@ -55,20 +60,51 @@ class Command(BaseCommand):
         if not offers:
             raise CommandError(f'Nenhuma oferta elegível encontrada para channel={channel.code}.')
 
-        observer_context = {
+        # Sprint 6 / Tarefa 6.2 (achado P3): antes disto era um dict estático
+        # (nunca refletia o que o observer via de fato); agora é
+        # build_observer_context() de verdade — mesclado com os 3 campos que
+        # já existiam antes desta tarefa. `source`/`skip_images`/
+        # `real_send_enabled` são metadados DESTE comando (não são sinal do
+        # observer), por isso ficam por cima do spread: se algum dia um campo
+        # colidir, o metadado explícito do comando vence sobre o agregado
+        # genérico. `assert_sanitized_context` reaplica a validação
+        # anti-vazamento (LGPD) sobre o dict final já mesclado — defesa extra
+        # e barata contra um futuro campo de metadado sensível ser adicionado
+        # aqui sem passar pela sanitização de `build_observer_context`.
+        observer_context = assert_sanitized_context({
+            **build_observer_context(),
             'source': 'prepare_ai_curation_batch_command',
             'skip_images': bool(options['skip_images']),
             'real_send_enabled': False,
-        }
+        })
+
+        # Sprint 6 / Tarefa 6.1 (achado P7): ranking de vendas Shopee do dia.
+        # `collect_radar_mercado()` já se auto-protege por
+        # `settings.SHOPEE_AFFILIATE_ENABLED` (off por padrão em produção
+        # hoje) e devolve um resultado vazio/neutro sem chamar a API nesse
+        # caso — não muda nada em produção enquanto a flag estiver desligada.
+        # Nota para quando a flag for ligada: este comando roda a cada ciclo
+        # de curadoria (não só 1x/dia), então religar a flag reabre a
+        # pergunta de cadência de chamadas à API Shopee aqui — decisão futura
+        # do dono, fora do escopo desta tarefa.
+        market_radar = collect_radar_mercado().as_dict()
+
         runner = None
         profile_name = 'mock'
         model_provider = 'mock'
         model_name = 'fake-hermes-runner'
         if options['runner'] == 'real':
             profile_name = options['profile']
-            model_provider = 'openai-codex'
-            model_name = 'gpt-5.5'
-            runner = HermesProfileRunner(profile_name=profile_name, timeout_seconds=options['runner_timeout'])
+            model_override = options['model'].strip() or None
+            provider_override = options['provider'].strip() or None
+            model_provider = provider_override or 'openai-codex'
+            model_name = model_override or 'gpt-5.5'
+            runner = HermesProfileRunner(
+                profile_name=profile_name,
+                timeout_seconds=options['runner_timeout'],
+                model_override=model_override,
+                provider_override=provider_override,
+            )
 
         result = prepare_ai_curation_batch(
             channel=channel,
@@ -79,6 +115,7 @@ class Command(BaseCommand):
             audit_dir=Path(options['audit_dir']),
             public_json_dir=Path(options['public_dir']),
             observer_context=observer_context,
+            market_radar=market_radar,
             profile_name=profile_name,
             model_provider=model_provider,
             model_name=model_name,
@@ -105,6 +142,10 @@ class Command(BaseCommand):
         if run.error_message:
             self.stdout.write(self.style.ERROR(run.error_message))
         self.stdout.write(self.style.WARNING('dry-run/controlado: nenhum envio real foi chamado.'))
+        if run.status == CurationRun.Status.FAILED:
+            raise CommandError(
+                f'prepare_ai_curation_batch falhou (run #{run.id}): {run.error_message or "run com status failed"}'
+            )
 
     def _get_channel(self, code: str) -> SocialChannel:
         try:
@@ -115,4 +156,67 @@ class Command(BaseCommand):
     def _get_candidates(self, *, channel: SocialChannel, limit: int):
         config = get_selection_config()
         queryset = _eligible_offers(channel, config).select_related('marketplace', 'category')
-        return list(queryset[:limit])
+        return _balanced_marketplace_candidates(queryset, limit=limit)
+
+
+CANDIDATE_OVERFETCH_MULTIPLIER = 3  # margem para compensar itens descartados pelo dedup de produto canônico
+
+
+def _balanced_marketplace_candidates(queryset, *, limit: int):
+    """Build the AI candidate pool with marketplace coverage before the agent runs.
+
+    The AI remains the curator, but it cannot pick Shopee if the candidate payload
+    is filled by higher-discount ML/Amazon rows before Shopee appears. Seed the
+    payload near the target mix, then fill shortages from the global order.
+
+    Also applies a light pre-filter (Sprint 5 / achado P8) that skips offers
+    whose `produto_canonico_id` already appears earlier in the pool (queryset
+    ordering already favors higher discount first, so "earlier" means "best"),
+    so we don't waste candidate slots sending the AI an obvious duplicate
+    (e.g. the same Amazon ASIN via two sellers). This is only a pool-shaping
+    optimization — the actual source of truth for dedup is
+    apps.curation.services.batch_optimizer.optimize_curation_batch, which runs
+    after the AI decides and is what final selection actually depends on.
+    """
+    if limit <= 0:
+        return []
+    quotas = _target_counts(limit, DEFAULT_TARGET_DISTRIBUTION)
+    selected = []
+    selected_ids: set[int] = set()
+    seen_canonicos: set[str] = set()
+    for marketplace_code in DEFAULT_TARGET_DISTRIBUTION:
+        quota = quotas.get(marketplace_code, 0)
+        if quota <= 0:
+            continue
+        candidates = queryset.filter(marketplace__code=marketplace_code)[: quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_canonicos)
+    if len(selected) < limit:
+        remaining_quota = limit - len(selected)
+        remaining = queryset.exclude(id__in=selected_ids)[: remaining_quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        _append_deduped_by_canonico(remaining, remaining_quota, selected, selected_ids, seen_canonicos)
+    return selected[:limit]
+
+
+def _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_canonicos):
+    added = 0
+    for offer in candidates:
+        if added >= quota:
+            break
+        canonico = (offer.produto_canonico_id or '').strip()
+        if canonico and canonico in seen_canonicos:
+            continue
+        selected.append(offer)
+        selected_ids.add(offer.id)
+        if canonico:
+            seen_canonicos.add(canonico)
+        added += 1
+
+
+def _target_counts(limit: int, target_distribution: dict[str, float]) -> dict[str, int]:
+    raw = {marketplace: limit * weight for marketplace, weight in target_distribution.items()}
+    counts = {marketplace: int(value) for marketplace, value in raw.items()}
+    missing = limit - sum(counts.values())
+    remainders = sorted(raw.items(), key=lambda item: (-(item[1] - int(item[1])), item[0]))
+    for marketplace, _ in remainders[:missing]:
+        counts[marketplace] += 1
+    return counts

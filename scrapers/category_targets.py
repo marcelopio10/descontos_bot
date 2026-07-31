@@ -241,6 +241,23 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             'cycle_limit': 20,
             'fallback': 'generic',
         },
+        'moda_masculina': {
+            # IDs descobertos via keyword search na productOfferV2 (não há query
+            # de listagem de categorias na Affiliate API) — camiseta/bermuda/cueca
+            # masculina retornam productCatIds=[100011, ...] de forma consistente
+            # (42/60 hits); confirmado direto com productCatId=100011 trazendo só
+            # roupa masculina. 100012 idem para calçados/acessórios masculinos
+            # (palmilha, chinelo, tênis, sem itens femininos misturados).
+            'urls': [
+                ('Moda Masculina', 100011),
+                ('Calçados e Acessórios Masculinos', 100012),
+            ],
+            'priority_brands': ('insider', 'nike', 'adidas', 'puma', 'fila', 'mizuno'),
+            'min_discount': 20,
+            'max_price': 500.0,
+            'cycle_limit': 20,
+            'fallback': 'generic',
+        },
         'infantil': {
             'urls': [
                 ('Brinquedos e Hobbies', 100639),
@@ -252,6 +269,22 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             'max_price': 400.0,
             'cycle_limit': 15,
             'fallback': 'generic',
+        },
+        'saude_suplementacao': {
+            # 100001 é "Saúde" genérico (escova elétrica, balança, nebulizador —
+            # fora do escopo). 100002 é o nível "Suplementos Alimentares" dentro
+            # de Saúde — testado direto e retornou só whey/creatina/vitaminas/
+            # pré-treino, alinhado com priority_brands abaixo. Mesmo padrão de
+            # exposição limitada usado em amazon/mercadolivre (cycle_limit=5,
+            # fallback=skip — viés do dono, não é limite de oferta da API).
+            'urls': [
+                ('Suplementos Alimentares', 100002),
+            ],
+            'priority_brands': ('growth', 'integralmedica', 'max titanium', 'vitafor'),
+            'min_discount': 25,
+            'max_price': 300.0,
+            'cycle_limit': 5,  # exposição limitada — viés do dono (mesmo padrão amazon/ml)
+            'fallback': 'skip',
         },
     },
 }

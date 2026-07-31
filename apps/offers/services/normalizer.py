@@ -12,6 +12,7 @@ from apps.marketplaces.models import Marketplace
 
 ASIN_RE = re.compile(r'/(?:dp|gp/product|exec/obidos/ASIN)/([A-Z0-9]{10})')
 PLAIN_ASIN_RE = re.compile(r'^[A-Z0-9]{10}$')
+MAX_REVIEW_COUNT = 2_147_483_647
 
 
 @dataclass(frozen=True)
@@ -21,6 +22,7 @@ class NormalizedOffer:
     title: str
     normalized_title: str
     offer_hash: str
+    produto_canonico_id: str
     current_price: Decimal
     original_price: Decimal | None
     discount_pct: Decimal | None
@@ -77,6 +79,7 @@ def normalize_offer(marketplace: Marketplace, payload: dict[str, Any]) -> Normal
         title=title,
         normalized_title=normalized_title,
         offer_hash=build_offer_hash(marketplace.code, stable_external_id, product_url),
+        produto_canonico_id=build_produto_canonico_id(marketplace.code, asin, stable_external_id),
         current_price=current_price,
         original_price=original_price,
         discount_pct=discount_pct or Decimal('0.00'),
@@ -104,6 +107,45 @@ def normalize_title(value: str) -> str:
 def build_offer_hash(marketplace_code: str, external_id: str, product_url: str) -> str:
     source = '|'.join([marketplace_code.strip().lower(), external_id.strip().lower(), product_url.strip()])
     return hashlib.sha256(source.encode('utf-8')).hexdigest()
+
+
+def build_produto_canonico_id(marketplace_code: str, asin: str, external_id: str) -> str:
+    """Best-effort canonical product id, used only for internal curation dedup.
+
+    Distinct from `offer_hash` (identity of one *listing*/URL): this tries to
+    identify the underlying *physical product* so the curation batch optimizer
+    can avoid publishing two near-identical listings (Sprint 5 / achado P8).
+
+    - Amazon: o ASIN identifica o produto de forma exata, independente de
+      vendedor/buy-box — é o caso "resolvido" (equivalente a um GTIN real).
+    - Shopee: `external_id` chega como `"{itemId}:{shopId}"` (ver
+      `shopee_normalizer.shopee_external_id`). Usamos só o `itemId`, pois o
+      mesmo anúncio pode ser vendido por lojas (shopId) diferentes — dropar o
+      shopId é o que de fato deduplica o produto entre vendedores.
+    - Demais marketplaces (ex.: Mercado Livre): não há ASIN/GTIN no payload.
+      Cai para `external_id` (o próprio identificador do anúncio). Isso é uma
+      limitação conhecida e intencional: NÃO deduplica o mesmo produto
+      anunciado por vendedores diferentes (cada um tem seu próprio ID de
+      anúncio). Deliberadamente não implementamos heurística de marca+modelo
+      via NLP aqui — o risco de fundir produtos diferentes por engano supera o
+      ganho de um dedup best-effort mais agressivo. Mesmo espírito das
+      limitações já documentadas em `shopee_normalizer.py`.
+    """
+    code = (marketplace_code or '').strip().lower()
+    cleaned_external_id = (external_id or '').strip()
+
+    if code == 'amazon' and asin:
+        return f'amazon:{asin.strip()}'
+
+    if code == 'shopee' and cleaned_external_id:
+        item_id = cleaned_external_id.split(':', 1)[0].strip()
+        if item_id:
+            return f'shopee:{item_id}'
+
+    if cleaned_external_id:
+        return f'{code}:{cleaned_external_id}'
+
+    return ''
 
 
 def extract_asin(value: Any) -> str:
@@ -190,9 +232,12 @@ def _to_optional_count(value: Any) -> int | None:
     if not text:
         return None
     try:
-        return int(text)
+        count = int(text)
     except ValueError:
         return None
+    if count > MAX_REVIEW_COUNT:
+        return None
+    return count
 
 
 def _to_decimal(value: Any) -> Decimal | None:

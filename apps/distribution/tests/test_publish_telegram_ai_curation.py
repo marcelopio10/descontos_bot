@@ -1,11 +1,14 @@
 from decimal import Decimal
 from io import StringIO
+from unittest.mock import patch
 
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TestCase
 from django.utils import timezone
 
 from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationDecision, CurationRun
+from apps.curation.services.message_builder import _FALLBACK_HIGHLIGHT_VARIANTS, _select_badge_variant
 from apps.curation.services.telegram_message_builder import CAPTION_MAX, build_curated_telegram_payload
 from apps.distribution.models import Delivery, SocialChannel
 from apps.marketplaces.models import Marketplace
@@ -174,15 +177,48 @@ class PublishTelegramAICurationTests(TestCase):
         payload = build_curated_telegram_payload(item, self.channel)
 
         self.assertIn('<b>📦 Kit 7 Camisetas Masculina Manga Curta Lisa Algodão Premium com 19% OFF</b>', payload.caption)
-        self.assertIn('🤖 Trecho do agente descontos-bot:', payload.caption)
-        highlight = payload.caption.split('🤖 Trecho do agente descontos-bot:', 1)[1].split('\n\n💰', 1)[0]
+        self.assertNotIn('🤖 Trecho do agente descontos-bot:', payload.caption)
+        self.assertNotIn('✨', payload.caption)
+        # Tarefa 5.3: o badge agora varia deterministicamente por offer.id (achado P9).
+        lead, label, trail = _select_badge_variant(19, item.offer.id)
+        badge_html = f'{lead} <b>{label}</b> {trail}'
+        highlight = payload.caption.split(badge_html, 1)[1].split('\n\n💰', 1)[0]
         self.assertNotIn('Kit 7 Camisetas', highlight)
         self.assertNotIn('R$ 125,30', highlight)
         self.assertNotIn('19% OFF', highlight)
+        # A legenda da IA foi descartada (fallback bateu no clichê antigo de curadoria);
+        # o highlight cai numa das variações da categoria "roupa básica" (Tarefa 5.3).
+        self.assertIn(highlight.strip(), _FALLBACK_HIGHLIGHT_VARIANTS['roupa_basica'])
         self.assertIn('💰 <s>De R$ 155,44</s>', payload.caption)
         self.assertIn('✅ <b>Por apenas R$ 125,30</b>', payload.caption)
 
-    def test_without_ai_curation_keeps_legacy_selector_flow(self):
+    def test_default_flow_prepares_ai_curation_and_blocks_legacy_selector_fallback(self):
+        out = StringIO()
+
+        with patch('apps.distribution.management.commands.publish_telegram.call_command') as prepare:
+            call_command(
+                'publish_telegram',
+                '--once',
+                '--channel',
+                'telegram_homolog',
+                '--dry-run',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        prepare.assert_called_once()
+        args = prepare.call_args.args
+        self.assertEqual(args[:3], ('prepare_ai_curation_batch', '--channel', 'telegram_homolog'))
+        self.assertIn('--runner', args)
+        self.assertIn('real', args)
+        self.assertIn('--profile', args)
+        self.assertIn('descontos-bot', args)
+        self.assertIn('--dry-run', args)
+        self.assertIn('Nenhum lote curado pronto', text)
+        self.assertNotIn('Título selector antigo Telegram', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_legacy_selector_flag_keeps_old_selector_flow(self):
         out = StringIO()
 
         call_command(
@@ -191,6 +227,7 @@ class PublishTelegramAICurationTests(TestCase):
             '--channel',
             'telegram_homolog',
             '--dry-run',
+            '--legacy-selector',
             stdout=out,
         )
 
@@ -198,4 +235,50 @@ class PublishTelegramAICurationTests(TestCase):
         self.assertIn('Selecionadas', text)
         self.assertIn('Título selector antigo Telegram', text)
         self.assertNotIn('Lote curado #', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_command_error_with_ready_batch_still_consumes_batch(self):
+        batch, _item = self._create_ready_batch()
+        out = StringIO()
+
+        with patch(
+            'apps.distribution.management.commands.publish_telegram.call_command',
+            side_effect=CommandError('runner falhou: sessão expirada'),
+        ):
+            call_command(
+                'publish_telegram',
+                '--once',
+                '--channel',
+                'telegram_homolog',
+                '--dry-run',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        self.assertIn('Preparação IA falhou', text)
+        self.assertIn(f'Lote curado #{batch.id}', text)
+        self.assertIn('Título curado Telegram', text)
+        self.assertIn('dry_run ativo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_command_error_without_batch_shows_error_and_no_selector_fallback(self):
+        out = StringIO()
+
+        with patch(
+            'apps.distribution.management.commands.publish_telegram.call_command',
+            side_effect=CommandError('runner falhou: sessão expirada'),
+        ):
+            call_command(
+                'publish_telegram',
+                '--once',
+                '--channel',
+                'telegram_homolog',
+                '--dry-run',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        self.assertIn('Preparação IA falhou', text)
+        self.assertIn('Nenhum lote curado pronto', text)
+        self.assertNotIn('Título selector antigo Telegram', text)
         self.assertEqual(Delivery.objects.count(), 0)

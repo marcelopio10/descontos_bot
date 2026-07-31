@@ -10,6 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db import transaction
 from django.utils import timezone
 
+from apps.analytics.services.alertas import alertar_curadoria_falhas_consecutivas
 from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationBlacklistTerm, CurationDecision, CurationRun
 from apps.curation.services.ai_prompt import build_ai_curation_payload
 from apps.curation.services.ai_schema import validate_agent_input, validate_agent_output
@@ -41,6 +42,7 @@ def prepare_ai_curation_batch(
     public_json_dir: Path | str | None = None,
     observer_context: dict[str, Any] | None = None,
     target_distribution: dict[str, float] | None = None,
+    market_radar: dict[str, Any] | None = None,
     profile_name: str = 'descontos.bot',
     model_provider: str = 'mock',
     model_name: str = 'fake-hermes-runner',
@@ -75,6 +77,7 @@ def prepare_ai_curation_batch(
         batch_size=batch_size,
         observer_context=observer_context,
         target_distribution=target,
+        market_radar=market_radar,
     )
     input_validation = validate_agent_input(input_payload)
     if not input_validation.is_valid:
@@ -105,7 +108,13 @@ def prepare_ai_curation_batch(
 
     with transaction.atomic():
         decisions_by_offer_id = _persist_decisions(run, offers, output_payload, input_payload)
-        optimized = optimize_curation_batch(output_payload.get('decisions') or [], batch_size=batch_size, target_distribution=target)
+        enriched_decisions = _enrich_decisions_with_offer_fields(output_payload.get('decisions') or [], offers)
+        optimized = optimize_curation_batch(enriched_decisions, batch_size=batch_size, target_distribution=target)
+
+        if not optimized.selected:
+            _fail_run(run, f'Nenhum item aprovado e selecionado pela IA para o lote (candidatas={len(offers)}; gate de segurança ou IA não selecionou itens)')
+            return AICurationResult(run=run, batch=None, input_payload=input_payload, output_payload=output_payload)
+
         batch = CuratedBatch.objects.create(
             run=run,
             channel=channel,
@@ -189,6 +198,44 @@ def _persist_decisions(
         _apply_blacklist_actions(run, decision, raw_decision)
         decisions_by_offer_id[offer_id] = decision
     return decisions_by_offer_id
+
+
+def _enrich_decisions_with_offer_fields(
+    decisions: list[dict[str, Any]],
+    offers: list[Offer],
+) -> list[dict[str, Any]]:
+    """Attach Offer-only fields the AI never sees, needed by the batch optimizer's dedup gate.
+
+    `produto_canonico_id` (Sprint 5 / achado P8) is computed at ingestion time
+    in apps.offers.services.normalizer — it is not part of the AI decision
+    schema, so optimize_curation_batch can't dedupe by canonical product
+    unless we attach it here first. `current_price` rides along only as a
+    tie-break signal (cheaper wins between two duplicates of the same
+    product); neither value is exposed back to the AI or to any rendered
+    message.
+    """
+    offers_by_id = {offer.id: offer for offer in offers}
+    enriched: list[dict[str, Any]] = []
+    for raw_decision in decisions:
+        decision = dict(raw_decision)
+        offer = _lookup_offer(offers_by_id, decision.get('offer_id'))
+        if offer is not None:
+            decision.setdefault('produto_canonico_id', offer.produto_canonico_id)
+            decision.setdefault(
+                'current_price',
+                float(offer.current_price) if offer.current_price is not None else None,
+            )
+        enriched.append(decision)
+    return enriched
+
+
+def _lookup_offer(offers_by_id: dict[int, Offer], offer_id: Any) -> Offer | None:
+    if offer_id is None:
+        return None
+    try:
+        return offers_by_id.get(int(offer_id))
+    except (TypeError, ValueError):
+        return None
 
 
 def _apply_blacklist_actions(run: CurationRun, decision: CurationDecision, raw_decision: dict[str, Any]) -> None:
@@ -279,8 +326,33 @@ def _write_audit_json(audit_dir: Path, run_id: int | None, label: str, payload: 
     return path
 
 
+CONSECUTIVE_FAILURE_ALERT_THRESHOLD = 2
+
+
 def _fail_run(run: CurationRun, message: str) -> None:
     run.status = CurationRun.Status.FAILED
     run.error_message = message[:4000]
     run.selected_count = 0
     run.save(update_fields=['status', 'error_message', 'selected_count', 'updated_at'])
+    _alert_if_consecutive_failures(run)
+
+
+def _alert_if_consecutive_failures(run: CurationRun, threshold: int = CONSECUTIVE_FAILURE_ALERT_THRESHOLD) -> None:
+    """Alerta o operador quando as últimas `threshold` execuções do canal falharam em sequência.
+
+    Nota: dispara a cada run FAILED enquanto a sequência se mantiver (não só na
+    transição para o limiar) — simples e suficiente dado o volume baixo de runs.
+    """
+    recent_statuses = list(
+        CurationRun.objects.filter(channel=run.channel)
+        .order_by('-created_at')
+        .values_list('status', flat=True)[:threshold],
+    )
+    if len(recent_statuses) < threshold:
+        return
+    if all(status == CurationRun.Status.FAILED for status in recent_statuses):
+        alertar_curadoria_falhas_consecutivas(
+            channel_code=run.channel.code,
+            run_id=run.id,
+            total_falhas=threshold,
+        )

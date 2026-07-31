@@ -1,8 +1,10 @@
+import './env.js';
 import http from 'node:http';
 import { getConfig } from './config.js';
 import { getConnectionStatus, sendMedia, sendText } from './evolutionClient.js';
 import { loadGroupMap } from './groupMap.js';
 import { extractWebhookMessages, ObserverBuffer } from './observerBuffer.js';
+import { enqueueOffer, RouterRequestError } from './routerClient.js';
 
 export function createApp({ config = getConfig(), groupMap = loadGroupMap(config), observer = new ObserverBuffer(config, groupMap) } = {}) {
   async function route(req, res) {
@@ -15,13 +17,16 @@ export function createApp({ config = getConfig(), groupMap = loadGroupMap(config
         return json(res, 200, await getConnectionStatus(config));
       }
       if (req.method === 'POST' && url.pathname === '/send-message') {
-        return handleSendMessage(req, res, config, groupMap);
+        await handleSendMessage(req, res, config, groupMap);
+        return;
       }
       if (req.method === 'POST' && url.pathname === '/send') {
-        return handleSendBatch(req, res, config, groupMap);
+        await handleSendBatch(req, res, config, groupMap);
+        return;
       }
       if (req.method === 'POST' && url.pathname === '/webhook/whatsapp') {
-        return handleWebhook(req, res, observer);
+        await handleWebhook(req, res, observer);
+        return;
       }
       if (req.method === 'POST' && url.pathname === '/observer/collect') {
         await readJson(req).catch(() => ({}));
@@ -33,7 +38,12 @@ export function createApp({ config = getConfig(), groupMap = loadGroupMap(config
       }
       return json(res, 404, { error: 'not found' });
     } catch (error) {
-      return json(res, 500, { error: error instanceof Error ? error.message : String(error) });
+      const status = error instanceof ObserverReadOnlyError
+        ? 403
+        : error instanceof RouterRequestError
+          ? error.statusCode
+          : 500;
+      return json(res, status, { error: error instanceof Error ? error.message : String(error) });
     }
   }
 
@@ -42,13 +52,28 @@ export function createApp({ config = getConfig(), groupMap = loadGroupMap(config
 
 async function handleSendMessage(req, res, config, groupMap) {
   const body = await readJson(req);
-  const { destination, message, image_url } = body;
+  const { destination, message, image_url, idempotency_key } = body;
   if (!destination || typeof destination !== 'string') return json(res, 400, { error: "Campo 'destination' é obrigatório (string)" });
   if (!message || typeof message !== 'string') return json(res, 400, { error: "Campo 'message' é obrigatório (string)" });
   if (image_url !== undefined && typeof image_url !== 'string') return json(res, 400, { error: "Campo 'image_url' deve ser string quando informado" });
+  if (config.outboundProvider === 'router' && (typeof idempotency_key !== 'string' || !idempotency_key.trim())) {
+    return json(res, 400, { error: "Campo 'idempotency_key' é obrigatório para o roteador" });
+  }
 
-  const number = groupMap.resolve(destination);
-  const result = image_url ? await sendMedia(config, number, message, image_url) : await sendText(config, number, message);
+  const target = groupMap.resolveTarget(destination);
+  const senderConfig = await configForTarget(config, target);
+  if (config.outboundProvider === 'router') {
+    const result = await enqueueOffer(config, groupMap, destination, {
+      idempotencyKey: idempotency_key,
+      text: message,
+      mediaUrl: image_url,
+    });
+    return json(res, 200, result);
+  }
+
+  const result = image_url
+    ? await sendMedia(senderConfig, target.jid, message, image_url)
+    : await sendText(senderConfig, target.jid, message);
   return json(res, 200, result);
 }
 
@@ -58,21 +83,47 @@ async function handleSendBatch(req, res, config, groupMap) {
   if (!target || typeof target !== 'string') return json(res, 400, { error: "Campo 'target' é obrigatório (string)" });
   if (!Array.isArray(items) || items.length === 0) return json(res, 400, { error: "Campo 'items' deve ser array não-vazio" });
 
-  const number = groupMap.resolve(target);
+  const resolvedTarget = groupMap.resolveTarget(target);
+  const senderConfig = await configForTarget(config, resolvedTarget);
   const result = { sent: 0, errors: 0, failures: [] };
   for (const item of items) {
     try {
       const caption = resolveItemText(item);
       const mediaUrl = item.image_url || item.media_url;
-      if (!mediaUrl) throw new Error('item sem image_url/media_url para Evolution');
-      await sendMedia(config, number, caption, mediaUrl);
+      if (config.outboundProvider === 'router') {
+        await enqueueOffer(config, groupMap, target, {
+          idempotencyKey: item.idempotency_key,
+          text: caption,
+          mediaUrl,
+        });
+      } else {
+        if (!mediaUrl) throw new Error('item sem image_url/media_url para Evolution');
+        await sendMedia(senderConfig, resolvedTarget.jid, caption, mediaUrl);
+      }
       result.sent += 1;
     } catch (error) {
       result.errors += 1;
-      result.failures.push({ id: String(item?.id || ''), reason: error instanceof Error ? error.message : String(error) });
+      const reason = error instanceof RouterRequestError
+        ? error.message
+        : error instanceof Error
+          ? error.message
+          : String(error);
+      result.failures.push({ id: String(item?.id || ''), reason });
     }
   }
   return json(res, 200, result);
+}
+
+async function configForTarget(config, target) {
+  if (target.senderInstance !== 'observer') return config;
+  throw new ObserverReadOnlyError();
+}
+
+class ObserverReadOnlyError extends Error {
+  constructor() {
+    super('A instância descontos_observer é somente leitura; migre o destino para descontos_envio');
+    this.name = 'ObserverReadOnlyError';
+  }
 }
 
 function resolveItemText(item) {
@@ -97,12 +148,12 @@ async function handleWebhook(req, res, observer) {
 
 function isMessagesUpsertEvent(body) {
   const event = body?.event;
-  return !event || event === 'messages.upsert' || event === 'MESSAGES_UPSERT';
+  return event === 'messages.upsert' || event === 'MESSAGES_UPSERT';
 }
 
 function isObserverInstance(body, expectedInstance) {
   const instance = body?.instance || body?.instanceName || body?.data?.instance || body?.data?.instanceName;
-  return !instance || instance === expectedInstance;
+  return instance === expectedInstance;
 }
 
 async function readJson(req) {

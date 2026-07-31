@@ -1,5 +1,7 @@
 # Sprint 12 — Homologação visual controlada
 
+> Nota: este relatório preserva a numeração original do plano antes da remoção da sprint de criação do profile Hermes. No plano atualizado, esta etapa corresponde à Sprint 11 — Homologação visual controlada.
+
 Status: implementação e simulação ponta a ponta concluídas; envio visual externo bloqueado por configuração local.
 
 ## Implementado

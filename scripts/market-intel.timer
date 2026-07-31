@@ -1,0 +1,16 @@
+[Unit]
+Description=descontos.bot - Disparo diário do coletor de market intel (observer WhatsApp)
+
+[Timer]
+# 22h horário de Brasília. O fuso é embutido diretamente na expressão
+# OnCalendar= (não existe uma diretiva TimeZone= separada em [Timer] —
+# validado com `systemd-analyze calendar`). Se a máquina de destino não
+# tiver o banco IANA de timezones instalado, remova " America/Sao_Paulo" e
+# ajuste o horário manualmente para UTC (22h BRT = 01h UTC no horário de
+# verão brasileiro atual, sem DST desde 2019 = sempre UTC-3).
+OnCalendar=*-*-* 22:00:00 America/Sao_Paulo
+Persistent=true
+Unit=market-intel.service
+
+[Install]
+WantedBy=timers.target

@@ -62,6 +62,7 @@ class Delivery(TimestampedModel):
         SENT = 'sent', 'Enviado'
         FAILED = 'failed', 'Falhou'
         SKIPPED = 'skipped', 'Ignorado'
+        DEAD_LETTER = 'dead_letter', 'Esgotado (dead-letter)'
 
     offer = models.ForeignKey(
         Offer,
@@ -96,6 +97,17 @@ class Delivery(TimestampedModel):
         'enviado em',
         null=True,
         blank=True,
+    )
+    retry_count = models.PositiveIntegerField(
+        'tentativas',
+        default=0,
+        help_text='Quantidade de reenvios tentados pela fila de envio (apps.distribution.services.fila_envio).',
+    )
+    next_retry_at = models.DateTimeField(
+        'próxima tentativa em',
+        null=True,
+        blank=True,
+        help_text='Backoff: a fila de envio só tenta novamente após este horário.',
     )
 
     class Meta:

@@ -1,4 +1,5 @@
 import logging
+import os
 from datetime import timedelta
 from pathlib import Path
 
@@ -7,16 +8,24 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 
+from apps.curation.models import CurationRun
 from apps.curation.services.blacklist import filter_blacklisted_offers
 from apps.curation.services.curated_batch_reader import get_ready_curated_batch
 from apps.curation.services.message_builder import build_curated_offer_message, build_offer_message, get_final_url
 from apps.curation.services.selector import get_selection_config, select_offers_for_channel
+from apps.curation.services.settings import get_bool_setting
 from apps.distribution.models import SocialChannel
-from apps.distribution.services.delivery import deliver_curated_item_to_whatsapp, deliver_offer_to_channel
+from apps.distribution.services.delivery import (
+    SessaoIndisponivelError,
+    deliver_curated_item_to_whatsapp,
+    deliver_offer_to_channel,
+    get_whatsapp_session_status,
+)
 from apps.distribution.services.execution_window import (
     get_silence_error_message,
     is_distribution_silenced,
 )
+from apps.distribution.services.whatsapp_client import WhatsAppClientError
 from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
 from apps.orchestration.services.offer_publication import (
@@ -24,7 +33,9 @@ from apps.orchestration.services.offer_publication import (
     publish_offers_after_capture,
 )
 from apps.orchestration.services.scheduler import (
+    apply_channel_cadence,
     calculate_next_sleep_seconds,
+    get_channel_cadence_config,
     get_scheduler_config,
     sleep_between_cycles,
     wait_until_distribution_window,
@@ -32,6 +43,7 @@ from apps.orchestration.services.scheduler import (
 from apps.scraping.models import ScrapingRun
 from apps.scraping.services.runner import run_marketplace_scraping
 from apps.social_posts.models import InstagramPost
+from apps.social_posts.services.politica_cadencia import CadenciaExcedidaError
 from apps.social_posts.services.post_generator import generate_story_for_offer
 
 
@@ -42,6 +54,66 @@ PRODUCTION_WHATSAPP_CHANNEL_CODES = {'whatsapp_principal'}
 AI_PRODUCTION_CONFIRMATION = 'CONFIRM_AI_PRODUCTION'
 INSTAGRAM_GENERATION_WINDOW_HOURS = 36
 HEALTHCHECK_FILE = Path(settings.BASE_DIR) / 'data' / 'last_cycle.txt'
+
+# Curadoria IA: mesmo profile em todas as tentativas; muda apenas o modelo/provider.
+# O modelo padrão do profile (gpt-5.5) costuma estourar limite de token/latência; o
+# fallback força um modelo mais leve/estável de outro provider (glm-5.2), sem trocar
+# de profile. Sobrescrevível por env para operação sem deploy.
+AI_CURATION_PROFILE = 'descontos-bot'
+AI_CURATION_FALLBACK_MODELS = ('glm-5.2',)
+
+# Tarefa 5.4 (achado E) — baseline medido em 2026-07-21 via `manage.py painel_operacional
+# --days 7` e reconfirmado por query direta em `CurationRun` (últimos 7 dias, janela
+# 2026-07-14..07-21): 109 runs, 103 completed / 6 failed (5.5% FAILED — já abaixo da
+# meta de <10% do plano). Médias saudáveis: candidate_count≈38.5, selected_count≈15
+# nos runs completos (não reproduz mais o "12→4" do laudo original).
+#
+# Das 6 falhas: 3 foram timeout de 600s (candidate_count 13, 25 e 25 — SEM correlação
+# com tamanho de lote: a faixa mais comum entre os runs bem-sucedidos é justamente
+# candidate_count=50, a maior possível hoje), 1 foi "hermes" ausente do PATH (transitório;
+# o binário resolve normalmente no processo run_bot ao vivo), 1 foi JSON inválido devolvido
+# pelo Hermes, e 1 foi "nenhum item aprovado" (resultado legítimo, não bug).
+#
+# Decisão: **não mexer em `--candidate-limit`** (apps/curation/management/commands/
+# prepare_ai_curation_batch.py) — os dados não mostram lotes grandes causando timeout;
+# reduzir o limite só encolheria o funil de seleção sem ganho medido.
+#
+# Decisão: **reduzir o timeout de 600s para 450s.** Duração total (created_at→updated_at,
+# superset do tempo real gasto na chamada ao Hermes CLI) dos 103 runs completed da mesma
+# janela: p50=143s, p75=157s, p90=166s, p95=173s, p99=245s, max=303s. 450s mantém >45% de
+# folga sobre o pior caso observado de sucesso legítimo (praticamente zero risco de virar
+# falso-positivo de timeout), e ainda corta até 150s por tentativa quando o timeout é real
+# — inclusive no pior cenário já observado (runs #109/#110: primário gpt-5.5 e fallback
+# glm-5.2 estouraram os dois o timeout completo em sequência no mesmo ciclo), o que reduzia
+# um ciclo inteiro de `run_bot` a ~1200s perdidos; com 450s, o mesmo cenário cai para ~900s.
+# Não foi criado um timeout diferente por tentativa (primário vs. fallback): o fallback
+# glm-5.2 também já tomou o timeout cheio numa falha real observada, então não há evidência
+# de que ele mereça uma janela mais curta — o ganho já vem de encurtar a constante única
+# compartilhada pelas duas tentativas em `_ai_curation_attempts()`.
+AI_CURATION_RUNNER_TIMEOUT = 450
+
+# Sprint 3 - Tarefa 3.3: com esta Setting ligada, `run_bot` só coleta e prepara o
+# lote de curadoria IA (enfileira); o consumo/envio passa a rodar em processo
+# separado via `manage.py consumir_fila_whatsapp`. Default off: comportamento
+# idêntico ao atual (preparar + consumir no mesmo ciclo). Rollback = desligar.
+DECOUPLED_QUEUE_SETTING_KEY = 'usa_fila_desacoplada'
+
+
+def _ai_curation_attempts() -> list[tuple[str, str | None]]:
+    """Tentativas de curadoria IA no MESMO profile, na ordem de execução.
+
+    Cada item é (label, model_override): o primário usa o modelo padrão do profile
+    (model_override=None) e os fallbacks forçam outro modelo via `hermes -m <modelo>`.
+    Env override: AI_CURATION_FALLBACK_MODELS="glm-5.2,glm-4.6" (CSV de modelos de fallback).
+    """
+    raw = os.environ.get('AI_CURATION_FALLBACK_MODELS', '').strip()
+    if raw:
+        fallback_models: tuple[str, ...] = tuple(item.strip() for item in raw.split(',') if item.strip())
+    else:
+        fallback_models = AI_CURATION_FALLBACK_MODELS
+    attempts: list[tuple[str, str | None]] = [('primário (modelo padrão do profile)', None)]
+    attempts.extend((f'fallback IA ({model})', model) for model in fallback_models)
+    return attempts
 
 
 class Command(BaseCommand):
@@ -82,7 +154,12 @@ class Command(BaseCommand):
         parser.add_argument(
             '--ai-curation',
             action='store_true',
-            help='Usa lote curado por IA em vez do selector determinístico.',
+            help='Usa lote curado por IA em vez do selector determinístico. Mantido por compatibilidade; agora é o padrão.',
+        )
+        parser.add_argument(
+            '--legacy-selector',
+            action='store_true',
+            help='Opt-out explícito: usa o selector determinístico legado sem curadoria IA.',
         )
         parser.add_argument(
             '--ai-curation-required',
@@ -112,7 +189,12 @@ class Command(BaseCommand):
             raise CommandError('--max-pages deve ficar entre 1 e 5.')
 
         dry_run = options['dry_run']
-        ai_curation = options['ai_curation'] or options['ai_curation_required']
+        legacy_selector = options['legacy_selector']
+        ai_curation = not legacy_selector or options['ai_curation'] or options['ai_curation_required']
+        # Só bloqueia o fallback legado quando o operador exige explicitamente lote curado.
+        # No fluxo padrão, a IA falhando cai no selector legado como segundo fallback.
+        ai_curation_required = options['ai_curation_required']
+        prepare_ai_curation = options['prepare_ai_curation'] or (ai_curation and not legacy_selector)
         ai_curation_limit = options['ai_curation_limit']
         if ai_curation_limit is not None and ai_curation_limit < 1:
             raise CommandError('--ai-curation-limit deve ser maior que zero.')
@@ -129,8 +211,8 @@ class Command(BaseCommand):
                 max_pages=max_pages,
                 skip_scraping=options['skip_scraping'],
                 ai_curation=ai_curation,
-                ai_curation_required=options['ai_curation_required'],
-                prepare_ai_curation=options['prepare_ai_curation'],
+                ai_curation_required=ai_curation_required,
+                prepare_ai_curation=prepare_ai_curation,
                 ai_curation_limit=ai_curation_limit,
             )
             if options['show_next_interval']:
@@ -151,8 +233,8 @@ class Command(BaseCommand):
                     max_pages=max_pages,
                     skip_scraping=options['skip_scraping'],
                     ai_curation=ai_curation,
-                    ai_curation_required=options['ai_curation_required'],
-                    prepare_ai_curation=options['prepare_ai_curation'],
+                    ai_curation_required=ai_curation_required,
+                    prepare_ai_curation=prepare_ai_curation,
                     ai_curation_limit=ai_curation_limit,
                 )
                 seconds = sleep_between_cycles()
@@ -190,30 +272,45 @@ class Command(BaseCommand):
             self._generate_instagram_posts_for_new_offers()
 
         if prepare_ai_curation:
-            self.stdout.write('Preparando lote de curadoria IA antes do consumo.')
-            prepare_args = [
-                'prepare_ai_curation_batch',
-                '--channel',
-                channel.code,
-                '--mode',
-                'dry_run' if dry_run else 'homolog',
-                '--skip-images',
-            ]
-            if dry_run:
-                prepare_args.append('--dry-run')
-            call_command(*prepare_args, stdout=self.stdout)
+            self._prepare_ai_curation(channel=channel, dry_run=dry_run)
 
         if ai_curation:
-            if not dry_run and ai_curation_required:
-                self.stdout.write(self.style.WARNING('ai-curation-required ativo: fallback para selector legado bloqueado.'))
-            if self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=ai_curation_limit):
-                return
-            if ai_curation_required or dry_run:
+            allowed_modes = [CurationRun.Mode.DRY_RUN] if dry_run else [CurationRun.Mode.HOMOLOG, CurationRun.Mode.PRODUCTION]
+            if self._usa_fila_desacoplada() and get_ready_curated_batch(channel, allowed_modes=allowed_modes).has_batch:
+                # Só desvia para o fluxo desacoplado quando HÁ de fato lote pronto para
+                # entregar (achado 2026-07-21): interceptar sempre, mesmo sem lote,
+                # eliminaria o fallback para o selector legado logo abaixo — o canal
+                # ficaria mudo em qualquer ciclo em que a curadoria IA não produzisse
+                # nada, o que hoje é coberto pelo selector legado como rede de segurança.
+                self.stdout.write(
+                    self.style.WARNING(
+                        'Fila desacoplada ativa (Setting usa_fila_desacoplada=on): ciclo só '
+                        'coleta e prepara o lote. Consumo/envio roda em processo separado '
+                        '(`manage.py consumir_fila_whatsapp`).',
+                    ),
+                )
+                log.info('ai_curation.decoupled_queue_prepare_only canal=%s', channel.code)
                 self._write_healthcheck()
                 return
+            if ai_curation_required:
+                self.stdout.write(self.style.WARNING('ai-curation-required ativo: fallback para selector legado bloqueado.'))
+            if self._run_ai_curation_cycle(channel=channel, dry_run=dry_run, limit=ai_curation_limit, allowed_modes=allowed_modes):
+                return
+            if ai_curation_required:
+                self.stdout.write(self.style.ERROR('ai-curation-required: abortando ciclo sem fallback para selector legado.'))
+                self._write_healthcheck()
+                return
+            self.stdout.write(
+                self.style.WARNING(
+                    'Curadoria IA indisponível (tentativas de IA falharam). '
+                    'Usando selector legado por lógica como segundo fallback.',
+                ),
+            )
+            log.warning('ai_curation.fallback_to_legacy canal=%s', channel.code)
 
         config = get_selection_config()
         offers = select_offers_for_channel(channel=channel, config=config)
+        offers = self._apply_channel_cadence(channel=channel, items=offers)
 
         mode = 'dry_run' if dry_run else 'envio real'
         self.stdout.write(f'Ciclo do descontos.bot em {mode}')
@@ -236,6 +333,10 @@ class Command(BaseCommand):
         if not dry_run and is_distribution_silenced():
             self.stdout.write(self.style.WARNING(get_silence_error_message()))
 
+        if not dry_run and not self._check_whatsapp_session():
+            self._write_healthcheck()
+            return
+
         for index, offer in enumerate(offers, start=1):
             message = build_offer_message(offer, channel)
             self.stdout.write('')
@@ -246,7 +347,17 @@ class Command(BaseCommand):
             self.stdout.write(message)
 
             if not dry_run:
-                result = deliver_offer_to_channel(offer=offer, channel=channel)
+                try:
+                    result = deliver_offer_to_channel(offer=offer, channel=channel)
+                except SessaoIndisponivelError as exc:
+                    self.stdout.write(
+                        self.style.ERROR(f'Sessão do WhatsApp caiu durante o envio: {exc}'),
+                    )
+                    log.error(
+                        'whatsapp_session.dropped_mid_batch offer_id=%s motivo=%s',
+                        offer.id, exc,
+                    )
+                    break
                 delivery = result.delivery
                 self.stdout.write(
                     f'Entrega: {delivery.delivery_status} '
@@ -267,8 +378,62 @@ class Command(BaseCommand):
         log.info('Ciclo finalizado. ofertas_selecionadas=%s', len(offers))
         self._write_healthcheck()
 
-    def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool, limit: int | None = None) -> bool:
-        result = get_ready_curated_batch(channel)
+    def _prepare_ai_curation(self, *, channel: SocialChannel, dry_run: bool) -> bool:
+        """Prepara o lote de curadoria IA tentando o profile primário e, se falhar,
+        o mesmo profile com um modelo de fallback (outro provider).
+
+        Retorna True na primeira tentativa que preparar o lote sem erro; False se
+        todas falharem (o chamador então cai no selector legado).
+        """
+        for label, model_override in _ai_curation_attempts():
+            prepare_args = [
+                'prepare_ai_curation_batch',
+                '--channel',
+                channel.code,
+                '--mode',
+                'dry_run' if dry_run else 'homolog',
+                '--runner',
+                'real',
+                '--profile',
+                AI_CURATION_PROFILE,
+                '--skip-images',
+                '--runner-timeout',
+                str(AI_CURATION_RUNNER_TIMEOUT),
+            ]
+            if model_override:
+                prepare_args += ['--model', model_override]
+            if dry_run:
+                prepare_args.append('--dry-run')
+
+            self.stdout.write(f'Preparando lote de curadoria IA ({label}, profile={AI_CURATION_PROFILE}).')
+            try:
+                call_command(*prepare_args, stdout=self.stdout)
+            except CommandError as exc:
+                log.error(
+                    'ai_curation.prepare_failed canal=%s profile=%s modelo=%s erro=%s',
+                    channel.code, AI_CURATION_PROFILE, model_override or 'default', exc,
+                )
+                self.stdout.write(self.style.ERROR(f'Preparação IA falhou ({label}): {exc}'))
+                continue
+            log.info(
+                'ai_curation.prepare_ok canal=%s profile=%s modelo=%s',
+                channel.code, AI_CURATION_PROFILE, model_override or 'default',
+            )
+            return True
+        return False
+
+    def _usa_fila_desacoplada(self) -> bool:
+        """Setting `usa_fila_desacoplada` (Sprint 3 - Tarefa 3.3). Default True desde
+        2026-07-21 (decisão do dono): quando HÁ lote pronto, `run_bot` só coleta e
+        prepara; consumo/envio roda via `consumir-fila-whatsapp-v2.timer` (systemd
+        --user, intervalo aleatório de 90-240min, com teto de cadência). Só desvia
+        para esse fluxo se houver lote pronto de fato — sem isso, o ciclo cai no
+        fallback do selector legado como sempre.
+        """
+        return get_bool_setting(DECOUPLED_QUEUE_SETTING_KEY, True)
+
+    def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool, limit: int | None = None, allowed_modes: list[str] | None = None) -> bool:
+        result = get_ready_curated_batch(channel, allowed_modes=allowed_modes)
         if not result.has_batch:
             self.stdout.write(self.style.WARNING(result.reason or 'Nenhum lote curado pronto.'))
             log.info('ai_curation.paused channel=%s reason=%s', channel.code, result.reason)
@@ -278,10 +443,16 @@ class Command(BaseCommand):
         items = result.items
         if limit is not None:
             items = items[:limit]
+        else:
+            items = self._apply_channel_cadence(channel=channel, items=items)
         mode = 'dry_run' if dry_run else 'homologação/envio real'
         self.stdout.write(f'Ciclo do descontos.bot em {mode} com curadoria IA')
         self.stdout.write(f'Canal: {channel.name} ({channel.code})')
         self.stdout.write(f'Lote curado #{batch.id}: run={batch.run_id}; itens={len(items)}')
+
+        if not dry_run and not self._check_whatsapp_session():
+            self._write_healthcheck()
+            return True
 
         for index, item in enumerate(items, start=1):
             offer = item.offer
@@ -294,7 +465,17 @@ class Command(BaseCommand):
             self.stdout.write(build_curated_offer_message(item, channel))
 
             if not dry_run:
-                delivery_result = deliver_curated_item_to_whatsapp(item=item, channel=channel)
+                try:
+                    delivery_result = deliver_curated_item_to_whatsapp(item=item, channel=channel)
+                except SessaoIndisponivelError as exc:
+                    self.stdout.write(
+                        self.style.ERROR(f'Sessão do WhatsApp caiu durante o envio: {exc}'),
+                    )
+                    log.error(
+                        'whatsapp_session.dropped_mid_batch offer_id=%s item_id=%s motivo=%s',
+                        offer.id, item.id, exc,
+                    )
+                    break
                 delivery = delivery_result.delivery
                 self.stdout.write(
                     f'Entrega: {delivery.delivery_status} '
@@ -316,6 +497,63 @@ class Command(BaseCommand):
         log.info('ai_curation.cycle_finished batch_id=%s items=%s dry_run=%s', batch.id, len(items), dry_run)
         self._write_healthcheck()
         return True
+
+    def _check_whatsapp_session(self) -> bool:
+        """Checa a sessão do WhatsApp uma única vez antes de iniciar o loop de envio.
+
+        Evita o cenário do achado C3: se a sessão já está indisponível antes do
+        ciclo começar a enviar, não iteramos as ofertas nem marcamos nada como
+        FAILED — apenas registramos o motivo e saímos cedo. As ofertas seguem
+        elegíveis para o próximo ciclo.
+        """
+        try:
+            status = get_whatsapp_session_status()
+        except WhatsAppClientError as exc:
+            self.stdout.write(self.style.ERROR(f'Sessão do WhatsApp indisponível: {exc}'))
+            log.error('whatsapp_session.precheck_failed motivo=%s', exc)
+            return False
+        if not status.connected:
+            self.stdout.write(
+                self.style.ERROR(
+                    'Sessão do WhatsApp não conectada. Ciclo abortado antes do envio; '
+                    'as ofertas continuam elegíveis no próximo ciclo.',
+                ),
+            )
+            log.error('whatsapp_session.precheck_failed motivo=nao_conectado')
+            return False
+        return True
+
+    def _apply_channel_cadence(self, *, channel: SocialChannel, items: list) -> list:
+        """Aplica o teto/piso de cadência configurado para o canal (Tarefa 1.4).
+
+        Teto: corta rajadas limitando itens/ciclo. Piso: não força itens
+        inexistentes a aparecer — apenas registra quando o lote elegível fica
+        abaixo do piso configurado (não há o que enviar além do que existe).
+        """
+        result = apply_channel_cadence(items)
+        if result.capped:
+            self.stdout.write(
+                self.style.WARNING(
+                    f'Cadência: lote reduzido de {result.total} para {len(result.items)} '
+                    f'(teto configurado: {result.limit}/ciclo, canal={channel.code}).',
+                ),
+            )
+            log.info(
+                'channel_cadence.capped canal=%s total=%s teto=%s',
+                channel.code, result.total, result.limit,
+            )
+        elif result.below_floor:
+            self.stdout.write(
+                self.style.WARNING(
+                    f'Cadência abaixo do piso configurado ({result.total} < {result.floor}) '
+                    f'para o canal={channel.code}: não há itens elegíveis suficientes.',
+                ),
+            )
+            log.info(
+                'channel_cadence.below_floor canal=%s total=%s piso=%s',
+                channel.code, result.total, result.floor,
+            )
+        return result.items
 
     def _write_healthcheck(self) -> None:
         try:
@@ -450,6 +688,13 @@ class Command(BaseCommand):
         for offer in offers:
             try:
                 post = generate_story_for_offer(offer)
+            except CadenciaExcedidaError as exc:
+                # Teto diário atingido (Tarefa 7.2): as próximas ofertas também
+                # seriam recusadas pelo mesmo motivo, então paramos aqui em vez
+                # de logar o mesmo aviso oferta a oferta até o fim da lista.
+                self.stdout.write(self.style.WARNING(f'Cadência Instagram: {exc}'))
+                log.info('instagram_posts.generation_stopped_by_cadencia motivo=%s', exc)
+                break
             except Exception as exc:
                 skipped += 1
                 self.stdout.write(

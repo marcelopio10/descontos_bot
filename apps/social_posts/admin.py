@@ -6,7 +6,7 @@ from django.utils import timezone
 from apps.social_posts.models import InstagramPost
 from apps.social_posts.services.composio_publisher import (
     ComposioPublishError,
-    publish_story,
+    publish_post,
     record_failure,
 )
 from apps.social_posts.services.instagram_handoff_telegram import (
@@ -108,11 +108,11 @@ def approve_and_publish(modeladmin, request, queryset):
     skipped = 0
     failed = 0
     for post in queryset:
-        if post.format != InstagramPost.Format.STORY:
+        if post.format not in (InstagramPost.Format.FEED, InstagramPost.Format.STORY):
             skipped += 1
             messages.warning(
                 request,
-                f'Post #{post.id} ignorado — apenas story suportado por enquanto.',
+                f'Post #{post.id} ignorado — apenas feed/story suportados por enquanto.',
             )
             continue
         if post.status == InstagramPost.Status.POSTED:
@@ -121,7 +121,7 @@ def approve_and_publish(modeladmin, request, queryset):
             continue
 
         try:
-            result = publish_story(post)
+            result = publish_post(post)
         except ComposioPublishError as exc:
             failed += 1
             error = f'[{exc.stage}] {exc}'
@@ -153,6 +153,10 @@ class InstagramPostAdmin(admin.ModelAdmin):
         'status',
         'primary_offer',
         'instagram_media_id',
+        'instagram_container_id',
+        'instagram_permalink',
+        'publish_state',
+        'publish_attempts',
         'telegram_handoff_message_id',
         'posted_at',
         'created_at',
@@ -169,6 +173,11 @@ class InstagramPostAdmin(admin.ModelAdmin):
     )
     readonly_fields = (
         'instagram_media_id',
+        'instagram_container_id',
+        'instagram_permalink',
+        'publish_state',
+        'publish_attempts',
+        'publication_receipt',
         'telegram_handoff_message_id',
         'posted_at',
         'published_error',

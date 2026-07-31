@@ -81,6 +81,7 @@ export class ObserverBuffer {
 
 export function normalizeIncomingMessage(raw, groupMap, config) {
   const key = raw?.key ?? {};
+  if (key.fromMe === true || raw?.fromMe === true) return null;
   const groupJid = String(key.remoteJid ?? raw?.remoteJid ?? '');
   const messageId = String(key.id ?? raw?.id ?? raw?.messageId ?? '');
   if (!groupJid.endsWith('@g.us') || !messageId) return null;

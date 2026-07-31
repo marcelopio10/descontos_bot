@@ -1,0 +1,20 @@
+[Unit]
+Description=descontos.bot - Disparo periódico do consumo/envio da fila desacoplada (WhatsApp)
+
+[Timer]
+# Achado 2026-07-21: 15min era rápido demais — com vários lotes represados
+# (~15-20 itens cada) e o teto de cadência de 25/ciclo, um timer curto ainda
+# manda muito mais rápido que o ritmo original do run_bot (1 ciclo a cada
+# 90-180min, ver DEFAULT_CYCLE_MIN/MAX_MINUTES em orchestration/services/
+# scheduler.py). OnUnitActiveSec=90min + RandomizedDelaySec=150min dá um
+# intervalo uniforme entre 90 e 240min a cada disparo (recalculado sempre),
+# igual ao random.randint que o run_bot já usa — cadência mais humana, menos
+# risco de bloqueio do WhatsApp por padrão robótico de envio.
+OnBootSec=15min
+OnUnitActiveSec=90min
+RandomizedDelaySec=150min
+Persistent=true
+Unit=consumir-fila-whatsapp-v2.service
+
+[Install]
+WantedBy=timers.target

@@ -6,8 +6,10 @@ from collections import defaultdict
 from dataclasses import dataclass
 from decimal import Decimal
 
-from django.db.models import Q, QuerySet
+from django.db.models import QuerySet
+from django.utils import timezone
 
+from apps.curation.models import CuratedBatch, CuratedBatchItem
 from apps.curation.services.blacklist import (
     apply_blacklist_exclusion,
     get_blacklist_terms,
@@ -91,7 +93,19 @@ def get_selection_config() -> SelectionConfig:
 def select_offers_for_channel(
     channel: SocialChannel,
     config: SelectionConfig | None = None,
+    *,
+    observer_context: dict | None = None,
 ) -> list[Offer]:
+    """Seleção determinística legada (usada por `run_bot.py` no canal WhatsApp
+    legado e por `publish_telegram.py`). Aceita `observer_context` opcional
+    (Sprint 6 / Tarefa 6.2, achado P3) só para dar paridade com o fluxo de
+    curadoria IA — hoje nenhum caller de produção passa esse argumento; a
+    correção obrigatória do achado P3 (contexto real em vez de dict estático)
+    é escopo de `prepare_ai_curation_batch.py`, que é o único ponto citado no
+    plano como responsável pela curadoria IA de WhatsApp em produção. Ligar
+    isto também no seletor legado/Telegram é uma decisão futura do dono, não
+    coberta por esta tarefa.
+    """
     config = config or get_selection_config()
     queryset = _eligible_offers(channel, config)
 
@@ -113,7 +127,7 @@ def select_offers_for_channel(
 
     evaluated = []
     for offer in candidates:
-        breakdown = quality_score_breakdown(offer)
+        breakdown = quality_score_breakdown(offer, observer_context=observer_context)
         if breakdown.score < config.min_quality_score:
             log.info(
                 'selector_drop offer_id=%s reason=low_score score=%.2f classification=%s '
@@ -283,10 +297,24 @@ def _resolve_category_quotas(config: SelectionConfig) -> dict[str, int]:
 
 
 def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySet[Offer]:
-    sent_delivery_filter = Q(
-        deliveries__social_channel=channel,
-        deliveries__delivery_status=Delivery.DeliveryStatus.SENT,
-    )
+    sent_offer_ids = Delivery.objects.filter(
+        social_channel=channel,
+        delivery_status=Delivery.DeliveryStatus.SENT,
+    ).values('offer_id')
+
+    # Achado 2026-07-22: sem isso, uma oferta com envio pendente num lote ainda
+    # ativo (curado mas não consumido) continuava elegível — cada novo ciclo de
+    # preparo reordenava o pool por desconto e pegava de novo o mesmo topo do
+    # ranking, gerando lotes com 80-90% de duplicatas (skipped) quando o
+    # consumo atrasa. Só existe efeito prático desde que a fila desacoplada
+    # (`usa_fila_desacoplada`) virou padrão: no fluxo síncrono antigo (seleciona
+    # e envia no mesmo ciclo) não havia essa janela de "pendente entre ciclos".
+    pending_offer_ids = CuratedBatchItem.objects.filter(
+        batch__channel=channel,
+        batch__status=CuratedBatch.Status.READY,
+        batch__expires_at__gt=timezone.now(),
+        send_status=CuratedBatchItem.SendStatus.PENDING,
+    ).values('offer_id')
 
     queryset = (
         Offer.objects.select_related('marketplace')
@@ -299,7 +327,8 @@ def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySe
             discount_pct__gte=config.min_discount_percentage,
             last_seen_at__gte=get_freshness_cutoff(),
         )
-        .exclude(sent_delivery_filter)
+        .exclude(id__in=sent_offer_ids)
+        .exclude(id__in=pending_offer_ids)
         .order_by('-discount_pct', '-current_price', 'title')
     )
 

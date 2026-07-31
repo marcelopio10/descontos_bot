@@ -1,0 +1,18 @@
+[Unit]
+Description=descontos.bot - Evolution adapter (bridge WhatsApp entre run_bot e Evolution API)
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/descontos.bot/evolution_adapter
+# O adapter carrega %h/descontos.bot/.env sozinho (src/env.js), então não precisa de
+# EnvironmentFile. Ajuste o caminho do node conforme a instalação (aqui: nvm).
+ExecStart=%h/.nvm/versions/node/v24.15.0/bin/node src/server.js
+Restart=always
+RestartSec=10
+StandardOutput=append:%h/descontos.bot/logs/evolution_adapter.out
+StandardError=append:%h/descontos.bot/logs/evolution_adapter.out
+
+[Install]
+WantedBy=default.target

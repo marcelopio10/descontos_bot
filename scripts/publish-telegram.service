@@ -1,0 +1,15 @@
+[Unit]
+Description=descontos.bot - Publica ofertas curadas no canal Telegram principal
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
+# systemd --user usa um PATH mínimo que não inclui ~/.local/bin, onde o CLI
+# `hermes` (curadoria IA, --runner real) está instalado. Sem isso, o prepare
+# falha com "Hermes CLI indisponível: No such file or directory: 'hermes'".
+Environment=PATH=/home/marce/.local/bin:/home/marce/.nvm/versions/node/v24.15.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py publish_telegram --once --channel telegram_main --confirm-ai-production CONFIRM_AI_PRODUCTION
+StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/publish-telegram.log
+StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/publish-telegram.log

@@ -12,6 +12,7 @@ from apps.distribution.services.telegram_client import TelegramSendResult
 from apps.distribution.services.whatsapp_client import WhatsAppSendResult, WhatsAppStatus
 from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
+from apps.panel.models import Setting
 
 
 class FakeWhatsAppClient:
@@ -140,8 +141,14 @@ class AICuratedHomologDeliveryTests(TestCase):
         channel = self._channel('whatsapp_main', SocialChannel.ChannelType.WHATSAPP_GROUP, 'descontos.bot homolog')
         batch, item = self._ready_batch_item(channel)
         fake_client = FakeWhatsAppClient()
+        # `usa_fila_desacoplada` é True por padrão desde 2026-07-21: este teste cobre
+        # o envio síncrono no mesmo ciclo do run_bot, então desliga explicitamente.
+        Setting.objects.create(key='usa_fila_desacoplada', value='false')
 
-        with patch('apps.distribution.services.delivery.WhatsAppClient', return_value=fake_client):
+        with (
+            patch('apps.distribution.services.delivery.WhatsAppClient', return_value=fake_client),
+            patch('apps.distribution.services.delivery.is_distribution_silenced', return_value=False),
+        ):
             out = StringIO()
             call_command(
                 'run_bot',
@@ -174,7 +181,11 @@ class AICuratedHomologDeliveryTests(TestCase):
         batch, item = self._ready_batch_item(channel)
         fake_client = FakeTelegramClient()
 
-        with patch('apps.distribution.services.telegram_delivery.TelegramClient', return_value=fake_client):
+        with (
+            patch('apps.distribution.services.telegram_delivery.TelegramClient', return_value=fake_client),
+            patch('apps.distribution.services.telegram_delivery.is_distribution_silenced', return_value=False),
+            patch('apps.distribution.management.commands.publish_telegram.is_distribution_silenced', return_value=False),
+        ):
             out = StringIO()
             call_command(
                 'publish_telegram',

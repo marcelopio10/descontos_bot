@@ -51,3 +51,4 @@ media/instagram/**
 # macOS metadata (não versionar)
 .DS_Store
 ._*
+.worktrees/

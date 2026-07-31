@@ -5,6 +5,7 @@ from django.db import transaction
 from django.utils import timezone
 
 from apps.curation.services.blacklist import filter_blacklisted_offers, is_blacklisted
+from apps.marketplaces.services.radar_mercado import RadarMercadoResult, collect_radar_mercado
 from apps.offers.models import Offer
 from apps.social_posts.models import InstagramPost
 from apps.social_posts.services.caption_builder import build_caption
@@ -14,6 +15,10 @@ from apps.social_posts.services.image_renderer import (
     render_story_asset,
 )
 from apps.social_posts.services.link_builder import build_instagram_tracked_url
+from apps.social_posts.services.politica_cadencia import (
+    exigir_cota_feed_ou_carrossel,
+    exigir_cota_story,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +26,9 @@ FRESHNESS_HOURS = 36
 
 
 def generate_feed_post(top: int = 1) -> InstagramPost:
+    # Tarefa 7.2: feed e carrossel dividem o mesmo teto diário ("1 feed-ou-
+    # carrossel/dia" — ver apps.social_posts.services.politica_cadencia).
+    exigir_cota_feed_ou_carrossel()
     offer = _get_offer_by_rank(top)
     asset = render_feed_asset(offer)
     return _create_post(
@@ -50,6 +58,10 @@ def generate_story_for_offer(offer: Offer) -> InstagramPost:
     if existing:
         return existing
 
+    # Cota checada só depois do "já existe" acima: reconsultar uma story já
+    # gerada não deve contar contra o teto do dia (achado C4 / Tarefa 7.2).
+    exigir_cota_story()
+
     asset = render_story_asset(offer)
     return _create_post(
         post_format=InstagramPost.Format.STORY,
@@ -61,6 +73,7 @@ def generate_story_for_offer(offer: Offer) -> InstagramPost:
 
 
 def generate_carousel(count: int = 5) -> InstagramPost:
+    exigir_cota_feed_ou_carrossel()
     offers = _get_ranked_offers(count)
     assets = render_carousel_assets(offers)
     return _create_post(
@@ -137,9 +150,9 @@ def _trigger_handoff(post: InstagramPost) -> None:
 def _get_ranked_offers(limit: int) -> list[Offer]:
     generated_offer_ids = _get_generated_offer_ids()
     cutoff = timezone.now() - timedelta(hours=FRESHNESS_HOURS)
-    offers = filter_blacklisted_offers(list(
+    candidates = filter_blacklisted_offers(list(
         Offer.objects
-        .select_related('marketplace')
+        .select_related('marketplace', 'category')
         .filter(is_active=True, slug__isnull=False)
         .filter(marketplace__code__in=['amazon', 'shopee', 'mercadolivre'])
         .exclude(slug='')
@@ -148,10 +161,41 @@ def _get_ranked_offers(limit: int) -> list[Offer]:
         .exclude(id__in=generated_offer_ids)
         .filter(created_at__gte=cutoff)
         .order_by('-discount_pct', 'current_price', 'title')[:limit * 3],
-    ))[:limit]
+    ))
+    offers = _apply_radar_mercado_priority(candidates)[:limit]
     if len(offers) < limit:
         raise ValueError(f'Ofertas publicáveis insuficientes: {len(offers)} de {limit}.')
     return offers
+
+
+def _apply_radar_mercado_priority(offers: list[Offer]) -> list[Offer]:
+    """Reordena `offers` priorizando categorias em alta no radar de vendas do
+    dia (Sprint 6, `apps.marketplaces.services.radar_mercado`), como pauta
+    preferencial de conteúdo (ex.: "top mais vendidos hoje").
+
+    Fallback silencioso: radar desligado (`SHOPEE_AFFILIATE_ENABLED=false`,
+    default de produção), sem cobertura ou qualquer erro na coleta mantêm a
+    ordem original (desconto/preço, já usada em `_get_ranked_offers`) — o
+    radar é só um sinal de bônus, nunca bloqueante para a geração de posts.
+    """
+    try:
+        radar: RadarMercadoResult = collect_radar_mercado()
+    except Exception as exc:  # noqa: BLE001 - radar nunca pode quebrar a geração de posts
+        logger.warning('post_generator.radar_mercado_falhou erro=%s', exc)
+        return offers
+
+    if not radar.enabled or not radar.category_scores:
+        return offers
+
+    def _escore(offer: Offer) -> float:
+        category = getattr(offer, 'category', None)
+        if not category:
+            return 0.0
+        return radar.category_scores.get(category.code, 0.0)
+
+    # sorted() é estável: ofertas sem sinal de radar (escore 0.0) mantêm a
+    # ordem original entre si (desconto/preço), só quem tem escore alto sobe.
+    return sorted(offers, key=_escore, reverse=True)
 
 
 def _get_offer_by_rank(rank: int) -> Offer:

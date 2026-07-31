@@ -3,6 +3,7 @@ from io import StringIO
 from unittest.mock import patch
 
 from django.core.management import call_command
+from django.core.management.base import CommandError
 from django.test import TestCase
 from django.utils import timezone
 
@@ -10,6 +11,7 @@ from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationDecisio
 from apps.distribution.models import Delivery, SocialChannel
 from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
+from apps.panel.models import Setting
 
 
 class RunBotAICurationTests(TestCase):
@@ -95,18 +97,23 @@ class RunBotAICurationTests(TestCase):
 
     def test_dry_run_ai_curation_prints_ready_batch_without_delivery(self):
         batch = self._create_ready_batch()
+        # `usa_fila_desacoplada` é True por padrão desde 2026-07-21; este teste
+        # cobre o consumo/print no mesmo ciclo, então precisa desligar
+        # explicitamente (o caso decoupled já é coberto em test_decoupled_queue.py).
+        Setting.objects.create(key='usa_fila_desacoplada', value='false')
         out = StringIO()
 
-        call_command(
-            'run_bot',
-            '--dry-run',
-            '--once',
-            '--skip-scraping',
-            '--channel',
-            'whatsapp_main',
-            '--ai-curation',
-            stdout=out,
-        )
+        with patch('apps.orchestration.management.commands.run_bot.call_command'):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                '--ai-curation',
+                stdout=out,
+            )
 
         text = out.getvalue()
         self.assertIn(f'Lote curado #{batch.id}', text)
@@ -118,26 +125,60 @@ class RunBotAICurationTests(TestCase):
         self.assertIsNone(batch.consumed_at)
         self.assertEqual(batch.status, CuratedBatch.Status.READY)
 
-    def test_ai_curation_without_ready_batch_pauses_without_selector_fallback(self):
+    def test_ai_curation_without_ready_batch_falls_back_to_legacy_selector(self):
         out = StringIO()
 
-        call_command(
-            'run_bot',
-            '--dry-run',
-            '--once',
-            '--skip-scraping',
-            '--channel',
-            'whatsapp_main',
-            '--ai-curation',
-            stdout=out,
-        )
+        with patch('apps.orchestration.management.commands.run_bot.call_command'):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                '--ai-curation',
+                stdout=out,
+            )
 
         text = out.getvalue()
         self.assertIn('Nenhum lote curado pronto', text)
-        self.assertNotIn('Título selector antigo', text)
+        self.assertIn('selector legado por lógica como segundo fallback', text)
+        self.assertIn('Ofertas selecionadas:', text)
+        self.assertIn('Título selector antigo', text)
+        self.assertNotIn('ai-curation-required: abortando ciclo', text)
         self.assertEqual(Delivery.objects.count(), 0)
 
-    def test_without_ai_curation_keeps_legacy_selector_flow(self):
+    def test_default_flow_prepares_ai_curation_then_falls_back_to_legacy_selector(self):
+        out = StringIO()
+
+        with patch('apps.orchestration.management.commands.run_bot.call_command') as prepare:
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        # Primária prepara com sucesso (call_command mockado); sem lote pronto cai no legado.
+        prepare.assert_called_once()
+        args = prepare.call_args.args
+        self.assertEqual(args[:3], ('prepare_ai_curation_batch', '--channel', 'whatsapp_main'))
+        self.assertIn('--runner', args)
+        self.assertIn('real', args)
+        self.assertIn('--profile', args)
+        self.assertIn('descontos-bot', args)
+        self.assertIn('--dry-run', args)
+        self.assertIn('Nenhum lote curado pronto', text)
+        self.assertIn('selector legado por lógica como segundo fallback', text)
+        self.assertIn('Ofertas selecionadas:', text)
+        self.assertIn('Título selector antigo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_legacy_selector_flag_keeps_old_selector_flow(self):
         out = StringIO()
 
         call_command(
@@ -147,6 +188,7 @@ class RunBotAICurationTests(TestCase):
             '--skip-scraping',
             '--channel',
             'whatsapp_main',
+            '--legacy-selector',
             stdout=out,
         )
 
@@ -159,20 +201,109 @@ class RunBotAICurationTests(TestCase):
     def test_ai_curation_required_pauses_without_selector_fallback(self):
         out = StringIO()
 
-        call_command(
-            'run_bot',
-            '--dry-run',
-            '--once',
-            '--skip-scraping',
-            '--channel',
-            'whatsapp_main',
-            '--ai-curation-required',
-            stdout=out,
-        )
+        with patch('apps.orchestration.management.commands.run_bot.call_command'):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                '--ai-curation-required',
+                stdout=out,
+            )
 
         text = out.getvalue()
         self.assertIn('Nenhum lote curado pronto', text)
         self.assertNotIn('Título selector antigo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_command_error_when_ai_required_aborts_without_legacy_fallback(self):
+        out = StringIO()
+
+        with patch(
+            'apps.orchestration.management.commands.run_bot.call_command',
+            side_effect=CommandError('runner falhou: sessão expirada'),
+        ):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                '--ai-curation-required',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        self.assertIn('Preparação IA falhou', text)
+        self.assertIn('Nenhum lote curado pronto', text)
+        self.assertIn('ai-curation-required: abortando ciclo', text)
+        self.assertNotIn('Ofertas selecionadas:', text)
+        self.assertNotIn('Título selector antigo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_primary_failure_retries_same_profile_with_fallback_model(self):
+        out = StringIO()
+
+        with patch(
+            'apps.orchestration.management.commands.run_bot.call_command',
+            side_effect=CommandError('runner falhou: timeout'),
+        ) as prepare:
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                '--ai-curation',
+                stdout=out,
+            )
+
+        # Primária (modelo padrão) falha e o fallback tenta o MESMO profile com -m glm-5.2.
+        self.assertEqual(prepare.call_count, 2)
+        primary_args = prepare.call_args_list[0].args
+        fallback_args = prepare.call_args_list[1].args
+        self.assertIn('--profile', primary_args)
+        self.assertIn('descontos-bot', primary_args)
+        self.assertNotIn('--model', primary_args)
+        self.assertIn('--profile', fallback_args)
+        self.assertIn('descontos-bot', fallback_args)
+        self.assertIn('--model', fallback_args)
+        self.assertEqual(fallback_args[fallback_args.index('--model') + 1], 'glm-5.2')
+        # Ambas falham → cai no selector legado.
+        text = out.getvalue()
+        self.assertIn('selector legado por lógica como segundo fallback', text)
+        self.assertIn('Título selector antigo', text)
+        self.assertEqual(Delivery.objects.count(), 0)
+
+    def test_prepare_command_error_with_ready_batch_still_consumes_batch(self):
+        batch = self._create_ready_batch()
+        # Ver comentário em test_dry_run_ai_curation_prints_ready_batch_without_delivery.
+        Setting.objects.create(key='usa_fila_desacoplada', value='false')
+        out = StringIO()
+
+        with patch(
+            'apps.orchestration.management.commands.run_bot.call_command',
+            side_effect=CommandError('runner falhou: sessão expirada'),
+        ):
+            call_command(
+                'run_bot',
+                '--dry-run',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_main',
+                stdout=out,
+            )
+
+        text = out.getvalue()
+        self.assertIn('Preparação IA falhou', text)
+        self.assertIn(f'Lote curado #{batch.id}', text)
+        self.assertIn('Título curado pela IA', text)
+        self.assertNotIn('ai-curation-required: abortando ciclo', text)
         self.assertEqual(Delivery.objects.count(), 0)
 
     def test_prepare_ai_curation_invokes_prepare_command_before_reading_batch(self):

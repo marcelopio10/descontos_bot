@@ -148,12 +148,12 @@ async function handleWebhook(req, res, observer) {
 
 function isMessagesUpsertEvent(body) {
   const event = body?.event;
-  return !event || event === 'messages.upsert' || event === 'MESSAGES_UPSERT';
+  return event === 'messages.upsert' || event === 'MESSAGES_UPSERT';
 }
 
 function isObserverInstance(body, expectedInstance) {
   const instance = body?.instance || body?.instanceName || body?.data?.instance || body?.data?.instanceName;
-  return !instance || instance === expectedInstance;
+  return instance === expectedInstance;
 }
 
 async function readJson(req) {

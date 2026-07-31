@@ -342,7 +342,7 @@ test('webhook normaliza, deduplica e collect preserva schema observer', async ()
   }
 });
 
-test('webhook ignora eventos e instâncias fora do escopo observer', async () => {
+test('webhook falha fechado para envelope fora do observer, privados e mensagens próprias', async () => {
   const base = {
     data: {
       key: { remoteJid: '120363000000001@g.us', id: 'IGNORADO', participant: '5511999999999@s.whatsapp.net' },
@@ -350,10 +350,31 @@ test('webhook ignora eventos e instâncias fora do escopo observer', async () =>
       message: { conversation: 'não deve entrar' },
     },
   };
-  assert.deepEqual(await (await post('/webhook/whatsapp', { ...base, event: 'SEND_MESSAGE', instance: 'descontos_observer' })).json(), { accepted: true, recorded: 0 });
-  assert.deepEqual(await (await post('/webhook/whatsapp', { ...base, event: 'messages.upsert', instance: 'outra_instancia' })).json(), { accepted: true, recorded: 0 });
+  const ignoredPayloads = [
+    { ...base, event: 'SEND_MESSAGE', instance: 'descontos_observer' },
+    { ...base, event: 'messages.upsert', instance: 'outra_instancia' },
+    { ...base, instance: 'descontos_observer' },
+    { ...base, event: 'messages.upsert' },
+    {
+      ...base,
+      event: 'messages.upsert',
+      instance: 'descontos_observer',
+      data: { ...base.data, key: { ...base.data.key, id: 'OWN-FIXTURE', fromMe: true } },
+    },
+    {
+      ...base,
+      event: 'messages.upsert',
+      instance: 'descontos_observer',
+      data: { ...base.data, key: { ...base.data.key, id: 'PRIVATE-FIXTURE', remoteJid: 'private-fixture@s.whatsapp.net' } },
+    },
+  ];
+  for (const payload of ignoredPayloads) {
+    assert.deepEqual(await (await post('/webhook/whatsapp', payload)).json(), { accepted: true, recorded: 0 });
+  }
   const body = await (await post('/observer/collect', {})).json();
-  assert.equal(body.messages.some((message) => message.message_id === 'IGNORADO'), false);
+  for (const id of ['IGNORADO', 'OWN-FIXTURE', 'PRIVATE-FIXTURE']) {
+    assert.equal(body.messages.some((message) => message.message_id === id), false);
+  }
 });
 
 test('GET /observer/groups retorna interseção entre allowlist e mapa', async () => {

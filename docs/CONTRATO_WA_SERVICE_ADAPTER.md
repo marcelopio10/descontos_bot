@@ -67,6 +67,13 @@ Usado por `apps/distribution/services/whatsapp_client.py`.
 - Se `image_url` existe, envia imagem por URL com `caption=message`.
 - Sem `image_url`, envia texto.
 
+### Política de envio por instância na Evolution
+
+- `descontos_observer` é estritamente somente leitura e continua dedicado à coleta.
+- Destinos com `sender_instance: "observer"` no mapa são rejeitados com HTTP 403 antes de qualquer chamada à Evolution API.
+- A resposta orienta migrar o destino para `descontos_envio`; no mapa, use `sender_instance: "envio"` ou omita o campo.
+- A mesma restrição se aplica aos endpoints `/send-message` e `/send`.
+
 ### Mapeamento Evolution API
 
 - Texto: `POST /message/sendText/{EVOLUTION_INSTANCIA_ENVIO}`

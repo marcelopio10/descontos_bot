@@ -1,8 +1,28 @@
 {
   "version": "1.1",
-  "generated_at": "2026-07-30T19:10:55.702599+00:00",
+  "generated_at": "2026-08-02T11:05:01.967069+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 8705,
+      "title": "Ventosa De Silicone Dupla Face Suporte De Telefone Capa Adesivo Para selfies Streaming De Vídeo",
+      "current_price": "3.29",
+      "original_price": "54.83",
+      "discount_pct": "94.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134301-7rdvu-mcrmnh6av13o50",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/6pzZhrzpfl?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8705"
+    },
+    {
+      "id": 10139,
+      "title": "Conjunto De Retoque De Cabelo 2 Em 1 , Cobertura Instantânea De Cinzas E Linhas Finas Perfeitas , À Prova D'água , De Lo",
+      "current_price": "6.66",
+      "original_price": "74.00",
+      "discount_pct": "91.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134301-7rdy1-mdo3rbw5te1h18",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/7VFGV6atN2?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10139"
+    },
     {
       "id": 6798,
       "title": "Jogo de Lençol 400 fios toque Suave e Acetinado Berço Solteiro Casal Queen King 02 e 03 Peças",
@@ -11,7 +31,7 @@
       "discount_pct": "91.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m82atd2bm5f53a",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/AAFym64vI5?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6798"
+      "tracked_url": "https://s.shopee.com.br/111ml94IqM?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6798"
     },
     {
       "id": 7594,
@@ -19,9 +39,9 @@
       "current_price": "11.69",
       "original_price": "83.50",
       "discount_pct": "86.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134301-8258r-mqr0qmm26qz28d",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8258k-mre5tgwen3lz1b",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/1qaqqnVqNg?utm_source=instagram&utm_medium=bio&utm_campaign=offer_7594"
+      "tracked_url": "https://s.shopee.com.br/7VFGV6fMQN?utm_source=instagram&utm_medium=bio&utm_campaign=offer_7594"
     },
     {
       "id": 6836,
@@ -31,27 +51,7 @@
       "discount_pct": "86.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820ly-mnb7dwwwmo748e",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/50XsccBCBB?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
-    },
-    {
-      "id": 10006,
-      "title": "Hoygi Retinal Eye Cream Suave Nutritivo Firmador Hidratante Cuidados Com Os Olhos",
-      "current_price": "7.88",
-      "original_price": "46.35",
-      "discount_pct": "83.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82619-mjl7s667d7uq27",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/6pzWnz8gWu?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10006"
-    },
-    {
-      "id": 8366,
-      "title": "Kit 10 Panos De Limpeza Microfibra alta absorção Multiuso",
-      "current_price": "16.49",
-      "original_price": "97.00",
-      "discount_pct": "83.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rffl-m3zbdqna4dhzc0",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/8KoKajGRJm?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8366"
+      "tracked_url": "https://s.shopee.com.br/111ml9qhTv?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
     }
   ]
 }

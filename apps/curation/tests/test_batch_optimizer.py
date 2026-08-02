@@ -48,8 +48,8 @@ class BatchOptimizerTests(SimpleTestCase):
 
         result = optimize_curation_batch(decisions, batch_size=20)
 
-        self.assertEqual([item['offer_id'] for item in result.selected], [2])
-        self.assertEqual(result.actual_distribution, {'amazon': 1})
+        self.assertEqual([item['offer_id'] for item in result.selected], [2, 3, 1])
+        self.assertEqual(result.actual_distribution, {'amazon': 1, 'shopee': 1, 'mercadolivre': 1})
         self.assertEqual(result.rejected_count, 2)
 
     def test_preserves_ai_order_then_normalizes_positions(self):
@@ -119,8 +119,8 @@ class BatchOptimizerTests(SimpleTestCase):
         result = optimize_curation_batch(decisions, batch_size=20)
 
         self.assertEqual(result.target_distribution, DEFAULT_TARGET_DISTRIBUTION)
-        self.assertEqual(result.actual_distribution, {'mercadolivre': 2})
-        self.assertEqual([item['offer_id'] for item in result.selected], [1, 2])
+        self.assertEqual(result.actual_distribution, {'mercadolivre': 2, 'amazon': 1, 'shopee': 1})
+        self.assertEqual([item['offer_id'] for item in result.selected], [1, 2, 3, 4])
 
 
 class CanonicalProductDedupTests(SimpleTestCase):

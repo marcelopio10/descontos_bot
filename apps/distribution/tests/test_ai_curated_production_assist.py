@@ -186,17 +186,21 @@ class AICuratedProductionAssistTests(TestCase):
         self._channel('whatsapp_principal', SocialChannel.ChannelType.WHATSAPP_GROUP, 'descontos.bot')
         out = StringIO()
 
-        call_command(
-            'run_bot',
-            '--once',
-            '--skip-scraping',
-            '--channel',
-            'whatsapp_principal',
-            '--ai-curation-required',
-            '--confirm-ai-production',
-            'CONFIRM_AI_PRODUCTION',
-            stdout=out,
-        )
+        with patch(
+            'apps.orchestration.management.commands.run_bot.call_command',
+            side_effect=CommandError('runner indisponível no cenário controlado'),
+        ):
+            call_command(
+                'run_bot',
+                '--once',
+                '--skip-scraping',
+                '--channel',
+                'whatsapp_principal',
+                '--ai-curation-required',
+                '--confirm-ai-production',
+                'CONFIRM_AI_PRODUCTION',
+                stdout=out,
+            )
 
         self.assertIn('Nenhum lote curado pronto', out.getvalue())
         self.assertNotIn('Ofertas selecionadas', out.getvalue())

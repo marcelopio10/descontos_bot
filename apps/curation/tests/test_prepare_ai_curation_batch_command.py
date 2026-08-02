@@ -6,7 +6,7 @@ from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 from django.core.management import call_command
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.utils import timezone
 
 from apps.curation.management.commands.prepare_ai_curation_batch import _balanced_marketplace_candidates
@@ -177,6 +177,7 @@ class PrepareAICurationBatchCommandTests(TestCase):
         self.assertNotIn('example.com', serialized)
         self.assertNotIn('Texto bruto', serialized)
 
+    @override_settings(SHOPEE_AFFILIATE_ENABLED=False)
     def test_market_radar_is_neutral_and_present_in_payload_when_shopee_affiliate_disabled(self):
         """Sprint 6 / Tarefa 6.1 (achado P7): com SHOPEE_AFFILIATE_ENABLED
         desligado (estado real de produção hoje), o payload da IA ainda tem o

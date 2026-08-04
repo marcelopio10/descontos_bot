@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-08-04T11:05:23.362951+00:00",
+  "generated_at": "2026-08-04T13:32:00.944673+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,6 +14,16 @@
       "tracked_url": "https://s.shopee.com.br/5ArNQGrG8P?utm_source=instagram&utm_medium=bio&utm_campaign=offer_8705"
     },
     {
+      "id": 10139,
+      "title": "Conjunto De Retoque De Cabelo 2 Em 1 , Cobertura Instantânea De Cinzas E Linhas Finas Perfeitas , À Prova D'água , De Lo",
+      "current_price": "6.66",
+      "original_price": "74.00",
+      "discount_pct": "91.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134301-7rdy1-mdo3rbw5te1h18",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/2gA5RVO4X1?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10139"
+    },
+    {
       "id": 6798,
       "title": "Jogo de Lençol 400 fios toque Suave e Acetinado Berço Solteiro Casal Queen King 02 e 03 Peças",
       "current_price": "14.25",
@@ -21,7 +31,7 @@
       "discount_pct": "91.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m82atd2bm5f53a",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/Lm7fNnf11?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6798"
+      "tracked_url": "https://s.shopee.com.br/6VMo0XEDL6?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6798"
     },
     {
       "id": 7594,
@@ -42,16 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820ly-mnb7dwwwmo748e",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/4Ayq3zsiCL?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
-    },
-    {
-      "id": 10006,
-      "title": "Hoygi Retinal Eye Cream Suave Nutritivo Firmador Hidratante Cuidados Com Os Olhos",
-      "current_price": "14.24",
-      "original_price": "83.76",
-      "discount_pct": "83.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82619-mjl7s667d7uq27",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/6fgB2anJrM?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10006"
     }
   ]
 }

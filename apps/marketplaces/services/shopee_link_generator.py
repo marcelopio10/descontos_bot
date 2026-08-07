@@ -25,7 +25,7 @@ SUBID_OWNER = 'descontosbot'
 MAX_SUBIDS = 5
 
 GENERATE_SHORT_LINK_QUERY = """
-mutation generateShortLink($input: GenerateShortLinkInput!) {
+mutation generateShortLink($input: ShortLinkInput!) {
   generateShortLink(input: $input) {
     shortLink
   }

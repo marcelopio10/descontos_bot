@@ -19,6 +19,11 @@ class ObserverContextTests(TestCase):
             urls=['https://example.com/oferta'],
             has_image=True,
             parsed_marketplace='amazon',
+            parsed_price='47.84',
+            parsed_original_price='139.00',
+            parsed_coupon='OFICIALMODA',
+            marca='nike',
+            scraper_hints=['moda'],
             editorial_labels=['pix', 'cupom'],
         )
         MarketIntelDailyReport.objects.create(
@@ -39,6 +44,11 @@ class ObserverContextTests(TestCase):
         self.assertEqual(context['messages_analyzed'], 1)
         self.assertEqual(context['marketplace_counts'], {'amazon': 1})
         self.assertEqual(context['editorial_label_counts'], {'pix': 1, 'cupom': 1})
+        self.assertEqual(context['opportunity_radar']['brands'], {'nike': 1})
+        self.assertEqual(context['opportunity_radar']['coupons'], {'OFICIALMODA': 1})
+        self.assertEqual(context['opportunity_radar']['categories'], {'moda': 1})
+        self.assertEqual(context['opportunity_radar']['price_bands'], {'0_50': 1})
+        self.assertEqual(context['opportunity_radar']['opportunities'][0]['kind'], 'brand')
         serialized = str(context)
         self.assertNotIn('123@g.us', serialized)
         self.assertNotIn('secret-sender', serialized)

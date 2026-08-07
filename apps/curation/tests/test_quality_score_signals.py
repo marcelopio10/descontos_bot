@@ -93,6 +93,29 @@ class QualityScoreSignalsTests(TestCase):
             quality_score(offer),
         )
 
+    def test_observer_opportunity_radar_boosts_matching_brand_and_price_band(self):
+        offer = self._make_offer()
+        offer.title = 'Nike Air Max Oferta'
+        offer.normalized_title = 'nike air max oferta'
+        offer.current_price = Decimal('47.84')
+        offer.save(update_fields=['title', 'normalized_title', 'current_price'])
+        observer_context = {
+            'marketplace_counts': {},
+            'editorial_label_counts': {},
+            'opportunity_radar': {
+                'brands': {'nike': 10},
+                'price_bands': {'0_50': 10},
+                'categories': {},
+                'coupons': {},
+                'marketplaces': {},
+            },
+        }
+
+        breakdown = quality_score_breakdown(offer, observer_context=observer_context)
+
+        self.assertIn('observer_bonus', breakdown.multipliers)
+        self.assertGreater(breakdown.multipliers['observer_bonus'], 1.0)
+
     def test_observer_bonus_when_discount_tier_label_is_top_observed(self):
         offer = self._make_offer(discount_pct='75.00')  # >=70 -> desconto_70/50/30
         observer_context = {

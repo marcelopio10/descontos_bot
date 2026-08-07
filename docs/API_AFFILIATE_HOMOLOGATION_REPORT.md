@@ -43,9 +43,12 @@ Correção aplicada:
 
 - schema atual exige `ShortLinkInput`;
 - código usava `GenerateShortLinkInput`;
+- SubIDs com `_` ou `-` foram rejeitados pela API;
+- gerador agora sanitiza SubIDs para caracteres alfanuméricos;
+- chamada real com URL de produto existente e SubIDs sanitizados retornou short link;
 - alteração aplicada em `apps/marketplaces/services/shopee_link_generator.py`;
-- testes específicos: 6 passaram;
-- geração de short link com URL fictícia foi recusada por `invalid sub id`, após atingir validação de negócio.
+- testes específicos: 7 passaram;
+- nenhuma oferta foi publicada.
 
 Arquivos:
 

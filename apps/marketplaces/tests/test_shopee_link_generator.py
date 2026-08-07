@@ -25,7 +25,13 @@ class LinkGeneratorTests(SimpleTestCase):
     def test_build_sub_ids_order(self):
         self.assertEqual(
             build_sub_ids('telegram', 'achadinhos', 'eletronicos', '2026-06-14'),
-            ['descontosbot', 'telegram', 'achadinhos', 'eletronicos', '2026-06-14'],
+            ['descontosbot', 'telegram', 'achadinhos', 'eletronicos', '20260614'],
+        )
+
+    def test_build_sub_ids_removes_invalid_shopee_characters(self):
+        self.assertEqual(
+            build_sub_ids('wa_principal', 'api_test', 'moda-fem', 'batch/1'),
+            ['descontosbot', 'waprincipal', 'apitest', 'modafem', 'batch1'],
         )
 
     def test_resolve_prefers_offer_link(self):

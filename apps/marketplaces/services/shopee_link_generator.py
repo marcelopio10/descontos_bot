@@ -13,6 +13,7 @@ SubIds (rastreamento cruzado com conversionReport):
 """
 
 import logging
+import re
 
 from apps.marketplaces.services.shopee_affiliate_client import (
     ShopeeAffiliateClient,
@@ -40,7 +41,17 @@ def build_sub_ids(
     batch: str = '',
 ) -> list[str]:
     """Monta a lista de subIds na ordem oficial (sempre 5 posições)."""
-    sub_ids = [SUBID_OWNER, channel_code or 'site', campaign or '', category or '', batch or '']
+    def sanitize(value: str, fallback: str = 'na') -> str:
+        cleaned = re.sub(r'[^A-Za-z0-9]+', '', str(value or ''))
+        return cleaned or fallback
+
+    sub_ids = [
+        sanitize(SUBID_OWNER),
+        sanitize(channel_code, 'site'),
+        sanitize(campaign),
+        sanitize(category),
+        sanitize(batch),
+    ]
     return sub_ids[:MAX_SUBIDS]
 
 

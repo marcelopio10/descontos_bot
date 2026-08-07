@@ -140,3 +140,21 @@ class WhatsAppDeliveryDeduplicationTests(TestCase):
         self.assertEqual(client.status_calls, 0)
         self.assertEqual(client.send_calls, 0)
         self.assertEqual(result.delivery.external_message_id, 'MSG-OLD')
+
+    @patch('apps.distribution.services.delivery.is_distribution_silenced', return_value=False)
+    def test_sent_delivery_can_reenter_after_material_price_improvement(self, _silenced):
+        Delivery.objects.create(
+            offer=self.offer,
+            social_channel=self.channel,
+            message='Oferta anterior por R$ 100,00',
+            delivery_status=Delivery.DeliveryStatus.SENT,
+            external_message_id='MSG-OLD',
+            sent_at=timezone.now() - timezone.timedelta(days=2),
+        )
+        client = FakeWhatsAppClient()
+
+        result = deliver_offer_to_channel(self.offer, self.channel, client=client)
+
+        self.assertTrue(result.sent)
+        self.assertEqual(client.send_calls, 1)
+        self.assertNotEqual(result.delivery.external_message_id, 'MSG-OLD')

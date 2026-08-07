@@ -18,6 +18,7 @@ from apps.curation.services.blacklist import (
 from apps.curation.services.quality_score import quality_score_breakdown
 from apps.curation.services.settings import get_decimal_setting, get_integer_setting
 from apps.distribution.models import Delivery, SocialChannel
+from apps.distribution.services.delivery import _should_republish_after_improvement
 from apps.offers.models import Category, Offer
 from apps.offers.services.freshness import get_freshness_cutoff
 
@@ -297,10 +298,15 @@ def _resolve_category_quotas(config: SelectionConfig) -> dict[str, int]:
 
 
 def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySet[Offer]:
-    sent_offer_ids = Delivery.objects.filter(
+    sent_deliveries = Delivery.objects.select_related('offer').filter(
         social_channel=channel,
         delivery_status=Delivery.DeliveryStatus.SENT,
-    ).values('offer_id')
+    )
+    blocked_sent_offer_ids = [
+        delivery.offer_id
+        for delivery in sent_deliveries
+        if not _should_republish_after_improvement(delivery, delivery.offer, '')
+    ]
 
     # Achado 2026-07-22: sem isso, uma oferta com envio pendente num lote ainda
     # ativo (curado mas não consumido) continuava elegível — cada novo ciclo de
@@ -327,7 +333,7 @@ def _eligible_offers(channel: SocialChannel, config: SelectionConfig) -> QuerySe
             discount_pct__gte=config.min_discount_percentage,
             last_seen_at__gte=get_freshness_cutoff(),
         )
-        .exclude(id__in=sent_offer_ids)
+        .exclude(id__in=blocked_sent_offer_ids)
         .exclude(id__in=pending_offer_ids)
         .order_by('-discount_pct', '-current_price', 'title')
     )

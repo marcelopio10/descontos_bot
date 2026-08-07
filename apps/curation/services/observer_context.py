@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import timedelta
+from decimal import Decimal
 from typing import Any
 
 from django.db.models import Count
@@ -21,12 +22,14 @@ def build_observer_context(*, lookback_hours: int = 24, limit: int = 20) -> dict
         .order_by('-total')[:limit]
     )
     labels = _top_json_list_values(messages, 'editorial_labels', limit=limit)
+    opportunity_radar = _build_opportunity_radar(messages, limit=limit)
     recent_report = MarketIntelDailyReport.objects.order_by('-date').first()
     context = {
         'lookback_hours': lookback_hours,
         'messages_analyzed': messages.count(),
         'marketplace_counts': marketplace_counts,
         'editorial_label_counts': labels,
+        'opportunity_radar': opportunity_radar,
         'latest_report': _sanitize_latest_report(recent_report),
     }
     return assert_sanitized_context(context)
@@ -61,6 +64,90 @@ def _top_json_list_values(queryset, field: str, *, limit: int) -> dict[str, int]
                 continue
             counts[key] = counts.get(key, 0) + 1
     return dict(sorted(counts.items(), key=lambda item: item[1], reverse=True)[:limit])
+
+
+def _build_opportunity_radar(queryset, *, limit: int) -> dict[str, Any]:
+    """Converte observações em sinais de busca, sem copiar texto/links.
+
+    O radar é deliberadamente agregado: marca, cupom, categoria, marketplace e
+    faixa de preço. Ele serve para orientar captura/curadoria, não para afirmar
+    conversão ou equivalência entre ofertas.
+    """
+    counts: dict[str, dict[str, int]] = {
+        'brands': {},
+        'coupons': {},
+        'categories': {},
+        'marketplaces': {},
+        'price_bands': {},
+    }
+    for row in queryset.values(
+        'marca',
+        'parsed_coupon',
+        'parsed_marketplace',
+        'parsed_price',
+        'scraper_hints',
+    ):
+        _increment(counts['brands'], row.get('marca'))
+        _increment(counts['coupons'], row.get('parsed_coupon'))
+        _increment(counts['marketplaces'], row.get('parsed_marketplace'))
+        hints = row.get('scraper_hints') or []
+        if isinstance(hints, list):
+            _increment(counts['categories'], hints[0] if hints else None)
+        _increment(counts['price_bands'], _price_band(row.get('parsed_price')))
+
+    for key in counts:
+        counts[key] = _rank_counts(counts[key], limit=limit)
+
+    opportunities: list[dict[str, Any]] = []
+    kind_order = ('brands', 'coupons', 'categories', 'price_bands', 'marketplaces')
+    kind_labels = {
+        'brands': 'brand',
+        'coupons': 'coupon',
+        'categories': 'category',
+        'price_bands': 'price_band',
+        'marketplaces': 'marketplace',
+    }
+    for bucket in kind_order:
+        for key, count in counts[bucket].items():
+            opportunities.append({'kind': kind_labels[bucket], 'key': key, 'count': count})
+    opportunities.sort(key=lambda item: (-item['count'], kind_order.index(_bucket_for_kind(item['kind'])), item['key']))
+    return {**counts, 'opportunities': opportunities[:limit]}
+
+
+def _bucket_for_kind(kind: str) -> str:
+    return {
+        'brand': 'brands',
+        'coupon': 'coupons',
+        'category': 'categories',
+        'price_band': 'price_bands',
+        'marketplace': 'marketplaces',
+    }[kind]
+
+
+def _increment(bucket: dict[str, int], value: Any) -> None:
+    key = str(value or '').strip()
+    if key:
+        bucket[key] = bucket.get(key, 0) + 1
+
+
+def _rank_counts(counts: dict[str, int], *, limit: int) -> dict[str, int]:
+    return dict(sorted(counts.items(), key=lambda item: (-item[1], item[0].lower()))[:limit])
+
+
+def _price_band(value: Any) -> str:
+    try:
+        price = Decimal(str(value))
+    except Exception:
+        return ''
+    if price < 50:
+        return '0_50'
+    if price < 100:
+        return '50_100'
+    if price < 250:
+        return '100_250'
+    if price < 500:
+        return '250_500'
+    return '500_plus'
 
 
 def _drop_sensitive(value: Any) -> Any:

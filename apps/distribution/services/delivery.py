@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 from datetime import timedelta
+from decimal import Decimal, InvalidOperation
+import re
 
 from django.db import IntegrityError, transaction
 from django.utils import timezone
@@ -23,6 +25,9 @@ from apps.distribution.services.whatsapp_rate_limiter import (
 from apps.offers.models import Offer
 
 PENDING_STALE_AFTER = timedelta(minutes=15)
+REPUBLISH_COOLDOWN = timedelta(hours=12)
+REPUBLISH_MIN_PRICE_DROP = Decimal('0.10')
+PRICE_RE = re.compile(r'R\$\s*([0-9.]+,[0-9]{2}|[0-9]+(?:\.[0-9]{2})?)', re.IGNORECASE)
 
 
 class SessaoIndisponivelError(Exception):
@@ -263,6 +268,17 @@ def _reserve_delivery_for_send(
             )
             if delivery:
                 if delivery.delivery_status == Delivery.DeliveryStatus.SENT:
+                    if _should_republish_after_improvement(delivery, offer, message):
+                        delivery.message = message
+                        delivery.delivery_status = Delivery.DeliveryStatus.PENDING
+                        delivery.external_message_id = ''
+                        delivery.error_message = 'Reentrada por melhoria comercial.'
+                        delivery.sent_at = None
+                        delivery.save(update_fields=[
+                            'message', 'delivery_status', 'external_message_id',
+                            'error_message', 'sent_at', 'updated_at',
+                        ])
+                        return delivery, True
                     return delivery, False
                 if (
                     delivery.delivery_status == Delivery.DeliveryStatus.PENDING
@@ -300,6 +316,29 @@ def _reserve_delivery_for_send(
         if delivery.delivery_status == Delivery.DeliveryStatus.PENDING:
             return delivery, False
         return delivery, delivery.delivery_status != Delivery.DeliveryStatus.SENT
+
+
+def _should_republish_after_improvement(delivery: Delivery, offer: Offer, message: str) -> bool:
+    """Permite uma nova publicação somente por melhoria material e com cooldown."""
+    if not delivery.sent_at or timezone.now() - delivery.sent_at < REPUBLISH_COOLDOWN:
+        return False
+    previous_price = _last_message_price(delivery.message)
+    current_price = _last_message_price(message) or offer.current_price
+    if previous_price is None or current_price is None or previous_price <= 0:
+        return False
+    drop = (previous_price - Decimal(current_price)) / previous_price
+    return drop >= REPUBLISH_MIN_PRICE_DROP
+
+
+def _last_message_price(message: str) -> Decimal | None:
+    matches = PRICE_RE.findall(message or '')
+    if not matches:
+        return None
+    raw = matches[-1].replace('.', '').replace(',', '.')
+    try:
+        return Decimal(raw)
+    except (InvalidOperation, ValueError):
+        return None
 
 
 def _save_delivery(

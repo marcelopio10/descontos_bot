@@ -192,6 +192,28 @@ class SafetyBlacklistTests(TestCase):
 
         self.assertIn(sent_elsewhere, selected)
 
+    def test_selector_allows_reentry_after_material_price_improvement(self):
+        improved = self._offer('Cafeteira Elétrica Inox 30 Xícaras Oferta Especial')
+        Delivery.objects.create(
+            offer=improved,
+            social_channel=self.channel,
+            message='Oferta anterior por R$ 100,00',
+            delivery_status=Delivery.DeliveryStatus.SENT,
+            sent_at=timezone.now() - timezone.timedelta(days=2),
+        )
+        config = SelectionConfig(
+            global_limit=5,
+            marketplace_limit=5,
+            min_discount_percentage=Decimal('20.00'),
+            min_quality_score=0,
+            priority_quality_score=0,
+            exposure_quota_enabled=False,
+        )
+
+        selected = select_offers_for_channel(self.channel, config=config)
+
+        self.assertIn(improved, selected)
+
     def test_selector_allows_offer_failed_in_channel_even_if_sent_elsewhere(self):
         retriable = self._offer('Relógio Led Digital Esportivo Promoção Especial')
         other_channel = SocialChannel.objects.create(

@@ -85,6 +85,7 @@ BESTSELLER_LABELS: frozenset[str] = frozenset(
 OBSERVER_BONUS_TOP_N = 3
 OBSERVER_MARKETPLACE_BONUS = 1.05
 OBSERVER_DISCOUNT_LABEL_BONUS = 1.03
+OBSERVER_OPPORTUNITY_BONUS = 1.03
 
 # Sprint 6 / Tarefa 6.1 (achado P7): bônus modesto quando a categoria da oferta
 # aparece bem posicionada no radar de vendas Shopee do dia
@@ -391,6 +392,22 @@ def _observer_bonus_multiplier(offer: 'Offer', observer_context: dict[str, Any] 
         if offer_labels & _top_n_keys(label_counts, OBSERVER_BONUS_TOP_N):
             bonus *= OBSERVER_DISCOUNT_LABEL_BONUS
 
+    opportunity_radar = observer_context.get('opportunity_radar') or {}
+    if opportunity_radar:
+        title = (getattr(offer, 'normalized_title', '') or getattr(offer, 'title', '') or '').lower()
+        brands = opportunity_radar.get('brands') or {}
+        if any(str(brand).lower() in title for brand in _top_n_keys(brands, OBSERVER_BONUS_TOP_N)):
+            bonus *= OBSERVER_OPPORTUNITY_BONUS
+
+        categories = opportunity_radar.get('categories') or {}
+        category_code = (getattr(offer.category, 'code', '') or '').lower() if getattr(offer, 'category_id', None) else ''
+        if category_code and any(str(category).lower() in category_code for category in _top_n_keys(categories, OBSERVER_BONUS_TOP_N)):
+            bonus *= OBSERVER_OPPORTUNITY_BONUS
+
+        price_bands = opportunity_radar.get('price_bands') or {}
+        if _price_band_key(getattr(offer, 'current_price', None)) in _top_n_keys(price_bands, OBSERVER_BONUS_TOP_N):
+            bonus *= OBSERVER_OPPORTUNITY_BONUS
+
     return bonus
 
 
@@ -442,6 +459,21 @@ def _discount_tier_labels(discount_pct: Decimal | None) -> set[str]:
     if pct >= Decimal('30'):
         labels.add('desconto_30')
     return labels
+
+
+def _price_band_key(value: Decimal | None) -> str:
+    if value is None:
+        return ''
+    price = Decimal(value)
+    if price < 50:
+        return '0_50'
+    if price < 100:
+        return '50_100'
+    if price < 250:
+        return '100_250'
+    if price < 500:
+        return '250_500'
+    return '500_plus'
 
 
 def _score_recency(last_seen_at) -> float:

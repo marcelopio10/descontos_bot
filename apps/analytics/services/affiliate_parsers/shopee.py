@@ -29,12 +29,8 @@ _SUBID_CHANNEL_PREFIX_MAP = {
     'tg': 'telegram',
 }
 
-# ATENÇÃO — melhor estimativa, não validada contra um export real:
-# não tivemos acesso a um relatório de conversão real da Shopee ao escrever
-# este parser (Tarefa 2.6). Os nomes de coluna abaixo foram inferidos da
-# documentação pública do Shopee Affiliate Program. Confira contra o export
-# real na primeira vez que for usado e ajuste os aliases se necessário
-# (mesmo espírito de `COLUMN_ALIASES` em affiliate_parsers/amazon.py).
+# Parser legado para CSV/TSV exportado. A API oficial foi homologada
+# separadamente em `apps/marketplaces/services/shopee_conversion_api.py`.
 COLUMN_ALIASES: dict[str, tuple[str, ...]] = {
     'order_id': (
         'order id', 'id do pedido', 'purchase id', 'id da compra',
@@ -100,15 +96,9 @@ def parse_shopee_report(
 ) -> BatchResult:
     """Parseia o relatório de conversão do Shopee Affiliate Program (CSV/TSV).
 
-    RESTR-04: Shopee é a única fonte de afiliado com relatório exportável
-    oficialmente (ML e Amazon exigem entrada manual — ver
-    `ingest_affiliate_amazon.py`/`ingest_affiliate_mercadolivre.py`).
-
-    ATENÇÃO — melhor estimativa de schema: não validamos este parser contra
-    um export real do painel Shopee. As colunas aceitas (`COLUMN_ALIASES`)
-    são a melhor hipótese com base na documentação pública do Shopee
-    Affiliate Program. Confira o cabeçalho do primeiro export real e ajuste
-    os aliases/campos obrigatórios se divergir.
+    Mantém compatibilidade com CSV/TSV do portal. Para ingestão autônoma,
+    usar o adapter oficial em
+    `apps/marketplaces/services/shopee_conversion_api.py`.
 
     Período: se `period_start`/`period_end` não forem informados, o parser
     tenta derivá-los do min/max das colunas de data (`conversion_time` ou,

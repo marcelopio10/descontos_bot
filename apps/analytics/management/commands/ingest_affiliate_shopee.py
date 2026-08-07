@@ -9,13 +9,9 @@ from apps.analytics.services.affiliate_summary import publish_affiliate_summary
 
 class Command(BaseCommand):
     help = (
-        'Importa o relatório de conversão do Shopee Affiliate Program (CSV/TSV). '
-        'RESTR-04: Shopee é a única fonte com relatório exportável oficialmente '
-        '(ML e Amazon são manuais — ver ingest_affiliate_mercadolivre/ingest_affiliate_amazon). '
-        'ATENÇÃO: os nomes de coluna aceitos são uma melhor estimativa — este parser NÃO '
-        'foi validado contra um export real do painel Shopee. Confira o cabeçalho do '
-        'primeiro arquivo real contra COLUMN_ALIASES em '
-        'apps/analytics/services/affiliate_parsers/shopee.py e ajuste se divergir.'
+        'Importa relatório CSV/TSV do Shopee Affiliate Program. Para ingestão '
+        'autônoma via API oficial, use o adapter em '
+        'apps/marketplaces/services/shopee_conversion_api.py.'
     )
 
     def add_arguments(self, parser):

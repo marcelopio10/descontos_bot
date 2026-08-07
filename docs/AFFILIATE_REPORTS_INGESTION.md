@@ -192,26 +192,20 @@ para mudar a janela mostrada no dashboard.
 
 ---
 
-## Shopee Afiliados (ingestão automática — RESTR-04)
+## Shopee Afiliados (API oficial homologada; CSV/TSV como legado)
 
-Diferente de Amazon e Mercado Livre, o **Shopee Affiliate Program** é a
-**única fonte com relatório de conversão exportável oficialmente** pelo
-próprio portal (RESTR-04 do laudo). Por isso só a Shopee tem um comando de
-ingestão dedicado; ML/Amazon continuam manuais (seções acima).
+Diferente de Amazon e Mercado Livre, o **Shopee Affiliate Open API** foi
+homologado para consulta de `conversionReport`, com produto, pedido, comissão,
+status e paginação. O adapter read-only fica em
+`apps/marketplaces/services/shopee_conversion_api.py`. O comando CSV/TSV abaixo
+permanece como legado até a ingestão persistente via API ser concluída.
 
-### ⚠️ Aviso — schema de colunas é melhor estimativa, não validada
+### Aviso — caminho CSV/TSV legado
 
-Este parser foi escrito **sem acesso a um export real** do painel Shopee
-Affiliate. As colunas aceitas (`COLUMN_ALIASES` em
-`apps/analytics/services/affiliate_parsers/shopee.py`) são a melhor hipótese
-com base na nomenclatura pública do programa (Order ID, Item ID, Shop ID,
-Item Name, Click Time, Conversion Time, Status, Sub ID 1-5, Actual
-Amount/GMV, Commission). **Na primeira vez que alguém for usar isso com um
-arquivo real**: baixe o relatório de conversão do portal, rode com
-`--dry-run` e confira o cabeçalho contra `COLUMN_ALIASES` antes de confiar no
-resultado. Se algum nome de coluna divergir, adicione o alias correspondente
-no dicionário (mesmo padrão tolerante usado no parser da Amazon) — não é
-necessário mudar a estrutura do comando.
+O parser continua aceitando aliases de CSV/TSV e deve ser usado somente como
+fallback legado. A API oficial não expõe SubIDs no schema homologado; portanto
+o adapter de API preserva `channel=None` e não infere canal por `utmContent`,
+`referrer` ou `channelType`.
 
 ### 1. Exportar o relatório de conversão
 

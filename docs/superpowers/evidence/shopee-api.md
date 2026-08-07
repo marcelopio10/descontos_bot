@@ -105,10 +105,26 @@ Suíte combinada de link builder apresentou 1 falha e 1 erro preexistentes relac
 
 `HOMOLOGADO_API` para acesso e consulta de conversões/comissões Shopee.
 
-`PENDENTE` para:
+Adapter read-only criado:
 
-- corrigir e testar geração de short link com URL de produto válido;
-- adaptar resposta GraphQL ao parser/`AffiliateConversion`;
-- validar associação de `itemId`, `shopId`, SubIDs e canal;
+- `apps/marketplaces/services/shopee_conversion_api.py`
+- normaliza conversões por item;
+- preserva produto, item, loja, pedido, status, receita e comissão;
+- suporta janela temporal, limite e `scrollId`;
+- não persiste nem publica.
+
+Validação real do adapter:
+
+- `conversion_nodes=2`
+- `normalized_rows=4`
+- paginação presente
+- `channel_claims=0`
+
+A API não expôs SubIDs nativos no schema consultado. `channel` permanece `None`; `utmContent`, `referrer` e `channelType` não são tratados como SubID. Atribuição por canal continua não homologada.
+
+Pendências não bloqueantes da homologação da API:
+
+- gerar short link com URL de produto válido e SubIDs aceitos;
+- criar ingestão persistente posterior, com comissão e canal separados;
 - validar paginação completa e status cancelado/ajustado;
-- confirmar limites, atraso e permissões da conta.
+- confirmar limites, atraso e permissões documentados.

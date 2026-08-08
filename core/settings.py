@@ -227,6 +227,7 @@ INSTALLED_APPS = [
     'apps.social_posts',
     'apps.analytics',
     'apps.market_intel',
+    'apps.coupons',
 ]
 
 MIDDLEWARE = [

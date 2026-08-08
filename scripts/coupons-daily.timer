@@ -1,0 +1,10 @@
+[Unit]
+Description=descontos.bot - execução diária do pipeline de cupons
+
+[Timer]
+OnCalendar=*-*-* 09:15:00 America/Sao_Paulo
+Persistent=true
+Unit=coupons-daily.service
+
+[Install]
+WantedBy=timers.target

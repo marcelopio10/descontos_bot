@@ -75,19 +75,30 @@ class HermesProfileRunner:
 
 def build_curation_prompt(payload: dict[str, Any]) -> str:
     serialized = json.dumps(payload, cls=DjangoJSONEncoder, ensure_ascii=False, sort_keys=True)
+    if payload.get('schema_version') == 'coupon-1.0':
+        decision_contract = (
+            'Para cupons, cada decisão deve conter candidate_hash, classification (approved ou rejected), '
+            'selected_for_batch, relevance_score, benefit_score, reliability_score, frustration_risk_score e reason. '
+            'Aprovar somente evidência suficiente; não completar campos ausentes; registrar restrições e validade na justificativa. '
+            'A estrutura editorial deve destacar benefício, depois código/ativação, restrições, validade e CTA.\n'
+        )
+    else:
+        decision_contract = (
+            'Cada item em decisions DEVE conter exatamente estes campos compatíveis com o validador: '
+            'offer_id, marketplace_code, classification, selected_for_batch, batch_position, '
+            'conversion_score, relevance_score, discount_quality_score, audience_fit_score, reason, '
+            'rewritten_title, rewritten_caption_whatsapp, rewritten_caption_telegram, image_required, '
+            'image_decision, blacklist_actions, risk_flags.\n'
+        )
     return (
         'Você é o profile Hermes de curadoria IA do descontos.bot. '\
         'Responda SOMENTE JSON puro, sem markdown, sem comentários e sem texto extra.\n'
-        f'O JSON de saída deve ter schema_version "{OUTPUT_SCHEMA_VERSION}", actual_distribution e decisions.\n'
-        'Cada item em decisions DEVE conter exatamente estes campos compatíveis com o validador: '
-        'offer_id, marketplace_code, classification, selected_for_batch, batch_position, '
-        'conversion_score, relevance_score, discount_quality_score, audience_fit_score, reason, '
-        'rewritten_title, rewritten_caption_whatsapp, rewritten_caption_telegram, image_required, '
-        'image_decision, blacklist_actions, risk_flags.\n'
-        'classification deve ser approved, rejected ou improper. '\
-        'Itens improper, com risk_flags adult_content/weapon/obscene ou image_decision improper/adult_content/obscene/blocked nunca podem ser selected_for_batch=true. '\
-        'Use batch_position inteiro positivo somente para selecionados; use null para não selecionados.\n'
-        'Respeite a composição alvo sempre que houver candidatas seguras: 40% Mercado Livre, 30% Amazon e 30% Shopee. '
+        f'O JSON de saída deve ter schema_version "{OUTPUT_SCHEMA_VERSION}" (ou manter "coupon-1.0" para cupons), actual_distribution e decisions.\n'
+        + decision_contract
+        + 'classification deve ser approved, rejected ou improper. '\
+        + 'Itens improper, com risk_flags adult_content/weapon/obscene ou image_decision improper/adult_content/obscene/blocked nunca podem ser selected_for_batch=true. '\
+        + 'Use batch_position inteiro positivo somente para selecionados; use null para não selecionados.\n'
+        + 'Respeite a composição alvo sempre que houver candidatas seguras: 40% Mercado Livre, 30% Amazon e 30% Shopee. '
         'Se houver poucas candidatas seguras de um marketplace, selecione o máximo viável dele antes de redistribuir os slots. '
         'Não deixe Shopee zerada quando existirem ofertas Shopee aprováveis; em lote pequeno, priorize ao menos 1 Shopee segura. '
         'Ofertas com editorial_flags contendo low_priority_book representam livros; livros têm baixa conversão e só devem entrar como preenchimento quando faltarem opções melhores.\n'

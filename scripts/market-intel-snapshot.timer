@@ -1,0 +1,11 @@
+[Unit]
+Description=Cadência horária de snapshot de inteligência de mercado
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=1h
+Persistent=true
+Unit=market-intel-snapshot.service
+
+[Install]
+WantedBy=timers.target

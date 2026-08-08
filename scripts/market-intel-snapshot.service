@@ -1,0 +1,9 @@
+[Unit]
+Description=Snapshot horário de inteligência de mercado
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/descontos.bot
+EnvironmentFile=-%h/descontos.bot/.env
+ExecStart=/bin/bash %h/descontos.bot/scripts/market_intel_snapshot.sh

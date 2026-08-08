@@ -1,0 +1,11 @@
+[Unit]
+Description=Cadência incremental de inteligência de mercado
+
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=15min
+Persistent=true
+Unit=market-intel-incremental.service
+
+[Install]
+WantedBy=timers.target

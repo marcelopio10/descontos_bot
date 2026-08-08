@@ -1,5 +1,7 @@
 from django.db import models
 
+from apps._base.models import TimestampedModel
+
 
 class ObservedWhatsAppGroup(models.Model):
     name = models.CharField(max_length=255)
@@ -113,3 +115,86 @@ class MarketIntelDailyReport(models.Model):
 
     def __str__(self) -> str:
         return f'Relatório Market Intel {self.date}'
+
+
+class MarketIntelCursor(TimestampedModel):
+    """Cursor operacional por fonte; mantém processamento incremental idempotente."""
+
+    source = models.CharField(max_length=64, unique=True)
+    last_message_sent_at = models.DateTimeField(null=True, blank=True)
+    last_message_id = models.PositiveIntegerField(null=True, blank=True)
+    last_run_at = models.DateTimeField(null=True, blank=True)
+    processed_count = models.PositiveIntegerField(default=0)
+    failed_count = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        verbose_name = 'cursor de inteligência de mercado'
+        verbose_name_plural = 'cursores de inteligência de mercado'
+
+
+class ObservedOpportunity(TimestampedModel):
+    class Status(models.TextChoices):
+        OBSERVED = 'observed', 'Observada'
+        NORMALIZED = 'normalized', 'Normalizada'
+        MATCHED_CATALOG = 'matched_catalog', 'Catalogada'
+        CANDIDATE = 'candidate', 'Candidata'
+        ENRICHMENT_PENDING = 'enrichment_pending', 'Aguardando enriquecimento'
+        ENRICHED = 'enriched', 'Enriquecida'
+        SENT_TO_CURATION = 'sent_to_curation', 'Enviada à curadoria'
+        EXPIRED = 'expired', 'Expirada'
+        REJECTED_FOR_FRESHNESS = 'rejected_for_freshness', 'Rejeitada por frescor'
+
+    fingerprint = models.CharField(max_length=64, unique=True)
+    marketplace = models.CharField(max_length=64, blank=True)
+    category = models.CharField(max_length=120, blank=True)
+    brand = models.CharField(max_length=120, blank=True)
+    coupon = models.CharField(max_length=80, blank=True)
+    price_band = models.CharField(max_length=32, blank=True)
+    latest_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    max_discount_pct = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    first_observed_at = models.DateTimeField()
+    last_observed_at = models.DateTimeField()
+    occurrence_count = models.PositiveIntegerField(default=0)
+    source_group_count = models.PositiveIntegerField(default=0)
+    status = models.CharField(max_length=32, choices=Status.choices, default=Status.OBSERVED)
+    parser_version = models.CharField(max_length=16, default='2')
+    last_message_id = models.PositiveIntegerField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-last_observed_at', '-occurrence_count']
+        indexes = [
+            models.Index(fields=['status', 'last_observed_at']),
+            models.Index(fields=['marketplace', 'category']),
+        ]
+
+
+class LearningEvent(TimestampedModel):
+    event_type = models.CharField(max_length=64)
+    key = models.CharField(max_length=180)
+    observed_at = models.DateTimeField()
+    payload = models.JSONField(default=dict, blank=True)
+    policy_version = models.CharField(max_length=16, default='1')
+
+    class Meta:
+        indexes = [models.Index(fields=['event_type', 'observed_at'])]
+
+
+class MarketLearningSnapshot(TimestampedModel):
+    class State(models.TextChoices):
+        SHADOW = 'shadow', 'Shadow'
+        CANDIDATE = 'candidate', 'Candidata'
+        APPROVED = 'approved', 'Aprovada'
+        ACTIVE = 'active', 'Ativa'
+        ROLLED_BACK = 'rolled_back', 'Revertida'
+
+    period_start = models.DateTimeField()
+    period_end = models.DateTimeField()
+    schema_version = models.CharField(max_length=16, default='1')
+    policy_version = models.CharField(max_length=16, default='1')
+    state = models.CharField(max_length=16, choices=State.choices, default=State.SHADOW)
+    sample_size = models.PositiveIntegerField(default=0)
+    payload = models.JSONField(default=dict, blank=True)
+
+    class Meta:
+        ordering = ['-period_end', '-id']
+        indexes = [models.Index(fields=['state', 'period_end'])]

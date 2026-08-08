@@ -7,7 +7,11 @@ from typing import Any
 from django.db.models import Count
 from django.utils import timezone
 
-from apps.market_intel.models import MarketIntelDailyReport, ObservedWhatsAppMessage
+from apps.market_intel.models import (
+    MarketIntelDailyReport,
+    MarketLearningSnapshot,
+    ObservedWhatsAppMessage,
+)
 
 SENSITIVE_KEYS = {'jid', 'group_jid', 'sender_hash', 'text', 'urls', 'raw_text', 'message_id', 'external_message_id'}
 
@@ -24,6 +28,7 @@ def build_observer_context(*, lookback_hours: int = 24, limit: int = 20) -> dict
     labels = _top_json_list_values(messages, 'editorial_labels', limit=limit)
     opportunity_radar = _build_opportunity_radar(messages, limit=limit)
     recent_report = MarketIntelDailyReport.objects.order_by('-date').first()
+    recent_snapshot = MarketLearningSnapshot.objects.order_by('-period_end', '-id').first()
     context = {
         'lookback_hours': lookback_hours,
         'messages_analyzed': messages.count(),
@@ -31,6 +36,7 @@ def build_observer_context(*, lookback_hours: int = 24, limit: int = 20) -> dict
         'editorial_label_counts': labels,
         'opportunity_radar': opportunity_radar,
         'latest_report': _sanitize_latest_report(recent_report),
+        'latest_learning_snapshot': _sanitize_learning_snapshot(recent_snapshot),
     }
     return assert_sanitized_context(context)
 
@@ -50,6 +56,18 @@ def _sanitize_latest_report(report: MarketIntelDailyReport | None) -> dict[str, 
         'messages_analyzed': report.messages_analyzed,
         'groups_analyzed': report.groups_analyzed,
         'summary': _drop_sensitive(summary),
+    }
+
+
+def _sanitize_learning_snapshot(snapshot: MarketLearningSnapshot | None) -> dict[str, Any]:
+    if snapshot is None:
+        return {}
+    return {
+        'period_start': snapshot.period_start.isoformat(),
+        'period_end': snapshot.period_end.isoformat(),
+        'state': snapshot.state,
+        'sample_size': snapshot.sample_size,
+        'payload': _drop_sensitive(snapshot.payload),
     }
 
 

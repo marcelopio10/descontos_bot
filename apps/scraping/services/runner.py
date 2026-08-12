@@ -39,6 +39,16 @@ def run_marketplace_scraping(marketplace: Marketplace, max_pages: int) -> Scrapi
     try:
         adapter = build_adapter(marketplace.code)
         payloads = adapter.collect(max_pages=max_pages)
+        provenance_counts: dict[str, int] = {}
+        for payload in payloads:
+            source_kind = str((payload.get('search_provenance') or {}).get('source_kind') or 'unknown')
+            provenance_counts[source_kind] = provenance_counts.get(source_kind, 0) + 1
+        log.info(
+            'scraping.provenance marketplace=%s run_id=%s counts=%s',
+            marketplace.code,
+            run.id,
+            provenance_counts,
+        )
 
         for payload in payloads:
             try:

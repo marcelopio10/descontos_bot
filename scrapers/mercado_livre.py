@@ -106,6 +106,18 @@ class MercadoLivreScraper(BaseScraper):
     def get_html(self, url: str) -> str:
         try:
             resp = self.fetch_with_retry(self.session, url, headers=self.headers, timeout=20)
+            final_url = str(getattr(resp, 'url', '') or '')
+            response_text = str(getattr(resp, 'text', '') or '')
+            suspicious_traffic = (
+                'account-verification' in final_url
+                or 'suspicious-traffic' in response_text.lower()
+                or 'verifique que você não é um robô' in response_text.lower()
+            )
+            if suspicious_traffic:
+                self.blocked = True
+                self.error_message = 'Mercado Livre redirecionou para verificação de tráfego.'
+                log.error('Mercado Livre bloqueou a busca direcionada; não usar fallback.')
+                return ''
             if resp.status_code == 403:
                 self.blocked = True
                 self.error_message = f'Acesso negado 403 em {url}'

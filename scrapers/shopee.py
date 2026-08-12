@@ -217,7 +217,9 @@ class ShopeeScraper:
                 nodes = self._collector.fetch(keyword=query.query_text, limit=DEFAULT_LIMIT, page=1)
             except Exception as exc:
                 log.error('Shopee busca direcionada falhou query=%s: %s', query.query_text, exc)
-                continue
+                self.blocked = True
+                self.error_message = f'Shopee busca direcionada indisponível: {type(exc).__name__}'
+                break
             self.pages_scraped += 1
             provenance = sanitize_search_provenance({'source_kind': query.source_kind, 'query_text': query.query_text, 'brand': query.brand, 'category_code': query.category_code, 'price_band': query.price_band, 'marketplace': query.marketplace})
             for item in nodes:

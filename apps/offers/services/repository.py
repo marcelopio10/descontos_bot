@@ -5,6 +5,7 @@ from django.utils.text import slugify
 
 from apps.offers.models import Offer, PriceHistoryEntry
 from apps.offers.services.normalizer import NormalizedOffer
+from apps.marketplaces.services.search_provenance import merge_sanitized_raw_payload
 
 
 log = logging.getLogger(__name__)
@@ -49,6 +50,7 @@ def save_normalized_offer(normalized_offer: NormalizedOffer) -> tuple[Offer, boo
         _record_price_history(offer, collected_at=defaults['price_collected_at'])
         return offer, created
 
+    defaults['raw_payload'] = merge_sanitized_raw_payload(offer.raw_payload, normalized_offer.raw_payload)
     update_fields = [*defaults.keys(), 'updated_at']
     for field, value in defaults.items():
         setattr(offer, field, value)

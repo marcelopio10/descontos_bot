@@ -5,7 +5,8 @@ from dataclasses import dataclass
 from typing import Protocol
 
 from apps.curation.services.settings import get_integer_setting
-from apps.marketplaces.services.search_query_planner import SearchQuery, build_search_plan
+from apps.marketplaces.services.commercial_opportunity import CommercialOpportunity, build_opportunity_plan
+from apps.marketplaces.services.commercial_validator import validate_commercial_candidate
 from apps.marketplaces.services.search_provenance import sanitize_search_provenance
 from apps.marketplaces.services.search_radar import build_search_radar
 from scrapers import amazon, mercado_livre, shopee
@@ -28,6 +29,9 @@ class MarketplaceScraper(Protocol):
     def scrape_daily_deals(self, max_pages: int) -> list[dict]:
         ...
 
+    def scrape_search_queries(self, queries: tuple[CommercialOpportunity, ...]) -> list[dict]:
+        ...
+
 
 @dataclass(frozen=True)
 class ScraperAdapter:
@@ -35,10 +39,25 @@ class ScraperAdapter:
     scraper: MarketplaceScraper
 
     def collect(self, max_pages: int) -> list[dict]:
-        directed = self._directed_queries()
+        if _directed_search_enabled():
+            directed = self._directed_opportunities()
+            if not hasattr(self.scraper, 'scrape_search_queries'):
+                raise RuntimeError(f'{self.marketplace_code} não implementa busca comercial direcionada')
+            payloads = self.scraper.scrape_search_queries(directed)
+            payloads = _attach_execution_provenance(payloads, directed)
+            payloads = _validate_directed_payloads(payloads, directed)
+            log.info(
+                'commercial_search.completed marketplace=%s opportunities=%d offers=%d',
+                self.marketplace_code,
+                len(directed),
+                len(payloads),
+            )
+            return _deduplicate_payloads(payloads)
+
+        return self._collect_legacy(max_pages)
+
+    def _collect_legacy(self, max_pages: int) -> list[dict]:
         payloads: list[dict] = []
-        if directed and hasattr(self.scraper, 'scrape_search_queries'):
-            payloads.extend(self.scraper.scrape_search_queries(directed))
         if not payloads and _category_scraping_enabled() and hasattr(self.scraper, 'scrape_categories'):
             targets = flatten_urls(self.marketplace_code)
             if targets:
@@ -50,15 +69,16 @@ class ScraperAdapter:
             return _mark_unattributed_as_fallback(_deduplicate_payloads(payloads))
         return _mark_unattributed_as_fallback(self.scraper.scrape_daily_deals(max_pages=max_pages))
 
-    def _directed_queries(self) -> tuple[SearchQuery, ...]:
-        if not _directed_search_enabled():
-            return ()
-        try:
-            radar = build_search_radar(lookback_hours=168, limit=30)
-            plan = build_search_plan(radar, marketplaces=(self.marketplace_code,), max_queries=DIRECTED_QUERY_LIMIT)
-            return plan.directed_queries
-        except Exception:
-            return ()
+    def _directed_opportunities(self) -> tuple[CommercialOpportunity, ...]:
+        radar = build_search_radar(lookback_hours=168, limit=30)
+        plan = build_opportunity_plan(radar, marketplace=self.marketplace_code, limit=DIRECTED_QUERY_LIMIT)
+        if not plan.opportunities:
+            log.warning(
+                'commercial_search.no_opportunities marketplace=%s unplannable=%s',
+                self.marketplace_code,
+                plan.unplannable,
+            )
+        return plan.opportunities
 
     @property
     def blocked(self) -> bool:
@@ -92,6 +112,49 @@ def _deduplicate_payloads(payloads: list[dict]) -> list[dict]:
         result.append(payload)
     log.info('directed_search_dedup input=%d output=%d', len(payloads), len(result))
     return result
+
+
+def _validate_directed_payloads(payloads: list[dict], opportunities: tuple[CommercialOpportunity, ...]) -> list[dict]:
+    by_query = {item.query_text: item for item in opportunities}
+    accepted: list[dict] = []
+    rejected: dict[str, int] = {}
+    for payload in payloads:
+        provenance = payload.get('search_provenance') or {}
+        opportunity = by_query.get(str(provenance.get('query_text') or '').strip().lower())
+        if opportunity is None:
+            rejected['missing_provenance'] = rejected.get('missing_provenance', 0) + 1
+            continue
+        validation = validate_commercial_candidate(payload, opportunity)
+        if not validation.accepted:
+            rejected[validation.reason] = rejected.get(validation.reason, 0) + 1
+            continue
+        accepted.append(payload)
+    log.info('commercial_search.validation accepted=%d rejected=%s', len(accepted), rejected)
+    return accepted
+
+
+def _attach_execution_provenance(payloads: list[dict], opportunities: tuple[CommercialOpportunity, ...]) -> list[dict]:
+    by_query = {item.query_text: item for item in opportunities}
+    for payload in payloads:
+        provenance = dict(payload.get('search_provenance') or {})
+        opportunity = by_query.get(str(provenance.get('query_text') or '').strip().lower())
+        if opportunity is None:
+            continue
+        provenance.update({
+            'opportunity_id': _opportunity_id(opportunity),
+            'query_hash': _query_hash(opportunity),
+        })
+        payload['search_provenance'] = sanitize_search_provenance(provenance)
+    return payloads
+
+
+def _opportunity_id(opportunity: CommercialOpportunity) -> str:
+    return f'{opportunity.marketplace}:{opportunity.source_kind}:{_query_hash(opportunity)}'
+
+
+def _query_hash(opportunity: CommercialOpportunity) -> str:
+    import hashlib
+    return hashlib.sha256(f'{opportunity.marketplace}:{opportunity.query_text}'.encode()).hexdigest()[:16]
 
 
 def _mark_unattributed_as_fallback(payloads: list[dict]) -> list[dict]:

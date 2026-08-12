@@ -73,10 +73,20 @@ def build_ai_curation_payload(
         'baseline_summary': {
             'candidate_count': len(serialized_offers),
             'marketplace_counts': _count_by(serialized_offers, 'marketplace_code'),
+            'search_provenance_counts': _count_provenance(serialized_offers),
+            'generic_fallback_count': sum(1 for offer in serialized_offers if (offer.get('search_provenance') or {}).get('source_kind') == 'generic_fallback'),
             'quality_score_breakdown': summarize_quality(serialized_offers),
         },
         'offers': serialized_offers,
     }
+
+
+def _count_provenance(rows: list[dict[str, Any]]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in rows:
+        source = str((row.get('search_provenance') or {}).get('source_kind') or 'unknown')
+        counts[source] = counts.get(source, 0) + 1
+    return counts
 
 
 def _count_by(rows: list[dict[str, Any]], key: str) -> dict[str, int]:

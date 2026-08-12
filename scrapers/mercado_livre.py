@@ -18,6 +18,7 @@ except ImportError:
 
 from apps.analytics.services.alertas import enviar_alerta_operador
 from scrapers.base import HTTP_EXCEPTIONS, BaseScraper, build_impersonated_session
+from apps.marketplaces.services.search_provenance import sanitize_search_provenance
 
 log = logging.getLogger(__name__)
 
@@ -204,6 +205,39 @@ class MercadoLivreScraper(BaseScraper):
             if idx < total - 1:
                 time.sleep(round(random.uniform(DELAY_MIN, DELAY_MAX), 2))
 
+        return all_offers
+
+    def scrape_search_queries(self, queries) -> list[dict]:
+        items = []
+        for query in queries:
+            slug = urllib.parse.quote(query.query_text, safe='')
+            items.append((f'Busca direcionada: {query.query_text}', f'https://lista.mercadolivre.com.br/{slug}', '', False, sanitize_search_provenance({'source_kind': query.source_kind, 'query_text': query.query_text, 'brand': query.brand, 'category_code': query.category_code, 'price_band': query.price_band, 'marketplace': query.marketplace})))
+        return self._scrape_search_urls(items)
+
+    def _scrape_search_urls(self, items: list[tuple]) -> list[dict]:
+        all_offers, seen_ids = [], set()
+        for idx, item in enumerate(items):
+            label, url, category_code, trust_hint, *rest = item
+            provenance = rest[0] if rest else {}
+            if self.blocked:
+                break
+            html = self.get_html(url)
+            if not html:
+                continue
+            if self.is_blocked(html):
+                self.blocked = True
+                self.error_message = f'CAPTCHA detectado em {url}'
+                break
+            self.pages_scraped += 1
+            for offer in self._extract_poly_cards(html, idx + 1):
+                data = offer.to_dict()
+                if data['id'] in seen_ids:
+                    continue
+                seen_ids.add(data['id'])
+                data['source_label'] = label
+                if provenance:
+                    data['search_provenance'] = provenance
+                all_offers.append(data)
         return all_offers
 
     def _extract_poly_cards(self, html: str, page: int) -> list[MercadoLivreOffer]:

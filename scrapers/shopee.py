@@ -17,6 +17,7 @@ from typing import Any
 
 from apps.marketplaces.services.shopee_affiliate_client import ShopeeAffiliateClient
 from apps.marketplaces.services.shopee_collectors import ProductOfferCollector
+from apps.marketplaces.services.search_provenance import sanitize_search_provenance
 
 log = logging.getLogger(__name__)
 
@@ -209,6 +210,24 @@ class ShopeeScraper:
 
         return offers
 
+    def scrape_search_queries(self, queries) -> list[dict[str, Any]]:
+        offers = []
+        for query in queries:
+            try:
+                nodes = self._collector.fetch(keyword=query.query_text, limit=DEFAULT_LIMIT, page=1)
+            except Exception as exc:
+                log.error('Shopee busca direcionada falhou query=%s: %s', query.query_text, exc)
+                continue
+            self.pages_scraped += 1
+            provenance = sanitize_search_provenance({'source_kind': query.source_kind, 'query_text': query.query_text, 'brand': query.brand, 'category_code': query.category_code, 'price_band': query.price_band, 'marketplace': query.marketplace})
+            for item in nodes:
+                if _has_unsafe_price_range(item):
+                    continue
+                item = _with_price_variation_flag(item)
+                item_id, shop_id = str(item.get('itemId', '')), str(item.get('shopId', ''))
+                product_url = item.get('productLink') or item.get('offerLink') or ''
+                offers.append({'marketplace_code': 'shopee', 'title': item.get('productName', ''), 'current_price': item.get('priceMin') or item.get('price') or 0, 'price': item.get('priceMin') or item.get('price') or 0, 'original_price': _derive_original_price(item), 'discount_pct': item.get('priceDiscountRate') or 0, 'product_url': product_url, 'url': product_url, 'affiliate_url': item.get('offerLink') or '', 'image_url': item.get('imageUrl') or '', 'external_id': f'{item_id}:{shop_id}', 'raw_payload': item, 'search_provenance': provenance})
+        return offers
 
 def _derive_original_price(item: dict[str, Any]) -> float | None:
     """Calcula preço original a partir do desconto, quando confiável."""

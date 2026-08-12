@@ -37,6 +37,8 @@ def build_baseline_snapshot(
         'candidate_count': len(offers),
         'quality_score_breakdown': summarize_quality(offers),
         'marketplace_counts': _count_by(offers, 'marketplace_code'),
+        'search_provenance_counts': _count_by_provenance(offers),
+        'generic_fallback_count': sum(1 for offer in offers if (offer.get('search_provenance') or {}).get('source_kind') == 'generic_fallback'),
         'offers': offers,
     }
 
@@ -78,7 +80,21 @@ def serialize_offer_for_ai(
             'notes': list(breakdown.notes),
         },
         'editorial_flags': editorial_flags,
+        'search_provenance': _search_provenance(offer),
     }
+
+
+def _count_by_provenance(rows: list[dict[str, Any]]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for row in rows:
+        source = str((row.get('search_provenance') or {}).get('source_kind') or 'unknown')
+        counts[source] = counts.get(source, 0) + 1
+    return counts
+
+
+def _search_provenance(offer: Offer) -> dict[str, Any]:
+    value = (offer.raw_payload or {}).get('search_provenance')
+    return value if isinstance(value, dict) else {}
 
 
 def _editorial_flags(offer: Offer) -> list[str]:

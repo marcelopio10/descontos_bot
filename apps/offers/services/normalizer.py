@@ -8,6 +8,7 @@ from typing import Any
 from urllib.parse import urlsplit, urlunsplit
 
 from apps.marketplaces.models import Marketplace
+from apps.marketplaces.services.search_provenance import build_sanitized_raw_payload
 
 
 ASIN_RE = re.compile(r'/(?:dp|gp/product|exec/obidos/ASIN)/([A-Z0-9]{10})')
@@ -88,7 +89,7 @@ def normalize_offer(marketplace: Marketplace, payload: dict[str, Any]) -> Normal
         asin=asin,
         price_collected_at=None,
         image_url=_clean_url(payload.get('imagem') or payload.get('image_url') or ''),
-        raw_payload=payload,
+        raw_payload=build_sanitized_raw_payload(payload),
         review_rating=_to_optional_rating(
             payload.get('review_rating') or payload.get('rating') or payload.get('nota'),
         ),

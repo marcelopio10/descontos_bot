@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from apps.curation.services.observer_context import build_observer_context
+from apps.marketplaces.services.search_query_planner import SearchPlan, build_search_plan as _build_search_plan
 
 SEARCH_BRANDS = {
     'moda': ('insider', 'nike', 'adidas', 'puma', 'mizuno', 'asics', 'new balance', 'olympikus', 'fila', 'lupo', 'oakley', 'under armour'),
@@ -32,3 +33,8 @@ def build_search_radar(*, lookback_hours: int = 168, limit: int = 30) -> dict[st
         'generic_coupon_prevalence': int((radar.get('coupons') or {}).get('CUPOM', 0)),
         'source': 'sanitized_observer_aggregate',
     }
+
+
+def build_search_plan(radar: dict[str, Any] | None = None, *, marketplaces=('amazon', 'mercadolivre', 'shopee'), max_queries: int = 30) -> SearchPlan:
+    """Converte o radar sanitizado em consultas executáveis."""
+    return _build_search_plan(radar if radar is not None else build_search_radar(), marketplaces=marketplaces, max_queries=max_queries)

@@ -18,6 +18,7 @@ except ImportError:
     pass
 
 from scrapers.base import build_impersonated_session
+from apps.marketplaces.services.search_provenance import sanitize_search_provenance
 
 log = logging.getLogger(__name__)
 
@@ -168,9 +169,30 @@ class AmazonScraper:
         for target in targets:
             category_code, label, url, *rest = target
             trust_hint = rest[0] if rest else True
-            normalized_targets.append((label, url, category_code, bool(trust_hint)))
+            provenance = rest[1] if len(rest) > 1 else {}
+            normalized_targets.append((label, url, category_code, bool(trust_hint), provenance))
 
         return self._scrape_urls(normalized_targets)
+
+    def scrape_search_queries(self, queries) -> list[dict]:
+        items = []
+        for query in queries:
+            encoded = urllib.parse.quote_plus(query.query_text)
+            items.append((
+                f'Busca direcionada: {query.query_text}',
+                f'https://www.amazon.com.br/s?k={encoded}&deal-type=eligible',
+                '',
+                False,
+                sanitize_search_provenance({
+                    'source_kind': query.source_kind,
+                    'query_text': query.query_text,
+                    'brand': query.brand,
+                    'category_code': query.category_code,
+                    'price_band': query.price_band,
+                    'marketplace': query.marketplace,
+                }),
+            ))
+        return self._scrape_urls(items)
 
     def scrape_daily_deals(self, max_pages: int = 5) -> list[dict]:
         # max_pages é mantido por compatibilidade de API, mas Amazon raspa todas as
@@ -185,7 +207,9 @@ class AmazonScraper:
         seen_ids: set[str] = set()
         total = len(items)
 
-        for idx, (label, url, category_code, trust_hint) in enumerate(items):
+        for idx, item in enumerate(items):
+            label, url, category_code, trust_hint, *rest = item
+            provenance = rest[0] if rest else {}
             if self.blocked:
                 break
 
@@ -209,6 +233,8 @@ class AmazonScraper:
                 data = offer.to_dict()
                 if category_code and trust_hint:
                     data['category_hint'] = category_code
+                if provenance:
+                    data['search_provenance'] = provenance
                 if data['id'] in seen_ids:
                     continue
                 seen_ids.add(data['id'])

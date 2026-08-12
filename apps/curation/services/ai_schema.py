@@ -84,8 +84,10 @@ def validate_agent_output(payload: dict[str, Any], *, expected_offer_ids: set[in
             continue
         missing = REQUIRED_DECISION_FIELDS - set(decision)
         if missing:
-            errors.append(f'decisions[{index}] campos ausentes: {sorted(missing)}')
-            continue
+            editorial_fields = {'rewritten_caption_whatsapp', 'rewritten_caption_telegram'}
+            if not (missing <= editorial_fields and not decision.get('selected_for_batch')):
+                errors.append(f'decisions[{index}] campos ausentes: {sorted(missing)}')
+                continue
 
         offer_id = decision.get('offer_id')
         if expected_offer_ids is not None and offer_id not in expected_offer_ids:

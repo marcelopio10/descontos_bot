@@ -65,6 +65,27 @@ class AISchemaTests(SimpleTestCase):
         self.assertFalse(result.is_valid)
         self.assertIn('imprópria não pode ser selecionada', '; '.join(result.errors))
 
+    def test_rejected_decision_may_omit_editorial_captions(self):
+        decision = {
+            'offer_id': 1,
+            'marketplace_code': 'amazon',
+            'classification': 'rejected',
+            'selected_for_batch': False,
+            'batch_position': None,
+            'conversion_score': 10,
+            'relevance_score': 10,
+            'discount_quality_score': 10,
+            'audience_fit_score': 10,
+            'reason': 'score baixo',
+            'rewritten_title': 'Título',
+            'image_required': False,
+            'image_decision': 'not_required',
+            'blacklist_actions': [],
+            'risk_flags': [],
+        }
+        result = validate_agent_output({'schema_version': '1.0', 'decisions': [decision]})
+        self.assertTrue(result.is_valid, result.errors)
+
     def test_invalid_agent_output_fails_for_selected_offer_without_caption(self):
         payload = {
             'schema_version': '1.0',

@@ -16,6 +16,7 @@ from apps.curation.services.blacklist import (
     is_blacklisted,
 )
 from apps.curation.services.quality_score import quality_score_breakdown
+from apps.curation.services.recurrence import filter_blocked_recurrence, recurrence_score_multiplier, recurrence_signal
 from apps.curation.services.settings import get_decimal_setting, get_integer_setting
 from apps.distribution.models import Delivery, SocialChannel
 from apps.distribution.services.delivery import _should_republish_after_improvement
@@ -111,7 +112,7 @@ def select_offers_for_channel(
     queryset = _eligible_offers(channel, config)
 
     pool_size = max(CANDIDATE_POOL_FLOOR, config.global_limit * CANDIDATE_POOL_MULTIPLIER)
-    raw_candidates = list(queryset[:pool_size])
+    raw_candidates = filter_blocked_recurrence(list(queryset[:pool_size]), channel)
 
     blacklist_terms = get_blacklist_terms()
     candidates: list[Offer] = []
@@ -129,6 +130,16 @@ def select_offers_for_channel(
     evaluated = []
     for offer in candidates:
         breakdown = quality_score_breakdown(offer, observer_context=observer_context)
+        signal = recurrence_signal(offer, channel)
+        recurrence_multiplier = recurrence_score_multiplier(signal)
+        if recurrence_multiplier != 1.0:
+            from dataclasses import replace
+            breakdown = replace(
+                breakdown,
+                score=breakdown.score * recurrence_multiplier,
+                multipliers={**breakdown.multipliers, 'recurrence': recurrence_multiplier},
+                notes=[*breakdown.notes, 'família recorrente; prioridade reduzida'],
+            )
         if breakdown.score < config.min_quality_score:
             log.info(
                 'selector_drop offer_id=%s reason=low_score score=%.2f classification=%s '

@@ -186,6 +186,14 @@ def _category_aware_breakdown(
         penalties['history_suspect_price'] = PENALTY_HISTORY_SUSPECT_PRICE
     if _is_extreme_discount(offer.discount_pct):
         penalties['extreme_discount'] = PENALTY_EXTREME_DISCOUNT
+    from apps.curation.services.baseline_snapshot import _editorial_flags
+    flags = _editorial_flags(offer)
+    if 'low_priority_spinning' in flags:
+        penalties['low_priority_spinning'] = 0.78
+    if 'low_priority_book' in flags:
+        penalties['low_priority_book'] = 0.82
+    if 'low_priority_generic' in flags:
+        penalties['low_priority_generic'] = 0.86
 
     soft_penalties = evaluate_soft_penalties(offer)
     penalties.update(soft_penalties)

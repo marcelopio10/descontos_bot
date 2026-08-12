@@ -98,10 +98,11 @@ def build_curation_prompt(payload: dict[str, Any]) -> str:
         + 'classification deve ser approved, rejected ou improper. '\
         + 'Itens improper, com risk_flags adult_content/weapon/obscene ou image_decision improper/adult_content/obscene/blocked nunca podem ser selected_for_batch=true. '\
         + 'Use batch_position inteiro positivo somente para selecionados; use null para não selecionados.\n'
-        + 'Respeite a composição alvo sempre que houver candidatas seguras: 40% Mercado Livre, 30% Amazon e 30% Shopee. '
+        + 'Deixe o Mercado Livre liderar quando houver maior volume, qualidade ou rentabilidade. Preserve apenas cobertura mínima de Amazon e Shopee quando houver candidatas seguras e relevantes; não force quotas artificiais. '
         'Se houver poucas candidatas seguras de um marketplace, selecione o máximo viável dele antes de redistribuir os slots. '
-        'Não deixe Shopee zerada quando existirem ofertas Shopee aprováveis; em lote pequeno, priorize ao menos 1 Shopee segura. '
+        'Não deixe um marketplace elegível zerado por erro de montagem do pool, mas não promova candidato fraco apenas para cumprir distribuição. '
         'Ofertas com editorial_flags contendo low_priority_book representam livros; livros têm baixa conversão e só devem entrar como preenchimento quando faltarem opções melhores.\n'
+        'Ofertas com editorial_flags low_priority_spinning ou low_priority_generic devem ser tratadas como preenchimento quando existirem alternativas melhores; não são blacklist automática.\n'
         'Nas captions reescritas, escreva como uma pessoa real de grupo de ofertas, não como chatbot. '
         'Aplique os princípios da skill humanizer: corte frases com cara de IA, varie ritmo e estrutura, prefira linguagem simples e específica, e evite tom formal/promocional. '
         'Não use fórmulas repetidas entre ofertas, principalmente começos iguais como "Boa para", "Vale para", "Oferta para", "Quem procura" ou "Se você". '

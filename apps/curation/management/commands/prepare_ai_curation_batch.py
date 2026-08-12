@@ -12,9 +12,11 @@ from apps.curation.services.batch_optimizer import DEFAULT_TARGET_DISTRIBUTION
 from apps.curation.services.hermes_runner import HermesProfileRunner
 from apps.curation.services.image_processing import process_selected_batch_images
 from apps.curation.services.observer_context import assert_sanitized_context, build_observer_context
+from apps.curation.services.recurrence import filter_blocked_recurrence
 from apps.curation.services.selector import _eligible_offers, get_selection_config
 from apps.distribution.models import SocialChannel
 from apps.marketplaces.services.radar_mercado import collect_radar_mercado
+from apps.marketplaces.services.search_radar import build_search_radar
 
 DEFAULT_CHANNEL_CODE = 'whatsapp_main'
 DEFAULT_AUDIT_DIR = 'runtime/curation/ai_runs'
@@ -73,6 +75,7 @@ class Command(BaseCommand):
         # aqui sem passar pela sanitização de `build_observer_context`.
         observer_context = assert_sanitized_context({
             **build_observer_context(),
+            'search_radar': build_search_radar(),
             'source': 'prepare_ai_curation_batch_command',
             'skip_images': bool(options['skip_images']),
             'real_send_enabled': False,
@@ -156,7 +159,7 @@ class Command(BaseCommand):
     def _get_candidates(self, *, channel: SocialChannel, limit: int):
         config = get_selection_config()
         queryset = _eligible_offers(channel, config).select_related('marketplace', 'category')
-        return _balanced_marketplace_candidates(queryset, limit=limit)
+        return _balanced_marketplace_candidates(filter_blocked_recurrence(queryset, channel), limit=limit)
 
 
 CANDIDATE_OVERFETCH_MULTIPLIER = 3  # margem para compensar itens descartados pelo dedup de produto canônico
@@ -184,15 +187,24 @@ def _balanced_marketplace_candidates(queryset, *, limit: int):
     selected = []
     selected_ids: set[int] = set()
     seen_canonicos: set[str] = set()
+    is_materialized = isinstance(queryset, list)
     for marketplace_code in DEFAULT_TARGET_DISTRIBUTION:
         quota = quotas.get(marketplace_code, 0)
         if quota <= 0:
             continue
-        candidates = queryset.filter(marketplace__code=marketplace_code)[: quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        candidates = (
+            [offer for offer in queryset if offer.marketplace.code == marketplace_code][: quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+            if is_materialized
+            else queryset.filter(marketplace__code=marketplace_code)[: quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        )
         _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_canonicos)
     if len(selected) < limit:
         remaining_quota = limit - len(selected)
-        remaining = queryset.exclude(id__in=selected_ids)[: remaining_quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        remaining = (
+            [offer for offer in queryset if offer.id not in selected_ids][: remaining_quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+            if is_materialized
+            else queryset.exclude(id__in=selected_ids)[: remaining_quota * CANDIDATE_OVERFETCH_MULTIPLIER]
+        )
         _append_deduped_by_canonico(remaining, remaining_quota, selected, selected_ids, seen_canonicos)
     return selected[:limit]
 

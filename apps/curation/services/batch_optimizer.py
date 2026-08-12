@@ -37,15 +37,12 @@ from apps.curation.services.ai_schema import SAFETY_RISK_FLAGS
 #   - shopee: R$ 0,00 de comissão nas semanas em que já havia envio
 #     (a partir de meados de junho/2026; 10 a 120 envios/semana).
 #
-# Nova distribuição-alvo: aumenta ML (a fonte de receita real hoje),
-# aumenta levemente Amazon (aposta controlada — converte bem por clique,
-# vale testar mais exposição para ver se a comissão acompanha) e reduz
-# Shopee (sem receita real mensurada e com o afiliado ainda desligado em
-# produção). Não é um corte a zero — mantém Shopee como fatia pequena para
-# não perder cobertura/aprendizado desse marketplace.
+# Mercado Livre lidera por volume e rentabilidade. Amazon e Shopee permanecem
+# com cobertura mínima quando houver candidatas seguras e relevantes, sem
+# forçar candidatos fracos para cumprir uma quota artificial.
 DEFAULT_TARGET_DISTRIBUTION: dict[str, float] = {
-    'mercadolivre': 0.55,
-    'amazon': 0.35,
+    'mercadolivre': 0.70,
+    'amazon': 0.20,
     'shopee': 0.10,
 }
 

@@ -61,7 +61,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
                 ('Moda Masculina', 'https://www.amazon.com.br/s?k=camiseta+masculina&i=apparel&deal-type=eligible'),
                 ('Calçados Masculinos', 'https://www.amazon.com.br/s?k=tenis+masculino&i=shoes&deal-type=eligible'),
             ],
-            'priority_brands': ('insider', 'nike', 'adidas', 'puma', 'fila', 'mizuno'),
+            'priority_brands': ('insider', 'nike', 'adidas', 'puma', 'fila', 'mizuno', 'asics', 'new balance', 'under armour', 'oakley', 'vans', 'converse', 'calvin klein', 'tommy hilfiger'),
             'min_discount': 15,
             'max_price': 500.0,
             'cycle_limit': 20,
@@ -94,7 +94,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
                 ('Beleza', 'https://www.amazon.com.br/s?k=beleza&i=beauty&deal-type=eligible'),
                 ('Cuidados Pessoais', 'https://www.amazon.com.br/s?k=skincare&i=beauty&deal-type=eligible'),
             ],
-            'priority_brands': ('avon', 'natura', 'eudora', 'oral-b', 'colgate', 'taiff'),
+            'priority_brands': ('avon', 'natura', 'eudora', 'o boticario', 'loreal', 'elseve', 'oral-b', 'colgate', 'taiff', 'kerastase'),
             'min_discount': 20,
             'max_price': 400.0,
             'cycle_limit': 15,
@@ -104,7 +104,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             'urls': [
                 ('Saúde — Suplementos', 'https://www.amazon.com.br/s?k=suplemento&i=hpc&deal-type=eligible'),
             ],
-            'priority_brands': ('growth', 'integralmedica', 'max titanium', 'vitafor'),
+            'priority_brands': ('growth', 'max titanium', 'dark lab', 'integralmedica', 'vitafor', 'dux nutrition', 'adaptogen', 'soldiers nutrition', 'atlhetica nutrition', 'bodyaction', 'probiótica', 'essential nutrition', 'nutrify', 'optimum nutrition', 'universal nutrition', 'muscletech', 'black skull'),
             'min_discount': 25,
             'max_price': 300.0,
             'cycle_limit': 5,  # exposição limitada — viés do dono
@@ -177,7 +177,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             'urls': [
                 ('Beleza e Cuidado Pessoal', 'https://www.mercadolivre.com.br/ofertas?category=MLB1246'),
             ],
-            'priority_brands': ('avon', 'natura', 'eudora', 'oral-b', 'taiff'),
+            'priority_brands': ('avon', 'natura', 'eudora', 'o boticario', 'loreal', 'elseve', 'oral-b', 'taiff', 'kerastase', 'lattafa', 'afnan', 'armaf', 'rasasi', 'al haramain', 'maison alhambra', 'swiss arabian', 'khadlaj', 'fragrance world', 'paris corner', 'asdaaf', 'ajmal', 'al wataniah', 'ard al zaafaran'),
             'min_discount': 25,
             'max_price': 300.0,
             'cycle_limit': 15,
@@ -189,7 +189,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             'urls': [
                 ('Esportes e Fitness', 'https://www.mercadolivre.com.br/ofertas?category=MLB1276', False),
             ],
-            'priority_brands': ('growth', 'integralmedica', 'max titanium', 'vitafor'),
+            'priority_brands': ('growth', 'max titanium', 'dark lab', 'integralmedica', 'vitafor', 'dux nutrition', 'adaptogen', 'soldiers nutrition', 'atlhetica nutrition', 'bodyaction', 'probiótica', 'essential nutrition', 'nutrify', 'optimum nutrition', 'universal nutrition', 'muscletech', 'black skull'),
             'min_discount': 30,
             'max_price': 250.0,
             'cycle_limit': 5,
@@ -224,7 +224,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             'urls': [
                 ('Beleza e Cuidados Pessoais', 100630),
             ],
-            'priority_brands': ('avon', 'natura', 'eudora', 'oral-b'),
+            'priority_brands': ('avon', 'natura', 'eudora', 'o boticario', 'loreal', 'elseve', 'oral-b', 'taiff', 'lattafa', 'afnan', 'armaf', 'rasasi', 'al haramain', 'maison alhambra', 'swiss arabian', 'khadlaj', 'fragrance world', 'paris corner', 'asdaaf', 'ajmal', 'al wataniah', 'ard al zaafaran'),
             'min_discount': 20,
             'max_price': 400.0,
             'cycle_limit': 15,
@@ -252,7 +252,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
                 ('Moda Masculina', 100011),
                 ('Calçados e Acessórios Masculinos', 100012),
             ],
-            'priority_brands': ('insider', 'nike', 'adidas', 'puma', 'fila', 'mizuno'),
+            'priority_brands': ('insider', 'nike', 'adidas', 'puma', 'fila', 'mizuno', 'asics', 'new balance', 'under armour', 'oakley', 'vans', 'converse', 'calvin klein', 'tommy hilfiger'),
             'min_discount': 20,
             'max_price': 500.0,
             'cycle_limit': 20,
@@ -280,7 +280,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             'urls': [
                 ('Suplementos Alimentares', 100002),
             ],
-            'priority_brands': ('growth', 'integralmedica', 'max titanium', 'vitafor'),
+            'priority_brands': ('growth', 'max titanium', 'dark lab', 'integralmedica', 'vitafor', 'dux nutrition', 'adaptogen', 'soldiers nutrition', 'atlhetica nutrition', 'bodyaction', 'probiótica', 'essential nutrition', 'nutrify', 'optimum nutrition', 'universal nutrition', 'muscletech', 'black skull'),
             'min_discount': 25,
             'max_price': 300.0,
             'cycle_limit': 5,  # exposição limitada — viés do dono (mesmo padrão amazon/ml)

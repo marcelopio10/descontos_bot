@@ -85,6 +85,10 @@ def _editorial_flags(offer: Offer) -> list[str]:
     flags: list[str] = []
     if _is_low_priority_book(offer):
         flags.append('low_priority_book')
+    if _is_low_priority_spinning(offer):
+        flags.append('low_priority_spinning')
+    if _is_low_priority_generic(offer):
+        flags.append('low_priority_generic')
     return flags
 
 
@@ -103,6 +107,30 @@ def _is_low_priority_book(offer: Offer) -> bool:
     return bool(
         re.search(r'\b(livro|livros|capa comum|capa dura|kindle|ebook|e-book)\b', text)
     )
+
+
+def _offer_text(offer: Offer) -> str:
+    return ' '.join(
+        str(part or '')
+        for part in (
+            offer.title,
+            offer.normalized_title,
+            offer.category.code if offer.category_id else '',
+            offer.category.name if offer.category_id else '',
+            (offer.raw_payload or {}).get('source_label'),
+            (offer.raw_payload or {}).get('category_hint'),
+        )
+    ).lower()
+
+
+def _is_low_priority_spinning(offer: Offer) -> bool:
+    return bool(re.search(r'\b(spinning|bike indoor|bicicleta ergometrica|bicicleta de ciclismo indoor)\b', _offer_text(offer)))
+
+
+def _is_low_priority_generic(offer: Offer) -> bool:
+    text = _offer_text(offer)
+    strong_markers = ('nike', 'adidas', 'samsung', 'growth', 'insider', 'lattafa', 'afnan', 'max titanium')
+    return not any(term in text for term in strong_markers) and len((offer.title or '').split()) <= 5
 
 
 def summarize_quality(offers: list[dict[str, Any]]) -> dict[str, Any]:

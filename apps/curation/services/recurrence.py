@@ -87,11 +87,23 @@ def recurrence_score_multiplier(signal: RecurrenceSignal) -> float:
 
 
 def filter_blocked_recurrence(offers, channel):
-    """Remove only offers inside cooldown; keep saturated families for scoring."""
+    """Remove only offers inside cooldown; allow material price improvements."""
     kept = []
     for offer in offers:
         signal = recurrence_signal(offer, channel)
         if signal.blocked:
-            continue
+            from apps.distribution.services.delivery import _should_republish_after_improvement
+
+            previous_delivery = Delivery.objects.filter(
+                offer=offer,
+                social_channel=channel,
+                delivery_status=Delivery.DeliveryStatus.SENT,
+            ).order_by('-sent_at').first()
+            if previous_delivery is None or not _should_republish_after_improvement(
+                previous_delivery,
+                offer,
+                '',
+            ):
+                continue
         kept.append(offer)
     return kept

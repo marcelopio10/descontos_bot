@@ -45,6 +45,21 @@ DEFAULT_BLACKLIST_TERMS: tuple[str, ...] = (
     'fachada comercial',
     'peca de reposicao industrial',
     'equipamento profissional industrial',
+    'sapateira',
+    'armario de sapatos',
+    'armario para sapatos',
+    'organizador de sapatos',
+    'porta sapatos',
+    'termogenico',
+    'queimador de gordura',
+    'testosterona',
+    'precursor da testosterona',
+)
+
+SAFE_SUPPLEMENT_BRANDS: tuple[str, ...] = (
+    'growth', 'growth supplements', 'max titanium', 'integralmedica',
+    'dux nutrition', 'dux', 'optimum nutrition', 'black skull',
+    'dark lab', 'soldiers nutrition',
 )
 
 # Termos de segurança não podem ser removidos pelo painel. Eles protegem todos
@@ -118,7 +133,21 @@ def is_blacklisted(offer: Offer, terms: tuple[str, ...] | None = None) -> bool:
     haystack = _strip_accents(
         f'{offer.title or ""} {offer.normalized_title or ""}',
     ).lower()
-    return any(_term_matches(term, haystack) for term in terms)
+    if any(_term_matches(term, haystack) for term in terms):
+        return True
+    return _is_restricted_supplement(offer, haystack)
+
+
+def _is_restricted_supplement(offer: Offer, haystack: str) -> bool:
+    category_code = offer.category.code if getattr(offer, 'category_id', None) else ''
+    supplement_signal = category_code == 'saude_suplementacao' or any(
+        term in haystack for term in ('whey', 'creatina', 'suplemento', 'proteina', 'vitamina', 'pre treino', 'bcaa', 'glutamina')
+    )
+    if not supplement_signal:
+        return False
+    if not re.search(r'\bwhey\b|\bcreatina\b', haystack):
+        return True
+    return not any(brand in haystack for brand in SAFE_SUPPLEMENT_BRANDS)
 
 
 def apply_blacklist_exclusion(

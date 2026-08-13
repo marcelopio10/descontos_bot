@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from decimal import Decimal
 from math import log10
+import re
 from typing import TYPE_CHECKING, Any
 
 from django.utils import timezone
@@ -52,6 +53,15 @@ PENALTY_SUSPECT_PRICE = 0.5
 PENALTY_HISTORY_SUSPECT_PRICE = 0.4
 PENALTY_EXTREME_DISCOUNT = 0.0
 PENALTY_TEST_CONTROLLED_CONFIDENCE = 0.85  # suplementos: viés do dono → fator de confiança
+LOW_PRICE_BONUS = 1.12
+HIGH_PRICE_PENALTY_THRESHOLD = Decimal('300')
+HIGH_PRICE_PENALTY = 0.72
+SNEAKER_PRIORITY_BONUS = 1.16
+SAFE_SUPPLEMENT_BRANDS = frozenset({
+    'growth', 'growth supplements', 'max titanium', 'integralmedica',
+    'dux nutrition', 'dux', 'optimum nutrition', 'black skull',
+    'dark lab', 'soldiers nutrition',
+})
 
 # Marcas reconhecidas — alimenta o critério de popularidade.
 STRONG_BRANDS: frozenset[str] = frozenset(
@@ -195,6 +205,10 @@ def _category_aware_breakdown(
     if 'low_priority_generic' in flags:
         penalties['low_priority_generic'] = 0.86
 
+    editorial_multiplier, editorial_notes = _editorial_multiplier(offer)
+    if editorial_multiplier != 1.0:
+        multipliers['editorial_adjustment'] = editorial_multiplier
+
     soft_penalties = evaluate_soft_penalties(offer)
     penalties.update(soft_penalties)
 
@@ -207,6 +221,7 @@ def _category_aware_breakdown(
     final = max(0.0, min(100.0, base * multiplier))
     classification, decision = _classify_score(final)
     notes = _build_notes(penalties, multipliers)
+    notes.extend(editorial_notes)
 
     return ScoreBreakdown(
         score=final,
@@ -338,6 +353,32 @@ def _score_price(offer: 'Offer') -> float:
     if price <= 1500:
         return 0.35
     return 0.15
+
+
+def _editorial_multiplier(offer: 'Offer') -> tuple[float, list[str]]:
+    title = (getattr(offer, 'normalized_title', '') or getattr(offer, 'title', '') or '').lower()
+    multiplier = 1.0
+    notes: list[str] = []
+    price = Decimal(offer.current_price or 0)
+
+    if price > 0 and price <= Decimal('100'):
+        multiplier *= LOW_PRICE_BONUS
+        notes.append('reserva editorial reforçada para preço até R$ 100')
+    elif price > HIGH_PRICE_PENALTY_THRESHOLD:
+        multiplier *= HIGH_PRICE_PENALTY
+        notes.append('ticket acima de R$ 300 reduzido editorialmente')
+
+    if re.search(r'\btenis\b|\bsneaker\b', title):
+        multiplier *= SNEAKER_PRIORITY_BONUS
+        notes.append('tênis priorizado editorialmente')
+
+    if any(term in title for term in ('whey', 'creatina', 'suplemento', 'proteina')) and not any(
+        brand in title for brand in SAFE_SUPPLEMENT_BRANDS
+    ):
+        multiplier *= 0.45
+        notes.append('suplemento sem marca editorialmente segura')
+
+    return multiplier, notes
 
 
 def _score_category(offer: 'Offer') -> float:

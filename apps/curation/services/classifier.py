@@ -181,6 +181,15 @@ def classify(
     marketplace_code: str = '',
 ) -> ClassificationResult:
     haystack = _normalize(f'{title or ""} {normalized_title or ""}')
+    if any(term in haystack for term in (
+        'sapateira', 'armario de sapatos', 'armario para sapatos',
+        'organizador de sapatos', 'porta sapatos',
+    )):
+        return ClassificationResult(
+            category_code=FALLBACK_CATEGORY_CODE,
+            source='editorial_exclusion',
+            matched_terms=(),
+        )
 
     matches = _match_keywords(haystack)
     if matches:

@@ -30,6 +30,15 @@ DEFAULT_SOFT_PENALTIES: dict[str, float] = {
     'galao 5l': 0.75,
     'galao 20l': 0.65,
     'reposicao': 0.80,
+    'televisao': 0.55,
+    'smart tv': 0.55,
+    'tv': 0.55,
+    'rack': 0.55,
+    'sofa': 0.55,
+    'moveis': 0.55,
+    'movel': 0.55,
+    'guarda roupa': 0.55,
+    'armario': 0.55,
 }
 
 # Regra de sinal fraco: oferta com pouco apelo combina desconto baixo + categoria fria + sem marca.

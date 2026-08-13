@@ -1,6 +1,6 @@
 {
   "version": "2.0",
-  "generated_at": "2026-08-13T00:57:32.768935+00:00",
+  "generated_at": "2026-08-13T11:02:23.084669+00:00",
   "site_base_url": "https://descontos-bot.vercel.app",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "offers": [
@@ -17,9 +17,9 @@
       "original_price": "90.29",
       "discount_pct": "69.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mbvdh2finh5zcd",
-      "affiliate_link": "https://s.shopee.com.br/6fgOdSnx8G",
+      "affiliate_link": "https://s.shopee.com.br/9fK3y8O1KX",
       "detail_url": "/oferta?slug=antena-digital-interna-externa-full-hdtv-4k-cabo-de-3m-5m-grande-tx-3008-6810",
-      "price_collected_at": "2026-08-13T00:57:30.629716+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.305096+00:00"
     },
     {
       "id": 6814,
@@ -34,9 +34,9 @@
       "original_price": "18.94",
       "discount_pct": "32.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-lx021yat5mm7bb",
-      "affiliate_link": "https://s.shopee.com.br/3LPz2zTT6r",
+      "affiliate_link": "https://s.shopee.com.br/5LB4oAa7Hk",
       "detail_url": "/oferta?slug=extensao-eletrica-2-metros-extensao-de-energia-3-tomadas-com-3-metros-5-metros-10-metros-6814",
-      "price_collected_at": "2026-08-13T00:57:30.618284+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.295515+00:00"
     },
     {
       "id": 6809,
@@ -51,9 +51,9 @@
       "original_price": "25.00",
       "discount_pct": "48.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820l4-mo6w42be1gjl57",
-      "affiliate_link": "https://s.shopee.com.br/3VjPFISpls",
+      "affiliate_link": "https://s.shopee.com.br/7psPmlQbDD",
       "detail_url": "/oferta?slug=chave-t-longa-para-maquina-de-lavar-10mm-agitador-brastempconsulelectrolux-universal-4862cm-6809",
-      "price_collected_at": "2026-08-13T00:57:30.606114+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.285521+00:00"
     },
     {
       "id": 7642,
@@ -68,9 +68,9 @@
       "original_price": "171.86",
       "discount_pct": "36.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mc83lzgst4gw71",
-      "affiliate_link": "https://s.shopee.com.br/3B6YqgU6Rm",
+      "affiliate_link": "https://s.shopee.com.br/7VFZO9Rrt7",
       "detail_url": "/oferta?slug=liquidificador-mondial-l99-turbo-550-w-3-velocidades-7642",
-      "price_collected_at": "2026-08-13T00:57:30.593284+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.272940+00:00"
     },
     {
       "id": 7276,
@@ -85,9 +85,9 @@
       "original_price": "69.00",
       "discount_pct": "79.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mk35l9kuakg158",
-      "affiliate_link": "https://s.shopee.com.br/2gAIFlW0Sf",
+      "affiliate_link": "https://s.shopee.com.br/7Kw9BqSVE4",
       "detail_url": "/oferta?slug=kit-6-forma-de-silicone-para-fritadeira-air-fryer-com-alca-antiaderente-cozinha-7276",
-      "price_collected_at": "2026-08-13T00:57:30.581902+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.260622+00:00"
     },
     {
       "id": 8367,
@@ -98,13 +98,13 @@
       },
       "title": "Chaleira Elétrica Jarra Café Chá Inox 110v",
       "short_description": "",
-      "current_price": "44.90",
-      "original_price": "71.27",
-      "discount_pct": "37.00",
+      "current_price": "44.39",
+      "original_price": "71.60",
+      "discount_pct": "38.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820m9-mr7oweocldl204",
-      "affiliate_link": "https://s.shopee.com.br/2qTiS4VN7g",
+      "affiliate_link": "https://s.shopee.com.br/7AcizXT8Z1",
       "detail_url": "/oferta?slug=chaleira-eletrica-jarra-cafe-cha-inox-110v-8367",
-      "price_collected_at": "2026-08-13T00:57:30.571105+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.244160+00:00"
     },
     {
       "id": 9238,
@@ -119,9 +119,9 @@
       "original_price": "248.62",
       "discount_pct": "20.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-8258n-mr7pa4agaz2a74",
-      "affiliate_link": "https://s.shopee.com.br/7VFY0eDbeZ",
+      "affiliate_link": "https://s.shopee.com.br/70JInETlty",
       "detail_url": "/oferta?slug=air-fryer-britania-42l-dura-mais-1500w-bfr38-9238",
-      "price_collected_at": "2026-08-13T00:57:30.560503+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.233152+00:00"
     },
     {
       "id": 8016,
@@ -136,9 +136,9 @@
       "original_price": "170.71",
       "discount_pct": "59.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-8262e-mjejrub4w35z78",
-      "affiliate_link": "https://s.shopee.com.br/7Kw7oLEEzW",
+      "affiliate_link": "https://s.shopee.com.br/6pzsavUPEv",
       "detail_url": "/oferta?slug=picador-de-alimentos-moedor-de-carne-mixer-eletrica-processador-cozinha-casa-alho-110v-220v-8016",
-      "price_collected_at": "2026-08-13T00:57:30.548513+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.220127+00:00"
     },
     {
       "id": 6812,
@@ -153,9 +153,9 @@
       "original_price": "49.98",
       "discount_pct": "56.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7renx-m8c8ne7qdez9a8",
-      "affiliate_link": "https://s.shopee.com.br/7psOPGCKyb",
+      "affiliate_link": "https://s.shopee.com.br/6fgSOcV2Zs",
       "detail_url": "/oferta?slug=mini-aspirador-de-po-3-em-1-a-vacuo-usb-portatil-recarregavel-se8010-6812",
-      "price_collected_at": "2026-08-13T00:57:30.536613+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.208747+00:00"
     },
     {
       "id": 6806,
@@ -170,9 +170,9 @@
       "original_price": "90.43",
       "discount_pct": "79.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd48-lupf3z3a40mxf1",
-      "affiliate_link": "https://s.shopee.com.br/7fYyCxCyJY",
+      "affiliate_link": "https://s.shopee.com.br/3qMH1PfpKJ",
       "detail_url": "/oferta?slug=batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-6806",
-      "price_collected_at": "2026-08-13T00:57:30.525717+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.196349+00:00"
     },
     {
       "id": 10464,
@@ -187,9 +187,9 @@
       "original_price": "38.00",
       "discount_pct": "58.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m5q7asdx9eiad2",
-      "affiliate_link": "https://s.shopee.com.br/19X4rbU2f",
+      "affiliate_link": "https://s.shopee.com.br/3VjQcnhMyn",
       "detail_url": "/oferta?slug=tira-manchas-alvejante-1kg-percarbonato-de-sodio-1kg-10464",
-      "price_collected_at": "2026-08-13T00:57:30.514218+00:00"
+      "price_collected_at": "2026-08-13T11:02:21.184710+00:00"
     },
     {
       "id": 10675,
@@ -204,9 +204,9 @@
       "original_price": "15.94",
       "discount_pct": "20.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134253-823p6-mp0fkzbntyq449",
-      "affiliate_link": "https://s.shopee.com.br/BSxHAaqhg",
+      "affiliate_link": "https://s.shopee.com.br/3LQ0QUi0Jk",
       "detail_url": "/oferta?slug=descascador-de-frutas-e-legumes-com-cabo-ergonomico-de-madeira-lamina-de-aco-inoxidavel-e-abridor-10675",
-      "price_collected_at": "2026-08-13T00:57:30.502981+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.951425+00:00"
     },
     {
       "id": 8362,
@@ -221,9 +221,9 @@
       "original_price": "33.18",
       "discount_pct": "56.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mkce515eat4w1c",
-      "affiliate_link": "https://s.shopee.com.br/gPDs5Ywgj",
+      "affiliate_link": "https://s.shopee.com.br/4Az7Q1epcr",
       "detail_url": "/oferta?slug=jogo-de-lencol-400-fios-ponto-palito-tecido-leve-suave-berco-solteiro-casal-queen-king-02-e-03-pecas-8362",
-      "price_collected_at": "2026-08-13T00:57:30.492343+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.936453+00:00"
     },
     {
       "id": 10113,
@@ -238,9 +238,9 @@
       "original_price": "35.00",
       "discount_pct": "52.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-md3o52t872giaa",
-      "affiliate_link": "https://s.shopee.com.br/qie4OYJLk",
+      "affiliate_link": "https://s.shopee.com.br/40fhDifSxo",
       "detail_url": "/oferta?slug=arranjo-c-3-trepadeira-folha-de-hera-vaso-trancado-marrom-10113",
-      "price_collected_at": "2026-08-13T00:57:30.480082+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.926204+00:00"
     },
     {
       "id": 10922,
@@ -255,9 +255,9 @@
       "original_price": "32.06",
       "discount_pct": "47.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-mqdb9to75udd59",
-      "affiliate_link": "https://s.shopee.com.br/9V0cOK1JlP",
+      "affiliate_link": "https://s.shopee.com.br/5Arebrb1b1",
       "detail_url": "/oferta?slug=percarbonato-de-sodio-100-puro-tira-manchas-roupas-brancas-e-coloridas-limpeza-em-geral-10922",
-      "price_collected_at": "2026-08-13T00:57:30.467006+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.916427+00:00"
     },
     {
       "id": 8943,
@@ -272,9 +272,9 @@
       "original_price": "49.63",
       "discount_pct": "68.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rdyw-lzcksj98pb0nf8",
-      "affiliate_link": "https://s.shopee.com.br/9KhCC11x6M",
+      "affiliate_link": "https://s.shopee.com.br/50YEPYbevy",
       "detail_url": "/oferta?slug=escova-3-em-1-vassoura-rodo-gap-limpeza-esfregao-mop-limpa-8943",
-      "price_collected_at": "2026-08-13T00:57:30.455863+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.905651+00:00"
     },
     {
       "id": 10595,
@@ -289,9 +289,9 @@
       "original_price": "15.94",
       "discount_pct": "20.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134253-823pt-mp0fl7fbnksvba",
-      "affiliate_link": "https://s.shopee.com.br/9pdSmw035R",
+      "affiliate_link": "https://s.shopee.com.br/4qEoDFcIGv",
       "detail_url": "/oferta?slug=descascador-de-aco-inoxidavel-com-cabo-de-madeira-e-abridor-integrado-para-frutas-e-legumes-10595",
-      "price_collected_at": "2026-08-13T00:57:30.443004+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.894554+00:00"
     },
     {
       "id": 6801,
@@ -306,9 +306,9 @@
       "original_price": "25.00",
       "discount_pct": "60.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mctxxpi1l4qad6",
-      "affiliate_link": "https://s.shopee.com.br/4fvMdRFaoJ",
+      "affiliate_link": "https://s.shopee.com.br/7psPmlI4fB",
       "detail_url": "/oferta?slug=kit-6121824-panos-de-limpeza-aco-premium-arear-panela-fogao-toalha-louca-tira-gordura-reutilizavel-6801",
-      "price_collected_at": "2026-08-13T00:57:30.431906+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.883665+00:00"
     },
     {
       "id": 6802,
@@ -323,9 +323,9 @@
       "original_price": "49.84",
       "discount_pct": "36.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd6x-luv5vclgwaxb45",
-      "affiliate_link": "https://s.shopee.com.br/4qEmpkExTK",
+      "affiliate_link": "https://s.shopee.com.br/7fYzaSIi08",
       "detail_url": "/oferta?slug=mesa-de-cabeceira-retro-compacta-com-nicho-para-quarto-sala-casal-ou-solteiro-palma-6802",
-      "price_collected_at": "2026-08-13T00:57:30.420405+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.872894+00:00"
     },
     {
       "id": 9464,
@@ -340,9 +340,9 @@
       "original_price": "14.69",
       "discount_pct": "68.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-823rt-mp4mcmnyrg245a",
-      "affiliate_link": "https://s.shopee.com.br/5ArdEMDgnM",
+      "affiliate_link": "https://s.shopee.com.br/5LB4oARaje",
       "detail_url": "/oferta?slug=cabelo-de-faixa-larga-de-7-cm-protege-gorro-de-seda-acetinada-para-dormir-9464",
-      "price_collected_at": "2026-08-13T00:57:30.408320+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.862238+00:00"
     },
     {
       "id": 8361,
@@ -357,9 +357,9 @@
       "original_price": "14.93",
       "discount_pct": "33.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mhua3erpy8ee79",
-      "affiliate_link": "https://s.shopee.com.br/40ffqDI8A7",
+      "affiliate_link": "https://s.shopee.com.br/5q7LP5Pgij",
       "detail_url": "/oferta?slug=kit-com-100-unidades-de-tampa-de-plastico-descartavel-para-alimento-8361",
-      "price_collected_at": "2026-08-13T00:57:30.396371+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.851915+00:00"
     },
     {
       "id": 6805,
@@ -374,9 +374,9 @@
       "original_price": "29.98",
       "discount_pct": "40.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820lm-mohh8j4tjpc0e3",
-      "affiliate_link": "https://s.shopee.com.br/4Az62WHUp8",
+      "affiliate_link": "https://s.shopee.com.br/5fnvCmQK3g",
       "detail_url": "/oferta?slug=percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6805",
-      "price_collected_at": "2026-08-13T00:57:30.384207+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.841156+00:00"
     },
     {
       "id": 6804,
@@ -391,9 +391,9 @@
       "original_price": "14.93",
       "discount_pct": "33.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-824j0-medc35ydcm4m9c",
-      "affiliate_link": "https://s.shopee.com.br/4LIWEpGrU9",
+      "affiliate_link": "https://s.shopee.com.br/6AkBnhOQ2l",
       "detail_url": "/oferta?slug=percarbonato-de-sodio-100-puro-limpeza-em-geral-tira-manchas-roupas-brancas-500g1kg-2kg-6804",
-      "price_collected_at": "2026-08-13T00:57:30.368939+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.829893+00:00"
     },
     {
       "id": 6797,
@@ -408,9 +408,9 @@
       "original_price": "30.00",
       "discount_pct": "54.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820m5-mo7pypmcmww19c",
-      "affiliate_link": "https://s.shopee.com.br/4VbwR8GE9A",
+      "affiliate_link": "https://s.shopee.com.br/60QlbOP3Ni",
       "detail_url": "/oferta?slug=jogo-de-lencol-400-fios-micropercal-com-fronha-em-ponto-palito-6797",
-      "price_collected_at": "2026-08-13T00:57:30.356580+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.819821+00:00"
     },
     {
       "id": 6799,
@@ -425,9 +425,1131 @@
       "original_price": "32.06",
       "discount_pct": "47.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820lm-mqdb9tob0xdu3d",
-      "affiliate_link": "https://s.shopee.com.br/gPDs5UovP",
+      "affiliate_link": "https://s.shopee.com.br/6VN2CJN9Mn",
       "detail_url": "/oferta?slug=percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6799",
-      "price_collected_at": "2026-08-13T00:57:30.324335+00:00"
+      "price_collected_at": "2026-08-13T11:02:20.805822+00:00"
+    },
+    {
+      "id": 11048,
+      "slug": "bolsa-arezzo-shopping-tamanho-grande-lisa-com-carteira-cor-preto-11048",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Bolsa Arezzo Shopping Tamanho Grande Lisa Com Carteira Cor Preto",
+      "short_description": "",
+      "current_price": "238.00",
+      "original_price": "399.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959322-MLA99457215616_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2AVLMbq",
+      "detail_url": "/oferta?slug=bolsa-arezzo-shopping-tamanho-grande-lisa-com-carteira-cor-preto-11048",
+      "price_collected_at": "2026-08-13T11:02:11.790702+00:00"
+    },
+    {
+      "id": 10258,
+      "slug": "mochila-feminina-impermeavel-reforcada-com-capacidade-para-laptop-de-156-polegadas-24l-mochila-para-viagens-diarias-e-para-a-escola-10258",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mochila feminina, impermeável, reforçada, com capacidade para laptop de 15,6 polegadas, 24L, mochila para viagens diárias e para a escola",
+      "short_description": "",
+      "current_price": "79.00",
+      "original_price": "269.00",
+      "discount_pct": "71.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_696887-MLA114688319821_072026-AB.webp",
+      "affiliate_link": "https://meli.la/1yoLwn8",
+      "detail_url": "/oferta?slug=mochila-feminina-impermeavel-reforcada-com-capacidade-para-laptop-de-156-polegadas-24l-mochila-para-viagens-diarias-e-para-a-escola-10258",
+      "price_collected_at": "2026-08-13T11:02:11.776443+00:00"
+    },
+    {
+      "id": 10499,
+      "slug": "kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping-verde-camuflado-tamanho-unico-10499",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit Chapéu Boonie Balaclava Uv Dobrável Pesca Moto Camping Verde Camuflado Tamanho Único",
+      "short_description": "",
+      "current_price": "40.00",
+      "original_price": "58.00",
+      "discount_pct": "31.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_831455-MLB114629696293_072026-AB--kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping.webp",
+      "affiliate_link": "https://meli.la/1xDn4BE",
+      "detail_url": "/oferta?slug=kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping-verde-camuflado-tamanho-unico-10499",
+      "price_collected_at": "2026-08-13T11:02:11.759264+00:00"
+    },
+    {
+      "id": 5843,
+      "slug": "kit-5-camisetas-basicas-masculina-dry-fit-lisa-tradicional-variado-g-5843",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 5 Camisetas Básicas Masculina Dry Fit Lisa Tradicional Variado G",
+      "short_description": "",
+      "current_price": "39.00",
+      "original_price": "77.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_662777-MLB115247096341_072026-AB--kit-5-camisetas-basicas-masculina-dry-fit-lisa-tradicional.webp",
+      "affiliate_link": "https://meli.la/2PUcEGE",
+      "detail_url": "/oferta?slug=kit-5-camisetas-basicas-masculina-dry-fit-lisa-tradicional-variado-g-5843",
+      "price_collected_at": "2026-08-13T11:02:11.740008+00:00"
+    },
+    {
+      "id": 10312,
+      "slug": "mochila-masculina-impermeavel-reforcada-com-capacidade-ampliada-de-30-42l-adequada-para-portatil-viagens-diarias-cor-preta-10312",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mochila masculina, impermeável, reforçada, com capacidade ampliada de 30-42L, adequada para portátil, viagens diárias, cor preta",
+      "short_description": "",
+      "current_price": "86.00",
+      "original_price": "218.00",
+      "discount_pct": "61.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_718229-MLA113595305320_072026-AB.webp",
+      "affiliate_link": "https://meli.la/1RR8rKd",
+      "detail_url": "/oferta?slug=mochila-masculina-impermeavel-reforcada-com-capacidade-ampliada-de-30-42l-adequada-para-portatil-viagens-diarias-cor-preta-10312",
+      "price_collected_at": "2026-08-13T11:02:11.727273+00:00"
+    },
+    {
+      "id": 8791,
+      "slug": "mochila-jiesipote-a-prova-dagua-reforcada-expansivel-cor-preto-8791",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mochila jiesipote À Prova D'água Reforçada Expansível Cor Preto",
+      "short_description": "",
+      "current_price": "83.00",
+      "original_price": "269.00",
+      "discount_pct": "69.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_974980-MLA112776013576_062026-AB.webp",
+      "affiliate_link": "https://meli.la/1VvxLdz",
+      "detail_url": "/oferta?slug=mochila-jiesipote-a-prova-dagua-reforcada-expansivel-cor-preto-8791",
+      "price_collected_at": "2026-08-13T11:02:11.714869+00:00"
+    },
+    {
+      "id": 10583,
+      "slug": "cadeira-gamer-sweet-studio-ergonomica-reclinavel-em-couro-sintetico-azul-com-apoio-de-pes-10583",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira Gamer Sweet Studio Ergonômica Reclinável em Couro Sintético Azul com Apoio de Pés",
+      "short_description": "",
+      "current_price": "387.00",
+      "original_price": "645.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_899728-MLA113996191628_072026-AB.webp",
+      "affiliate_link": "https://meli.la/2495zUp",
+      "detail_url": "/oferta?slug=cadeira-gamer-sweet-studio-ergonomica-reclinavel-em-couro-sintetico-azul-com-apoio-de-pes-10583",
+      "price_collected_at": "2026-08-13T11:02:11.702510+00:00"
+    },
+    {
+      "id": 2960,
+      "slug": "kit-10-pote-hermeticos-empilhaveis-porta-mantimento-rebirth-2960",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Pote Herméticos Empilháveis Porta Mantimento Rebirth",
+      "short_description": "",
+      "current_price": "76.00",
+      "original_price": "199.00",
+      "discount_pct": "62.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_880391-MLA110075353803_042026-AB.webp",
+      "affiliate_link": "https://meli.la/1iHDSog",
+      "detail_url": "/oferta?slug=kit-10-pote-hermeticos-empilhaveis-porta-mantimento-rebirth-2960",
+      "price_collected_at": "2026-08-13T11:02:11.688411+00:00"
+    },
+    {
+      "id": 11005,
+      "slug": "aparelho-de-jantar-20-pecas-vidro-opaline-para-mesa-posta-branco-floral-11005",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Aparelho De Jantar 20 Peças Vidro Opaline Para Mesa Posta Branco Floral",
+      "short_description": "",
+      "current_price": "198.00",
+      "original_price": "399.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_999748-MLB114193618598_082026-AB--aparelho-de-jantar-20-pecas-vidro-opaline-para-mesa-posta.webp",
+      "affiliate_link": "https://meli.la/2kT2XEZ",
+      "detail_url": "/oferta?slug=aparelho-de-jantar-20-pecas-vidro-opaline-para-mesa-posta-branco-floral-11005",
+      "price_collected_at": "2026-08-13T11:02:11.677048+00:00"
+    },
+    {
+      "id": 4409,
+      "slug": "jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-verdeverde-lisa-4409",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Toalhas Buddemeyer Bella Extra Soft Banho 4",
+      "short_description": "",
+      "current_price": "143.00",
+      "original_price": "229.00",
+      "discount_pct": "38.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_790673-MLA110892473838_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1eVamf1",
+      "detail_url": "/oferta?slug=jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-verdeverde-lisa-4409",
+      "price_collected_at": "2026-08-13T11:02:11.665785+00:00"
+    },
+    {
+      "id": 4252,
+      "slug": "jogo-de-toalhas-buddemeyer-atena-fio-penteado-banho-verdeverde-claro-4-pecas-4252",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo de Toalhas Buddemeyer Atena Fio Penteado Banho Verde/Verde Claro 4 peças",
+      "short_description": "",
+      "current_price": "169.00",
+      "original_price": "309.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_809096-MLA100187134945_122025-AB.webp",
+      "affiliate_link": "https://meli.la/2K3Foq8",
+      "detail_url": "/oferta?slug=jogo-de-toalhas-buddemeyer-atena-fio-penteado-banho-verdeverde-claro-4-pecas-4252",
+      "price_collected_at": "2026-08-13T11:02:11.654723+00:00"
+    },
+    {
+      "id": 11036,
+      "slug": "jogo-de-panelas-7-ceramic-life-smart-plus-areia-brinox-areia-11036",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Panelas 7 Ceramic Life Smart Plus Areia Brinox Areia",
+      "short_description": "",
+      "current_price": "460.00",
+      "original_price": "999.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_928703-MLA111907915483_052026-AB.webp",
+      "affiliate_link": "https://meli.la/1gdfYf7",
+      "detail_url": "/oferta?slug=jogo-de-panelas-7-ceramic-life-smart-plus-areia-brinox-areia-11036",
+      "price_collected_at": "2026-08-13T11:02:11.644422+00:00"
+    },
+    {
+      "id": 11047,
+      "slug": "estrutura-de-cama-de-metal-solteiro-com-espaco-de-armazena-cor-preto-hot-wheels-11047",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Estrutura De Cama De Metal, Solteiro, Com Espaço De Armazena Cor Preto Hot Wheels",
+      "short_description": "",
+      "current_price": "210.00",
+      "original_price": "279.00",
+      "discount_pct": "25.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_748818-MLA84661477595_052025-AB.webp",
+      "affiliate_link": "https://meli.la/1ZfvK6p",
+      "detail_url": "/oferta?slug=estrutura-de-cama-de-metal-solteiro-com-espaco-de-armazena-cor-preto-hot-wheels-11047",
+      "price_collected_at": "2026-08-13T11:02:11.617046+00:00"
+    },
+    {
+      "id": 10332,
+      "slug": "jogo-de-panelas-ceramico-antiaderente-inducao-10-pecas-10332",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Panelas Cerâmico Antiaderente Indução 10 Peças",
+      "short_description": "",
+      "current_price": "379.00",
+      "original_price": "482.00",
+      "discount_pct": "21.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_713526-MLA96104001241_102025-AB.webp",
+      "affiliate_link": "https://meli.la/1nraiNJ",
+      "detail_url": "/oferta?slug=jogo-de-panelas-ceramico-antiaderente-inducao-10-pecas-10332",
+      "price_collected_at": "2026-08-13T11:02:11.605838+00:00"
+    },
+    {
+      "id": 9847,
+      "slug": "jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-azul-serena-azul-naval-bosco-9847",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Toalhas 4 Pçs Fio Cardado 100% Algodão Bosco Karsten Azul Serena/ Azul Naval Bosco",
+      "short_description": "",
+      "current_price": "105.00",
+      "original_price": "149.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_800180-MLA96101701387_102025-AB.webp",
+      "affiliate_link": "https://meli.la/1wbA6hX",
+      "detail_url": "/oferta?slug=jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-azul-serena-azul-naval-bosco-9847",
+      "price_collected_at": "2026-08-13T11:02:11.592448+00:00"
+    },
+    {
+      "id": 6592,
+      "slug": "cesto-de-roupa-bambu-retangular-de-72l-com-tampa-e-forro-de-linho-natural-6592",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cesto de Roupa Bambu Retangular de 72L com Tampa e Forro de Linho",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "77.00",
+      "discount_pct": "23.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802693-MLA107519536904_032026-AB.webp",
+      "affiliate_link": "https://meli.la/2a2Pcya",
+      "detail_url": "/oferta?slug=cesto-de-roupa-bambu-retangular-de-72l-com-tampa-e-forro-de-linho-natural-6592",
+      "price_collected_at": "2026-08-13T11:02:11.579418+00:00"
+    },
+    {
+      "id": 10177,
+      "slug": "espelho-100x50-organico-corpo-inteiro-grande-moldura-caramelo-10177",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Espelho 100x50 Orgânico Corpo Inteiro Grande Moldura Caramelo",
+      "short_description": "",
+      "current_price": "91.00",
+      "original_price": "399.00",
+      "discount_pct": "77.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_936790-MLA96100703939_102025-AB.webp",
+      "affiliate_link": "https://meli.la/2HDJw3s",
+      "detail_url": "/oferta?slug=espelho-100x50-organico-corpo-inteiro-grande-moldura-caramelo-10177",
+      "price_collected_at": "2026-08-13T11:02:11.568554+00:00"
+    },
+    {
+      "id": 10944,
+      "slug": "cadeira-de-escritorio-sweet-studio-ergonomica-preta-com-apoio-de-cabeca-e-suporte-lombar-10944",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira de Escritório Sweet Studio Ergonômica Preta, com Apoio de Cabeça e Suporte Lombar",
+      "short_description": "",
+      "current_price": "329.00",
+      "original_price": "622.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_910116-MLA108277670580_032026-AB.webp",
+      "affiliate_link": "https://meli.la/2tEA7RP",
+      "detail_url": "/oferta?slug=cadeira-de-escritorio-sweet-studio-ergonomica-preta-com-apoio-de-cabeca-e-suporte-lombar-10944",
+      "price_collected_at": "2026-08-13T11:02:11.558126+00:00"
+    },
+    {
+      "id": 11046,
+      "slug": "lustre-led-sala-moderno-60w-3-arcos-pendente-luminaria-teto-127220v-dourado-11046",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Lustre Led Sala Moderno 60w, 3 Arcos Pendente Luminária Teto 127/220v Dourado",
+      "short_description": "",
+      "current_price": "149.00",
+      "original_price": "299.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_968473-MLB113373590448_072026-AB--lustre-led-sala-moderno-60w-3-arcos-pendente-luminaria-teto.webp",
+      "affiliate_link": "https://meli.la/134jeLi",
+      "detail_url": "/oferta?slug=lustre-led-sala-moderno-60w-3-arcos-pendente-luminaria-teto-127220v-dourado-11046",
+      "price_collected_at": "2026-08-13T11:02:11.542397+00:00"
+    },
+    {
+      "id": 7118,
+      "slug": "jogo-de-toalhas-buddemeyer-atena-fio-penteado-banho-azulazul-claro-4-pecas-azul-claroazul-7118",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Toalhas Buddemeyer Atena Fio Penteado Banho Azul/azul Claro 4 Peças",
+      "short_description": "",
+      "current_price": "169.00",
+      "original_price": "309.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_765723-MLA100186800377_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1P3LnsA",
+      "detail_url": "/oferta?slug=jogo-de-toalhas-buddemeyer-atena-fio-penteado-banho-azulazul-claro-4-pecas-azul-claroazul-7118",
+      "price_collected_at": "2026-08-13T11:02:11.531228+00:00"
+    },
+    {
+      "id": 10480,
+      "slug": "cadeira-de-escritorio-columbus-presidente-ergonomica-cinza-mesh-10480",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira De Escritório Columbus Presidente Ergonomica Cinza Mesh",
+      "short_description": "",
+      "current_price": "346.00",
+      "original_price": "589.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_905570-MLA95700627584_102025-AB.webp",
+      "affiliate_link": "https://meli.la/1RWbttu",
+      "detail_url": "/oferta?slug=cadeira-de-escritorio-columbus-presidente-ergonomica-cinza-mesh-10480",
+      "price_collected_at": "2026-08-13T11:02:11.520742+00:00"
+    },
+    {
+      "id": 9671,
+      "slug": "jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-9671",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Toalhas 4 Pçs Fio Cardado 100% Algodão Bosco Karsten",
+      "short_description": "",
+      "current_price": "105.00",
+      "original_price": "149.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_733667-MLA95696781618_102025-AB.webp",
+      "affiliate_link": "https://meli.la/1wR5YG1",
+      "detail_url": "/oferta?slug=jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-9671",
+      "price_collected_at": "2026-08-13T11:02:11.507909+00:00"
+    },
+    {
+      "id": 9637,
+      "slug": "cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-9637",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
+      "short_description": "",
+      "current_price": "522.00",
+      "original_price": "906.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1nnYp49",
+      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-9637",
+      "price_collected_at": "2026-08-13T11:02:11.496615+00:00"
+    },
+    {
+      "id": 935,
+      "slug": "jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-grafitecinza-lisa-935",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Toalhas Buddemeyer Bella Extra Soft Banho 4 Grafite/cinza Lisa",
+      "short_description": "",
+      "current_price": "159.00",
+      "original_price": "229.00",
+      "discount_pct": "31.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_992849-MLA100187157773_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1fHztYw",
+      "detail_url": "/oferta?slug=jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-grafitecinza-lisa-935",
+      "price_collected_at": "2026-08-13T11:02:11.486127+00:00"
+    },
+    {
+      "id": 7992,
+      "slug": "vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco-7992",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Vaso Sanitário Tubrax Monobloco VAB0002 Caixa Acoplada Completo Privada Cor Branco",
+      "short_description": "",
+      "current_price": "523.00",
+      "original_price": "894.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_632053-MLA96114658485_102025-AB.webp",
+      "affiliate_link": "https://meli.la/19EYiDt",
+      "detail_url": "/oferta?slug=vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco-7992",
+      "price_collected_at": "2026-08-13T11:02:11.474648+00:00"
+    },
+    {
+      "id": 809,
+      "slug": "kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Pote De Vidro Marmita Hermético 370ml Freezer Fitness Rishon",
+      "short_description": "",
+      "current_price": "73.00",
+      "original_price": "159.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_605578-MLA113633610823_062026-AB.webp",
+      "affiliate_link": "https://meli.la/2kBbZys",
+      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
+      "price_collected_at": "2026-08-13T11:02:11.464135+00:00"
+    },
+    {
+      "id": 8724,
+      "slug": "kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto-8724",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 2 Refletor Super Led 400w Ip67 Holofote Bivolt Prova D'água Branco Frio 6500k Preto",
+      "short_description": "",
+      "current_price": "44.00",
+      "original_price": "99.00",
+      "discount_pct": "56.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_753073-MLA110946060098_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2zjSoeV",
+      "detail_url": "/oferta?slug=kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto-8724",
+      "price_collected_at": "2026-08-13T11:02:11.441999+00:00"
+    },
+    {
+      "id": 178,
+      "slug": "kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Rishon",
+      "short_description": "",
+      "current_price": "93.00",
+      "original_price": "188.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_900432-MLA113518359539_062026-AB.webp",
+      "affiliate_link": "https://meli.la/15a74wK",
+      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
+      "price_collected_at": "2026-08-13T11:02:11.429282+00:00"
+    },
+    {
+      "id": 11045,
+      "slug": "travesseiro-cervical-borboleta-memory-foam-alivio-dor-cervic-11045",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Travesseiro Cervical Borboleta Memory Foam Alívio Dor Cervic",
+      "short_description": "",
+      "current_price": "173.00",
+      "original_price": "298.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_723979-MLB101880455787_122025-AB--travesseiro-cervical-borboleta-memory-foam-alivio-dor-cervic.webp",
+      "affiliate_link": "https://meli.la/2PU88A5",
+      "detail_url": "/oferta?slug=travesseiro-cervical-borboleta-memory-foam-alivio-dor-cervic-11045",
+      "price_collected_at": "2026-08-13T11:02:11.389807+00:00"
+    },
+    {
+      "id": 11028,
+      "slug": "flash-limp-mop-giratorio-fit-balde-8-litros-mop5010-11028",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Flash Limp - Mop Giratório Fit, Balde 8 litros - MOP5010",
+      "short_description": "",
+      "current_price": "59.54",
+      "original_price": "139.88",
+      "discount_pct": "57.00",
+      "image_url": "https://m.media-amazon.com/images/I/71z-3rqPaUL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B07NQ9PFKN?linkCode=sl2&tag=desconto.bot-20&linkId=a467ab4b1d5fed8d806253426ab58a74&th=1",
+      "detail_url": "/oferta?slug=flash-limp-mop-giratorio-fit-balde-8-litros-mop5010-11028",
+      "price_collected_at": "2026-08-13T11:01:39.390083+00:00"
+    },
+    {
+      "id": 11023,
+      "slug": "anuncio-patrocinado-camiseta-basica-feminina-gugi-lisa-sem-estampa-100-algodao-premium-11023",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Anúncio patrocinado – Camiseta Básica Feminina GuGi Lisa Sem Estampa 100% Algodão Premium",
+      "short_description": "",
+      "current_price": "34.90",
+      "original_price": "69.90",
+      "discount_pct": "50.00",
+      "image_url": "https://m.media-amazon.com/images/I/512PEt-bNHL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0CSGWZPPP?linkCode=sl2&tag=desconto.bot-20&linkId=00ec4d0726a1c74b4d8d7bdbb3111171&th=1",
+      "detail_url": "/oferta?slug=anuncio-patrocinado-camiseta-basica-feminina-gugi-lisa-sem-estampa-100-algodao-premium-11023",
+      "price_collected_at": "2026-08-13T11:01:39.376822+00:00"
+    },
+    {
+      "id": 2530,
+      "slug": "moda-com-proposito-nova-edicao-manifesto-pela-grande-virada-2530",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Moda com propósito (Nova edição): Manifesto pela grande virada",
+      "short_description": "",
+      "current_price": "56.01",
+      "original_price": "87.90",
+      "discount_pct": "36.00",
+      "image_url": "https://m.media-amazon.com/images/I/61PCR7dD6sL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8584392769?linkCode=sl2&tag=desconto.bot-20&linkId=6bd237d3079ae30c8bd2699dc5dd14c8&th=1",
+      "detail_url": "/oferta?slug=moda-com-proposito-nova-edicao-manifesto-pela-grande-virada-2530",
+      "price_collected_at": "2026-08-13T11:01:39.362464+00:00"
+    },
+    {
+      "id": 2772,
+      "slug": "modativismo-quando-a-moda-encontra-a-luta-2772",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Modativismo: Quando a moda encontra a luta",
+      "short_description": "",
+      "current_price": "44.00",
+      "original_price": "62.90",
+      "discount_pct": "30.00",
+      "image_url": "https://m.media-amazon.com/images/I/81eG7HN8jfL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8584393668?linkCode=sl2&tag=desconto.bot-20&linkId=0aef83488f5c8ef2ddc745fb333191f9&th=1",
+      "detail_url": "/oferta?slug=modativismo-quando-a-moda-encontra-a-luta-2772",
+      "price_collected_at": "2026-08-13T11:01:39.345508+00:00"
+    },
+    {
+      "id": 11044,
+      "slug": "as-marcas-do-vestir-entre-a-autoestima-a-psicanalise-e-a-moda-11044",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "As Marcas do Vestir: Entre a Autoestima, a Psicanálise e a Moda",
+      "short_description": "",
+      "current_price": "38.65",
+      "original_price": "61.00",
+      "discount_pct": "37.00",
+      "image_url": "https://m.media-amazon.com/images/I/81MQGy9rvFL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/6525038618?linkCode=sl2&tag=desconto.bot-20&linkId=a804779d4356afecfa27edd1d4d3e024&th=1",
+      "detail_url": "/oferta?slug=as-marcas-do-vestir-entre-a-autoestima-a-psicanalise-e-a-moda-11044",
+      "price_collected_at": "2026-08-13T11:01:39.323174+00:00"
+    },
+    {
+      "id": 11025,
+      "slug": "historia-e-cultura-de-moda-11025",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "História e Cultura de Moda",
+      "short_description": "",
+      "current_price": "60.27",
+      "original_price": "69.00",
+      "discount_pct": "13.00",
+      "image_url": "https://m.media-amazon.com/images/I/91NqzWnGtiL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8560166513?linkCode=sl2&tag=desconto.bot-20&linkId=a2058f0e3f18a677945896bfbfd0c731&th=1",
+      "detail_url": "/oferta?slug=historia-e-cultura-de-moda-11025",
+      "price_collected_at": "2026-08-13T11:01:39.309377+00:00"
+    },
+    {
+      "id": 2520,
+      "slug": "nos-bastidores-da-vogue-a-historia-da-revista-que-transformou-o-mundo-da-moda-2520",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Nos bastidores da Vogue: A história da revista que transformou o mundo da moda",
+      "short_description": "",
+      "current_price": "88.60",
+      "original_price": "104.90",
+      "discount_pct": "16.00",
+      "image_url": "https://m.media-amazon.com/images/I/71QmJl7qPpL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/6555873205?linkCode=sl2&tag=desconto.bot-20&linkId=aed545a295fedd113e1fb23b9beef63c&th=1",
+      "detail_url": "/oferta?slug=nos-bastidores-da-vogue-a-historia-da-revista-que-transformou-o-mundo-da-moda-2520",
+      "price_collected_at": "2026-08-13T11:01:39.296506+00:00"
+    },
+    {
+      "id": 11026,
+      "slug": "fashion-new-edition-the-definitive-visual-guide-11026",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Fashion, New Edition: The Definitive Visual Guide",
+      "short_description": "",
+      "current_price": "121.48",
+      "original_price": "258.42",
+      "discount_pct": "53.00",
+      "image_url": "https://m.media-amazon.com/images/I/61gd+Ak8f9L._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/1465486402?linkCode=sl2&tag=desconto.bot-20&linkId=218adf943adf86db57b169dbfb2f1960&th=1",
+      "detail_url": "/oferta?slug=fashion-new-edition-the-definitive-visual-guide-11026",
+      "price_collected_at": "2026-08-13T11:01:39.281379+00:00"
+    },
+    {
+      "id": 2528,
+      "slug": "a-moda-e-seu-papel-social-classe-genero-e-identidade-das-roupas-2528",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "A moda e seu papel social: Classe, Gênero e Identidade das Roupas",
+      "short_description": "",
+      "current_price": "94.99",
+      "original_price": "160.00",
+      "discount_pct": "41.00",
+      "image_url": "https://m.media-amazon.com/images/I/816bLPalgmL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8573598107?linkCode=sl2&tag=desconto.bot-20&linkId=14d2f074e42bb5452d70f2b8b98648ad&th=1",
+      "detail_url": "/oferta?slug=a-moda-e-seu-papel-social-classe-genero-e-identidade-das-roupas-2528",
+      "price_collected_at": "2026-08-13T11:01:39.267518+00:00"
+    },
+    {
+      "id": 3839,
+      "slug": "teoria-de-moda-sociedade-imagem-e-consumo-3839",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Teoria de moda: sociedade, imagem e consumo",
+      "short_description": "",
+      "current_price": "57.80",
+      "original_price": "68.00",
+      "discount_pct": "15.00",
+      "image_url": "https://m.media-amazon.com/images/I/71lnZMS8OpL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8560166181?linkCode=sl2&tag=desconto.bot-20&linkId=3a9380d899e6a90867850ad2d32e0323&th=1",
+      "detail_url": "/oferta?slug=teoria-de-moda-sociedade-imagem-e-consumo-3839",
+      "price_collected_at": "2026-08-13T11:01:39.252362+00:00"
+    },
+    {
+      "id": 3465,
+      "slug": "moda-uma-trama-filosofica-3465",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Moda: uma Trama Filosófica",
+      "short_description": "",
+      "current_price": "55.25",
+      "original_price": "64.00",
+      "discount_pct": "14.00",
+      "image_url": "https://m.media-amazon.com/images/I/41BwfZlo3uL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/6550290678?linkCode=sl2&tag=desconto.bot-20&linkId=30bc51825c2b6bd6051c4a331af542e3&th=1",
+      "detail_url": "/oferta?slug=moda-uma-trama-filosofica-3465",
+      "price_collected_at": "2026-08-13T11:01:39.239052+00:00"
+    },
+    {
+      "id": 3261,
+      "slug": "a-moda-imita-a-vida-nova-edicao-como-construir-uma-marca-de-moda-3261",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "A moda imita a vida (Nova edição): Como construir uma marca de moda",
+      "short_description": "",
+      "current_price": "67.43",
+      "original_price": "87.90",
+      "discount_pct": "23.00",
+      "image_url": "https://m.media-amazon.com/images/I/711jEq5mC9L._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8584391622?linkCode=sl2&tag=desconto.bot-20&linkId=4000d8cdb499d3b9ebcb2804080ace07&th=1",
+      "detail_url": "/oferta?slug=a-moda-imita-a-vida-nova-edicao-como-construir-uma-marca-de-moda-3261",
+      "price_collected_at": "2026-08-13T11:01:39.226512+00:00"
+    },
+    {
+      "id": 11022,
+      "slug": "a-moda-e-sintoma-da-cultura-11022",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "A Moda é Sintoma da Cultura?",
+      "short_description": "",
+      "current_price": "45.00",
+      "original_price": "50.00",
+      "discount_pct": "10.00",
+      "image_url": "https://m.media-amazon.com/images/I/514O1BqzlxL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/6550290260?linkCode=sl2&tag=desconto.bot-20&linkId=ef29a91e977084df6a59974368dcbf0e&th=1",
+      "detail_url": "/oferta?slug=a-moda-e-sintoma-da-cultura-11022",
+      "price_collected_at": "2026-08-13T11:01:39.213841+00:00"
+    },
+    {
+      "id": 2532,
+      "slug": "moda-e-comunicacao-2532",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Moda é Comunicação?",
+      "short_description": "",
+      "current_price": "73.88",
+      "original_price": "81.40",
+      "discount_pct": "9.00",
+      "image_url": "https://m.media-amazon.com/images/I/71FNFcBxUDL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/6556754897?linkCode=sl2&tag=desconto.bot-20&linkId=19c30f9885eb459fe4e7a1763044df12&th=1",
+      "detail_url": "/oferta?slug=moda-e-comunicacao-2532",
+      "price_collected_at": "2026-08-13T11:01:39.199427+00:00"
+    },
+    {
+      "id": 2523,
+      "slug": "as-engrenagens-da-moda-2523",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "As engrenagens da moda",
+      "short_description": "",
+      "current_price": "40.70",
+      "original_price": "55.00",
+      "discount_pct": "26.00",
+      "image_url": "https://m.media-amazon.com/images/I/61r26JRBs1L._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/6586493900?linkCode=sl2&tag=desconto.bot-20&linkId=740e67e69774eb1247c211fd294c7789&th=1",
+      "detail_url": "/oferta?slug=as-engrenagens-da-moda-2523",
+      "price_collected_at": "2026-08-13T11:01:39.187442+00:00"
+    },
+    {
+      "id": 5186,
+      "slug": "negras-maneiras-de-vestir-moda-memoria-e-arte-afro-brasileira-5186",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Negras maneiras de vestir: Moda, memória e arte afro-brasileira",
+      "short_description": "",
+      "current_price": "62.90",
+      "original_price": "69.90",
+      "discount_pct": "10.00",
+      "image_url": "https://m.media-amazon.com/images/I/71dNfXvb2aL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8584395040?linkCode=sl2&tag=desconto.bot-20&linkId=74503a5af2ba2a3d9bdf46468fa31bef&th=1",
+      "detail_url": "/oferta?slug=negras-maneiras-de-vestir-moda-memoria-e-arte-afro-brasileira-5186",
+      "price_collected_at": "2026-08-13T11:01:39.173579+00:00"
+    },
+    {
+      "id": 2524,
+      "slug": "como-compreender-moda-guia-rapido-para-entender-estilos-2524",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Como compreender moda: Guia Rápido Para Entender Estilos",
+      "short_description": "",
+      "current_price": "77.92",
+      "original_price": "104.00",
+      "discount_pct": "25.00",
+      "image_url": "https://m.media-amazon.com/images/I/71R1iYifGAL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8539601621?linkCode=sl2&tag=desconto.bot-20&linkId=cf14fc2bcf13183ae0ef22b7f5be0b67&th=1",
+      "detail_url": "/oferta?slug=como-compreender-moda-guia-rapido-para-entender-estilos-2524",
+      "price_collected_at": "2026-08-13T11:01:39.160875+00:00"
+    },
+    {
+      "id": 2522,
+      "slug": "o-cerebro-e-a-moda-2522",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "O cérebro e a moda",
+      "short_description": "",
+      "current_price": "63.00",
+      "original_price": "84.00",
+      "discount_pct": "25.00",
+      "image_url": "https://m.media-amazon.com/images/I/81awiqKy3EL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/6555363738?linkCode=sl2&tag=desconto.bot-20&linkId=612e1f1ad53e3759651ff72d6b36bf1b&th=1",
+      "detail_url": "/oferta?slug=o-cerebro-e-a-moda-2522",
+      "price_collected_at": "2026-08-13T11:01:39.147665+00:00"
+    },
+    {
+      "id": 3167,
+      "slug": "consumo-de-moda-a-relacao-pessoa-objeto-3167",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Consumo de Moda: a Relação Pessoa-objeto",
+      "short_description": "",
+      "current_price": "49.85",
+      "original_price": "57.00",
+      "discount_pct": "13.00",
+      "image_url": "https://m.media-amazon.com/images/I/91uMHvPz-ML._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8568552544?linkCode=sl2&tag=desconto.bot-20&linkId=b358e0690bf5aad052c19aee7ca1dbe2&th=1",
+      "detail_url": "/oferta?slug=consumo-de-moda-a-relacao-pessoa-objeto-3167",
+      "price_collected_at": "2026-08-13T11:01:39.131751+00:00"
+    },
+    {
+      "id": 2525,
+      "slug": "historia-da-moda-no-brasil-das-influencias-as-autorreferencias-2525",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "História da moda no Brasil: Das influências às autorreferências",
+      "short_description": "",
+      "current_price": "110.40",
+      "original_price": "184.00",
+      "discount_pct": "40.00",
+      "image_url": "https://m.media-amazon.com/images/I/71vuR9rkhnL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8578440943?linkCode=sl2&tag=desconto.bot-20&linkId=8677dc47bfe456a5b62fd69a41f76a78&th=1",
+      "detail_url": "/oferta?slug=historia-da-moda-no-brasil-das-influencias-as-autorreferencias-2525",
+      "price_collected_at": "2026-08-13T11:01:39.117224+00:00"
+    },
+    {
+      "id": 11043,
+      "slug": "anuncio-patrocinado-rolex-11043",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Anúncio patrocinado – Rolex",
+      "short_description": "",
+      "current_price": "75.84",
+      "original_price": "96.00",
+      "discount_pct": "21.00",
+      "image_url": "https://m.media-amazon.com/images/I/51Lwn9LB5gL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8539657651?linkCode=sl2&tag=desconto.bot-20&linkId=eebbe7048adb85382bb0a92452e6c02e&th=1",
+      "detail_url": "/oferta?slug=anuncio-patrocinado-rolex-11043",
+      "price_collected_at": "2026-08-13T11:01:39.096701+00:00"
+    },
+    {
+      "id": 3461,
+      "slug": "anuncio-patrocinado-malharia-do-design-a-pratica-guia-de-modelagem-e-confeccao-3461",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Anúncio patrocinado – Malharia: do design à prática - guia de modelagem e confecção",
+      "short_description": "",
+      "current_price": "57.00",
+      "original_price": "80.00",
+      "discount_pct": "29.00",
+      "image_url": "https://m.media-amazon.com/images/I/8150eioznLL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8539656922?linkCode=sl2&tag=desconto.bot-20&linkId=5b42519621f102b99d9351ad4be2684f&th=1",
+      "detail_url": "/oferta?slug=anuncio-patrocinado-malharia-do-design-a-pratica-guia-de-modelagem-e-confeccao-3461",
+      "price_collected_at": "2026-08-13T11:01:39.076642+00:00"
+    },
+    {
+      "id": 11042,
+      "slug": "anuncio-patrocinado-biosseguranca-em-empresas-de-beleza-e-na-moda-11042",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Anúncio patrocinado – Biossegurança em empresas de beleza e na moda",
+      "short_description": "",
+      "current_price": "52.50",
+      "original_price": "70.00",
+      "discount_pct": "25.00",
+      "image_url": "https://m.media-amazon.com/images/I/91bfdPGCJeL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/8539656612?linkCode=sl2&tag=desconto.bot-20&linkId=67cc6d8b443f547abb7d4427a7cf2c69&th=1",
+      "detail_url": "/oferta?slug=anuncio-patrocinado-biosseguranca-em-empresas-de-beleza-e-na-moda-11042",
+      "price_collected_at": "2026-08-13T11:01:39.056406+00:00"
+    },
+    {
+      "id": 11021,
+      "slug": "keiko-sports-kimono-jiu-jitsu-balance-11021",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Keiko Sports, Kimono Jiu Jitsu Balance",
+      "short_description": "",
+      "current_price": "463.21",
+      "original_price": "551.00",
+      "discount_pct": "16.00",
+      "image_url": "https://m.media-amazon.com/images/I/517wlMVzd7L._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B07TXD2PCH?linkCode=sl2&tag=desconto.bot-20&linkId=c031f5615efa8592f168e14e50414873&th=1",
+      "detail_url": "/oferta?slug=keiko-sports-kimono-jiu-jitsu-balance-11021",
+      "price_collected_at": "2026-08-13T11:01:39.043724+00:00"
+    },
+    {
+      "id": 11020,
+      "slug": "anuncio-patrocinado-smartphone-motorola-moto-g15-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-e-night-vision-11020",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Anúncio patrocinado – Smartphone Motorola Moto g15-256GB 12GB (4GB RAM+8GB Ram Boost) e Camera 50MP com AI e Night Vision ...",
+      "short_description": "",
+      "current_price": "892.36",
+      "original_price": "992.26",
+      "discount_pct": "10.00",
+      "image_url": "https://m.media-amazon.com/images/I/61kE-oxS5QL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0DQQCGG3Q?linkCode=sl2&tag=desconto.bot-20&linkId=9ecf0f43b8ef648b4d8d431aa36685fe&th=1",
+      "detail_url": "/oferta?slug=anuncio-patrocinado-smartphone-motorola-moto-g15-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-e-night-vision-11020",
+      "price_collected_at": "2026-08-13T11:01:39.030320+00:00"
+    },
+    {
+      "id": 11019,
+      "slug": "lg-ar-condicionado-split-lg-dual-inverter-ai-voice-9000-btuh-frio-s3-q09aa31f-220-volts-11019",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "LG Ar Condicionado Split LG Dual Inverter AI Voice 9000 BTU/h Frio S3-Q09AA31F - 220 Volts",
+      "short_description": "",
+      "current_price": "2023.40",
+      "original_price": "2248.24",
+      "discount_pct": "10.00",
+      "image_url": "https://m.media-amazon.com/images/I/51NfHemGyVL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0GQJP852H?linkCode=sl2&tag=desconto.bot-20&linkId=00e48152978e7b9f5c02a09e292e8fd4&th=1",
+      "detail_url": "/oferta?slug=lg-ar-condicionado-split-lg-dual-inverter-ai-voice-9000-btuh-frio-s3-q09aa31f-220-volts-11019",
+      "price_collected_at": "2026-08-13T11:01:39.014462+00:00"
+    },
+    {
+      "id": 11018,
+      "slug": "anuncio-patrocinado-smart-tv-43-lg-full-hd-43lr6700-processador-5-ger6-ai-alexa-integrado-lg-channels-webos-23-compati-11018",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Anúncio patrocinado – Smart TV 43\" LG Full HD 43LR6700 Processador α5 Ger6 AI Alexa integrado LG Channels webOS 23 compatí...",
+      "short_description": "",
+      "current_price": "1535.74",
+      "original_price": "1619.99",
+      "discount_pct": "5.00",
+      "image_url": "https://m.media-amazon.com/images/I/61RFJ5GOqVL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0D3J6CQNB?linkCode=sl2&tag=desconto.bot-20&linkId=5d00276a78fd5f8e911b1bf9be55b07d&th=1",
+      "detail_url": "/oferta?slug=anuncio-patrocinado-smart-tv-43-lg-full-hd-43lr6700-processador-5-ger6-ai-alexa-integrado-lg-channels-webos-23-compati-11018",
+      "price_collected_at": "2026-08-13T11:01:39.000411+00:00"
+    },
+    {
+      "id": 11041,
+      "slug": "tenis-adidas-superstar-slip-on-feminino-preto-38-11041",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Tenis Adidas Superstar Slip On feminino preto 38",
+      "short_description": "",
+      "current_price": "359.99",
+      "original_price": "399.99",
+      "discount_pct": "10.00",
+      "image_url": "https://m.media-amazon.com/images/I/516f6161T2L._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B084TBNH8C?linkCode=sl2&tag=desconto.bot-20&linkId=27b92e9db729c267b05f521f6472c0bd&th=1",
+      "detail_url": "/oferta?slug=tenis-adidas-superstar-slip-on-feminino-preto-38-11041",
+      "price_collected_at": "2026-08-13T11:01:38.978599+00:00"
+    },
+    {
+      "id": 11015,
+      "slug": "calcados-adidas-vl-court-base-masculino-sapatos-casuais-11015",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Calçados adidas Vl Court Base masculino | Sapatos casuais",
+      "short_description": "",
+      "current_price": "299.99",
+      "original_price": "349.90",
+      "discount_pct": "14.00",
+      "image_url": "https://m.media-amazon.com/images/I/614yHp-DW5L._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0CJV25P1G?linkCode=sl2&tag=desconto.bot-20&linkId=af81b7bbdcef162c22b17901ed404344&th=1",
+      "detail_url": "/oferta?slug=calcados-adidas-vl-court-base-masculino-sapatos-casuais-11015",
+      "price_collected_at": "2026-08-13T11:01:38.964411+00:00"
+    },
+    {
+      "id": 11014,
+      "slug": "tenis-feminino-adidas-vl-court-30-low-11014",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Tênis Feminino Adidas Vl Court 3.0 Low",
+      "short_description": "",
+      "current_price": "348.90",
+      "original_price": "399.99",
+      "discount_pct": "13.00",
+      "image_url": "https://m.media-amazon.com/images/I/51YoesdFu+L._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0FRTRQ384?linkCode=sl2&tag=desconto.bot-20&linkId=727abc2e18b4727b9e94ec207ea98c67&th=1",
+      "detail_url": "/oferta?slug=tenis-feminino-adidas-vl-court-30-low-11014",
+      "price_collected_at": "2026-08-13T11:01:38.950493+00:00"
+    },
+    {
+      "id": 11040,
+      "slug": "adidas-tenis-de-corrida-masculino-response-2-11040",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "adidas Tênis de corrida masculino Response 2",
+      "short_description": "",
+      "current_price": "398.90",
+      "original_price": "428.90",
+      "discount_pct": "6.00",
+      "image_url": "https://m.media-amazon.com/images/I/71ou6Ehl+cL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0F1XGR21W?linkCode=sl2&tag=desconto.bot-20&linkId=a4e6e71edb3995769a2c4c0ea6b2c565&th=1",
+      "detail_url": "/oferta?slug=adidas-tenis-de-corrida-masculino-response-2-11040",
+      "price_collected_at": "2026-08-13T11:01:38.928035+00:00"
+    },
+    {
+      "id": 11012,
+      "slug": "tenis-baixo-que-nao-e-futebol-adidas-advantage-base-20-shoes-feminino-11012",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Tênis baixo que não é futebol adidas Advantage Base 2.0 Shoes feminino",
+      "short_description": "",
+      "current_price": "279.00",
+      "original_price": "349.99",
+      "discount_pct": "20.00",
+      "image_url": "https://m.media-amazon.com/images/I/61bQuN9RzyL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0CKXYXJY3?linkCode=sl2&tag=desconto.bot-20&linkId=58bea52d1835763c785c1a7a63009ceb&th=1",
+      "detail_url": "/oferta?slug=tenis-baixo-que-nao-e-futebol-adidas-advantage-base-20-shoes-feminino-11012",
+      "price_collected_at": "2026-08-13T11:01:38.913256+00:00"
+    },
+    {
+      "id": 11011,
+      "slug": "calcados-adidas-vl-court-base-masculino-sapatos-casuais-11011",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Calçados adidas Vl Court Base masculino | Sapatos casuais",
+      "short_description": "",
+      "current_price": "299.99",
+      "original_price": "349.90",
+      "discount_pct": "14.00",
+      "image_url": "https://m.media-amazon.com/images/I/614yHp-DW5L._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0CJTZQ1QJ?linkCode=sl2&tag=desconto.bot-20&linkId=28c06e30f2eb1236dcfac9805bf9d579&th=1",
+      "detail_url": "/oferta?slug=calcados-adidas-vl-court-base-masculino-sapatos-casuais-11011",
+      "price_collected_at": "2026-08-13T11:01:38.898879+00:00"
+    },
+    {
+      "id": 11039,
+      "slug": "adidas-park-street-20-tenis-masculino-11039",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "adidas Park Street 2.0 Tênis masculino",
+      "short_description": "",
+      "current_price": "293.99",
+      "original_price": "369.99",
+      "discount_pct": "21.00",
+      "image_url": "https://m.media-amazon.com/images/I/61Brm6GdhqL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0DHZT1JCC?linkCode=sl2&tag=desconto.bot-20&linkId=4d6f63f5aa2d2cf4f83c077ef2486882&th=1",
+      "detail_url": "/oferta?slug=adidas-park-street-20-tenis-masculino-11039",
+      "price_collected_at": "2026-08-13T11:01:38.863038+00:00"
+    },
+    {
+      "id": 11008,
+      "slug": "adidas-park-street-20-tenis-masculino-11008",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "adidas Park Street 2.0 Tênis masculino",
+      "short_description": "",
+      "current_price": "293.99",
+      "original_price": "369.99",
+      "discount_pct": "21.00",
+      "image_url": "https://m.media-amazon.com/images/I/61Brm6GdhqL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0DHZVG6DT?linkCode=sl2&tag=desconto.bot-20&linkId=bb17319779af62ffc6f75d78f4f0d116&th=1",
+      "detail_url": "/oferta?slug=adidas-park-street-20-tenis-masculino-11008",
+      "price_collected_at": "2026-08-13T11:01:38.850607+00:00"
+    },
+    {
+      "id": 11009,
+      "slug": "tenis-adidas-response-runner-preto-11009",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Tenis Adidas Response Runner Preto",
+      "short_description": "",
+      "current_price": "260.99",
+      "original_price": "289.99",
+      "discount_pct": "10.00",
+      "image_url": "https://m.media-amazon.com/images/I/71uH5EQ9slL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0DB6HM24G?linkCode=sl2&tag=desconto.bot-20&linkId=c1b9ad6e6199538bed154a6b2a0dcfe0&th=1",
+      "detail_url": "/oferta?slug=tenis-adidas-response-runner-preto-11009",
+      "price_collected_at": "2026-08-13T11:01:38.837387+00:00"
+    },
+    {
+      "id": 11016,
+      "slug": "tenis-nike-revolution-8-road-running-shoes-feminino-11016",
+      "marketplace": {
+        "code": "amazon",
+        "name": "Amazon"
+      },
+      "title": "Tênis NIKE Revolution 8 Road Running Shoes feminino",
+      "short_description": "",
+      "current_price": "399.90",
+      "original_price": "449.90",
+      "discount_pct": "11.00",
+      "image_url": "https://m.media-amazon.com/images/I/61978oDJ-iL._AC_UL320_.jpg",
+      "affiliate_link": "https://www.amazon.com.br/dp/B0DPHSG9QN?linkCode=sl2&tag=desconto.bot-20&linkId=2c17b0261fa1b0d151db277f54d3c710&th=1",
+      "detail_url": "/oferta?slug=tenis-nike-revolution-8-road-running-shoes-feminino-11016",
+      "price_collected_at": "2026-08-13T11:01:38.754694+00:00"
     },
     {
       "id": 11032,
@@ -515,23 +1637,6 @@
       "price_collected_at": "2026-08-13T00:57:09.974233+00:00"
     },
     {
-      "id": 8791,
-      "slug": "mochila-jiesipote-a-prova-dagua-reforcada-expansivel-cor-preto-8791",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mochila jiesipote À Prova D'água Reforçada Expansível Cor Preto",
-      "short_description": "",
-      "current_price": "83.00",
-      "original_price": "269.00",
-      "discount_pct": "69.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_974980-MLA112776013576_062026-AB.webp",
-      "affiliate_link": "https://meli.la/1VvxLdz",
-      "detail_url": "/oferta?slug=mochila-jiesipote-a-prova-dagua-reforcada-expansivel-cor-preto-8791",
-      "price_collected_at": "2026-08-13T00:57:09.960661+00:00"
-    },
-    {
       "id": 9602,
       "slug": "kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-airfryer-com-4-travas-de-super-vedacao-9602",
       "marketplace": {
@@ -600,74 +1705,6 @@
       "price_collected_at": "2026-08-13T00:57:09.867737+00:00"
     },
     {
-      "id": 11036,
-      "slug": "jogo-de-panelas-7-ceramic-life-smart-plus-areia-brinox-areia-11036",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Panelas 7 Ceramic Life Smart Plus Areia Brinox Areia",
-      "short_description": "",
-      "current_price": "460.00",
-      "original_price": "999.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_928703-MLA111907915483_052026-AB.webp",
-      "affiliate_link": "https://meli.la/1gdfYf7",
-      "detail_url": "/oferta?slug=jogo-de-panelas-7-ceramic-life-smart-plus-areia-brinox-areia-11036",
-      "price_collected_at": "2026-08-13T00:57:09.845877+00:00"
-    },
-    {
-      "id": 7992,
-      "slug": "vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco-7992",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Vaso Sanitário Tubrax Monobloco VAB0002 Caixa Acoplada Completo Privada Cor Branco",
-      "short_description": "",
-      "current_price": "523.00",
-      "original_price": "894.00",
-      "discount_pct": "41.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_632053-MLA96114658485_102025-AB.webp",
-      "affiliate_link": "https://meli.la/19EYiDt",
-      "detail_url": "/oferta?slug=vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco-7992",
-      "price_collected_at": "2026-08-13T00:57:09.820517+00:00"
-    },
-    {
-      "id": 10177,
-      "slug": "espelho-100x50-organico-corpo-inteiro-grande-moldura-caramelo-10177",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Espelho 100x50 Orgânico Corpo Inteiro Grande Moldura Caramelo",
-      "short_description": "",
-      "current_price": "91.00",
-      "original_price": "399.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_936790-MLA96100703939_102025-AB.webp",
-      "affiliate_link": "https://meli.la/2HDJw3s",
-      "detail_url": "/oferta?slug=espelho-100x50-organico-corpo-inteiro-grande-moldura-caramelo-10177",
-      "price_collected_at": "2026-08-13T00:57:09.809351+00:00"
-    },
-    {
-      "id": 10944,
-      "slug": "cadeira-de-escritorio-sweet-studio-ergonomica-preta-com-apoio-de-cabeca-e-suporte-lombar-10944",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira de Escritório Sweet Studio Ergonômica Preta, com Apoio de Cabeça e Suporte Lombar",
-      "short_description": "",
-      "current_price": "329.00",
-      "original_price": "622.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_910116-MLA108277670580_032026-AB.webp",
-      "affiliate_link": "https://meli.la/2tEA7RP",
-      "detail_url": "/oferta?slug=cadeira-de-escritorio-sweet-studio-ergonomica-preta-com-apoio-de-cabeca-e-suporte-lombar-10944",
-      "price_collected_at": "2026-08-13T00:57:09.796216+00:00"
-    },
-    {
       "id": 9470,
       "slug": "fechadura-digital-de-sobrepor-intelbras-fr-101-9470",
       "marketplace": {
@@ -702,23 +1739,6 @@
       "price_collected_at": "2026-08-13T00:57:09.772295+00:00"
     },
     {
-      "id": 9637,
-      "slug": "cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-9637",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
-      "short_description": "",
-      "current_price": "522.00",
-      "original_price": "906.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1nnYp49",
-      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-9637",
-      "price_collected_at": "2026-08-13T00:57:09.759351+00:00"
-    },
-    {
       "id": 791,
       "slug": "cadeira-de-escritorio-giratoria-homenow-columbus-presidente-preta-com-tela-mesh-preto-791",
       "marketplace": {
@@ -734,91 +1754,6 @@
       "affiliate_link": "https://meli.la/2FegW4s",
       "detail_url": "/oferta?slug=cadeira-de-escritorio-giratoria-homenow-columbus-presidente-preta-com-tela-mesh-preto-791",
       "price_collected_at": "2026-08-13T00:57:09.734985+00:00"
-    },
-    {
-      "id": 6592,
-      "slug": "cesto-de-roupa-bambu-retangular-de-72l-com-tampa-e-forro-de-linho-natural-6592",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cesto de Roupa Bambu Retangular de 72L com Tampa e Forro de Linho",
-      "short_description": "",
-      "current_price": "55.00",
-      "original_price": "77.00",
-      "discount_pct": "29.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802693-MLA107519536904_032026-AB.webp",
-      "affiliate_link": "https://meli.la/2a2Pcya",
-      "detail_url": "/oferta?slug=cesto-de-roupa-bambu-retangular-de-72l-com-tampa-e-forro-de-linho-natural-6592",
-      "price_collected_at": "2026-08-13T00:57:09.722221+00:00"
-    },
-    {
-      "id": 10480,
-      "slug": "cadeira-de-escritorio-columbus-presidente-ergonomica-cinza-mesh-10480",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira De Escritório Columbus Presidente Ergonomica Cinza Mesh",
-      "short_description": "",
-      "current_price": "346.00",
-      "original_price": "589.00",
-      "discount_pct": "41.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_905570-MLA95700627584_102025-AB.webp",
-      "affiliate_link": "https://meli.la/1RWbttu",
-      "detail_url": "/oferta?slug=cadeira-de-escritorio-columbus-presidente-ergonomica-cinza-mesh-10480",
-      "price_collected_at": "2026-08-13T00:57:09.711056+00:00"
-    },
-    {
-      "id": 178,
-      "slug": "kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Rishon",
-      "short_description": "",
-      "current_price": "93.00",
-      "original_price": "188.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_900432-MLA113518359539_062026-AB.webp",
-      "affiliate_link": "https://meli.la/15a74wK",
-      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
-      "price_collected_at": "2026-08-13T00:57:09.685508+00:00"
-    },
-    {
-      "id": 8724,
-      "slug": "kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto-8724",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 2 Refletor Super Led 400w Ip67 Holofote Bivolt Prova D'água Branco Frio 6500k Preto",
-      "short_description": "",
-      "current_price": "44.00",
-      "original_price": "99.00",
-      "discount_pct": "56.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_753073-MLA110946060098_052026-AB.webp",
-      "affiliate_link": "https://meli.la/2zjSoeV",
-      "detail_url": "/oferta?slug=kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto-8724",
-      "price_collected_at": "2026-08-13T00:57:09.511762+00:00"
-    },
-    {
-      "id": 809,
-      "slug": "kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 10 Pote De Vidro Marmita Hermético 370ml Freezer Fitness Rishon",
-      "short_description": "",
-      "current_price": "73.00",
-      "original_price": "159.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_605578-MLA113633610823_062026-AB.webp",
-      "affiliate_link": "https://meli.la/2kBbZys",
-      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
-      "price_collected_at": "2026-08-13T00:57:09.498800+00:00"
     },
     {
       "id": 11029,
@@ -855,23 +1790,6 @@
       "price_collected_at": "2026-08-13T00:57:09.468521+00:00"
     },
     {
-      "id": 11028,
-      "slug": "flash-limp-mop-giratorio-fit-balde-8-litros-mop5010-11028",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Flash Limp - Mop Giratório Fit, Balde 8 litros - MOP5010",
-      "short_description": "",
-      "current_price": "59.54",
-      "original_price": "139.88",
-      "discount_pct": "57.00",
-      "image_url": "https://m.media-amazon.com/images/I/71z-3rqPaUL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B07NQ9PFKN?linkCode=sl2&tag=desconto.bot-20&linkId=a467ab4b1d5fed8d806253426ab58a74&th=1",
-      "detail_url": "/oferta?slug=flash-limp-mop-giratorio-fit-balde-8-litros-mop5010-11028",
-      "price_collected_at": "2026-08-13T00:56:34.202695+00:00"
-    },
-    {
       "id": 2648,
       "slug": "a-moda-e-o-novo-homem-2648",
       "marketplace": {
@@ -906,295 +1824,6 @@
       "price_collected_at": "2026-08-13T00:56:34.175432+00:00"
     },
     {
-      "id": 11026,
-      "slug": "fashion-new-edition-the-definitive-visual-guide-11026",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Fashion, New Edition: The Definitive Visual Guide",
-      "short_description": "",
-      "current_price": "121.48",
-      "original_price": "254.48",
-      "discount_pct": "52.00",
-      "image_url": "https://m.media-amazon.com/images/I/61gd+Ak8f9L._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/1465486402?linkCode=sl2&tag=desconto.bot-20&linkId=218adf943adf86db57b169dbfb2f1960&th=1",
-      "detail_url": "/oferta?slug=fashion-new-edition-the-definitive-visual-guide-11026",
-      "price_collected_at": "2026-08-13T00:56:34.161176+00:00"
-    },
-    {
-      "id": 2528,
-      "slug": "a-moda-e-seu-papel-social-classe-genero-e-identidade-das-roupas-2528",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "A moda e seu papel social: Classe, Gênero e Identidade das Roupas",
-      "short_description": "",
-      "current_price": "94.99",
-      "original_price": "160.00",
-      "discount_pct": "41.00",
-      "image_url": "https://m.media-amazon.com/images/I/816bLPalgmL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8573598107?linkCode=sl2&tag=desconto.bot-20&linkId=14d2f074e42bb5452d70f2b8b98648ad&th=1",
-      "detail_url": "/oferta?slug=a-moda-e-seu-papel-social-classe-genero-e-identidade-das-roupas-2528",
-      "price_collected_at": "2026-08-13T00:56:34.147055+00:00"
-    },
-    {
-      "id": 2530,
-      "slug": "moda-com-proposito-nova-edicao-manifesto-pela-grande-virada-2530",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Moda com propósito (Nova edição): Manifesto pela grande virada",
-      "short_description": "",
-      "current_price": "56.01",
-      "original_price": "87.90",
-      "discount_pct": "36.00",
-      "image_url": "https://m.media-amazon.com/images/I/61PCR7dD6sL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8584392769?linkCode=sl2&tag=desconto.bot-20&linkId=6bd237d3079ae30c8bd2699dc5dd14c8&th=1",
-      "detail_url": "/oferta?slug=moda-com-proposito-nova-edicao-manifesto-pela-grande-virada-2530",
-      "price_collected_at": "2026-08-13T00:56:34.134086+00:00"
-    },
-    {
-      "id": 11025,
-      "slug": "historia-e-cultura-de-moda-11025",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "História e Cultura de Moda",
-      "short_description": "",
-      "current_price": "60.27",
-      "original_price": "69.00",
-      "discount_pct": "13.00",
-      "image_url": "https://m.media-amazon.com/images/I/91NqzWnGtiL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8560166513?linkCode=sl2&tag=desconto.bot-20&linkId=a2058f0e3f18a677945896bfbfd0c731&th=1",
-      "detail_url": "/oferta?slug=historia-e-cultura-de-moda-11025",
-      "price_collected_at": "2026-08-13T00:56:34.120241+00:00"
-    },
-    {
-      "id": 3839,
-      "slug": "teoria-de-moda-sociedade-imagem-e-consumo-3839",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Teoria de moda: sociedade, imagem e consumo",
-      "short_description": "",
-      "current_price": "57.80",
-      "original_price": "68.00",
-      "discount_pct": "15.00",
-      "image_url": "https://m.media-amazon.com/images/I/71lnZMS8OpL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8560166181?linkCode=sl2&tag=desconto.bot-20&linkId=3a9380d899e6a90867850ad2d32e0323&th=1",
-      "detail_url": "/oferta?slug=teoria-de-moda-sociedade-imagem-e-consumo-3839",
-      "price_collected_at": "2026-08-13T00:56:34.105326+00:00"
-    },
-    {
-      "id": 2532,
-      "slug": "moda-e-comunicacao-2532",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Moda é Comunicação?",
-      "short_description": "",
-      "current_price": "70.73",
-      "original_price": "81.40",
-      "discount_pct": "13.00",
-      "image_url": "https://m.media-amazon.com/images/I/71FNFcBxUDL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/6556754897?linkCode=sl2&tag=desconto.bot-20&linkId=19c30f9885eb459fe4e7a1763044df12&th=1",
-      "detail_url": "/oferta?slug=moda-e-comunicacao-2532",
-      "price_collected_at": "2026-08-13T00:56:34.092371+00:00"
-    },
-    {
-      "id": 3465,
-      "slug": "moda-uma-trama-filosofica-3465",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Moda: uma Trama Filosófica",
-      "short_description": "",
-      "current_price": "55.25",
-      "original_price": "64.00",
-      "discount_pct": "14.00",
-      "image_url": "https://m.media-amazon.com/images/I/41BwfZlo3uL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/6550290678?linkCode=sl2&tag=desconto.bot-20&linkId=30bc51825c2b6bd6051c4a331af542e3&th=1",
-      "detail_url": "/oferta?slug=moda-uma-trama-filosofica-3465",
-      "price_collected_at": "2026-08-13T00:56:34.079374+00:00"
-    },
-    {
-      "id": 2772,
-      "slug": "modativismo-quando-a-moda-encontra-a-luta-2772",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Modativismo: Quando a moda encontra a luta",
-      "short_description": "",
-      "current_price": "44.00",
-      "original_price": "62.90",
-      "discount_pct": "30.00",
-      "image_url": "https://m.media-amazon.com/images/I/81eG7HN8jfL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8584393668?linkCode=sl2&tag=desconto.bot-20&linkId=0aef83488f5c8ef2ddc745fb333191f9&th=1",
-      "detail_url": "/oferta?slug=modativismo-quando-a-moda-encontra-a-luta-2772",
-      "price_collected_at": "2026-08-13T00:56:34.066333+00:00"
-    },
-    {
-      "id": 2520,
-      "slug": "nos-bastidores-da-vogue-a-historia-da-revista-que-transformou-o-mundo-da-moda-2520",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Nos bastidores da Vogue: A história da revista que transformou o mundo da moda",
-      "short_description": "",
-      "current_price": "88.60",
-      "original_price": "104.90",
-      "discount_pct": "16.00",
-      "image_url": "https://m.media-amazon.com/images/I/71QmJl7qPpL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/6555873205?linkCode=sl2&tag=desconto.bot-20&linkId=aed545a295fedd113e1fb23b9beef63c&th=1",
-      "detail_url": "/oferta?slug=nos-bastidores-da-vogue-a-historia-da-revista-que-transformou-o-mundo-da-moda-2520",
-      "price_collected_at": "2026-08-13T00:56:34.051101+00:00"
-    },
-    {
-      "id": 2523,
-      "slug": "as-engrenagens-da-moda-2523",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "As engrenagens da moda",
-      "short_description": "",
-      "current_price": "40.70",
-      "original_price": "55.00",
-      "discount_pct": "26.00",
-      "image_url": "https://m.media-amazon.com/images/I/61r26JRBs1L._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/6586493900?linkCode=sl2&tag=desconto.bot-20&linkId=740e67e69774eb1247c211fd294c7789&th=1",
-      "detail_url": "/oferta?slug=as-engrenagens-da-moda-2523",
-      "price_collected_at": "2026-08-13T00:56:34.037981+00:00"
-    },
-    {
-      "id": 5186,
-      "slug": "negras-maneiras-de-vestir-moda-memoria-e-arte-afro-brasileira-5186",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Negras maneiras de vestir: Moda, memória e arte afro-brasileira",
-      "short_description": "",
-      "current_price": "62.90",
-      "original_price": "69.90",
-      "discount_pct": "10.00",
-      "image_url": "https://m.media-amazon.com/images/I/71dNfXvb2aL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8584395040?linkCode=sl2&tag=desconto.bot-20&linkId=74503a5af2ba2a3d9bdf46468fa31bef&th=1",
-      "detail_url": "/oferta?slug=negras-maneiras-de-vestir-moda-memoria-e-arte-afro-brasileira-5186",
-      "price_collected_at": "2026-08-13T00:56:34.023506+00:00"
-    },
-    {
-      "id": 11022,
-      "slug": "a-moda-e-sintoma-da-cultura-11022",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "A Moda é Sintoma da Cultura?",
-      "short_description": "",
-      "current_price": "45.00",
-      "original_price": "50.00",
-      "discount_pct": "10.00",
-      "image_url": "https://m.media-amazon.com/images/I/514O1BqzlxL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/6550290260?linkCode=sl2&tag=desconto.bot-20&linkId=ef29a91e977084df6a59974368dcbf0e&th=1",
-      "detail_url": "/oferta?slug=a-moda-e-sintoma-da-cultura-11022",
-      "price_collected_at": "2026-08-13T00:56:34.010525+00:00"
-    },
-    {
-      "id": 2524,
-      "slug": "como-compreender-moda-guia-rapido-para-entender-estilos-2524",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Como compreender moda: Guia Rápido Para Entender Estilos",
-      "short_description": "",
-      "current_price": "77.92",
-      "original_price": "104.00",
-      "discount_pct": "25.00",
-      "image_url": "https://m.media-amazon.com/images/I/71R1iYifGAL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8539601621?linkCode=sl2&tag=desconto.bot-20&linkId=cf14fc2bcf13183ae0ef22b7f5be0b67&th=1",
-      "detail_url": "/oferta?slug=como-compreender-moda-guia-rapido-para-entender-estilos-2524",
-      "price_collected_at": "2026-08-13T00:56:33.997599+00:00"
-    },
-    {
-      "id": 3167,
-      "slug": "consumo-de-moda-a-relacao-pessoa-objeto-3167",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Consumo de Moda: a Relação Pessoa-objeto",
-      "short_description": "",
-      "current_price": "48.45",
-      "original_price": "57.00",
-      "discount_pct": "15.00",
-      "image_url": "https://m.media-amazon.com/images/I/91uMHvPz-ML._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8568552544?linkCode=sl2&tag=desconto.bot-20&linkId=b358e0690bf5aad052c19aee7ca1dbe2&th=1",
-      "detail_url": "/oferta?slug=consumo-de-moda-a-relacao-pessoa-objeto-3167",
-      "price_collected_at": "2026-08-13T00:56:33.984042+00:00"
-    },
-    {
-      "id": 3261,
-      "slug": "a-moda-imita-a-vida-nova-edicao-como-construir-uma-marca-de-moda-3261",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "A moda imita a vida (Nova edição): Como construir uma marca de moda",
-      "short_description": "",
-      "current_price": "67.43",
-      "original_price": "87.90",
-      "discount_pct": "23.00",
-      "image_url": "https://m.media-amazon.com/images/I/711jEq5mC9L._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8584391622?linkCode=sl2&tag=desconto.bot-20&linkId=4000d8cdb499d3b9ebcb2804080ace07&th=1",
-      "detail_url": "/oferta?slug=a-moda-imita-a-vida-nova-edicao-como-construir-uma-marca-de-moda-3261",
-      "price_collected_at": "2026-08-13T00:56:33.969970+00:00"
-    },
-    {
-      "id": 2522,
-      "slug": "o-cerebro-e-a-moda-2522",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "O cérebro e a moda",
-      "short_description": "",
-      "current_price": "63.00",
-      "original_price": "84.00",
-      "discount_pct": "25.00",
-      "image_url": "https://m.media-amazon.com/images/I/81awiqKy3EL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/6555363738?linkCode=sl2&tag=desconto.bot-20&linkId=612e1f1ad53e3759651ff72d6b36bf1b&th=1",
-      "detail_url": "/oferta?slug=o-cerebro-e-a-moda-2522",
-      "price_collected_at": "2026-08-13T00:56:33.955966+00:00"
-    },
-    {
-      "id": 2525,
-      "slug": "historia-da-moda-no-brasil-das-influencias-as-autorreferencias-2525",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "História da moda no Brasil: Das influências às autorreferências",
-      "short_description": "",
-      "current_price": "110.40",
-      "original_price": "184.00",
-      "discount_pct": "40.00",
-      "image_url": "https://m.media-amazon.com/images/I/71vuR9rkhnL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/8578440943?linkCode=sl2&tag=desconto.bot-20&linkId=8677dc47bfe456a5b62fd69a41f76a78&th=1",
-      "detail_url": "/oferta?slug=historia-da-moda-no-brasil-das-influencias-as-autorreferencias-2525",
-      "price_collected_at": "2026-08-13T00:56:33.940011+00:00"
-    },
-    {
       "id": 11035,
       "slug": "anuncio-patrocinado-pantene-pro-v-condicionador-biotinamina-b3-antiqueda-e-nutricao-1-l-11035",
       "marketplace": {
@@ -1210,23 +1839,6 @@
       "affiliate_link": "https://www.amazon.com.br/dp/B0FPRYKHQJ?linkCode=sl2&tag=desconto.bot-20&linkId=11f344c4ed1ec396a3d25fe003ecfa60&th=1",
       "detail_url": "/oferta?slug=anuncio-patrocinado-pantene-pro-v-condicionador-biotinamina-b3-antiqueda-e-nutricao-1-l-11035",
       "price_collected_at": "2026-08-13T00:56:33.920441+00:00"
-    },
-    {
-      "id": 11021,
-      "slug": "keiko-sports-kimono-jiu-jitsu-balance-11021",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Keiko Sports, Kimono Jiu Jitsu Balance",
-      "short_description": "",
-      "current_price": "463.21",
-      "original_price": "551.00",
-      "discount_pct": "16.00",
-      "image_url": "https://m.media-amazon.com/images/I/517wlMVzd7L._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B07TXD2PCH?linkCode=sl2&tag=desconto.bot-20&linkId=c031f5615efa8592f168e14e50414873&th=1",
-      "detail_url": "/oferta?slug=keiko-sports-kimono-jiu-jitsu-balance-11021",
-      "price_collected_at": "2026-08-13T00:56:33.907178+00:00"
     },
     {
       "id": 11034,
@@ -1246,40 +1858,6 @@
       "price_collected_at": "2026-08-13T00:56:33.884615+00:00"
     },
     {
-      "id": 11019,
-      "slug": "lg-ar-condicionado-split-lg-dual-inverter-ai-voice-9000-btuh-frio-s3-q09aa31f-220-volts-11019",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "LG Ar Condicionado Split LG Dual Inverter AI Voice 9000 BTU/h Frio S3-Q09AA31F - 220 Volts",
-      "short_description": "",
-      "current_price": "2023.40",
-      "original_price": "2248.24",
-      "discount_pct": "10.00",
-      "image_url": "https://m.media-amazon.com/images/I/51NfHemGyVL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0GQJP852H?linkCode=sl2&tag=desconto.bot-20&linkId=00e48152978e7b9f5c02a09e292e8fd4&th=1",
-      "detail_url": "/oferta?slug=lg-ar-condicionado-split-lg-dual-inverter-ai-voice-9000-btuh-frio-s3-q09aa31f-220-volts-11019",
-      "price_collected_at": "2026-08-13T00:56:33.870647+00:00"
-    },
-    {
-      "id": 11020,
-      "slug": "anuncio-patrocinado-smartphone-motorola-moto-g15-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-e-night-vision-11020",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – Smartphone Motorola Moto g15-256GB 12GB (4GB RAM+8GB Ram Boost) e Camera 50MP com AI e Night Vision ...",
-      "short_description": "",
-      "current_price": "892.36",
-      "original_price": "992.26",
-      "discount_pct": "10.00",
-      "image_url": "https://m.media-amazon.com/images/I/61kE-oxS5QL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0DQQCGG3Q?linkCode=sl2&tag=desconto.bot-20&linkId=9ecf0f43b8ef648b4d8d431aa36685fe&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-smartphone-motorola-moto-g15-256gb-12gb-4gb-ram8gb-ram-boost-e-camera-50mp-com-ai-e-night-vision-11020",
-      "price_collected_at": "2026-08-13T00:56:33.855874+00:00"
-    },
-    {
       "id": 11033,
       "slug": "anuncio-patrocinado-monitor-aoc-185-led-vga-e-hdmi-11033",
       "marketplace": {
@@ -1295,23 +1873,6 @@
       "affiliate_link": "https://www.amazon.com.br/dp/B08L6Z7XG6?linkCode=sl2&tag=desconto.bot-20&linkId=ab8b8c4cac9c5de209de54e57ce7353e&th=1",
       "detail_url": "/oferta?slug=anuncio-patrocinado-monitor-aoc-185-led-vga-e-hdmi-11033",
       "price_collected_at": "2026-08-13T00:56:33.826940+00:00"
-    },
-    {
-      "id": 11018,
-      "slug": "anuncio-patrocinado-smart-tv-43-lg-full-hd-43lr6700-processador-5-ger6-ai-alexa-integrado-lg-channels-webos-23-compati-11018",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – Smart TV 43\" LG Full HD 43LR6700 Processador α5 Ger6 AI Alexa integrado LG Channels webOS 23 compatí...",
-      "short_description": "",
-      "current_price": "1535.74",
-      "original_price": "1619.99",
-      "discount_pct": "5.00",
-      "image_url": "https://m.media-amazon.com/images/I/61RFJ5GOqVL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0D3J6CQNB?linkCode=sl2&tag=desconto.bot-20&linkId=5d00276a78fd5f8e911b1bf9be55b07d&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-smart-tv-43-lg-full-hd-43lr6700-processador-5-ger6-ai-alexa-integrado-lg-channels-webos-23-compati-11018",
-      "price_collected_at": "2026-08-13T00:56:33.812826+00:00"
     },
     {
       "id": 11017,
@@ -1331,57 +1892,6 @@
       "price_collected_at": "2026-08-13T00:56:33.797806+00:00"
     },
     {
-      "id": 11016,
-      "slug": "tenis-nike-revolution-8-road-running-shoes-feminino-11016",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Tênis NIKE Revolution 8 Road Running Shoes feminino",
-      "short_description": "",
-      "current_price": "399.90",
-      "original_price": "449.90",
-      "discount_pct": "11.00",
-      "image_url": "https://m.media-amazon.com/images/I/61978oDJ-iL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0DPHSG9QN?linkCode=sl2&tag=desconto.bot-20&linkId=2c17b0261fa1b0d151db277f54d3c710&th=1",
-      "detail_url": "/oferta?slug=tenis-nike-revolution-8-road-running-shoes-feminino-11016",
-      "price_collected_at": "2026-08-13T00:56:33.783742+00:00"
-    },
-    {
-      "id": 11015,
-      "slug": "calcados-adidas-vl-court-base-masculino-sapatos-casuais-11015",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Calçados adidas Vl Court Base masculino | Sapatos casuais",
-      "short_description": "",
-      "current_price": "299.99",
-      "original_price": "349.90",
-      "discount_pct": "14.00",
-      "image_url": "https://m.media-amazon.com/images/I/614yHp-DW5L._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0CJV25P1G?linkCode=sl2&tag=desconto.bot-20&linkId=af81b7bbdcef162c22b17901ed404344&th=1",
-      "detail_url": "/oferta?slug=calcados-adidas-vl-court-base-masculino-sapatos-casuais-11015",
-      "price_collected_at": "2026-08-13T00:56:33.769655+00:00"
-    },
-    {
-      "id": 11014,
-      "slug": "tenis-feminino-adidas-vl-court-30-low-11014",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Tênis Feminino Adidas Vl Court 3.0 Low",
-      "short_description": "",
-      "current_price": "348.90",
-      "original_price": "399.99",
-      "discount_pct": "13.00",
-      "image_url": "https://m.media-amazon.com/images/I/51YoesdFu+L._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0FRTRQ384?linkCode=sl2&tag=desconto.bot-20&linkId=727abc2e18b4727b9e94ec207ea98c67&th=1",
-      "detail_url": "/oferta?slug=tenis-feminino-adidas-vl-court-30-low-11014",
-      "price_collected_at": "2026-08-13T00:56:33.755739+00:00"
-    },
-    {
       "id": 11013,
       "slug": "adidas-park-street-20-tenis-masculino-11013",
       "marketplace": {
@@ -1397,91 +1907,6 @@
       "affiliate_link": "https://www.amazon.com.br/dp/B0DHZS5MNZ?linkCode=sl2&tag=desconto.bot-20&linkId=c67497539af713cb606443e451f4e480&th=1",
       "detail_url": "/oferta?slug=adidas-park-street-20-tenis-masculino-11013",
       "price_collected_at": "2026-08-13T00:56:33.740174+00:00"
-    },
-    {
-      "id": 11012,
-      "slug": "tenis-baixo-que-nao-e-futebol-adidas-advantage-base-20-shoes-feminino-11012",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Tênis baixo que não é futebol adidas Advantage Base 2.0 Shoes feminino",
-      "short_description": "",
-      "current_price": "279.00",
-      "original_price": "349.99",
-      "discount_pct": "20.00",
-      "image_url": "https://m.media-amazon.com/images/I/61bQuN9RzyL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0CKXYXJY3?linkCode=sl2&tag=desconto.bot-20&linkId=58bea52d1835763c785c1a7a63009ceb&th=1",
-      "detail_url": "/oferta?slug=tenis-baixo-que-nao-e-futebol-adidas-advantage-base-20-shoes-feminino-11012",
-      "price_collected_at": "2026-08-13T00:56:33.725239+00:00"
-    },
-    {
-      "id": 11011,
-      "slug": "calcados-adidas-vl-court-base-masculino-sapatos-casuais-11011",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Calçados adidas Vl Court Base masculino | Sapatos casuais",
-      "short_description": "",
-      "current_price": "299.99",
-      "original_price": "349.90",
-      "discount_pct": "14.00",
-      "image_url": "https://m.media-amazon.com/images/I/614yHp-DW5L._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0CJTZQ1QJ?linkCode=sl2&tag=desconto.bot-20&linkId=28c06e30f2eb1236dcfac9805bf9d579&th=1",
-      "detail_url": "/oferta?slug=calcados-adidas-vl-court-base-masculino-sapatos-casuais-11011",
-      "price_collected_at": "2026-08-13T00:56:33.711673+00:00"
-    },
-    {
-      "id": 11009,
-      "slug": "tenis-adidas-response-runner-preto-11009",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Tenis Adidas Response Runner Preto",
-      "short_description": "",
-      "current_price": "260.99",
-      "original_price": "289.99",
-      "discount_pct": "10.00",
-      "image_url": "https://m.media-amazon.com/images/I/71uH5EQ9slL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0DB6HM24G?linkCode=sl2&tag=desconto.bot-20&linkId=c1b9ad6e6199538bed154a6b2a0dcfe0&th=1",
-      "detail_url": "/oferta?slug=tenis-adidas-response-runner-preto-11009",
-      "price_collected_at": "2026-08-13T00:56:33.685284+00:00"
-    },
-    {
-      "id": 11008,
-      "slug": "adidas-park-street-20-tenis-masculino-11008",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "adidas Park Street 2.0 Tênis masculino",
-      "short_description": "",
-      "current_price": "293.99",
-      "original_price": "369.99",
-      "discount_pct": "21.00",
-      "image_url": "https://m.media-amazon.com/images/I/61Brm6GdhqL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0DHZVG6DT?linkCode=sl2&tag=desconto.bot-20&linkId=bb17319779af62ffc6f75d78f4f0d116&th=1",
-      "detail_url": "/oferta?slug=adidas-park-street-20-tenis-masculino-11008",
-      "price_collected_at": "2026-08-13T00:56:33.667929+00:00"
-    },
-    {
-      "id": 10312,
-      "slug": "mochila-masculina-impermeavel-reforcada-com-capacidade-ampliada-de-30-42l-adequada-para-portatil-viagens-diarias-cor-preta-10312",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mochila masculina, impermeável, reforçada, com capacidade ampliada de 30-42L, adequada para portátil, viagens diárias, cor preta",
-      "short_description": "",
-      "current_price": "86.00",
-      "original_price": "218.00",
-      "discount_pct": "61.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_718229-MLA113595305320_072026-AB.webp",
-      "affiliate_link": "https://meli.la/1RR8rKd",
-      "detail_url": "/oferta?slug=mochila-masculina-impermeavel-reforcada-com-capacidade-ampliada-de-30-42l-adequada-para-portatil-viagens-diarias-cor-preta-10312",
-      "price_collected_at": "2026-08-12T22:42:25.002076+00:00"
     },
     {
       "id": 10924,
@@ -1518,23 +1943,6 @@
       "price_collected_at": "2026-08-12T22:42:24.774182+00:00"
     },
     {
-      "id": 11005,
-      "slug": "aparelho-de-jantar-20-pecas-vidro-opaline-para-mesa-posta-branco-floral-11005",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Aparelho De Jantar 20 Peças Vidro Opaline Para Mesa Posta Branco Floral",
-      "short_description": "",
-      "current_price": "198.00",
-      "original_price": "399.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_999748-MLB114193618598_082026-AB--aparelho-de-jantar-20-pecas-vidro-opaline-para-mesa-posta.webp",
-      "affiliate_link": "https://meli.la/2kT2XEZ",
-      "detail_url": "/oferta?slug=aparelho-de-jantar-20-pecas-vidro-opaline-para-mesa-posta-branco-floral-11005",
-      "price_collected_at": "2026-08-12T22:42:24.632698+00:00"
-    },
-    {
       "id": 11027,
       "slug": "styling-e-criacao-de-imagem-de-moda-11027",
       "marketplace": {
@@ -1567,23 +1975,6 @@
       "affiliate_link": "https://www.amazon.com.br/dp/B0FG6S26KJ?linkCode=sl2&tag=desconto.bot-20&linkId=8ccf314fea2740ef009cff3a69188da8&th=1",
       "detail_url": "/oferta?slug=anuncio-patrocinado-cinto-feminino-corrente-moda-blogueira-modelo-cinto-feminino-corrente-moda-blogueira-modelo-corrent-11024",
       "price_collected_at": "2026-08-12T22:41:46.422975+00:00"
-    },
-    {
-      "id": 11023,
-      "slug": "anuncio-patrocinado-camiseta-basica-feminina-gugi-lisa-sem-estampa-100-algodao-premium-11023",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – Camiseta Básica Feminina GuGi Lisa Sem Estampa 100% Algodão Premium",
-      "short_description": "",
-      "current_price": "34.90",
-      "original_price": "69.90",
-      "discount_pct": "50.00",
-      "image_url": "https://m.media-amazon.com/images/I/512PEt-bNHL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0CSGWZPPP?linkCode=sl2&tag=desconto.bot-20&linkId=00ec4d0726a1c74b4d8d7bdbb3111171&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-camiseta-basica-feminina-gugi-lisa-sem-estampa-100-algodao-premium-11023",
-      "price_collected_at": "2026-08-12T22:41:46.404434+00:00"
     },
     {
       "id": 882,
@@ -6941,23 +7332,6 @@
       "price_collected_at": "2026-08-12T14:17:12.608406+00:00"
     },
     {
-      "id": 10499,
-      "slug": "kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping-verde-camuflado-tamanho-unico-10499",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit Chapéu Boonie Balaclava Uv Dobrável Pesca Moto Camping Verde Camuflado Tamanho Único",
-      "short_description": "",
-      "current_price": "40.00",
-      "original_price": "58.00",
-      "discount_pct": "31.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_831455-MLB114629696293_072026-AB--kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping.webp",
-      "affiliate_link": "https://meli.la/1xDn4BE",
-      "detail_url": "/oferta?slug=kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping-verde-camuflado-tamanho-unico-10499",
-      "price_collected_at": "2026-08-12T14:17:12.575830+00:00"
-    },
-    {
       "id": 9792,
       "slug": "mochila-feminina-impermeavel-reforcada-com-capacidade-expansivel-de-25-a-40-l-capaz-de-acomodar-um-laptop-de-156-polegadas-com-porta-de-carregamento-sub-9792",
       "marketplace": {
@@ -7043,23 +7417,6 @@
       "price_collected_at": "2026-08-12T14:17:12.453605+00:00"
     },
     {
-      "id": 10583,
-      "slug": "cadeira-gamer-sweet-studio-ergonomica-reclinavel-em-couro-sintetico-azul-com-apoio-de-pes-10583",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira Gamer Sweet Studio Ergonômica Reclinável em Couro Sintético Azul com Apoio de Pés",
-      "short_description": "",
-      "current_price": "387.00",
-      "original_price": "645.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_899728-MLA113996191628_072026-AB.webp",
-      "affiliate_link": "https://meli.la/2495zUp",
-      "detail_url": "/oferta?slug=cadeira-gamer-sweet-studio-ergonomica-reclinavel-em-couro-sintetico-azul-com-apoio-de-pes-10583",
-      "price_collected_at": "2026-08-12T14:17:12.440088+00:00"
-    },
-    {
       "id": 10979,
       "slug": "cortina-300x280-metros-blackout-blecaute-avela-corta-luz-em-tecido-grosso-para-quarto-e-sala-casa-laura-enxovais-10979",
       "marketplace": {
@@ -7092,23 +7449,6 @@
       "affiliate_link": "https://meli.la/2Fz8K4G",
       "detail_url": "/oferta?slug=chuveiro-eletronico-lorenzetti-acqua-duo-ultra-pretocromado-parede-7800w-10702",
       "price_collected_at": "2026-08-12T14:17:12.214883+00:00"
-    },
-    {
-      "id": 9671,
-      "slug": "jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-9671",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Toalhas 4 Pçs Fio Cardado 100% Algodão Bosco Karsten",
-      "short_description": "",
-      "current_price": "95.00",
-      "original_price": "149.00",
-      "discount_pct": "36.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_733667-MLA95696781618_102025-AB.webp",
-      "affiliate_link": "https://meli.la/1wR5YG1",
-      "detail_url": "/oferta?slug=jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-9671",
-      "price_collected_at": "2026-08-12T14:17:12.190385+00:00"
     },
     {
       "id": 4637,
@@ -7160,23 +7500,6 @@
       "affiliate_link": "https://meli.la/2pwyoEx",
       "detail_url": "/oferta?slug=cortina-300x280-metros-blackout-blecaute-preto-corta-luz-em-tecido-grosso-para-quarto-e-sala-casa-laura-enxovais-10977",
       "price_collected_at": "2026-08-12T14:17:11.977778+00:00"
-    },
-    {
-      "id": 9847,
-      "slug": "jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-azul-serena-azul-naval-bosco-9847",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Toalhas 4 Pçs Fio Cardado 100% Algodão Bosco Karsten Azul Serena/ Azul Naval Bosco",
-      "short_description": "",
-      "current_price": "95.00",
-      "original_price": "149.00",
-      "discount_pct": "36.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_800180-MLA96101701387_102025-AB.webp",
-      "affiliate_link": "https://meli.la/1wbA6hX",
-      "detail_url": "/oferta?slug=jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-azul-serena-azul-naval-bosco-9847",
-      "price_collected_at": "2026-08-12T14:17:11.909800+00:00"
     },
     {
       "id": 2604,
@@ -8046,23 +8369,6 @@
       "price_collected_at": "2026-08-12T11:05:01.379370+00:00"
     },
     {
-      "id": 10258,
-      "slug": "mochila-feminina-impermeavel-reforcada-com-capacidade-para-laptop-de-156-polegadas-24l-mochila-para-viagens-diarias-e-para-a-escola-10258",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mochila feminina, impermeável, reforçada, com capacidade para laptop de 15,6 polegadas, 24L, mochila para viagens diárias e para a escola",
-      "short_description": "",
-      "current_price": "79.00",
-      "original_price": "269.00",
-      "discount_pct": "71.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_696887-MLA114688319821_072026-AB.webp",
-      "affiliate_link": "https://meli.la/1yoLwn8",
-      "detail_url": "/oferta?slug=mochila-feminina-impermeavel-reforcada-com-capacidade-para-laptop-de-156-polegadas-24l-mochila-para-viagens-diarias-e-para-a-escola-10258",
-      "price_collected_at": "2026-08-12T11:05:01.361609+00:00"
-    },
-    {
       "id": 10479,
       "slug": "tenda-gazebo-sanfonada-articulada-luvinco-3x3m-azul-impermeavel-resistente-protecao-ao-ar-livre-camping-praia-eventos-montagem-pratica-estrutura-resistente-duravel-10479",
       "marketplace": {
@@ -8129,23 +8435,6 @@
       "affiliate_link": "https://meli.la/22J7dRv",
       "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-g500-luvinco-cor-cinza-com-suporte-lombar-estofado-mesh-9983",
       "price_collected_at": "2026-08-12T11:05:01.221323+00:00"
-    },
-    {
-      "id": 935,
-      "slug": "jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-grafitecinza-lisa-935",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Toalhas Buddemeyer Bella Extra Soft Banho 4 Grafite/cinza Lisa",
-      "short_description": "",
-      "current_price": "159.00",
-      "original_price": "229.00",
-      "discount_pct": "31.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_992849-MLA100187157773_122025-AB.webp",
-      "affiliate_link": "https://meli.la/1fHztYw",
-      "detail_url": "/oferta?slug=jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-grafitecinza-lisa-935",
-      "price_collected_at": "2026-08-12T11:05:01.135559+00:00"
     },
     {
       "id": 10950,
@@ -9812,1706 +10101,6 @@
       "affiliate_link": "https://www.amazon.com.br/dp/B07QSB5M3X?linkCode=sl2&tag=desconto.bot-20&linkId=645a0cd22666801153a5124b633f0b7a&th=1",
       "detail_url": "/oferta?slug=wolff-potiche-decorativo-de-cristal-com-pe-louise-11cm-x-18cm-enxoval-decoracao-organizacao-bomboniere-vasos-dec-10860",
       "price_collected_at": "2026-08-11T23:46:14.797025+00:00"
-    },
-    {
-      "id": 10509,
-      "slug": "kit-eudora-diva-fabulosa-3-produtos-10509",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit Eudora Diva Fabulosa (3 Produtos)",
-      "short_description": "",
-      "current_price": "65.00",
-      "original_price": "125.00",
-      "discount_pct": "48.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_890633-MLA109638805503_032026-AB.webp",
-      "affiliate_link": "https://meli.la/2wE52aR",
-      "detail_url": "/oferta?slug=kit-eudora-diva-fabulosa-3-produtos-10509",
-      "price_collected_at": "2026-08-11T21:12:49.827111+00:00"
-    },
-    {
-      "id": 10022,
-      "slug": "roku-streaming-stick-2025-para-tv-hdfhd-controle-por-voz-preto-de-voz-3a-geracao-3840br-10022",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Roku Streaming Stick 2025 Para Tv Hd/fhd Controle Por Voz Preto De Voz 3ª geração 3840BR",
-      "short_description": "",
-      "current_price": "207.00",
-      "original_price": "349.00",
-      "discount_pct": "41.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_947612-MLA99369632726_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2FA3RLz",
-      "detail_url": "/oferta?slug=roku-streaming-stick-2025-para-tv-hdfhd-controle-por-voz-preto-de-voz-3a-geracao-3840br-10022",
-      "price_collected_at": "2026-08-11T21:12:49.282520+00:00"
-    },
-    {
-      "id": 6969,
-      "slug": "fone-de-ouvido-qcy-t13-com-4-microfones-e-bluetooth-51-cor-preto-6969",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Fone De Ouvido Qcy T13 Com 4 Microfones E Bluetooth 5.1 Cor Preto",
-      "short_description": "",
-      "current_price": "159.00",
-      "original_price": "239.00",
-      "discount_pct": "33.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_928856-MLA99938836845_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2iuNA6K",
-      "detail_url": "/oferta?slug=fone-de-ouvido-qcy-t13-com-4-microfones-e-bluetooth-51-cor-preto-6969",
-      "price_collected_at": "2026-08-11T21:12:48.973094+00:00"
-    },
-    {
-      "id": 10110,
-      "slug": "fone-ouvido-bluetooth-compativel-com-iphone-x-xr-11-12-13-14-15-16-17-xs-pro-max-plus-samsung-s20-s23-s24-xiaomi-motorola-android-ios-sem-fio-prova-dagua-wireless-tipo-light-cancelamento-ruido-celular-10110",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Fone Ouvido Bluetooth Compatível Com Iphone X Xr 11 12 13 14 15 16 17 Xs Pro Max Plus Samsung S20 S23 S24 Xiaomi Motorola Android Ios Sem Fio Prova DAgua Wireless Tipo Light Cancelamento Ruido Celular",
-      "short_description": "",
-      "current_price": "40.00",
-      "original_price": "78.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_793840-MLA109795835063_032026-AB.webp",
-      "affiliate_link": "https://meli.la/1o3kvKw",
-      "detail_url": "/oferta?slug=fone-ouvido-bluetooth-compativel-com-iphone-x-xr-11-12-13-14-15-16-17-xs-pro-max-plus-samsung-s20-s23-s24-xiaomi-motorola-android-ios-sem-fio-prova-dagua-wireless-tipo-light-cancelamento-ruido-celular-10110",
-      "price_collected_at": "2026-08-11T21:12:48.645095+00:00"
-    },
-    {
-      "id": 10187,
-      "slug": "volante-brinquedo-infantil-musical-gira-360o-sons-de-carro-10187",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Volante Brinquedo Infantil Musical Gira 360o Sons De Carro",
-      "short_description": "",
-      "current_price": "31.00",
-      "original_price": "67.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_779830-MLB113466791262_072026-AB--volante-brinquedo-infantil-musical-gira-360o-sons-de-carro.webp",
-      "affiliate_link": "https://meli.la/1SoxSSt",
-      "detail_url": "/oferta?slug=volante-brinquedo-infantil-musical-gira-360o-sons-de-carro-10187",
-      "price_collected_at": "2026-08-11T21:12:48.416370+00:00"
-    },
-    {
-      "id": 10927,
-      "slug": "brinquedo-infantil-anti-stress-sensorial-macio-colecionavel-1-unidades-10927",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Brinquedo Infantil Anti Stress Sensorial Macio Colecionável 1 Unidades",
-      "short_description": "",
-      "current_price": "37.00",
-      "original_price": "78.00",
-      "discount_pct": "53.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_711791-MLB115784348859_082026-AB--brinquedo-infantil-anti-stress-sensorial-macio-colecionavel.webp",
-      "affiliate_link": "https://meli.la/1XYuCn8",
-      "detail_url": "/oferta?slug=brinquedo-infantil-anti-stress-sensorial-macio-colecionavel-1-unidades-10927",
-      "price_collected_at": "2026-08-11T21:12:48.330664+00:00"
-    },
-    {
-      "id": 10882,
-      "slug": "jaqueta-masculina-bobojaco-puffer-inverno-frio-qualidade-preto-gg-10882",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jaqueta Masculina Bobojaco Puffer Inverno Frio Qualidade Preto Gg",
-      "short_description": "",
-      "current_price": "65.00",
-      "original_price": "199.00",
-      "discount_pct": "67.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_706279-MLB112003946641_052026-AB--jaqueta-masculina-bobojaco-puffer-inverno-frio-qualidade.webp",
-      "affiliate_link": "https://meli.la/2Z7J5bw",
-      "detail_url": "/oferta?slug=jaqueta-masculina-bobojaco-puffer-inverno-frio-qualidade-preto-gg-10882",
-      "price_collected_at": "2026-08-11T21:12:47.617059+00:00"
-    },
-    {
-      "id": 10912,
-      "slug": "conjunto-10-potes-vidro-organizadores-de-cozinha-multiuso-transparente-10912",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Conjunto 10 Potes Vidro Organizadores De Cozinha Multiuso Transparente",
-      "short_description": "",
-      "current_price": "38.00",
-      "original_price": "89.00",
-      "discount_pct": "57.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_788821-MLA110127056304_042026-AB.webp",
-      "affiliate_link": "https://meli.la/2r4giGB",
-      "detail_url": "/oferta?slug=conjunto-10-potes-vidro-organizadores-de-cozinha-multiuso-transparente-10912",
-      "price_collected_at": "2026-08-11T21:12:46.543141+00:00"
-    },
-    {
-      "id": 10627,
-      "slug": "cadeira-de-escritorio-ergonomica-fivdaily-c600-preta-com-apoio-de-cabeca-e-suporte-lombar-10627",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira de Escritório Ergonômica FivDaily C600 Preta, com Apoio de Cabeça e Suporte Lombar",
-      "short_description": "",
-      "current_price": "329.00",
-      "original_price": "622.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_910116-MLA108277670580_032026-AB.webp",
-      "affiliate_link": "https://meli.la/2tEA7RP",
-      "detail_url": "/oferta?slug=cadeira-de-escritorio-ergonomica-fivdaily-c600-preta-com-apoio-de-cabeca-e-suporte-lombar-10627",
-      "price_collected_at": "2026-08-11T21:12:46.265739+00:00"
-    },
-    {
-      "id": 8598,
-      "slug": "anuncio-patrocinado-suplemento-alimentar-nutren-senior-a-z-60-capsulas-8598",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – Suplemento Alimentar Nutren Senior A-Z 60 Cápsulas",
-      "short_description": "",
-      "current_price": "46.80",
-      "original_price": "84.59",
-      "discount_pct": "45.00",
-      "image_url": "https://m.media-amazon.com/images/I/71uDV8MAAdL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0DGXYN7VH?linkCode=sl2&tag=desconto.bot-20&linkId=f77af62999ea6f6afa5a87bb0125ad4d&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-suplemento-alimentar-nutren-senior-a-z-60-capsulas-8598",
-      "price_collected_at": "2026-08-11T21:09:38.048135+00:00"
-    },
-    {
-      "id": 10935,
-      "slug": "anuncio-patrocinado-sensodyne-escova-de-dente-extra-macia-limpeza-profunda-para-dentes-sensiveis-limpeza-interdental-10935",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – Sensodyne Escova de Dente Extra Macia, Limpeza Profunda, para Dentes Sensíveis, Limpeza Interdental",
-      "short_description": "",
-      "current_price": "15.29",
-      "original_price": "20.90",
-      "discount_pct": "27.00",
-      "image_url": "https://m.media-amazon.com/images/I/41q1f5XWlML._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B07FHHN29Z?linkCode=sl2&tag=desconto.bot-20&linkId=a34aecfaf595d62d9a775eac28083cb0&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-sensodyne-escova-de-dente-extra-macia-limpeza-profunda-para-dentes-sensiveis-limpeza-interdental-10935",
-      "price_collected_at": "2026-08-11T21:09:37.877765+00:00"
-    },
-    {
-      "id": 5587,
-      "slug": "max-titanium-creatina-300-gr-monohidratada-5587",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "MAX TITANIUM CREATINA 300 GR MONOHIDRATADA",
-      "short_description": "",
-      "current_price": "50.82",
-      "original_price": "93.00",
-      "discount_pct": "45.00",
-      "image_url": "https://m.media-amazon.com/images/I/51gt4U5kD-L._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B07DVJC66X?linkCode=sl2&tag=desconto.bot-20&linkId=62eb3d06fb65c5748b366d2aaba6fe67&th=1",
-      "detail_url": "/oferta?slug=max-titanium-creatina-300-gr-monohidratada-5587",
-      "price_collected_at": "2026-08-11T21:09:37.778025+00:00"
-    },
-    {
-      "id": 8148,
-      "slug": "widi-care-mousse-finalizador-juba-criador-de-cachos-200ml-8148",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Widi Care Mousse Finalizador Juba Criador de Cachos 200ml",
-      "short_description": "",
-      "current_price": "42.58",
-      "original_price": "72.07",
-      "discount_pct": "41.00",
-      "image_url": "https://m.media-amazon.com/images/I/613SIxLQPAL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B07FYLRHXP?linkCode=sl2&tag=desconto.bot-20&linkId=5df09aa2d2e30ef5fa6ed5b186b90253&th=1",
-      "detail_url": "/oferta?slug=widi-care-mousse-finalizador-juba-criador-de-cachos-200ml-8148",
-      "price_collected_at": "2026-08-11T21:09:37.767248+00:00"
-    },
-    {
-      "id": 1013,
-      "slug": "bravecto-caes-1125mg-antipulgas-e-carrapatos-caes-de-2-a-45kg-1-comp-mastigavel-msd-saude-animal-1013",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Bravecto® Cães 112,5mg Antipulgas e Carrapatos Cães de 2 a 4,5kg 1 Comp. Mastigável MSD Saúde Animal",
-      "short_description": "",
-      "current_price": "111.90",
-      "original_price": "197.90",
-      "discount_pct": "43.00",
-      "image_url": "https://m.media-amazon.com/images/I/51iclTjdAZL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B07J4LGB4G?linkCode=sl2&tag=desconto.bot-20&linkId=de0eae3abfaa08766a05c44fc68fbd5e&th=1",
-      "detail_url": "/oferta?slug=bravecto-caes-1125mg-antipulgas-e-carrapatos-caes-de-2-a-45kg-1-comp-mastigavel-msd-saude-animal-1013",
-      "price_collected_at": "2026-08-11T21:09:37.693521+00:00"
-    },
-    {
-      "id": 5,
-      "slug": "bravecto-caes-1000mg-antipulgas-e-carrapatos-caes-de-20-a-40kg-1-comp-mastigavel-msd-saude-animal-5",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Bravecto® 1000mg Comprimido Mastigável Antipulgas e Carrapatos para Cães de 20 a 40kg – 1 Comprimido – MSD Saúde Animal",
-      "short_description": "",
-      "current_price": "165.80",
-      "original_price": "323.00",
-      "discount_pct": "49.00",
-      "image_url": "https://m.media-amazon.com/images/I/511I-2ZvPqL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B07B3BCV1Q?linkCode=sl2&tag=desconto.bot-20&linkId=542cc8a8529005f09015155ed4e538f5&th=1",
-      "detail_url": "/oferta?slug=bravecto-caes-1000mg-antipulgas-e-carrapatos-caes-de-20-a-40kg-1-comp-mastigavel-msd-saude-animal-5",
-      "price_collected_at": "2026-08-11T21:09:37.653024+00:00"
-    },
-    {
-      "id": 6089,
-      "slug": "candide-laptop-infantil-homem-aranha-brinquedo-educativo-bilingue-6089",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Candide, Laptop Infantil, Homem-Aranha, Brinquedo Educativo - Bilíngue",
-      "short_description": "",
-      "current_price": "64.99",
-      "original_price": "99.99",
-      "discount_pct": "35.00",
-      "image_url": "https://m.media-amazon.com/images/I/61mMbktfL-L._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B08GKXGS45?linkCode=sl2&tag=desconto.bot-20&linkId=af0a1a14af33340312bf952fc854ebae&th=1",
-      "detail_url": "/oferta?slug=candide-laptop-infantil-homem-aranha-brinquedo-educativo-bilingue-6089",
-      "price_collected_at": "2026-08-11T21:09:37.643428+00:00"
-    },
-    {
-      "id": 10750,
-      "slug": "anuncio-patrocinado-triciclo-avespa-maral-pink-10750",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – TRICICLO AVESPA MARAL PINK",
-      "short_description": "",
-      "current_price": "218.55",
-      "original_price": "314.95",
-      "discount_pct": "31.00",
-      "image_url": "https://m.media-amazon.com/images/I/51vhe3JElxL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B091664YFV?linkCode=sl2&tag=desconto.bot-20&linkId=192d7f5473e6bc59022e73ab20e6d643&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-triciclo-avespa-maral-pink-10750",
-      "price_collected_at": "2026-08-11T21:09:37.499561+00:00"
-    },
-    {
-      "id": 10900,
-      "slug": "camiseta-masculina-penalty-x-performance-profissional-com-tecnologia-dry-one-10900",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Camiseta Masculina Penalty X – Performance Profissional com Tecnologia Dry One",
-      "short_description": "",
-      "current_price": "51.00",
-      "original_price": "69.99",
-      "discount_pct": "27.00",
-      "image_url": "https://m.media-amazon.com/images/I/312L8EU9PkL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B08W66TWFJ?linkCode=sl2&tag=desconto.bot-20&linkId=1946e440272e46cc062cfa2a61fadc65&th=1",
-      "detail_url": "/oferta?slug=camiseta-masculina-penalty-x-performance-profissional-com-tecnologia-dry-one-10900",
-      "price_collected_at": "2026-08-11T21:09:37.399906+00:00"
-    },
-    {
-      "id": 6568,
-      "slug": "tenis-fila-freestyle-ii-feminino-6568",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Tênis Fila Freestyle II Feminino",
-      "short_description": "",
-      "current_price": "189.99",
-      "original_price": "329.90",
-      "discount_pct": "42.00",
-      "image_url": "https://m.media-amazon.com/images/I/51U13Oy6wyL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0FXJGLNTL?linkCode=sl2&tag=desconto.bot-20&linkId=1adc5d210070303dac82c6acdf115109&th=1",
-      "detail_url": "/oferta?slug=tenis-fila-freestyle-ii-feminino-6568",
-      "price_collected_at": "2026-08-11T21:09:37.096086+00:00"
-    },
-    {
-      "id": 10605,
-      "slug": "creatina-max-titanium-300g-pura-10605",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Creatina Max Titanium 300g Pura",
-      "short_description": "",
-      "current_price": "48.99",
-      "original_price": "181.44",
-      "discount_pct": "73.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-22100-7b7tjvynfbivb7",
-      "affiliate_link": "https://s.shopee.com.br/1122SdFp64",
-      "detail_url": "/oferta?slug=creatina-max-titanium-300g-pura-10605",
-      "price_collected_at": "2026-08-11T18:51:03.590266+00:00"
-    },
-    {
-      "id": 5716,
-      "slug": "bicicleta-ergometrica-para-spinning-mecanica-roda-de-inercia-18kg-pace6000-odin-fit-preto-5716",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Bicicleta Ergométrica Para Spinning Mecanica Roda De Inercia 18kg Pace6000 Odin Fit",
-      "short_description": "",
-      "current_price": "1648.00",
-      "original_price": "2699.00",
-      "discount_pct": "39.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_603014-MLA99897116373_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2AJ8pNx",
-      "detail_url": "/oferta?slug=bicicleta-ergometrica-para-spinning-mecanica-roda-de-inercia-18kg-pace6000-odin-fit-preto-5716",
-      "price_collected_at": "2026-08-11T18:50:30.254018+00:00"
-    },
-    {
-      "id": 3934,
-      "slug": "bicicleta-eletrica-yoo-mobility-y-200-aro-2025-pretovermelho-350w-3934",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Bicicleta Elétrica Yoo Mobility Y-200 Aro 2025 Preto/Vermelho 350W",
-      "short_description": "",
-      "current_price": "3139.00",
-      "original_price": "5999.00",
-      "discount_pct": "48.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_899637-MLA99578800896_122025-AB.webp",
-      "affiliate_link": "https://meli.la/2BktohX",
-      "detail_url": "/oferta?slug=bicicleta-eletrica-yoo-mobility-y-200-aro-2025-pretovermelho-350w-3934",
-      "price_collected_at": "2026-08-11T18:50:30.121588+00:00"
-    },
-    {
-      "id": 236,
-      "slug": "keranat-300mg-90-cap-fortalecimento-capilar-236",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Keranat 300mg 90 Cáp Fortalecimento Capilar",
-      "short_description": "",
-      "current_price": "172.00",
-      "original_price": "399.00",
-      "discount_pct": "57.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_659290-MLB115732860547_082026-AB--keranat-300mg-90-cap-fortalecimento-capilar.webp",
-      "affiliate_link": "https://meli.la/2y1mfLF",
-      "detail_url": "/oferta?slug=keranat-300mg-90-cap-fortalecimento-capilar-236",
-      "price_collected_at": "2026-08-11T18:50:30.090560+00:00"
-    },
-    {
-      "id": 9966,
-      "slug": "loreal-paris-elseve-collagen-lifter-kit-shampoo-condicionador-e-serum-leave-in-com-peptideos-e-protecao-termica-para-cabelos-finos-volume-em-3d-400ml-400ml-100ml-9966",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "L'Oréal Paris Elseve Collagen Lifter Kit Shampoo, Condicionador e Sérum Leave-in com Peptídeos e Proteção Térmica para Cabelos Finos, Volume em 3D, 400ml + 400ml + 100ml",
-      "short_description": "",
-      "current_price": "89.00",
-      "original_price": "134.00",
-      "discount_pct": "34.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_920780-MLA109640286659_032026-AB.webp",
-      "affiliate_link": "https://meli.la/2FYvjTi",
-      "detail_url": "/oferta?slug=loreal-paris-elseve-collagen-lifter-kit-shampoo-condicionador-e-serum-leave-in-com-peptideos-e-protecao-termica-para-cabelos-finos-volume-em-3d-400ml-400ml-100ml-9966",
-      "price_collected_at": "2026-08-11T18:50:29.651396+00:00"
-    },
-    {
-      "id": 280,
-      "slug": "escova-progressiva-150g-fashion-gold-280",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Escova Progressiva 150g - Fashion Gold",
-      "short_description": "",
-      "current_price": "74.00",
-      "original_price": "116.00",
-      "discount_pct": "36.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_861957-MLA108178234350_032026-AB.webp",
-      "affiliate_link": "https://meli.la/1K4yHSq",
-      "detail_url": "/oferta?slug=escova-progressiva-150g-fashion-gold-280",
-      "price_collected_at": "2026-08-11T18:50:29.600543+00:00"
-    },
-    {
-      "id": 10919,
-      "slug": "perfume-armaf-club-de-nuit-woman-105ml-edp-feminino-10919",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Perfume Armaf Club de Nuit Woman 105ml EDP Feminino",
-      "short_description": "",
-      "current_price": "196.00",
-      "original_price": "399.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_716302-MLA52223329791_102022-AB.webp",
-      "affiliate_link": "https://meli.la/1HLSCho",
-      "detail_url": "/oferta?slug=perfume-armaf-club-de-nuit-woman-105ml-edp-feminino-10919",
-      "price_collected_at": "2026-08-11T18:50:29.588255+00:00"
-    },
-    {
-      "id": 854,
-      "slug": "secador-taiff-tourmaline-ion-2100w-alta-performance-preto-127v-854",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Secador Taiff Tourmaline Íon 2100W – Alta Performance Preto",
-      "short_description": "",
-      "current_price": "276.00",
-      "original_price": "799.00",
-      "discount_pct": "65.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_899500-MLA100080591947_122025-AB.webp",
-      "affiliate_link": "https://meli.la/2Z5Nqop",
-      "detail_url": "/oferta?slug=secador-taiff-tourmaline-ion-2100w-alta-performance-preto-127v-854",
-      "price_collected_at": "2026-08-11T18:50:29.543819+00:00"
-    },
-    {
-      "id": 4589,
-      "slug": "suporte-pedestal-para-tv-de-23-a-60-com-rodinhas-bandeja-cor-preto-4589",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Suporte Pedestal Para Tv De 23 A 60 Com Rodinhas Bandeja Cor Preto",
-      "short_description": "",
-      "current_price": "216.00",
-      "original_price": "352.00",
-      "discount_pct": "39.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_692951-MLA99509626864_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1r5Qr1g",
-      "detail_url": "/oferta?slug=suporte-pedestal-para-tv-de-23-a-60-com-rodinhas-bandeja-cor-preto-4589",
-      "price_collected_at": "2026-08-11T18:50:29.472013+00:00"
-    },
-    {
-      "id": 5846,
-      "slug": "caminhao-transporte-dinossauro-transformavel-com-6-carros-carro-de-dinossauro-azul-5846",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Caminhão Transporte Dinossauro Transformável Com 6 Carros Carro De Dinossauro Azul",
-      "short_description": "",
-      "current_price": "68.00",
-      "original_price": "300.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_941899-MLB109651172401_032026-AB--caminhao-transporte-dinossauro-transformavel-com-6-carros.webp",
-      "affiliate_link": "https://meli.la/287Ky4Y",
-      "detail_url": "/oferta?slug=caminhao-transporte-dinossauro-transformavel-com-6-carros-carro-de-dinossauro-azul-5846",
-      "price_collected_at": "2026-08-11T18:50:29.184481+00:00"
-    },
-    {
-      "id": 10925,
-      "slug": "tenis-masculino-streettalk-adidas-branco-liso-41-br-10925",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis Masculino Streettalk adidas Branco Liso 41 Br",
-      "short_description": "",
-      "current_price": "246.00",
-      "original_price": "399.00",
-      "discount_pct": "38.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_775788-MLB115388474475_072026-AB--tenis-masculino-streettalk-adidas.webp",
-      "affiliate_link": "https://meli.la/1ygPPVz",
-      "detail_url": "/oferta?slug=tenis-masculino-streettalk-adidas-branco-liso-41-br-10925",
-      "price_collected_at": "2026-08-11T18:50:28.970025+00:00"
-    },
-    {
-      "id": 10555,
-      "slug": "jogo-de-panelas-mimo-style-fundo-triplo-inducao-5-pecas-cor-bege-10555",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Panelas Mimo Style Fundo Triplo Indução 5 Peças Cor Bege",
-      "short_description": "",
-      "current_price": "262.00",
-      "original_price": "359.00",
-      "discount_pct": "27.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_991050-MLA96135691389_102025-AB.webp",
-      "affiliate_link": "https://meli.la/2H1HDsu",
-      "detail_url": "/oferta?slug=jogo-de-panelas-mimo-style-fundo-triplo-inducao-5-pecas-cor-bege-10555",
-      "price_collected_at": "2026-08-11T18:50:28.918474+00:00"
-    },
-    {
-      "id": 9658,
-      "slug": "panela-de-pressao-fechamento-externo-presscook-grafito-42l-mimo-style-9658",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Panela De Pressão Fechamento Externo Presscook Grafito 4,2l - Mimo Style",
-      "short_description": "",
-      "current_price": "170.00",
-      "original_price": "259.00",
-      "discount_pct": "34.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_899548-MLA113886817336_072026-AB.webp",
-      "affiliate_link": "https://meli.la/2dh6ZGL",
-      "detail_url": "/oferta?slug=panela-de-pressao-fechamento-externo-presscook-grafito-42l-mimo-style-9658",
-      "price_collected_at": "2026-08-11T18:50:28.764318+00:00"
-    },
-    {
-      "id": 10357,
-      "slug": "anuncio-patrocinado-patrulha-canina-veiculo-solido-rubble-sunny-brinquedos-multicor-10357",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – Patrulha Canina - Veiculo Solido Rubble, Sunny Brinquedos, Multicor",
-      "short_description": "",
-      "current_price": "64.60",
-      "original_price": "139.99",
-      "discount_pct": "54.00",
-      "image_url": "https://m.media-amazon.com/images/I/513URC-RPfL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B098YS2NLM?linkCode=sl2&tag=desconto.bot-20&linkId=3020bf9e565e37ef350584dfb32a6dee&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-patrulha-canina-veiculo-solido-rubble-sunny-brinquedos-multicor-10357",
-      "price_collected_at": "2026-08-11T18:47:32.045468+00:00"
-    },
-    {
-      "id": 10832,
-      "slug": "anuncio-patrocinado-camiseta-masculina-basica-confortavel-polo-wear-branco-100-algodao-10832",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – Camiseta Masculina Algodão Polo Wear Branco",
-      "short_description": "",
-      "current_price": "59.99",
-      "original_price": "89.99",
-      "discount_pct": "33.00",
-      "image_url": "https://m.media-amazon.com/images/I/61ysq+eX+tL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0H7YSBZZF?linkCode=sl2&tag=desconto.bot-20&linkId=fedf658d77d25df4d0358866df4414d7&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-camiseta-masculina-basica-confortavel-polo-wear-branco-100-algodao-10832",
-      "price_collected_at": "2026-08-11T18:47:31.778230+00:00"
-    },
-    {
-      "id": 10714,
-      "slug": "anuncio-patrocinado-lucky-step-tenis-chunky-feminino-plataforma-couro-branco-casual-confortavel-tenis-de-caminhada-espor-10714",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – LUCKY STEP Tênis Chunky Feminino Plataforma Couro Branco Casual Confortável Tênis de Caminhada Espor...",
-      "short_description": "",
-      "current_price": "284.05",
-      "original_price": "359.00",
-      "discount_pct": "21.00",
-      "image_url": "https://m.media-amazon.com/images/I/61pAYqVg0LL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0F1XZPYP4?linkCode=sl2&tag=desconto.bot-20&linkId=2886de5b789d3a68d386997813c9dc8c&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-lucky-step-tenis-chunky-feminino-plataforma-couro-branco-casual-confortavel-tenis-de-caminhada-espor-10714",
-      "price_collected_at": "2026-08-11T18:47:31.472931+00:00"
-    },
-    {
-      "id": 10932,
-      "slug": "tenis-adidas-adizero-drive-rc-corrida-leve-energy-rods-meia-rosa-43-br-10932",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis adidas Adizero Drive Rc Corrida Leve Energy Rods Meia Rosa 43 Br",
-      "short_description": "",
-      "current_price": "636.00",
-      "original_price": "899.00",
-      "discount_pct": "29.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_930934-MLB115239758907_072026-AB--tenis-adidas-adizero-drive-rc-corrida-leve-energy-rods-meia.webp",
-      "affiliate_link": "https://meli.la/2reeWzj",
-      "detail_url": "/oferta?slug=tenis-adidas-adizero-drive-rc-corrida-leve-energy-rods-meia-rosa-43-br-10932",
-      "price_collected_at": "2026-08-11T18:41:45.311147+00:00"
-    },
-    {
-      "id": 10920,
-      "slug": "kit-presente-zaad-intense-o-boticario-masculino-original-10920",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit Presente Zaad Intense O Boticário Masculino Original",
-      "short_description": "",
-      "current_price": "275.00",
-      "original_price": "369.00",
-      "discount_pct": "25.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_601846-MLB114188147253_072026-AB--kit-presente-zaad-intense-o-boticario-masculino-original.webp",
-      "affiliate_link": "https://meli.la/2PdxRps",
-      "detail_url": "/oferta?slug=kit-presente-zaad-intense-o-boticario-masculino-original-10920",
-      "price_collected_at": "2026-08-11T18:41:44.677607+00:00"
-    },
-    {
-      "id": 10339,
-      "slug": "fichario-album-para-cartas-pokemon-360-cartas-pasta-otug-azul-10339",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Fichário Álbum Para Cartas Pokémon - 360 Cartas Pasta Otug Azul",
-      "short_description": "",
-      "current_price": "49.00",
-      "original_price": "78.00",
-      "discount_pct": "37.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_683557-MLB112586912210_062026-AB--fichario-album-para-cartas-pokemon--360-cartas-pasta-otug.webp",
-      "affiliate_link": "https://meli.la/17fzJ1u",
-      "detail_url": "/oferta?slug=fichario-album-para-cartas-pokemon-360-cartas-pasta-otug-azul-10339",
-      "price_collected_at": "2026-08-11T18:41:44.221668+00:00"
-    },
-    {
-      "id": 10107,
-      "slug": "tapete-infantil-tatame-dobravel-impermeavel-dupla-face-10107",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tapete Infantil Tatame Dobrável Impermeável Dupla Face",
-      "short_description": "",
-      "current_price": "73.00",
-      "original_price": "98.00",
-      "discount_pct": "26.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_972612-MLB111800339259_052026-AB--tapete-infantil-tatame-dobravel-impermeavel-dupla-face.webp",
-      "affiliate_link": "https://meli.la/1njXzB9",
-      "detail_url": "/oferta?slug=tapete-infantil-tatame-dobravel-impermeavel-dupla-face-10107",
-      "price_collected_at": "2026-08-11T18:41:44.210257+00:00"
-    },
-    {
-      "id": 5823,
-      "slug": "caminhao-de-engolir-dinossauro-transformavel-brinquedo-7-em1-azul-5823",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Caminhão De Engolir Dinossauro Transformável Brinquedo 7 Em1 Azul",
-      "short_description": "",
-      "current_price": "94.00",
-      "original_price": "400.00",
-      "discount_pct": "76.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_996450-MLB95286940381_102025-AB--caminhao-de-engolir-dinossauro-transformavel-brinquedo-7-em1.webp",
-      "affiliate_link": "https://meli.la/23cTXXC",
-      "detail_url": "/oferta?slug=caminhao-de-engolir-dinossauro-transformavel-brinquedo-7-em1-azul-5823",
-      "price_collected_at": "2026-08-11T18:41:44.142855+00:00"
-    },
-    {
-      "id": 10926,
-      "slug": "squishy-dumpling-paozinho-surpresa-antiestresse-viral-aleatorio-10926",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Squishy Dumpling Pãozinho Surpresa Antiestresse Viral Aleatório",
-      "short_description": "",
-      "current_price": "43.00",
-      "original_price": "78.00",
-      "discount_pct": "45.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_680406-MLB113863654236_072026-AB--squishy-dumpling-paozinho-surpresa-antiestresse-viral.webp",
-      "affiliate_link": "https://meli.la/1Bh5ren",
-      "detail_url": "/oferta?slug=squishy-dumpling-paozinho-surpresa-antiestresse-viral-aleatorio-10926",
-      "price_collected_at": "2026-08-11T18:41:44.036133+00:00"
-    },
-    {
-      "id": 6213,
-      "slug": "kit-com-3-camisetas-masculinas-basicas-hering-6213",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Kit Com 3 Camisetas Masculinas Básicas Regular Hering - Hering",
-      "short_description": "",
-      "current_price": "99.90",
-      "original_price": "159.99",
-      "discount_pct": "38.00",
-      "image_url": "https://m.media-amazon.com/images/I/61gRYC-stlL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0CL516HBN?linkCode=sl2&tag=desconto.bot-20&linkId=488e7ebb312bf88e58a361aa705b4885&th=1",
-      "detail_url": "/oferta?slug=kit-com-3-camisetas-masculinas-basicas-hering-6213",
-      "price_collected_at": "2026-08-11T18:38:41.249565+00:00"
-    },
-    {
-      "id": 7297,
-      "slug": "tenis-feminino-fila-comet-2-7297",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Tenis Feminino Fila Comet 2",
-      "short_description": "",
-      "current_price": "215.55",
-      "original_price": "399.99",
-      "discount_pct": "46.00",
-      "image_url": "https://m.media-amazon.com/images/I/51vwRW9VklL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0FH4FPZRQ?linkCode=sl2&tag=desconto.bot-20&linkId=91496852736a0e98b701cd7cbd18bb32&th=1",
-      "detail_url": "/oferta?slug=tenis-feminino-fila-comet-2-7297",
-      "price_collected_at": "2026-08-11T18:38:40.923913+00:00"
-    },
-    {
-      "id": 10923,
-      "slug": "garrafa-termica-de-plastico-nordica-com-tampa-dourada-luxo-1l-mesa-posta-itens-para-casa-utensilios-de-cozinha-per-10923",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Garrafa Térmica de Plástico Nórdica com Tampa Dourada Luxo 1L - Mesa Posta - Itens Para Casa - Utensílios de Cozinha - Per...",
-      "short_description": "",
-      "current_price": "54.99",
-      "original_price": "64.99",
-      "discount_pct": "15.00",
-      "image_url": "https://m.media-amazon.com/images/I/61zSd6O6S7L._AC_UY218_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0H3LRD7YD?linkCode=sl2&tag=desconto.bot-20&linkId=edbd282331e06a7388678c4fd1273ea5&th=1",
-      "detail_url": "/oferta?slug=garrafa-termica-de-plastico-nordica-com-tampa-dourada-luxo-1l-mesa-posta-itens-para-casa-utensilios-de-cozinha-per-10923",
-      "price_collected_at": "2026-08-11T18:38:40.588626+00:00"
-    },
-    {
-      "id": 4960,
-      "slug": "whey-protein-concentrado-1kg-chocolate-branco-dark-lab-4960",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Whey Protein Concentrado 1kg Chocolate Branco Dark Lab",
-      "short_description": "",
-      "current_price": "179.00",
-      "original_price": "349.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_941748-MLA99933256895_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2grdRKM",
-      "detail_url": "/oferta?slug=whey-protein-concentrado-1kg-chocolate-branco-dark-lab-4960",
-      "price_collected_at": "2026-08-11T15:50:32.841536+00:00"
-    },
-    {
-      "id": 9698,
-      "slug": "nac-600mg-n-acetil-l-cisteina-antioxidante-formula-com-maxima-concentracao-e-pureza-120-capsulas-forged-nutrition-9698",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Nac 600mg N-acetil L-cisteína Antioxidante - Fórmula Com Máxima Concentração E Pureza 120 Cápsulas - Forged Nutrition",
-      "short_description": "",
-      "current_price": "69.00",
-      "original_price": "109.00",
-      "discount_pct": "37.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_759603-MLA112585594154_062026-AB.webp",
-      "affiliate_link": "https://meli.la/29Qgnck",
-      "detail_url": "/oferta?slug=nac-600mg-n-acetil-l-cisteina-antioxidante-formula-com-maxima-concentracao-e-pureza-120-capsulas-forged-nutrition-9698",
-      "price_collected_at": "2026-08-11T15:50:32.814638+00:00"
-    },
-    {
-      "id": 10871,
-      "slug": "whey-protein-fresh-whey-dux-900g-pistache-chocolate-branco-10871",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Whey Protein Fresh Whey Dux 900g Pistache Chocolate Branco",
-      "short_description": "",
-      "current_price": "194.00",
-      "original_price": "270.00",
-      "discount_pct": "28.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_601852-MLA114538447489_072026-AB.webp",
-      "affiliate_link": "https://meli.la/1pA1fvE",
-      "detail_url": "/oferta?slug=whey-protein-fresh-whey-dux-900g-pistache-chocolate-branco-10871",
-      "price_collected_at": "2026-08-11T15:50:32.787191+00:00"
-    },
-    {
-      "id": 2330,
-      "slug": "whey-one-baunilha-pro-com-bcaa-e-aminoacidos-900g-dark-lab-2330",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Whey One Baunilha Pro Com Bcaa E Aminoácidos 900g Dark Lab",
-      "short_description": "",
-      "current_price": "78.00",
-      "original_price": "129.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_982473-MLA110293763354_052026-AB.webp",
-      "affiliate_link": "https://meli.la/2DV4YNM",
-      "detail_url": "/oferta?slug=whey-one-baunilha-pro-com-bcaa-e-aminoacidos-900g-dark-lab-2330",
-      "price_collected_at": "2026-08-11T15:50:32.745336+00:00"
-    },
-    {
-      "id": 7459,
-      "slug": "kit-2x-creatina-300g-creatina-monohidratada-max-titanium-sem-sabor-alta-pureza-7459",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 2x Creatina 300g Creatina Monohidratada Max Titanium Sem Sabor Alta Pureza",
-      "short_description": "",
-      "current_price": "82.00",
-      "original_price": "179.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_776821-MLA99365251528_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1GK44rq",
-      "detail_url": "/oferta?slug=kit-2x-creatina-300g-creatina-monohidratada-max-titanium-sem-sabor-alta-pureza-7459",
-      "price_collected_at": "2026-08-11T15:50:32.564065+00:00"
-    },
-    {
-      "id": 1170,
-      "slug": "whey-isolate-protein-fuse-900g-dark-lab-sabor-baunilha-1170",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Whey Isolate Protein Fuse 900g Dark Lab Sabor Baunilha",
-      "short_description": "",
-      "current_price": "78.00",
-      "original_price": "129.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_689088-MLA99988196355_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1DK6AmW",
-      "detail_url": "/oferta?slug=whey-isolate-protein-fuse-900g-dark-lab-sabor-baunilha-1170",
-      "price_collected_at": "2026-08-11T15:50:32.505707+00:00"
-    },
-    {
-      "id": 10921,
-      "slug": "tenis-adidas-adizero-corrida-energy-drive-rc-leve-rods-azul-azul-42-br-10921",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis adidas Adizero Corrida Energy Drive Rc Leve Rods Azul Azul 42 Br",
-      "short_description": "",
-      "current_price": "705.00",
-      "original_price": "899.00",
-      "discount_pct": "22.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_951556-MLB114552624939_072026-AB--tenis-adidas-adizero-corrida-energy-drive-rc-leve-rods-azul.webp",
-      "affiliate_link": "https://meli.la/1TtiMBQ",
-      "detail_url": "/oferta?slug=tenis-adidas-adizero-corrida-energy-drive-rc-leve-rods-azul-azul-42-br-10921",
-      "price_collected_at": "2026-08-11T15:50:32.415541+00:00"
-    },
-    {
-      "id": 441,
-      "slug": "hipercalorico-dark-mass-3kg-dark-lab-sabor-baunilha-441",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Hipercalórico Dark Mass 3kg Dark Lab Sabor Baunilha",
-      "short_description": "",
-      "current_price": "74.00",
-      "original_price": "249.00",
-      "discount_pct": "70.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_852996-MLA99937703973_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1H68iBd",
-      "detail_url": "/oferta?slug=hipercalorico-dark-mass-3kg-dark-lab-sabor-baunilha-441",
-      "price_collected_at": "2026-08-11T15:50:32.402524+00:00"
-    },
-    {
-      "id": 10842,
-      "slug": "gokoco-gd037-modeladoracacheadora-preto-10842",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Gokoco GD037 Modeladora/Cacheadora - Preto",
-      "short_description": "",
-      "current_price": "189.00",
-      "original_price": "399.00",
-      "discount_pct": "53.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_653652-MLA113721401192_072026-AB.webp",
-      "affiliate_link": "https://meli.la/2H81W7U",
-      "detail_url": "/oferta?slug=gokoco-gd037-modeladoracacheadora-preto-10842",
-      "price_collected_at": "2026-08-11T15:50:32.212913+00:00"
-    },
-    {
-      "id": 4718,
-      "slug": "celimax-retinal-shot-tightening-booster-korea-15ml-pele-todo-tipo-de-pele-dianoite-4718",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Celimax Retinal Shot Tightening Booster Korea 15ml Pele Todo Tipo De Pele Dia/noite",
-      "short_description": "",
-      "current_price": "147.00",
-      "original_price": "200.00",
-      "discount_pct": "26.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_674325-MLB113892685441_062026-AB--celimax-retinal-shot-tightening-booster-korea-15ml-pele.webp",
-      "affiliate_link": "https://meli.la/19foRvd",
-      "detail_url": "/oferta?slug=celimax-retinal-shot-tightening-booster-korea-15ml-pele-todo-tipo-de-pele-dianoite-4718",
-      "price_collected_at": "2026-08-11T15:50:31.963186+00:00"
-    },
-    {
-      "id": 9693,
-      "slug": "fone-de-ouvido-bluetooth-54-soundcore-p30i-da-anker-cancelamento-de-ruido-adaptativo-graves-poderosos-45h-de-reproducao-estojo-2-em-1-com-suporte-para-celular-ip54-fone-sem-fio-tws-verde-9693",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Fone de Ouvido Bluetooth 5.4 soundcore P30i da Anker, Cancelamento de Ruído Adaptativo, Graves Poderosos, 45H de Reprodução, Estojo 2-em-1 com Suporte para Celular, IP54, Fone sem fio TWS, Verde",
-      "short_description": "",
-      "current_price": "210.00",
-      "original_price": "389.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_704425-MLA99991505833_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1W8wuCE",
-      "detail_url": "/oferta?slug=fone-de-ouvido-bluetooth-54-soundcore-p30i-da-anker-cancelamento-de-ruido-adaptativo-graves-poderosos-45h-de-reproducao-estojo-2-em-1-com-suporte-para-celular-ip54-fone-sem-fio-tws-verde-9693",
-      "price_collected_at": "2026-08-11T15:50:31.899277+00:00"
-    },
-    {
-      "id": 9785,
-      "slug": "fone-de-ouvido-bluetooth-54-soundcore-p30i-da-anker-cancelamento-de-ruido-adaptativo-graves-poderosos-45h-de-reproducao-estojo-2-em-1-com-suporte-para-celular-ip54-fone-sem-fio-tws-branco-9785",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Fone de Ouvido Bluetooth 5.4 soundcore P30i da Anker, Cancelamento de Ruído Adaptativo, Graves Poderosos, 45H de Reprodução, Estojo 2-em-1 com Suporte para Celular, IP54, Fone sem fio TWS, Branco",
-      "short_description": "",
-      "current_price": "210.00",
-      "original_price": "389.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_944817-MLA99499902540_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2ymZEyC",
-      "detail_url": "/oferta?slug=fone-de-ouvido-bluetooth-54-soundcore-p30i-da-anker-cancelamento-de-ruido-adaptativo-graves-poderosos-45h-de-reproducao-estojo-2-em-1-com-suporte-para-celular-ip54-fone-sem-fio-tws-branco-9785",
-      "price_collected_at": "2026-08-11T15:50:31.885500+00:00"
-    },
-    {
-      "id": 10904,
-      "slug": "quadro-50x-minifiguras-para-lego-acrilico-preto-3mm-preto-10904",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Quadro 50x Minifiguras Para Lego Acrilico Preto 3mm Preto",
-      "short_description": "",
-      "current_price": "62.00",
-      "original_price": "157.00",
-      "discount_pct": "61.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_637620-MLB111557183313_052026-AB--quadro-50x-minifiguras-para-lego-acrilico-preto-3mm.webp",
-      "affiliate_link": "https://meli.la/1FPAghg",
-      "detail_url": "/oferta?slug=quadro-50x-minifiguras-para-lego-acrilico-preto-3mm-preto-10904",
-      "price_collected_at": "2026-08-11T15:50:31.674417+00:00"
-    },
-    {
-      "id": 10886,
-      "slug": "boneca-fada-voadora-controle-remoto-voa-sensor-recarregavel-rosa-lilas-azul-10886",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Boneca Fada Voadora Controle Remoto Voa Sensor Recarregavel Rosa Lilas Azul",
-      "short_description": "",
-      "current_price": "35.00",
-      "original_price": "60.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_606190-MLB109877913187_032026-AB--boneca-fada-voadora-controle-remoto-voa-sensor-recarregavel.webp",
-      "affiliate_link": "https://meli.la/1KFgBQQ",
-      "detail_url": "/oferta?slug=boneca-fada-voadora-controle-remoto-voa-sensor-recarregavel-rosa-lilas-azul-10886",
-      "price_collected_at": "2026-08-11T15:50:31.662729+00:00"
-    },
-    {
-      "id": 10889,
-      "slug": "mobile-centopeia-espiral-bebe-para-carrinho-berco-chocalho-colorido-10889",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Móbile Centopeia Espiral Bebe Para Carrinho Berço Chocalho Colorido",
-      "short_description": "",
-      "current_price": "32.00",
-      "original_price": "49.00",
-      "discount_pct": "35.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_822387-MLB113356527456_072026-AB--mobile-centopeia-espiral-bebe-para-carrinho-berco-chocalho.webp",
-      "affiliate_link": "https://meli.la/2SZ6FY4",
-      "detail_url": "/oferta?slug=mobile-centopeia-espiral-bebe-para-carrinho-berco-chocalho-colorido-10889",
-      "price_collected_at": "2026-08-11T15:50:31.637759+00:00"
-    },
-    {
-      "id": 10260,
-      "slug": "quadro-lousa-branca-120x90-moldura-aluminio-4-can-1-apg-branco-10260",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Quadro Lousa Branca 120x90 Moldura Alumínio + 4 Can 1 Apg Branco",
-      "short_description": "",
-      "current_price": "149.00",
-      "original_price": "259.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_765815-MLB115011122423_072026-AB--quadro-lousa-branca-120x90-moldura-aluminio--4-can-1-apg.webp",
-      "affiliate_link": "https://meli.la/1AGFDfU",
-      "detail_url": "/oferta?slug=quadro-lousa-branca-120x90-moldura-aluminio-4-can-1-apg-branco-10260",
-      "price_collected_at": "2026-08-11T15:50:31.620414+00:00"
-    },
-    {
-      "id": 10917,
-      "slug": "urso-pelucia-teddy-gigante-creme-c-laco-110m-super-fofinho-creme-10917",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Urso Pelúcia Teddy Gigante Creme C/ Laço 1,10m Super Fofinho Creme",
-      "short_description": "",
-      "current_price": "162.00",
-      "original_price": "229.00",
-      "discount_pct": "29.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_842921-MLB93848320894_102025-AB--urso-pelucia-teddy-gigante-creme-c-laco-110m-super-fofinho.webp",
-      "affiliate_link": "https://meli.la/178z8WH",
-      "detail_url": "/oferta?slug=urso-pelucia-teddy-gigante-creme-c-laco-110m-super-fofinho-creme-10917",
-      "price_collected_at": "2026-08-11T15:50:31.586972+00:00"
-    },
-    {
-      "id": 10902,
-      "slug": "conjunto-de-jogo-de-bingo-ideal-para-festas-em-material-de-10902",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Conjunto De Jogo De Bingo, Ideal Para Festas, Em Material De",
-      "short_description": "",
-      "current_price": "121.00",
-      "original_price": "238.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_900570-MLB112974921078_072026-AB--conjunto-de-jogo-de-bingo-ideal-para-festas-em-material-de.webp",
-      "affiliate_link": "https://meli.la/2avxTP7",
-      "detail_url": "/oferta?slug=conjunto-de-jogo-de-bingo-ideal-para-festas-em-material-de-10902",
-      "price_collected_at": "2026-08-11T15:50:31.551521+00:00"
-    },
-    {
-      "id": 10901,
-      "slug": "tiranossauro-rex-brinquedo-solta-fumaca-anda-com-rugido-luz-personagem-dinossauro-solta-fumaca-brinquedo-crianca-anda-sons-e-luzes-10901",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tiranossauro Rex Brinquedo Solta Fumaça Anda Com Rugido Luz Personagem Dinossauro Solta Fumaça Brinquedo Criança Anda, Sons E Luzes",
-      "short_description": "",
-      "current_price": "45.00",
-      "original_price": "60.00",
-      "discount_pct": "25.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_948254-MLA95658254354_102025-AB.webp",
-      "affiliate_link": "https://meli.la/2kwujJr",
-      "detail_url": "/oferta?slug=tiranossauro-rex-brinquedo-solta-fumaca-anda-com-rugido-luz-personagem-dinossauro-solta-fumaca-brinquedo-crianca-anda-sons-e-luzes-10901",
-      "price_collected_at": "2026-08-11T15:50:31.537444+00:00"
-    },
-    {
-      "id": 10888,
-      "slug": "brinquedo-infantil-anti-stress-sensorial-macio-colecionavel-2-unidades-10888",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Brinquedo Infantil Anti Stress Sensorial Macio Colecionável 2 Unidades",
-      "short_description": "",
-      "current_price": "72.00",
-      "original_price": "149.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959750-MLB115784174583_082026-AB--brinquedo-infantil-anti-stress-sensorial-macio-colecionavel.webp",
-      "affiliate_link": "https://meli.la/1rhfy6H",
-      "detail_url": "/oferta?slug=brinquedo-infantil-anti-stress-sensorial-macio-colecionavel-2-unidades-10888",
-      "price_collected_at": "2026-08-11T15:50:31.505283+00:00"
-    },
-    {
-      "id": 2499,
-      "slug": "genco-3-em-1-balde-10kg-para-piscina-2499",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Genco 3 Em 1 Balde 10kg Para Piscina",
-      "short_description": "",
-      "current_price": "191.00",
-      "original_price": "247.00",
-      "discount_pct": "23.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_858470-MLA111239724696_052026-AB.webp",
-      "affiliate_link": "https://meli.la/2Nz26Qw",
-      "detail_url": "/oferta?slug=genco-3-em-1-balde-10kg-para-piscina-2499",
-      "price_collected_at": "2026-08-11T15:50:31.302267+00:00"
-    },
-    {
-      "id": 10914,
-      "slug": "panela-de-pressao-brinox-vanilla-54l-inducao-ceramic-life-c-creme-10914",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Panela De Pressão Brinox Vanilla 5,4l Indução Ceramic Life C Creme",
-      "short_description": "",
-      "current_price": "249.00",
-      "original_price": "377.00",
-      "discount_pct": "34.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_872472-MLA99980491655_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1PiqWj9",
-      "detail_url": "/oferta?slug=panela-de-pressao-brinox-vanilla-54l-inducao-ceramic-life-c-creme-10914",
-      "price_collected_at": "2026-08-11T15:50:31.272932+00:00"
-    },
-    {
-      "id": 10913,
-      "slug": "mini-mixer-misturador-de-bebidas-eletrico-2-em-1-portatil-recarregavel-mexedor-de-ovos-whey-leite-cafe-espuma-shake-drinks-capuccino-suco-comica-10913",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mini Mixer Misturador De Bebidas Elétrico 2 Em 1 Portátil Recarregável Mexedor De Ovos Whey Leite Café Espuma Shake Drinks Capuccino Suco Comica",
-      "short_description": "",
-      "current_price": "21.00",
-      "original_price": "49.00",
-      "discount_pct": "57.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_906444-MLA113292060459_062026-AB.webp",
-      "affiliate_link": "https://meli.la/2gWdvDP",
-      "detail_url": "/oferta?slug=mini-mixer-misturador-de-bebidas-eletrico-2-em-1-portatil-recarregavel-mexedor-de-ovos-whey-leite-cafe-espuma-shake-drinks-capuccino-suco-comica-10913",
-      "price_collected_at": "2026-08-11T15:50:31.207005+00:00"
-    },
-    {
-      "id": 8772,
-      "slug": "guarda-roupa-dobravel-organizador-colmeia-preto-8-prateleiras-irsina-8772",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Guarda Roupa Dobrável Organizador Colmeia Preto 8 Prateleiras IRSINA",
-      "short_description": "",
-      "current_price": "97.00",
-      "original_price": "138.00",
-      "discount_pct": "30.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_938828-MLA99418141062_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2pgWLRM",
-      "detail_url": "/oferta?slug=guarda-roupa-dobravel-organizador-colmeia-preto-8-prateleiras-irsina-8772",
-      "price_collected_at": "2026-08-11T15:50:31.175298+00:00"
-    },
-    {
-      "id": 10910,
-      "slug": "marmita-eletrica-veicular-bivolt-p-carro-casa-taxi-uber-caminhao-12v-24v-110v-220v-c-10910",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Marmita Elétrica Veicular Bivolt P/ Carro Casa Taxi Uber Caminhão 12V 24V 110V 220V C",
-      "short_description": "",
-      "current_price": "47.97",
-      "original_price": "199.88",
-      "discount_pct": "76.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg90u8sbzcas0d",
-      "affiliate_link": "https://s.shopee.com.br/BSuaEXZcg",
-      "detail_url": "/oferta?slug=marmita-eletrica-veicular-bivolt-p-carro-casa-taxi-uber-caminhao-12v-24v-110v-220v-c-10910",
-      "price_collected_at": "2026-08-11T13:02:48.989827+00:00"
-    },
-    {
-      "id": 10895,
-      "slug": "cozedor-eletrico-multifuncional-de-ovo-milho-a-vapor-de-leite-rapido-de-tripla-camada-coze-10895",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Cozedor Elétrico Multifuncional De Ovo Milho A Vapor De Leite Rápido De Tripla Camada Coze",
-      "short_description": "",
-      "current_price": "33.57",
-      "original_price": "50.10",
-      "discount_pct": "33.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd4q-lvkgz6kjwgt9b0",
-      "affiliate_link": "https://s.shopee.com.br/LmKmXWwHh",
-      "detail_url": "/oferta?slug=cozedor-eletrico-multifuncional-de-ovo-milho-a-vapor-de-leite-rapido-de-tripla-camada-coze-10895",
-      "price_collected_at": "2026-08-11T13:02:48.976774+00:00"
-    },
-    {
-      "id": 10909,
-      "slug": "tenis-adidas-adizero-corrida-energy-drive-rc-leve-rods-azul-azul-41-br-10909",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis adidas Adizero Corrida Energy Drive Rc Leve Rods Azul Azul 41 Br",
-      "short_description": "",
-      "current_price": "726.00",
-      "original_price": "899.00",
-      "discount_pct": "19.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_951556-MLB114552624939_072026-AB--tenis-adidas-adizero-corrida-energy-drive-rc-leve-rods-azul.webp",
-      "affiliate_link": "https://meli.la/27zoeB9",
-      "detail_url": "/oferta?slug=tenis-adidas-adizero-corrida-energy-drive-rc-leve-rods-azul-azul-41-br-10909",
-      "price_collected_at": "2026-08-11T13:02:17.266727+00:00"
-    },
-    {
-      "id": 10879,
-      "slug": "pasta-de-amendoim-com-whey-protein-600g-dr-peanut-sabor-buenissimo-sem-gluten-10879",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Pasta de Amendoim com Whey Protein 600g Dr. Peanut Sabor Bueníssimo Sem Glúten",
-      "short_description": "",
-      "current_price": "38.00",
-      "original_price": "62.00",
-      "discount_pct": "39.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_632010-MLA111491448020_062026-AB.webp",
-      "affiliate_link": "https://meli.la/1Y81RYy",
-      "detail_url": "/oferta?slug=pasta-de-amendoim-com-whey-protein-600g-dr-peanut-sabor-buenissimo-sem-gluten-10879",
-      "price_collected_at": "2026-08-11T13:02:17.238378+00:00"
-    },
-    {
-      "id": 10908,
-      "slug": "bola-futebol-campo-penalty-bravo-mundo-xxvi-edicao-especial-10908",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Bola Futebol Campo Penalty Bravo Mundo XXVI Edição Especial",
-      "short_description": "",
-      "current_price": "85.00",
-      "original_price": "175.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_665956-MLA112636709388_062026-AB.webp",
-      "affiliate_link": "https://meli.la/2ZztjWb",
-      "detail_url": "/oferta?slug=bola-futebol-campo-penalty-bravo-mundo-xxvi-edicao-especial-10908",
-      "price_collected_at": "2026-08-11T13:02:17.161422+00:00"
-    },
-    {
-      "id": 10517,
-      "slug": "kit-c4-body-splash-arabe-200ml-perfume-feminino-masculino-original-10517",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit C/4 Body Splash Árabe 200ml Perfume Feminino Masculino Original",
-      "short_description": "",
-      "current_price": "65.00",
-      "original_price": "129.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_860072-MLA107259652144_032026-AB.webp",
-      "affiliate_link": "https://meli.la/24dbj2b",
-      "detail_url": "/oferta?slug=kit-c4-body-splash-arabe-200ml-perfume-feminino-masculino-original-10517",
-      "price_collected_at": "2026-08-11T13:02:16.724689+00:00"
-    },
-    {
-      "id": 10355,
-      "slug": "carga-aparelho-de-barbear-gillette-mach3-sensitive-com-aloe-10355",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Carga Aparelho De Barbear Gillette Mach3 Sensitive Com Aloe",
-      "short_description": "",
-      "current_price": "36.00",
-      "original_price": "49.00",
-      "discount_pct": "27.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_613916-MLA114978372693_072026-AB.webp",
-      "affiliate_link": "https://meli.la/1biBXu8",
-      "detail_url": "/oferta?slug=carga-aparelho-de-barbear-gillette-mach3-sensitive-com-aloe-10355",
-      "price_collected_at": "2026-08-11T13:02:16.653488+00:00"
-    },
-    {
-      "id": 10878,
-      "slug": "presente-nativa-spa-ameixa-o-boticario-10878",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Presente Nativa Spa Ameixa O Boticário",
-      "short_description": "",
-      "current_price": "69.00",
-      "original_price": "145.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_812015-MLA107655219735_022026-AB.webp",
-      "affiliate_link": "https://meli.la/2YZKYf9",
-      "detail_url": "/oferta?slug=presente-nativa-spa-ameixa-o-boticario-10878",
-      "price_collected_at": "2026-08-11T13:02:16.531687+00:00"
-    },
-    {
-      "id": 3935,
-      "slug": "basike-fone-de-ouvido-sem-fio-bluetooth-para-bluetooth-53-branco-3935",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Basike Fone De Ouvido Sem Fio Bluetooth Para Bluetooth 5.3 Branco",
-      "short_description": "",
-      "current_price": "64.00",
-      "original_price": "99.00",
-      "discount_pct": "35.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_690574-MLB100520428706_122025-AB--basike-fone-de-ouvido-sem-fio-bluetooth-para-bluetooth-53.webp",
-      "affiliate_link": "https://meli.la/2YCsA5m",
-      "detail_url": "/oferta?slug=basike-fone-de-ouvido-sem-fio-bluetooth-para-bluetooth-53-branco-3935",
-      "price_collected_at": "2026-08-11T13:02:16.518838+00:00"
-    },
-    {
-      "id": 5625,
-      "slug": "carregador-30w-turbo-para-iphone-8-x-xr-11-12-13-14-pro-max-fonte-usb-c-cor-branca-dtimp-branco-5625",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Carregador 30w Turbo Para iPhone 8 X Xr 11 12 13 14 Pro Max Fonte Usb C Cor Branca Dtimp",
-      "short_description": "",
-      "current_price": "46.00",
-      "original_price": "99.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_989431-MLA113963894617_062026-AB.webp",
-      "affiliate_link": "https://meli.la/1nw4xQj",
-      "detail_url": "/oferta?slug=carregador-30w-turbo-para-iphone-8-x-xr-11-12-13-14-pro-max-fonte-usb-c-cor-branca-dtimp-branco-5625",
-      "price_collected_at": "2026-08-11T13:02:16.502670+00:00"
-    },
-    {
-      "id": 10377,
-      "slug": "fone-de-ouvido-sem-fio-havit-tw982-enc-bluetooth-54-cor-preto-10377",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Fone De Ouvido Sem Fio Havit Tw982 Enc Bluetooth 5.4 Cor Preto",
-      "short_description": "",
-      "current_price": "71.00",
-      "original_price": "119.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_687944-MLA96073444085_102025-AB.webp",
-      "affiliate_link": "https://meli.la/2zV6ytY",
-      "detail_url": "/oferta?slug=fone-de-ouvido-sem-fio-havit-tw982-enc-bluetooth-54-cor-preto-10377",
-      "price_collected_at": "2026-08-11T13:02:16.424239+00:00"
-    },
-    {
-      "id": 5663,
-      "slug": "relogio-smartwatch-redmi-watch-5-active-lite-xiaomi-preto-prateado-5663",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Relógio Smartwatch Redmi Watch 5 Active Lite Xiaomi Preto Prateado",
-      "short_description": "",
-      "current_price": "335.00",
-      "original_price": "699.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_761997-MLA111392533251_052026-AB.webp",
-      "affiliate_link": "https://meli.la/2587g7B",
-      "detail_url": "/oferta?slug=relogio-smartwatch-redmi-watch-5-active-lite-xiaomi-preto-prateado-5663",
-      "price_collected_at": "2026-08-11T13:02:16.293312+00:00"
-    },
-    {
-      "id": 10906,
-      "slug": "guitarra-infantil-rosa-com-microfone-luzes-conexao-mp3-organ-rosa-chiclete-10906",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Guitarra Infantil Rosa Com Microfone Luzes Conexão Mp3 Organ Rosa-chiclete",
-      "short_description": "",
-      "current_price": "90.00",
-      "original_price": "150.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_980360-MLB111539001647_052026-AB--guitarra-infantil-rosa-com-microfone-luzes-conexao-mp3-organ.webp",
-      "affiliate_link": "https://meli.la/2HxSNgp",
-      "detail_url": "/oferta?slug=guitarra-infantil-rosa-com-microfone-luzes-conexao-mp3-organ-rosa-chiclete-10906",
-      "price_collected_at": "2026-08-11T13:02:16.041183+00:00"
-    },
-    {
-      "id": 10905,
-      "slug": "maleta-de-maquiagem-infantil-lavavel-com-espelho-kit-completo-32-pecas-antialergica-presente-menina-mompas-10905",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Maleta De Maquiagem Infantil Lavável Com Espelho Kit Completo 32 Peças Antialérgica Presente Menina Mompas",
-      "short_description": "",
-      "current_price": "56.00",
-      "original_price": "78.00",
-      "discount_pct": "28.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802995-MLA115717449671_082026-AB.webp",
-      "affiliate_link": "https://meli.la/1qm4bvo",
-      "detail_url": "/oferta?slug=maleta-de-maquiagem-infantil-lavavel-com-espelho-kit-completo-32-pecas-antialergica-presente-menina-mompas-10905",
-      "price_collected_at": "2026-08-11T13:02:16.011673+00:00"
-    },
-    {
-      "id": 10903,
-      "slug": "microfone-guitarra-infantil-musical-som-luzes-pedestal-viola-azul-10903",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Microfone Guitarra Infantil Musical Som Luzes Pedestal Viola Azul",
-      "short_description": "",
-      "current_price": "94.00",
-      "original_price": "150.00",
-      "discount_pct": "37.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_736850-MLB111915035645_052026-AB--microfone-guitarra-infantil-musical-som-luzes-pedestal-viola.webp",
-      "affiliate_link": "https://meli.la/1VRBeZ9",
-      "detail_url": "/oferta?slug=microfone-guitarra-infantil-musical-som-luzes-pedestal-viola-azul-10903",
-      "price_collected_at": "2026-08-11T13:02:15.962823+00:00"
-    },
-    {
-      "id": 9284,
-      "slug": "expositor-para-lego-senna-10330-acrilico-cristal-3mm-cristal-9284",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Expositor Para Lego Senna 10330 Acrilico Cristal 3mm Cristal",
-      "short_description": "",
-      "current_price": "159.00",
-      "original_price": "398.00",
-      "discount_pct": "60.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_873142-MLB108758941027_032026-AB--expositor-para-lego-senna-10330-acrilico-cristal-3mm.webp",
-      "affiliate_link": "https://meli.la/2dy3LLG",
-      "detail_url": "/oferta?slug=expositor-para-lego-senna-10330-acrilico-cristal-3mm-cristal-9284",
-      "price_collected_at": "2026-08-11T13:02:15.884169+00:00"
-    },
-    {
-      "id": 10150,
-      "slug": "carrinho-controle-remoto-conquer-scy16102-50km-4x4-automode-livre-2-x-baterias-funciona-varios-veiculos-simultaneamente-sem-interferencia-presente-de-dia-dos-pais-k888-10150",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Carrinho Controle Remoto Conquer Scy16102 50km 4x4 Automode Livre 2 x Baterias | Funciona Vários Veículos Simultaneamente Sem Interferência | Presente de Dia dos Pais -k888",
-      "short_description": "",
-      "current_price": "355.00",
-      "original_price": "490.00",
-      "discount_pct": "28.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_696916-MLA113213983626_072026-AB.webp",
-      "affiliate_link": "https://meli.la/2vDzozK",
-      "detail_url": "/oferta?slug=carrinho-controle-remoto-conquer-scy16102-50km-4x4-automode-livre-2-x-baterias-funciona-varios-veiculos-simultaneamente-sem-interferencia-presente-de-dia-dos-pais-k888-10150",
-      "price_collected_at": "2026-08-11T13:02:15.866716+00:00"
-    },
-    {
-      "id": 10512,
-      "slug": "mochila-feminina-ideal-para-deslocamentos-diarios-viagens-e-estudos-impermeavel-reforcada-com-capacidade-para-portatil-24l-preto-10512",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mochila feminina, ideal para deslocamentos diários, viagens e estudos, impermeável, reforçada, com capacidade para portátil, 24L (preto)",
-      "short_description": "",
-      "current_price": "37.00",
-      "original_price": "158.00",
-      "discount_pct": "77.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_950579-MLA113441139782_072026-AB.webp",
-      "affiliate_link": "https://meli.la/1imWHKU",
-      "detail_url": "/oferta?slug=mochila-feminina-ideal-para-deslocamentos-diarios-viagens-e-estudos-impermeavel-reforcada-com-capacidade-para-portatil-24l-preto-10512",
-      "price_collected_at": "2026-08-11T13:02:15.795208+00:00"
-    },
-    {
-      "id": 8980,
-      "slug": "cobertor-casal-manta-cereja-habitat-poa-bolinha-soft-macia-cereja-cerejas-8980",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cobertor Casal Manta Cereja Habitat Poá Bolinha Soft Macia Cereja Cerejas",
-      "short_description": "",
-      "current_price": "67.00",
-      "original_price": "94.00",
-      "discount_pct": "29.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_875625-MLB108966240299_032026-AB--cobertor-casal-manta-cereja-habitat-poa-bolinha-soft-macia.webp",
-      "affiliate_link": "https://meli.la/1HTLUxe",
-      "detail_url": "/oferta?slug=cobertor-casal-manta-cereja-habitat-poa-bolinha-soft-macia-cereja-cerejas-8980",
-      "price_collected_at": "2026-08-11T13:02:15.744602+00:00"
-    },
-    {
-      "id": 9947,
-      "slug": "chuveiro-ducha-lorenzetti-loren-shower-ultra-branco-7500w-220v-9947",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Chuveiro Ducha Lorenzetti Loren Shower Ultra Branco 7500W 220V",
-      "short_description": "",
-      "current_price": "135.00",
-      "original_price": "240.00",
-      "discount_pct": "44.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896908-MLA101388142032_122025-AB.webp",
-      "affiliate_link": "https://meli.la/1rpzpVk",
-      "detail_url": "/oferta?slug=chuveiro-ducha-lorenzetti-loren-shower-ultra-branco-7500w-220v-9947",
-      "price_collected_at": "2026-08-11T13:02:15.715477+00:00"
-    },
-    {
-      "id": 10872,
-      "slug": "kit-2-sacos-para-lavar-tenis-e-sapatos-em-maquina-de-lavar-saco-telado-anti-impacto-com-fechamento-em-ziper-10872",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 2 Sacos Para Lavar Tênis E Sapatos Em Máquina De Lavar – Saco Telado Anti-Impacto Com Fechamento Em Zíper",
-      "short_description": "",
-      "current_price": "29.00",
-      "original_price": "39.00",
-      "discount_pct": "26.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_860122-MLA112856868136_072026-AB.webp",
-      "affiliate_link": "https://meli.la/2tmVgmz",
-      "detail_url": "/oferta?slug=kit-2-sacos-para-lavar-tenis-e-sapatos-em-maquina-de-lavar-saco-telado-anti-impacto-com-fechamento-em-ziper-10872",
-      "price_collected_at": "2026-08-11T13:02:15.702272+00:00"
-    },
-    {
-      "id": 10644,
-      "slug": "panela-de-pressao-ceramic-life-pressure-42l-areia-brinox-10644",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Panela De Pressão Ceramic Life Pressure 4,2l Areia Brinox",
-      "short_description": "",
-      "current_price": "189.00",
-      "original_price": "497.00",
-      "discount_pct": "62.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_681726-MLA99524592290_122025-AB.webp",
-      "affiliate_link": "https://meli.la/1mHausr",
-      "detail_url": "/oferta?slug=panela-de-pressao-ceramic-life-pressure-42l-areia-brinox-10644",
-      "price_collected_at": "2026-08-11T13:02:15.674808+00:00"
-    },
-    {
-      "id": 10881,
-      "slug": "edredom-sherpa-queen-240x220m-cobertor-e-coberdrom-macio-cor-avela-10881",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Edredom Sherpa Queen 2,40x2,20m Cobertor E Coberdrom Macio Cor Avelã",
-      "short_description": "",
-      "current_price": "97.00",
-      "original_price": "149.00",
-      "discount_pct": "35.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_657784-MLA96173543371_102025-AB.webp",
-      "affiliate_link": "https://meli.la/2tXibuh",
-      "detail_url": "/oferta?slug=edredom-sherpa-queen-240x220m-cobertor-e-coberdrom-macio-cor-avela-10881",
-      "price_collected_at": "2026-08-11T13:02:15.622286+00:00"
-    },
-    {
-      "id": 10120,
-      "slug": "chuveiro-ducha-lorenzetti-loren-shower-eletronico-branco-6800w-220v-10120",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Chuveiro Ducha Lorenzetti Loren Shower Eletrônico Branco 6800w 220V",
-      "short_description": "",
-      "current_price": "124.00",
-      "original_price": "156.00",
-      "discount_pct": "21.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896908-MLA101388142032_122025-AB.webp",
-      "affiliate_link": "https://meli.la/2MaxY3J",
-      "detail_url": "/oferta?slug=chuveiro-ducha-lorenzetti-loren-shower-eletronico-branco-6800w-220v-10120",
-      "price_collected_at": "2026-08-11T13:02:15.610634+00:00"
-    },
-    {
-      "id": 10880,
-      "slug": "kit-6-cadeiras-de-jantar-allegra-waw-design-empilhavel-em-polipropileno-preto-10880",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 6 Cadeiras de Jantar Allegra Waw Design Empilhável em Polipropileno Preto",
-      "short_description": "",
-      "current_price": "375.00",
-      "original_price": "544.00",
-      "discount_pct": "31.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_975701-MLU78731069455_082024-AB.webp",
-      "affiliate_link": "https://meli.la/1QXiYrj",
-      "detail_url": "/oferta?slug=kit-6-cadeiras-de-jantar-allegra-waw-design-empilhavel-em-polipropileno-preto-10880",
-      "price_collected_at": "2026-08-11T13:02:15.573839+00:00"
-    },
-    {
-      "id": 4106,
-      "slug": "jogo-de-toalhas-altenburg-toquio-banho-4-pecas-4106",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Toalhas Altenburg Tóquio Banho 4 peças",
-      "short_description": "",
-      "current_price": "81.00",
-      "original_price": "139.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_726279-MLA95688472374_102025-AB.webp",
-      "affiliate_link": "https://meli.la/2Ebyqqk",
-      "detail_url": "/oferta?slug=jogo-de-toalhas-altenburg-toquio-banho-4-pecas-4106",
-      "price_collected_at": "2026-08-11T13:02:15.494054+00:00"
-    },
-    {
-      "id": 5971,
-      "slug": "multivitaminico-lavitan-az-para-mulher-com-90-comprimidos-5971",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Multivitamínico Lavitan AZ Para Mulher Com 90 Comprimidos",
-      "short_description": "",
-      "current_price": "20.50",
-      "original_price": "39.90",
-      "discount_pct": "49.00",
-      "image_url": "https://m.media-amazon.com/images/I/51ovA4UycqL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B09BNVQN4D?linkCode=sl2&tag=desconto.bot-20&linkId=500542b6ca5d822a8818c07692199b94&th=1",
-      "detail_url": "/oferta?slug=multivitaminico-lavitan-az-para-mulher-com-90-comprimidos-5971",
-      "price_collected_at": "2026-08-11T12:59:20.629380+00:00"
-    },
-    {
-      "id": 2650,
-      "slug": "anuncio-patrocinado-cerave-locao-facial-hidratante-pm-uso-noturno-para-peles-normais-a-secas-com-3-ceramidas-essenciai-2650",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – CeraVe PM, Loção Facial Hidratante Ultraleve, Pele Normal a Seca, 52ml",
-      "short_description": "",
-      "current_price": "78.46",
-      "original_price": "99.90",
-      "discount_pct": "21.00",
-      "image_url": "https://m.media-amazon.com/images/I/61e7BF-RoIL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B096XPFVLL?linkCode=sl2&tag=desconto.bot-20&linkId=e28d263b0e9d4e548d01155e2fa655c9&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-cerave-locao-facial-hidratante-pm-uso-noturno-para-peles-normais-a-secas-com-3-ceramidas-essenciai-2650",
-      "price_collected_at": "2026-08-11T12:59:20.407182+00:00"
-    },
-    {
-      "id": 10163,
-      "slug": "ype-detergente-em-po-para-maquina-1kg-10163",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Ypê Detergente em Pó para Máquina 1Kg",
-      "short_description": "",
-      "current_price": "38.49",
-      "original_price": "48.87",
-      "discount_pct": "21.00",
-      "image_url": "https://m.media-amazon.com/images/I/616mKGypBaL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0CSYPRC2Q?linkCode=sl2&tag=desconto.bot-20&linkId=2e19c97cac96ad9a1f57f5acac195ca1&th=1",
-      "detail_url": "/oferta?slug=ype-detergente-em-po-para-maquina-1kg-10163",
-      "price_collected_at": "2026-08-11T12:59:20.236282+00:00"
-    },
-    {
-      "id": 6744,
-      "slug": "anuncio-patrocinado-big-carriola-magic-toys-6744",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – Big Carriola Magic Toys",
-      "short_description": "",
-      "current_price": "89.90",
-      "original_price": "123.60",
-      "discount_pct": "27.00",
-      "image_url": "https://m.media-amazon.com/images/I/51LE0pY3cbL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B07FB2L185?linkCode=sl2&tag=desconto.bot-20&linkId=a114343c1d674cc4e2958db9d659cd97&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-big-carriola-magic-toys-6744",
-      "price_collected_at": "2026-08-11T12:59:19.814370+00:00"
-    },
-    {
-      "id": 8531,
-      "slug": "anuncio-patrocinado-camiseta-oversized-masculina-pesada-premium-estilo-streetwearcasual-camisa-larga-de-maior-grama-8531",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Anúncio patrocinado – Camiseta Oversized Masculina Pesada Premium - Estilo Streetwear/Casual - Camisa Larga de Maior Grama...",
-      "short_description": "",
-      "current_price": "65.69",
-      "original_price": "79.90",
-      "discount_pct": "18.00",
-      "image_url": "https://m.media-amazon.com/images/I/51hVZBgc7GL._AC_UL320_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0FW1MTRR7?linkCode=sl2&tag=desconto.bot-20&linkId=c6208b3964bbe2afa1b33e2ebbcfce11&th=1",
-      "detail_url": "/oferta?slug=anuncio-patrocinado-camiseta-oversized-masculina-pesada-premium-estilo-streetwearcasual-camisa-larga-de-maior-grama-8531",
-      "price_collected_at": "2026-08-11T12:59:19.582728+00:00"
-    },
-    {
-      "id": 6126,
-      "slug": "jogo-03-colheres-de-silicone-cozinha-wellmix-cabo-curto-preparo-antiaderente-alta-durabilidade-6126",
-      "marketplace": {
-        "code": "amazon",
-        "name": "Amazon"
-      },
-      "title": "Jogo 03 Colheres de Silicone Cozinha Wellmix Cabo Curto Preparo Antiaderente Alta Durabilidade",
-      "short_description": "",
-      "current_price": "22.99",
-      "original_price": "56.99",
-      "discount_pct": "60.00",
-      "image_url": "https://m.media-amazon.com/images/I/51xM65U1u3L._AC_UY218_.jpg",
-      "affiliate_link": "https://www.amazon.com.br/dp/B0CJSYYQ48?linkCode=sl2&tag=desconto.bot-20&linkId=caaf1b54289c698f970a0483ef8b2fb8&th=1",
-      "detail_url": "/oferta?slug=jogo-03-colheres-de-silicone-cozinha-wellmix-cabo-curto-preparo-antiaderente-alta-durabilidade-6126",
-      "price_collected_at": "2026-08-11T12:59:19.211731+00:00"
     }
   ]
 }

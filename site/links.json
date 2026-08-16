@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-08-16T16:21:47.588890+00:00",
+  "generated_at": "2026-08-16T22:01:43.700305+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -34,16 +34,6 @@
       "tracked_url": "https://s.shopee.com.br/2gALE8P6zU?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
     },
     {
-      "id": 11200,
-      "title": "A 50ª Lei: O medo é o seu maior inimigo",
-      "current_price": "13.99",
-      "original_price": "64.90",
-      "discount_pct": "78.00",
-      "image_url": "https://m.media-amazon.com/images/I/71VyWMT0QZL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=a-50a-lei-o-medo-e-o-seu-maior-inimigo-11200&utm_source=instagram&utm_medium=bio&utm_campaign=offer_11200"
-    },
-    {
       "id": 10910,
       "title": "Marmita Elétrica Veicular Bivolt P/ Carro Casa Taxi Uber Caminhão 12V 24V 110V 220V C",
       "current_price": "49.99",
@@ -52,6 +42,16 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg90u8sbzcas0d",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/8V8BibUFFd?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10910"
+    },
+    {
+      "id": 10177,
+      "title": "Espelho 100x50 Orgânico Corpo Inteiro Grande Moldura Caramelo",
+      "current_price": "99.00",
+      "original_price": "399.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_936790-MLA96100703939_102025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2HDJw3s?matt_word=dbot_ig_bio_10177&utm_source=instagram&utm_medium=bio&utm_campaign=offer_10177"
     }
   ]
 }

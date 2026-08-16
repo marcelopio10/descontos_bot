@@ -1,9 +1,26 @@
 {
   "version": "2.0",
-  "generated_at": "2026-08-16T13:11:25.906288+00:00",
+  "generated_at": "2026-08-16T16:21:47.510867+00:00",
   "site_base_url": "https://descontos-bot.vercel.app",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "offers": [
+    {
+      "id": 10910,
+      "slug": "marmita-eletrica-veicular-bivolt-p-carro-casa-taxi-uber-caminhao-12v-24v-110v-220v-c-10910",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Marmita Elétrica Veicular Bivolt P/ Carro Casa Taxi Uber Caminhão 12V 24V 110V 220V C",
+      "short_description": "",
+      "current_price": "49.99",
+      "original_price": "199.96",
+      "discount_pct": "75.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg90u8sbzcas0d",
+      "affiliate_link": "https://s.shopee.com.br/8fRbhpREU2",
+      "detail_url": "/oferta?slug=marmita-eletrica-veicular-bivolt-p-carro-casa-taxi-uber-caminhao-12v-24v-110v-220v-c-10910",
+      "price_collected_at": "2026-08-16T16:21:45.889591+00:00"
+    },
     {
       "id": 11220,
       "slug": "extensao-filtro-de-linha-seguranca-5-tomadas-11220",
@@ -19,7 +36,7 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mbpmz2gbxodjd8",
       "affiliate_link": "https://s.shopee.com.br/9ANsIkPKT7",
       "detail_url": "/oferta?slug=extensao-filtro-de-linha-seguranca-5-tomadas-11220",
-      "price_collected_at": "2026-08-16T13:11:23.798459+00:00"
+      "price_collected_at": "2026-08-16T16:21:45.878974+00:00"
     },
     {
       "id": 6813,
@@ -36,7 +53,7 @@
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rdw0-mcampzjyibgx55",
       "affiliate_link": "https://s.shopee.com.br/904S6RPxo4",
       "detail_url": "/oferta?slug=controle-remoto-universal-433-mhz-compativel-com-porta-de-garagem-4-botoes-6813",
-      "price_collected_at": "2026-08-16T13:11:23.783787+00:00"
+      "price_collected_at": "2026-08-16T16:21:45.868850+00:00"
     },
     {
       "id": 6809,
@@ -53,7 +70,7 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820l4-mo6w42be1gjl57",
       "affiliate_link": "https://s.shopee.com.br/8AVL6uT8Ut",
       "detail_url": "/oferta?slug=chave-t-longa-para-maquina-de-lavar-10mm-agitador-brastempconsulelectrolux-universal-4862cm-6809",
-      "price_collected_at": "2026-08-16T13:11:23.768238+00:00"
+      "price_collected_at": "2026-08-16T16:21:45.858840+00:00"
     },
     {
       "id": 8368,
@@ -70,7 +87,7 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-lxbl28z9kzg67e",
       "affiliate_link": "https://s.shopee.com.br/8V8BVWNOm9",
       "detail_url": "/oferta?slug=filtro-de-linha-regua-de-tomadas-6-ou-3-tomadas-tripolar-10-amperes-com-fusivel-8368",
-      "price_collected_at": "2026-08-16T13:11:23.752749+00:00"
+      "price_collected_at": "2026-08-16T16:21:45.847549+00:00"
     },
     {
       "id": 6814,
@@ -87,7 +104,772 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-lx021yat5mm7bb",
       "affiliate_link": "https://s.shopee.com.br/8KolJDO276",
       "detail_url": "/oferta?slug=extensao-eletrica-2-metros-extensao-de-energia-3-tomadas-com-3-metros-5-metros-10-metros-6814",
-      "price_collected_at": "2026-08-16T13:11:23.736206+00:00"
+      "price_collected_at": "2026-08-16T16:21:45.836868+00:00"
+    },
+    {
+      "id": 7276,
+      "slug": "kit-6-forma-de-silicone-para-fritadeira-air-fryer-com-alca-antiaderente-cozinha-7276",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit 6 Forma de Silicone para Fritadeira Air Fryer com Alça Antiaderente Cozinha",
+      "short_description": "",
+      "current_price": "14.49",
+      "original_price": "69.00",
+      "discount_pct": "79.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mk35l9kuakg158",
+      "affiliate_link": "https://s.shopee.com.br/7psUiIPw7x",
+      "detail_url": "/oferta?slug=kit-6-forma-de-silicone-para-fritadeira-air-fryer-com-alca-antiaderente-cozinha-7276",
+      "price_collected_at": "2026-08-16T16:21:45.824351+00:00"
+    },
+    {
+      "id": 7642,
+      "slug": "liquidificador-mondial-l99-turbo-550-w-3-velocidades-7642",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Liquidificador Mondial L‑99 Turbo 550 W 3 Velocidades",
+      "short_description": "",
+      "current_price": "109.99",
+      "original_price": "171.86",
+      "discount_pct": "36.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mc83lzgst4gw71",
+      "affiliate_link": "https://s.shopee.com.br/7fZ4VzQZSu",
+      "detail_url": "/oferta?slug=liquidificador-mondial-l99-turbo-550-w-3-velocidades-7642",
+      "price_collected_at": "2026-08-16T16:21:45.811320+00:00"
+    },
+    {
+      "id": 6812,
+      "slug": "mini-aspirador-de-po-3-em-1-a-vacuo-usb-portatil-recarregavel-se8010-6812",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Mini Aspirador De Pó 3 em 1 a Vacuo Usb Portátil Recarregavel -SE8010",
+      "short_description": "",
+      "current_price": "21.99",
+      "original_price": "49.98",
+      "discount_pct": "56.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7renx-m8c8ne7qdez9a8",
+      "affiliate_link": "https://s.shopee.com.br/6pzxWSTk9j",
+      "detail_url": "/oferta?slug=mini-aspirador-de-po-3-em-1-a-vacuo-usb-portatil-recarregavel-se8010-6812",
+      "price_collected_at": "2026-08-16T16:21:45.798616+00:00"
+    },
+    {
+      "id": 8367,
+      "slug": "chaleira-eletrica-jarra-cafe-cha-inox-110v-8367",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Chaleira Elétrica Jarra Café Chá Inox 110v",
+      "short_description": "",
+      "current_price": "44.90",
+      "original_price": "71.27",
+      "discount_pct": "37.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m9-mr7oweocldl204",
+      "affiliate_link": "https://s.shopee.com.br/6fgXK9UNUg",
+      "detail_url": "/oferta?slug=chaleira-eletrica-jarra-cafe-cha-inox-110v-8367",
+      "price_collected_at": "2026-08-16T16:21:45.786718+00:00"
+    },
+    {
+      "id": 8016,
+      "slug": "picador-de-alimentos-moedor-de-carne-mixer-eletrica-processador-cozinha-casa-alho-110v-220v-8016",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Picador De Alimentos Moedor De Carne Mixer Elétrica Processador Cozinha Casa Alho - 110v-220v",
+      "short_description": "",
+      "current_price": "69.99",
+      "original_price": "170.71",
+      "discount_pct": "59.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8262e-mjejrub4w35z78",
+      "affiliate_link": "https://s.shopee.com.br/7Acnv4STTl",
+      "detail_url": "/oferta?slug=picador-de-alimentos-moedor-de-carne-mixer-eletrica-processador-cozinha-casa-alho-110v-220v-8016",
+      "price_collected_at": "2026-08-16T16:21:45.773312+00:00"
+    },
+    {
+      "id": 6806,
+      "slug": "batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-6806",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Batedor Misturador Mixer Elétrico para Bebidas Leite Café Clara de Ovo 2 em 1",
+      "short_description": "",
+      "current_price": "18.99",
+      "original_price": "90.43",
+      "discount_pct": "79.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd48-lupf3z3a40mxf1",
+      "affiliate_link": "https://s.shopee.com.br/70JNilT6oi",
+      "detail_url": "/oferta?slug=batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-6806",
+      "price_collected_at": "2026-08-16T16:21:45.759172+00:00"
+    },
+    {
+      "id": 8943,
+      "slug": "escova-3-em-1-vassoura-rodo-gap-limpeza-esfregao-mop-limpa-8943",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Escova 3 Em 1 Vassoura Rodo Gap Limpeza Esfregão Mop Limpa",
+      "short_description": "",
+      "current_price": "15.88",
+      "original_price": "49.63",
+      "discount_pct": "68.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rdyw-lzcksj98pb0nf8",
+      "affiliate_link": "https://s.shopee.com.br/W5tyonSDV",
+      "detail_url": "/oferta?slug=escova-3-em-1-vassoura-rodo-gap-limpeza-esfregao-mop-limpa-8943",
+      "price_collected_at": "2026-08-16T16:21:45.745352+00:00"
+    },
+    {
+      "id": 10675,
+      "slug": "descascador-de-frutas-e-legumes-com-cabo-ergonomico-de-madeira-lamina-de-aco-inoxidavel-e-abridor-10675",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Descascador de frutas e legumes com cabo ergonômico de madeira, lâmina de aço inoxidável e abridor",
+      "short_description": "",
+      "current_price": "12.75",
+      "original_price": "15.94",
+      "discount_pct": "20.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134253-823p6-mp0fkzbntyq449",
+      "affiliate_link": "https://s.shopee.com.br/LmTmVo5YS",
+      "detail_url": "/oferta?slug=descascador-de-frutas-e-legumes-com-cabo-ergonomico-de-madeira-lamina-de-aco-inoxidavel-e-abridor-10675",
+      "price_collected_at": "2026-08-16T16:21:45.732610+00:00"
+    },
+    {
+      "id": 10113,
+      "slug": "arranjo-c-3-trepadeira-folha-de-hera-vaso-trancado-marrom-10113",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Arranjo c/ 3 Trepadeira Folha de HERA + Vaso Trançado Marrom",
+      "short_description": "",
+      "current_price": "16.80",
+      "original_price": "35.00",
+      "discount_pct": "52.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-md3o52t872giaa",
+      "affiliate_link": "https://s.shopee.com.br/qikNQmBXX",
+      "detail_url": "/oferta?slug=arranjo-c-3-trepadeira-folha-de-hera-vaso-trancado-marrom-10113",
+      "price_collected_at": "2026-08-16T16:21:45.720656+00:00"
+    },
+    {
+      "id": 8362,
+      "slug": "jogo-de-lencol-400-fios-ponto-palito-tecido-leve-suave-berco-solteiro-casal-queen-king-02-e-03-pecas-8362",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Jogo de Lençol 400 Fios Ponto Palito Tecido Leve Suave Berço Solteiro Casal Queen King 02 e 03 Peças",
+      "short_description": "",
+      "current_price": "14.60",
+      "original_price": "33.18",
+      "discount_pct": "56.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mkce515eat4w1c",
+      "affiliate_link": "https://s.shopee.com.br/gPKB7mosU",
+      "detail_url": "/oferta?slug=jogo-de-lencol-400-fios-ponto-palito-tecido-leve-suave-berco-solteiro-casal-queen-king-02-e-03-pecas-8362",
+      "price_collected_at": "2026-08-16T16:21:45.709302+00:00"
+    },
+    {
+      "id": 10922,
+      "slug": "percarbonato-de-sodio-100-puro-tira-manchas-roupas-brancas-e-coloridas-limpeza-em-geral-10922",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Percarbonato de Sódio 100% Puro Tira Manchas Roupas Brancas e Coloridas Limpeza em Geral",
+      "short_description": "",
+      "current_price": "16.99",
+      "original_price": "32.06",
+      "discount_pct": "47.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-mqdb9to75udd59",
+      "affiliate_link": "https://s.shopee.com.br/112AZjlYCW",
+      "detail_url": "/oferta?slug=percarbonato-de-sodio-100-puro-tira-manchas-roupas-brancas-e-coloridas-limpeza-em-geral-10922",
+      "price_collected_at": "2026-08-16T16:21:45.697832+00:00"
+    },
+    {
+      "id": 6801,
+      "slug": "kit-6121824-panos-de-limpeza-aco-premium-arear-panela-fogao-toalha-louca-tira-gordura-reutilizavel-6801",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit 6/12/18/24 Panos De Limpeza Aço Premium Arear Panela Fogão Toalha Louça Tira Gordura Reutilizável",
+      "short_description": "",
+      "current_price": "10.00",
+      "original_price": "25.00",
+      "discount_pct": "60.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mctxxpi1l4qad6",
+      "affiliate_link": "https://s.shopee.com.br/1Lf0yLkHWY",
+      "detail_url": "/oferta?slug=kit-6121824-panos-de-limpeza-aco-premium-arear-panela-fogao-toalha-louca-tira-gordura-reutilizavel-6801",
+      "price_collected_at": "2026-08-16T16:21:45.685730+00:00"
+    },
+    {
+      "id": 10595,
+      "slug": "descascador-de-aco-inoxidavel-com-cabo-de-madeira-e-abridor-integrado-para-frutas-e-legumes-10595",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Descascador de Aço Inoxidável com Cabo de Madeira e Abridor Integrado para Frutas e Legumes",
+      "short_description": "",
+      "current_price": "12.75",
+      "original_price": "15.94",
+      "discount_pct": "20.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134253-823pt-mp0fl7fbnksvba",
+      "affiliate_link": "https://s.shopee.com.br/4AzCLYV1jT",
+      "detail_url": "/oferta?slug=descascador-de-aco-inoxidavel-com-cabo-de-madeira-e-abridor-integrado-para-frutas-e-legumes-10595",
+      "price_collected_at": "2026-08-16T16:21:45.674691+00:00"
+    },
+    {
+      "id": 6802,
+      "slug": "mesa-de-cabeceira-retro-compacta-com-nicho-para-quarto-sala-casal-ou-solteiro-palma-6802",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Mesa de Cabeceira Retrô Compacta com Nicho para Quarto Sala Casal ou Solteiro Palma",
+      "short_description": "",
+      "current_price": "29.80",
+      "original_price": "46.56",
+      "discount_pct": "36.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd6x-luv5vclgwaxb45",
+      "affiliate_link": "https://s.shopee.com.br/40fm9FVf4Q",
+      "detail_url": "/oferta?slug=mesa-de-cabeceira-retro-compacta-com-nicho-para-quarto-sala-casal-ou-solteiro-palma-6802",
+      "price_collected_at": "2026-08-16T16:21:45.657565+00:00"
+    },
+    {
+      "id": 9464,
+      "slug": "cabelo-de-faixa-larga-de-7-cm-protege-gorro-de-seda-acetinada-para-dormir-9464",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Cabelo De Faixa Larga De 7 Cm Protege Gorro De Seda Acetinada Para Dormir",
+      "short_description": "",
+      "current_price": "4.70",
+      "original_price": "14.69",
+      "discount_pct": "68.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823rt-mp4mcmnyrg245a",
+      "affiliate_link": "https://s.shopee.com.br/4LIcXrUOOS",
+      "detail_url": "/oferta?slug=cabelo-de-faixa-larga-de-7-cm-protege-gorro-de-seda-acetinada-para-dormir-9464",
+      "price_collected_at": "2026-08-16T16:21:45.641037+00:00"
+    },
+    {
+      "id": 6804,
+      "slug": "percarbonato-de-sodio-100-puro-limpeza-em-geral-tira-manchas-roupas-brancas-500g1kg-2kg-6804",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Percarbonato de Sódio 100% Puro Limpeza Em Geral Tira Manchas Roupas Brancas 500g/1kg /2kg",
+      "short_description": "",
+      "current_price": "10.00",
+      "original_price": "14.93",
+      "discount_pct": "33.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824j0-medc35ydcm4m9c",
+      "affiliate_link": "https://s.shopee.com.br/4fvSwTT7iU",
+      "detail_url": "/oferta?slug=percarbonato-de-sodio-100-puro-limpeza-em-geral-tira-manchas-roupas-brancas-500g1kg-2kg-6804",
+      "price_collected_at": "2026-08-16T16:21:45.629760+00:00"
+    },
+    {
+      "id": 8361,
+      "slug": "kit-com-100-unidades-de-tampa-de-plastico-descartavel-para-alimento-8361",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit com 100 Unidades de Tampa De Plástico descartável para alimento",
+      "short_description": "",
+      "current_price": "10.00",
+      "original_price": "14.93",
+      "discount_pct": "33.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mhua3erpy8ee79",
+      "affiliate_link": "https://s.shopee.com.br/5ArjXORDhZ",
+      "detail_url": "/oferta?slug=kit-com-100-unidades-de-tampa-de-plastico-descartavel-para-alimento-8361",
+      "price_collected_at": "2026-08-16T16:21:45.617978+00:00"
+    },
+    {
+      "id": 6797,
+      "slug": "jogo-de-lencol-400-fios-micropercal-com-fronha-em-ponto-palito-6797",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Jogo de Lençol 400 Fios Micropercal Com Fronha em Ponto Palito",
+      "short_description": "",
+      "current_price": "19.80",
+      "original_price": "31.43",
+      "discount_pct": "37.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m5-mo7pypmcmww19c",
+      "affiliate_link": "https://s.shopee.com.br/50YJL5Rr2W",
+      "detail_url": "/oferta?slug=jogo-de-lencol-400-fios-micropercal-com-fronha-em-ponto-palito-6797",
+      "price_collected_at": "2026-08-16T16:21:45.606005+00:00"
+    },
+    {
+      "id": 6799,
+      "slug": "percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6799",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Percarbonato 100% Puro Tira Manchas Roupas Brancas e Coloridas",
+      "short_description": "",
+      "current_price": "16.99",
+      "original_price": "32.06",
+      "discount_pct": "47.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lm-mqdb9tob0xdu3d",
+      "affiliate_link": "https://s.shopee.com.br/2qTol6a6R5",
+      "detail_url": "/oferta?slug=percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6799",
+      "price_collected_at": "2026-08-16T16:21:45.576801+00:00"
+    },
+    {
+      "id": 8934,
+      "slug": "mala-de-bordo-rigida-abs-preto-sweet-studio-com-rodas-duplas-360-para-viagem-8934",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mala de Bordo Rígida ABS Preto Sweet Studio com Rodas Duplas 360° para Viagem",
+      "short_description": "",
+      "current_price": "164.00",
+      "original_price": "322.00",
+      "discount_pct": "48.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_706320-MLA113820575963_062026-AB.webp",
+      "affiliate_link": "https://meli.la/1Hn3zFJ",
+      "detail_url": "/oferta?slug=mala-de-bordo-rigida-abs-preto-sweet-studio-com-rodas-duplas-360-para-viagem-8934",
+      "price_collected_at": "2026-08-16T16:21:36.470991+00:00"
+    },
+    {
+      "id": 10499,
+      "slug": "kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping-verde-camuflado-tamanho-unico-10499",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit Chapéu Boonie Balaclava Uv Dobrável Pesca Moto Camping Verde Camuflado Tamanho Único",
+      "short_description": "",
+      "current_price": "39.00",
+      "original_price": "58.00",
+      "discount_pct": "32.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_831455-MLB114629696293_072026-AB--kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping.webp",
+      "affiliate_link": "https://meli.la/1xDn4BE",
+      "detail_url": "/oferta?slug=kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping-verde-camuflado-tamanho-unico-10499",
+      "price_collected_at": "2026-08-16T16:21:36.456200+00:00"
+    },
+    {
+      "id": 11120,
+      "slug": "camisa-polo-reserva-essence-basica-preto-liso-g-11120",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Camisa Polo Reserva Essence Básica Preto Liso G",
+      "short_description": "",
+      "current_price": "284.00",
+      "original_price": "499.00",
+      "discount_pct": "43.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_711136-MLB109613036997_032026-AB--camisa-polo-reserva-essence-basica.webp",
+      "affiliate_link": "https://meli.la/1h1J6VH",
+      "detail_url": "/oferta?slug=camisa-polo-reserva-essence-basica-preto-liso-g-11120",
+      "price_collected_at": "2026-08-16T16:21:36.439409+00:00"
+    },
+    {
+      "id": 8297,
+      "slug": "mala-de-bordo-rigida-sweet-studio-em-abs-com-rodas-360-para-viagem-preto-mala-2075-8297",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mala de Bordo Rígida Sweet Studio em ABS com Rodas 360° para Viagem",
+      "short_description": "",
+      "current_price": "151.00",
+      "original_price": "322.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_674217-MLA112637860882_062026-AB.webp",
+      "affiliate_link": "https://meli.la/2Kuras9",
+      "detail_url": "/oferta?slug=mala-de-bordo-rigida-sweet-studio-em-abs-com-rodas-360-para-viagem-preto-mala-2075-8297",
+      "price_collected_at": "2026-08-16T16:21:36.424995+00:00"
+    },
+    {
+      "id": 8791,
+      "slug": "mochila-jiesipote-a-prova-dagua-reforcada-expansivel-cor-preto-8791",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Mochila jiesipote À Prova D'água Reforçada Expansível Cor Preto",
+      "short_description": "",
+      "current_price": "88.00",
+      "original_price": "269.00",
+      "discount_pct": "67.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_974980-MLA112776013576_062026-AB.webp",
+      "affiliate_link": "https://meli.la/1VvxLdz",
+      "detail_url": "/oferta?slug=mochila-jiesipote-a-prova-dagua-reforcada-expansivel-cor-preto-8791",
+      "price_collected_at": "2026-08-16T16:21:36.399499+00:00"
+    },
+    {
+      "id": 11214,
+      "slug": "cadeira-de-escritorio-presidente-ergonomica-python-fly-couro-sintetico-encosto-ajustavel-com-trava-e-apoio-para-pes-cor-cinza-11214",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira De Escritório Presidente Ergonômica Python Fly Couro Sintético Encosto Ajustável Com Trava E Apoio Para Pés Cor Cinza",
+      "short_description": "",
+      "current_price": "444.00",
+      "original_price": "1248.00",
+      "discount_pct": "64.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_692481-MLA108382852496_032026-AB.webp",
+      "affiliate_link": "https://meli.la/2jKKWDh",
+      "detail_url": "/oferta?slug=cadeira-de-escritorio-presidente-ergonomica-python-fly-couro-sintetico-encosto-ajustavel-com-trava-e-apoio-para-pes-cor-cinza-11214",
+      "price_collected_at": "2026-08-16T16:21:36.388979+00:00"
+    },
+    {
+      "id": 7989,
+      "slug": "sapateiras-8-pares-sapatos-pequena-para-entrada-da-porta-preto-7989",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Sapateiras 8 Pares Sapatos Pequena Para Entrada Da Porta Preto",
+      "short_description": "",
+      "current_price": "21.00",
+      "original_price": "42.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_783363-MLB84035891578_052025-AB--sapateiras-8-pares-sapatos-pequena-para-entrada-da-porta.webp",
+      "affiliate_link": "https://meli.la/1vXjezV",
+      "detail_url": "/oferta?slug=sapateiras-8-pares-sapatos-pequena-para-entrada-da-porta-preto-7989",
+      "price_collected_at": "2026-08-16T16:21:36.378327+00:00"
+    },
+    {
+      "id": 10177,
+      "slug": "espelho-100x50-organico-corpo-inteiro-grande-moldura-caramelo-10177",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Espelho 100x50 Orgânico Corpo Inteiro Grande Moldura Caramelo",
+      "short_description": "",
+      "current_price": "99.00",
+      "original_price": "399.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_936790-MLA96100703939_102025-AB.webp",
+      "affiliate_link": "https://meli.la/2HDJw3s",
+      "detail_url": "/oferta?slug=espelho-100x50-organico-corpo-inteiro-grande-moldura-caramelo-10177",
+      "price_collected_at": "2026-08-16T16:21:36.367026+00:00"
+    },
+    {
+      "id": 11188,
+      "slug": "fechadura-digital-de-sobrepor-fr-102-preto-intelbras-11188",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Fechadura Digital De Sobrepor Fr 102 Preto Intelbras",
+      "short_description": "",
+      "current_price": "190.00",
+      "original_price": "375.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_602779-MLA99373435896_112025-AB.webp",
+      "affiliate_link": "https://meli.la/2ghJdMX",
+      "detail_url": "/oferta?slug=fechadura-digital-de-sobrepor-fr-102-preto-intelbras-11188",
+      "price_collected_at": "2026-08-16T16:21:36.353427+00:00"
+    },
+    {
+      "id": 11151,
+      "slug": "omo-lava-roupas-liquido-profissional-perfect-white-7l-11151",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Omo lava roupas líquido profissional Perfect White 7L",
+      "short_description": "",
+      "current_price": "75.00",
+      "original_price": "98.00",
+      "discount_pct": "23.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_760436-MLA113216455674_072026-AB.webp",
+      "affiliate_link": "https://meli.la/1o3moE4",
+      "detail_url": "/oferta?slug=omo-lava-roupas-liquido-profissional-perfect-white-7l-11151",
+      "price_collected_at": "2026-08-16T16:21:36.342614+00:00"
+    },
+    {
+      "id": 9637,
+      "slug": "cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-9637",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
+      "short_description": "",
+      "current_price": "497.00",
+      "original_price": "906.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
+      "affiliate_link": "https://meli.la/1nnYp49",
+      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-9637",
+      "price_collected_at": "2026-08-16T16:21:36.331610+00:00"
+    },
+    {
+      "id": 9627,
+      "slug": "papel-higienico-neve-supreme-folha-tripla-leve-32-pague-28-9627",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Papel Higiênico Neve Supreme Folha Tripla Leve 32 Pague 28",
+      "short_description": "",
+      "current_price": "61.00",
+      "original_price": "92.00",
+      "discount_pct": "32.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_732844-MLA115671731761_082026-AB.webp",
+      "affiliate_link": "https://meli.la/19pSEFp",
+      "detail_url": "/oferta?slug=papel-higienico-neve-supreme-folha-tripla-leve-32-pague-28-9627",
+      "price_collected_at": "2026-08-16T16:21:36.320803+00:00"
+    },
+    {
+      "id": 935,
+      "slug": "jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-grafitecinza-lisa-935",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Toalhas Buddemeyer Bella Extra Soft Banho 4 Grafite/cinza Lisa",
+      "short_description": "",
+      "current_price": "152.00",
+      "original_price": "229.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_992849-MLA100187157773_122025-AB.webp",
+      "affiliate_link": "https://meli.la/1fHztYw",
+      "detail_url": "/oferta?slug=jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-grafitecinza-lisa-935",
+      "price_collected_at": "2026-08-16T16:21:36.308248+00:00"
+    },
+    {
+      "id": 10702,
+      "slug": "chuveiro-eletronico-lorenzetti-acqua-duo-ultra-pretocromado-parede-7800w-10702",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Chuveiro Eletrônico Lorenzetti Acqua Duo Ultra Preto/Cromado Parede 7800W",
+      "short_description": "",
+      "current_price": "599.00",
+      "original_price": "1026.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_682264-MLA83775380502_042025-AB.webp",
+      "affiliate_link": "https://meli.la/2Fz8K4G",
+      "detail_url": "/oferta?slug=chuveiro-eletronico-lorenzetti-acqua-duo-ultra-pretocromado-parede-7800w-10702",
+      "price_collected_at": "2026-08-16T16:21:36.297503+00:00"
+    },
+    {
+      "id": 7992,
+      "slug": "vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco-7992",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Vaso Sanitário Tubrax Monobloco VAB0002 Caixa Acoplada Completo Privada Cor Branco",
+      "short_description": "",
+      "current_price": "523.00",
+      "original_price": "894.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_632053-MLA96114658485_102025-AB.webp",
+      "affiliate_link": "https://meli.la/19EYiDt",
+      "detail_url": "/oferta?slug=vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco-7992",
+      "price_collected_at": "2026-08-16T16:21:36.286215+00:00"
+    },
+    {
+      "id": 1483,
+      "slug": "lorenzetti-loren-shower-ultra-multitemperaturas-de-220v-7500w-ducha-branca-branco-75-kw-1483",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Lorenzetti Loren Shower Ultra Multitemperaturas de 220V 7500w ducha branca",
+      "short_description": "",
+      "current_price": "118.00",
+      "original_price": "155.00",
+      "discount_pct": "24.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_906215-MLA96637759000_112025-AB.webp",
+      "affiliate_link": "https://meli.la/21yzoad",
+      "detail_url": "/oferta?slug=lorenzetti-loren-shower-ultra-multitemperaturas-de-220v-7500w-ducha-branca-branco-75-kw-1483",
+      "price_collected_at": "2026-08-16T16:21:36.274543+00:00"
+    },
+    {
+      "id": 3280,
+      "slug": "jogo-de-toalhas-banho-village-com-4-pecas-buddemeyer-3280",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jogo De Toalhas Banho Village Com 4 Peças Buddemeyer",
+      "short_description": "",
+      "current_price": "206.00",
+      "original_price": "309.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_940382-MLA95838863063_102025-AB.webp",
+      "affiliate_link": "https://meli.la/2Pie4Hg",
+      "detail_url": "/oferta?slug=jogo-de-toalhas-banho-village-com-4-pecas-buddemeyer-3280",
+      "price_collected_at": "2026-08-16T16:21:36.261484+00:00"
+    },
+    {
+      "id": 11215,
+      "slug": "suporte-inox-pendurar-vassoura-pa-rodo-mop-organizador-7-acessorios-parede-porta-organizacao-guardar-area-de-servico-cozinha-garagem-aco-inoxidavel-armazenar-interno-externo-hiper-casa-megastore-11215",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Suporte Inox Pendurar Vassoura Pá Rodo Mop Organizador 7 Acessórios Parede Porta Organização Guardar Área De Serviço Cozinha Garagem Aço Inoxidável Armazenar Interno Externo Hiper Casa Megastore",
+      "short_description": "",
+      "current_price": "25.00",
+      "original_price": "49.00",
+      "discount_pct": "48.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_932752-MLA112152878764_062026-AB.webp",
+      "affiliate_link": "https://meli.la/1u2d8aS",
+      "detail_url": "/oferta?slug=suporte-inox-pendurar-vassoura-pa-rodo-mop-organizador-7-acessorios-parede-porta-organizacao-guardar-area-de-servico-cozinha-garagem-aco-inoxidavel-armazenar-interno-externo-hiper-casa-megastore-11215",
+      "price_collected_at": "2026-08-16T16:21:36.251159+00:00"
+    },
+    {
+      "id": 10583,
+      "slug": "cadeira-gamer-sweet-studio-ergonomica-reclinavel-em-couro-sintetico-azul-com-apoio-de-pes-10583",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cadeira Gamer Sweet Studio Ergonômica Reclinável em Couro Sintético Azul com Apoio de Pés",
+      "short_description": "",
+      "current_price": "387.00",
+      "original_price": "645.00",
+      "discount_pct": "39.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_899728-MLA113996191628_072026-AB.webp",
+      "affiliate_link": "https://meli.la/2495zUp",
+      "detail_url": "/oferta?slug=cadeira-gamer-sweet-studio-ergonomica-reclinavel-em-couro-sintetico-azul-com-apoio-de-pes-10583",
+      "price_collected_at": "2026-08-16T16:21:36.229948+00:00"
+    },
+    {
+      "id": 8515,
+      "slug": "kit-10-potes-de-vidro-marmita-hermetico-640ml-freezer-fitness-borossilicato-transparente-8515",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Borossilicato 4 Travas Micro-ondas Azul-Escuro",
+      "short_description": "",
+      "current_price": "99.00",
+      "original_price": "164.00",
+      "discount_pct": "39.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_676567-MLA109280570920_042026-AB.webp",
+      "affiliate_link": "https://meli.la/2PXP92Q",
+      "detail_url": "/oferta?slug=kit-10-potes-de-vidro-marmita-hermetico-640ml-freezer-fitness-borossilicato-transparente-8515",
+      "price_collected_at": "2026-08-16T16:21:36.203716+00:00"
+    },
+    {
+      "id": 9602,
+      "slug": "kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-airfryer-com-4-travas-de-super-vedacao-9602",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Potes Herméticos Vidro 640ml Starhouse Marmita Forno Micro-ondas Airfryer com 4 travas de super vedação",
+      "short_description": "",
+      "current_price": "93.00",
+      "original_price": "189.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_942823-MLA113526261849_062026-AB.webp",
+      "affiliate_link": "https://meli.la/1AnMgMd",
+      "detail_url": "/oferta?slug=kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-airfryer-com-4-travas-de-super-vedacao-9602",
+      "price_collected_at": "2026-08-16T16:21:36.192120+00:00"
+    },
+    {
+      "id": 11221,
+      "slug": "panela-de-pressao-com-dispositivo-de-travamento-externo-7l-prateado-11221",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Panela De Pressão Com Dispositivo De Travamento Externo, 7l Prateado",
+      "short_description": "",
+      "current_price": "335.00",
+      "original_price": "859.00",
+      "discount_pct": "61.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_639336-MLB116234914597_082026-AB--panela-de-pressao-com-dispositivo-de-travamento-externo-7l.webp",
+      "affiliate_link": "https://meli.la/2yGuJGB",
+      "detail_url": "/oferta?slug=panela-de-pressao-com-dispositivo-de-travamento-externo-7l-prateado-11221",
+      "price_collected_at": "2026-08-16T16:21:36.172007+00:00"
+    },
+    {
+      "id": 809,
+      "slug": "kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Pote De Vidro Marmita Hermético 370ml Freezer Fitness Rishon",
+      "short_description": "",
+      "current_price": "73.00",
+      "original_price": "159.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_605578-MLA113633610823_062026-AB.webp",
+      "affiliate_link": "https://meli.la/2kBbZys",
+      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
+      "price_collected_at": "2026-08-16T16:21:36.003445+00:00"
+    },
+    {
+      "id": 8724,
+      "slug": "kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto-8724",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 2 Refletor Super Led 400w Ip67 Holofote Bivolt Prova D'água Branco Frio 6500k Preto",
+      "short_description": "",
+      "current_price": "44.00",
+      "original_price": "99.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_753073-MLA110946060098_052026-AB.webp",
+      "affiliate_link": "https://meli.la/2zjSoeV",
+      "detail_url": "/oferta?slug=kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto-8724",
+      "price_collected_at": "2026-08-16T16:21:35.979515+00:00"
+    },
+    {
+      "id": 178,
+      "slug": "kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Rishon",
+      "short_description": "",
+      "current_price": "93.00",
+      "original_price": "188.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_900432-MLA113518359539_062026-AB.webp",
+      "affiliate_link": "https://meli.la/15a74wK",
+      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
+      "price_collected_at": "2026-08-16T16:21:35.966535+00:00"
+    },
+    {
+      "id": 3296,
+      "slug": "cortina-300x280-metros-blackout-blecaute-cinza-corta-luz-em-tecido-grosso-para-quarto-e-sala-casa-laura-enxovais-3296",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cortina 3,00x2,80 Metros Blackout Blecaute Cinza Corta Luz Em Tecido Grosso Para Quarto E Sala Casa Laura Enxovais",
+      "short_description": "",
+      "current_price": "69.00",
+      "original_price": "145.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_999185-MLA96119168369_102025-AB.webp",
+      "affiliate_link": "https://meli.la/1Pdy1u4",
+      "detail_url": "/oferta?slug=cortina-300x280-metros-blackout-blecaute-cinza-corta-luz-em-tecido-grosso-para-quarto-e-sala-casa-laura-enxovais-3296",
+      "price_collected_at": "2026-08-16T16:21:35.930267+00:00"
     },
     {
       "id": 9238,
@@ -105,346 +887,6 @@
       "affiliate_link": "https://s.shopee.com.br/7KwE7NRq8s",
       "detail_url": "/oferta?slug=air-fryer-britania-42l-dura-mais-1500w-bfr38-9238",
       "price_collected_at": "2026-08-16T13:11:23.720555+00:00"
-    },
-    {
-      "id": 7276,
-      "slug": "kit-6-forma-de-silicone-para-fritadeira-air-fryer-com-alca-antiaderente-cozinha-7276",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit 6 Forma de Silicone para Fritadeira Air Fryer com Alça Antiaderente Cozinha",
-      "short_description": "",
-      "current_price": "14.49",
-      "original_price": "69.00",
-      "discount_pct": "79.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mk35l9kuakg158",
-      "affiliate_link": "https://s.shopee.com.br/7psUiIPw7x",
-      "detail_url": "/oferta?slug=kit-6-forma-de-silicone-para-fritadeira-air-fryer-com-alca-antiaderente-cozinha-7276",
-      "price_collected_at": "2026-08-16T13:11:23.704752+00:00"
-    },
-    {
-      "id": 7642,
-      "slug": "liquidificador-mondial-l99-turbo-550-w-3-velocidades-7642",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Liquidificador Mondial L‑99 Turbo 550 W 3 Velocidades",
-      "short_description": "",
-      "current_price": "109.99",
-      "original_price": "171.86",
-      "discount_pct": "36.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mc83lzgst4gw71",
-      "affiliate_link": "https://s.shopee.com.br/7fZ4VzQZSu",
-      "detail_url": "/oferta?slug=liquidificador-mondial-l99-turbo-550-w-3-velocidades-7642",
-      "price_collected_at": "2026-08-16T13:11:23.689311+00:00"
-    },
-    {
-      "id": 6812,
-      "slug": "mini-aspirador-de-po-3-em-1-a-vacuo-usb-portatil-recarregavel-se8010-6812",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Mini Aspirador De Pó 3 em 1 a Vacuo Usb Portátil Recarregavel -SE8010",
-      "short_description": "",
-      "current_price": "21.99",
-      "original_price": "49.98",
-      "discount_pct": "56.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7renx-m8c8ne7qdez9a8",
-      "affiliate_link": "https://s.shopee.com.br/6pzxWSTk9j",
-      "detail_url": "/oferta?slug=mini-aspirador-de-po-3-em-1-a-vacuo-usb-portatil-recarregavel-se8010-6812",
-      "price_collected_at": "2026-08-16T13:11:23.674315+00:00"
-    },
-    {
-      "id": 8367,
-      "slug": "chaleira-eletrica-jarra-cafe-cha-inox-110v-8367",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Chaleira Elétrica Jarra Café Chá Inox 110v",
-      "short_description": "",
-      "current_price": "44.90",
-      "original_price": "71.27",
-      "discount_pct": "37.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m9-mr7oweocldl204",
-      "affiliate_link": "https://s.shopee.com.br/6fgXK9UNUg",
-      "detail_url": "/oferta?slug=chaleira-eletrica-jarra-cafe-cha-inox-110v-8367",
-      "price_collected_at": "2026-08-16T13:11:23.658136+00:00"
-    },
-    {
-      "id": 8016,
-      "slug": "picador-de-alimentos-moedor-de-carne-mixer-eletrica-processador-cozinha-casa-alho-110v-220v-8016",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Picador De Alimentos Moedor De Carne Mixer Elétrica Processador Cozinha Casa Alho - 110v-220v",
-      "short_description": "",
-      "current_price": "69.99",
-      "original_price": "170.71",
-      "discount_pct": "59.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8262e-mjejrub4w35z78",
-      "affiliate_link": "https://s.shopee.com.br/7Acnv4STTl",
-      "detail_url": "/oferta?slug=picador-de-alimentos-moedor-de-carne-mixer-eletrica-processador-cozinha-casa-alho-110v-220v-8016",
-      "price_collected_at": "2026-08-16T13:11:23.640734+00:00"
-    },
-    {
-      "id": 6806,
-      "slug": "batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-6806",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Batedor Misturador Mixer Elétrico para Bebidas Leite Café Clara de Ovo 2 em 1",
-      "short_description": "",
-      "current_price": "18.99",
-      "original_price": "90.43",
-      "discount_pct": "79.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd48-lupf3z3a40mxf1",
-      "affiliate_link": "https://s.shopee.com.br/70JNilT6oi",
-      "detail_url": "/oferta?slug=batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-6806",
-      "price_collected_at": "2026-08-16T13:11:23.624188+00:00"
-    },
-    {
-      "id": 8943,
-      "slug": "escova-3-em-1-vassoura-rodo-gap-limpeza-esfregao-mop-limpa-8943",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Escova 3 Em 1 Vassoura Rodo Gap Limpeza Esfregão Mop Limpa",
-      "short_description": "",
-      "current_price": "15.88",
-      "original_price": "49.63",
-      "discount_pct": "68.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rdyw-lzcksj98pb0nf8",
-      "affiliate_link": "https://s.shopee.com.br/W5tyonSDV",
-      "detail_url": "/oferta?slug=escova-3-em-1-vassoura-rodo-gap-limpeza-esfregao-mop-limpa-8943",
-      "price_collected_at": "2026-08-16T13:11:23.607191+00:00"
-    },
-    {
-      "id": 10675,
-      "slug": "descascador-de-frutas-e-legumes-com-cabo-ergonomico-de-madeira-lamina-de-aco-inoxidavel-e-abridor-10675",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Descascador de frutas e legumes com cabo ergonômico de madeira, lâmina de aço inoxidável e abridor",
-      "short_description": "",
-      "current_price": "12.75",
-      "original_price": "15.94",
-      "discount_pct": "20.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134253-823p6-mp0fkzbntyq449",
-      "affiliate_link": "https://s.shopee.com.br/LmTmVo5YS",
-      "detail_url": "/oferta?slug=descascador-de-frutas-e-legumes-com-cabo-ergonomico-de-madeira-lamina-de-aco-inoxidavel-e-abridor-10675",
-      "price_collected_at": "2026-08-16T13:11:23.589808+00:00"
-    },
-    {
-      "id": 10113,
-      "slug": "arranjo-c-3-trepadeira-folha-de-hera-vaso-trancado-marrom-10113",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Arranjo c/ 3 Trepadeira Folha de HERA + Vaso Trançado Marrom",
-      "short_description": "",
-      "current_price": "16.80",
-      "original_price": "35.00",
-      "discount_pct": "52.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-md3o52t872giaa",
-      "affiliate_link": "https://s.shopee.com.br/qikNQmBXX",
-      "detail_url": "/oferta?slug=arranjo-c-3-trepadeira-folha-de-hera-vaso-trancado-marrom-10113",
-      "price_collected_at": "2026-08-16T13:11:23.572071+00:00"
-    },
-    {
-      "id": 8362,
-      "slug": "jogo-de-lencol-400-fios-ponto-palito-tecido-leve-suave-berco-solteiro-casal-queen-king-02-e-03-pecas-8362",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Jogo de Lençol 400 Fios Ponto Palito Tecido Leve Suave Berço Solteiro Casal Queen King 02 e 03 Peças",
-      "short_description": "",
-      "current_price": "14.60",
-      "original_price": "33.18",
-      "discount_pct": "56.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mkce515eat4w1c",
-      "affiliate_link": "https://s.shopee.com.br/gPKB7mosU",
-      "detail_url": "/oferta?slug=jogo-de-lencol-400-fios-ponto-palito-tecido-leve-suave-berco-solteiro-casal-queen-king-02-e-03-pecas-8362",
-      "price_collected_at": "2026-08-16T13:11:23.553096+00:00"
-    },
-    {
-      "id": 10922,
-      "slug": "percarbonato-de-sodio-100-puro-tira-manchas-roupas-brancas-e-coloridas-limpeza-em-geral-10922",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Percarbonato de Sódio 100% Puro Tira Manchas Roupas Brancas e Coloridas Limpeza em Geral",
-      "short_description": "",
-      "current_price": "16.99",
-      "original_price": "32.06",
-      "discount_pct": "47.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-mqdb9to75udd59",
-      "affiliate_link": "https://s.shopee.com.br/112AZjlYCW",
-      "detail_url": "/oferta?slug=percarbonato-de-sodio-100-puro-tira-manchas-roupas-brancas-e-coloridas-limpeza-em-geral-10922",
-      "price_collected_at": "2026-08-16T13:11:23.534404+00:00"
-    },
-    {
-      "id": 6801,
-      "slug": "kit-6121824-panos-de-limpeza-aco-premium-arear-panela-fogao-toalha-louca-tira-gordura-reutilizavel-6801",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit 6/12/18/24 Panos De Limpeza Aço Premium Arear Panela Fogão Toalha Louça Tira Gordura Reutilizável",
-      "short_description": "",
-      "current_price": "10.00",
-      "original_price": "25.00",
-      "discount_pct": "60.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mctxxpi1l4qad6",
-      "affiliate_link": "https://s.shopee.com.br/1Lf0yLkHWY",
-      "detail_url": "/oferta?slug=kit-6121824-panos-de-limpeza-aco-premium-arear-panela-fogao-toalha-louca-tira-gordura-reutilizavel-6801",
-      "price_collected_at": "2026-08-16T13:11:23.516934+00:00"
-    },
-    {
-      "id": 10595,
-      "slug": "descascador-de-aco-inoxidavel-com-cabo-de-madeira-e-abridor-integrado-para-frutas-e-legumes-10595",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Descascador de Aço Inoxidável com Cabo de Madeira e Abridor Integrado para Frutas e Legumes",
-      "short_description": "",
-      "current_price": "12.75",
-      "original_price": "15.94",
-      "discount_pct": "20.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134253-823pt-mp0fl7fbnksvba",
-      "affiliate_link": "https://s.shopee.com.br/4AzCLYV1jT",
-      "detail_url": "/oferta?slug=descascador-de-aco-inoxidavel-com-cabo-de-madeira-e-abridor-integrado-para-frutas-e-legumes-10595",
-      "price_collected_at": "2026-08-16T13:11:23.499336+00:00"
-    },
-    {
-      "id": 6802,
-      "slug": "mesa-de-cabeceira-retro-compacta-com-nicho-para-quarto-sala-casal-ou-solteiro-palma-6802",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Mesa de Cabeceira Retrô Compacta com Nicho para Quarto Sala Casal ou Solteiro Palma",
-      "short_description": "",
-      "current_price": "29.80",
-      "original_price": "46.56",
-      "discount_pct": "36.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd6x-luv5vclgwaxb45",
-      "affiliate_link": "https://s.shopee.com.br/40fm9FVf4Q",
-      "detail_url": "/oferta?slug=mesa-de-cabeceira-retro-compacta-com-nicho-para-quarto-sala-casal-ou-solteiro-palma-6802",
-      "price_collected_at": "2026-08-16T13:11:23.482554+00:00"
-    },
-    {
-      "id": 9464,
-      "slug": "cabelo-de-faixa-larga-de-7-cm-protege-gorro-de-seda-acetinada-para-dormir-9464",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Cabelo De Faixa Larga De 7 Cm Protege Gorro De Seda Acetinada Para Dormir",
-      "short_description": "",
-      "current_price": "4.70",
-      "original_price": "14.69",
-      "discount_pct": "68.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823rt-mp4mcmnyrg245a",
-      "affiliate_link": "https://s.shopee.com.br/4LIcXrUOOS",
-      "detail_url": "/oferta?slug=cabelo-de-faixa-larga-de-7-cm-protege-gorro-de-seda-acetinada-para-dormir-9464",
-      "price_collected_at": "2026-08-16T13:11:23.465115+00:00"
-    },
-    {
-      "id": 6804,
-      "slug": "percarbonato-de-sodio-100-puro-limpeza-em-geral-tira-manchas-roupas-brancas-500g1kg-2kg-6804",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Percarbonato de Sódio 100% Puro Limpeza Em Geral Tira Manchas Roupas Brancas 500g/1kg /2kg",
-      "short_description": "",
-      "current_price": "10.00",
-      "original_price": "14.93",
-      "discount_pct": "33.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824j0-medc35ydcm4m9c",
-      "affiliate_link": "https://s.shopee.com.br/4fvSwTT7iU",
-      "detail_url": "/oferta?slug=percarbonato-de-sodio-100-puro-limpeza-em-geral-tira-manchas-roupas-brancas-500g1kg-2kg-6804",
-      "price_collected_at": "2026-08-16T13:11:23.450729+00:00"
-    },
-    {
-      "id": 8361,
-      "slug": "kit-com-100-unidades-de-tampa-de-plastico-descartavel-para-alimento-8361",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit com 100 Unidades de Tampa De Plástico descartável para alimento",
-      "short_description": "",
-      "current_price": "10.00",
-      "original_price": "14.93",
-      "discount_pct": "33.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mhua3erpy8ee79",
-      "affiliate_link": "https://s.shopee.com.br/5ArjXORDhZ",
-      "detail_url": "/oferta?slug=kit-com-100-unidades-de-tampa-de-plastico-descartavel-para-alimento-8361",
-      "price_collected_at": "2026-08-16T13:11:23.436578+00:00"
-    },
-    {
-      "id": 6797,
-      "slug": "jogo-de-lencol-400-fios-micropercal-com-fronha-em-ponto-palito-6797",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Jogo de Lençol 400 Fios Micropercal Com Fronha em Ponto Palito",
-      "short_description": "",
-      "current_price": "19.80",
-      "original_price": "31.43",
-      "discount_pct": "37.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m5-mo7pypmcmww19c",
-      "affiliate_link": "https://s.shopee.com.br/50YJL5Rr2W",
-      "detail_url": "/oferta?slug=jogo-de-lencol-400-fios-micropercal-com-fronha-em-ponto-palito-6797",
-      "price_collected_at": "2026-08-16T13:11:23.423008+00:00"
-    },
-    {
-      "id": 6799,
-      "slug": "percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6799",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Percarbonato 100% Puro Tira Manchas Roupas Brancas e Coloridas",
-      "short_description": "",
-      "current_price": "16.99",
-      "original_price": "32.06",
-      "discount_pct": "47.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lm-mqdb9tob0xdu3d",
-      "affiliate_link": "https://s.shopee.com.br/2qTol6a6R5",
-      "detail_url": "/oferta?slug=percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6799",
-      "price_collected_at": "2026-08-16T13:11:23.391965+00:00"
-    },
-    {
-      "id": 8297,
-      "slug": "mala-de-bordo-rigida-sweet-studio-em-abs-com-rodas-360-para-viagem-preto-mala-2075-8297",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mala de Bordo Rígida Sweet Studio em ABS com Rodas 360° para Viagem",
-      "short_description": "",
-      "current_price": "151.00",
-      "original_price": "322.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_674217-MLA112637860882_062026-AB.webp",
-      "affiliate_link": "https://meli.la/2Kuras9",
-      "detail_url": "/oferta?slug=mala-de-bordo-rigida-sweet-studio-em-abs-com-rodas-360-para-viagem-preto-mala-2075-8297",
-      "price_collected_at": "2026-08-16T13:11:10.017005+00:00"
     },
     {
       "id": 11219,
@@ -481,23 +923,6 @@
       "price_collected_at": "2026-08-16T13:11:09.761984+00:00"
     },
     {
-      "id": 10499,
-      "slug": "kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping-verde-camuflado-tamanho-unico-10499",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit Chapéu Boonie Balaclava Uv Dobrável Pesca Moto Camping Verde Camuflado Tamanho Único",
-      "short_description": "",
-      "current_price": "39.00",
-      "original_price": "58.00",
-      "discount_pct": "32.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_831455-MLB114629696293_072026-AB--kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping.webp",
-      "affiliate_link": "https://meli.la/1xDn4BE",
-      "detail_url": "/oferta?slug=kit-chapeu-boonie-balaclava-uv-dobravel-pesca-moto-camping-verde-camuflado-tamanho-unico-10499",
-      "price_collected_at": "2026-08-16T13:11:09.745879+00:00"
-    },
-    {
       "id": 10312,
       "slug": "mochila-masculina-impermeavel-reforcada-com-capacidade-ampliada-de-30-42l-adequada-para-portatil-viagens-diarias-cor-preta-10312",
       "marketplace": {
@@ -513,57 +938,6 @@
       "affiliate_link": "https://meli.la/1RR8rKd",
       "detail_url": "/oferta?slug=mochila-masculina-impermeavel-reforcada-com-capacidade-ampliada-de-30-42l-adequada-para-portatil-viagens-diarias-cor-preta-10312",
       "price_collected_at": "2026-08-16T13:11:09.727260+00:00"
-    },
-    {
-      "id": 8791,
-      "slug": "mochila-jiesipote-a-prova-dagua-reforcada-expansivel-cor-preto-8791",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Mochila jiesipote À Prova D'água Reforçada Expansível Cor Preto",
-      "short_description": "",
-      "current_price": "88.00",
-      "original_price": "269.00",
-      "discount_pct": "67.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_974980-MLA112776013576_062026-AB.webp",
-      "affiliate_link": "https://meli.la/1VvxLdz",
-      "detail_url": "/oferta?slug=mochila-jiesipote-a-prova-dagua-reforcada-expansivel-cor-preto-8791",
-      "price_collected_at": "2026-08-16T13:11:09.708002+00:00"
-    },
-    {
-      "id": 9627,
-      "slug": "papel-higienico-neve-supreme-folha-tripla-leve-32-pague-28-9627",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Papel Higiênico Neve Supreme Folha Tripla Leve 32 Pague 28",
-      "short_description": "",
-      "current_price": "61.00",
-      "original_price": "92.00",
-      "discount_pct": "32.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_732844-MLA115671731761_082026-AB.webp",
-      "affiliate_link": "https://meli.la/19pSEFp",
-      "detail_url": "/oferta?slug=papel-higienico-neve-supreme-folha-tripla-leve-32-pague-28-9627",
-      "price_collected_at": "2026-08-16T13:11:09.695002+00:00"
-    },
-    {
-      "id": 1483,
-      "slug": "lorenzetti-loren-shower-ultra-multitemperaturas-de-220v-7500w-ducha-branca-branco-75-kw-1483",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Lorenzetti Loren Shower Ultra Multitemperaturas de 220V 7500w ducha branca",
-      "short_description": "",
-      "current_price": "118.00",
-      "original_price": "155.00",
-      "discount_pct": "24.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_906215-MLA96637759000_112025-AB.webp",
-      "affiliate_link": "https://meli.la/21yzoad",
-      "detail_url": "/oferta?slug=lorenzetti-loren-shower-ultra-multitemperaturas-de-220v-7500w-ducha-branca-branco-75-kw-1483",
-      "price_collected_at": "2026-08-16T13:11:09.676626+00:00"
     },
     {
       "id": 5702,
@@ -600,40 +974,6 @@
       "price_collected_at": "2026-08-16T13:11:09.644078+00:00"
     },
     {
-      "id": 7992,
-      "slug": "vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco-7992",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Vaso Sanitário Tubrax Monobloco VAB0002 Caixa Acoplada Completo Privada Cor Branco",
-      "short_description": "",
-      "current_price": "523.00",
-      "original_price": "894.00",
-      "discount_pct": "41.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_632053-MLA96114658485_102025-AB.webp",
-      "affiliate_link": "https://meli.la/19EYiDt",
-      "detail_url": "/oferta?slug=vaso-sanitario-tubrax-monobloco-vab0002-caixa-acoplada-completo-privada-cor-branco-7992",
-      "price_collected_at": "2026-08-16T13:11:09.628034+00:00"
-    },
-    {
-      "id": 3280,
-      "slug": "jogo-de-toalhas-banho-village-com-4-pecas-buddemeyer-3280",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Toalhas Banho Village Com 4 Peças Buddemeyer",
-      "short_description": "",
-      "current_price": "188.00",
-      "original_price": "309.00",
-      "discount_pct": "39.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_940382-MLA95838863063_102025-AB.webp",
-      "affiliate_link": "https://meli.la/2Pie4Hg",
-      "detail_url": "/oferta?slug=jogo-de-toalhas-banho-village-com-4-pecas-buddemeyer-3280",
-      "price_collected_at": "2026-08-16T13:11:09.610819+00:00"
-    },
-    {
       "id": 11218,
       "slug": "escova-eletrica-de-limpeza-9-em-1-recarregavel-multiuso-portatil-rotatoria-para-banheiro-e-cozinha-11218",
       "marketplace": {
@@ -668,40 +1008,6 @@
       "price_collected_at": "2026-08-16T13:11:09.574024+00:00"
     },
     {
-      "id": 7989,
-      "slug": "sapateiras-8-pares-sapatos-pequena-para-entrada-da-porta-preto-7989",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Sapateiras 8 Pares Sapatos Pequena Para Entrada Da Porta Preto",
-      "short_description": "",
-      "current_price": "21.00",
-      "original_price": "42.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_783363-MLB84035891578_052025-AB--sapateiras-8-pares-sapatos-pequena-para-entrada-da-porta.webp",
-      "affiliate_link": "https://meli.la/1vXjezV",
-      "detail_url": "/oferta?slug=sapateiras-8-pares-sapatos-pequena-para-entrada-da-porta-preto-7989",
-      "price_collected_at": "2026-08-16T13:11:09.555370+00:00"
-    },
-    {
-      "id": 11215,
-      "slug": "suporte-inox-pendurar-vassoura-pa-rodo-mop-organizador-7-acessorios-parede-porta-organizacao-guardar-area-de-servico-cozinha-garagem-aco-inoxidavel-armazenar-interno-externo-hiper-casa-megastore-11215",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Suporte Inox Pendurar Vassoura Pá Rodo Mop Organizador 7 Acessórios Parede Porta Organização Guardar Área De Serviço Cozinha Garagem Aço Inoxidável Armazenar Interno Externo Hiper Casa Megastore",
-      "short_description": "",
-      "current_price": "25.00",
-      "original_price": "49.00",
-      "discount_pct": "48.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_932752-MLA112152878764_062026-AB.webp",
-      "affiliate_link": "https://meli.la/1u2d8aS",
-      "detail_url": "/oferta?slug=suporte-inox-pendurar-vassoura-pa-rodo-mop-organizador-7-acessorios-parede-porta-organizacao-guardar-area-de-servico-cozinha-garagem-aco-inoxidavel-armazenar-interno-externo-hiper-casa-megastore-11215",
-      "price_collected_at": "2026-08-16T13:11:09.543540+00:00"
-    },
-    {
       "id": 9671,
       "slug": "jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-9671",
       "marketplace": {
@@ -719,91 +1025,6 @@
       "price_collected_at": "2026-08-16T13:11:09.530606+00:00"
     },
     {
-      "id": 935,
-      "slug": "jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-grafitecinza-lisa-935",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jogo De Toalhas Buddemeyer Bella Extra Soft Banho 4 Grafite/cinza Lisa",
-      "short_description": "",
-      "current_price": "143.00",
-      "original_price": "229.00",
-      "discount_pct": "37.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_992849-MLA100187157773_122025-AB.webp",
-      "affiliate_link": "https://meli.la/1fHztYw",
-      "detail_url": "/oferta?slug=jogo-de-toalhas-buddemeyer-bella-extra-soft-banho-4-grafitecinza-lisa-935",
-      "price_collected_at": "2026-08-16T13:11:09.518551+00:00"
-    },
-    {
-      "id": 10177,
-      "slug": "espelho-100x50-organico-corpo-inteiro-grande-moldura-caramelo-10177",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Espelho 100x50 Orgânico Corpo Inteiro Grande Moldura Caramelo",
-      "short_description": "",
-      "current_price": "99.00",
-      "original_price": "399.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_936790-MLA96100703939_102025-AB.webp",
-      "affiliate_link": "https://meli.la/2HDJw3s",
-      "detail_url": "/oferta?slug=espelho-100x50-organico-corpo-inteiro-grande-moldura-caramelo-10177",
-      "price_collected_at": "2026-08-16T13:11:09.503732+00:00"
-    },
-    {
-      "id": 10702,
-      "slug": "chuveiro-eletronico-lorenzetti-acqua-duo-ultra-pretocromado-parede-7800w-10702",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Chuveiro Eletrônico Lorenzetti Acqua Duo Ultra Preto/Cromado Parede 7800W",
-      "short_description": "",
-      "current_price": "599.00",
-      "original_price": "1026.00",
-      "discount_pct": "41.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_682264-MLA83775380502_042025-AB.webp",
-      "affiliate_link": "https://meli.la/2Fz8K4G",
-      "detail_url": "/oferta?slug=chuveiro-eletronico-lorenzetti-acqua-duo-ultra-pretocromado-parede-7800w-10702",
-      "price_collected_at": "2026-08-16T13:11:09.489103+00:00"
-    },
-    {
-      "id": 9602,
-      "slug": "kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-airfryer-com-4-travas-de-super-vedacao-9602",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 10 Potes Herméticos Vidro 640ml Starhouse Marmita Forno Micro-ondas Airfryer com 4 travas de super vedação",
-      "short_description": "",
-      "current_price": "93.00",
-      "original_price": "189.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_942823-MLA113526261849_062026-AB.webp",
-      "affiliate_link": "https://meli.la/1AnMgMd",
-      "detail_url": "/oferta?slug=kit-10-potes-hermeticos-vidro-640ml-starhouse-marmita-forno-micro-ondas-airfryer-com-4-travas-de-super-vedacao-9602",
-      "price_collected_at": "2026-08-16T13:11:09.475956+00:00"
-    },
-    {
-      "id": 10583,
-      "slug": "cadeira-gamer-sweet-studio-ergonomica-reclinavel-em-couro-sintetico-azul-com-apoio-de-pes-10583",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira Gamer Sweet Studio Ergonômica Reclinável em Couro Sintético Azul com Apoio de Pés",
-      "short_description": "",
-      "current_price": "387.00",
-      "original_price": "645.00",
-      "discount_pct": "39.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_899728-MLA113996191628_072026-AB.webp",
-      "affiliate_link": "https://meli.la/2495zUp",
-      "detail_url": "/oferta?slug=cadeira-gamer-sweet-studio-ergonomica-reclinavel-em-couro-sintetico-azul-com-apoio-de-pes-10583",
-      "price_collected_at": "2026-08-16T13:11:09.447679+00:00"
-    },
-    {
       "id": 9847,
       "slug": "jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-azul-serena-azul-naval-bosco-9847",
       "marketplace": {
@@ -819,91 +1040,6 @@
       "affiliate_link": "https://meli.la/1wbA6hX",
       "detail_url": "/oferta?slug=jogo-de-toalhas-4-pcs-fio-cardado-100-algodao-bosco-karsten-azul-serena-azul-naval-bosco-9847",
       "price_collected_at": "2026-08-16T13:11:09.432803+00:00"
-    },
-    {
-      "id": 9637,
-      "slug": "cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-9637",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira Escritório Ergonômica Genebra B500 Luvinco Cor Preto Com Suporte Lombar Estofado Mesh",
-      "short_description": "",
-      "current_price": "497.00",
-      "original_price": "906.00",
-      "discount_pct": "45.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_764756-MLA96570589252_112025-AB.webp",
-      "affiliate_link": "https://meli.la/1nnYp49",
-      "detail_url": "/oferta?slug=cadeira-escritorio-ergonomica-genebra-b500-luvinco-cor-preto-com-suporte-lombar-estofado-mesh-9637",
-      "price_collected_at": "2026-08-16T13:11:09.418267+00:00"
-    },
-    {
-      "id": 11214,
-      "slug": "cadeira-de-escritorio-presidente-ergonomica-python-fly-couro-sintetico-encosto-ajustavel-com-trava-e-apoio-para-pes-cor-cinza-11214",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Cadeira De Escritório Presidente Ergonômica Python Fly Couro Sintético Encosto Ajustável Com Trava E Apoio Para Pés Cor Cinza",
-      "short_description": "",
-      "current_price": "444.00",
-      "original_price": "1248.00",
-      "discount_pct": "64.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_692481-MLA108382852496_032026-AB.webp",
-      "affiliate_link": "https://meli.la/2jKKWDh",
-      "detail_url": "/oferta?slug=cadeira-de-escritorio-presidente-ergonomica-python-fly-couro-sintetico-encosto-ajustavel-com-trava-e-apoio-para-pes-cor-cinza-11214",
-      "price_collected_at": "2026-08-16T13:11:09.384005+00:00"
-    },
-    {
-      "id": 809,
-      "slug": "kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 10 Pote De Vidro Marmita Hermético 370ml Freezer Fitness Rishon",
-      "short_description": "",
-      "current_price": "73.00",
-      "original_price": "159.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_605578-MLA113633610823_062026-AB.webp",
-      "affiliate_link": "https://meli.la/2kBbZys",
-      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-370ml-freezer-fitness-rishon-transparente-809",
-      "price_collected_at": "2026-08-16T13:11:09.367205+00:00"
-    },
-    {
-      "id": 178,
-      "slug": "kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 10 Pote De Vidro Marmita Hermético 640ml Freezer Fitness Rishon",
-      "short_description": "",
-      "current_price": "93.00",
-      "original_price": "188.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_900432-MLA113518359539_062026-AB.webp",
-      "affiliate_link": "https://meli.la/15a74wK",
-      "detail_url": "/oferta?slug=kit-10-pote-de-vidro-marmita-hermetico-640ml-freezer-fitness-rishon-azul-escuro-178",
-      "price_collected_at": "2026-08-16T13:11:09.331649+00:00"
-    },
-    {
-      "id": 8724,
-      "slug": "kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto-8724",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Kit 2 Refletor Super Led 400w Ip67 Holofote Bivolt Prova D'água Branco Frio 6500k Preto",
-      "short_description": "",
-      "current_price": "44.00",
-      "original_price": "99.00",
-      "discount_pct": "55.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_753073-MLA110946060098_052026-AB.webp",
-      "affiliate_link": "https://meli.la/2zjSoeV",
-      "detail_url": "/oferta?slug=kit-2-refletor-super-led-400w-ip67-holofote-bivolt-prova-dagua-branco-frio-6500k-preto-8724",
-      "price_collected_at": "2026-08-16T13:11:09.311345+00:00"
     },
     {
       "id": 11217,
@@ -1977,23 +2113,6 @@
       "price_collected_at": "2026-08-16T11:01:03.021233+00:00"
     },
     {
-      "id": 10910,
-      "slug": "marmita-eletrica-veicular-bivolt-p-carro-casa-taxi-uber-caminhao-12v-24v-110v-220v-c-10910",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Marmita Elétrica Veicular Bivolt P/ Carro Casa Taxi Uber Caminhão 12V 24V 110V 220V C",
-      "short_description": "",
-      "current_price": "49.99",
-      "original_price": "199.96",
-      "discount_pct": "75.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg90u8sbzcas0d",
-      "affiliate_link": "https://s.shopee.com.br/1Lew2otkEy",
-      "detail_url": "/oferta?slug=marmita-eletrica-veicular-bivolt-p-carro-casa-taxi-uber-caminhao-12v-24v-110v-220v-c-10910",
-      "price_collected_at": "2026-08-16T02:33:45.026850+00:00"
-    },
-    {
       "id": 2436,
       "slug": "mala-de-bordo-10kg-pequena-londres-swiss-move-preto-2436",
       "marketplace": {
@@ -2113,23 +2232,6 @@
       "price_collected_at": "2026-08-16T02:33:35.839821+00:00"
     },
     {
-      "id": 11151,
-      "slug": "omo-lava-roupas-liquido-profissional-perfect-white-7l-11151",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Omo lava roupas líquido profissional Perfect White 7L",
-      "short_description": "",
-      "current_price": "75.00",
-      "original_price": "98.00",
-      "discount_pct": "22.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_760436-MLA113216455674_072026-AB.webp",
-      "affiliate_link": "https://meli.la/1o3moE4",
-      "detail_url": "/oferta?slug=omo-lava-roupas-liquido-profissional-perfect-white-7l-11151",
-      "price_collected_at": "2026-08-16T02:33:35.824814+00:00"
-    },
-    {
       "id": 11210,
       "slug": "ventilador-de-teto-com-luz-led-ventilador-de-teto-retratil-42-luminaria-de-teto-brilho-ajustavel-60w-seis-velocidades-ajustaveis-controle-remoto-adequado-para-quartos-e-salas-de-estar-11210",
       "marketplace": {
@@ -2196,23 +2298,6 @@
       "affiliate_link": "https://meli.la/2eMBPjd",
       "detail_url": "/oferta?slug=jogo-de-panelas-4pcs-solar-aco-inox-tramontina-4246",
       "price_collected_at": "2026-08-16T02:33:35.165345+00:00"
-    },
-    {
-      "id": 11188,
-      "slug": "fechadura-digital-de-sobrepor-fr-102-preto-intelbras-11188",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Fechadura Digital De Sobrepor Fr 102 Preto Intelbras",
-      "short_description": "",
-      "current_price": "187.00",
-      "original_price": "375.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_602779-MLA99373435896_112025-AB.webp",
-      "affiliate_link": "https://meli.la/2ghJdMX",
-      "detail_url": "/oferta?slug=fechadura-digital-de-sobrepor-fr-102-preto-intelbras-11188",
-      "price_collected_at": "2026-08-16T02:33:35.123524+00:00"
     },
     {
       "id": 10176,

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-08-18T11:02:12.688797+00:00",
+  "generated_at": "2026-08-18T19:31:21.053367+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,16 +24,6 @@
       "tracked_url": "https://s.shopee.com.br/AKZr8w4y5I?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
     },
     {
-      "id": 10177,
-      "title": "Espelho 100x50 Orgânico Corpo Inteiro Grande Moldura Caramelo",
-      "current_price": "81.00",
-      "original_price": "399.00",
-      "discount_pct": "79.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_936790-MLA96100703939_102025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2HDJw3s?matt_word=dbot_ig_bio_10177&utm_source=instagram&utm_medium=bio&utm_campaign=offer_10177"
-    },
-    {
       "id": 10910,
       "title": "Marmita Elétrica Veicular Bivolt P/ Carro Casa Taxi Uber Caminhão 12V 24V 110V 220V C",
       "current_price": "49.99",
@@ -42,6 +32,16 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg90u8sbzcas0d",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/8V8BibUFFd?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10910"
+    },
+    {
+      "id": 10177,
+      "title": "Espelho 100x50 Orgânico Corpo Inteiro Grande Moldura Caramelo",
+      "current_price": "99.00",
+      "original_price": "399.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_936790-MLA96100703939_102025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2HDJw3s?matt_word=dbot_ig_bio_10177&utm_source=instagram&utm_medium=bio&utm_campaign=offer_10177"
     },
     {
       "id": 11263,

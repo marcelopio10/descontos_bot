@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-08-19T11:02:45.520222+00:00",
+  "generated_at": "2026-08-19T14:21:03.569766+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 11201,
+      "title": "O Idiota",
+      "current_price": "1.99",
+      "original_price": "59.90",
+      "discount_pct": "97.00",
+      "image_url": "https://m.media-amazon.com/images/I/71xJco7ed0L._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=o-idiota-11201&utm_source=instagram&utm_medium=bio&utm_campaign=offer_11201"
+    },
     {
       "id": 7276,
       "title": "Kit 6 Forma de Silicone para Fritadeira Air Fryer com Alça Antiaderente Cozinha",
@@ -26,9 +36,9 @@
     {
       "id": 10177,
       "title": "Espelho 100x50 Orgânico Corpo Inteiro Grande Moldura Caramelo",
-      "current_price": "99.00",
+      "current_price": "91.00",
       "original_price": "399.00",
-      "discount_pct": "75.00",
+      "discount_pct": "77.00",
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_936790-MLA96100703939_102025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/2HDJw3s?matt_word=dbot_ig_bio_10177&utm_source=instagram&utm_medium=bio&utm_campaign=offer_10177"
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_834599-MLA110520212053_042026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/2SiHBrS?matt_word=dbot_ig_bio_11310&utm_source=instagram&utm_medium=bio&utm_campaign=offer_11310"
-    },
-    {
-      "id": 9464,
-      "title": "Cabelo De Faixa Larga De 7 Cm Protege Gorro De Seda Acetinada Para Dormir",
-      "current_price": "4.70",
-      "original_price": "14.69",
-      "discount_pct": "68.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823rt-mp4mcmnyrg245a",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/7KwIlDhKXF?utm_source=instagram&utm_medium=bio&utm_campaign=offer_9464"
     }
   ]
 }

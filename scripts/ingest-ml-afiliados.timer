@@ -1,0 +1,15 @@
+[Unit]
+Description=descontos.bot - Disparo semanal da ingestão de vendas do ML
+
+[Timer]
+# Semanal, segunda de manhã. A cadência é semanal e não diária porque o dado do
+# outro lado muda devagar (status leva semanas para resolver) e cada execução é
+# requisição autenticada com o cookie da conta — não é chamada barata como um
+# SELECT local. Duas páginas cobrem 45 dias com folga.
+OnCalendar=Mon *-*-* 06:20:00
+RandomizedDelaySec=15min
+Persistent=true
+Unit=ingest-ml-afiliados.service
+
+[Install]
+WantedBy=timers.target

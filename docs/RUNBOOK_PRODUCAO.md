@@ -282,3 +282,59 @@ Com os padrões acima e o intervalo entre ciclos do scheduler
   mostrar `whatsapp_session.precheck_failed` (ou `whatsapp_session.dropped_mid_batch` se a
   queda ocorrer no meio do lote) e **não** uma sequência de dezenas de `FAILED` contíguos —
   ver Tarefa 1.3 (`SessaoIndisponivelError`).
+
+---
+
+# Runbook — Ingestão de vendas do painel ML (`ingest-ml-afiliados.timer`)
+
+Traz do painel de afiliados do Mercado Livre as vendas **uma a uma**, com status
+e motivo de rejeição, para `MLAffiliateSale`. Detalhes de projeto, limites do
+endpoint e a recalibragem de `max_price` que ela viabilizou estão em
+`docs/INGESTAO_PAINEL_ML_2026-08-23.md`.
+
+## Cadência
+
+Semanal, segunda 06:20 (`RandomizedDelaySec=15min`, `Persistent=true`), janela de
+45 dias **propositalmente sobreposta**: venda entra como `IN_REVIEW` e só resolve
+semanas depois, e a ingestão é idempotente por `sale_id`.
+
+## Instalação (systemd --user)
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now ingest-ml-afiliados.timer
+```
+
+Verificar:
+
+```bash
+systemctl --user list-timers ingest-ml-afiliados.timer
+tail -n 50 logs/ingest-ml-afiliados.log
+```
+
+## Dependência crítica: `ML_COOKIE`
+
+Usa o mesmo cookie do scraper de ofertas. **Cookie vencido derruba as duas
+coisas** — a ingestão levanta `MLAffiliateAuthError` e dispara alerta de operador
+(`categoria='ml_cookie_expirado'`) antes de falhar. Se este timer começar a
+falhar por autenticação, verificar a coleta de ML no mesmo movimento.
+
+## Validar sem persistir
+
+```bash
+python3 manage.py ingest_ml_affiliate_sales --days 7 --dry-run
+```
+
+## Rollback rápido
+
+```bash
+systemctl --user disable --now ingest-ml-afiliados.timer
+```
+
+Nenhum dado já ingerido é afetado.
+
+## Cuidado ao ler os números
+
+Compra própria marcada automaticamente vem **só** de status `REJECTED`; compra da
+casa ainda `IN_REVIEW` não é detectada e precisa de marcação manual no Admin — que
+a rotina nunca sobrescreve.

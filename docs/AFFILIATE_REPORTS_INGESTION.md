@@ -104,6 +104,17 @@ python manage.py ingest_affiliate_amazon \
 ML só mostra os dados em tela. Captura: copiar o JSON da response interna no
 DevTools.
 
+> **Existe desde 2026-08-23 um segundo caminho, automático, para o ML** —
+> `manage.py ingest_ml_affiliate_sales`, que chama o endpoint do painel com o
+> `ML_COOKIE` e roda em timer semanal. Ver
+> `docs/INGESTAO_PAINEL_ML_2026-08-23.md`.
+>
+> Os dois **não se substituem**: o desta seção é o relatório agregado por produto
+> no período (`item_list`/`entity_id`) e alimenta `AffiliateConversion` e o
+> `affiliate-summary.json`; o novo é venda a venda, com status e compra própria,
+> e alimenta `MLAffiliateSale`. Cuidado ao somar: importar o mesmo período pelos
+> dois caminhos conta a venda duas vezes se alguém unificar os totais.
+
 ### 1. Capturar o JSON
 
 1. Entrar em [mercadolivre.com.br/afiliados](https://www.mercadolivre.com.br/afiliados/).

@@ -18,6 +18,40 @@ Estrutura:
             }
         }
     }
+
+Revisão dos tetos de `max_price` — 2026-08-23
+---------------------------------------------
+Os tetos passaram a ser calibrados pela **taxa de comissão medida** no painel de
+afiliados do ML (74 vendas, mai–ago/2026), e não pela intuição de "preço que o
+público paga". O gatilho foi o achado de que 45,3% da comissão de cliente de maio
+veio de vendas acima de R$ 500 e que essa faixa zerou a partir de junho.
+
+Efeito medido dos tetos anteriores no preço máximo de oferta de ML coletada
+(maio → agosto), que confirma quais deles estavam mordendo:
+
+    beleza_cuidados       R$ 819  → R$ 299   (teto 300 — cortou o perfume de R$ 717
+                                              que rendeu R$ 94,16 a 16% em maio)
+    infantil              R$ 1549 → R$ 399   (teto 400)
+    casa_cozinha          R$ 5299 → R$ 642   (teto 600)
+    tecnologia_cotidiana  R$ 3899 → R$ 2099  (teto 700, vaza por alvo sem hint)
+
+Taxa de comissão observada, que define para onde cada teto vai:
+
+    ALTA  (12–26%)  perfumaria/beleza 16–17% · moda 16–26% · cozinha 17%
+                    fitness/musculação 16% · equipamento médico 12%
+    BAIXA (2,5–7%)  celulares 5% · áudio 5% · acessórios 5% · relógios 6%
+                    pequenos eletrodomésticos 6,8% · colecionáveis 6%
+
+Daí a assimetria: beleza e casa sobem, moda sobe um degrau, e
+`tecnologia_cotidiana` **desce** — era o teto mais alto do arquivo servindo à
+categoria que menos paga. `saude_suplementacao` fica intocada de propósito: o
+teto baixo ali não é comercial, é exposição limitada por viés do dono (~80% das
+vendas de suplemento registradas são compra dele).
+
+Importante para quem for medir o efeito: alvos com `trust_hint=False` (ML
+MLB1430 e MLB1276) **não passam por este filtro** — sem `category_hint` no
+payload, `_apply_category_filters` deixa passar. Bicicleta ergométrica e o resto
+de Esportes entram por ali, classificados como `outros`, sem teto nenhum.
 """
 
 from dataclasses import dataclass
@@ -41,7 +75,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('tramontina', 'oster', 'mondial', 'arno', 'philips walita', 'electrolux'),
             'min_discount': 15,
-            'max_price': 600.0,
+            'max_price': 800.0,  # 600 → 800 (2026-08-23): cozinha paga 16,8%
             'cycle_limit': 25,
             'fallback': 'generic',
         },
@@ -52,7 +86,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('nike', 'adidas', 'mizuno', 'olympikus', 'havaianas', 'colcci'),
             'min_discount': 20,
-            'max_price': 500.0,
+            'max_price': 600.0,  # 500 → 600 (2026-08-23): moda paga 16–26%
             'cycle_limit': 20,
             'fallback': 'generic',
         },
@@ -63,7 +97,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('insider', 'nike', 'adidas', 'puma', 'fila', 'mizuno', 'asics', 'new balance', 'under armour', 'oakley', 'vans', 'converse', 'calvin klein', 'tommy hilfiger'),
             'min_discount': 15,
-            'max_price': 500.0,
+            'max_price': 600.0,  # 500 → 600 (2026-08-23): moda paga 16–26%
             'cycle_limit': 20,
             'fallback': 'generic',
         },
@@ -74,7 +108,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('mattel', 'hasbro', 'lego', 'fisher-price', 'estrela'),
             'min_discount': 15,
-            'max_price': 400.0,
+            'max_price': 500.0,  # 400 → 500 (2026-08-23): brinquedo paga 11–16%, colecionável só 6%
             'cycle_limit': 15,
             'fallback': 'generic',
         },
@@ -85,7 +119,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('samsung', 'xiaomi', 'jbl', 'sony', 'logitech', 'tcl', 'lg'),
             'min_discount': 15,
-            'max_price': 800.0,
+            'max_price': 500.0,  # 800 → 500 (2026-08-23): era o teto mais alto do arquivo servindo a 2,5–6,8% de comissão
             'cycle_limit': 20,
             'fallback': 'generic',
         },
@@ -96,7 +130,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('avon', 'natura', 'eudora', 'o boticario', 'loreal', 'elseve', 'oral-b', 'colgate', 'taiff', 'kerastase'),
             'min_discount': 20,
-            'max_price': 400.0,
+            'max_price': 800.0,  # 400 → 800 (2026-08-23): perfumaria paga 16% com ticket de R$ 416
             'cycle_limit': 15,
             'fallback': 'generic',
         },
@@ -125,7 +159,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('tramontina', 'mondial', 'oster', 'brastemp', 'electrolux'),
             'min_discount': 20,
-            'max_price': 600.0,
+            'max_price': 800.0,  # 600 → 800 (2026-08-23): teto mordia — máx. coletado caiu de R$ 5.299 para R$ 642
             'cycle_limit': 25,
             'fallback': 'generic',
         },
@@ -137,7 +171,10 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('havaianas', 'nike', 'adidas', 'mizuno', 'colcci'),
             'min_discount': 25,
-            'max_price': 400.0,
+            # 400 → 600 (2026-08-23). Sem efeito prático hoje: este alvo é
+            # trust_hint=False, então não passa por _apply_category_filters.
+            # Alinhado com os demais para o dia em que o hint voltar a existir.
+            'max_price': 600.0,
             'cycle_limit': 40,
             'fallback': 'generic',
         },
@@ -147,7 +184,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             'urls': [],
             'priority_brands': ('insider', 'nike', 'adidas', 'mizuno', 'fila'),
             'min_discount': 20,
-            'max_price': 500.0,
+            'max_price': 600.0,  # 500 → 600 (2026-08-23): moda paga 16–26%
             'cycle_limit': 20,
             'fallback': 'generic',
         },
@@ -158,7 +195,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('mattel', 'hasbro', 'lego', 'estrela', 'fisher-price'),
             'min_discount': 25,
-            'max_price': 400.0,
+            'max_price': 500.0,  # 400 → 500 (2026-08-23): teto mordia — máx. coletado caiu de R$ 1.549 para R$ 399
             'cycle_limit': 15,
             'fallback': 'generic',
         },
@@ -169,7 +206,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('xiaomi', 'samsung', 'jbl', 'sony', 'motorola'),
             'min_discount': 20,
-            'max_price': 700.0,
+            'max_price': 500.0,  # 700 → 500 (2026-08-23): celular pagou 5% num ticket de R$ 637 — pior relação do arquivo
             'cycle_limit': 20,
             'fallback': 'generic',
         },
@@ -179,7 +216,10 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('avon', 'natura', 'eudora', 'o boticario', 'loreal', 'elseve', 'oral-b', 'taiff', 'kerastase', 'lattafa', 'afnan', 'armaf', 'rasasi', 'al haramain', 'maison alhambra', 'swiss arabian', 'khadlaj', 'fragrance world', 'paris corner', 'asdaaf', 'ajmal', 'al wataniah', 'ard al zaafaran'),
             'min_discount': 25,
-            'max_price': 300.0,
+            # 300 → 800 (2026-08-23). O teto mais danoso do arquivo: o preço máximo
+            # de oferta de beleza coletada no ML caiu de R$ 819 (maio) para R$ 299,
+            # e o kit de perfume que rendeu R$ 94,16 a 16% custava R$ 717.
+            'max_price': 800.0,
             'cycle_limit': 15,
             'fallback': 'generic',
         },
@@ -204,7 +244,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('tramontina', 'mondial', 'oster', 'arno', 'electrolux'),
             'min_discount': 15,
-            'max_price': 600.0,
+            'max_price': 800.0,  # 600 → 800 (2026-08-23): cozinha paga 16,8%
             'cycle_limit': 25,
             'fallback': 'generic',
         },
@@ -216,7 +256,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('samsung', 'xiaomi', 'jbl', 'sony', 'logitech'),
             'min_discount': 15,
-            'max_price': 800.0,
+            'max_price': 500.0,  # 800 → 500 (2026-08-23): comissão de eletrônico é 2,5–6,8%
             'cycle_limit': 20,
             'fallback': 'generic',
         },
@@ -226,7 +266,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('avon', 'natura', 'eudora', 'o boticario', 'loreal', 'elseve', 'oral-b', 'taiff', 'lattafa', 'afnan', 'armaf', 'rasasi', 'al haramain', 'maison alhambra', 'swiss arabian', 'khadlaj', 'fragrance world', 'paris corner', 'asdaaf', 'ajmal', 'al wataniah', 'ard al zaafaran'),
             'min_discount': 20,
-            'max_price': 400.0,
+            'max_price': 800.0,  # 400 → 800 (2026-08-23): perfumaria paga 16% com ticket de R$ 416
             'cycle_limit': 15,
             'fallback': 'generic',
         },
@@ -237,7 +277,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('nike', 'adidas', 'mizuno', 'havaianas'),
             'min_discount': 20,
-            'max_price': 500.0,
+            'max_price': 600.0,  # 500 → 600 (2026-08-23): moda paga 16–26%
             'cycle_limit': 20,
             'fallback': 'generic',
         },
@@ -254,7 +294,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('insider', 'nike', 'adidas', 'puma', 'fila', 'mizuno', 'asics', 'new balance', 'under armour', 'oakley', 'vans', 'converse', 'calvin klein', 'tommy hilfiger'),
             'min_discount': 20,
-            'max_price': 500.0,
+            'max_price': 600.0,  # 500 → 600 (2026-08-23): moda paga 16–26%
             'cycle_limit': 20,
             'fallback': 'generic',
         },
@@ -266,7 +306,7 @@ CATEGORY_TARGETS: dict[str, dict[str, dict]] = {
             ],
             'priority_brands': ('mattel', 'hasbro', 'lego', 'fisher-price'),
             'min_discount': 15,
-            'max_price': 400.0,
+            'max_price': 500.0,  # 400 → 500 (2026-08-23): brinquedo paga 11–16%
             'cycle_limit': 15,
             'fallback': 'generic',
         },

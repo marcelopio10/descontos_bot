@@ -9,6 +9,8 @@ from apps.analytics.models import (
     AffiliateImportBatch,
     ClickEvent,
     MetricaCanalDiaria,
+    MLAffiliateSale,
+    OwnPurchaseSource,
 )
 from apps.analytics.services.affiliate_parsers.amazon import parse_amazon_tsv
 from apps.analytics.services.affiliate_parsers.mercadolivre import (
@@ -285,3 +287,98 @@ class AffiliateConversionAdmin(admin.ModelAdmin):
             args=[obj.batch_id],
         )
         return format_html('<a href="{}">#{}</a>', url, obj.batch_id)
+
+
+@admin.register(MLAffiliateSale)
+class MLAffiliateSaleAdmin(admin.ModelAdmin):
+    """Tela de marcação de compra própria.
+
+    `is_own_purchase` é editável direto na listagem de propósito: a marcação é a
+    única parte deste dado que não vem do ML e precisa ser barata de fazer — são
+    poucas vendas por mês e o dono reconhece as dele de bate-pronto. Marcar aqui
+    grava `own_purchase_source='manual'`, e a ingestão semanal nunca sobrescreve
+    marcação manual.
+    """
+
+    list_display = (
+        'sale_date',
+        'product_title',
+        'category_name',
+        'store_name',
+        'sale_value_brl',
+        'commission_brl',
+        'commission_pct',
+        'status',
+        'is_own_purchase',
+        'own_purchase_source',
+        'offer',
+    )
+    list_editable = ('is_own_purchase',)
+    list_filter = (
+        'is_own_purchase',
+        'status',
+        'own_purchase_source',
+        'category_name',
+        ('sale_date', admin.DateFieldListFilter),
+    )
+    search_fields = (
+        'product_title',
+        'store_name',
+        'external_ref',
+        'sale_id',
+    )
+    readonly_fields = (
+        'sale_id',
+        'sale_date',
+        'product_title',
+        'product_link',
+        'external_ref',
+        'category_name',
+        'store_name',
+        'sale_value_brl',
+        'sale_units',
+        'commission_brl',
+        'commission_pct',
+        'sale_type',
+        'status',
+        'status_detail',
+        'batch',
+        'created_at',
+        'updated_at',
+    )
+    date_hierarchy = 'sale_date'
+    actions = ('marcar_como_compra_propria', 'desmarcar_compra_propria')
+
+    def has_add_permission(self, request):
+        return False
+
+    def save_model(self, request, obj, form, change):
+        if 'is_own_purchase' in getattr(form, 'changed_data', []):
+            obj.own_purchase_source = (
+                OwnPurchaseSource.MANUAL if obj.is_own_purchase else OwnPurchaseSource.NONE
+            )
+        super().save_model(request, obj, form, change)
+
+    @admin.action(description='Marcar como compra própria (não conta como receita)')
+    def marcar_como_compra_propria(self, request, queryset):
+        atualizadas = queryset.update(
+            is_own_purchase=True,
+            own_purchase_source=OwnPurchaseSource.MANUAL,
+        )
+        self.message_user(
+            request,
+            f'{atualizadas} venda(s) marcada(s) como compra própria.',
+            messages.SUCCESS,
+        )
+
+    @admin.action(description='Desmarcar compra própria (voltar a contar como receita)')
+    def desmarcar_compra_propria(self, request, queryset):
+        atualizadas = queryset.update(
+            is_own_purchase=False,
+            own_purchase_source=OwnPurchaseSource.NONE,
+        )
+        self.message_user(
+            request,
+            f'{atualizadas} venda(s) desmarcada(s).',
+            messages.SUCCESS,
+        )

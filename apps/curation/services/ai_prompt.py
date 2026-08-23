@@ -6,8 +6,14 @@ from apps.curation.models import CurationRun
 from apps.curation.services.ai_schema import INPUT_SCHEMA_VERSION
 from apps.curation.services.baseline_snapshot import serialize_offer_for_ai, summarize_quality
 from apps.curation.services.batch_optimizer import DEFAULT_TARGET_DISTRIBUTION
+from apps.curation.services.recurrence import build_family_history, get_family_spacing_config
 from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
+
+# Quantas famílias recentes cabem no payload. É contexto, não regra dura (o
+# gate real é o batch_optimizer): 25 basta para o agente perceber o padrão do
+# dia sem inflar o prompt.
+RECENT_FAMILIES_LIMIT = 25
 
 EDITORIAL_POLICY = {
     'preferred_categories': [
@@ -65,6 +71,9 @@ def build_ai_curation_payload(
         },
         'editorial_policy': EDITORIAL_POLICY,
         'baseline_rules': BASELINE_RULES,
+        # Achado 2026-08-21: o agente decidia cada lote sem saber o que já
+        # tinha saído no canal, então repetia o tipo de produto de horas atrás.
+        'recent_families': _recent_families(channel),
         'observer_context': observer_context or {},
         # Sprint 6 / Tarefa 6.1 (achado P7): ranking de vendas Shopee do dia
         # (apps.marketplaces.services.radar_mercado), vazio por padrão quando o
@@ -78,6 +87,26 @@ def build_ai_curation_payload(
             'quality_score_breakdown': summarize_quality(serialized_offers),
         },
         'offers': serialized_offers,
+    }
+
+
+def _recent_families(channel: SocialChannel) -> dict[str, Any]:
+    """Famílias já publicadas na janela recente do canal, com contagem.
+
+    Só agregado sanitizado (tipo de produto + contagem), sem título, link ou
+    qualquer dado de terceiro — mesma regra do observer_context.
+    """
+    config = get_family_spacing_config()
+    history = build_family_history(channel, config=config)
+    counts = sorted(
+        ((family, len(sent_times)) for family, sent_times in history.items()),
+        key=lambda item: (-item[1], item[0]),
+    )
+    return {
+        'window_hours': config['window_hours'],
+        'cooldown_hours': config['cooldown_hours'],
+        'max_sends_per_family_in_window': config['max_window_sends'],
+        'counts': dict(counts[:RECENT_FAMILIES_LIMIT]),
     }
 
 

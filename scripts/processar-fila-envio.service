@@ -1,0 +1,29 @@
+[Unit]
+# Achado A1 do diagnóstico 2026-08-18: o subsistema de retry/backoff/dead-letter
+# de `Delivery` (apps/distribution/services/fila_envio.py + comando
+# processar_fila_envio) estava pronto e testado desde a Sprint 3, mas NUNCA
+# rodava — não havia unit systemd. Na prática toda Delivery que caía em FAILED
+# ficava parada para sempre: nunca reenviada e nunca promovida a dead-letter
+# (logo, nunca disparava o alerta de dead-letter que o próprio módulo implementa).
+Description=descontos.bot - Reprocessa fila de reenvio de Delivery (retry/backoff/dead-letter)
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
+# systemd --user usa um PATH mínimo que não inclui ~/.local/bin.
+Environment=PATH=/home/marce/.local/bin:/home/marce/.nvm/versions/node/v24.15.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=PYTHONUNBUFFERED=1
+# --limit 5: teto de rajada. Auditoria de cadência de 2026-08-18 (volume real do
+# banco antes de ligar o timer): ~40-130 Delivery criadas/dia, 118 nas últimas
+# 72h, 0 elegíveis para retry no momento, 0 com retry_count > 0 e nenhum
+# dead-letter desde 2026-06-25. O risco não é o estado normal (~0 itens), é o
+# pior caso: uma queda prolongada da sessão marcaria dezenas de Delivery como
+# FAILED de uma vez e, sem teto, um único disparo reenviaria todas em rajada —
+# exatamente o incidente de 2026-07-21 do consumir-fila-whatsapp.timer. Com
+# `--limit 5` a cada ~30min, o pior caso sustentado é ~10 envios/hora, dentro da
+# mesma faixa do caminho normal de envio (teto de 25/ciclo a cada 90-240min).
+ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py processar_fila_envio --limit 5
+StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/processar-fila-envio.log
+StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/processar-fila-envio.log

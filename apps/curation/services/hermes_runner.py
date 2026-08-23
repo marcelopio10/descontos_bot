@@ -62,8 +62,14 @@ class HermesProfileRunner:
             raise HermesRunnerError(f'Hermes CLI indisponível: {exc}') from exc
 
         if completed.returncode != 0:
-            detail = (completed.stderr or completed.stdout or '').strip()[:1000]
-            if any(kw in detail.lower() for kw in ('session', 'auth', 'login', 'expired')):
+            # Junta os dois streams: o Hermes escreve o erro real em stdout em
+            # alguns caminhos, e antes só o primeiro não-vazio era capturado —
+            # em 2026-08-21 sobrou apenas a linha `session_id: ...` do stderr e
+            # a causa verdadeira da falha se perdeu.
+            detail = '\n'.join(
+                parte.strip() for parte in (completed.stderr, completed.stdout) if (parte or '').strip()
+            )[:2000]
+            if _parece_falha_de_autenticacao(detail):
                 raise HermesRunnerError(
                     f'Hermes CLI falhou com código {completed.returncode} (sessão/autenticação inválida): '
                     f'renove a autenticação do profile "{self.profile_name}" e tente novamente. Detalhe: {detail}'
@@ -71,6 +77,46 @@ class HermesProfileRunner:
             raise HermesRunnerError(f'Hermes CLI falhou com código {completed.returncode}: {detail}')
         payload = extract_json_payload((completed.stdout or '') + '\n' + (completed.stderr or ''))
         return sanitize_hermes_payload(payload)
+
+
+# Sinais que de fato indicam credencial inválida. A versão anterior casava
+# qualquer ocorrência de 'session', 'auth', 'login' ou 'expired' na saída — e o
+# Hermes imprime `session_id: <hash>` em execução normal, então **toda** falha
+# virava "renove a autenticação". Em 2026-08-21 isso mascarou a causa real de um
+# lote de curadoria perdido e mandou o operador mexer no pool de credenciais à
+# toa. Frase inteira, não palavra solta.
+_SINAIS_DE_AUTENTICACAO = (
+    'invalid session',
+    'session invalid',
+    'session expired',
+    'session not found',
+    'sessão expirada',
+    'auth token',
+    'authentication failed',
+    'authentication error',
+    'unauthorized',
+    'not authenticated',
+    'not logged in',
+    'please log in',
+    'please login',
+    'login again',
+    'login required',
+    'token expired',
+    'expired token',
+    'invalid api key',
+    'invalid credentials',
+    'no credentials',
+    'credential not found',
+    'http 401',
+    'http 403',
+    'status 401',
+    'status 403',
+)
+
+
+def _parece_falha_de_autenticacao(detail: str) -> bool:
+    texto = (detail or '').lower()
+    return any(sinal in texto for sinal in _SINAIS_DE_AUTENTICACAO)
 
 
 def build_curation_prompt(payload: dict[str, Any]) -> str:
@@ -103,6 +149,11 @@ def build_curation_prompt(payload: dict[str, Any]) -> str:
         'Não deixe um marketplace elegível zerado por erro de montagem do pool, mas não promova candidato fraco apenas para cumprir distribuição. '
         'Ofertas com editorial_flags contendo low_priority_book representam livros; livros têm baixa conversão e só devem entrar como preenchimento quando faltarem opções melhores.\n'
         'Ofertas com editorial_flags low_priority_spinning ou low_priority_generic devem ser tratadas como preenchimento quando existirem alternativas melhores; não são blacklist automática.\n'
+        'Diversidade é critério de seleção, não detalhe: cada oferta tem product_family (tipo de produto). '
+        'Selecione no máximo UMA oferta por product_family no lote, mesmo que sejam anúncios diferentes com títulos diferentes — duas piscinas infláveis ou dois power banks no mesmo lote leem como repetição. '
+        'recent_families lista o que já saiu no canal na janela recente, com contagem, e serve para DESEMPATE entre candidatas de qualidade parecida: prefira a família ausente. '
+        'Não é motivo para recusar: o espaçamento no tempo já foi aplicado em código antes de montar este payload, então toda candidata que chegou aqui está liberada mesmo que a família apareça em recent_families. '
+        'Prefira também espalhar as categorias do lote em vez de concentrar tudo em uma.\n'
         'Nas captions reescritas, escreva como uma pessoa real de grupo de ofertas, não como chatbot. '
         'Aplique os princípios da skill humanizer: corte frases com cara de IA, varie ritmo e estrutura, prefira linguagem simples e específica, e evite tom formal/promocional. '
         'Não use fórmulas repetidas entre ofertas, principalmente começos iguais como "Boa para", "Vale para", "Oferta para", "Quem procura" ou "Se você". '

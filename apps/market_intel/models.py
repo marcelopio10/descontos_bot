@@ -94,6 +94,72 @@ class ObservedWhatsAppMessage(models.Model):
         return f'{self.group.name} #{self.external_message_id}'
 
 
+class ObservedOfferLink(models.Model):
+    """Resolução de um link de oferta divulgado por um grupo concorrente.
+
+    O observer já captura ~4.4 mil mensagens de Mercado Livre por semana, mas o
+    link vem encurtado (`meli.la/...`) e aponta para a vitrine de afiliado de
+    quem publicou — não para o anúncio. Este modelo guarda o resultado de abrir
+    esse link uma única vez: qual anúncio é, com que preço e com que cupom.
+
+    Existe separado da mensagem por três motivos: uma mensagem pode conter mais
+    de um link; a resolução falha por motivos próprios (link morto, vitrine sem
+    card, bloqueio) que precisam ser auditáveis; e o mesmo anúncio chega por
+    vários grupos, então a deduplicação real acontece por `external_item_id`,
+    não por mensagem.
+
+    O que **não** entra aqui: nada que identifique grupo ou remetente. Essa
+    associação já vive em `ObservedWhatsAppMessage`; o payload que segue para a
+    oferta é sanitizado em `build_sanitized_raw_payload`.
+    """
+
+    class Status(models.TextChoices):
+        PENDING = 'pending', 'Pendente'
+        RESOLVED = 'resolved', 'Resolvido'
+        FAILED = 'failed', 'Falhou'
+        SKIPPED = 'skipped', 'Ignorado'
+
+    message = models.ForeignKey(
+        ObservedWhatsAppMessage,
+        on_delete=models.CASCADE,
+        related_name='offer_links',
+    )
+    source_url = models.CharField(max_length=1500)
+    marketplace_code = models.CharField(max_length=40)
+    status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
+    failure_reason = models.CharField(max_length=300, blank=True)
+
+    resolved_url = models.CharField(max_length=1500, blank=True)
+    external_item_id = models.CharField(max_length=64, blank=True)
+    title = models.CharField(max_length=500, blank=True)
+    image_url = models.CharField(max_length=1500, blank=True)
+    seller = models.CharField(max_length=200, blank=True)
+    current_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    original_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    discount_pct = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    affiliate_url = models.CharField(max_length=1500, blank=True)
+    resolved_at = models.DateTimeField(null=True, blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at', '-id']
+        constraints = [
+            models.UniqueConstraint(
+                fields=['message', 'source_url'],
+                name='unique_observed_offer_link',
+            ),
+        ]
+        indexes = [
+            models.Index(fields=['status', 'resolved_at']),
+            models.Index(fields=['external_item_id']),
+        ]
+
+    def __str__(self) -> str:
+        return f'{self.marketplace_code}:{self.external_item_id or self.source_url}'
+
+
 class MarketIntelDailyReport(models.Model):
     date = models.DateField(unique=True)
     window_start = models.DateTimeField()

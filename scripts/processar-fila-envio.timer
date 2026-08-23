@@ -1,0 +1,21 @@
+[Unit]
+Description=descontos.bot - Disparo periódico do reprocessamento da fila de reenvio
+
+[Timer]
+# Intervalo menor que o do consumir-fila-whatsapp-v2 (90-240min) porque isto NÃO
+# é envio de conteúdo novo: é reprocessamento de Delivery que já falhou, e o
+# backoff exponencial do próprio módulo (2**retry_count min, teto 60min) já
+# controla quando cada item volta a ser elegível. O teto de rajada por disparo
+# fica no `--limit 5` do .service (ver auditoria de cadência lá).
+#
+# RandomizedDelaySec=10min evita padrão robótico de horário exato (mesma
+# preocupação anti-bloqueio do consumir-fila-whatsapp-v2.timer), sem esticar o
+# intervalo a ponto de segurar reenvio legítimo.
+OnBootSec=10min
+OnUnitActiveSec=30min
+RandomizedDelaySec=10min
+Persistent=true
+Unit=processar-fila-envio.service
+
+[Install]
+WantedBy=timers.target

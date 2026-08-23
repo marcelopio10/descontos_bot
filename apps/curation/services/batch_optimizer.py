@@ -2,10 +2,21 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from decimal import Decimal
-from math import floor
+from math import ceil, floor
 from typing import Any, Iterable
 
 from apps.curation.services.ai_schema import SAFETY_RISK_FLAGS
+
+# Diversidade dentro do lote (achado 2026-08-21). O dedup por
+# `produto_canonico_id` só pega o mesmo anúncio; dois anúncios distintos do
+# mesmo tipo de produto (dois cozedores de ovos, dois jogos de panelas)
+# passavam juntos no mesmo lote. `product_family` é anexado às decisões em
+# apps.curation.services.ai_curator._enrich_decisions_with_offer_fields.
+DEFAULT_MAX_PER_FAMILY = 1
+# Cota de categoria proporcional, não absoluta: um teto fixo baixo esvaziaria
+# lotes em dias com poucas categorias ativas no pool. 50% só morde o caso
+# patológico (lote de 20 com 15 itens de casa_cozinha).
+DEFAULT_MAX_CATEGORY_SHARE = 0.5
 
 # Sprint 6 / Tarefa 6.4 (item 20 do backlog, achado do laudo diagnóstico
 # externo 4.5): reponderação por receita real, tratada como EXPERIMENTO
@@ -94,6 +105,8 @@ def optimize_curation_batch(
     batch_size: int,
     target_distribution: dict[str, float] | None = None,
     min_ai_score: float | Decimal | None = None,
+    max_per_family: int = DEFAULT_MAX_PER_FAMILY,
+    max_category_share: float = DEFAULT_MAX_CATEGORY_SHARE,
 ) -> OptimizedBatch:
     """Build a safe batch from AI decisions without replacing AI selection.
 
@@ -116,6 +129,28 @@ def optimize_curation_batch(
     eligibility = [_is_eligible(decision, min_ai_score=min_ai_score) for decision in normalized_decisions]
     ai_selected_flags = [bool(decision.get('selected_for_batch')) for decision in normalized_decisions]
     canonical_duplicate_indices = _canonical_duplicate_indices(normalized_decisions, eligibility, ai_selected_flags)
+    diversity_eligibility = [
+        eligible and index not in canonical_duplicate_indices
+        for index, eligible in enumerate(eligibility)
+    ]
+    family_overflow_indices = _overflow_indices(
+        normalized_decisions,
+        diversity_eligibility,
+        ai_selected_flags,
+        key_field='product_family',
+        max_per_key=max_per_family,
+    )
+    category_overflow_indices = _overflow_indices(
+        normalized_decisions,
+        [
+            eligible and index not in family_overflow_indices
+            for index, eligible in enumerate(diversity_eligibility)
+        ],
+        ai_selected_flags,
+        key_field='category_code',
+        max_per_key=_category_cap(batch_size, max_category_share),
+    )
+    dropped_indices = canonical_duplicate_indices | family_overflow_indices | category_overflow_indices
 
     selected_candidates: list[dict[str, Any]] = []
     approved_candidates: list[dict[str, Any]] = []
@@ -123,7 +158,7 @@ def optimize_curation_batch(
 
     for index, decision in enumerate(normalized_decisions):
         ai_selected = ai_selected_flags[index]
-        eligible = eligibility[index] and index not in canonical_duplicate_indices
+        eligible = eligibility[index] and index not in dropped_indices
         if eligible:
             approved_candidates.append(decision)
         if ai_selected and eligible:
@@ -257,6 +292,54 @@ def _canonical_duplicate_indices(
         )
         duplicate_indices.update(idx for idx in indices if idx != winner)
     return duplicate_indices
+
+
+def _category_cap(batch_size: int, max_category_share: float) -> int:
+    if max_category_share <= 0 or max_category_share >= 1:
+        return batch_size
+    # Piso de 2: com lote pequeno (3-4 itens) um teto de 1 por categoria
+    # inviabilizaria o lote em dias de pool concentrado.
+    return max(2, ceil(batch_size * max_category_share))
+
+
+def _overflow_indices(
+    decisions: list[dict[str, Any]],
+    eligibility: list[bool],
+    ai_selected_flags: list[bool],
+    *,
+    key_field: str,
+    max_per_key: int,
+) -> set[int]:
+    """Índices a descartar para respeitar `max_per_key` itens por chave no lote.
+
+    Mesma mecânica de `_canonical_duplicate_indices` — só decisões elegíveis
+    competem, e o vencedor sai pela ordem (IA selecionou > maior ai_score >
+    mais barato > menor offer_id) — mas com teto configurável em vez de 1
+    fixo, e ignorando chave vazia (título do qual não se extraiu tipo, ou
+    oferta sem categoria: nunca devem competir entre si).
+    """
+    if max_per_key <= 0:
+        return set()
+
+    indices_by_key: dict[str, list[int]] = {}
+    for index, decision in enumerate(decisions):
+        if not eligibility[index]:
+            continue
+        key = str(decision.get(key_field) or '').strip()
+        if not key:
+            continue
+        indices_by_key.setdefault(key, []).append(index)
+
+    overflow: set[int] = set()
+    for indices in indices_by_key.values():
+        if len(indices) <= max_per_key:
+            continue
+        ranked = sorted(
+            indices,
+            key=lambda idx: _canonical_priority(decisions[idx], ai_selected_flags[idx]),
+        )
+        overflow.update(ranked[max_per_key:])
+    return overflow
 
 
 def _canonical_priority(decision: dict[str, Any], ai_selected: bool) -> tuple[int, float, float, int]:

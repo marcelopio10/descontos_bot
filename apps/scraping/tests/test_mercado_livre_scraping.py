@@ -112,3 +112,113 @@ class MercadoLivreCookieAlertTests(SimpleTestCase):
             with self._patch_affiliate_session(response), patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
                 scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/d')
             mock_alert.assert_called_once()
+
+
+class SocialCardScrapingTests(SimpleTestCase):
+    """Radar de concorrente (2026-08-21): resolver `meli.la` na vitrine de afiliado.
+
+    A vitrine lista o catálogo inteiro de quem publicou; o anúncio do link é o que
+    o `og:title` nomeia. O ID do item vem do href do card — nunca do `og:image`,
+    cujo nome de arquivo carrega o ID do *asset* (às vezes até de outro site, um
+    `MLA...`), e não o do anúncio.
+    """
+
+    CARD_TEMPLATE = (
+        '<div class="poly-card">'
+        '<a class="poly-component__title" href="{href}">{titulo}</a>'
+        '<div class="poly-price__current"><span class="andes-money-amount__fraction">{preco}</span></div>'
+        '<s class="andes-money-amount--previous"><span class="andes-money-amount__fraction">{de}</span></s>'
+        '<img class="poly-component__picture" src="{imagem}"/>'
+        '</div>'
+    )
+
+    def _html(self, og_title, cards):
+        corpo = ''.join(self.CARD_TEMPLATE.format(**card) for card in cards)
+        return f'<html><head><meta property="og:title" content="{og_title}"/></head><body>{corpo}</body></html>'
+
+    def _scraper(self, html):
+        scraper = MercadoLivreScraper()
+        scraper.get_html = MagicMock(return_value=html)
+        scraper.is_blocked = MagicMock(return_value=False)
+        scraper._gerar_link_afiliado_oficial = MagicMock(side_effect=lambda url: f'{url}#afiliado')
+        return scraper
+
+    def _card(self, titulo, item, preco='100', de='200'):
+        return {
+            'titulo': titulo,
+            'href': f'https://produto.mercadolivre.com.br/{item}-slug-_JM',
+            'preco': preco,
+            'de': de,
+            'imagem': 'https://http2.mlstatic.com/D_NQ_NP_1-MLA99981972913_112025-O.webp',
+        }
+
+    def test_escolhe_o_card_do_og_title_e_nao_o_primeiro(self):
+        html = self._html('Relógio Casio G-Shock', [
+            self._card('Outro Produto Da Vitrine', 'MLB-1111111111'),
+            self._card('Relógio Casio G-Shock', 'MLB-2222222222', preco='248', de='519'),
+        ])
+
+        payload = self._scraper(html).scrape_social_card('https://meli.la/abc')
+
+        self.assertEqual(payload['id'], 'MLB2222222222')
+        self.assertEqual(payload['nome'], 'Relógio Casio G-Shock')
+        self.assertEqual(payload['preco'], 248.0)
+        self.assertEqual(payload['preco_original'], 519.0)
+
+    def test_id_vem_do_href_e_nao_do_asset_da_imagem(self):
+        """O `og:image` da vitrine chega a apontar para asset `MLA...`, de outro site."""
+        html = self._html('Par Retrovisor Triumph', [self._card('Par Retrovisor Triumph', 'MLB-3656481579')])
+
+        payload = self._scraper(html).scrape_social_card('https://meli.la/abc')
+
+        self.assertEqual(payload['id'], 'MLB3656481579')
+
+    def test_sem_casamento_de_titulo_nao_resolve(self):
+        """Chutar o card em destaque trocava o produto em silêncio.
+
+        Casos reais de 2026-08-21: mensagem de "micro-ondas consul cms23ab"
+        resolveu num "Micro-ondas MTO30", e "Insider Light T-Shirt" na "Daily
+        T-shirt". A oferta é real, mas não é a que o grupo anunciou — o que
+        derruba a premissa do radar.
+        """
+        html = self._html('Micro-ondas Consul 23L CMS23AB', [self._card('Micro-ondas MTO30 20L', 'MLB-4444444444')])
+
+        self.assertIsNone(self._scraper(html).scrape_social_card('https://meli.la/abc'))
+
+    def test_vitrine_sem_alvo_no_og_title_nao_resolve(self):
+        """`og:title` vira "Minhas recomendações" quando o link aponta para a raiz."""
+        html = self._html('Minhas recomendações', [self._card('Produto Qualquer Da Vitrine', 'MLB-5555555555')])
+
+        self.assertIsNone(self._scraper(html).scrape_social_card('https://meli.la/abc'))
+
+    def test_titulo_do_card_mais_longo_que_o_og_title_casa(self):
+        html = self._html('Camiseta Daily T-shirt Insider', [
+            self._card('Camiseta Daily T-shirt Insider Masculina Preta P', 'MLB-3962940727', preco='69', de='139'),
+        ])
+
+        payload = self._scraper(html).scrape_social_card('https://meli.la/abc')
+
+        self.assertEqual(payload['id'], 'MLB3962940727')
+
+    def test_pagina_sem_card_devolve_none(self):
+        payload = self._scraper('<html><body>vitrine vazia</body></html>').scrape_social_card('https://meli.la/abc')
+
+        self.assertIsNone(payload)
+
+    def test_html_bloqueado_marca_o_scraper_como_bloqueado(self):
+        scraper = self._scraper('<html>captcha</html>')
+        scraper.is_blocked = MagicMock(return_value=True)
+
+        self.assertIsNone(scraper.scrape_social_card('https://meli.la/abc'))
+        self.assertTrue(scraper.blocked)
+
+    def test_gera_link_de_afiliado_nosso_para_o_anuncio(self):
+        """O link do concorrente é descartado: publicamos com a nossa tag."""
+        html = self._html('Chinelo Reserva', [self._card('Chinelo Reserva', 'MLB-5555555555', preco='57', de='129')])
+
+        payload = self._scraper(html).scrape_social_card('https://meli.la/abc')
+
+        self.assertEqual(
+            payload['link_afiliado'],
+            'https://produto.mercadolivre.com.br/MLB-5555555555-slug-_JM#afiliado',
+        )

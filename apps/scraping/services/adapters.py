@@ -17,7 +17,11 @@ log = logging.getLogger(__name__)
 CATEGORY_SCRAPING_FLAG = 'category_scraping_enabled'
 DIRECTED_QUERY_FLAG = 'directed_search_enabled'
 DIRECTED_QUERY_LIMIT = 6
-DIRECTED_FALLBACK_CATEGORY_LIMIT = 2
+
+# `DIRECTED_FALLBACK_CATEGORY_LIMIT = 2` foi removido no achado B1 (2026-08-18):
+# truncava `flatten_urls()` sempre nas 2 primeiras URLs, na mesma ordem, todo ciclo,
+# tornando as categorias do fim da lista (moda_masculina, saude_suplementacao...)
+# inalcançáveis por construção. Hoje todas as URLs configuradas são varridas.
 
 
 class MarketplaceScraper(Protocol):
@@ -35,19 +39,54 @@ class ScraperAdapter:
     scraper: MarketplaceScraper
 
     def collect(self, max_pages: int) -> list[dict]:
-        directed = self._directed_queries()
+        """Coleta por união de três caminhos: busca direcionada + categorias + radar.
+
+        Achado B1 (diagnóstico 2026-08-18). Até o commit 84e5071 a categoria era
+        **fallback** da direcionada (`if not payloads`), o que na prática matou a
+        coleta por categoria: onde a direcionada funciona (Amazon, Shopee) o ramo de
+        categoria nunca mais rodou, e com ele foram junto todas as regras de
+        qualidade de `category_targets` (min_discount, max_price, cycle_limit,
+        incluindo o teto de exposição de suplementos). Os dois caminhos agora rodam
+        sempre e o resultado é mesclado, deduplicado e filtrado de uma vez só.
+
+        `scrape_daily_deals` continua como último recurso, para o caso de os dois
+        caminhos voltarem vazios (marketplace bloqueado, flags desligadas).
+
+        O terceiro ramo é o radar de concorrente (2026-08-21): ofertas divulgadas
+        nos grupos observados, já resolvidas para o anúncio real por
+        `resolve_competitor_links`. Entra na mesma união porque é coleta como
+        qualquer outra — passa por dedup, filtros de categoria, normalização,
+        curadoria e gates de diversidade sem tratamento especial. Existe para
+        cobrir o que a coleta própria não alcança: com a busca por texto do ML
+        bloqueada (B2), o pool do ML é o que cabe em 8 URLs de `/ofertas`.
+        """
         payloads: list[dict] = []
+
+        directed = self._directed_queries()
         if directed and hasattr(self.scraper, 'scrape_search_queries'):
             payloads.extend(self.scraper.scrape_search_queries(directed))
-        if not payloads and _category_scraping_enabled() and hasattr(self.scraper, 'scrape_categories'):
+        directed_count = len(payloads)
+
+        if _category_scraping_enabled() and hasattr(self.scraper, 'scrape_categories'):
             targets = flatten_urls(self.marketplace_code)
             if targets:
                 payloads.extend(self.scraper.scrape_categories(
-                    [(t.category_code, t.label, t.url, t.trust_hint) for t in targets[:DIRECTED_FALLBACK_CATEGORY_LIMIT]],
+                    [(t.category_code, t.label, t.url, t.trust_hint) for t in targets],
                 ))
-                return _apply_category_filters(self.marketplace_code, _mark_unattributed_as_fallback(_deduplicate_payloads(payloads)))
+        category_count = len(payloads) - directed_count
+
+        payloads.extend(_competitor_radar_payloads(self.marketplace_code))
+        radar_count = len(payloads) - directed_count - category_count
+
         if payloads:
-            return _mark_unattributed_as_fallback(_deduplicate_payloads(payloads))
+            log.info(
+                'collect_summary marketplace=%s directed=%d category=%d radar=%d total=%d',
+                self.marketplace_code, directed_count, category_count, radar_count, len(payloads),
+            )
+            return _apply_category_filters(
+                self.marketplace_code,
+                _mark_unattributed_as_fallback(_deduplicate_payloads(payloads)),
+            )
         return _mark_unattributed_as_fallback(self.scraper.scrape_daily_deals(max_pages=max_pages))
 
     def _directed_queries(self) -> tuple[SearchQuery, ...]:
@@ -58,6 +97,10 @@ class ScraperAdapter:
             plan = build_search_plan(radar, marketplaces=(self.marketplace_code,), max_queries=DIRECTED_QUERY_LIMIT)
             return plan.directed_queries
         except Exception:
+            # Achado B3 (2026-08-18): esta exceção era engolida em silêncio. Uma falha
+            # aqui desliga a busca direcionada e o sistema degrada para o fallback
+            # genérico sem deixar rastro nenhum de por quê.
+            log.warning('directed_queries_failed marketplace=%s', self.marketplace_code, exc_info=True)
             return ()
 
     @property
@@ -81,14 +124,50 @@ def _directed_search_enabled() -> bool:
     return bool(get_integer_setting(DIRECTED_QUERY_FLAG, 1))
 
 
+def _competitor_radar_payloads(marketplace_code: str) -> list[dict]:
+    """Ofertas que chegaram por link divulgado em grupo concorrente.
+
+    Terceiro ramo da união (2026-08-21). Não faz rede: consome o que o comando
+    `resolve_competitor_links` já resolveu e gravou em `ObservedOfferLink`,
+    dentro da janela de frescor de preço. Desligado por padrão
+    (`competitor_radar_enabled`).
+
+    A falha aqui é contida pelo mesmo motivo do achado B3: um erro de leitura do
+    radar não pode derrubar a coleta inteira do marketplace — mas também não
+    pode sumir sem rastro.
+    """
+    try:
+        from apps.market_intel.services.competitor_radar import build_radar_payloads, radar_enabled
+
+        if not radar_enabled():
+            return []
+        return build_radar_payloads(marketplace_code)
+    except Exception:
+        log.warning('competitor_radar_payloads_failed marketplace=%s', marketplace_code, exc_info=True)
+        return []
+
+
 def _deduplicate_payloads(payloads: list[dict]) -> list[dict]:
-    seen: set[str] = set()
+    """Deduplica preservando os sinais dos dois caminhos de coleta.
+
+    Com a união do achado B1 a mesma oferta passa a poder chegar pelas duas vias, e
+    cada uma traz um sinal que a outra não tem: a direcionada traz
+    `search_provenance` (qual demanda observada motivou a busca) e a categoria traz
+    `category_hint` (que alimenta o classifier e os filtros de categoria). Descartar
+    a duplicata inteira perderia um dos dois, então mantemos a primeira ocorrência e
+    completamos apenas os campos que faltam nela.
+    """
+    seen: dict[str, dict] = {}
     result: list[dict] = []
     for payload in payloads:
         key = str(payload.get('external_id') or payload.get('id') or payload.get('product_url') or payload.get('url') or payload.get('title') or '')
-        if key in seen:
+        kept = seen.get(key)
+        if kept is not None:
+            for field in ('category_hint', 'search_provenance'):
+                if not kept.get(field) and payload.get(field):
+                    kept[field] = payload[field]
             continue
-        seen.add(key)
+        seen[key] = payload
         result.append(payload)
     log.info('directed_search_dedup input=%d output=%d', len(payloads), len(result))
     return result
@@ -136,6 +215,14 @@ def _apply_category_filters(marketplace_code: str, payloads: list[dict]) -> list
 
         counters[category_code] = counters.get(category_code, 0) + 1
         out.append(payload)
+
+    # Reposto no achado B1 (2026-08-18): este log existia antes do commit 84e5071 e
+    # foi removido junto com a regressão, apagando a única visibilidade operacional
+    # de quantas ofertas cada categoria rendeu e por qual regra as descartadas caíram.
+    log.info(
+        'category_scraping_summary marketplace=%s in=%d kept=%d per_category=%s dropped=%s',
+        marketplace_code, len(payloads), len(out), counters, dropped,
+    )
     return out
 
 

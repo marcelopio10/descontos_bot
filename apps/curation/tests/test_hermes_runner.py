@@ -172,6 +172,40 @@ class HermesProfileRunnerTests(SimpleTestCase):
             self.assertIn('descontos-bot', msg)
             self.assertIn('renove a autenticação', msg)
 
+    def test_session_id_no_log_nao_e_confundido_com_erro_de_autenticacao(self):
+        """Achado 2026-08-21: `session_id: <hash>` é linha normal do Hermes.
+
+        O classificador casava a substring 'session' e anunciava
+        "renove a autenticação" em qualquer falha cuja saída mencionasse a
+        sessão. Isso mascarou a causa real de um lote de curadoria perdido e
+        mandou o operador mexer no pool de credenciais sem necessidade.
+        """
+        completed = subprocess.CompletedProcess(
+            args=['hermes'], returncode=1, stdout='', stderr='session_id: 20260821_173054_3fc3e5',
+        )
+
+        with patch('apps.curation.services.hermes_runner.subprocess.run', return_value=completed):
+            with self.assertRaises(HermesRunnerError) as ctx:
+                HermesProfileRunner(profile_name='descontos-bot').run({'offers': []})
+
+        msg = str(ctx.exception)
+        self.assertNotIn('autenticação', msg)
+        self.assertIn('session_id: 20260821_173054_3fc3e5', msg)
+
+    def test_detalhe_junta_stderr_e_stdout(self):
+        """Só o primeiro stream não-vazio era capturado, e o erro real se perdia."""
+        completed = subprocess.CompletedProcess(
+            args=['hermes'], returncode=1,
+            stdout='model glm-5.2 is not available for this provider',
+            stderr='session_id: abc123',
+        )
+
+        with patch('apps.curation.services.hermes_runner.subprocess.run', return_value=completed):
+            with self.assertRaises(HermesRunnerError) as ctx:
+                HermesProfileRunner(profile_name='descontos-bot').run({'offers': []})
+
+        self.assertIn('model glm-5.2 is not available', str(ctx.exception))
+
     def test_profile_runner_raises_when_output_has_no_json(self):
         completed = subprocess.CompletedProcess(args=['hermes'], returncode=0, stdout='sem json', stderr='')
 
@@ -316,3 +350,35 @@ class SanitizeHermesPayloadTests(SimpleTestCase):
     def test_returns_payload_unchanged_when_there_is_no_decisions_key(self):
         payload = {'schema_version': '1.0', 'actual_distribution': {}}
         self.assertEqual(sanitize_hermes_payload(payload), payload)
+
+
+class PromptDiversityContractTests(SimpleTestCase):
+    """O contrato precisa separar espaçamento (código) de desempate (agente).
+
+    Achado 2026-08-21, na mesma noite em que os gates entraram: o agente passou
+    a aprovar 1 de 47 candidatas. O prompt mandava "evite famílias que já
+    apareceram em recent_families", mas `prepare_ai_curation_batch` já aplica
+    `filter_saturated_families` ANTES de montar o payload — então o agente
+    filtrava de novo o que o código já tinha liberado, e o efeito piorava
+    conforme a lista de famílias recentes crescia ao longo do dia.
+    """
+
+    def _prompt(self) -> str:
+        from apps.curation.services.hermes_runner import build_curation_prompt
+
+        return build_curation_prompt({
+            'schema_version': '1.0',
+            'run': {'batch_size': 5},
+            'offers': [],
+            'recent_families': {'tenis': 8},
+        })
+
+    def test_recent_families_e_desempate_nao_veto(self):
+        prompt = self._prompt()
+
+        self.assertIn('DESEMPATE', prompt)
+        self.assertIn('Não é motivo para recusar', prompt)
+        self.assertNotIn('evite famílias que já apareceram', prompt)
+
+    def test_contrato_mantem_o_teto_de_uma_por_familia_no_lote(self):
+        self.assertIn('no máximo UMA oferta por product_family', self._prompt())

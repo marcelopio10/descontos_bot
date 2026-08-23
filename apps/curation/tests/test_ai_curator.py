@@ -38,14 +38,25 @@ class AICuratorTests(TestCase):
         self.offers = []
         now = timezone.now()
         offer_id = 1
-        for marketplace_code in ('mercadolivre', 'amazon', 'shopee'):
+        # Um tipo de produto distinto por oferta: o gate de diversidade do
+        # optimizer (achado 2026-08-21) mantém no máximo uma candidata por
+        # product_family, e títulos genéricos colapsariam as 9 ofertas em 3
+        # famílias, escondendo o que estes testes medem (balanceamento por
+        # marketplace e persistência do lote).
+        titles = (
+            'Fone de Ouvido Bluetooth', 'Jogo de Panelas Cerâmica', 'Mochila Escolar Reforçada',
+            'Cafeteira Elétrica Programável', 'Travesseiro Cervical Viscoelástico', 'Teclado Mecânico Compacto',
+            'Perfume Amadeirado 100ml', 'Creatina Monohidratada 300g', 'Tapete Antiderrapante Sala',
+        )
+        for marketplace_index, marketplace_code in enumerate(('mercadolivre', 'amazon', 'shopee')):
             for index in range(3):
+                title = titles[marketplace_index * 3 + index]
                 self.offers.append(
                     Offer.objects.create(
                         marketplace=self.marketplaces[marketplace_code],
                         external_id=f'{marketplace_code}-{index}',
-                        title=f'Oferta {marketplace_code} {index}',
-                        normalized_title=f'oferta {marketplace_code} {index}',
+                        title=title,
+                        normalized_title=title.lower(),
                         offer_hash=f'hash-s4-{offer_id}',
                         slug=f'oferta-{marketplace_code}-{index}',
                         current_price=Decimal('99.90'),

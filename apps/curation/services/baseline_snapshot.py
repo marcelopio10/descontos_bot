@@ -4,6 +4,7 @@ from decimal import Decimal
 import re
 from typing import Any
 
+from apps.curation.services.product_family import offer_family_key
 from apps.curation.services.quality_score import quality_score_breakdown
 from apps.curation.services.selector import SelectionConfig, _eligible_offers, get_selection_config
 from apps.distribution.models import SocialChannel
@@ -57,6 +58,9 @@ def serialize_offer_for_ai(
         'title': offer.title,
         'marketplace_code': marketplace_code,
         'category_code': offer.category.code if offer.category_id else '',
+        # Tipo de produto (achado 2026-08-21): a IA precisa enxergar que duas
+        # candidatas são "a mesma coisa" mesmo com títulos diferentes.
+        'product_family': offer_family_key(offer),
         'current_price': _decimal_to_float(offer.current_price),
         'original_price': _decimal_to_float(offer.original_price),
         'discount_pct': _decimal_to_float(offer.discount_pct),

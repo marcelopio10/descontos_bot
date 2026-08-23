@@ -8,6 +8,7 @@ from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from django.utils import timezone
 
+from apps.analytics.services.alertas import enviar_alerta_operador
 from apps.curation.models import CurationRun
 from apps.curation.services.blacklist import filter_blacklisted_offers
 from apps.curation.services.curated_batch_reader import get_ready_curated_batch
@@ -60,7 +61,9 @@ HEALTHCHECK_FILE = Path(settings.BASE_DIR) / 'data' / 'last_cycle.txt'
 # fallback força um modelo mais leve/estável de outro provider (glm-5.2), sem trocar
 # de profile. Sobrescrevível por env para operação sem deploy.
 AI_CURATION_PROFILE = 'descontos-bot'
-AI_CURATION_FALLBACK_MODELS = ('glm-5.2',)
+# (modelo, provider). O GLM roda pela assinatura do opencode-go; forçá-lo sem
+# provider cai no Codex e volta HTTP 400 (ver `_ai_curation_attempts`).
+AI_CURATION_FALLBACK_MODELS = (('glm-5.2', 'opencode-go'),)
 
 # Tarefa 5.4 (achado E) — baseline medido em 2026-07-21 via `manage.py painel_operacional
 # --days 7` e reconfirmado por query direta em `CurationRun` (últimos 7 dias, janela
@@ -99,21 +102,40 @@ AI_CURATION_RUNNER_TIMEOUT = 450
 DECOUPLED_QUEUE_SETTING_KEY = 'usa_fila_desacoplada'
 
 
-def _ai_curation_attempts() -> list[tuple[str, str | None]]:
+def _ai_curation_attempts() -> list[tuple[str, str | None, str | None]]:
     """Tentativas de curadoria IA no MESMO profile, na ordem de execução.
 
-    Cada item é (label, model_override): o primário usa o modelo padrão do profile
-    (model_override=None) e os fallbacks forçam outro modelo via `hermes -m <modelo>`.
-    Env override: AI_CURATION_FALLBACK_MODELS="glm-5.2,glm-4.6" (CSV de modelos de fallback).
+    Cada item é (label, model_override, provider_override). O primário usa o
+    modelo padrão do profile; os fallbacks forçam modelo **e** provider.
+
+    O provider é obrigatório no fallback (achado 2026-08-21): sem ele o Hermes
+    tenta o `glm-5.2` no provider ativo, que é o Codex, e volta
+    `HTTP 400: The 'glm-5.2' model is not supported when using Codex with a
+    ChatGPT account`. O GLM roda pela assinatura do opencode-go, não pela OpenAI.
+
+    Env override: `AI_CURATION_FALLBACK_MODELS="glm-5.2@opencode-go,glm-4.6"`
+    (CSV; `@provider` é opcional e, quando ausente, herda o provider do profile).
     """
     raw = os.environ.get('AI_CURATION_FALLBACK_MODELS', '').strip()
     if raw:
-        fallback_models: tuple[str, ...] = tuple(item.strip() for item in raw.split(',') if item.strip())
+        fallbacks: tuple[tuple[str, str | None], ...] = tuple(
+            _split_model_provider(item) for item in raw.split(',') if item.strip()
+        )
     else:
-        fallback_models = AI_CURATION_FALLBACK_MODELS
-    attempts: list[tuple[str, str | None]] = [('primário (modelo padrão do profile)', None)]
-    attempts.extend((f'fallback IA ({model})', model) for model in fallback_models)
+        fallbacks = AI_CURATION_FALLBACK_MODELS
+    attempts: list[tuple[str, str | None, str | None]] = [
+        ('primário (modelo padrão do profile)', None, None),
+    ]
+    attempts.extend(
+        (f'fallback IA ({model}{f" via {provider}" if provider else ""})', model, provider)
+        for model, provider in fallbacks
+    )
     return attempts
+
+
+def _split_model_provider(item: str) -> tuple[str, str | None]:
+    model, _, provider = item.strip().partition('@')
+    return model.strip(), (provider.strip() or None)
 
 
 class Command(BaseCommand):
@@ -357,6 +379,12 @@ class Command(BaseCommand):
                         'whatsapp_session.dropped_mid_batch offer_id=%s motivo=%s',
                         offer.id, exc,
                     )
+                    enviar_alerta_operador(
+                        f'Sessão do WhatsApp caiu no meio do lote (canal "{channel.code}", '
+                        f'oferta #{offer.id}, fluxo legado). Envio interrompido; as ofertas '
+                        f'restantes seguem elegíveis no próximo ciclo. Motivo: {exc}',
+                        categoria='whatsapp_sessao_indisponivel',
+                    )
                     break
                 delivery = result.delivery
                 self.stdout.write(
@@ -385,7 +413,7 @@ class Command(BaseCommand):
         Retorna True na primeira tentativa que preparar o lote sem erro; False se
         todas falharem (o chamador então cai no selector legado).
         """
-        for label, model_override in _ai_curation_attempts():
+        for label, model_override, provider_override in _ai_curation_attempts():
             prepare_args = [
                 'prepare_ai_curation_batch',
                 '--channel',
@@ -402,6 +430,8 @@ class Command(BaseCommand):
             ]
             if model_override:
                 prepare_args += ['--model', model_override]
+            if provider_override:
+                prepare_args += ['--provider', provider_override]
             if dry_run:
                 prepare_args.append('--dry-run')
 
@@ -475,6 +505,13 @@ class Command(BaseCommand):
                         'whatsapp_session.dropped_mid_batch offer_id=%s item_id=%s motivo=%s',
                         offer.id, item.id, exc,
                     )
+                    enviar_alerta_operador(
+                        f'Sessão do WhatsApp caiu no meio do lote curado #{batch.id} (canal '
+                        f'"{channel.code}", oferta #{offer.id}, item #{item.id}). Envio '
+                        f'interrompido; os itens restantes seguem pendentes no lote. '
+                        f'Motivo: {exc}',
+                        categoria='whatsapp_sessao_indisponivel',
+                    )
                     break
                 delivery = delivery_result.delivery
                 self.stdout.write(
@@ -505,12 +542,21 @@ class Command(BaseCommand):
         ciclo começar a enviar, não iteramos as ofertas nem marcamos nada como
         FAILED — apenas registramos o motivo e saímos cedo. As ofertas seguem
         elegíveis para o próximo ciclo.
+
+        Achado A2 (2026-08-18): abortar em silêncio significava que o bot parava
+        de enviar e ninguém ficava sabendo até alguém abrir o log. Agora todo
+        caminho que aborta o ciclo por sessão indisponível alerta o operador.
         """
         try:
             status = get_whatsapp_session_status()
         except WhatsAppClientError as exc:
             self.stdout.write(self.style.ERROR(f'Sessão do WhatsApp indisponível: {exc}'))
             log.error('whatsapp_session.precheck_failed motivo=%s', exc)
+            enviar_alerta_operador(
+                f'Ciclo do run_bot abortado antes do envio: sessão do WhatsApp '
+                f'indisponível. Motivo: {exc}',
+                categoria='whatsapp_sessao_indisponivel',
+            )
             return False
         if not status.connected:
             self.stdout.write(
@@ -520,6 +566,11 @@ class Command(BaseCommand):
                 ),
             )
             log.error('whatsapp_session.precheck_failed motivo=nao_conectado')
+            enviar_alerta_operador(
+                'Ciclo do run_bot abortado antes do envio: sessão do WhatsApp não '
+                'conectada. As ofertas continuam elegíveis no próximo ciclo.',
+                categoria='whatsapp_sessao_indisponivel',
+            )
             return False
         return True
 

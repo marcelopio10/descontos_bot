@@ -12,7 +12,8 @@ from apps.curation.services.batch_optimizer import DEFAULT_TARGET_DISTRIBUTION
 from apps.curation.services.hermes_runner import HermesProfileRunner
 from apps.curation.services.image_processing import process_selected_batch_images
 from apps.curation.services.observer_context import assert_sanitized_context, build_observer_context
-from apps.curation.services.recurrence import filter_blocked_recurrence
+from apps.curation.services.product_family import offer_family_key
+from apps.curation.services.recurrence import filter_blocked_recurrence, filter_saturated_families
 from apps.curation.services.selector import _eligible_offers, get_selection_config
 from apps.distribution.models import SocialChannel
 from apps.marketplaces.services.radar_mercado import collect_radar_mercado
@@ -159,10 +160,22 @@ class Command(BaseCommand):
     def _get_candidates(self, *, channel: SocialChannel, limit: int):
         config = get_selection_config()
         queryset = _eligible_offers(channel, config).select_related('marketplace', 'category')
-        return _balanced_marketplace_candidates(filter_blocked_recurrence(queryset, channel), limit=limit)
+        recent_ok = filter_blocked_recurrence(queryset, channel)
+        return _balanced_marketplace_candidates(
+            filter_saturated_families(recent_ok, channel),
+            limit=limit,
+        )
 
 
 CANDIDATE_OVERFETCH_MULTIPLIER = 3  # margem para compensar itens descartados pelo dedup de produto canônico
+
+# Teto de candidatas da mesma família no payload enviado ao agente (achado
+# 2026-08-21). Sem isto, um pool de 50 candidatas chegava com ~13% de tênis
+# (era o que a coleta trazia) e a IA escolhia entre variações do mesmo produto
+# achando que estava diversificando. Não é 1 porque o pool é matéria-prima, não
+# lote final: manter 2 dá margem para a IA descartar uma por segurança/qualidade
+# e ainda ter a família representada.
+CANDIDATE_MAX_PER_FAMILY = 2
 
 
 def _balanced_marketplace_candidates(queryset, *, limit: int):
@@ -187,6 +200,7 @@ def _balanced_marketplace_candidates(queryset, *, limit: int):
     selected = []
     selected_ids: set[int] = set()
     seen_canonicos: set[str] = set()
+    family_counts: dict[str, int] = {}
     is_materialized = isinstance(queryset, list)
     for marketplace_code in DEFAULT_TARGET_DISTRIBUTION:
         quota = quotas.get(marketplace_code, 0)
@@ -197,7 +211,7 @@ def _balanced_marketplace_candidates(queryset, *, limit: int):
             if is_materialized
             else queryset.filter(marketplace__code=marketplace_code)[: quota * CANDIDATE_OVERFETCH_MULTIPLIER]
         )
-        _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_canonicos)
+        _append_diversified(candidates, quota, selected, selected_ids, seen_canonicos, family_counts)
     if len(selected) < limit:
         remaining_quota = limit - len(selected)
         remaining = (
@@ -205,11 +219,11 @@ def _balanced_marketplace_candidates(queryset, *, limit: int):
             if is_materialized
             else queryset.exclude(id__in=selected_ids)[: remaining_quota * CANDIDATE_OVERFETCH_MULTIPLIER]
         )
-        _append_deduped_by_canonico(remaining, remaining_quota, selected, selected_ids, seen_canonicos)
+        _append_diversified(remaining, remaining_quota, selected, selected_ids, seen_canonicos, family_counts)
     return selected[:limit]
 
 
-def _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_canonicos):
+def _append_diversified(candidates, quota, selected, selected_ids, seen_canonicos, family_counts):
     added = 0
     for offer in candidates:
         if added >= quota:
@@ -217,10 +231,15 @@ def _append_deduped_by_canonico(candidates, quota, selected, selected_ids, seen_
         canonico = (offer.produto_canonico_id or '').strip()
         if canonico and canonico in seen_canonicos:
             continue
+        family = offer_family_key(offer)
+        if family and family_counts.get(family, 0) >= CANDIDATE_MAX_PER_FAMILY:
+            continue
         selected.append(offer)
         selected_ids.add(offer.id)
         if canonico:
             seen_canonicos.add(canonico)
+        if family:
+            family_counts[family] = family_counts.get(family, 0) + 1
         added += 1
 
 

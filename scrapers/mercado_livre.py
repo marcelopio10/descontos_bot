@@ -3,6 +3,7 @@ import os
 import random
 import re
 import time
+import unicodedata
 import urllib.parse
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -18,7 +19,6 @@ except ImportError:
 
 from apps.analytics.services.alertas import enviar_alerta_operador
 from scrapers.base import HTTP_EXCEPTIONS, BaseScraper, build_impersonated_session
-from apps.marketplaces.services.search_provenance import sanitize_search_provenance
 
 log = logging.getLogger(__name__)
 
@@ -27,6 +27,13 @@ MAX_PAGES = 5
 MIN_DISCOUNT = 5
 DELAY_MIN = 2.0
 DELAY_MAX = 4.5
+
+
+def _normalize_for_match(value: str) -> str:
+    """Forma canônica para casar título de `og:title` com título de card."""
+    folded = unicodedata.normalize('NFKD', value or '')
+    folded = ''.join(char for char in folded if not unicodedata.combining(char))
+    return re.sub(r'\s+', ' ', folded).strip().lower()
 
 
 @dataclass
@@ -208,37 +215,131 @@ class MercadoLivreScraper(BaseScraper):
         return all_offers
 
     def scrape_search_queries(self, queries) -> list[dict]:
-        items = []
-        for query in queries:
-            slug = urllib.parse.quote(query.query_text, safe='')
-            items.append((f'Busca direcionada: {query.query_text}', f'https://lista.mercadolivre.com.br/{slug}', '', False, sanitize_search_provenance({'source_kind': query.source_kind, 'query_text': query.query_text, 'brand': query.brand, 'category_code': query.category_code, 'price_band': query.price_band, 'marketplace': query.marketplace})))
-        return self._scrape_search_urls(items)
+        """Busca direcionada por texto livre está DESATIVADA no Mercado Livre.
 
-    def _scrape_search_urls(self, items: list[tuple]) -> list[dict]:
-        all_offers, seen_ids = [], set()
-        for idx, item in enumerate(items):
-            label, url, category_code, trust_hint, *rest = item
-            provenance = rest[0] if rest else {}
-            if self.blocked:
-                break
-            html = self.get_html(url)
-            if not html:
-                continue
-            if self.is_blocked(html):
-                self.blocked = True
-                self.error_message = f'CAPTCHA detectado em {url}'
-                break
-            self.pages_scraped += 1
-            for offer in self._extract_poly_cards(html, idx + 1):
-                data = offer.to_dict()
-                if data['id'] in seen_ids:
-                    continue
-                seen_ids.add(data['id'])
-                data['source_label'] = label
-                if provenance:
-                    data['search_provenance'] = provenance
-                all_offers.append(data)
-        return all_offers
+        Achado B2 (diagnóstico 2026-08-18). O commit 84e5071 (2026-08-12) passou a
+        montar `https://lista.mercadolivre.com.br/{slug}` — domínio bloqueado pelo
+        Akamai, o mesmo de que `category_targets.py` já havia migrado. Verificação
+        ao vivo em 2026-08-18, com a sessão impersonada real do scraper:
+
+        - `lista.mercadolivre.com.br/{slug}` sem cookie → 200 com 10KB de HTML e
+          zero cards, ou redirect para `/gz/account-verification`.
+        - `www.mercadolivre.com.br/jm/search?as_word=` → redireciona para
+          `/gz/account-verification`.
+        - `www.mercadolivre.com.br/search?q=` → 404.
+        - `www.mercadolivre.com.br/ofertas?q=` → 200 com 45 cards, MAS o parâmetro
+          `q` é ignorado: os 45 títulos são idênticos aos de `/ofertas` sem `q`,
+          para qualquer termo. Falso positivo — pareceria funcionar e devolveria
+          ofertas genéricas com proveniência de busca direcionada, o que é pior do
+          que não buscar.
+        - `lista.mercadolivre.com.br/{slug}` COM `ML_COOKIE` → 200, 964KB,
+          `<title>Cafeteira | Mercado Livre</title>` (a busca certa!), mas **zero**
+          cards no HTML servido: a página virou React streaming SSR (`_n.ctx`,
+          `$RC(...)`), sem `__PRELOADED_STATE__`, sem `ld+json` e sem `.poly-card`.
+          Extrair dali exige navegador headless ou engenharia reversa do payload
+          de streaming — outro scraper, não um ajuste de URL.
+
+        Contenção adotada: o ML não faz busca direcionada por texto livre. Amazon e
+        Shopee seguem normalmente (não dependem desse domínio), e o ML continua
+        coletando por `scrape_categories` (URLs de categoria fixa em
+        `www.mercadolivre.com.br/ofertas?category=MLB...`, que funcionam) e por
+        `scrape_daily_deals`.
+
+        Retorna lista vazia de propósito: `ScraperAdapter.collect()` então cai no
+        fallback de categoria/daily deals, que é o caminho que de fato funciona.
+        """
+        if queries:
+            log.warning(
+                'ml_directed_search_skipped queries=%d motivo=busca_por_texto_sem_url_scrapavel '
+                '(ver docstring de scrape_search_queries e docs/DIAGNOSTICO_ENVIOS_COLETA_2026-08-18.md)',
+                len(queries),
+            )
+        return []
+
+    # `_scrape_search_urls` foi removido junto com a busca direcionada por texto
+    # (achado B2, 2026-08-18): era usado só por `scrape_search_queries` e todas as
+    # URLs que ele recebia eram do domínio bloqueado. `scrape_categories` tem seu
+    # próprio loop, com paginação e `category_hint`.
+
+    def scrape_social_card(self, url: str) -> Optional[dict]:
+        """Resolve um link encurtado de vitrine de afiliado (`meli.la/...`) no anúncio.
+
+        É o caminho de coleta do radar de concorrente (2026-08-21). Os grupos de
+        oferta divulgam `meli.la/<hash>`, que redireciona para
+        `www.mercadolivre.com.br/social/<vitrine>` — a página de afiliado de quem
+        publicou, com o anúncio-alvo em destaque e o resto do catálogo dele abaixo.
+
+        Verificado ao vivo em 2026-08-21, com a sessão impersonada do scraper:
+        essa página responde **200 com HTML completo** (270-365KB) e usa os mesmos
+        `.poly-card` das páginas de categoria, então `_parse_item` funciona sem
+        adaptação — o que também garante que o `external_id` extraído aqui é o
+        mesmo que o da coleta por categoria (identidade consistente, requisito
+        para o dedup por `produto_canonico_id`). As páginas do anúncio em si
+        continuam bloqueadas: `produto.mercadolivre.com.br/MLB-...` devolve
+        micro-landing de 9KB e `/p/MLB...` redireciona para
+        `/gz/account-verification`. Por isso o preço sai do card da vitrine, não
+        da página do produto.
+
+        O alvo é escolhido pelo `og:title`, que a vitrine preenche com o anúncio
+        do link, e **só** por ele: sem casamento, devolve `None`. O ID do anúncio
+        **não** pode sair do `og:image`: o nome do arquivo de imagem carrega o ID
+        do *asset* (`D_NQ_NP_..-MLB78955357177_..`), que é diferente do ID do item
+        (`MLB-3656481579` no href do mesmo card) e às vezes nem é do site
+        brasileiro (`MLA...`).
+        """
+        html = self.get_html(url)
+        if not html:
+            return None
+        if self.is_blocked(html):
+            self.blocked = True
+            self.error_message = f'CAPTCHA detectado em {url}'
+            log.error('CAPTCHA detectado ao resolver vitrine social %s.', url)
+            return None
+
+        soup = BeautifulSoup(html, 'html.parser')
+        card = self._find_social_target_card(soup)
+        if card is None:
+            log.info('social_card_sem_alvo url=%s', url)
+            return None
+
+        offer = self._parse_item(card)
+        if offer is None:
+            return None
+        return offer.to_dict()
+
+    def _find_social_target_card(self, soup: BeautifulSoup) -> Optional[BeautifulSoup]:
+        cards = soup.select('.poly-card')
+        if not cards:
+            return None
+
+        og_title = soup.find('meta', property='og:title')
+        expected = _normalize_for_match(og_title.get('content', '') if og_title else '')
+        if not expected:
+            log.info('social_card_sem_og_title cards=%d', len(cards))
+            return None
+
+        titles = [
+            (card, _normalize_for_match(title_el.get_text(strip=True)))
+            for card in cards
+            if (title_el := card.select_one('.poly-component__title'))
+        ]
+        for card, title in titles:
+            if title == expected:
+                return card
+        for card, title in titles:
+            if expected in title or title in expected:
+                return card
+
+        # Sem casamento, o link não tem alvo identificável: ou aponta para a raiz
+        # da vitrine (`og:title` vira "minhas recomendações") ou o produto
+        # anunciado saiu do ar. O card em destaque é uma oferta real, mas **não é
+        # a oferta anunciada** — chutar nele trocava o produto em silêncio
+        # (2026-08-21: mensagem de "micro-ondas consul cms23ab" resolveu num
+        # "Micro-ondas MTO30", e "Insider Light T-Shirt" na "Daily T-shirt").
+        # Isso derruba a premissa do radar, que é publicar a oferta que os grupos
+        # estão empurrando. Melhor não resolver.
+        log.info('social_card_alvo_nao_identificado og_title=%s cards=%d', expected[:60], len(cards))
+        return None
 
     def _extract_poly_cards(self, html: str, page: int) -> list[MercadoLivreOffer]:
         soup = BeautifulSoup(html, 'html.parser')

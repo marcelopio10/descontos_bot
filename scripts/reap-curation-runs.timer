@@ -1,0 +1,14 @@
+[Unit]
+Description=descontos.bot - Disparo horário do reaper de curadoria
+
+[Timer]
+# De hora em hora: a run só é encerrada depois de 60 min presa, então esta é a
+# menor cadência que não corre risco de matar run viva. O custo é um SELECT
+# indexado por status; não toca em rede nem em marketplace.
+OnBootSec=15min
+OnUnitActiveSec=1h
+Persistent=true
+Unit=reap-curation-runs.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=descontos.bot - Disparo diário da rotação de logs
+
+[Timer]
+# 05:10 BRT, logo depois do backup (04:30) e ainda dentro da janela de silêncio.
+# Persistent=true porque o notebook desliga; sem isso um dia offline pula a
+# rotação e o arquivo volta a crescer sem teto.
+OnCalendar=*-*-* 05:10:00
+RandomizedDelaySec=5min
+Persistent=true
+Unit=logrotate-descontos.service
+
+[Install]
+WantedBy=timers.target

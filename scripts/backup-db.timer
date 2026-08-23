@@ -1,0 +1,18 @@
+[Unit]
+Description=descontos.bot - Disparo diário do backup do banco
+
+[Timer]
+# 04:30 BRT: dentro da janela de silêncio de distribuição (00:00-08:00), depois
+# do último ciclo da madrugada e antes do pico da manhã. O backup usa a API
+# .backup do SQLite e é seguro com o run_bot rodando, mas rodar na janela morta
+# evita disputar I/O do /mnt/c, que é lento.
+#
+# Persistent=true é o ponto principal: este notebook desliga. Sem isso, um dia
+# com a máquina fora do ar às 04:30 simplesmente não teria backup.
+OnCalendar=*-*-* 04:30:00
+RandomizedDelaySec=10min
+Persistent=true
+Unit=backup-db.service
+
+[Install]
+WantedBy=timers.target

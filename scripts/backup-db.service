@@ -1,0 +1,10 @@
+[Unit]
+Description=descontos.bot - Backup diário do SQLite (local + OneDrive comprimido)
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/scripts/backup_db.sh
+StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/backup-db.log
+StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/backup-db.log

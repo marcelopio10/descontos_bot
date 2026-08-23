@@ -31,7 +31,12 @@ from django.db.models import Count, Sum
 from django.db.models.functions import TruncDate, TruncWeek
 from django.utils import timezone
 
-from apps.analytics.models import AffiliateConversion, AffiliateSource, MetricaCanalDiaria
+from apps.analytics.models import (
+    AffiliateConversion,
+    AffiliateSource,
+    FonteMetricaCanal,
+    MetricaCanalDiaria,
+)
 from apps.curation.models import CurationRun
 from apps.distribution.models import Delivery
 from apps.market_intel.models import MarketIntelDailyReport, ObservedWhatsAppMessage
@@ -427,6 +432,7 @@ class MembershipGrowthReport:
     days: int
     since: date
     series: list[ChannelMembershipSeries] = field(default_factory=list)
+    unverified_points: int = 0
 
 
 def channel_membership_series(days: int = DEFAULT_MEMBERSHIP_DAYS) -> MembershipGrowthReport:
@@ -438,6 +444,11 @@ def channel_membership_series(days: int = DEFAULT_MEMBERSHIP_DAYS) -> Membership
     função completa o ponto com a contagem real de envios (`Delivery`
     sent) do canal naquele dia — mesma fonte de `deliveries_per_day_by_channel`
     — em vez de forçar uma segunda entrada manual redundante.
+
+    **Pontos com `fonte='estimado'` ficam fora da curva** (2026-08-23): os três
+    registros que existiam eram estimativas erradas por 12× e 143×, e curva
+    traçada sobre palpite é pior que curva vazia, porque induz decisão. O total
+    descartado vai em `unverified_points`, para o descarte ser visível.
     """
     since_date = timezone.now().date() - timedelta(days=days)
 
@@ -446,8 +457,10 @@ def channel_membership_series(days: int = DEFAULT_MEMBERSHIP_DAYS) -> Membership
         for row in deliveries_per_day_by_channel(days=days).rows
     }
 
+    na_janela = MetricaCanalDiaria.objects.filter(data__gte=since_date)
+    unverified_points = na_janela.filter(fonte=FonteMetricaCanal.ESTIMADO).count()
     queryset = (
-        MetricaCanalDiaria.objects.filter(data__gte=since_date)
+        na_janela.exclude(fonte=FonteMetricaCanal.ESTIMADO)
         .select_related('canal')
         .order_by('canal__code', 'data')
     )
@@ -478,7 +491,12 @@ def channel_membership_series(days: int = DEFAULT_MEMBERSHIP_DAYS) -> Membership
         for code, points in sorted(points_by_channel.items())
     ]
 
-    return MembershipGrowthReport(days=days, since=since_date, series=series)
+    return MembershipGrowthReport(
+        days=days,
+        since=since_date,
+        series=series,
+        unverified_points=unverified_points,
+    )
 
 
 # --------------------------------------------------------------------------

@@ -1,0 +1,13 @@
+[Unit]
+Description=descontos.bot - Disparo semanal do relatório publicado x vendido
+
+[Timer]
+# Segunda 07:10, depois da ingestão das 06:20 (que tem até 15 min de jitter e
+# leva ~2 min). Sem RandomizedDelaySec aqui: a ordem em relação à ingestão
+# importa mais que espalhar carga, e o custo é uma consulta local.
+OnCalendar=Mon *-*-* 07:10:00
+Persistent=true
+Unit=relatorio-receita-semanal.service
+
+[Install]
+WantedBy=timers.target

@@ -12,7 +12,7 @@ from decimal import Decimal
 from django.test import TestCase
 from django.utils import timezone
 
-from apps.analytics.models import MetricaCanalDiaria
+from apps.analytics.models import FonteMetricaCanal, MetricaCanalDiaria
 from apps.analytics.services.operational_metrics import (
     DEFAULT_MEMBERSHIP_DAYS,
     channel_membership_series,
@@ -66,11 +66,13 @@ class ChannelMembershipSeriesTests(TestCase):
     def test_series_groups_by_channel_ordered_by_date(self):
         MetricaCanalDiaria.objects.create(
             canal=self.channel, data=self.today, membros=1500,
+            fonte=FonteMetricaCanal.INFORMADO_DONO,
         )
         MetricaCanalDiaria.objects.create(
             canal=self.channel,
             data=self.today - timezone.timedelta(days=7),
             membros=1400,
+            fonte=FonteMetricaCanal.INFORMADO_DONO,
         )
 
         report = channel_membership_series(days=30)
@@ -87,6 +89,7 @@ class ChannelMembershipSeriesTests(TestCase):
 
         MetricaCanalDiaria.objects.create(
             canal=self.channel, data=self.today, membros=1500,
+            fonte=FonteMetricaCanal.INFORMADO_DONO,
         )  # posts_publicados não informado
 
         report = channel_membership_series(days=30)
@@ -101,6 +104,7 @@ class ChannelMembershipSeriesTests(TestCase):
             data=self.today,
             membros=1500,
             posts_publicados=9,  # valor manual não deve ser sobrescrito
+            fonte=FonteMetricaCanal.INFORMADO_DONO,
         )
 
         report = channel_membership_series(days=30)

@@ -1,0 +1,11 @@
+[Unit]
+Description=descontos.bot - Cobra a contagem semanal de membros do canal
+
+[Service]
+Type=oneshot
+WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+# Só cobra quando a última medição verificada passa de 8 dias — a folga de um dia
+# sobre a semana evita alerta em toda segunda por causa de algumas horas.
+ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py lembrar_metrica_canal --canal whatsapp_principal --max-age-days 8
+StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/lembrar-metrica-canal.log
+StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/lembrar-metrica-canal.log

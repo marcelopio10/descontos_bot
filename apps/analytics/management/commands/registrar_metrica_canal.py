@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.core.management.base import BaseCommand, CommandError
 
-from apps.analytics.models import MetricaCanalDiaria
+from apps.analytics.models import FonteMetricaCanal, MetricaCanalDiaria
 from apps.distribution.models import SocialChannel
 
 
@@ -45,6 +45,18 @@ class Command(BaseCommand):
             default=None,
             help='Cliques estimados (medição indireta/manual, opcional).',
         )
+        parser.add_argument(
+            '--fonte',
+            required=True,
+            choices=[choice.value for choice in FonteMetricaCanal],
+            help=(
+                'De onde veio o número. `medido_api` = contado por API do canal; '
+                '`informado_dono` = contado e informado pelo dono; `estimado` = '
+                'palpite, fica fora da curva do painel. Obrigatório desde '
+                '2026-08-23: os três registros anteriores eram estimativa gravada '
+                'como medição, erradas por 12x e 143x.'
+            ),
+        )
 
     def handle(self, *args, **options):
         try:
@@ -66,6 +78,7 @@ class Command(BaseCommand):
                 'membros': options['membros'],
                 'posts_publicados': options['posts_publicados'],
                 'cliques_estimados': options['cliques_estimados'],
+                'fonte': options['fonte'],
             },
         )
 
@@ -73,6 +86,13 @@ class Command(BaseCommand):
         self.stdout.write(
             self.style.SUCCESS(
                 f'Métrica {action}: {metrica.canal.name} — '
-                f'{metrica.data.isoformat()} — {metrica.membros} membros.'
+                f'{metrica.data.isoformat()} — {metrica.membros} membros '
+                f'({metrica.get_fonte_display()}).'
             )
         )
+
+        if metrica.fonte == FonteMetricaCanal.ESTIMADO:
+            self.stdout.write(self.style.WARNING(
+                '  ! Marcada como estimativa: fica fora da curva do painel. '
+                'Use --fonte informado_dono ou medido_api para um número conferido.'
+            ))

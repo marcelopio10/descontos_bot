@@ -39,6 +39,30 @@ class EnviarAlertaOperadorTests(SimpleTestCase):
     @override_settings(
         OPERATOR_ALERT_BOT_TOKEN='operator-token',
         OPERATOR_ALERT_CHAT_ID='operator-chat',
+    )
+    @patch('apps.analytics.services.alertas.TelegramClient')
+    def test_escapa_html_da_mensagem(self, mock_client_cls):
+        """Regressão de 2026-08-23: o Telegram recebe isto em parse_mode HTML e
+        devolvia HTTP 400 ("Unsupported start tag") quando o dado trazia '<'.
+        O alerta sumia em silêncio — no caso encontrado, o lembrete de contagem
+        de membros, que trazia `--membros <N>` na instrução."""
+        mock_client = MagicMock()
+        mock_client.send_message.return_value = TelegramSendResult(
+            success=True, message_id='1', sent_at=None, error_message='',
+        )
+        mock_client_cls.return_value = mock_client
+
+        alertas.enviar_alerta_operador('registre com --membros <N> & confira', categoria='x')
+
+        _, kwargs = mock_client.send_message.call_args
+        self.assertIn('&lt;N&gt;', kwargs['text_html'])
+        self.assertIn('&amp;', kwargs['text_html'])
+        # A marcação da própria função continua sendo HTML de verdade.
+        self.assertIn('<b>Alerta operacional</b>', kwargs['text_html'])
+
+    @override_settings(
+        OPERATOR_ALERT_BOT_TOKEN='operator-token',
+        OPERATOR_ALERT_CHAT_ID='operator-chat',
         INSTAGRAM_HANDOFF_BOT_TOKEN='fallback-token',
         INSTAGRAM_HANDOFF_CHAT_ID='fallback-chat',
     )

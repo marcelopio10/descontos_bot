@@ -10,7 +10,7 @@ from django.core.management import call_command
 from django.test import TestCase, override_settings
 from django.utils import timezone
 
-from apps.analytics.models import MetricaCanalDiaria
+from apps.analytics.models import FonteMetricaCanal, MetricaCanalDiaria
 from apps.distribution.models import SocialChannel
 
 
@@ -25,6 +25,8 @@ class PainelOperacionalMembershipTests(TestCase):
         self.today = timezone.now().date()
         MetricaCanalDiaria.objects.create(
             canal=self.channel, data=self.today, membros=1500,
+            # Desde 2026-08-23 o painel só traça a curva com ponto verificado.
+            fonte=FonteMetricaCanal.INFORMADO_DONO,
         )
 
     def test_membership_section_printed_and_written_to_json(self):

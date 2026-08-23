@@ -304,11 +304,30 @@ class MLAffiliateSale(TimestampedModel):
         )
 
 
+class FonteMetricaCanal(models.TextChoices):
+    """De onde saiu a contagem de membros — o campo que faltava em 2026-08.
+
+    Os três únicos registros que existiam eram estimativas gravadas como se
+    fossem medição: 1.240 no WhatsApp contra ~100 reais, 860 no Telegram contra
+    6. Erro de 12× e 143× no número que orienta todo o growth. Sem procedência,
+    não há como distinguir palpite de medição depois de gravado.
+    """
+
+    MEDIDO_API = 'medido_api', 'medido na API do canal'
+    INFORMADO_DONO = 'informado_dono', 'contado e informado pelo dono'
+    ESTIMADO = 'estimado', 'estimativa não verificada'
+
+
 class MetricaCanalDiaria(TimestampedModel):
     """Contagem agregada de membros/seguidores por canal e por dia (Sprint 7 -
     Tarefa 7.3, achado H9). Entrada manual periódica (admin ou comando
     `registrar_metrica_canal`) — LGPD (doc 24): só contagem agregada, nunca
-    dado individual de terceiro (nome, telefone etc.)."""
+    dado individual de terceiro (nome, telefone etc.).
+
+    Desde 2026-08-23 toda medição carrega `fonte`. O padrão é `estimado` de
+    propósito: quem não declara procedência não deve ganhar o benefício da
+    dúvida, e o painel só traça a curva com pontos verificados.
+    """
 
     canal = models.ForeignKey(
         SocialChannel,
@@ -322,6 +341,17 @@ class MetricaCanalDiaria(TimestampedModel):
     membros = models.PositiveIntegerField(
         'membros/seguidores',
         help_text='Contagem agregada de membros/seguidores do canal nesta data.',
+    )
+    fonte = models.CharField(
+        'fonte da contagem',
+        max_length=20,
+        choices=FonteMetricaCanal.choices,
+        default=FonteMetricaCanal.ESTIMADO,
+        db_index=True,
+        help_text=(
+            'De onde veio o número. Só medição verificada '
+            '(API ou contagem do dono) entra na curva do painel.'
+        ),
     )
     posts_publicados = models.PositiveIntegerField(
         'posts publicados',

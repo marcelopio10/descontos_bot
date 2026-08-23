@@ -10,7 +10,7 @@ from io import StringIO
 from django.core.management import CommandError, call_command
 from django.test import TestCase
 
-from apps.analytics.models import MetricaCanalDiaria
+from apps.analytics.models import FonteMetricaCanal, MetricaCanalDiaria
 from apps.distribution.models import SocialChannel
 
 
@@ -30,11 +30,13 @@ class RegistrarMetricaCanalCommandTests(TestCase):
             '--canal', 'whatsapp_principal',
             '--data', '2026-07-20',
             '--membros', '1500',
+            '--fonte', 'informado_dono',
             stdout=out,
         )
 
         metrica = MetricaCanalDiaria.objects.get(canal=self.channel, data=date(2026, 7, 20))
         self.assertEqual(metrica.membros, 1500)
+        self.assertEqual(metrica.fonte, FonteMetricaCanal.INFORMADO_DONO)
         self.assertIn('criada', out.getvalue())
 
     def test_rerunning_same_day_updates_instead_of_duplicating(self):
@@ -43,6 +45,7 @@ class RegistrarMetricaCanalCommandTests(TestCase):
             '--canal', 'whatsapp_principal',
             '--data', '2026-07-20',
             '--membros', '1500',
+            '--fonte', 'informado_dono',
         )
         out = StringIO()
         call_command(
@@ -50,6 +53,7 @@ class RegistrarMetricaCanalCommandTests(TestCase):
             '--canal', 'whatsapp_principal',
             '--data', '2026-07-20',
             '--membros', '1600',
+            '--fonte', 'informado_dono',
             stdout=out,
         )
 
@@ -66,6 +70,7 @@ class RegistrarMetricaCanalCommandTests(TestCase):
             '--membros', '1500',
             '--posts-publicados', '3',
             '--cliques-estimados', '42',
+            '--fonte', 'informado_dono',
         )
         metrica = MetricaCanalDiaria.objects.get(canal=self.channel, data=date(2026, 7, 20))
         self.assertEqual(metrica.posts_publicados, 3)

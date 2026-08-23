@@ -205,11 +205,13 @@ class MetricaCanalDiariaAdmin(admin.ModelAdmin):
         'data',
         'canal',
         'membros',
+        'fonte',
         'posts_publicados',
         'cliques_estimados',
     )
     list_filter = (
         'canal',
+        'fonte',
         ('data', admin.DateFieldListFilter),
     )
     search_fields = (

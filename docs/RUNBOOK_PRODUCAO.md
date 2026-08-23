@@ -338,3 +338,69 @@ Nenhum dado já ingerido é afetado.
 Compra própria marcada automaticamente vem **só** de status `REJECTED`; compra da
 casa ainda `IN_REVIEW` não é detectada e precisa de marcação manual no Admin — que
 a rotina nunca sobrescreve.
+
+---
+
+# Runbook — Relatório publicado × vendido (`relatorio-receita-semanal.timer`)
+
+Cruza envios com vendas por faixa de preço, categoria e caminho de publicação.
+Projeto e leitura dos números em `docs/LACO_PUBLICADO_VS_VENDIDO_2026-08-23.md`.
+
+## Cadência e ordem
+
+Segunda 07:10, **depois** da ingestão do painel do ML das 06:20 — é dela que vem
+o lado da venda. A unit declara `After=ingest-ml-afiliados.service`; se a ingestão
+falhar, o relatório roda mesmo assim sobre o que já foi ingerido.
+
+## Instalação e verificação
+
+```bash
+systemctl --user daemon-reload
+systemctl --user enable --now relatorio-receita-semanal.timer
+systemctl --user list-timers relatorio-receita-semanal.timer
+tail -n 60 logs/relatorio-receita-semanal.log
+```
+
+Rodar à mão, sem gravar arquivo nem alertar:
+
+```bash
+python3 manage.py relatorio_receita_semanal --weeks 8 --no-json
+python3 manage.py relatorio_receita_semanal --end 2026-05-31 --weeks 4 --no-json
+```
+
+## Onde o resultado fica
+
+`data/exports/receita_semanal/AAAA-MM-DD.json`, **fora do git de propósito** — o
+relatório tem receita e `site/` é publicado. Não mover para `site/`.
+
+## Como ler sem se enganar
+
+- `deliveries_total` inclui os três marketplaces; os cruzamentos usam
+  `deliveries_ml`, porque só o ML tem venda a venda.
+- Comissão de janela recente vem quase toda em `IN_REVIEW` — o relatório avisa
+  quando passa de 30%. Comparar mês recente com mês fechado subestima o recente.
+- O recorte por categoria é amostra (casa ~58% das vendas). O por faixa não é.
+
+---
+
+# Runbook — Lembrete de contagem de membros (`lembrar-metrica-canal.timer`)
+
+Segunda 09:00. Cobra o dono quando a última medição **verificada** de membros
+passa de 8 dias. O adapter Evolution não expõe contagem de participantes: a
+medição é manual, só a cobrança é automática.
+
+```bash
+systemctl --user enable --now lembrar-metrica-canal.timer
+python3 manage.py lembrar_metrica_canal --dry-run        # diagnostica sem alertar
+```
+
+Registrar o número (obrigatório declarar a procedência):
+
+```bash
+python3 manage.py registrar_metrica_canal --canal whatsapp_principal \
+    --data AAAA-MM-DD --membros N --fonte informado_dono
+```
+
+`--fonte estimado` grava, mas o ponto **fica fora da curva do painel** — foi o
+que aconteceu com os três registros de julho, errados por 12x e 143x. Só o
+WhatsApp é acompanhado (decisão de 2026-08-23 sobre o Telegram).

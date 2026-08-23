@@ -16,6 +16,7 @@ geram `log.warning`.
 """
 
 import logging
+from html import escape
 
 from django.conf import settings
 
@@ -41,8 +42,13 @@ def enviar_alerta_operador(mensagem: str, categoria: str = '') -> None:
         )
         return
 
-    prefixo = f'[{categoria}] ' if categoria else ''
-    texto_html = f'⚠️ <b>Alerta operacional</b>\n{prefixo}{mensagem}'
+    # A API do Telegram recebe isto em parse_mode HTML: qualquer '<' vindo do
+    # dado (um `<N>` de instrução, um `<html>` de mensagem de erro, um '&' em
+    # título de produto) derruba a mensagem inteira com HTTP 400 e o alerta some
+    # em silêncio — justamente quando havia algo a avisar. Nenhum caller manda
+    # markup; a marcação é a daqui.
+    prefixo = f'[{escape(categoria)}] ' if categoria else ''
+    texto_html = f'⚠️ <b>Alerta operacional</b>\n{prefixo}{escape(mensagem)}'
 
     try:
         client = TelegramClient(token=token)

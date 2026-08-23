@@ -19,13 +19,30 @@ class DirectedScraperQueryTests(SimpleTestCase):
         self.assertIn('nike+t%C3%AAnis', items[0][1])
         self.assertEqual(items[0][4]['source_kind'], 'radar_brand')
 
-    @patch.object(MercadoLivreScraper, '_scrape_search_urls', return_value=[])
-    def test_mercado_livre_converts_query_to_search_url(self, scrape):
+    def test_mercado_livre_skips_free_text_directed_search(self):
+        """Achado B2 (2026-08-18): não existe URL de busca por texto scrapável no ML.
+
+        Verificado ao vivo — `lista.mercadolivre.com.br` só responde autenticado e
+        a página virou React streaming SSR (zero cards no HTML servido);
+        `/ofertas?q=` ignora o `q` e devolveria ofertas genéricas disfarçadas de
+        busca direcionada. A contenção é pular: o adapter então cai no fallback de
+        categoria/daily deals, que funciona. Ver a docstring do método e
+        `docs/DIAGNOSTICO_ENVIOS_COLETA_2026-08-18.md`.
+        """
         query = SearchQuery('mercadolivre', 'growth whey', 'priority_catalog', brand='growth')
-        MercadoLivreScraper().scrape_search_queries((query,))
-        items = scrape.call_args.args[0]
-        self.assertIn('growth%20whey', items[0][1])
-        self.assertEqual(items[0][4]['brand'], 'growth')
+        scraper = MercadoLivreScraper()
+
+        with self.assertLogs('scrapers.mercado_livre', level='WARNING') as captured:
+            result = scraper.scrape_search_queries((query,))
+
+        self.assertEqual(result, [])
+        self.assertIn('ml_directed_search_skipped', captured.output[0])
+        # Nenhuma requisição HTTP foi feita e nada foi marcado como bloqueado.
+        self.assertEqual(scraper.pages_scraped, 0)
+        self.assertFalse(scraper.blocked)
+
+    def test_mercado_livre_without_queries_is_silent(self):
+        self.assertEqual(MercadoLivreScraper().scrape_search_queries(()), [])
 
     def test_shopee_passes_keyword_and_provenance_to_payload(self):
         collector = MagicMock()

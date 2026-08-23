@@ -3,6 +3,7 @@ import logging
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
+from apps.analytics.services.alertas import enviar_alerta_operador
 from apps.curation.models import CurationRun
 from apps.curation.services.curated_batch_reader import get_ready_curated_batch
 from apps.curation.services.message_builder import build_curated_offer_message, get_final_url
@@ -134,6 +135,12 @@ class Command(BaseCommand):
                     'whatsapp_session.dropped_mid_batch offer_id=%s item_id=%s motivo=%s',
                     offer.id, item.id, exc,
                 )
+                enviar_alerta_operador(
+                    f'Sessão do WhatsApp caiu durante o consumo do lote curado #{batch.id} '
+                    f'(canal "{channel.code}", oferta #{offer.id}, item #{item.id}). Consumo '
+                    f'interrompido; os itens restantes seguem pendentes no lote. Motivo: {exc}',
+                    categoria='whatsapp_sessao_indisponivel',
+                )
                 break
             delivery = delivery_result.delivery
             self.stdout.write(
@@ -192,12 +199,20 @@ class Command(BaseCommand):
         se a sessão já está indisponível, não iteramos os itens nem marcamos nada
         como falho — os itens seguem `pendente` no lote para o próximo ciclo deste
         comando.
+
+        Achado A2 (2026-08-18): abortar em silêncio significava que o consumo
+        parava e ninguém ficava sabendo até alguém abrir o log.
         """
         try:
             status = get_whatsapp_session_status()
         except WhatsAppClientError as exc:
             self.stdout.write(self.style.ERROR(f'Sessão do WhatsApp indisponível: {exc}'))
             log.error('whatsapp_session.precheck_failed motivo=%s', exc)
+            enviar_alerta_operador(
+                f'Consumo da fila desacoplada abortado antes do envio: sessão do '
+                f'WhatsApp indisponível. Motivo: {exc}',
+                categoria='whatsapp_sessao_indisponivel',
+            )
             return False
         if not status.connected:
             self.stdout.write(
@@ -207,6 +222,11 @@ class Command(BaseCommand):
                 ),
             )
             log.error('whatsapp_session.precheck_failed motivo=nao_conectado')
+            enviar_alerta_operador(
+                'Consumo da fila desacoplada abortado antes do envio: sessão do WhatsApp '
+                'não conectada. Os itens continuam pendentes no lote.',
+                categoria='whatsapp_sessao_indisponivel',
+            )
             return False
         return True
 

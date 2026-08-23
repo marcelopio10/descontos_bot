@@ -10,6 +10,27 @@ from apps.marketplaces.services.search_provenance import ALLOWED_SEARCH_SOURCES
 _GENERIC_TERMS = frozenset({'cupom', 'desconto', 'oferta', 'promoção', 'promocao'})
 _UNSAFE_RE = re.compile(r'(@g\.us|https?://|raw_text|sender_hash|group_jid)', re.IGNORECASE)
 
+# Achado 2026-08-21 (origem da "impressão de repetição"): o termo de produto era
+# fixo por família — TODA marca de moda virava a query "<marca> tênis". Com 12
+# marcas de moda no radar, o plano de busca era estruturalmente um plano de
+# tênis, e o pool refletia isso (52 das 386 ofertas coletadas em 7 dias eram
+# tênis, 13%). Gate de curadoria nenhum conserta um pool que já chega enviesado:
+# ele só reduziria volume. Aqui a marca passa a variar o produto buscado.
+#
+# A escolha é por ÍNDICE da marca dentro da família (determinística, sem
+# random): marcas vizinhas da mesma família nunca pedem o mesmo produto e o
+# plano é reproduzível entre execuções — mesma propriedade que o repo já adota
+# em message_builder._variant_index.
+FAMILY_PRODUCT_TERMS: dict[str, tuple[str, ...]] = {
+    'moda': ('tênis', 'camiseta', 'moletom', 'bermuda', 'mochila', 'jaqueta', 'chinelo', 'meia'),
+    'perfumes_arabes': ('perfume', 'perfume masculino', 'perfume feminino'),
+    'suplementos': ('creatina', 'whey protein', 'colágeno', 'multivitamínico', 'pré treino'),
+    'tecnologia': ('fone de ouvido', 'caixa de som', 'monitor', 'smartwatch', 'carregador', 'teclado'),
+    'casa': ('air fryer', 'liquidificador', 'jogo de panelas', 'aspirador', 'cafeteira', 'ventilador'),
+}
+_FALLBACK_FAMILY_PRODUCT_TERM = 'oferta'
+_NO_FAMILY_PRODUCT_TERM = 'produto'
+
 
 @dataclass(frozen=True)
 class SearchQuery:
@@ -76,13 +97,16 @@ def build_search_plan(
         brand_budget = max(1, max_queries // 2)
         category_budget = max(1, max_queries // 3)
         price_budget = max(1, max_queries - brand_budget - category_budget)
+        family_positions: dict[str, int] = {}
         for item in brands[:brand_budget]:
             term = _normalize(item.get('term'))
             if not term or term in _GENERIC_TERMS:
                 continue
             family = _normalize(item.get('family'))
             source = 'radar_brand' if int(item.get('observed_count') or 0) > 0 else 'priority_catalog'
-            text = f'{term} {"tênis" if family == "moda" else "oferta" if family else "produto"}'
+            position = family_positions.get(family, 0)
+            family_positions[family] = position + 1
+            text = f'{term} {_family_product_term(family, position)}'
             _append_query(queries, seen, marketplace, text, source, brand=term, priority=float(item.get('observed_count') or 0))
         for category, count in categories[:category_budget]:
             term = _category_term(category)
@@ -101,6 +125,21 @@ def build_search_plan(
             except ValueError:
                 continue
     return SearchPlan(queries=tuple(queries[:max_queries]), fallback_queries=tuple(fallback[:max(1, max_queries // 10)]))
+
+
+def _family_product_term(family: str, position: int) -> str:
+    """Produto buscado para a n-ésima marca de uma família.
+
+    Sem família conhecida mantém o comportamento antigo ("<marca> produto");
+    família sem lista própria cai em "oferta". Só as famílias mapeadas em
+    FAMILY_PRODUCT_TERMS rotacionam.
+    """
+    if not family:
+        return _NO_FAMILY_PRODUCT_TERM
+    terms = FAMILY_PRODUCT_TERMS.get(family)
+    if not terms:
+        return _FALLBACK_FAMILY_PRODUCT_TERM
+    return terms[position % len(terms)]
 
 
 def _append_query(queries, seen, marketplace, text, source, **kwargs):

@@ -37,11 +37,36 @@ CATEGORY_KEYWORDS = {
 # Brand detection (P1-6)
 # ---------------------------------------------------------------------------
 BRAND_PATTERNS = (
+    # Calçado e esporte
     'nike', 'adidas', 'olympikus', 'asics', 'mizuno', 'puma', 'new balance',
-    'samsung', 'apple', 'xiaomi', 'motorola', 'lg', 'sony', 'brastemp',
-    'consul', 'electrolux', 'philco', 'mondial', 'cadence', 'arno',
-    'lenovo', 'dell', 'acer', 'positivo', 'multilaser',
+    'fila', 'under armour', 'vans', 'converse', 'oakley', 'havaianas', 'rider',
+    'speedo', 'reebok', 'topper', 'penalty',
+    # Vestuário — o que mais aparece nos grupos observados e não estava aqui.
+    # A ausência de `insider` foi o que motivou a revisão (2026-08-21): dez
+    # grupos anunciaram a mesma camiseta no mesmo dia e o campo `marca` saiu
+    # vazio nas dez, deixando o sinal invisível para o radar.
+    'insider', 'reserva', 'calvin klein', 'lupo', 'hering', 'colcci',
+    'lacoste', 'tommy hilfiger', 'levis', 'malwee', 'polo wear',
+    # Eletrônico e eletrodoméstico
+    'samsung', 'apple', 'xiaomi', 'motorola', 'lg', 'sony', 'jbl', 'brastemp',
+    'consul', 'electrolux', 'philco', 'mondial', 'cadence', 'arno', 'britania',
+    'philips', 'oster', 'tramontina', 'intelbras', 'tp-link',
+    'lenovo', 'dell', 'acer', 'positivo', 'multilaser', 'logitech', 'redragon',
+    # Relógio
+    'casio', 'g-shock', 'technos', 'orient',
+    # Suplemento
+    'growth', 'max titanium', 'integralmedica', 'dux nutrition', 'vitafor',
+    'black skull', 'probiotica', 'atlhetica',
+    # Beleza
+    'nivea', 'loreal', 'garnier', 'natura', 'avon', 'o boticario', 'truss',
+    'la roche', 'cerave', 'vichy', 'neutrogena', 'wella',
 )
+
+_BRANDS_BY_SPECIFICITY = tuple(sorted(BRAND_PATTERNS, key=len, reverse=True))
+_BRAND_REGEXES = {
+    brand: re.compile(rf'(?<![0-9a-z]){re.escape(brand)}(?![0-9a-z])')
+    for brand in BRAND_PATTERNS
+}
 
 # ---------------------------------------------------------------------------
 # Urgency / proof / CTA terms
@@ -73,8 +98,14 @@ DELIVERY_PROGRAM_TERMS = {
 # Regexes
 # ---------------------------------------------------------------------------
 PRICE_RE = re.compile(r'R\$\s*([0-9\.]+,\d{2}|[0-9]+(?:[\.,]\d{2})?)', re.IGNORECASE)
+# `[\s*_~]*` antes do código: o WhatsApp marca negrito/itálico com `*`, `_` e `~`
+# coladas na palavra, e o formato dominante nos grupos observados é
+# `🎟️ Cupom: *COMPENSAML*`. Sem isso o `*` interrompe o casamento e o código do
+# cupom se perde — que é o campo de onde vem o preço real da oferta divulgada.
 COUPON_RE = re.compile(
-    r'\b(?:(?:cupom)\s*[:=\-]?\s*|(?:use|aplique)\s+(?:o\s+)?(?:cupom\s+)?)([A-Z0-9][A-Z0-9_-]{2,20})\b',
+    r'\b(?:(?:cupom)\s*[:=\-]?\s*|(?:use|aplique)\s+(?:o\s+)?(?:cupom\s*[:=\-]?\s*)?)'
+    r'[\s*_~]*'
+    r'([A-Z0-9][A-Z0-9_-]{2,20})\b',
     re.IGNORECASE,
 )
 URL_RE = re.compile(r'https?://[^\s)\]}>"\']+', re.IGNORECASE)
@@ -251,7 +282,11 @@ def _decimal_to_str(value: Decimal | None) -> str:
 
 def _extract_coupon(text: str) -> str:
     match = COUPON_RE.search(text)
-    return match.group(1).upper() if match else ''
+    if not match:
+        return ''
+    # `_` é caractere de palavra, então o `\b` final não separa o marcador de
+    # itálico do WhatsApp do código (`_COMPENSAML_` casaria com o `_` no fim).
+    return match.group(1).upper().strip('_-')
 
 
 def _labels(normalized: str, price: Decimal | None, discount_pct: Decimal | None, coupon: str, has_image: bool, raw_text: str = '') -> list[str]:
@@ -493,7 +528,19 @@ def _detect_delivery_program(normalized: str) -> str:
 # ---------------------------------------------------------------------------
 
 def _extract_brand(normalized: str) -> str:
-    for brand in BRAND_PATTERNS:
-        if brand in normalized:
+    """Marca da mensagem, casando por palavra inteira e da mais específica para a menos.
+
+    Era `if brand in normalized`, substring pura, e isso produzia marca errada em
+    escala: 'lg' casa dentro de "algodão", e "Kit 3 Camisetas Algodão" virava
+    marca LG. Em 2026-08-21 havia 297 mensagens marcadas como `lg` na janela de 7
+    dias, boa parte camiseta de algodão. O campo alimenta o relatório de market
+    intel e a priorização do radar, então o ruído se propagava.
+
+    A ordem por comprimento decrescente evita que 'reserva' ganhe de
+    'calvin klein' ou que 'fila' seja escolhida antes de uma marca composta que a
+    contenha.
+    """
+    for brand in _BRANDS_BY_SPECIFICITY:
+        if _BRAND_REGEXES[brand].search(normalized):
             return brand
     return ''

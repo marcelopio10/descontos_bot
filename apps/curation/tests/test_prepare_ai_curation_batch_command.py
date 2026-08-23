@@ -16,6 +16,27 @@ from apps.market_intel.models import ObservedWhatsAppGroup, ObservedWhatsAppMess
 from apps.marketplaces.models import Marketplace
 from apps.offers.models import Offer
 
+# Cada oferta de fixture precisa de um TIPO de produto distinto. O gate de
+# diversidade (achado 2026-08-21) mantém no máximo uma candidata por
+# product_family no lote e duas por família no pool; títulos genéricos como
+# "Oferta mercadolivre 0" caem todos na mesma família e encolheriam o resultado
+# por um motivo que não é o que estes testes medem (cota por marketplace e
+# dedup por produto canônico).
+_FIXTURE_PRODUCT_TITLES = (
+    'Fone de Ouvido Bluetooth', 'Jogo de Panelas Cerâmica', 'Mochila Escolar Reforçada',
+    'Cafeteira Elétrica Programável', 'Travesseiro Cervical Viscoelástico', 'Teclado Mecânico Compacto',
+    'Perfume Amadeirado 100ml', 'Creatina Monohidratada 300g', 'Tapete Antiderrapante Sala',
+    'Air Fryer Digital 5L', 'Camiseta Básica Algodão', 'Smartwatch Tela Ampla',
+    'Aspirador Vertical Portátil', 'Chapinha Cerâmica Profissional', 'Sandália Confortável Verão',
+    'Cobertor Casal Microfibra', 'Monitor 24 Polegadas', 'Liquidificador Alta Rotação',
+    'Bermuda Sarja Masculina', 'Luminária Mesa Articulada', 'Panela de Pressão 6L',
+    'Pelúcia Infantil Grande', 'Ventilador Coluna Silencioso', 'Shampoo Hidratação Profunda',
+)
+
+
+def _fixture_title(sequence: int) -> str:
+    return _FIXTURE_PRODUCT_TITLES[(sequence - 1) % len(_FIXTURE_PRODUCT_TITLES)]
+
 
 class PrepareAICurationBatchCommandTests(TestCase):
     def setUp(self):
@@ -45,8 +66,8 @@ class PrepareAICurationBatchCommandTests(TestCase):
                 Offer.objects.create(
                     marketplace=self.marketplaces[marketplace_code],
                     external_id=f'{marketplace_code}-{index}',
-                    title=f'Oferta {marketplace_code} {index}',
-                    normalized_title=f'oferta {marketplace_code} {index}',
+                    title=_fixture_title(offer_id),
+                    normalized_title=_fixture_title(offer_id).lower(),
                     offer_hash=f'hash-s5-{offer_id}',
                     slug=f'oferta-{marketplace_code}-{index}',
                     current_price=Decimal('99.90'),
@@ -393,8 +414,8 @@ class PrepareAICurationBatchCommandTests(TestCase):
                 Offer.objects.create(
                     marketplace=self.marketplaces[marketplace_code],
                     external_id=f'{marketplace_code}-balanced-{index}',
-                    title=f'Oferta forte {marketplace_code} {index}',
-                    normalized_title=f'oferta forte {marketplace_code} {index}',
+                    title=_fixture_title(offer_id),
+                    normalized_title=_fixture_title(offer_id).lower(),
                     offer_hash=f'hash-balanced-{offer_id}',
                     slug=f'oferta-forte-{marketplace_code}-{index}',
                     current_price=Decimal('99.90'),
@@ -413,8 +434,8 @@ class PrepareAICurationBatchCommandTests(TestCase):
             Offer.objects.create(
                 marketplace=self.marketplaces['shopee'],
                 external_id=f'shopee-balanced-{index}',
-                title=f'Oferta Shopee segura {index}',
-                normalized_title=f'oferta shopee segura {index}',
+                title=_fixture_title(offer_id),
+                normalized_title=_fixture_title(offer_id).lower(),
                 offer_hash=f'hash-balanced-{offer_id}',
                 slug=f'oferta-shopee-segura-{index}',
                 current_price=Decimal('99.90'),
@@ -502,8 +523,8 @@ class PrepareAICurationBatchCommandTests(TestCase):
                 Offer.objects.create(
                     marketplace=self.marketplaces[marketplace_code],
                     external_id=f'{marketplace_code}-shortage-{index}',
-                    title=f'Oferta shortage {marketplace_code} {index}',
-                    normalized_title=f'oferta shortage {marketplace_code} {index}',
+                    title=_fixture_title(offer_id),
+                    normalized_title=_fixture_title(offer_id).lower(),
                     offer_hash=f'hash-shortage-{offer_id}',
                     slug=f'oferta-shortage-{marketplace_code}-{index}',
                     current_price=Decimal('99.90'),
@@ -542,8 +563,8 @@ class PrepareAICurationBatchCommandTests(TestCase):
             offer = Offer.objects.create(
                 marketplace=self.marketplaces['mercadolivre'],
                 external_id=f'ml-canon-{index}',
-                title=f'Oferta ML canon {index}',
-                normalized_title=f'oferta ml canon {index}',
+                title=_fixture_title(offer_id),
+                normalized_title=_fixture_title(offer_id).lower(),
                 offer_hash=f'hash-canon-{offer_id}',
                 slug=f'oferta-ml-canon-{index}',
                 produto_canonico_id=canonico,
@@ -573,8 +594,8 @@ class PrepareAICurationBatchCommandTests(TestCase):
                 Offer.objects.create(
                     marketplace=self.marketplaces[marketplace_code],
                     external_id=f'{marketplace_code}-canon-{index}',
-                    title=f'Oferta {marketplace_code} canon {index}',
-                    normalized_title=f'oferta {marketplace_code} canon {index}',
+                    title=_fixture_title(offer_id),
+                    normalized_title=_fixture_title(offer_id).lower(),
                     offer_hash=f'hash-canon-{offer_id}',
                     slug=f'oferta-{marketplace_code}-canon-{index}',
                     current_price=Decimal('99.90'),

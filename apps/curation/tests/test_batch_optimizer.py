@@ -216,3 +216,97 @@ class CanonicalProductDedupTests(SimpleTestCase):
         result = optimize_curation_batch(decisions, batch_size=20)
 
         self.assertEqual({item['offer_id'] for item in result.selected}, {1, 2})
+
+
+class BatchDiversityTests(SimpleTestCase):
+    """Achado 2026-08-21: anúncios distintos do mesmo TIPO de produto passavam
+    juntos porque só o produto_canonico_id era verificado."""
+
+    def _decision(
+        self,
+        offer_id,
+        marketplace_code,
+        score,
+        *,
+        product_family='',
+        category_code='',
+        selected=True,
+        position=None,
+    ):
+        return {
+            'offer_id': offer_id,
+            'marketplace_code': marketplace_code,
+            'classification': 'approved',
+            'selected_for_batch': selected,
+            'batch_position': position,
+            'conversion_score': score,
+            'relevance_score': score,
+            'discount_quality_score': score,
+            'audience_fit_score': score,
+            'reason': 'ok',
+            'rewritten_title': f'Oferta {offer_id}',
+            'rewritten_caption_whatsapp': f'Caption whatsapp {offer_id}',
+            'rewritten_caption_telegram': f'Caption telegram {offer_id}',
+            'image_required': False,
+            'image_decision': 'skip',
+            'blacklist_actions': [],
+            'risk_flags': [],
+            'product_family': product_family,
+            'category_code': category_code,
+        }
+
+    def test_apenas_uma_oferta_por_familia_entra_no_lote(self):
+        decisions = [
+            self._decision(1, 'mercadolivre', 70, product_family='piscina'),
+            self._decision(2, 'mercadolivre', 90, product_family='piscina'),
+            self._decision(3, 'mercadolivre', 60, product_family='power_bank'),
+        ]
+
+        result = optimize_curation_batch(decisions, batch_size=20)
+
+        self.assertEqual({item['offer_id'] for item in result.selected}, {2, 3})
+
+    def test_familia_vazia_nunca_dispara_o_gate(self):
+        decisions = [
+            self._decision(1, 'mercadolivre', 90, product_family=''),
+            self._decision(2, 'mercadolivre', 80, product_family=''),
+        ]
+
+        result = optimize_curation_batch(decisions, batch_size=20)
+
+        self.assertEqual({item['offer_id'] for item in result.selected}, {1, 2})
+
+    def test_teto_por_familia_e_configuravel(self):
+        decisions = [
+            self._decision(1, 'mercadolivre', 90, product_family='tenis'),
+            self._decision(2, 'mercadolivre', 80, product_family='tenis'),
+            self._decision(3, 'mercadolivre', 70, product_family='tenis'),
+        ]
+
+        result = optimize_curation_batch(decisions, batch_size=20, max_per_family=2)
+
+        self.assertEqual({item['offer_id'] for item in result.selected}, {1, 2})
+
+    def test_categoria_nao_pode_dominar_o_lote_inteiro(self):
+        decisions = [
+            self._decision(index, 'mercadolivre', 90 - index, product_family=f'familia{index}', category_code='casa_cozinha')
+            for index in range(6)
+        ]
+
+        result = optimize_curation_batch(decisions, batch_size=6)
+
+        # Teto proporcional (50% de 6 = 3), não 1 por categoria: um teto fixo
+        # baixo esvaziaria lotes em dias de pool concentrado.
+        self.assertEqual(len(result.selected), 3)
+
+    def test_gate_de_diversidade_desligado_mantem_comportamento_antigo(self):
+        decisions = [
+            self._decision(1, 'mercadolivre', 90, product_family='tenis', category_code='moda_masculina'),
+            self._decision(2, 'mercadolivre', 80, product_family='tenis', category_code='moda_masculina'),
+        ]
+
+        result = optimize_curation_batch(
+            decisions, batch_size=20, max_per_family=0, max_category_share=0,
+        )
+
+        self.assertEqual({item['offer_id'] for item in result.selected}, {1, 2})

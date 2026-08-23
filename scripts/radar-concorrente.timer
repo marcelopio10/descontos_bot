@@ -1,0 +1,20 @@
+[Unit]
+Description=descontos.bot - Disparo periódico do radar de concorrente
+
+[Timer]
+# 20 min é a cadência da *coleta*, não de envio: este timer não publica nada.
+# Escolhido para caber dentro da janela de 24h do buffer do evolution_adapter
+# (teto de 300 mensagens por grupo) com folga, e para a oferta chegar enquanto a
+# campanha de cupom que a sustenta ainda está de pé.
+#
+# Custo por disparo: 1 chamada local ao adapter + até COMPETITOR_RADAR_LIMIT
+# (20) requisições ao Mercado Livre, espaçadas de 2 a 4,5s. `RandomizedDelaySec`
+# evita o padrão robótico de bater sempre no mesmo minuto.
+OnBootSec=8min
+OnUnitActiveSec=20min
+RandomizedDelaySec=5min
+Persistent=true
+Unit=radar-concorrente.service
+
+[Install]
+WantedBy=timers.target

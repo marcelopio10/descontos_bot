@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from typing import Any
 
-ALLOWED_SEARCH_SOURCES = frozenset({'radar_brand', 'radar_category', 'radar_price_band', 'radar_coupon_signal', 'priority_catalog', 'generic_fallback'})
+# `competitor_radar` (2026-08-21): oferta que chegou por link divulgado em grupo
+# concorrente e resolvido pelo radar. Como as demais, é só rótulo de origem —
+# nada aqui identifica grupo ou remetente, e os campos de identidade continuam
+# sendo removidos em `build_sanitized_raw_payload`.
+ALLOWED_SEARCH_SOURCES = frozenset({'radar_brand', 'radar_category', 'radar_price_band', 'radar_coupon_signal', 'priority_catalog', 'generic_fallback', 'competitor_radar'})
 
 
 def sanitize_search_provenance(value: dict[str, Any] | None) -> dict[str, Any]:

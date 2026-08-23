@@ -59,6 +59,46 @@ class MarketIntelParserV1Tests(TestCase):
                 self.assertEqual(parsed['coupon'], expected_coupon)
                 self.assertIn('cupom', parsed['labels'])
 
+    def test_parser_matches_brand_by_whole_word(self):
+        """`'lg' in normalized` casava dentro de "algodão".
+
+        Em 2026-08-21 havia 297 mensagens marcadas como marca `lg` na janela de 7
+        dias, boa parte camiseta de algodão. O campo alimenta relatório e
+        priorização do radar.
+        """
+        self.assertEqual(parse_observed_message('Kit 3 Camisetas Algodão Dia Dia')['marca'], '')
+        self.assertEqual(parse_observed_message('Smart TV 50" LG 4K Ultra HD')['marca'], 'lg')
+
+    def test_parser_recognizes_apparel_brands_from_the_observed_groups(self):
+        """`insider` faltava, e era a marca que todos os grupos anunciavam."""
+        examples = {
+            'Camiseta Insider Light T-Shirt (3 Cores)': 'insider',
+            'Kit 6 Cuecas Lupo Boxer Sem Costura': 'lupo',
+            'Tênis Esportivo Corrida Fila Fastpace': 'fila',
+            'Kit 2 Cuecas Boxer Calvin Klein': 'calvin klein',
+            'Whey Protein Growth Supplements 1kg': 'growth',
+        }
+        for text, expected in examples.items():
+            with self.subTest(text=text):
+                self.assertEqual(parse_observed_message(text)['marca'], expected)
+
+    def test_parser_extracts_coupon_wrapped_in_whatsapp_formatting(self):
+        """Formato dominante nos grupos observados: `🎟️ Cupom: *COMPENSAML*`.
+
+        O `*` de negrito interrompia o casamento e o código se perdia — justamente
+        o campo que explica o preço anunciado, já que a oferta do concorrente
+        costuma nascer do cupom, não do desconto de página.
+        """
+        examples = {
+            '🎟️ Cupom: *COMPENSAML*': 'COMPENSAML',
+            '🎟️ *Cupom:* *PROMOTEC*': 'PROMOTEC',
+            'Use o Cupom: _COMPENSAML_': 'COMPENSAML',
+            'Cupom ~TESTE10~': 'TESTE10',
+        }
+        for text, expected_coupon in examples.items():
+            with self.subTest(text=text):
+                self.assertEqual(parse_observed_message(text)['coupon'], expected_coupon)
+
 
 class MarketIntelParserV2PriceTests(TestCase):
     """P0-2: Price mechanics extraction tests."""

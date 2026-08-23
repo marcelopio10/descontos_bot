@@ -16,7 +16,13 @@ from apps.curation.services.blacklist import (
     is_blacklisted,
 )
 from apps.curation.services.quality_score import quality_score_breakdown
-from apps.curation.services.recurrence import filter_blocked_recurrence, recurrence_score_multiplier, recurrence_signal
+from apps.curation.services.product_family import offer_family_key
+from apps.curation.services.recurrence import (
+    filter_blocked_recurrence,
+    filter_saturated_families,
+    recurrence_score_multiplier,
+    recurrence_signal,
+)
 from apps.curation.services.settings import get_decimal_setting, get_integer_setting
 from apps.distribution.models import Delivery, SocialChannel
 from apps.distribution.services.delivery import _should_republish_after_improvement
@@ -36,6 +42,8 @@ CANDIDATE_POOL_MULTIPLIER = 5
 CANDIDATE_POOL_FLOOR = 60
 EXPOSURE_QUOTA_FLAG = 'exposure_quota_enabled'
 SIMILAR_TITLE_PREFIX = 50
+# Mesmo teto que `batch_optimizer` aplica no fluxo de curadoria IA.
+MAX_PER_FAMILY = 1
 SIMILAR_TITLE_MIN_TOKENS = 4
 SIMILAR_TITLE_JACCARD_THRESHOLD = 0.75
 TITLE_STOPWORDS = frozenset({
@@ -112,7 +120,16 @@ def select_offers_for_channel(
     queryset = _eligible_offers(channel, config)
 
     pool_size = max(CANDIDATE_POOL_FLOOR, config.global_limit * CANDIDATE_POOL_MULTIPLIER)
-    raw_candidates = filter_blocked_recurrence(list(queryset[:pool_size]), channel)
+    # `filter_saturated_families` faltava aqui (achado 2026-08-21). Os gates de
+    # diversidade escritos junto com `product_family.py` cobriam só o fluxo de
+    # curadoria IA, e este selector é o **fallback** de quando a IA falha — ou
+    # seja, justamente o caminho que roda quando algo dá errado. Medido no dia:
+    # dos 25 envios após o restart, 17 saíram por aqui, entre eles 7 fones de
+    # ouvido em 3 minutos.
+    raw_candidates = filter_saturated_families(
+        filter_blocked_recurrence(list(queryset[:pool_size]), channel),
+        channel,
+    )
 
     blacklist_terms = get_blacklist_terms()
     candidates: list[Offer] = []
@@ -167,6 +184,7 @@ def select_offers_for_channel(
     selected: list[Offer] = []
     per_marketplace_count: dict[int, int] = defaultdict(int)
     per_category_count: dict[str, int] = defaultdict(int)
+    per_family_count: dict[str, int] = defaultdict(int)
     seen_prefixes: set[str] = set()
     selected_token_sets: list[tuple[int, set[str]]] = []
 
@@ -196,6 +214,19 @@ def select_offers_for_channel(
             )
             return False
 
+        # Teto de família DENTRO da seleção. O filtro de histórico acima não
+        # cobre isto: os envios deste mesmo ciclo ainda não existem no banco
+        # quando a seleção é montada, então sem este teto os 7 fones de ouvido
+        # saem juntos mesmo com o espaçamento ligado. É o equivalente ao
+        # `max_per_family=1` que `batch_optimizer` aplica no fluxo de curadoria.
+        familia = offer_family_key(offer)
+        if familia and per_family_count[familia] >= MAX_PER_FAMILY:
+            log.info(
+                'selector_drop offer_id=%s reason=family_limit family=%s title=%r',
+                offer.id, familia, (offer.title or '')[:80],
+            )
+            return False
+
         if per_marketplace_count[offer.marketplace_id] >= config.marketplace_limit:
             log.info(
                 'selector_drop offer_id=%s reason=marketplace_limit marketplace=%s limit=%s',
@@ -218,6 +249,8 @@ def select_offers_for_channel(
         selected.append(offer)
         per_marketplace_count[offer.marketplace_id] += 1
         per_category_count[category_code] += 1
+        if familia:
+            per_family_count[familia] += 1
         if prefix:
             seen_prefixes.add(prefix)
         if len(tokens) >= SIMILAR_TITLE_MIN_TOKENS:

@@ -17,6 +17,7 @@ from apps.curation.services.ai_schema import validate_agent_input, validate_agen
 from apps.curation.services.batch_optimizer import DEFAULT_TARGET_DISTRIBUTION, optimize_curation_batch
 from apps.curation.services.blacklist_updates import add_curation_blacklist_term
 from apps.curation.services.hermes_runner import FakeHermesRunner, HermesRunner, HermesRunnerError
+from apps.curation.services.product_family import offer_family_key
 from apps.distribution.models import SocialChannel
 from apps.offers.models import Offer
 
@@ -213,6 +214,11 @@ def _enrich_decisions_with_offer_fields(
     tie-break signal (cheaper wins between two duplicates of the same
     product); neither value is exposed back to the AI or to any rendered
     message.
+
+    `product_family` e `category_code` (achado 2026-08-21) alimentam o gate de
+    diversidade do mesmo optimizer: `produto_canonico_id` só pega o mesmo
+    anúncio, e o que gerava impressão de repetição eram anúncios distintos do
+    mesmo tipo de produto no mesmo lote.
     """
     offers_by_id = {offer.id: offer for offer in offers}
     enriched: list[dict[str, Any]] = []
@@ -221,6 +227,8 @@ def _enrich_decisions_with_offer_fields(
         offer = _lookup_offer(offers_by_id, decision.get('offer_id'))
         if offer is not None:
             decision.setdefault('produto_canonico_id', offer.produto_canonico_id)
+            decision.setdefault('product_family', offer_family_key(offer))
+            decision.setdefault('category_code', offer.category.code if offer.category_id else '')
             decision.setdefault(
                 'current_price',
                 float(offer.current_price) if offer.current_price is not None else None,

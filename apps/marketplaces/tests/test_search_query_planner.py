@@ -68,3 +68,51 @@ class SearchQueryPlannerTests(SimpleTestCase):
         self.assertNotIn('raw_text', result)
         self.assertNotIn('group_jid', result)
         self.assertNotIn('url', result)
+
+
+class BrandQueryDiversityTests(SimpleTestCase):
+    """Achado 2026-08-21: o termo de produto era fixo por família, então TODA
+    marca de moda virava "<marca> tênis" e o plano de busca inteiro puxava
+    tênis — 13% de tudo que foi coletado em 7 dias."""
+
+    def _moda_radar(self, *terms):
+        return {
+            'brands': [{'family': 'moda', 'term': term, 'observed_count': 0} for term in terms],
+            'categories': {},
+            'price_bands': {},
+        }
+
+    def test_marcas_da_mesma_familia_nao_buscam_todas_o_mesmo_produto(self):
+        radar = self._moda_radar('Nike', 'Adidas', 'Puma', 'Olympikus')
+
+        plan = build_search_plan(radar, marketplaces=('mercadolivre',), max_queries=20)
+
+        produtos = {
+            query.query_text.split(' ', 1)[1]
+            for query in plan.queries
+            if query.brand
+        }
+        self.assertGreater(len(produtos), 1)
+        self.assertEqual(len([q for q in plan.queries if q.query_text.endswith('tênis')]), 1)
+
+    def test_plano_e_deterministico_entre_execucoes(self):
+        radar = self._moda_radar('Nike', 'Adidas', 'Puma')
+
+        primeiro = build_search_plan(radar, marketplaces=('mercadolivre',), max_queries=20)
+        segundo = build_search_plan(radar, marketplaces=('mercadolivre',), max_queries=20)
+
+        self.assertEqual(
+            [query.query_text for query in primeiro.queries],
+            [query.query_text for query in segundo.queries],
+        )
+
+    def test_familia_sem_lista_propria_mantem_o_termo_generico(self):
+        radar = {
+            'brands': [{'family': 'nicho_novo', 'term': 'MarcaX', 'observed_count': 0}],
+            'categories': {},
+            'price_bands': {},
+        }
+
+        plan = build_search_plan(radar, marketplaces=('mercadolivre',), max_queries=10)
+
+        self.assertIn('marcax oferta', [query.query_text for query in plan.queries])

@@ -1,0 +1,10 @@
+[Unit]
+Description=descontos.bot guardian monitor timer
+
+[Timer]
+OnCalendar=*:0/15
+Persistent=true
+Unit=descontos-bot-guardian.service
+
+[Install]
+WantedBy=timers.target

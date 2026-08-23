@@ -1,0 +1,11 @@
+[Unit]
+# ATENÇÃO: como a unidade guardian, o script executado NÃO está neste
+# repositório (`~/.hermes_v2/profiles/descontos-bot/scripts/`) e o
+# WorkingDirectory aponta para outro sistema (`~/central-hermes`). Versionada
+# aqui só para o inventário de unidades ficar completo.
+Description=descontos.bot - publicar relatório sanitizado na Central Hermes
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/marce/central-hermes
+ExecStart=/home/marce/.hermes_v2/profiles/descontos-bot/scripts/publish_central_report.py

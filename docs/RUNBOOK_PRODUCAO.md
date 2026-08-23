@@ -1,5 +1,10 @@
 # Runbook — Ativação do canal de produção WhatsApp
 
+> **Unidades systemd:** o inventário completo do que roda nesta máquina, com
+> agendamento e convenção, está em `scripts/UNITS.md`. Antes de instalar ou
+> editar qualquer unidade, rodar `scripts/check-units-drift.sh` — até
+> 2026-08-23 as cópias do repositório divergiam das instaladas em silêncio.
+
 Comandos exatos para liberar o canal `whatsapp_principal` (grupo `descontos.bot`)
 após o sign-off da homologação. Execute em ordem; cada passo tem critério próprio.
 

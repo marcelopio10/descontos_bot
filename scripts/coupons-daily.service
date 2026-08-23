@@ -5,6 +5,10 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-WorkingDirectory=%h/descontos.bot
-EnvironmentFile=%h/descontos.bot/.env
-ExecStart=%h/descontos.bot/.venv/bin/python3 manage.py run_coupon_pipeline
+WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
+Environment=PATH=/home/marce/.local/bin:/home/marce/.nvm/versions/node/v24.15.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py run_coupon_pipeline --once --runner real
+StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/coupons-daily.log
+StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/coupons-daily.log

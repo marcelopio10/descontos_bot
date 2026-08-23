@@ -1,0 +1,12 @@
+[Unit]
+# ATENÇÃO: o script que esta unidade executa NÃO está neste repositório — ele
+# vive no profile Hermes (`~/.hermes_v2/profiles/descontos-bot/scripts/`).
+# A unidade está versionada aqui porque monitora este projeto e porque, sem ela
+# no inventário, ninguém sabe que existe; mas um clone limpo não a faz funcionar.
+# Versionar o script em si é decisão de quem mantém o profile Hermes.
+Description=descontos.bot guardian monitor (profile dedicado)
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/marce/.hermes_v2/profiles/descontos-bot
+ExecStart=/home/marce/.hermes_v2/profiles/descontos-bot/scripts/descontos_bot_guardian.py

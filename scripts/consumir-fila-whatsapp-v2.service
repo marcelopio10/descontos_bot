@@ -17,5 +17,5 @@ EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
 # `hermes` (curadoria IA, --runner real) está instalado.
 Environment=PATH=/home/marce/.local/bin:/home/marce/.nvm/versions/node/v24.15.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py consumir_fila_whatsapp --channel whatsapp_principal --confirm-ai-production CONFIRM_AI_PRODUCTION
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/consumir-fila-whatsapp.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/consumir-fila-whatsapp.log
+StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/consumir-fila-whatsapp-v2.log
+StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/consumir-fila-whatsapp-v2.log

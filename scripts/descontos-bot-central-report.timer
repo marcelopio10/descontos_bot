@@ -1,0 +1,10 @@
+[Unit]
+Description=descontos.bot - timer do relatório da Central Hermes
+
+[Timer]
+OnCalendar=*-*-* 08:15:00
+Persistent=true
+Unit=descontos-bot-central-report.service
+
+[Install]
+WantedBy=timers.target

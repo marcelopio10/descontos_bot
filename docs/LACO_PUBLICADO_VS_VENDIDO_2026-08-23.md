@@ -108,10 +108,22 @@ mantendo a marcação da própria função. Regressão coberta em `test_alertas.
 
 ---
 
-## Item 9 — A medição que a decisão exige
+## Item 9 — Decidido: exigir curadoria IA
 
-A decisão é do dono: aceitar o selector legado como fallback e medir os dois
-caminhos, ou ligar `--ai-curation-required` e pausar o ciclo quando a IA falha.
+**Decisão do dono em 2026-08-23: ligar `--ai-curation-required`.** Quando a
+curadoria IA falha, o ciclo aborta em vez de cair no selector legado. Em
+produção desde 15:36 do mesmo dia (`run-bot.service` reiniciado; a flag está no
+`ExecStart` com o motivo escrito na própria unit).
+
+O que muda no comportamento, confirmado no código (`run_bot.py:317-331`): o ciclo
+escreve o healthcheck e retorna, sem publicar nada. Não derruba o scheduler — o
+próximo ciclo tenta de novo. Em dia ruim de IA, o canal fica mais quieto; nenhum
+envio sai sem passar pela curadoria.
+
+Reverter é tirar a flag do `ExecStart` e reiniciar. O efeito é medido pelo
+relatório do item 7, que traz a quebra por caminho por padrão.
+
+**A medição que sustentou a decisão:**
 
 **Envios do WhatsApp por caminho, por semana:**
 
@@ -137,5 +149,17 @@ selector legado responde por 20,1% dos envios e por **zero** venda casada. Com 1
 vendas na janela, isso é indício, não prova — a leitura fica honesta só depois de
 algumas semanas de série.
 
-O relatório semanal passa a trazer essa quebra por padrão, que é o que a opção
-"aceitar e medir" exige para não ser só aceitar.
+**O que acompanhar nas próximas semanas**, agora que a flag está ligada:
+
+1. **Volume publicado no WhatsApp.** Cair é esperado; cair muito (dias seguidos
+   perto de zero) significa que a taxa de falha da curadoria virou o gargalo, e
+   aí o alvo passa a ser a causa das falhas — o grosso hoje é "nenhum item
+   aprovado", que é sintoma de pool ruim, não de IA rígida.
+2. **Comissão por mil envios.** É a métrica que justifica a troca: menos envios
+   com mais retorno por envio é o resultado desejado.
+3. **A linha `selector legado` do relatório**, que deve ir a zero. Se não for,
+   sobrou caminho de publicação sem gate — foi o que aconteceu em 21/08, quando
+   17 de 25 envios saíram por um fallback que ninguém lembrava que existia.
+
+O Telegram **não** teve a flag aplicada: é arquivo público desde a revisão 2.2 do
+diagnóstico, e mexer nele seria investir em canal que não distribui.

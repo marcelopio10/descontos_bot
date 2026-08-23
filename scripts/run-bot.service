@@ -7,7 +7,17 @@ Wants=network-online.target
 Type=simple
 WorkingDirectory=%h/descontos.bot
 EnvironmentFile=%h/descontos.bot/.env
-ExecStart=%h/descontos.bot/.venv/bin/python3 manage.py run_bot
+# --ai-curation-required (decisão do dono, 2026-08-23, item 9 da Onda 1): quando a
+# curadoria IA falha, o ciclo aborta em vez de cair no selector legado. Com ~99
+# membros no grupo, volume não é alavanca; o legado chegou a 30% dos envios numa
+# semana e não tem uma venda casada. Reverter = tirar a flag e reiniciar.
+#
+# ATENÇÃO: a unit em produção (~/.config/systemd/user/run-bot.service) tem
+# caminhos absolutos e as flags `--channel whatsapp_principal
+# --confirm-ai-production CONFIRM_AI_PRODUCTION`; este arquivo versionado está
+# defasado nesses pontos desde antes de 2026-08. Ao instalar do zero, conferir
+# a instalada antes de sobrescrever.
+ExecStart=%h/descontos.bot/.venv/bin/python3 manage.py run_bot --ai-curation-required
 Restart=always
 RestartSec=30
 StandardOutput=append:%h/descontos.bot/logs/run-bot.log

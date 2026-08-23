@@ -60,6 +60,15 @@ class Command(BaseCommand):
             action='store_true',
             help='Envia o resumo para o Telegram do operador (usado pelo timer).',
         )
+        parser.add_argument(
+            '--nota',
+            default='',
+            help=(
+                'Texto extra no início do alerta. Serve para lembrete agendado '
+                'saber explicar por que disparou (ex.: a medição de fechamento '
+                'da Onda 1, marcada para setembro).'
+            ),
+        )
 
     def handle(self, *args, **options):
         end = None
@@ -85,7 +94,10 @@ class Command(BaseCommand):
             self.stdout.write(f'\nJSON: {path}')
 
         if options['alert']:
-            enviar_alerta_operador(self._alert_text(report), categoria='receita_semanal')
+            enviar_alerta_operador(
+                self._alert_text(report, nota=options['nota']),
+                categoria='receita_semanal',
+            )
 
     def _print(self, report):
         w = self.stdout.write
@@ -148,9 +160,12 @@ class Command(BaseCommand):
         )
         return path
 
-    def _alert_text(self, report) -> str:
+    def _alert_text(self, report, nota: str = '') -> str:
         top_band = max(report.bands, key=lambda row: row.commission, default=None)
-        linhas = [
+        linhas = []
+        if nota:
+            linhas.append(nota)
+        linhas += [
             f'Semanal {report.start:%d/%m} a {report.end:%d/%m} — '
             f'{report.deliveries_ml} envios de ML, {report.sales_total} vendas, '
             f'R$ {report.commission_total} de comissão '

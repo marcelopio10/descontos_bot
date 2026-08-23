@@ -1,0 +1,15 @@
+[Unit]
+Description=descontos.bot - Disparo único do lembrete da medição de setembro
+
+[Timer]
+# Data fixa, uma vez só: segunda-feira 2026-10-05, às 08:00. Setembro inteiro já
+# fechado e com uma semana de folga para o status das últimas vendas resolver no
+# painel. Segunda de manhã para cair junto da leitura semanal de rotina.
+# `Persistent=true` garante o disparo mesmo se a máquina estiver desligada na
+# data — este lembrete não pode simplesmente sumir.
+OnCalendar=2026-10-05 08:00:00
+Persistent=true
+Unit=lembrete-medicao-setembro.service
+
+[Install]
+WantedBy=timers.target

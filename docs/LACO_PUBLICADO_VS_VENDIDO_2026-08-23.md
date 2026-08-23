@@ -64,6 +64,15 @@ R$ 500 a 1.000           322   13.5       3   R$ 240.21   40.1    745.99
 **40% da comissão do mês em 13,5% dos envios.** É a quebra de junho vista pelo
 instrumento que deveria tê-la detectado na época.
 
+### Lembrete agendado que usa o mesmo comando
+
+A Onda 1 foi encerrada em 2026-08-23 sem esperar pela medição de setembro — dado
+futuro não é trabalho pendente. A medição virou `lembrete-medicao-setembro.timer`
+(disparo único, segunda 2026-10-05 08:00, `Persistent=true`), que roda este mesmo
+relatório com `--weeks 6 --alert --nota "<por que este alerta existe>"`. A opção
+`--nota` existe para o alerta agendado saber se explicar meses depois, com os
+números de comparação (14,09 de julho, 31,79 de agosto) no próprio texto.
+
 ### Onde o resultado é gravado
 
 `data/exports/receita_semanal/AAAA-MM-DD.json` — diretório ignorado pelo git de

@@ -1,0 +1,17 @@
+[Unit]
+# Lembrete de disparo único: a medição que fecha a Onda 1 do diagnóstico v2.
+# A onda foi dada por encerrada em 2026-08-23 com os cinco itens entregues — o
+# que faltava era tempo, não trabalho, e trava de fechamento por dado futuro só
+# transforma entrega feita em pendência aberta.
+Description=descontos.bot - Lembrete da medição de setembro (fechamento da Onda 1)
+After=ingest-ml-afiliados.service
+
+[Service]
+Type=oneshot
+WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+# Janela de 6 semanas cobre setembro inteiro mais folga de maturidade: venda
+# entra no painel como IN_REVIEW e leva semanas para resolver, então ler só o mês
+# corrido subestimaria setembro contra meses já fechados.
+ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py relatorio_receita_semanal --weeks 6 --alert --nota "Fechamento da Onda 1: comparar a comissão por mil envios abaixo com 14,09 (julho) e 31,79 (agosto). A faixa de preço reaberta entrou em producao em 23/08. Lembre da maturidade: o que estiver IN_REVIEW ainda vai virar aprovado."
+StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/lembrete-medicao-setembro.log
+StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/lembrete-medicao-setembro.log

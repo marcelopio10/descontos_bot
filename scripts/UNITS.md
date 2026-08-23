@@ -45,6 +45,12 @@ avisar, porque o guard de produção só exige confirmação em canal de produç
 | `reap-curation-runs.timer` | 1 h | Encerra `CurationRun` presa em `running` |
 | `check-observer-health.timer` | 6 h | Saúde da coleta do observer |
 | `descontos-bot-guardian.timer` | 15 min | Monitor do profile Hermes |
+| `lembrete-medicao-setembro.timer` | **uma vez**, 2026-10-05 08:00 | Lembrete da medição que fecha a Onda 1 |
+
+O `lembrete-medicao-setembro` é de disparo único e some do inventário depois de
+rodar: existe porque a Onda 1 foi encerrada em 2026-08-23 sem esperar por dado de
+setembro, e a medição virou compromisso com data em vez de pendência aberta.
+`Persistent=true` garante o disparo mesmo com a máquina desligada na data.
 
 ## Unidades cujo código não está neste repositório
 

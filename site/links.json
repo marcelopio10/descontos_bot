@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-08-23T13:42:52.530730+00:00",
+  "generated_at": "2026-08-24T00:01:10.519173+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 11201,
-      "title": "O Idiota",
-      "current_price": "1.99",
-      "original_price": "59.90",
-      "discount_pct": "97.00",
-      "image_url": "https://m.media-amazon.com/images/I/71xJco7ed0L._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=o-idiota-11201&utm_source=instagram&utm_medium=bio&utm_campaign=offer_11201"
-    },
     {
       "id": 11414,
       "title": "Caneta Bordada Russa | Conjunto De Agulhas De Perfuração De 3 E 2 Threaders , Ferramenta De Artesanato De Costura DIY Id",
@@ -52,6 +42,16 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820ly-mnb7dwwwmo748e",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/80C670LldR?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
+    },
+    {
+      "id": 6835,
+      "title": "40-120 Pçs Hidrocolóide Acne Remendos Rosto Espinha Adesivos Para Zits Tratamento De Ponto Cuidados Com A Pele Essencial",
+      "current_price": "2.19",
+      "original_price": "10.95",
+      "discount_pct": "80.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823qq-mp4me4j9r9xq17",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/7VFqCY2sYM?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6835"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-08-26T14:18:18.403183+00:00",
+  "generated_at": "2026-08-26T16:31:33.692792+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,6 +12,16 @@
       "image_url": "https://m.media-amazon.com/images/I/71xJco7ed0L._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=o-idiota-11201&utm_source=instagram&utm_medium=bio&utm_campaign=offer_11201"
+    },
+    {
+      "id": 12486,
+      "title": "Livro do Desassossego",
+      "current_price": "1.99",
+      "original_price": "34.90",
+      "discount_pct": "94.00",
+      "image_url": "https://m.media-amazon.com/images/I/91vTaBVhqPL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=livro-do-desassossego-12486&utm_source=instagram&utm_medium=bio&utm_campaign=offer_12486"
     },
     {
       "id": 11414,
@@ -42,16 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820ly-mnb7dwwwmo748e",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/AUtVuhaAM2?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6836"
-    },
-    {
-      "id": 7276,
-      "title": "Kit 6 Forma de Silicone para Fritadeira Air Fryer com Alça Antiaderente Cozinha",
-      "current_price": "13.90",
-      "original_price": "69.50",
-      "discount_pct": "80.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mk35l9kuakg158",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/2LXnDlsYUW?utm_source=instagram&utm_medium=bio&utm_campaign=offer_7276"
     }
   ]
 }

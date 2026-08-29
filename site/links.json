@@ -1,28 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-08-28T14:31:22.763260+00:00",
+  "generated_at": "2026-08-29T11:06:57.345831+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 11201,
-      "title": "O Idiota",
-      "current_price": "1.99",
-      "original_price": "59.90",
-      "discount_pct": "97.00",
-      "image_url": "https://m.media-amazon.com/images/I/71xJco7ed0L._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=o-idiota-11201&utm_source=instagram&utm_medium=bio&utm_campaign=offer_11201"
-    },
-    {
-      "id": 12486,
-      "title": "Livro do Desassossego",
-      "current_price": "1.99",
-      "original_price": "34.90",
-      "discount_pct": "94.00",
-      "image_url": "https://m.media-amazon.com/images/I/91vTaBVhqPL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=livro-do-desassossego-12486&utm_source=instagram&utm_medium=bio&utm_campaign=offer_12486"
-    },
     {
       "id": 10139,
       "title": "Conjunto De Retoque De Cabelo 2 Em 1 , Cobertura Instantânea De Cinzas E Linhas Finas Perfeitas , À Prova D'água , De Lo",
@@ -52,6 +32,26 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mk35l9kuakg158",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/qj3bcOURe?utm_source=instagram&utm_medium=bio&utm_campaign=offer_7276"
+    },
+    {
+      "id": 10992,
+      "title": "Lixador de Pé Elétrico - Esfoliador Tira Calos Pedicure Portátil",
+      "current_price": "15.99",
+      "original_price": "79.95",
+      "discount_pct": "80.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-lr68nerol2joe0",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/60RB7xvzFm?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10992"
+    },
+    {
+      "id": 6806,
+      "title": "Batedor Misturador Mixer Elétrico para Bebidas Leite Café Clara de Ovo 2 em 1",
+      "current_price": "18.99",
+      "original_price": "90.43",
+      "discount_pct": "79.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd48-lupf3z3a40mxf1",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/9Khd65nQ9i?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6806"
     }
   ]
 }

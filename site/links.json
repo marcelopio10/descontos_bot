@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-08-29T17:11:22.149715+00:00",
+  "generated_at": "2026-08-30T02:32:28.820089+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,6 +12,16 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mfn8h5ufyu4kb0",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/2LXtAFhNeI?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6857"
+    },
+    {
+      "id": 7216,
+      "title": "Sandália Feminina Confortável com Charms Aleatórios Antiderrapante",
+      "current_price": "34.99",
+      "original_price": "129.59",
+      "discount_pct": "73.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820ly-mobvyvdz0c1y4a",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/4LIyAScOlm?utm_source=instagram&utm_medium=bio&utm_campaign=offer_7216"
     },
     {
       "id": 6852,
@@ -42,16 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820l4-mqlwg4jg6d4zbe",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/gPfBBwWZz?utm_source=instagram&utm_medium=bio&utm_campaign=offer_11847"
-    },
-    {
-      "id": 11436,
-      "title": "Conjunto Jaqueta e Calça Jogger Masculina Inverno Frio Academia Treino Fitness Casual Esportivo Confortável",
-      "current_price": "45.97",
-      "original_price": "114.92",
-      "discount_pct": "60.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztg-ml5s2d08vuh3b4",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/1LfLyPyNyj?utm_source=instagram&utm_medium=bio&utm_campaign=offer_11436"
     }
   ]
 }

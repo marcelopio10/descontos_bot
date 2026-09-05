@@ -1,17 +1,27 @@
 {
   "version": "1.1",
-  "generated_at": "2026-09-05T14:17:20.693667+00:00",
+  "generated_at": "2026-09-05T19:57:41.971343+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 10600,
-      "title": "Tenis liso EC moda conforto tenis meia calce facil",
-      "current_price": "21.46",
-      "original_price": "49.91",
-      "discount_pct": "57.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7qukw-li3gn37h6v5h4a",
+      "id": 6851,
+      "title": "Tênis Meia Feminino Calce Fácil Botinha Ortopédico Esportivo Sneaker Slip On Casual confortável Academia",
+      "current_price": "22.90",
+      "original_price": "60.26",
+      "discount_pct": "62.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820ma-mnx8czipq39ea6",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/6fh04TaVCP?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10600"
+      "tracked_url": "https://s.shopee.com.br/5VV6HjFuSc?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6851"
+    },
+    {
+      "id": 7216,
+      "title": "Sandália Feminina Confortável com Charms Aleatórios Antiderrapante",
+      "current_price": "34.99",
+      "original_price": "129.59",
+      "discount_pct": "73.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820ly-mobvyvdz0c1y4a",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/2BEeJbSOT9?utm_source=instagram&utm_medium=bio&utm_campaign=offer_7216"
     },
     {
       "id": 6852,
@@ -42,16 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820l4-mqlwg4jg6d4zbe",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/4fvvVzORuj?utm_source=instagram&utm_medium=bio&utm_campaign=offer_11847"
-    },
-    {
-      "id": 11436,
-      "title": "Conjunto Jaqueta e Calça Jogger Masculina Inverno Frio Academia Treino Fitness Casual Esportivo Confortável",
-      "current_price": "45.97",
-      "original_price": "114.92",
-      "discount_pct": "60.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztg-ml5s2d08vuh3b4",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/7AdGUaJC1u?utm_source=instagram&utm_medium=bio&utm_campaign=offer_11436"
     }
   ]
 }

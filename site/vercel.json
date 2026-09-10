@@ -5,7 +5,7 @@
     { "source": "/links", "destination": "/links.html" },
     { "source": "/sobre", "destination": "/sobre.html" },
     { "source": "/grupo", "destination": "/grupo.html" },
-    { "source": "/whatsapp", "destination": "/grupo.html" },
+    { "source": "/whatsapp", "destination": "/grupo" },
     { "source": "/disclosure", "destination": "/disclosure.html" },
     { "source": "/r", "destination": "/r.html" },
     { "source": "/dashboard", "destination": "/dashboard.html" },

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupo de ofertas no WhatsApp | descontos.bot</title>
+  <meta name="description" content="Entre no grupo do descontos.bot no WhatsApp e receba ofertas selecionadas com preço e horário de coleta.">
+  <link rel="canonical" href="https://descontos.bot/grupo">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Grupo de ofertas no WhatsApp | descontos.bot">
+  <meta property="og:description" content="Ofertas selecionadas por automação, direto no seu WhatsApp. Entrada gratuita, saída a qualquer momento.">
+  <meta property="og:image" content="/og.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+  <style>
+    .join-shell {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 64px 16px 88px;
+      text-align: center;
+    }
+    .join-shell h1 {
+      margin: 14px 0 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+    .join-shell .lead {
+      margin: 0 auto;
+      max-width: 46ch;
+    }
+    .join-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 56px;
+      margin-top: 28px;
+      padding: 0 30px;
+      border-radius: 12px;
+      background: var(--cyan);
+      color: var(--dark);
+      font: 700 15px 'Space Mono', monospace;
+      text-decoration: none;
+    }
+    .join-cta:hover {
+      background: var(--yellow);
+    }
+    .join-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .join-points {
+      display: grid;
+      gap: 10px;
+      margin: 34px 0 0;
+      padding: 22px;
+      list-style: none;
+      background: var(--dark2);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      text-align: left;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .join-points li {
+      padding-left: 22px;
+      position: relative;
+    }
+    .join-points li::before {
+      content: '%';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">descontos<span>.bot</span></a>
+    <nav class="navlinks" aria-label="Navegação principal">
+      <a href="/">Ofertas</a>
+      <a href="/links">Links</a>
+      <a href="/sobre">Sobre</a>
+      <a href="/disclosure">Disclosure</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="join-shell">
+      <p class="eyebrow">Grupo no WhatsApp</p>
+      <h1>Ofertas selecionadas direto no seu WhatsApp</h1>
+      <p class="lead">O descontos.bot acompanha marketplaces e envia no grupo as quedas de preço que valem a pena, sempre com preço e horário da coleta.</p>
+
+      <a class="join-cta" id="joinLink" href="https://chat.whatsapp.com/EKf4vnNG8MdLurY9xKrqAm" rel="noopener">
+        Entrar no grupo
+      </a>
+      <p class="join-note" id="joinNote">Você será redirecionado automaticamente. Se nada acontecer, toque no botão acima.</p>
+
+      <ul class="join-points">
+        <li>Entrada gratuita e saída a qualquer momento.</li>
+        <li>Somente ofertas — o grupo não permite mensagens de participantes.</li>
+        <li>Cada oferta tem página pública com preço e horário de coleta.</li>
+        <li>Preços mudam sem aviso: confirme sempre no site da loja.</li>
+      </ul>
+
+      <p class="disclosure-inline">Como Associado da Amazon, ganho por compras qualificadas.</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Como Associado da Amazon, ganho por compras qualificadas.</p>
+    <p>Os preços podem mudar depois do horário de coleta. Consulte a loja antes de finalizar a compra.</p>
+  </footer>
+
+  <script>
+    (function () {
+      var GROUP_URL = 'https://chat.whatsapp.com/EKf4vnNG8MdLurY9xKrqAm';
+      var DELAY_MS = 2500;
+
+      var noteEl = document.getElementById('joinNote');
+      // ?stay=1 desliga o redirect automático — útil para revisão de anúncio
+      // e para conferir a página sem sair dela.
+      var stay = new URLSearchParams(window.location.search).get('stay');
+
+      if (stay === '1') {
+        if (noteEl) noteEl.textContent = 'Toque no botão acima para entrar no grupo.';
+        return;
+      }
+
+      window.setTimeout(function () {
+        window.location.href = GROUP_URL;
+      }, DELAY_MS);
+    })();
+  </script>
+</body>
+</html>

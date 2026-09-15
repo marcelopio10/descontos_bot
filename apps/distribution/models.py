@@ -56,6 +56,38 @@ class SocialChannel(TimestampedModel):
         return self.name
 
 
+class WhatsAppThrottleState(TimestampedModel):
+    destination = models.CharField(
+        'destino',
+        max_length=255,
+        unique=True,
+    )
+    last_reserved_at = models.DateTimeField(
+        'última reserva',
+        null=True,
+        blank=True,
+    )
+    window_started_at = models.DateTimeField(
+        'início da janela horária',
+        null=True,
+        blank=True,
+    )
+    window_count = models.PositiveIntegerField(
+        'reservas na janela',
+        default=0,
+    )
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['destination', 'last_reserved_at']),
+        ]
+        verbose_name = 'estado de cadência do WhatsApp'
+        verbose_name_plural = 'estados de cadência do WhatsApp'
+
+    def __str__(self):
+        return self.destination
+
+
 class Delivery(TimestampedModel):
     class DeliveryStatus(models.TextChoices):
         PENDING = 'pending', 'Em envio'

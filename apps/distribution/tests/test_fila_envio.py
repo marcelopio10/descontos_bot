@@ -67,7 +67,7 @@ class FakeTelegramClient:
 
 
 def _fast_whatsapp_limiter():
-    return WhatsAppRateLimiter(min_interval_seconds=0, max_sends_per_hour=0)
+    return WhatsAppRateLimiter(min_interval_seconds=0, max_sends_per_hour=20)
 
 
 def _fast_telegram_limiter():

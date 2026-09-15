@@ -1,89 +1,155 @@
 import logging
-import threading
 import time
-from decimal import Decimal
+from datetime import timedelta
+from decimal import Decimal, InvalidOperation
+
+from django.db import OperationalError, transaction
+from django.utils import timezone
 
 from apps.curation.services.settings import get_decimal_setting, get_integer_setting
+from apps.distribution.models import WhatsAppThrottleState
 
 
 log = logging.getLogger(__name__)
 
 # Intervalo mínimo padrão entre envios consecutivos no WhatsApp (mesmo destino).
 # Configurável via Setting 'wa_min_interval_seconds'. Faixa sugerida: 8-15s.
-DEFAULT_WA_MIN_INTERVAL_SECONDS = Decimal('10')
+DEFAULT_WA_MIN_INTERVAL_SECONDS = Decimal('15')
 
-# Teto opcional de envios por hora por destino. 0 desativa o teto (padrão).
+# Teto de envios por hora por destino. O limite nunca pode ser desativado.
 # Configurável via Setting 'wa_max_sends_per_hour'.
-DEFAULT_WA_MAX_SENDS_PER_HOUR = 0
+DEFAULT_WA_MAX_SENDS_PER_HOUR = 20
+LOCK_RETRY_LIMIT = 5
+LOCK_RETRY_SLEEP_SECONDS = 0.05
 
 
 class WhatsAppRateLimiter:
-    """Garante um intervalo mínimo entre envios consecutivos no WhatsApp.
-
-    Espelha o design do `TelegramRateLimiter` (por-chat + janela), mas o
-    WhatsApp aqui é single-target por canal (um grupo por vez), então não há
-    necessidade de um limite "global entre chats" como no Telegram — apenas o
-    intervalo mínimo por destino e, opcionalmente, um teto de envios por hora.
-
-    O `run_bot` processa o loop de entrega de forma sequencial (um envio por
-    vez, sem threads), então o lock abaixo é uma proteção barata para uso
-    concorrente futuro — não é o caminho crítico hoje.
-    """
+    """Reserva slots persistentes de envio por destino no SQLite."""
 
     def __init__(
         self,
         min_interval_seconds: float | None = None,
         max_sends_per_hour: int | None = None,
     ):
-        self._lock = threading.Lock()
-        self._last_sent_at: dict[str, float] = {}
-        self._hourly_window: dict[str, list[float]] = {}
-        self._min_interval_seconds = (
-            float(min_interval_seconds)
+        configured_interval = (
+            min_interval_seconds
             if min_interval_seconds is not None
-            else float(
-                get_decimal_setting('wa_min_interval_seconds', DEFAULT_WA_MIN_INTERVAL_SECONDS),
+            else get_decimal_setting(
+                'wa_min_interval_seconds',
+                DEFAULT_WA_MIN_INTERVAL_SECONDS,
             )
         )
-        self._max_sends_per_hour = (
+        self._min_interval_seconds = self._safe_interval(configured_interval)
+        configured_limit = (
             max_sends_per_hour
             if max_sends_per_hour is not None
-            else get_integer_setting('wa_max_sends_per_hour', DEFAULT_WA_MAX_SENDS_PER_HOUR)
+            else get_integer_setting(
+                'wa_max_sends_per_hour',
+                DEFAULT_WA_MAX_SENDS_PER_HOUR,
+            )
         )
+        try:
+            normalized_limit = int(configured_limit)
+        except (TypeError, ValueError):
+            normalized_limit = DEFAULT_WA_MAX_SENDS_PER_HOUR
+        self._max_sends_per_hour = max(1, normalized_limit)
 
     def wait_for_send(self, destination: str) -> None:
         while True:
-            with self._lock:
-                now = time.monotonic()
-                wait_interval = self._interval_wait(destination, now)
-                wait_hourly = self._hourly_wait(destination, now)
-                wait = max(wait_interval, wait_hourly)
-                if wait <= 0:
-                    self._last_sent_at[destination] = now
-                    self._hourly_window.setdefault(destination, []).append(now)
-                    return
-            log.info(
-                'whatsapp_rate_limiter.wait destino=%s espera_segundos=%.1f',
-                destination, wait,
-            )
+            wait = self._try_reserve_slot(destination)
+            if wait <= 0:
+                return
+            log.info('whatsapp_rate_limiter.wait segundos=%.1f', wait)
             time.sleep(wait)
 
-    def _interval_wait(self, destination: str, now: float) -> float:
-        last = self._last_sent_at.get(destination)
-        if last is None:
-            return 0.0
-        return max(0.0, (last + self._min_interval_seconds) - now)
+    def _try_reserve_slot(self, destination: str) -> float:
+        destination = self._validate_destination(destination)
+        for attempt in range(LOCK_RETRY_LIMIT):
+            try:
+                return self._try_reserve_slot_once(destination)
+            except OperationalError as exc:
+                if 'locked' not in str(exc).lower() or attempt == LOCK_RETRY_LIMIT - 1:
+                    raise
+                time.sleep(LOCK_RETRY_SLEEP_SECONDS * (attempt + 1))
+        raise RuntimeError('Falha inesperada ao reservar cadência do WhatsApp.')
 
-    def _hourly_wait(self, destination: str, now: float) -> float:
-        if self._max_sends_per_hour <= 0:
+    def _try_reserve_slot_once(self, destination: str) -> float:
+        with transaction.atomic():
+            state, created = WhatsAppThrottleState.objects.get_or_create(
+                destination=destination,
+            )
+            if not created:
+                state = WhatsAppThrottleState.objects.select_for_update().get(pk=state.pk)
+                # SQLite só adquire o lock de escrita quando há uma escrita.
+                state.save(update_fields=['updated_at'])
+                state = WhatsAppThrottleState.objects.select_for_update().get(pk=state.pk)
+
+            now = timezone.now()
+            window_started_at = state.window_started_at
+            window_count = state.window_count
+            if (
+                window_started_at is None
+                or now >= window_started_at + timedelta(hours=1)
+            ):
+                window_started_at = now
+                window_count = 0
+
+            wait_interval = 0.0
+            if state.last_reserved_at is not None:
+                due_at = state.last_reserved_at + timedelta(
+                    seconds=float(self._min_interval_seconds),
+                )
+                wait_interval = max(0.0, (due_at - now).total_seconds())
+
+            wait_hourly = 0.0
+            if window_count >= self._max_sends_per_hour:
+                due_at = window_started_at + timedelta(hours=1)
+                wait_hourly = max(0.0, (due_at - now).total_seconds())
+
+            wait_seconds = max(wait_interval, wait_hourly)
+            if wait_seconds > 0:
+                if (
+                    state.window_started_at != window_started_at
+                    or state.window_count != window_count
+                ):
+                    state.window_started_at = window_started_at
+                    state.window_count = window_count
+                    state.save(update_fields=[
+                        'window_started_at',
+                        'window_count',
+                        'updated_at',
+                    ])
+                return wait_seconds
+
+            state.window_started_at = window_started_at
+            state.window_count = window_count + 1
+            state.last_reserved_at = now
+            state.save(update_fields=[
+                'window_started_at',
+                'window_count',
+                'last_reserved_at',
+                'updated_at',
+            ])
             return 0.0
-        cutoff = now - 3600.0
-        window = [t for t in self._hourly_window.get(destination, []) if t > cutoff]
-        self._hourly_window[destination] = window
-        if len(window) < self._max_sends_per_hour:
-            return 0.0
-        oldest = window[0]
-        return max(0.0, (oldest + 3600.0) - now)
+
+    @staticmethod
+    def _safe_interval(value: object) -> Decimal:
+        try:
+            interval = Decimal(str(value))
+        except (InvalidOperation, TypeError, ValueError):
+            return DEFAULT_WA_MIN_INTERVAL_SECONDS
+        if not interval.is_finite() or interval < 0:
+            return DEFAULT_WA_MIN_INTERVAL_SECONDS
+        return interval
+
+    @staticmethod
+    def _validate_destination(destination: object) -> str:
+        if not isinstance(destination, str):
+            raise ValueError('Destino do WhatsApp deve ser texto.')
+        normalized = destination.strip()
+        if not normalized or len(normalized) > 255:
+            raise ValueError('Destino do WhatsApp inválido.')
+        return normalized
 
 
 _default_limiter: WhatsAppRateLimiter | None = None

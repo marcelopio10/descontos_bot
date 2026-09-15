@@ -79,10 +79,46 @@ def _resolve_site_offer_max_age_hours(default: int = 36) -> int:
     return parsed if parsed > 0 else default
 
 
+def _resolve_positive_int_env(name: str, default: int) -> int:
+    raw = os.environ.get(name)
+    if raw is None or str(raw).strip() == '':
+        return default
+    try:
+        parsed = int(str(raw).strip())
+    except (TypeError, ValueError):
+        return default
+    return parsed if parsed > 0 else default
+
+
 SITE_OFFER_MAX_AGE_HOURS = _resolve_site_offer_max_age_hours()
 AMAZON_AFFILIATE_TAG = os.environ.get(
     'AMAZON_AFFILIATE_TAG',
     os.environ.get('AMAZON_ASSOCIATE_TAG', 'desconto.bot-20'),
+)
+ML_API_BASE_URL = os.environ.get(
+    'ML_API_BASE_URL',
+    'https://api.mercadolibre.com',
+).rstrip('/')
+ML_API_SITE_ID = os.environ.get('ML_API_SITE_ID', 'MLB').strip().upper() or 'MLB'
+ML_API_ACCESS_TOKEN = os.environ.get('ML_API_ACCESS_TOKEN', '')
+ML_API_CLIENT_ID = os.environ.get('ML_API_CLIENT_ID', '')
+ML_API_CLIENT_SECRET = os.environ.get('ML_API_CLIENT_SECRET', '')
+ML_API_REFRESH_TOKEN = os.environ.get('ML_API_REFRESH_TOKEN', '')
+ML_API_REDIRECT_URI = os.environ.get('ML_API_REDIRECT_URI', '')
+ML_API_TIMEOUT_SECONDS = _resolve_positive_int_env('ML_API_TIMEOUT_SECONDS', 15)
+ML_API_MAX_RETRIES = _resolve_positive_int_env('ML_API_MAX_RETRIES', 3)
+ML_API_PAGE_SIZE = _resolve_positive_int_env('ML_API_PAGE_SIZE', 50)
+ML_API_CONTEXT = os.environ.get('ML_API_CONTEXT', 'channel_marketplace').strip() or 'channel_marketplace'
+ML_API_CONTEXTUAL_PRICE_ENABLED = os.environ.get(
+    'ML_API_CONTEXTUAL_PRICE_ENABLED',
+    'true',
+).lower() in ('1', 'true', 'yes', 'on')
+ML_API_ITEM_CACHE_TTL_SECONDS = _resolve_positive_int_env('ML_API_ITEM_CACHE_TTL_SECONDS', 900)
+ML_API_SELLER_CACHE_TTL_SECONDS = _resolve_positive_int_env('ML_API_SELLER_CACHE_TTL_SECONDS', 86400)
+ML_API_ALLOWED_SELLER_LEVEL_IDS = tuple(
+    value.strip()
+    for value in os.environ.get('ML_API_ALLOWED_SELLER_LEVEL_IDS', '').split(',')
+    if value.strip()
 )
 OFFERS_EXPORT_PATH = os.environ.get(
     'OFFERS_EXPORT_PATH',

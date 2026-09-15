@@ -18,6 +18,13 @@ except ImportError:
     pass
 
 from apps.analytics.services.alertas import enviar_alerta_operador
+from apps.marketplaces.services.mercadolivre_affiliate_adapter import (
+    ExistingAffiliateLinkEngineAdapter,
+)
+from apps.marketplaces.services.mercadolivre_product_normalizer import (
+    MercadoLivreProductNormalizer,
+)
+from apps.offers.services.normalizer import OfferNormalizationError
 from scrapers.base import HTTP_EXCEPTIONS, BaseScraper, build_impersonated_session
 
 log = logging.getLogger(__name__)
@@ -27,6 +34,15 @@ MAX_PAGES = 5
 MIN_DISCOUNT = 5
 DELAY_MIN = 2.0
 DELAY_MAX = 4.5
+_ALLOWED_FETCH_HOSTS = frozenset({
+    'meli.la',
+    'mercadolivre.com.br',
+    'www.mercadolivre.com.br',
+    'lista.mercadolivre.com.br',
+    'produto.mercadolivre.com.br',
+})
+_REDIRECT_STATUS_CODES = frozenset({301, 302, 303, 307, 308})
+_MAX_REDIRECT_HOPS = 3
 
 
 def _normalize_for_match(value: str) -> str:
@@ -34,6 +50,55 @@ def _normalize_for_match(value: str) -> str:
     folded = unicodedata.normalize('NFKD', value or '')
     folded = ''.join(char for char in folded if not unicodedata.combining(char))
     return re.sub(r'\s+', ' ', folded).strip().lower()
+
+
+def _is_allowed_fetch_url(value: str) -> bool:
+    if not isinstance(value, str) or not value.strip():
+        return False
+    if _contains_url_control(value):
+        return False
+    try:
+        parts = urllib.parse.urlsplit(value)
+        port = parts.port
+    except (TypeError, ValueError):
+        return False
+    decoded_path = _decode_fetch_path(parts.path)
+    return (
+        parts.scheme == 'https'
+        and parts.hostname is not None
+        and parts.hostname.lower() in _ALLOWED_FETCH_HOSTS
+        and port is None
+        and parts.username is None
+        and parts.password is None
+        and bool(parts.path)
+        and decoded_path is not None
+        and decoded_path == parts.path
+        and '\\' not in decoded_path
+        and not any(segment in {'.', '..'} for segment in decoded_path.split('/'))
+        and not parts.fragment
+    )
+
+
+def _contains_url_control(value: str) -> bool:
+    decoded = value
+    for _ in range(5):
+        if any(ord(char) < 32 or ord(char) == 127 for char in decoded):
+            return True
+        unquoted = urllib.parse.unquote(decoded)
+        if unquoted == decoded:
+            return False
+        decoded = unquoted
+    return any(ord(char) < 32 or ord(char) == 127 for char in decoded)
+
+
+def _decode_fetch_path(path: str) -> str | None:
+    decoded = path
+    for _ in range(5):
+        unquoted = urllib.parse.unquote(decoded)
+        if unquoted == decoded:
+            return decoded
+        decoded = unquoted
+    return None
 
 
 @dataclass
@@ -109,20 +174,63 @@ class MercadoLivreScraper(BaseScraper):
         # anti-bot (mesma abordagem do scrapers/amazon.py); fallback gracioso
         # para requests puro se curl_cffi não estiver instalado.
         self.session = build_impersonated_session('chrome124')
+        self._affiliate_adapter = ExistingAffiliateLinkEngineAdapter(
+            affiliate_tag=self.affiliate_tag,
+            ml_cookie=self.ml_cookie,
+            ml_csrf=self.ml_csrf,
+            session_factory=lambda: build_impersonated_session('chrome124'),
+            alert_callback=self._exibir_alerta_cookie,
+        )
+
+    def _fetch_ml_response(self, url: str):
+        current_url = url
+        for hop in range(_MAX_REDIRECT_HOPS + 1):
+            if not _is_allowed_fetch_url(current_url):
+                raise ValueError('URL de coleta do Mercado Livre não permitida.')
+            response = self.fetch_with_retry(
+                self.session,
+                current_url,
+                headers=self.headers,
+                timeout=20,
+                allow_redirects=False,
+            )
+            status = getattr(response, 'status_code', None)
+            if isinstance(status, bool) or not isinstance(status, int):
+                raise ValueError('Resposta HTTP inválida na coleta do Mercado Livre.')
+            if status not in _REDIRECT_STATUS_CODES:
+                return response
+            if hop >= _MAX_REDIRECT_HOPS:
+                raise ValueError('Cadeia de redirecionamento do Mercado Livre excedeu o limite.')
+            headers = getattr(response, 'headers', {}) or {}
+            location = headers.get('Location') or headers.get('location')
+            if not isinstance(location, str) or not location.strip():
+                raise ValueError('Redirecionamento do Mercado Livre sem destino válido.')
+            if _contains_url_control(location):
+                raise ValueError('Redirecionamento do Mercado Livre contém controle inválido.')
+            current_url = urllib.parse.urljoin(current_url, location.strip())
+        raise ValueError('Cadeia de redirecionamento do Mercado Livre inválida.')
 
     def get_html(self, url: str) -> str:
         try:
-            resp = self.fetch_with_retry(self.session, url, headers=self.headers, timeout=20)
+            resp = self._fetch_ml_response(url)
             if resp.status_code == 403:
                 self.blocked = True
-                self.error_message = f'Acesso negado 403 em {url}'
-                log.error('Acesso negado 403. URL: %s', url)
+                self.error_message = 'Acesso negado 403 na coleta do Mercado Livre.'
+                log.error('Acesso negado 403 na coleta do Mercado Livre.')
                 return ''
             resp.raise_for_status()
             return resp.text
+        except ValueError as exc:
+            self.error_message = 'URL ou redirecionamento inválido na coleta do Mercado Livre.'
+            log.error('URL/redirecionamento rejeitado no Mercado Livre: %s', type(exc).__name__)
+            return ''
         except HTTP_EXCEPTIONS as exc:
-            self.error_message = f'Erro ao acessar {url}: {exc}'
-            log.error('Erro ao acessar %s: %s', url, exc)
+            self.error_message = 'Falha HTTP na coleta do Mercado Livre.'
+            log.error('Falha HTTP na coleta do Mercado Livre: %s', type(exc).__name__)
+            return ''
+        except Exception as exc:  # noqa: BLE001 - fronteira externa fail-closed
+            self.error_message = 'Falha inesperada na coleta do Mercado Livre.'
+            log.error('Falha inesperada na coleta do Mercado Livre: %s', type(exc).__name__)
             return ''
 
     def scrape_daily_deals(self, max_pages: int = MAX_PAGES) -> list[dict]:
@@ -374,26 +482,37 @@ class MercadoLivreScraper(BaseScraper):
                 flags=re.IGNORECASE,
             ).strip()
             permalink = title_el.get('href', '')
-            if 'click1.mercadolivre' in permalink or 'mclics' in permalink:
+            if not isinstance(permalink, str) or not permalink:
+                return None
+            if _contains_url_control(permalink):
+                return None
+            is_tracking_wrapper = 'click1.mercadolivre' in permalink or 'mclics' in permalink
+            if is_tracking_wrapper:
                 parsed = urllib.parse.urlparse(permalink)
                 qs = urllib.parse.parse_qs(parsed.query)
-                if 'url' in qs:
-                    permalink = qs['url'][0]
-
-            if '?' in permalink:
-                permalink = permalink.split('?')[0]
-            if '#' in permalink:
-                permalink = permalink.split('#')[0]
+                target = qs.get('url', [None])[0]
+                if not isinstance(target, str) or not target or _contains_url_control(target):
+                    return None
+                permalink = target
+            elif '?' in permalink or '#' in permalink:
+                return None
             if not permalink or not title:
                 return None
 
-            item_id = 'MLB000000000'
+            item_id = ''
             match = re.search(r'(MLB[\-]?\d+)', permalink)
             if match:
                 item_id = match.group(1).replace('-', '')
             else:
-                fallback_id = ''.join(filter(str.isalnum, title[:20]))
-                item_id = f'MLB_{fallback_id}'
+                return None
+
+            try:
+                permalink = MercadoLivreProductNormalizer._canonical_product_url(
+                    item_id,
+                    permalink,
+                )
+            except OfferNormalizationError:
+                return None
 
             price_fraction = (
                 card.select_one('.poly-price__current .andes-money-amount__fraction')
@@ -479,7 +598,7 @@ class MercadoLivreScraper(BaseScraper):
                 review_count=review_count,
             )
         except Exception as exc:
-            log.debug('Erro ao parsear card: %s', exc)
+            log.debug('Erro ao parsear card: %s', type(exc).__name__)
             return None
 
     def _extract_reviews(self, card: BeautifulSoup) -> tuple[float, int]:
@@ -529,50 +648,7 @@ class MercadoLivreScraper(BaseScraper):
         enviar_alerta_operador(mensagem, categoria='ml_cookie_expirado')
 
     def _gerar_link_afiliado_oficial(self, permalink: str) -> str:
-        if not permalink:
-            return permalink
-        if not self.ml_cookie or not self.ml_csrf or not self.affiliate_tag:
-            self._exibir_alerta_cookie(motivo='credenciais_nao_configuradas')
-            return permalink
-
-        url_api = 'https://www.mercadolivre.com.br/affiliate-program/api/v2/stripe/user/links'
-        headers = {
-            'accept': 'application/json, text/plain, */*',
-            'content-type': 'application/json',
-            'cookie': self.ml_cookie,
-            'origin': 'https://www.mercadolivre.com.br',
-            'referer': permalink,
-            'user-agent': (
-                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                'AppleWebKit/537.36 (KHTML, like Gecko) '
-                'Chrome/147.0.0.0 Safari/537.36'
-            ),
-            'x-csrf-token': self.ml_csrf,
-        }
-        data = {
-            'url': permalink,
-            'tag': self.affiliate_tag,
-        }
-
-        try:
-            # Sessão dedicada, isolada de `self.session` (achado 2026-07-22): a
-            # sessão de raspagem acumula cookies novos a cada página de listagem
-            # visitada — inclusive um `_csrf` fresco do próprio Mercado Livre, que
-            # não bate mais com o `ML_CSRF_TOKEN` estático do `.env`. Reusar
-            # `self.session.post` aqui mescla esse cookie novo por cima do
-            # `cookie` explícito acima, quebrando o CSRF e derrubando a chamada em
-            # 401/403 mesmo com credenciais válidas — isolado numa sessão nova,
-            # sem esse acúmulo, a mesma credencial funciona de forma consistente.
-            resp = build_impersonated_session('chrome124').post(url_api, headers=headers, json=data, timeout=10)
-            if resp.ok:
-                return resp.json().get('short_url', permalink)
-            if resp.status_code in (401, 403):
-                self._exibir_alerta_cookie(motivo=f'rejeitado_pelo_ml_http_{resp.status_code}')
-            else:
-                log.error('Erro na API de afiliados HTTP %s: %s', resp.status_code, resp.text)
-        except Exception as exc:
-            log.error('Erro ao gerar link de afiliado oficial: %s', exc)
-        return permalink
+        return self._affiliate_adapter.generate(permalink)
 
 
 def build_from_env() -> MercadoLivreScraper:

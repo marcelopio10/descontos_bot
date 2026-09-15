@@ -22,6 +22,107 @@ class MercadoLivreScraperSessionTests(SimpleTestCase):
 
         mock_builder.assert_called_once_with('chrome124')
 
+    def test_get_html_rejects_external_initial_url_before_transport(self):
+        scraper = MercadoLivreScraper()
+        scraper.session = MagicMock()
+
+        self.assertEqual(scraper.get_html('https://evil.example/private'), '')
+        scraper.session.get.assert_not_called()
+
+    def test_get_html_follows_only_allowlisted_https_redirects(self):
+        redirect = MagicMock(status_code=302, headers={
+            'Location': 'https://www.mercadolivre.com.br/ofertas?page=1',
+        })
+        success = MagicMock(status_code=200, headers={}, text='<html>ok</html>')
+        scraper = MercadoLivreScraper()
+        scraper.session = MagicMock()
+        scraper.session.get.side_effect = [redirect, success]
+
+        self.assertEqual(scraper.get_html('https://meli.la/abc'), '<html>ok</html>')
+        self.assertEqual(scraper.session.get.call_count, 2)
+        for call in scraper.session.get.call_args_list:
+            self.assertFalse(call.kwargs['allow_redirects'])
+
+    def test_get_html_does_not_fetch_an_external_redirect_target(self):
+        redirect = MagicMock(status_code=302, headers={
+            'Location': 'https://evil.example/private',
+        })
+        scraper = MercadoLivreScraper()
+        scraper.session = MagicMock()
+        scraper.session.get.return_value = redirect
+
+        self.assertEqual(scraper.get_html('https://meli.la/abc'), '')
+        scraper.session.get.assert_called_once()
+        self.assertFalse(scraper.session.get.call_args.kwargs['allow_redirects'])
+
+    def test_fetch_with_retry_disables_redirects_by_default(self):
+        session = MagicMock()
+        session.get.return_value = MagicMock(status_code=200)
+        scraper = MercadoLivreScraper()
+
+        scraper.fetch_with_retry(
+            session,
+            'https://meli.la/abc',
+            headers={},
+        )
+
+        self.assertFalse(session.get.call_args.kwargs['allow_redirects'])
+
+    def test_get_html_sanitizes_unexpected_transport_exception(self):
+        session = MagicMock()
+        session.get.side_effect = RuntimeError('secret-sentinel')
+        scraper = MercadoLivreScraper()
+        scraper.session = session
+
+        with patch('scrapers.base.time.sleep'), self.assertLogs('scrapers.mercado_livre', level='ERROR') as logs:
+            result = scraper.get_html('https://meli.la/abc')
+
+        self.assertEqual(result, '')
+        self.assertEqual(scraper.error_message, 'Falha inesperada na coleta do Mercado Livre.')
+        self.assertNotIn('secret-sentinel', '\n'.join(logs.output))
+
+    def test_fetch_with_retry_sanitizes_arbitrary_exception_when_called_directly(self):
+        session = MagicMock()
+        session.get.side_effect = RuntimeError('RAW_URL_TEXT_SENTINEL')
+        scraper = MercadoLivreScraper()
+
+        with patch('scrapers.base.time.sleep'), self.assertLogs('scrapers.base', level='WARNING') as logs:
+            with self.assertRaises(RuntimeError) as context:
+                scraper.fetch_with_retry(session, 'https://meli.la/abc', headers={})
+
+        self.assertEqual(str(context.exception), 'Falha HTTP na coleta.')
+        self.assertIsNone(context.exception.__cause__)
+        self.assertIsNone(context.exception.__context__)
+        self.assertNotIn('RAW_URL_TEXT_SENTINEL', '\n'.join(logs.output))
+
+    def test_fetch_rejects_encoded_control_and_path_before_transport(self):
+        for url in (
+            'https://www.mercadolivre.com.br/ofertas%0a',
+            'https://www.mercadolivre.com.br/ofertas%2Fprivado',
+        ):
+            with self.subTest(url=url):
+                scraper = MercadoLivreScraper()
+                scraper.session = MagicMock()
+
+                self.assertEqual(scraper.get_html(url), '')
+                scraper.session.get.assert_not_called()
+
+    def test_fetch_status_subclass_is_not_logged_as_raw_value(self):
+        class SneakyInt(int):
+            def __str__(self):
+                return 'STATUS_SECRET_SENTINEL'
+
+        session = MagicMock()
+        session.get.return_value = MagicMock(status_code=SneakyInt(500))
+        scraper = MercadoLivreScraper()
+
+        with patch('scrapers.base.time.sleep'), self.assertLogs('scrapers.base', level='WARNING') as logs:
+            with self.assertRaises(RuntimeError) as context:
+                scraper.fetch_with_retry(session, 'https://meli.la/abc', headers={})
+
+        self.assertEqual(str(context.exception), 'Resposta HTTP inválida na coleta.')
+        self.assertNotIn('STATUS_SECRET_SENTINEL', '\n'.join(logs.output))
+
 
 class MercadoLivreCookieAlertTests(SimpleTestCase):
     """`_gerar_link_afiliado_oficial` usa uma sessão ISOLADA (achado 2026-07-22:
@@ -50,15 +151,17 @@ class MercadoLivreCookieAlertTests(SimpleTestCase):
 
         with self._patch_affiliate_session(response), patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
             resultados = [
-                scraper._gerar_link_afiliado_oficial(f'https://produto.mercadolivre.com.br/x{i}')
+                scraper._gerar_link_afiliado_oficial(
+                    f'https://produto.mercadolivre.com.br/MLB-100000000{i}-x',
+                )
                 for i in range(3)
             ]
 
         # sem link de afiliado, cai no fallback (retorna o permalink original)
         self.assertEqual(resultados, [
-            'https://produto.mercadolivre.com.br/x0',
-            'https://produto.mercadolivre.com.br/x1',
-            'https://produto.mercadolivre.com.br/x2',
+            'https://produto.mercadolivre.com.br/MLB-1000000000-x',
+            'https://produto.mercadolivre.com.br/MLB-1000000001-x',
+            'https://produto.mercadolivre.com.br/MLB-1000000002-x',
         ])
         mock_alert.assert_called_once()
         self.assertEqual(mock_alert.call_args.kwargs.get('categoria'), 'ml_cookie_expirado')
@@ -68,7 +171,7 @@ class MercadoLivreCookieAlertTests(SimpleTestCase):
         response = MagicMock(ok=False, status_code=403)
 
         with self._patch_affiliate_session(response), patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
-            scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/y')
+            scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/MLB-1000000001-y')
 
         mensagem = mock_alert.call_args.args[0]
         self.assertNotIn(FAKE_ML_COOKIE, mensagem)
@@ -81,8 +184,8 @@ class MercadoLivreCookieAlertTests(SimpleTestCase):
 
         with patch('scrapers.mercado_livre.build_impersonated_session') as mock_builder, \
                 patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
-            scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/a')
-            scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/b')
+            scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/MLB-1000000002-a')
+            scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/MLB-1000000003-b')
 
         mock_alert.assert_called_once()
         self.assertEqual(mock_alert.call_args.kwargs.get('categoria'), 'ml_cookie_expirado')
@@ -93,11 +196,12 @@ class MercadoLivreCookieAlertTests(SimpleTestCase):
         scraper = self._build_scraper_with_fake_credentials()
         response = MagicMock(
             ok=True,
+            status_code=200,
             json=lambda: {'short_url': 'https://mercadolivre.com/sec/fake-short'},
         )
 
         with self._patch_affiliate_session(response), patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
-            resultado = scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/c')
+            resultado = scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/MLB-1000000004-c')
 
         self.assertEqual(resultado, 'https://mercadolivre.com/sec/fake-short')
         mock_alert.assert_not_called()
@@ -110,7 +214,7 @@ class MercadoLivreCookieAlertTests(SimpleTestCase):
         for _ in range(2):
             scraper = self._build_scraper_with_fake_credentials()
             with self._patch_affiliate_session(response), patch('scrapers.mercado_livre.enviar_alerta_operador') as mock_alert:
-                scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/d')
+                scraper._gerar_link_afiliado_oficial('https://produto.mercadolivre.com.br/MLB-1000000005-d')
             mock_alert.assert_called_once()
 
 
@@ -222,3 +326,24 @@ class SocialCardScrapingTests(SimpleTestCase):
             payload['link_afiliado'],
             'https://produto.mercadolivre.com.br/MLB-5555555555-slug-_JM#afiliado',
         )
+
+    def test_href_externo_e_descartado_antes_do_motor_afiliado(self):
+        card = self._card('Produto perigoso', 'MLB-5555555555')
+        card['href'] = 'javascript:alert(1)//MLB-5555555555'
+        scraper = self._scraper(self._html('Produto perigoso', [card]))
+
+        self.assertIsNone(scraper.scrape_social_card('https://meli.la/abc'))
+
+    def test_href_com_query_ou_controle_codificado_e_descartado_antes_do_motor(self):
+        for href in (
+            'https://produto.mercadolivre.com.br/MLB-5555555555?x=\n',
+            'https://produto.mercadolivre.com.br/MLB-5555555555?x=%0A',
+            'https://produto.mercadolivre.com.br/MLB-5555555555?',
+            'https://produto.mercadolivre.com.br/MLB-5555555555#frag',
+        ):
+            with self.subTest(href=href):
+                card = self._card('Produto perigoso', 'MLB-5555555555')
+                card['href'] = href
+                scraper = self._scraper(self._html('Produto perigoso', [card]))
+
+                self.assertIsNone(scraper.scrape_social_card('https://meli.la/abc'))

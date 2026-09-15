@@ -1,4 +1,6 @@
 import logging
+from dataclasses import replace
+from datetime import datetime
 
 from django.utils import timezone
 from django.utils.text import slugify
@@ -13,9 +15,14 @@ MAX_SLUG_LENGTH = 220
 MAX_SLUG_BASE_LENGTH = 200
 
 
-def save_normalized_offer(normalized_offer: NormalizedOffer) -> tuple[Offer, bool]:
-    now = timezone.now()
+def save_normalized_offer(
+    normalized_offer: NormalizedOffer,
+    *,
+    observed_at: datetime | None = None,
+) -> tuple[Offer, bool]:
+    now = observed_at or timezone.now()
     defaults = {
+        'offer_hash': normalized_offer.offer_hash,
         'marketplace': normalized_offer.marketplace,
         'external_id': normalized_offer.external_id,
         'title': normalized_offer.title,
@@ -33,16 +40,38 @@ def save_normalized_offer(normalized_offer: NormalizedOffer) -> tuple[Offer, boo
         'raw_payload': normalized_offer.raw_payload,
         'review_rating': normalized_offer.review_rating,
         'review_count': normalized_offer.review_count,
+        'seller_id': normalized_offer.seller_id,
+        'seller_name': normalized_offer.seller_name,
+        'currency_code': normalized_offer.currency_code,
+        'listing_status': normalized_offer.listing_status,
+        'item_condition': normalized_offer.condition,
+        'available_quantity': normalized_offer.available_quantity,
+        'collection_source': normalized_offer.collection_source,
         'last_seen_at': now,
         'category_source': '',
     }
-    offer, created = Offer.objects.get_or_create(
-        offer_hash=normalized_offer.offer_hash,
-        defaults={
-            **defaults,
-            'first_seen_at': now,
-        },
-    )
+    offer = Offer.objects.filter(offer_hash=normalized_offer.offer_hash).first()
+    if offer is None and normalized_offer.marketplace.code == 'mercadolivre':
+        offer = (
+            Offer.objects
+            .filter(
+                marketplace=normalized_offer.marketplace,
+                external_id=normalized_offer.external_id,
+            )
+            .order_by('id')
+            .first()
+        )
+
+    if offer is None:
+        offer, created = Offer.objects.get_or_create(
+            offer_hash=normalized_offer.offer_hash,
+            defaults={
+                **defaults,
+                'first_seen_at': now,
+            },
+        )
+    else:
+        created = False
     if created:
         _ensure_public_slug(offer)
         _classify(offer)
@@ -118,3 +147,110 @@ def _build_unique_slug(offer: Offer) -> str:
 
 def _slug_exists(slug: str, offer: Offer) -> bool:
     return Offer.objects.filter(slug=slug).exclude(id=offer.id).exists()
+
+
+class OfferRepository:
+    """Persistência em duas fases do fluxo API do Mercado Livre."""
+
+    def _find_existing(self, normalized_offer: NormalizedOffer) -> Offer | None:
+        offer = Offer.objects.filter(offer_hash=normalized_offer.offer_hash).first()
+        if offer is not None:
+            return offer
+        if normalized_offer.marketplace.code == 'mercadolivre' and normalized_offer.external_id:
+            return (
+                Offer.objects
+                .filter(
+                    marketplace=normalized_offer.marketplace,
+                    external_id=normalized_offer.external_id,
+                )
+                .order_by('id')
+                .first()
+            )
+        return None
+
+    def save_original(
+        self,
+        normalized_offer: NormalizedOffer,
+        *,
+        run,
+        sequence: int,
+        observed_at: datetime,
+        source: str = '',
+    ) -> tuple[Offer, object, bool]:
+        from django.db import transaction
+        from apps.scraping.models import ScrapingItemResult
+
+        existing = self._find_existing(normalized_offer)
+        if existing is not None and existing.affiliate_url:
+            normalized_offer = replace(
+                normalized_offer,
+                affiliate_url=existing.affiliate_url,
+            )
+
+        with transaction.atomic():
+            offer, created = save_normalized_offer(
+                normalized_offer,
+                observed_at=observed_at,
+            )
+            item_result, _ = ScrapingItemResult.objects.update_or_create(
+                run=run,
+                sequence=sequence,
+                defaults={
+                    'external_id': normalized_offer.external_id,
+                    'original_url': normalized_offer.product_url,
+                    'source': source or normalized_offer.collection_source,
+                    'status': ScrapingItemResult.Status.PENDING,
+                    'reason_code': '',
+                    'error_message': '',
+                    'offer': offer,
+                    'processed_at': observed_at,
+                },
+            )
+        return offer, item_result, created
+
+    def attach_affiliate(
+        self,
+        offer: Offer,
+        *,
+        affiliate_url: str,
+        generated: bool,
+        run_item,
+        observed_at: datetime,
+        error_code: str = '',
+        error_message: str = '',
+    ) -> Offer:
+        from django.db import transaction
+        from apps.scraping.models import ScrapingItemResult
+
+        usable_generated = bool(
+            generated
+            and affiliate_url
+            and affiliate_url != offer.product_url
+        )
+        with transaction.atomic():
+            if usable_generated:
+                Offer.objects.filter(pk=offer.pk).update(
+                    affiliate_url=affiliate_url,
+                    updated_at=observed_at,
+                )
+                offer.affiliate_url = affiliate_url
+            run_item.status = (
+                ScrapingItemResult.Status.ACCEPTED
+                if usable_generated
+                else ScrapingItemResult.Status.AFFILIATE_FAILED
+            )
+            run_item.reason_code = (
+                ''
+                if usable_generated
+                else (error_code or 'affiliate_generation_failed')
+            )
+            run_item.error_message = '' if usable_generated else error_message[:2000]
+            run_item.processed_at = observed_at
+            run_item.save(update_fields=[
+                'status',
+                'reason_code',
+                'error_message',
+                'processed_at',
+                'updated_at',
+            ])
+        return offer

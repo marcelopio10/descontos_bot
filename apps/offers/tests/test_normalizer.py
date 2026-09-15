@@ -1,7 +1,11 @@
 from django.test import TestCase
 
 from apps.marketplaces.models import Marketplace
-from apps.offers.services.normalizer import build_produto_canonico_id, normalize_offer
+from apps.offers.services.normalizer import (
+    OfferNormalizationError,
+    build_produto_canonico_id,
+    normalize_offer,
+)
 
 
 class OfferNormalizerTests(TestCase):
@@ -160,11 +164,44 @@ class ProdutoCanonicoIdTests(TestCase):
                 'id': 'MLB123456789',
                 'nome': 'Produto ML',
                 'preco': '199,90',
-                'link_direto': 'https://www.mercadolivre.com.br/produto',
+                'link_direto': 'https://www.mercadolivre.com.br/MLB-123456789-produto',
             },
         )
 
         self.assertEqual(normalized.produto_canonico_id, 'mercadolivre:MLB123456789')
+
+    def test_mercadolivre_product_url_is_allowlisted_and_id_bound(self):
+        marketplace = Marketplace.objects.create(
+            name='Mercado Livre',
+            code='mercadolivre',
+            base_url='https://www.mercadolivre.com.br',
+        )
+        for product_url in (
+            'javascript:alert(1)//MLB123456789',
+            'https://evil.example/MLB123456789',
+            'https://www.mercadolivre.com.br/MLB-123456780-outro-produto',
+            'https://www.mercadolivre.com.br/MLB-123456789/MLB-987654321',
+            'https://www.mercadolivre.com.br/MLB-123456789/../MLB-987654321',
+            'https://www.mercadolivre.com.br/foo/MLB-123456789/bar',
+            'https://www.mercadolivre.com.br/MLB-123456789%2Fextra',
+            'https://www.mercadolivre.com.br/MLB-123456789-foo-MLB987654321',
+            'https://www.mercadolivre.com.br/MLB-123456789-%2e%2e',
+            'https://www.mercadolivre.com.br/MLB-123456789-%3fquery',
+            '\nhttps://www.mercadolivre.com.br/MLB-123456789-produto',
+            'https://www.mercadolivre.com.br/MLB-123456789-produto\t',
+            'https://www.mercadolivre.com.br/MLB%31',
+        ):
+            with self.subTest(product_url=product_url):
+                with self.assertRaises(OfferNormalizationError):
+                    normalize_offer(
+                        marketplace,
+                        {
+                            'id': 'MLB123456789',
+                            'nome': 'Produto ML',
+                            'preco': '199,90',
+                            'link_direto': product_url,
+                        },
+                    )
 
     def test_build_produto_canonico_id_returns_empty_without_any_identifier(self):
         self.assertEqual(build_produto_canonico_id('mercadolivre', '', ''), '')

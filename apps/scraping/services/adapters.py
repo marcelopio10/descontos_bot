@@ -1,13 +1,16 @@
 from __future__ import annotations
 
 import logging
+import os
 from dataclasses import dataclass
 from typing import Protocol
 
 from apps.curation.services.settings import get_integer_setting
+from apps.panel.models import Setting
 from apps.marketplaces.services.search_query_planner import SearchQuery, build_search_plan
 from apps.marketplaces.services.search_provenance import sanitize_search_provenance
 from apps.marketplaces.services.search_radar import build_search_radar
+from apps.scraping.services.mercadolivre_api_adapter import MercadoLivreApiAdapter
 from scrapers import amazon, mercado_livre, shopee
 from scrapers.category_targets import flatten_urls, get_targets
 
@@ -17,6 +20,7 @@ log = logging.getLogger(__name__)
 CATEGORY_SCRAPING_FLAG = 'category_scraping_enabled'
 DIRECTED_QUERY_FLAG = 'directed_search_enabled'
 DIRECTED_QUERY_LIMIT = 6
+MERCADOLIVRE_API_SEARCH_FLAG = 'mercadolivre_api_search_enabled'
 
 # `DIRECTED_FALLBACK_CATEGORY_LIMIT = 2` foi removido no achado B1 (2026-08-18):
 # truncava `flatten_urls()` sempre nas 2 primeiras URLs, na mesma ordem, todo ciclo,
@@ -122,6 +126,31 @@ def _category_scraping_enabled() -> bool:
 
 def _directed_search_enabled() -> bool:
     return bool(get_integer_setting(DIRECTED_QUERY_FLAG, 1))
+
+
+def _mercadolivre_api_search_enabled() -> bool:
+    raw = os.environ.get('MERCADOLIVRE_API_SEARCH_ENABLED', '').strip().lower()
+    if raw:
+        if raw in {'1', 'true', 'yes', 'on'}:
+            setting_value = None
+            setting_error = False
+            try:
+                setting_value = Setting.objects.filter(
+                    key=MERCADOLIVRE_API_SEARCH_FLAG,
+                ).values_list('value', flat=True).first()
+            except Exception:  # noqa: BLE001 - configuração externa fail-closed
+                setting_error = True
+            if setting_error:
+                raise ValueError('Configuração da flag API ML indisponível.')
+            if setting_value is None:
+                return True
+            if not isinstance(setting_value, str):
+                raise ValueError('Configuração da flag API ML inválida.')
+            return setting_value.strip() == '1'
+        if raw in {'0', 'false', 'no', 'off'}:
+            return False
+        raise ValueError('MERCADOLIVRE_API_SEARCH_ENABLED deve ser booleano.')
+    return False
 
 
 def _competitor_radar_payloads(marketplace_code: str) -> list[dict]:
@@ -238,7 +267,9 @@ def _payload_number(payload: dict, *keys: str) -> float:
     return 0.0
 
 
-def build_adapter(marketplace_code: str) -> ScraperAdapter:
+def build_adapter(marketplace_code: str) -> ScraperAdapter | MercadoLivreApiAdapter:
+    if marketplace_code == 'mercadolivre' and _mercadolivre_api_search_enabled():
+        return MercadoLivreApiAdapter()
     adapters = {
         'mercadolivre': lambda: mercado_livre.build_from_env(),
         'amazon': lambda: amazon.build_from_env(),

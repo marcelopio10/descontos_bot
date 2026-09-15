@@ -6,7 +6,7 @@ from typing import Any
 # concorrente e resolvido pelo radar. Como as demais, é só rótulo de origem —
 # nada aqui identifica grupo ou remetente, e os campos de identidade continuam
 # sendo removidos em `build_sanitized_raw_payload`.
-ALLOWED_SEARCH_SOURCES = frozenset({'radar_brand', 'radar_category', 'radar_price_band', 'radar_coupon_signal', 'priority_catalog', 'generic_fallback', 'competitor_radar'})
+ALLOWED_SEARCH_SOURCES = frozenset({'radar_brand', 'radar_category', 'radar_price_band', 'radar_coupon_signal', 'priority_catalog', 'generic_fallback', 'competitor_radar', 'category_target', 'api_fallback'})
 
 
 def sanitize_search_provenance(value: dict[str, Any] | None) -> dict[str, Any]:
@@ -19,11 +19,18 @@ def sanitize_search_provenance(value: dict[str, Any] | None) -> dict[str, Any]:
         if raw is None:
             continue
         text = str(raw).strip()
-        if not text or len(text) > 160 or '@g.us' in text or 'http://' in text or 'https://' in text:
+        normalized_text = text.casefold()
+        if (
+            not text
+            or len(text) > 160
+            or '@g.us' in normalized_text
+            or 'http://' in normalized_text
+            or 'https://' in normalized_text
+        ):
             continue
-        if key == 'source_kind' and text not in ALLOWED_SEARCH_SOURCES:
+        if key == 'source_kind' and normalized_text not in ALLOWED_SEARCH_SOURCES:
             continue
-        result[key] = text.lower() if key not in {'source_kind', 'price_band'} else text
+        result[key] = normalized_text if key != 'price_band' else text
     return result
 
 
@@ -34,6 +41,8 @@ def build_sanitized_raw_payload(payload: dict[str, Any]) -> dict[str, Any]:
         safe['search_provenance'] = provenance
     else:
         safe.pop('search_provenance', None)
-    for key in ('raw_text', 'group_jid', 'sender_hash', 'external_message_id'):
-        safe.pop(key, None)
+    sensitive_keys = {'raw_text', 'group_jid', 'sender_hash', 'external_message_id'}
+    for key in list(safe):
+        if isinstance(key, str) and key.casefold() in sensitive_keys:
+            safe.pop(key, None)
     return safe

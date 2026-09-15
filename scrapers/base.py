@@ -59,20 +59,59 @@ class BaseScraper(ABC):
         ]
         return any(marker in content for marker in blocked_markers)
 
-    def fetch_with_retry(self, session, url: str, headers: dict, timeout: int = 20) -> requests.Response:
-        last_exc = None
+    def fetch_with_retry(
+        self,
+        session,
+        url: str,
+        headers: dict,
+        timeout: int = 20,
+        allow_redirects: bool = False,
+    ) -> requests.Response:
+        last_failure = False
         for attempt, backoff in enumerate([0, 2, 4, 8], start=1):
             if backoff:
                 time.sleep(backoff)
+            invalid_status_type = None
             try:
-                response = session.get(url, headers=headers, timeout=timeout)
-                if response.status_code < 500:
+                response = session.get(
+                    url,
+                    headers=headers,
+                    timeout=timeout,
+                    allow_redirects=allow_redirects,
+                )
+                raw_status = response.status_code
+                if type(raw_status) is not int or not 100 <= raw_status <= 599:
+                    invalid_status_type = type(raw_status).__name__
+                elif raw_status < 500:
                     return response
-                last_exc = requests.HTTPError(f'HTTP {response.status_code}')
-                log.warning('Tentativa %d falhou para %s: HTTP %s', attempt, url, response.status_code)
+                else:
+                    last_failure = True
+                    log.warning(
+                        'Tentativa %d falhou na coleta HTTP: status=%d',
+                        attempt,
+                        raw_status,
+                    )
             except HTTP_EXCEPTIONS as exc:
-                last_exc = exc
-                log.warning('Tentativa %d falhou para %s: %s', attempt, url, exc)
-        if last_exc:
-            raise last_exc
+                last_failure = True
+                log.warning(
+                    'Tentativa %d falhou na coleta HTTP: reason=%s',
+                    attempt,
+                    type(exc).__name__,
+                )
+            except Exception as exc:  # noqa: BLE001 - fronteira externa fail-closed
+                last_failure = True
+                log.warning(
+                    'Tentativa %d falhou na coleta HTTP: reason=%s',
+                    attempt,
+                    type(exc).__name__,
+                )
+            if invalid_status_type is not None:
+                log.warning(
+                    'Tentativa %d falhou na coleta HTTP: status_type=%s',
+                    attempt,
+                    invalid_status_type,
+                )
+                raise RuntimeError('Resposta HTTP inválida na coleta.') from None
+        if last_failure:
+            raise RuntimeError('Falha HTTP na coleta.') from None
         raise RuntimeError('Falha inesperada no retry HTTP.')

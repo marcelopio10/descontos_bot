@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from typing import Any
-from urllib.parse import urlsplit, urlunsplit
+from urllib.parse import unquote, urlsplit, urlunsplit
 
 from apps.marketplaces.models import Marketplace
 from apps.marketplaces.services.search_provenance import build_sanitized_raw_payload
@@ -14,6 +14,12 @@ from apps.marketplaces.services.search_provenance import build_sanitized_raw_pay
 ASIN_RE = re.compile(r'/(?:dp|gp/product|exec/obidos/ASIN)/([A-Z0-9]{10})')
 PLAIN_ASIN_RE = re.compile(r'^[A-Z0-9]{10}$')
 MAX_REVIEW_COUNT = 2_147_483_647
+_MERCADOLIVRE_ALLOWED_HOSTS = frozenset({
+    'mercadolivre.com.br',
+    'www.mercadolivre.com.br',
+    'produto.mercadolivre.com.br',
+})
+_MERCADOLIVRE_ITEM_ID_RE = re.compile(r'^MLB[0-9]+$')
 
 
 @dataclass(frozen=True)
@@ -35,6 +41,13 @@ class NormalizedOffer:
     raw_payload: dict[str, Any]
     review_rating: Decimal | None = None
     review_count: int | None = None
+    seller_id: str = ''
+    seller_name: str = ''
+    currency_code: str = ''
+    listing_status: str = ''
+    condition: str = ''
+    available_quantity: int | None = None
+    collection_source: str = ''
 
 
 class OfferNormalizationError(ValueError):
@@ -43,7 +56,15 @@ class OfferNormalizationError(ValueError):
 
 def normalize_offer(marketplace: Marketplace, payload: dict[str, Any]) -> NormalizedOffer:
     title = _clean_text(payload.get('nome') or payload.get('title') or '')
-    product_url = _clean_url(payload.get('link_direto') or payload.get('product_url') or '')
+    raw_product_url = payload.get('link_direto') or payload.get('product_url') or ''
+    if marketplace.code == 'mercadolivre' and isinstance(raw_product_url, str):
+        if (
+            _contains_url_control(raw_product_url)
+            or '?' in raw_product_url
+            or '#' in raw_product_url
+        ):
+            raise OfferNormalizationError('Oferta Mercado Livre rejeitada: URL do produto inválida.')
+    product_url = _clean_url(raw_product_url)
     external_id = _clean_text(payload.get('id') or payload.get('external_id') or '')
     asin = _extract_payload_asin(payload, product_url, external_id)
     current_price = _to_money(payload.get('preco') or payload.get('current_price'))
@@ -56,6 +77,8 @@ def normalize_offer(marketplace: Marketplace, payload: dict[str, Any]) -> Normal
         raise OfferNormalizationError('Oferta sem URL do produto.')
     if current_price <= Decimal('0.00'):
         raise OfferNormalizationError('Oferta sem preço atual válido.')
+    if marketplace.code == 'mercadolivre':
+        product_url = _clean_mercadolivre_product_url(product_url, external_id)
     if marketplace.code == 'amazon':
         if not asin:
             raise OfferNormalizationError('Oferta Amazon rejeitada: ASIN não encontrado.')
@@ -73,6 +96,12 @@ def normalize_offer(marketplace: Marketplace, payload: dict[str, Any]) -> Normal
 
     normalized_title = normalize_title(title)
     stable_external_id = external_id or _fallback_external_id(product_url, normalized_title)
+    seller_payload = payload.get('seller')
+    seller_id_value = payload.get('seller_id')
+    seller_name_value = payload.get('seller_name') or payload.get('vendedor')
+    if isinstance(seller_payload, dict):
+        seller_id_value = seller_id_value or seller_payload.get('id')
+        seller_name_value = seller_name_value or seller_payload.get('nickname')
 
     return NormalizedOffer(
         marketplace=marketplace,
@@ -96,6 +125,13 @@ def normalize_offer(marketplace: Marketplace, payload: dict[str, Any]) -> Normal
         review_count=_to_optional_count(
             payload.get('review_count') or payload.get('reviews') or payload.get('total_avaliacoes'),
         ),
+        seller_id=_clean_text(seller_id_value),
+        seller_name=_clean_text(seller_name_value),
+        currency_code=_clean_text(payload.get('currency_code') or payload.get('currency_id')).upper(),
+        listing_status=_clean_text(payload.get('listing_status') or payload.get('status')),
+        condition=_clean_text(payload.get('condition') or payload.get('condicao')),
+        available_quantity=_available_quantity(payload),
+        collection_source=_clean_text(payload.get('collection_source') or payload.get('source')),
     )
 
 
@@ -157,6 +193,14 @@ def _clean_text(value: Any) -> str:
     return re.sub(r'\s+', ' ', str(value or '')).strip()
 
 
+def _first_present(payload: dict[str, Any], *keys: str) -> Any:
+    for key in keys:
+        value = payload.get(key)
+        if value is not None and value != '':
+            return value
+    return None
+
+
 def _extract_asin(product_url: str) -> str:
     value = (product_url or '').strip()
     if PLAIN_ASIN_RE.match(value):
@@ -190,6 +234,93 @@ def _clean_url(value: Any) -> str:
     if not parts.scheme:
         return ''
     return urlunsplit((parts.scheme, parts.netloc, parts.path, parts.query, ''))
+
+
+def _contains_url_control(value: str) -> bool:
+    return any(ord(char) < 32 or ord(char) == 127 for char in value)
+
+
+def _clean_mercadolivre_product_url(value: str, external_id: str) -> str:
+    if not _MERCADOLIVRE_ITEM_ID_RE.fullmatch(external_id):
+        raise OfferNormalizationError('Oferta Mercado Livre rejeitada: ID MLB inválido.')
+
+    parts = None
+    port = None
+    try:
+        parsed_parts = urlsplit(value)
+        port = parsed_parts.port
+        parts = parsed_parts
+    except (TypeError, ValueError):
+        pass
+    if parts is None:
+        raise OfferNormalizationError('Oferta Mercado Livre rejeitada: URL do produto inválida.')
+
+    decoded_path = parts.path
+    for _ in range(5):
+        unquoted_path = unquote(decoded_path)
+        if unquoted_path == decoded_path:
+            break
+        decoded_path = unquoted_path
+    else:
+        decoded_path = ''
+    path_item_id = get_mercadolivre_path_item_id(decoded_path)
+    if not (
+        not any(ord(char) < 32 or ord(char) == 127 for char in value)
+        and not any(ord(char) < 32 or ord(char) == 127 for char in decoded_path)
+        and parts.scheme == 'https'
+        and parts.hostname is not None
+        and parts.hostname.lower() in _MERCADOLIVRE_ALLOWED_HOSTS
+        and port is None
+        and parts.username is None
+        and parts.password is None
+        and bool(parts.path)
+        and decoded_path == parts.path
+        and '?' not in value
+        and '#' not in value
+        and not parts.fragment
+        and '\\' not in decoded_path
+        and not any(segment in {'.', '..'} for segment in decoded_path.split('/'))
+        and path_item_id == external_id
+    ):
+        raise OfferNormalizationError('Oferta Mercado Livre rejeitada: URL do produto inválida.')
+    return urlunsplit(('https', parts.hostname.lower(), parts.path, '', ''))
+
+
+_MERCADOLIVRE_PRODUCT_SEGMENT_RE = re.compile(
+    r'MLB-?([0-9]+)(?:-(?P<slug>[\w.-]+))?',
+    re.IGNORECASE,
+)
+_MERCADOLIVRE_DERIVED_SEGMENT_RE = re.compile(
+    r'MLB([0-9]+)',
+    re.IGNORECASE,
+)
+
+
+def get_mercadolivre_path_item_id(path: str) -> str:
+    segments = path.split('/')
+    if len(segments) == 2:
+        match = _MERCADOLIVRE_PRODUCT_SEGMENT_RE.fullmatch(segments[1])
+        if match and not _is_safe_mercadolivre_slug(match.group('slug')):
+            match = None
+    elif len(segments) == 3 and segments[1] == 'p':
+        match = _MERCADOLIVRE_DERIVED_SEGMENT_RE.fullmatch(segments[2])
+    else:
+        match = None
+    return f'MLB{match.group(1)}'.upper() if match else ''
+
+
+def is_canonical_mercadolivre_product_path(path: str) -> bool:
+    return bool(get_mercadolivre_path_item_id(path))
+
+
+def _is_safe_mercadolivre_slug(slug: str | None) -> bool:
+    if slug is None:
+        return True
+    return (
+        slug not in {'.', '..'}
+        and '..' not in slug
+        and not re.search(r'MLB-?[0-9]+', slug, re.IGNORECASE)
+    )
 
 
 def _to_money(value: Any) -> Decimal:
@@ -239,6 +370,22 @@ def _to_optional_count(value: Any) -> int | None:
     if count > MAX_REVIEW_COUNT:
         return None
     return count
+
+
+def _available_quantity(payload: dict[str, Any]) -> int | None:
+    if 'available_quantity' in payload:
+        return _to_optional_quantity(payload['available_quantity'])
+    if 'quantidade_disponivel' in payload:
+        return _to_optional_quantity(payload['quantidade_disponivel'])
+    return None
+
+
+def _to_optional_quantity(value: Any) -> int | None:
+    if value is None:
+        return None
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        raise OfferNormalizationError('Quantidade disponível inválida.')
+    return value
 
 
 def _to_decimal(value: Any) -> Decimal | None:

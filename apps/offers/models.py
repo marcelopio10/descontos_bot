@@ -202,6 +202,42 @@ class Offer(TimestampedModel):
         blank=True,
         help_text='Número de avaliações exibido na listagem do marketplace.',
     )
+    seller_id = models.CharField(
+        'ID do vendedor',
+        max_length=40,
+        blank=True,
+    )
+    seller_name = models.CharField(
+        'nome do vendedor',
+        max_length=200,
+        blank=True,
+    )
+    currency_code = models.CharField(
+        'moeda',
+        max_length=10,
+        blank=True,
+    )
+    listing_status = models.CharField(
+        'status do anúncio',
+        max_length=40,
+        blank=True,
+    )
+    item_condition = models.CharField(
+        'condição do item',
+        max_length=40,
+        blank=True,
+    )
+    available_quantity = models.PositiveIntegerField(
+        'quantidade disponível',
+        null=True,
+        blank=True,
+    )
+    collection_source = models.CharField(
+        'origem da coleta',
+        max_length=80,
+        blank=True,
+        default='',
+    )
 
     class Meta:
         ordering = ['-discount_pct', 'title']

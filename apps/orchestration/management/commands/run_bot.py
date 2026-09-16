@@ -453,14 +453,12 @@ class Command(BaseCommand):
         return False
 
     def _usa_fila_desacoplada(self) -> bool:
-        """Setting `usa_fila_desacoplada` (Sprint 3 - Tarefa 3.3). Default True desde
-        2026-07-21 (decisão do dono): quando HÁ lote pronto, `run_bot` só coleta e
-        prepara; consumo/envio roda via `consumir-fila-whatsapp-v2.timer` (systemd
-        --user, intervalo aleatório de 90-240min, com teto de cadência). Só desvia
-        para esse fluxo se houver lote pronto de fato — sem isso, o ciclo cai no
-        fallback do selector legado como sempre.
+        """Setting `usa_fila_desacoplada` (Sprint 3 - Tarefa 3.3). Default False:
+        mantém o consumo síncrono no `run_bot`, como no fluxo original. O modo
+        desacoplado só é ativado por Setting explícita `true`; quando ativado,
+        consumo/envio fica sob responsabilidade de `consumir_fila_whatsapp`.
         """
-        return get_bool_setting(DECOUPLED_QUEUE_SETTING_KEY, True)
+        return get_bool_setting(DECOUPLED_QUEUE_SETTING_KEY, False)
 
     def _run_ai_curation_cycle(self, *, channel: SocialChannel, dry_run: bool, limit: int | None = None, allowed_modes: list[str] | None = None) -> bool:
         result = get_ready_curated_batch(channel, allowed_modes=allowed_modes)
@@ -471,10 +469,11 @@ class Command(BaseCommand):
 
         batch = result.batch
         items = result.items
-        if limit is not None:
-            items = items[:limit]
-        else:
-            items = self._apply_channel_cadence(channel=channel, items=items)
+        items = self._apply_channel_cadence(
+            channel=channel,
+            items=items,
+            requested_limit=limit,
+        )
         mode = 'dry_run' if dry_run else 'homologação/envio real'
         self.stdout.write(f'Ciclo do descontos.bot em {mode} com curadoria IA')
         self.stdout.write(f'Canal: {channel.name} ({channel.code})')
@@ -574,14 +573,20 @@ class Command(BaseCommand):
             return False
         return True
 
-    def _apply_channel_cadence(self, *, channel: SocialChannel, items: list) -> list:
+    def _apply_channel_cadence(
+        self,
+        *,
+        channel: SocialChannel,
+        items: list,
+        requested_limit: int | None = None,
+    ) -> list:
         """Aplica o teto/piso de cadência configurado para o canal (Tarefa 1.4).
 
         Teto: corta rajadas limitando itens/ciclo. Piso: não força itens
         inexistentes a aparecer — apenas registra quando o lote elegível fica
         abaixo do piso configurado (não há o que enviar além do que existe).
         """
-        result = apply_channel_cadence(items)
+        result = apply_channel_cadence(items, requested_limit=requested_limit)
         if result.capped:
             self.stdout.write(
                 self.style.WARNING(

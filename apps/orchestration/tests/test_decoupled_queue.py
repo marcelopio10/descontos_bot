@@ -1,11 +1,8 @@
 """Sprint 3 - Tarefa 3.3: flag `usa_fila_desacoplada`.
 
-Default True desde 2026-07-21 (decisão do dono, pós-diagnóstico): `run_bot` só
-prepara o lote de curadoria IA e para; o consumo/envio roda em processo
-separado (`consumir_fila_whatsapp`, via `consumir-fila-whatsapp-v2.timer`). Só com
-a Setting explicitamente `false` é que `run_bot` volta a preparar e consumir no
-mesmo ciclo (comportamento coberto por `test_run_bot_ai_curation.py`, que não é
-tocado aqui).
+Default False: `run_bot` prepara e consome o lote no mesmo ciclo. A fila
+desacoplada (`consumir_fila_whatsapp`, via `consumir-fila-whatsapp-v2.timer`)
+continua disponível somente quando a Setting é explicitamente `true`.
 """
 from decimal import Decimal
 from io import StringIO
@@ -168,17 +165,21 @@ class RunBotDecoupledQueueFlagTests(DecoupledQueueFlagTestsMixin, TestCase):
         batch.refresh_from_db()
         self.assertEqual(batch.status, CuratedBatch.Status.READY)
 
-    def test_flag_default_prepares_but_does_not_consume(self):
-        """Sem Setting (default desde 2026-07-21), o ciclo só prepara e para."""
+    def test_flag_absent_defaults_to_synchronous_consumption(self):
+        """Sem Setting, o ciclo mantém o consumo síncrono original."""
         batch = self._create_ready_batch(self.channel, self.offer)
         out = StringIO()
 
         with (
-            patch('apps.orchestration.management.commands.run_bot.call_command') as prepare,
+            patch(
+                'apps.orchestration.management.commands.run_bot.call_command',
+            ),
             patch(
                 'apps.orchestration.management.commands.run_bot.Command._run_ai_curation_cycle',
+                wraps=None,
             ) as consume,
         ):
+            consume.return_value = True
             call_command(
                 'run_bot',
                 '--dry-run',
@@ -190,24 +191,10 @@ class RunBotDecoupledQueueFlagTests(DecoupledQueueFlagTestsMixin, TestCase):
                 stdout=out,
             )
 
-        # Preparou o lote (mesma etapa de sempre)...
-        prepare.assert_called_once()
-        prepare_args = prepare.call_args.args
-        self.assertEqual(prepare_args[:3], ('prepare_ai_curation_batch', '--channel', self.channel.code))
-        # ...mas NÃO consumiu/enviou: fila desacoplada é responsabilidade de outro comando.
-        consume.assert_not_called()
-
-        text = out.getvalue()
-        self.assertIn('Fila desacoplada ativa', text)
-        self.assertIn('consumir_fila_whatsapp', text)
-
+        consume.assert_called_once()
+        self.assertNotIn('Fila desacoplada ativa', out.getvalue())
         batch.refresh_from_db()
-        self.assertIsNone(batch.consumed_at)
         self.assertEqual(batch.status, CuratedBatch.Status.READY)
-        self.assertEqual(Delivery.objects.count(), 0)
-        # Item permanece pendente: quem consome é o comando separado.
-        item = batch.items.get()
-        self.assertEqual(item.send_status, CuratedBatchItem.SendStatus.PENDING)
 
     def test_flag_on_without_ai_curation_is_ignored(self):
         """A flag só se aplica quando ai_curation está ativo (--legacy-selector ignora)."""

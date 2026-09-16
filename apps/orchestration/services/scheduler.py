@@ -26,7 +26,7 @@ DEFAULT_CYCLE_MAX_MINUTES = 180
 # proteção contra rajada patológica (ex.: centenas de itens após uma queda
 # prolongada de canal).
 DEFAULT_CHANNEL_ITEMS_MIN_PER_CYCLE = 1
-DEFAULT_CHANNEL_ITEMS_MAX_PER_CYCLE = 25
+DEFAULT_CHANNEL_ITEMS_MAX_PER_CYCLE = 20
 
 
 @dataclass(frozen=True)
@@ -89,7 +89,11 @@ class CadenceApplication:
     floor: int
 
 
-def apply_channel_cadence(items: list, config: ChannelCadenceConfig | None = None) -> CadenceApplication:
+def apply_channel_cadence(
+    items: list,
+    config: ChannelCadenceConfig | None = None,
+    requested_limit: int | None = None,
+) -> CadenceApplication:
     """Aplica o teto/piso de cadência do canal (Tarefa 1.4) a uma lista de itens.
 
     Compartilhado por `run_bot` e `consumir_fila_whatsapp` (achado 2026-07-21):
@@ -98,13 +102,22 @@ def apply_channel_cadence(items: list, config: ChannelCadenceConfig | None = Non
     (rajada) em vez de respeitar o ritmo configurado por ciclo.
     """
     config = config or get_channel_cadence_config()
+    if requested_limit is not None and (
+        isinstance(requested_limit, bool)
+        or not isinstance(requested_limit, int)
+        or requested_limit < 1
+    ):
+        raise ValueError('requested_limit deve ser um inteiro maior que zero.')
     total = len(items)
-    capped_items = items[: config.max_items_per_cycle]
+    effective_limit = config.max_items_per_cycle
+    if requested_limit is not None:
+        effective_limit = min(effective_limit, requested_limit)
+    capped_items = items[:effective_limit]
     return CadenceApplication(
         items=capped_items,
         total=total,
         capped=len(capped_items) < total,
-        limit=config.max_items_per_cycle,
+        limit=effective_limit,
         below_floor=0 < total < config.min_items_per_cycle,
         floor=config.min_items_per_cycle,
     )

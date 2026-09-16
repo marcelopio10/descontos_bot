@@ -96,10 +96,11 @@ class Command(BaseCommand):
 
         batch = result.batch
         items = result.items
-        if limit is not None:
-            items = items[:limit]
-        else:
-            items = self._apply_channel_cadence(channel=channel, items=items)
+        items = self._apply_channel_cadence(
+            channel=channel,
+            items=items,
+            requested_limit=limit,
+        )
         mode = 'dry_run' if dry_run else 'homologação/envio real'
         self.stdout.write(f'Consumo da fila desacoplada em {mode}')
         self.stdout.write(f'Canal: {channel.name} ({channel.code})')
@@ -165,7 +166,13 @@ class Command(BaseCommand):
             batch.id, len(items), dry_run,
         )
 
-    def _apply_channel_cadence(self, *, channel: SocialChannel, items: list) -> list:
+    def _apply_channel_cadence(
+        self,
+        *,
+        channel: SocialChannel,
+        items: list,
+        requested_limit: int | None = None,
+    ) -> list:
         """Mesmo teto/piso de cadência do `run_bot` (achado 2026-07-21): sem isso,
         este comando rodando num timer periódico drena o lote inteiro a cada
         disparo em vez de respeitar o ritmo configurado por ciclo — foi o que
@@ -173,7 +180,7 @@ class Command(BaseCommand):
         `consumir-fila-whatsapp.timer`; ver scripts/consumir-fila-whatsapp-v2.service
         sobre a renomeação).
         """
-        result = apply_channel_cadence(items)
+        result = apply_channel_cadence(items, requested_limit=requested_limit)
         if result.capped:
             self.stdout.write(
                 self.style.WARNING(

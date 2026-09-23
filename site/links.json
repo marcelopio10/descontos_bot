@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-09-22T17:05:16.263982+00:00",
+  "generated_at": "2026-09-23T13:54:10.944714+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 10600,
+      "title": "Tenis liso EC moda conforto tenis meia calce facil",
+      "current_price": "21.46",
+      "original_price": "49.91",
+      "discount_pct": "57.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7qukw-li3gn37h6v5h4a",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/3LR40oPDtN?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10600"
+    },
     {
       "id": 6852,
       "title": "Chinelo BABUCHE PLATAFORMA ALTA NUVEM MACIA 100 % DECORADA COM BÓTONS PINGENTES EM ABS CONFORTÁVELSandália Confortável",
@@ -11,17 +21,7 @@
       "discount_pct": "52.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81zu9-mkpc3fgyf0u9e5",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/9peUneoS9w?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6852"
-    },
-    {
-      "id": 10114,
-      "title": "Vestido longo casual basico feminino ribana canelada manga muscle moda gringa preto marrom plus size",
-      "current_price": "37.99",
-      "original_price": "90.45",
-      "discount_pct": "58.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mke9y8fknmyr42",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/1qcBFokrqO?utm_source=instagram&utm_medium=bio&utm_campaign=offer_10114"
+      "tracked_url": "https://s.shopee.com.br/7VGcyT9ZHI?utm_source=instagram&utm_medium=bio&utm_campaign=offer_6852"
     },
     {
       "id": 12954,
@@ -31,7 +31,7 @@
       "discount_pct": "70.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820ld-mshfuhsrzv9iab",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/1LfuetrNQN?utm_source=instagram&utm_medium=bio&utm_campaign=offer_12954"
+      "tracked_url": "https://s.shopee.com.br/1BMZQpbwJT?utm_source=instagram&utm_medium=bio&utm_campaign=offer_12954"
     },
     {
       "id": 9404,

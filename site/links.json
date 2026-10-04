@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-04T11:07:35.663233+00:00",
+  "generated_at": "2026-10-04T14:04:57.529217+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,6 +24,16 @@
       "tracked_url": "https://s.shopee.com.br/1BMqnBgRpo?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13105"
     },
     {
+      "id": 16343,
+      "title": "Dumpling Squishy Caixa Misteriosa Mole Estresse Grande Fofa Brinquedo Sensorial Fidget Bao Chinês",
+      "current_price": "18.99",
+      "original_price": "111.71",
+      "discount_pct": "83.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82585-msptor9w4ume6f",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/2VsEZovtyb?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16343"
+    },
+    {
       "id": 15456,
       "title": "Kit 200 Cards Figurinhas Com 50 Pacotinhos Modelo Variado Para Bater Bafo Trocar Cartas",
       "current_price": "29.99",
@@ -42,16 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rbk0-lkmd1i11zmt505",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/9zyDtFLbak?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13741"
-    },
-    {
-      "id": 15878,
-      "title": "Dumpling Squishy Caixa Misteriosa Mole Estresse Grande Fofa Brinquedo Sensorial Fidget Bao Chinês",
-      "current_price": "18.99",
-      "original_price": "82.57",
-      "discount_pct": "77.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-825az-msptltsg5kp261",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/AKb47DVxqu?utm_source=instagram&utm_medium=bio&utm_campaign=offer_15878"
     }
   ]
 }

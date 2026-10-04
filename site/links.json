@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-04T14:04:57.529217+00:00",
+  "generated_at": "2026-10-04T16:20:12.209632+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -34,16 +34,6 @@
       "tracked_url": "https://s.shopee.com.br/2VsEZovtyb?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16343"
     },
     {
-      "id": 15456,
-      "title": "Kit 200 Cards Figurinhas Com 50 Pacotinhos Modelo Variado Para Bater Bafo Trocar Cartas",
-      "current_price": "29.99",
-      "original_price": "65.20",
-      "discount_pct": "54.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-825an-mqwdel42y9sa2a",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/6fhnLIPyiF?utm_source=instagram&utm_medium=bio&utm_campaign=offer_15456"
-    },
-    {
       "id": 13741,
       "title": "12/24/36 Pçs/set Idosos Agulha-Lado Buraco Cega Mão Costura Doméstica Agulhas De Aço Inoxidável Threading Vestuário",
       "current_price": "8.57",
@@ -52,6 +42,16 @@
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rbk0-lkmd1i11zmt505",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/9zyDtFLbak?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13741"
+    },
+    {
+      "id": 13966,
+      "title": "Barbante TETELEO Nº 6 600 Metros | 85% Algodão Premium | Antialérgico | Sem Poeira | Ideal para Crochê, Tricô, Tapeçaria",
+      "current_price": "22.80",
+      "original_price": "40.00",
+      "discount_pct": "43.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lw-mr3gi2truo04b5",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/60S6tXaQXC?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13966"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-07T20:35:32.115361+00:00",
+  "generated_at": "2026-10-08T11:14:23.193463+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -11,27 +11,7 @@
       "discount_pct": "50.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-82596-mt5fmnpo1c7ee3",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/3g4GYH7UOe?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16719"
-    },
-    {
-      "id": 15455,
-      "title": "Chinelo Feminino Leve e Prático Para Uso em Praia e Lazer",
-      "current_price": "14.97",
-      "original_price": "49.90",
-      "discount_pct": "70.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mh-mshfuhsd1vr815",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/BUP13FYSm?utm_source=instagram&utm_medium=bio&utm_campaign=offer_15455"
-    },
-    {
-      "id": 12954,
-      "title": "Sandália Macia Feminina Ideal Para Conforto Diário Leve",
-      "current_price": "14.97",
-      "original_price": "49.90",
-      "discount_pct": "70.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820ld-mshfuhsrzv9iab",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/W7EyttXfh?utm_source=instagram&utm_medium=bio&utm_campaign=offer_12954"
+      "tracked_url": "https://s.shopee.com.br/8fSy70yaoK?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16719"
     },
     {
       "id": 13105,
@@ -41,7 +21,7 @@
       "discount_pct": "73.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg76rg2cd98ndb",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/80DFuhHzac?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13105"
+      "tracked_url": "https://s.shopee.com.br/5q8mjovmCg?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13105"
     },
     {
       "id": 16720,
@@ -51,7 +31,27 @@
       "discount_pct": "50.00",
       "image_url": "https://cf.shopee.com.br/file/cn-11134207-7ras8-mbf021ixfo4h0b",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/2VsJA8Knc4?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16720"
+      "tracked_url": "https://s.shopee.com.br/3VkrxXvaqr?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16720"
+    },
+    {
+      "id": 16602,
+      "title": "T-shirt Masculina Looney Tunes modelo novo Camiseta Versátil Camisa Tendência Blusa Premium Crt Unissex",
+      "current_price": "23.90",
+      "original_price": "88.52",
+      "discount_pct": "73.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mg-mqxgrhjzl2px4a",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/AAHltoIXkU?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16602"
+    },
+    {
+      "id": 13966,
+      "title": "Barbante TETELEO Nº 6 600 Metros | 85% Algodão Premium | Antialérgico | Sem Poeira | Ideal para Crochê, Tricô, Tapeçaria",
+      "current_price": "22.80",
+      "original_price": "40.00",
+      "discount_pct": "43.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lw-mr3gi2truo04b5",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/2qVBALbFvx?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13966"
     }
   ]
 }

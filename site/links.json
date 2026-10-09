@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-08T14:55:54.603664+00:00",
+  "generated_at": "2026-10-09T11:05:23.804047+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,6 +14,16 @@
       "tracked_url": "https://s.shopee.com.br/8fSy70yaoK?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16719"
     },
     {
+      "id": 16909,
+      "title": "CAVALO UPA UPA BORRACHADO COM SOM DE MUSICAL(COM SELO IMETRO)",
+      "current_price": "49.99",
+      "original_price": "99.98",
+      "discount_pct": "50.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82589-mu28h5wesbnp36",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/2VsMLwPCfY?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16909"
+    },
+    {
       "id": 13105,
       "title": "Calça Pantalona Feminina Cintura Alta Com Bolso Tecido Duna",
       "current_price": "29.90",
@@ -24,34 +34,24 @@
       "tracked_url": "https://s.shopee.com.br/5q8mjovmCg?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13105"
     },
     {
-      "id": 16830,
-      "title": "Kit 6 Carrinhos Relampago MCqueen De Metal Carrinhos de Ferro Resistente Miniatura Coleção",
-      "current_price": "44.90",
-      "original_price": "80.18",
-      "discount_pct": "44.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8257u-mseaveuby39g6e",
+      "id": 7479,
+      "title": "Jogo Lençol Solteiro 02 Peças Microfibra Estampas Infantis Criança Azul Rosa Verde",
+      "current_price": "25.90",
+      "original_price": "55.11",
+      "discount_pct": "53.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lh-mp0vp3i1r9xf55",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/W7GdCnbik?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16830"
+      "tracked_url": "https://s.shopee.com.br/7AeBuWBlYz?utm_source=instagram&utm_medium=bio&utm_campaign=offer_7479"
     },
     {
-      "id": 16720,
-      "title": "Chaveiro Criativo De Armazenamento De Cabelo Fofo Cachorro Pingente Transparente Para Animais De Estimação",
-      "current_price": "9.74",
-      "original_price": "19.48",
-      "discount_pct": "50.00",
-      "image_url": "https://cf.shopee.com.br/file/cn-11134207-7ras8-mbf021ixfo4h0b",
+      "id": 16911,
+      "title": "Kit 10 Caixas Massinha de Modelar com 6 Cores Kit Festa Intantil Lembracinhas 65g",
+      "current_price": "15.65",
+      "original_price": "36.40",
+      "discount_pct": "57.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mbvas2v40q7b37",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/3VkrxXvaqr?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16720"
-    },
-    {
-      "id": 9561,
-      "title": "KIT ate 15 Pares de Meia Cano Alto",
-      "current_price": "16.49",
-      "original_price": "34.35",
-      "discount_pct": "52.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mgx56wtph5og32",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/1B02HtymP?utm_source=instagram&utm_medium=bio&utm_campaign=offer_9561"
+      "tracked_url": "https://s.shopee.com.br/6AleigK6tz?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16911"
     }
   ]
 }

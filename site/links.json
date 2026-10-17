@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-16T16:38:56.438979+00:00",
+  "generated_at": "2026-10-17T17:35:42.479871+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -11,7 +11,7 @@
       "discount_pct": "50.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-82596-mt5fmnpo1c7ee3",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/6q1X32rnUd?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16719"
+      "tracked_url": "https://s.shopee.com.br/4LKDjErvNt?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16719"
     },
     {
       "id": 13105,
@@ -24,16 +24,6 @@
       "tracked_url": "https://s.shopee.com.br/60SPgbs4jd?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13105"
     },
     {
-      "id": 16933,
-      "title": "Mini Geladeira Fill The Fridge com 2 Bolas Mini Brands Surpresa Colecionável Rosa Azul ou Aleatória",
-      "current_price": "44.99",
-      "original_price": "83.31",
-      "discount_pct": "46.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259j-mqot6hdarvuqc0",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/9V2GGETYsT?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16933"
-    },
-    {
       "id": 17054,
       "title": "Vários modelos com 24 meia cano alto 100% algodão soquete Cano Curto Masculina Feminina Unissex direto da fabrica",
       "current_price": "27.79",
@@ -44,14 +34,24 @@
       "tracked_url": "https://s.shopee.com.br/70Kx4hpO0y?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17054"
     },
     {
-      "id": 16830,
-      "title": "Kit 6 Carrinhos Relampago MCqueen De Metal Carrinhos de Ferro Resistente Miniatura Coleção",
-      "current_price": "44.90",
-      "original_price": "80.18",
-      "discount_pct": "44.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8257u-mseaveuby39g6e",
+      "id": 17544,
+      "title": "Kit 400 Toalhas Umedecidas Chameguinho Baby Lenço Umedecido para Bebê Higiene Infantil",
+      "current_price": "24.80",
+      "original_price": "49.60",
+      "discount_pct": "50.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lf-msihol3qbu9z7c",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/9fLgSXXKKO?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16830"
+      "tracked_url": "https://s.shopee.com.br/AUur4ZYqh8?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17544"
+    },
+    {
+      "id": 17540,
+      "title": "Dumpling Squishy Bolinho Baozi Brilhante Glitter Surpresa Pãozinho Macio Orbeez",
+      "current_price": "19.98",
+      "original_price": "79.92",
+      "discount_pct": "75.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lm-mtjzywafnegze7",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/4B0nWw1I0X?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17540"
     }
   ]
 }

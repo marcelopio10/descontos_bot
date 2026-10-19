@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-19T16:22:39.137376+00:00",
+  "generated_at": "2026-10-19T19:48:35.659539+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,6 +14,16 @@
       "tracked_url": "https://s.shopee.com.br/4LKDjErvNt?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16719"
     },
     {
+      "id": 16933,
+      "title": "Mini Geladeira Fill The Fridge com 2 Bolas Mini Brands Surpresa Colecionável Rosa Azul ou Aleatória",
+      "current_price": "44.99",
+      "original_price": "88.22",
+      "discount_pct": "49.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259j-mqot6hdarvuqc0",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/2qVRHmEe7S?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16933"
+    },
+    {
       "id": 13105,
       "title": "Calça Pantalona Feminina Cintura Alta Com Bolso Tecido Duna",
       "current_price": "29.90",
@@ -22,16 +32,6 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg76rg2cd98ndb",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/2BFm3428ik?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13105"
-    },
-    {
-      "id": 16933,
-      "title": "Mini Geladeira Fill The Fridge com 2 Bolas Mini Brands Surpresa Colecionável Rosa Azul ou Aleatória",
-      "current_price": "44.99",
-      "original_price": "83.31",
-      "discount_pct": "46.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259j-mqot6hdarvuqc0",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/2qVRHmEe7S?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16933"
     },
     {
       "id": 17054,

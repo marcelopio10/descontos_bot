@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-19T22:34:12.824674+00:00",
+  "generated_at": "2026-10-21T01:00:36.358051+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 17746,
+      "title": "Sandália Feminina Lumiss Rasteira Fisherman Confortável Bico Redondo Fivela",
+      "current_price": "48.90",
+      "original_price": "143.82",
+      "discount_pct": "66.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mh9inl3qdlhg90",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/gR0dj2wLm?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17746"
+    },
     {
       "id": 16719,
       "title": "Camiseta Masculina Importada Bo..os Camisa 100% Algodão Moda Verão Gola Reforçada Premium",
@@ -14,6 +24,26 @@
       "tracked_url": "https://s.shopee.com.br/9fLnbJvuuU?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16719"
     },
     {
+      "id": 17749,
+      "title": "Camisa Social Masculina Manga Longa Lisa Premium com Elastano Antiamaassante para Trabalho e Festas e LOVE INSIDE",
+      "current_price": "39.90",
+      "original_price": "166.25",
+      "discount_pct": "76.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lt-msmt9v3ml5aded",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/5VWGObojYo?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17749"
+    },
+    {
+      "id": 17748,
+      "title": "Kit De 6 Pares Meias Cano Invisível Lupo Sport Algodão Soquete Sapatilha Unissex",
+      "current_price": "46.77",
+      "original_price": "82.05",
+      "discount_pct": "43.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820l8-mseej1ezbjt320",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/50ZzngvF79?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17748"
+    },
+    {
       "id": 16933,
       "title": "Mini Geladeira Fill The Fridge com 2 Bolas Mini Brands Surpresa Colecionável Rosa Azul ou Aleatória",
       "current_price": "44.99",
@@ -22,36 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259j-mqot6hdarvuqc0",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/2qVRHmEe7S?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16933"
-    },
-    {
-      "id": 13105,
-      "title": "Calça Pantalona Feminina Cintura Alta Com Bolso Tecido Duna",
-      "current_price": "29.90",
-      "original_price": "110.74",
-      "discount_pct": "73.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg76rg2cd98ndb",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/2BFm3428ik?utm_source=instagram&utm_medium=bio&utm_campaign=offer_13105"
-    },
-    {
-      "id": 17054,
-      "title": "Vários modelos com 24 meia cano alto 100% algodão soquete Cano Curto Masculina Feminina Unissex direto da fabrica",
-      "current_price": "27.79",
-      "original_price": "49.62",
-      "discount_pct": "44.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-ms008boluiv9cf",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/7VHIbp9eMz?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17054"
-    },
-    {
-      "id": 16830,
-      "title": "Kit 6 Carrinhos Relampago MCqueen De Metal Carrinhos de Ferro Resistente Miniatura Coleção",
-      "current_price": "44.90",
-      "original_price": "80.18",
-      "discount_pct": "44.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8257u-mseaveuby39g6e",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/7AeQRk2gdU?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16830"
     }
   ]
 }

@@ -1,9 +1,1420 @@
 {
   "version": "2.0",
-  "generated_at": "2026-10-22T20:20:42.289479+00:00",
+  "generated_at": "2026-10-22T23:00:12.348154+00:00",
   "site_base_url": "https://descontos-bot.vercel.app",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "offers": [
+    {
+      "id": 9562,
+      "slug": "kit-com-2-pares-de-palmilha-ortopedica-em-gel-para-varias-horas-de-trabalho-alivia-dores-confortavel-9562",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit com 2 Pares de Palmilha Ortopédica em Gel Para Várias Horas de Trabalho Alivia Dores Confortável",
+      "short_description": "",
+      "current_price": "19.80",
+      "original_price": "44.00",
+      "discount_pct": "55.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m1y8c6hel0b5b0",
+      "affiliate_link": "https://s.shopee.com.br/2BFqh6hiYp",
+      "detail_url": "/oferta?slug=kit-com-2-pares-de-palmilha-ortopedica-em-gel-para-varias-horas-de-trabalho-alivia-dores-confortavel-9562",
+      "price_collected_at": "2026-10-22T23:00:06.172763+00:00"
+    },
+    {
+      "id": 9811,
+      "slug": "palmilha-ortopedica-em-gel-pu-anatomica-promocao-envio-imediato-9811",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Palmilha Ortopédica Em Gel PU Anatômica Promoção Envio Imediato",
+      "short_description": "",
+      "current_price": "12.89",
+      "original_price": "33.92",
+      "discount_pct": "62.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820me-mp7a5ik69wqr3d",
+      "affiliate_link": "https://s.shopee.com.br/20wQUniLtm",
+      "detail_url": "/oferta?slug=palmilha-ortopedica-em-gel-pu-anatomica-promocao-envio-imediato-9811",
+      "price_collected_at": "2026-10-22T23:00:06.160306+00:00"
+    },
+    {
+      "id": 17748,
+      "slug": "kit-de-6-pares-meias-cano-invisivel-lupo-sport-algodao-soquete-sapatilha-unissex-17748",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit De 6 Pares Meias Cano Invisível Lupo Sport Algodão Soquete Sapatilha Unissex",
+      "short_description": "",
+      "current_price": "46.77",
+      "original_price": "82.05",
+      "discount_pct": "43.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820l8-mseej1ezbjt320",
+      "affiliate_link": "https://s.shopee.com.br/8V9uVXcvr8",
+      "detail_url": "/oferta?slug=kit-de-6-pares-meias-cano-invisivel-lupo-sport-algodao-soquete-sapatilha-unissex-17748",
+      "price_collected_at": "2026-10-22T23:00:06.147213+00:00"
+    },
+    {
+      "id": 14509,
+      "slug": "kit-4-calca-masculina-jogger-academia-com-stylo-refletivo-promocao-2k26-14509",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "KIT 4 CALÇA MASCULINA JOGGER ACADEMIA COM STYLO REFLETIVO PROMOÇÃO 2K26",
+      "short_description": "",
+      "current_price": "79.98",
+      "original_price": "119.37",
+      "discount_pct": "33.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824h3-mfg7a26no0lp54",
+      "affiliate_link": "https://s.shopee.com.br/7KxwqbJVqY",
+      "detail_url": "/oferta?slug=kit-4-calca-masculina-jogger-academia-com-stylo-refletivo-promocao-2k26-14509",
+      "price_collected_at": "2026-10-22T23:00:06.134587+00:00"
+    },
+    {
+      "id": 16736,
+      "slug": "kit-com-3-e-2-calcas-jeans-masculinas-slim-fit-basicas-cores-variadas-dia-a-dia-16736",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit Com 3 e 2 Calças Jeans Masculinas Slim Fit Básicas Cores Variadas Dia a Dia",
+      "short_description": "",
+      "current_price": "92.99",
+      "original_price": "172.20",
+      "discount_pct": "46.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820me-mrhyfx2bi8sma8",
+      "affiliate_link": "https://s.shopee.com.br/7fanFDIFAa",
+      "detail_url": "/oferta?slug=kit-com-3-e-2-calcas-jeans-masculinas-slim-fit-basicas-cores-variadas-dia-a-dia-16736",
+      "price_collected_at": "2026-10-22T23:00:06.119588+00:00"
+    },
+    {
+      "id": 17462,
+      "slug": "camiseta-masculina-canelada-slim-fit-estilo-americana-ribana-justa-ao-corpo-streetwear-rapper-17462",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Camiseta Masculina Canelada Slim Fit Estilo Americana Ribana Justa ao Corpo Streetwear Rapper",
+      "short_description": "",
+      "current_price": "16.99",
+      "original_price": "34.67",
+      "discount_pct": "51.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lh-ms5jkzcv0wlgda",
+      "affiliate_link": "https://s.shopee.com.br/6fiG3NM3CM",
+      "detail_url": "/oferta?slug=camiseta-masculina-canelada-slim-fit-estilo-americana-ribana-justa-ao-corpo-streetwear-rapper-17462",
+      "price_collected_at": "2026-10-22T23:00:06.084873+00:00"
+    },
+    {
+      "id": 16932,
+      "slug": "meias-masculinas-cano-alto-macias-e-resistentes-16932",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Meias Masculinas Cano Alto Macias e Resistentes",
+      "short_description": "",
+      "current_price": "21.99",
+      "original_price": "30.12",
+      "discount_pct": "27.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820ll-mtippu71nkead9",
+      "affiliate_link": "https://s.shopee.com.br/7AeWeIK9BR",
+      "detail_url": "/oferta?slug=meias-masculinas-cano-alto-macias-e-resistentes-16932",
+      "price_collected_at": "2026-10-22T23:00:06.070866+00:00"
+    },
+    {
+      "id": 17407,
+      "slug": "kit-5-ou-10-cueca-boxer-men-cueca-masculina-microfibra-premium-cueca-men-box-conforto-e-qualidade-17407",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit 5 ou 10 Cueca Boxer men cueca Masculina Microfibra Premium cueca men box conforto e qualidade",
+      "short_description": "",
+      "current_price": "25.89",
+      "original_price": "57.53",
+      "discount_pct": "55.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lq-muamjw0jr4sge1",
+      "affiliate_link": "https://s.shopee.com.br/70L6RzKmWO",
+      "detail_url": "/oferta?slug=kit-5-ou-10-cueca-boxer-men-cueca-masculina-microfibra-premium-cueca-men-box-conforto-e-qualidade-17407",
+      "price_collected_at": "2026-10-22T23:00:06.055985+00:00"
+    },
+    {
+      "id": 16602,
+      "slug": "t-shirt-masculina-looney-tunes-modelo-novo-camiseta-versatil-camisa-tendencia-blusa-premium-crt-unissex-16602",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "T-shirt Masculina Looney Tunes modelo novo Camiseta Versátil Camisa Tendência Blusa Premium Crt Unissex",
+      "short_description": "",
+      "current_price": "23.90",
+      "original_price": "88.52",
+      "discount_pct": "73.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mg-mqxgrhjzl2px4a",
+      "affiliate_link": "https://s.shopee.com.br/6AlzSSNxDD",
+      "detail_url": "/oferta?slug=t-shirt-masculina-looney-tunes-modelo-novo-camiseta-versatil-camisa-tendencia-blusa-premium-crt-unissex-16602",
+      "price_collected_at": "2026-10-22T23:00:06.043008+00:00"
+    },
+    {
+      "id": 16719,
+      "slug": "camiseta-masculina-importada-boos-camisa-100-algodao-moda-verao-gola-reforcada-premium-16719",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Camiseta Masculina Importada Bo..os Camisa 100% Algodão Moda Verão Gola Reforçada Premium",
+      "short_description": "",
+      "current_price": "29.94",
+      "original_price": "49.90",
+      "discount_pct": "40.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82596-mt5fmnpo1c7ee3",
+      "affiliate_link": "https://s.shopee.com.br/60SZG9OaYA",
+      "detail_url": "/oferta?slug=camiseta-masculina-importada-boos-camisa-100-algodao-moda-verao-gola-reforcada-premium-16719",
+      "price_collected_at": "2026-10-22T23:00:06.022692+00:00"
+    },
+    {
+      "id": 15168,
+      "slug": "kit-5-ou-10-cuecas-boxer-masculinas-polo-wear-microfibra-leve-e-elastico-confortavel-15168",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit 5 ou 10 Cuecas Boxer Masculinas Polo Wear Microfibra Leve e Elástico Confortável",
+      "short_description": "",
+      "current_price": "57.90",
+      "original_price": "90.47",
+      "discount_pct": "36.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820l7-mogqop0wbp4z84",
+      "affiliate_link": "https://s.shopee.com.br/7AeXRAF2nN",
+      "detail_url": "/oferta?slug=kit-5-ou-10-cuecas-boxer-masculinas-polo-wear-microfibra-leve-e-elastico-confortavel-15168",
+      "price_collected_at": "2026-10-22T23:00:06.008197+00:00"
+    },
+    {
+      "id": 17054,
+      "slug": "varios-modelos-com-24-meia-cano-alto-100-algodao-soquete-cano-curto-masculina-feminina-unissex-direto-da-fabrica-17054",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Vários modelos com 24 meia cano alto 100% algodão soquete Cano Curto Masculina Feminina Unissex direto da fabrica",
+      "short_description": "",
+      "current_price": "27.79",
+      "original_price": "49.62",
+      "discount_pct": "44.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-ms008boluiv9cf",
+      "affiliate_link": "https://s.shopee.com.br/70L7ErFg8K",
+      "detail_url": "/oferta?slug=varios-modelos-com-24-meia-cano-alto-100-algodao-soquete-cano-curto-masculina-feminina-unissex-direto-da-fabrica-17054",
+      "price_collected_at": "2026-10-22T23:00:05.995967+00:00"
+    },
+    {
+      "id": 15265,
+      "slug": "kit-3-bermuda-masculina-importada-seda-gelada-elastano-secagem-rapida-bolsos-com-ziper-15265",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "KIT 3 Bermuda Masculina Importada Seda Gelada Elastano Secagem Rápida Bolsos com Zíper",
+      "short_description": "",
+      "current_price": "94.69",
+      "original_price": "129.71",
+      "discount_pct": "27.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7renw-m24lcwj70m7p22",
+      "affiliate_link": "https://s.shopee.com.br/7KxxdTEPSM",
+      "detail_url": "/oferta?slug=kit-3-bermuda-masculina-importada-seda-gelada-elastano-secagem-rapida-bolsos-com-ziper-15265",
+      "price_collected_at": "2026-10-22T23:00:05.972882+00:00"
+    },
+    {
+      "id": 15167,
+      "slug": "kit-com-5-ate-10-cuecas-boxer-masculina-microfibra-15167",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit Com 5 Até 10 Cuecas Boxer Masculina Microfibra",
+      "short_description": "",
+      "current_price": "28.99",
+      "original_price": "46.76",
+      "discount_pct": "38.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820la-mrj5atc8p9fr1d",
+      "affiliate_link": "https://s.shopee.com.br/7puEEOCVRR",
+      "detail_url": "/oferta?slug=kit-com-5-ate-10-cuecas-boxer-masculina-microfibra-15167",
+      "price_collected_at": "2026-10-22T23:00:05.961183+00:00"
+    },
+    {
+      "id": 9923,
+      "slug": "kit-3-4-ou-6-bermudas-masculinas-basicas-dryfit-malha-leve-e-confortavel-pronta-entrega-origins-9923",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit 3 4 ou 6 Bermudas Masculinas Básicas - DryFit - Malha Leve e Confortável - Pronta Entrega Origins",
+      "short_description": "",
+      "current_price": "44.95",
+      "original_price": "99.89",
+      "discount_pct": "55.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824gv-me9czhjwgqv8f9",
+      "affiliate_link": "https://s.shopee.com.br/3qO4gASZc5",
+      "detail_url": "/oferta?slug=kit-3-4-ou-6-bermudas-masculinas-basicas-dryfit-malha-leve-e-confortavel-pronta-entrega-origins-9923",
+      "price_collected_at": "2026-10-22T23:00:05.948886+00:00"
+    },
+    {
+      "id": 17111,
+      "slug": "camiseta-masculino-light-t-shirt-insider-17111",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Camiseta Masculino Light T-shirt Insider",
+      "short_description": "",
+      "current_price": "59.00",
+      "original_price": "190.32",
+      "discount_pct": "69.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259b-mslnrcihtxje06",
+      "affiliate_link": "https://s.shopee.com.br/2qVXUKWNdr",
+      "detail_url": "/oferta?slug=camiseta-masculino-light-t-shirt-insider-17111",
+      "price_collected_at": "2026-10-22T23:00:05.937080+00:00"
+    },
+    {
+      "id": 11410,
+      "slug": "kit-com-10-ou-5-cuecas-boxer-premium-masculina-extremamente-confortavel-cueca-box-11410",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit com 10 ou 5 Cuecas Boxer Premium Masculina Extremamente Confortável Cueca Box",
+      "short_description": "",
+      "current_price": "23.89",
+      "original_price": "59.73",
+      "discount_pct": "60.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820md-mr93qaevk9hi01",
+      "affiliate_link": "https://s.shopee.com.br/2gC7I1X0yo",
+      "detail_url": "/oferta?slug=kit-com-10-ou-5-cuecas-boxer-premium-masculina-extremamente-confortavel-cueca-box-11410",
+      "price_collected_at": "2026-10-22T23:00:05.925433+00:00"
+    },
+    {
+      "id": 10115,
+      "slug": "daily-t-shirt-insider-10115",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Daily T-shirt Insider",
+      "short_description": "",
+      "current_price": "74.99",
+      "original_price": "138.87",
+      "discount_pct": "46.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-81zvr-mimqzej64v0h61",
+      "affiliate_link": "https://s.shopee.com.br/3B8NswV6xt",
+      "detail_url": "/oferta?slug=daily-t-shirt-insider-10115",
+      "price_collected_at": "2026-10-22T23:00:05.912865+00:00"
+    },
+    {
+      "id": 6852,
+      "slug": "babuche-plataforma-alta-nuvem-macia-100-decorada-com-botons-pingentes-em-abs-confortavel-6852",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Chinelo BABUCHE PLATAFORMA ALTA NUVEM MACIA 100 % DECORADA COM BÓTONS PINGENTES EM ABS CONFORTÁVELSandália Confortável",
+      "short_description": "",
+      "current_price": "37.99",
+      "original_price": "80.83",
+      "discount_pct": "53.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81zu9-mkpc3fgyf0u9e5",
+      "affiliate_link": "https://s.shopee.com.br/3VlEHYL2i6",
+      "detail_url": "/oferta?slug=babuche-plataforma-alta-nuvem-macia-100-decorada-com-botons-pingentes-em-abs-confortavel-6852",
+      "price_collected_at": "2026-10-22T23:00:05.900426+00:00"
+    },
+    {
+      "id": 15455,
+      "slug": "chinelo-feminino-leve-e-pratico-para-uso-em-praia-e-lazer-15455",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Chinelo Feminino Leve e Prático Para Uso em Praia e Lazer",
+      "short_description": "",
+      "current_price": "14.97",
+      "original_price": "49.90",
+      "discount_pct": "70.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-825bb-mum5w17d61vrd7",
+      "affiliate_link": "https://s.shopee.com.br/3LRo5FLg35",
+      "detail_url": "/oferta?slug=chinelo-feminino-leve-e-pratico-para-uso-em-praia-e-lazer-15455",
+      "price_collected_at": "2026-10-22T23:00:05.888597+00:00"
+    },
+    {
+      "id": 6851,
+      "slug": "tenis-meia-feminino-calce-facil-botinha-ortopedico-esportivo-sneaker-slip-on-casual-confortavel-academia-6851",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Tênis Meia Feminino Calce Fácil Botinha Ortopédico Esportivo Sneaker Slip On Casual confortável Academia",
+      "short_description": "",
+      "current_price": "28.90",
+      "original_price": "60.21",
+      "discount_pct": "52.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820ma-mnx8czipq39ea6",
+      "affiliate_link": "https://s.shopee.com.br/3g4eTrKPN7",
+      "detail_url": "/oferta?slug=tenis-meia-feminino-calce-facil-botinha-ortopedico-esportivo-sneaker-slip-on-casual-confortavel-academia-6851",
+      "price_collected_at": "2026-10-22T23:00:05.876909+00:00"
+    },
+    {
+      "id": 11980,
+      "slug": "calca-cintura-media-versatil-perfeita-para-looks-casuais-e-elegantes-11980",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Calça Cintura média Versátil - Perfeita para Looks Casuais e Elegantes",
+      "short_description": "",
+      "current_price": "84.99",
+      "original_price": "160.36",
+      "discount_pct": "47.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-mt9wcdhx0s8x50",
+      "affiliate_link": "https://s.shopee.com.br/3LRoDQJKe7",
+      "detail_url": "/oferta?slug=calca-cintura-media-versatil-perfeita-para-looks-casuais-e-elegantes-11980",
+      "price_collected_at": "2026-10-22T23:00:05.864012+00:00"
+    },
+    {
+      "id": 7594,
+      "slug": "meias-lupo-original-femininas-para-homens-e-mulheres-pacote-de-3-pares-algodao-respiravel-com-padroes-delicados-preto-7594",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Meias Femininas Originais Para Homens E Mulheres-Pacote De 3 Pares | Algodão Respirável Com Padrões Delicados (Preto , B",
+      "short_description": "",
+      "current_price": "15.42",
+      "original_price": "81.16",
+      "discount_pct": "81.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134301-8258r-mqr0qmm26qz28d",
+      "affiliate_link": "https://s.shopee.com.br/9pfHpBsOZp",
+      "detail_url": "/oferta?slug=meias-lupo-original-femininas-para-homens-e-mulheres-pacote-de-3-pares-algodao-respiravel-com-padroes-delicados-preto-7594",
+      "price_collected_at": "2026-10-22T23:00:05.852206+00:00"
+    },
+    {
+      "id": 13105,
+      "slug": "calca-pantalona-feminina-cintura-alta-com-bolso-tecido-duna-13105",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Calça Pantalona Feminina Cintura Alta Com Bolso Tecido Duna",
+      "short_description": "",
+      "current_price": "29.90",
+      "original_price": "110.74",
+      "discount_pct": "73.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg76rg2cd98ndb",
+      "affiliate_link": "https://s.shopee.com.br/6L5Pel5igC",
+      "detail_url": "/oferta?slug=calca-pantalona-feminina-cintura-alta-com-bolso-tecido-duna-13105",
+      "price_collected_at": "2026-10-22T23:00:05.839420+00:00"
+    },
+    {
+      "id": 8590,
+      "slug": "kit-5-calcinhas-sem-costura-tanga-corte-a-laser-nao-marca-na-roupa-invisivel-academia-justo-conforto-8590",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit Calcinhas Sem costura Tanga corte a Laser Não Marca na Roupa Invisível Academia Justo Conforto",
+      "short_description": "",
+      "current_price": "16.79",
+      "original_price": "49.38",
+      "discount_pct": "66.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7ratx-maaleuuypc3p1c",
+      "affiliate_link": "https://s.shopee.com.br/6VOpr455LF",
+      "detail_url": "/oferta?slug=kit-5-calcinhas-sem-costura-tanga-corte-a-laser-nao-marca-na-roupa-invisivel-academia-justo-conforto-8590",
+      "price_collected_at": "2026-10-22T23:00:05.827867+00:00"
+    },
+    {
+      "id": 9922,
+      "slug": "legging-suplex-fitness-pronta-entrega-zero-transparencia-9922",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Legging Suplex Fitness Pronta Entrega Zero Transparência",
+      "short_description": "",
+      "current_price": "21.99",
+      "original_price": "34.90",
+      "discount_pct": "37.00",
+      "image_url": "https://cf.shopee.com.br/file/f6f75b5192f765859036093f8c6086e8",
+      "affiliate_link": "https://s.shopee.com.br/9fLrcst1um",
+      "detail_url": "/oferta?slug=legging-suplex-fitness-pronta-entrega-zero-transparencia-9922",
+      "price_collected_at": "2026-10-22T23:00:05.803846+00:00"
+    },
+    {
+      "id": 10114,
+      "slug": "vestido-longo-casual-basico-feminino-ribana-canelada-manga-muscle-moda-gringa-preto-marrom-plus-size-10114",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Vestido longo casual basico feminino ribana canelada manga muscle moda gringa preto marrom plus size",
+      "short_description": "",
+      "current_price": "37.99",
+      "original_price": "90.45",
+      "discount_pct": "58.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mke9y8fknmyr42",
+      "affiliate_link": "https://s.shopee.com.br/9zyi1UrlEo",
+      "detail_url": "/oferta?slug=vestido-longo-casual-basico-feminino-ribana-canelada-manga-muscle-moda-gringa-preto-marrom-plus-size-10114",
+      "price_collected_at": "2026-10-22T23:00:05.779889+00:00"
+    },
+    {
+      "id": 17039,
+      "slug": "legging-suplex-fitness-pronta-entrega-zero-transparencia-17039",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Legging Suplex Fitness Pronta Entrega Zero Transparência",
+      "short_description": "",
+      "current_price": "21.99",
+      "original_price": "34.90",
+      "discount_pct": "37.00",
+      "image_url": "https://cf.shopee.com.br/file/f6f75b5192f765859036093f8c6086e8",
+      "affiliate_link": "https://s.shopee.com.br/AUuycPprDt",
+      "detail_url": "/oferta?slug=legging-suplex-fitness-pronta-entrega-zero-transparencia-17039",
+      "price_collected_at": "2026-10-22T23:00:05.765636+00:00"
+    },
+    {
+      "id": 13104,
+      "slug": "calca-jeans-feminina-wide-leg-cintura-alta-pantalona-marmorizada-cintura-alta-13104",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Calça Jeans Feminina Wide Leg Cintura Alta Pantalona MARMORIZADA CINTURA ALTA",
+      "short_description": "",
+      "current_price": "49.90",
+      "original_price": "89.11",
+      "discount_pct": "44.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mdxnurrbkiypff",
+      "affiliate_link": "https://s.shopee.com.br/6q1h2XuB5c",
+      "detail_url": "/oferta?slug=calca-jeans-feminina-wide-leg-cintura-alta-pantalona-marmorizada-cintura-alta-13104",
+      "price_collected_at": "2026-10-22T23:00:05.603921+00:00"
+    },
+    {
+      "id": 7346,
+      "slug": "calca-wide-leg-jeans-feminina-cintura-alta-pantalona-7346",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Calça Wide Leg Jeans Feminina Cintura Alta Pantalona",
+      "short_description": "",
+      "current_price": "59.99",
+      "original_price": "99.98",
+      "discount_pct": "40.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mftpfyzvikn40c",
+      "affiliate_link": "https://s.shopee.com.br/4LKLH54bT7",
+      "detail_url": "/oferta?slug=calca-wide-leg-jeans-feminina-cintura-alta-pantalona-7346",
+      "price_collected_at": "2026-10-22T23:00:05.574909+00:00"
+    },
+    {
+      "id": 9865,
+      "slug": "depilador-indolor-caneta-sobrancelha-removedor-instantaneo-a-pilha-9865",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Depilador Indolor Caneta Sobrancelha Removedor Instantâneo A Pilha",
+      "short_description": "",
+      "current_price": "13.99",
+      "original_price": "48.24",
+      "discount_pct": "71.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824h3-mfcqeo0mbguk87",
+      "affiliate_link": "https://s.shopee.com.br/9APbds509z",
+      "detail_url": "/oferta?slug=depilador-indolor-caneta-sobrancelha-removedor-instantaneo-a-pilha-9865",
+      "price_collected_at": "2026-10-22T23:00:05.499053+00:00"
+    },
+    {
+      "id": 17229,
+      "slug": "empurrador-de-cuticula-caneta-de-oleo-de-unha-portatil-ceramica-ferramentas-removedoras-de-pele-morta-17229",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Empurrador De Cutícula Caneta De Óleo De Unha Portátil Cerâmica Ferramentas Removedoras De Pele Morta",
+      "short_description": "",
+      "current_price": "10.00",
+      "original_price": "20.83",
+      "discount_pct": "52.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-821ga-mhbcnolwii2y9f",
+      "affiliate_link": "https://s.shopee.com.br/906BRZ5dUw",
+      "detail_url": "/oferta?slug=empurrador-de-cuticula-caneta-de-oleo-de-unha-portatil-ceramica-ferramentas-removedoras-de-pele-morta-17229",
+      "price_collected_at": "2026-10-22T23:00:05.485234+00:00"
+    },
+    {
+      "id": 17003,
+      "slug": "123-pcs-caneta-de-moagem-de-quartzo-portatil-tesoura-de-cuticula-unhas-removedor-de-pele-morta-vara-arquivos-de-unhas-17003",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "1/2/3 Pçs Caneta De Moagem De Quartzo Portátil Tesoura De Cutícula Unhas Removedor De Pele Morta Vara Arquivos De Unhas",
+      "short_description": "",
+      "current_price": "7.99",
+      "original_price": "14.53",
+      "discount_pct": "45.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134201-820mb-mqxms48y7dvq72",
+      "affiliate_link": "https://s.shopee.com.br/8fTL2x6uAq",
+      "detail_url": "/oferta?slug=123-pcs-caneta-de-moagem-de-quartzo-portatil-tesoura-de-cuticula-unhas-removedor-de-pele-morta-vara-arquivos-de-unhas-17003",
+      "price_collected_at": "2026-10-22T23:00:05.472479+00:00"
+    },
+    {
+      "id": 13619,
+      "slug": "kit-1x-a-3x-pomadas-cera-caramelito-80g-infinity-classe-a-modela-alta-fixacao-hidrata-os-fios-fox-13619",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit 1x à 3x Pomadas Cera Caramelito 80g Infinity Classe A - Antifrizz Penteados Modela Alta Fixação Hidrata os Fios Fox",
+      "short_description": "",
+      "current_price": "11.99",
+      "original_price": "26.64",
+      "discount_pct": "55.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m4-mq5gzlvr8kcj7a",
+      "affiliate_link": "https://s.shopee.com.br/1LgkJTYp3P",
+      "detail_url": "/oferta?slug=kit-1x-a-3x-pomadas-cera-caramelito-80g-infinity-classe-a-modela-alta-fixacao-hidrata-os-fios-fox-13619",
+      "price_collected_at": "2026-10-22T23:00:05.460174+00:00"
+    },
+    {
+      "id": 12481,
+      "slug": "lapis-de-sobrancelha-liquido-a-prova-dagua-de-longa-duracao-definicao-natural-maquiagem-acessivel-12481",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Lápis De Sobrancelha Líquido À Prova D'água, De Longa Duração , Definição Natural , Maquiagem Acessível",
+      "short_description": "",
+      "current_price": "11.99",
+      "original_price": "32.41",
+      "discount_pct": "63.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82620-mkjr5fqpg26e40",
+      "affiliate_link": "https://s.shopee.com.br/1gJai5XYNR",
+      "detail_url": "/oferta?slug=lapis-de-sobrancelha-liquido-a-prova-dagua-de-longa-duracao-definicao-natural-maquiagem-acessivel-12481",
+      "price_collected_at": "2026-10-22T23:00:05.447611+00:00"
+    },
+    {
+      "id": 15452,
+      "slug": "mega-hidratacao-ouro-marroquino-efeito-teia-antifrizz-oleos-milagrosos-fina-maria-professional-15452",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "MEGA HIDRATAÇÃO OURO MARROQUINO EFEITO TEIA | ANTIFRIZZ | ÓLEOS MILAGROSOS | FINA MARIA PROFESSIONAL",
+      "short_description": "",
+      "current_price": "38.90",
+      "original_price": "79.39",
+      "discount_pct": "51.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mgcvuf1960as06",
+      "affiliate_link": "https://s.shopee.com.br/20wR6hWHhT",
+      "detail_url": "/oferta?slug=mega-hidratacao-ouro-marroquino-efeito-teia-antifrizz-oleos-milagrosos-fina-maria-professional-15452",
+      "price_collected_at": "2026-10-22T23:00:05.436242+00:00"
+    },
+    {
+      "id": 8589,
+      "slug": "celimax-the-vita-a-retinal-shot-tightening-booster-15ml-8589",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Celimax The Vita A Retinal Shot Tightening Booster 15ml",
+      "short_description": "",
+      "current_price": "136.00",
+      "original_price": "219.35",
+      "discount_pct": "38.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134207-825ai-mr9pynhmd43k22",
+      "affiliate_link": "https://s.shopee.com.br/9V2S2TzCB7",
+      "detail_url": "/oferta?slug=celimax-the-vita-a-retinal-shot-tightening-booster-15ml-8589",
+      "price_collected_at": "2026-10-22T23:00:05.424577+00:00"
+    },
+    {
+      "id": 15777,
+      "slug": "alicate-de-cuticula-mundial-522c-precisao-e-durabilidade-15777",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Alicate de Cutícula Mundial 522C: Precisão e Durabilidade",
+      "short_description": "",
+      "current_price": "19.90",
+      "original_price": "32.62",
+      "discount_pct": "39.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rbk0-lktyq6753ip22a",
+      "affiliate_link": "https://s.shopee.com.br/9Kj1qAzpW4",
+      "detail_url": "/oferta?slug=alicate-de-cuticula-mundial-522c-precisao-e-durabilidade-15777",
+      "price_collected_at": "2026-10-22T23:00:05.411620+00:00"
+    },
+    {
+      "id": 6835,
+      "slug": "40-120-pcs-hidrocoloide-acne-remendos-rosto-espinha-adesivos-para-zits-tratamento-de-ponto-cuidados-com-a-pele-essencial-6835",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Adesivos hidrocolóides anti-acne para espinhas; cuidado inverno; presente ideal Natal/Ano Novo",
+      "short_description": "",
+      "current_price": "7.34",
+      "original_price": "11.12",
+      "discount_pct": "34.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823qq-mp4me4j9r9xq17",
+      "affiliate_link": "https://s.shopee.com.br/906BRZ16By",
+      "detail_url": "/oferta?slug=40-120-pcs-hidrocoloide-acne-remendos-rosto-espinha-adesivos-para-zits-tratamento-de-ponto-cuidados-com-a-pele-essencial-6835",
+      "price_collected_at": "2026-10-22T23:00:05.400194+00:00"
+    },
+    {
+      "id": 15164,
+      "slug": "kit-clareador-facial-sabonete-liquido-protetor-solar-clareador-70-fps-serum-multicorretivo-clareador-15164",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit Hidrabene Clareador Skincare Clareador Facial: Sabonete, Protetor 70 FPS e Sérum Multicorretivo",
+      "short_description": "",
+      "current_price": "79.90",
+      "original_price": "159.80",
+      "discount_pct": "50.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lx-mt45q21kcvt09d",
+      "affiliate_link": "https://s.shopee.com.br/8pmlFG1jWv",
+      "detail_url": "/oferta?slug=kit-clareador-facial-sabonete-liquido-protetor-solar-clareador-70-fps-serum-multicorretivo-clareador-15164",
+      "price_collected_at": "2026-10-22T23:00:05.387979+00:00"
+    },
+    {
+      "id": 6840,
+      "slug": "fadvan-5d-w-extensoes-de-cilios-em-forma-de-007-cd-faux-mink-natural-pestanas-profissionais-suaves-6840",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Fadvan 5D W Extensões De Cílios Em Forma De 0.07 C/D Faux Mink Natural Lashes Profissionais Suaves",
+      "short_description": "",
+      "current_price": "22.25",
+      "original_price": "58.55",
+      "discount_pct": "62.00",
+      "image_url": "https://cf.shopee.com.br/file/cn-11134207-820l4-mlr6x8dggpa8d1",
+      "affiliate_link": "https://s.shopee.com.br/8fTL2x2Mrs",
+      "detail_url": "/oferta?slug=fadvan-5d-w-extensoes-de-cilios-em-forma-de-007-cd-faux-mink-natural-pestanas-profissionais-suaves-6840",
+      "price_collected_at": "2026-10-22T23:00:05.375240+00:00"
+    },
+    {
+      "id": 16447,
+      "slug": "oleo-finalizador-oleo-extraordinario-anti-frizz-protetor-termico-loreal-paris-elseve-100ml-16447",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Óleo Finalizador Óleo Extraordinário, Anti Frizz, Protetor Térmico, L'Oréal Paris Elseve 100ml",
+      "short_description": "",
+      "current_price": "36.99",
+      "original_price": "60.64",
+      "discount_pct": "39.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lt-msof4dg2rnyc07",
+      "affiliate_link": "https://s.shopee.com.br/8V9uqe30Cp",
+      "detail_url": "/oferta?slug=oleo-finalizador-oleo-extraordinario-anti-frizz-protetor-termico-loreal-paris-elseve-100ml-16447",
+      "price_collected_at": "2026-10-22T23:00:05.362675+00:00"
+    },
+    {
+      "id": 15250,
+      "slug": "ultra-hidratacao-efeito-teia-com-oleos-marroquinos-ouro-marroquino-fina-maria-profissional-15250",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "ULTRA HIDRATAÇÃO EFEITO TEIA COM ÓLEOS MARROQUINOS - OURO MARROQUINO - FINA MARIA PROFISSIONAL",
+      "short_description": "",
+      "current_price": "38.90",
+      "original_price": "79.39",
+      "discount_pct": "51.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8258h-mr1ynaykoao016",
+      "affiliate_link": "https://s.shopee.com.br/113tIx8UhH",
+      "detail_url": "/oferta?slug=ultra-hidratacao-efeito-teia-com-oleos-marroquinos-ouro-marroquino-fina-maria-profissional-15250",
+      "price_collected_at": "2026-10-22T23:00:05.350151+00:00"
+    },
+    {
+      "id": 17318,
+      "slug": "jbsara-revive-spicule-shot-102-ampoule-serum-1g-1ea-17318",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "JBSARA Revive Spicule Shot 102 Ampoule Serum 1g 1ea",
+      "short_description": "",
+      "current_price": "3.49",
+      "original_price": "9.43",
+      "discount_pct": "63.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134207-8258w-mrv26l1j53igaa",
+      "affiliate_link": "https://s.shopee.com.br/gR2uL9lNB",
+      "detail_url": "/oferta?slug=jbsara-revive-spicule-shot-102-ampoule-serum-1g-1ea-17318",
+      "price_collected_at": "2026-10-22T23:00:05.337577+00:00"
+    },
+    {
+      "id": 7761,
+      "slug": "fone-de-ouvido-bluetooth-50-sem-fio-headset-bateria-de-longa-duracao-fone-corrida-academia-7761",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Fone de Ouvido Bluetooth 5.0 Sem Fio Headset Bateria de Longa Duração Fone Corrida Academia",
+      "short_description": "",
+      "current_price": "40.99",
+      "original_price": "80.37",
+      "discount_pct": "49.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lw-mozd89yz0xdx96",
+      "affiliate_link": "https://s.shopee.com.br/40hVfKehdD",
+      "detail_url": "/oferta?slug=fone-de-ouvido-bluetooth-50-sem-fio-headset-bateria-de-longa-duracao-fone-corrida-academia-7761",
+      "price_collected_at": "2026-10-22T23:00:05.325740+00:00"
+    },
+    {
+      "id": 17109,
+      "slug": "fone-de-ouvido-estereo-sem-fio-a-prova-dagua-com-bluetooth-caixa-de-carregamento-longa-duracao-t70-17109",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Fone de ouvido estéreo sem fio à prova d'água com Bluetooth caixa de carregamento longa duração T70",
+      "short_description": "",
+      "current_price": "32.99",
+      "original_price": "106.42",
+      "discount_pct": "69.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lc-ms04vb3imy2vc7",
+      "affiliate_link": "https://s.shopee.com.br/4B0vrde4IE",
+      "detail_url": "/oferta?slug=fone-de-ouvido-estereo-sem-fio-a-prova-dagua-com-bluetooth-caixa-de-carregamento-longa-duracao-t70-17109",
+      "price_collected_at": "2026-10-22T23:00:05.312674+00:00"
+    },
+    {
+      "id": 15451,
+      "slug": "senbenbao-x55-fones-de-ouvido-tws-sono-sem-fio-bluetooth-display-led-alta-fidelidade-estereo-cancelamento-ruido-a-prova-15451",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Senbenbao X55 Fones De Ouvido TWS Sono Sem Fio Bluetooth Display Led Alta Fidelidade Estéreo Cancelamento Ruído À Prova",
+      "short_description": "",
+      "current_price": "17.19",
+      "original_price": "32.43",
+      "discount_pct": "47.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823ob-mp4layd5kxkw0c",
+      "affiliate_link": "https://s.shopee.com.br/4LKM3wdQxF",
+      "detail_url": "/oferta?slug=senbenbao-x55-fones-de-ouvido-tws-sono-sem-fio-bluetooth-display-led-alta-fidelidade-estereo-cancelamento-ruido-a-prova-15451",
+      "price_collected_at": "2026-10-22T23:00:05.301124+00:00"
+    },
+    {
+      "id": 6826,
+      "slug": "fone-de-ouvido-bluetooth-sem-fio-headphone-bluetooth-recarregavel-p9-air-top-casual-esportivo-6826",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Fone de ouvido Bluetooth Sem Fio Headphone Bluetooth Recarregável P9 Air Top Casual Esportivo",
+      "short_description": "",
+      "current_price": "24.87",
+      "original_price": "46.92",
+      "discount_pct": "47.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824gf-mf8cvs3kgwela4",
+      "affiliate_link": "https://s.shopee.com.br/4VdmGFcncG",
+      "detail_url": "/oferta?slug=fone-de-ouvido-bluetooth-sem-fio-headphone-bluetooth-recarregavel-p9-air-top-casual-esportivo-6826",
+      "price_collected_at": "2026-10-22T23:00:05.289127+00:00"
+    },
+    {
+      "id": 14484,
+      "slug": "senbenbao-x55-fones-de-ouvido-tws-sono-sem-fio-bluetooth-display-led-alta-fidelidade-estereo-cancelamento-ruido-a-prova-14484",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Senbenbao X55 Fones De Ouvido TWS Sono Sem Fio Bluetooth Display Led Alta Fidelidade Estéreo Cancelamento Ruído À Prova",
+      "short_description": "",
+      "current_price": "17.72",
+      "original_price": "21.35",
+      "discount_pct": "17.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823ob-mp7wv1fcnx8rc4",
+      "affiliate_link": "https://s.shopee.com.br/3LRos6hEz1",
+      "detail_url": "/oferta?slug=senbenbao-x55-fones-de-ouvido-tws-sono-sem-fio-bluetooth-display-led-alta-fidelidade-estereo-cancelamento-ruido-a-prova-14484",
+      "price_collected_at": "2026-10-22T23:00:05.276798+00:00"
+    },
+    {
+      "id": 17964,
+      "slug": "carregador-original-para-iphone-11-12-13-14-15-16-fonte-cabo-20w-pd-turbo-rapido-tipo-c-lightning-17964",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Carregador Original Para iPhone 11 12 13 14 15 16 Fonte + Cabo 20w PD Turbo Rapido Tipo C Lightning",
+      "short_description": "",
+      "current_price": "25.99",
+      "original_price": "59.07",
+      "discount_pct": "56.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mbd45zccr6of53",
+      "affiliate_link": "https://s.shopee.com.br/4qGc0AVcpA",
+      "detail_url": "/oferta?slug=carregador-original-para-iphone-11-12-13-14-15-16-fonte-cabo-20w-pd-turbo-rapido-tipo-c-lightning-17964",
+      "price_collected_at": "2026-10-22T23:00:05.252623+00:00"
+    },
+    {
+      "id": 16415,
+      "slug": "suporte-de-telefone-de-cabeca-alca-de-montagem-ajustavel-multifuncional-tiro-ao-vivo-com-clipe-16415",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Suporte De Telefone De Cabeça-Alça De Montagem Ajustável Multifuncional Tiro Ao Vivo Com Clipe",
+      "short_description": "",
+      "current_price": "24.00",
+      "original_price": "31.17",
+      "discount_pct": "23.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134301-7reo9-m8vck44ich0533",
+      "affiliate_link": "https://s.shopee.com.br/4VdlbYWtV4",
+      "detail_url": "/oferta?slug=suporte-de-telefone-de-cabeca-alca-de-montagem-ajustavel-multifuncional-tiro-ao-vivo-com-clipe-16415",
+      "price_collected_at": "2026-10-22T23:00:05.239826+00:00"
+    },
+    {
+      "id": 14370,
+      "slug": "kit-pilhas-clacier-recarregavel-4700mah-ou-2700mah-14370",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit Pilhas Clacier Recarregável 4700mAh ou 2700mAh",
+      "short_description": "",
+      "current_price": "18.88",
+      "original_price": "31.47",
+      "discount_pct": "40.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-ltvoxhgf5nq83e",
+      "affiliate_link": "https://s.shopee.com.br/40hV0dYnVx",
+      "detail_url": "/oferta?slug=kit-pilhas-clacier-recarregavel-4700mah-ou-2700mah-14370",
+      "price_collected_at": "2026-10-22T23:00:05.227054+00:00"
+    },
+    {
+      "id": 8415,
+      "slug": "capa-capinha-magnetica-space-transparente-anti-impacto-tpu-case-apple-iphone-11-12-13-14-15-16-17-pro-max-17-air-7-8-xr-8415",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Capa Capinha Magnética Space Transparente Anti Impacto TPU Case Apple IPhone 11 12 13 14 15 16 17 Pro Max 17 Air 7 8 XR",
+      "short_description": "",
+      "current_price": "9.99",
+      "original_price": "30.27",
+      "discount_pct": "67.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-mm9pu77ilgcmd7",
+      "affiliate_link": "https://s.shopee.com.br/6L5PmvPumN",
+      "detail_url": "/oferta?slug=capa-capinha-magnetica-space-transparente-anti-impacto-tpu-case-apple-iphone-11-12-13-14-15-16-17-pro-max-17-air-7-8-xr-8415",
+      "price_collected_at": "2026-10-22T23:00:05.214092+00:00"
+    },
+    {
+      "id": 15163,
+      "slug": "2510-pcs-capa-celular-bolsa-case-a-prova-dagua-transparente-cor-universal-praia-piscina-viajar-promocao-15163",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "2/5/10 Pcs Capa Celular Bolsa Case A Prova D'água Transparente Cor Universal Praia Piscina Viajar Promoção",
+      "short_description": "",
+      "current_price": "11.99",
+      "original_price": "29.97",
+      "discount_pct": "60.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82598-mtbzagotnri807",
+      "affiliate_link": "https://s.shopee.com.br/60SZOJRBSH",
+      "detail_url": "/oferta?slug=2510-pcs-capa-celular-bolsa-case-a-prova-dagua-transparente-cor-universal-praia-piscina-viajar-promocao-15163",
+      "price_collected_at": "2026-10-22T23:00:05.201550+00:00"
+    },
+    {
+      "id": 6818,
+      "slug": "amplificador-de-imagem-da-tela-do-celular-lupa-3d-216cm166cm27cm-promocao-6818",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Amplificador De Imagem Da Tela Do Celular Lupa 3D 21,6CM*16,6CM*2,7CM Promoção",
+      "short_description": "",
+      "current_price": "16.99",
+      "original_price": "29.81",
+      "discount_pct": "43.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259l-mskzqxceqnm23c",
+      "affiliate_link": "https://s.shopee.com.br/5AtT3TROTC",
+      "detail_url": "/oferta?slug=amplificador-de-imagem-da-tela-do-celular-lupa-3d-216cm166cm27cm-promocao-6818",
+      "price_collected_at": "2026-10-22T23:00:05.174299+00:00"
+    },
+    {
+      "id": 16600,
+      "slug": "kit-carregador-67w-turbo-cabo-tipo-c-carga-rapida-universal-xiaomi-redmi-note-e-poco-x7-android-16600",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Kit Carregador 67W Turbo + Cabo Tipo-C Carga Rápida Universal Xiaomi Redmi Note E Poco X7 Android",
+      "short_description": "",
+      "current_price": "29.51",
+      "original_price": "50.02",
+      "discount_pct": "41.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8258n-mr8vmek85csha1",
+      "affiliate_link": "https://s.shopee.com.br/4qGcerSf96",
+      "detail_url": "/oferta?slug=kit-carregador-67w-turbo-cabo-tipo-c-carga-rapida-universal-xiaomi-redmi-note-e-poco-x7-android-16600",
+      "price_collected_at": "2026-10-22T23:00:05.155120+00:00"
+    },
+    {
+      "id": 6817,
+      "slug": "ampliadora-lente-de-aumento-tela-3d-suporte-tablet-zoom-celular-6817",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Ampliadora Lente De Aumento Tela 3d Suporte Tablet Zoom Celular",
+      "short_description": "",
+      "current_price": "16.99",
+      "original_price": "29.81",
+      "discount_pct": "43.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8257u-msgod13asrggd3",
+      "affiliate_link": "https://s.shopee.com.br/30oyTUZdrj",
+      "detail_url": "/oferta?slug=ampliadora-lente-de-aumento-tela-3d-suporte-tablet-zoom-celular-6817",
+      "price_collected_at": "2026-10-22T23:00:05.136701+00:00"
+    },
+    {
+      "id": 15326,
+      "slug": "carregador-portatil-inducao-para-sem-fio-bateria-carga-3000500010000mah-15326",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Carregador Portátil Indução para Sem fio Bateria Carga 3000/5000/10000mAh",
+      "short_description": "",
+      "current_price": "28.98",
+      "original_price": "69.00",
+      "discount_pct": "58.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mhpueqwbzs3me6",
+      "affiliate_link": "https://s.shopee.com.br/3B8OfnZ0Wk",
+      "detail_url": "/oferta?slug=carregador-portatil-inducao-para-sem-fio-bateria-carga-3000500010000mah-15326",
+      "price_collected_at": "2026-10-22T23:00:05.118104+00:00"
+    },
+    {
+      "id": 17274,
+      "slug": "1-conjuntos-tela-de-ampliacao-10-polegadas-lente-3d-com-base-estavel-perfeita-para-ver-melhor-details-sem-forcar-a-vista-17274",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "1 Conjuntos Tela De Ampliacao 10 Polegadas Lente 3D Com Base Estavel Perfeita Para Ver Melhor Details Sem Forcar A Vista",
+      "short_description": "",
+      "current_price": "16.99",
+      "original_price": "29.81",
+      "discount_pct": "43.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8257s-mtc4bhi6xlaa4f",
+      "affiliate_link": "https://s.shopee.com.br/2gC84sauXd",
+      "detail_url": "/oferta?slug=1-conjuntos-tela-de-ampliacao-10-polegadas-lente-3d-com-base-estavel-perfeita-para-ver-melhor-details-sem-forcar-a-vista-17274",
+      "price_collected_at": "2026-10-22T23:00:05.102262+00:00"
+    },
+    {
+      "id": 8871,
+      "slug": "carregador-portatil-5000mah-sem-fio-para-iphone-inducao-bateria-carga-8871",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Carregador Sem Fio 5000/10000mAh iPhone",
+      "short_description": "",
+      "current_price": "28.88",
+      "original_price": "57.76",
+      "discount_pct": "50.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mavkx3k4v9n308",
+      "affiliate_link": "https://s.shopee.com.br/2qVYHBaHCe",
+      "detail_url": "/oferta?slug=carregador-portatil-5000mah-sem-fio-para-iphone-inducao-bateria-carga-8871",
+      "price_collected_at": "2026-10-22T23:00:05.086855+00:00"
+    },
+    {
+      "id": 15249,
+      "slug": "suporte-para-telefone-principal-alca-de-montagem-ajustavel-multifuncional-tiro-ao-vivo-primeira-pessoa-com-clipe-15249",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Suporte Para Telefone Principal Alça De Montagem Ajustável Multifuncional Tiro Ao Vivo Primeira Pessoa Com Clipe",
+      "short_description": "",
+      "current_price": "32.24",
+      "original_price": "42.99",
+      "discount_pct": "25.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134301-7reo9-m8vck44ich0533",
+      "affiliate_link": "https://s.shopee.com.br/3g4fGiX6Vn",
+      "detail_url": "/oferta?slug=suporte-para-telefone-principal-alca-de-montagem-ajustavel-multifuncional-tiro-ao-vivo-primeira-pessoa-com-clipe-15249",
+      "price_collected_at": "2026-10-22T23:00:05.071907+00:00"
+    },
+    {
+      "id": 15450,
+      "slug": "cartao-de-memoria-128-gb-para-cameras-wi-fi-drones-micro-sd-sensacional-15450",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Cartão De Memória 128 Gb Para Câmeras Wi-fi Drones Micro Sd Sensacional",
+      "short_description": "",
+      "current_price": "26.90",
+      "original_price": "79.12",
+      "discount_pct": "66.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259f-mt139xe6qm15e0",
+      "affiliate_link": "https://s.shopee.com.br/9V2RQZBfQi",
+      "detail_url": "/oferta?slug=cartao-de-memoria-128-gb-para-cameras-wi-fi-drones-micro-sd-sensacional-15450",
+      "price_collected_at": "2026-10-22T23:00:05.056019+00:00"
+    },
+    {
+      "id": 16735,
+      "slug": "chaleira-jarra-eletrica-termica-bule-com-tampa-inox-prateada-18-litros-1000w-16735",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Chaleira Jarra Elétrica Térmica Bule Com Tampa Inox Prateada 1,8 Litros 1000W",
+      "short_description": "",
+      "current_price": "39.96",
+      "original_price": "99.90",
+      "discount_pct": "60.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m0-mswxz4hit81yf5",
+      "affiliate_link": "https://s.shopee.com.br/9zyioM4jOR",
+      "detail_url": "/oferta?slug=chaleira-jarra-eletrica-termica-bule-com-tampa-inox-prateada-18-litros-1000w-16735",
+      "price_collected_at": "2026-10-22T23:00:05.025325+00:00"
+    },
+    {
+      "id": 11265,
+      "slug": "cozedor-de-ovos-eletrico-portatil-cozinha-a-vapor-110v220v-cores-disponiveis-branco-azul-rosa-amarelo-11265",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Cozedor de Ovos Elétrico Portátil Cozinha à Vapor 110V/220V Cores disponíveis （Branco Azul Rosa Amarelo）",
+      "short_description": "",
+      "current_price": "29.98",
+      "original_price": "99.93",
+      "discount_pct": "70.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mfytb2po8gzk07",
+      "affiliate_link": "https://s.shopee.com.br/9V2RQZ34gU",
+      "detail_url": "/oferta?slug=cozedor-de-ovos-eletrico-portatil-cozinha-a-vapor-110v220v-cores-disponiveis-branco-azul-rosa-amarelo-11265",
+      "price_collected_at": "2026-10-22T23:00:05.012246+00:00"
+    },
+    {
+      "id": 6812,
+      "slug": "mini-aspirador-de-po-3-em-1-a-vacuo-usb-portatil-recarregavel-se8010-6812",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Mini Aspirador De Pó 3 em 1 a Vacuo Usb Portátil Recarregavel -SE8010",
+      "short_description": "",
+      "current_price": "21.99",
+      "original_price": "49.98",
+      "discount_pct": "56.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7renx-m8c8ne7qdez9a8",
+      "affiliate_link": "https://s.shopee.com.br/9fLrcs2RLV",
+      "detail_url": "/oferta?slug=mini-aspirador-de-po-3-em-1-a-vacuo-usb-portatil-recarregavel-se8010-6812",
+      "price_collected_at": "2026-10-22T23:00:05.000413+00:00"
+    },
+    {
+      "id": 8587,
+      "slug": "regua-filtro-de-linha-com-7-tomadas-extensao-eletrica-1-universal-4-usb-bivolt-10a-110v220v-cabo-de-2-metros-seguro-e-confiavel-8587",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Régua Filtro de Linha com 7 Tomadas Extensão Elétrica 1 Universal 4 USB Bivolt 10A 110v/220v Cabo de 2 Metros Seguro e confiável",
+      "short_description": "",
+      "current_price": "32.99",
+      "original_price": "49.98",
+      "discount_pct": "34.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-lo4mequ479gpff",
+      "affiliate_link": "https://s.shopee.com.br/9pfHpB1o0W",
+      "detail_url": "/oferta?slug=regua-filtro-de-linha-com-7-tomadas-extensao-eletrica-1-universal-4-usb-bivolt-10a-110v220v-cabo-de-2-metros-seguro-e-confiavel-8587",
+      "price_collected_at": "2026-10-22T23:00:04.988218+00:00"
+    },
+    {
+      "id": 6814,
+      "slug": "extensao-eletrica-2-metros-extensao-de-energia-3-tomadas-com-3-metros-5-metros-10-metros-6814",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Extensão elétrica 2 Metros Extensão de Energia 3 Tomadas com 3 metros 5 metros 10 metros",
+      "short_description": "",
+      "current_price": "12.88",
+      "original_price": "18.94",
+      "discount_pct": "32.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-lx021yat5mm7bb",
+      "affiliate_link": "https://s.shopee.com.br/60SZG8GOml",
+      "detail_url": "/oferta?slug=extensao-eletrica-2-metros-extensao-de-energia-3-tomadas-com-3-metros-5-metros-10-metros-6814",
+      "price_collected_at": "2026-10-22T23:00:04.975154+00:00"
+    },
+    {
+      "id": 14508,
+      "slug": "batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-taobiju-14508",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Batedor Misturador Mixer Elétrico para Bebidas Leite Café Clara de Ovo 2 em 1 taobiju",
+      "short_description": "",
+      "current_price": "16.99",
+      "original_price": "67.96",
+      "discount_pct": "75.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-me30svo6rzsz62",
+      "affiliate_link": "https://s.shopee.com.br/6AlzSRFlRm",
+      "detail_url": "/oferta?slug=batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-taobiju-14508",
+      "price_collected_at": "2026-10-22T23:00:04.962877+00:00"
+    },
+    {
+      "id": 7642,
+      "slug": "liquidificador-mondial-l99-turbo-550-w-3-velocidades-7642",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Liquidificador Mondial L‑99 Turbo 550 W 3 Velocidades",
+      "short_description": "",
+      "current_price": "112.99",
+      "original_price": "173.83",
+      "discount_pct": "35.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mc83lzgst4gw71",
+      "affiliate_link": "https://s.shopee.com.br/9APb1wzsOl",
+      "detail_url": "/oferta?slug=liquidificador-mondial-l99-turbo-550-w-3-velocidades-7642",
+      "price_collected_at": "2026-10-22T23:00:04.950972+00:00"
+    },
+    {
+      "id": 15649,
+      "slug": "papa-bolinhas-eletrico-tira-pelos-de-roupas-removedor-aparador-sem-fio-recarregavel-marisa-15649",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Papa Bolinhas Eletrico Tira Pelos de Roupas Removedor Aparador Sem Fio Recarregável MARISA",
+      "short_description": "",
+      "current_price": "21.50",
+      "original_price": "27.92",
+      "discount_pct": "23.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-821fu-mgpih2ejj9562a",
+      "affiliate_link": "https://s.shopee.com.br/906Ape0Vji",
+      "detail_url": "/oferta?slug=papa-bolinhas-eletrico-tira-pelos-de-roupas-removedor-aparador-sem-fio-recarregavel-marisa-15649",
+      "price_collected_at": "2026-10-22T23:00:04.937741+00:00"
+    },
+    {
+      "id": 16829,
+      "slug": "moedor-de-especiarias-eletrico-110v220v-com-4-laminas-de-aco-inoxidavel-para-uso-domestico-16829",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Moedor de especiarias elétrico 110V/220V, com 4 lâminas de aço inoxidável, para uso doméstico.",
+      "short_description": "",
+      "current_price": "36.19",
+      "original_price": "69.60",
+      "discount_pct": "48.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820md-mq55654q4mbm4b",
+      "affiliate_link": "https://s.shopee.com.br/3B8O9ikZuZ",
+      "detail_url": "/oferta?slug=moedor-de-especiarias-eletrico-110v220v-com-4-laminas-de-aco-inoxidavel-para-uso-domestico-16829",
+      "price_collected_at": "2026-10-22T23:00:04.923546+00:00"
+    },
+    {
+      "id": 6806,
+      "slug": "batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-6806",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Batedor Misturador Mixer Elétrico para Bebidas Leite Café Clara de Ovo 2 em 1",
+      "short_description": "",
+      "current_price": "18.69",
+      "original_price": "89.00",
+      "discount_pct": "79.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd48-lupf3z3a40mxf1",
+      "affiliate_link": "https://s.shopee.com.br/8KqU2Q335W",
+      "detail_url": "/oferta?slug=batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-6806",
+      "price_collected_at": "2026-10-22T23:00:04.910603+00:00"
+    },
+    {
+      "id": 17076,
+      "slug": "moedor-multifuncional-de-cafe-110v-com-design-em-aco-inoxidavel-4-laminas-17076",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Moedor Multifuncional de Café 110V com Design em Aço Inoxidável 4 Lâminas",
+      "short_description": "",
+      "current_price": "31.99",
+      "original_price": "88.86",
+      "discount_pct": "64.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-825a6-ms2w4rj3eg3q6b",
+      "affiliate_link": "https://s.shopee.com.br/8AX3q73gQT",
+      "detail_url": "/oferta?slug=moedor-multifuncional-de-cafe-110v-com-design-em-aco-inoxidavel-4-laminas-17076",
+      "price_collected_at": "2026-10-22T23:00:04.896364+00:00"
+    },
+    {
+      "id": 8016,
+      "slug": "picador-de-alimentos-moedor-de-carne-mixer-eletrica-processador-cozinha-casa-alho-110v-220v-8016",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "2L/3L Picador De Alimentos Moedor De Carne Mixer Elétrica Processador Cozinha Casa Alho - 110v-220v",
+      "short_description": "",
+      "current_price": "79.98",
+      "original_price": "186.00",
+      "discount_pct": "57.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8262e-mjejrub4w35z78",
+      "affiliate_link": "https://s.shopee.com.br/80Dddo4JlQ",
+      "detail_url": "/oferta?slug=picador-de-alimentos-moedor-de-carne-mixer-eletrica-processador-cozinha-casa-alho-110v-220v-8016",
+      "price_collected_at": "2026-10-22T23:00:04.882808+00:00"
+    },
+    {
+      "id": 13453,
+      "slug": "ventilador-80w-de-teto-silencioso-led-3-cores-bulbo-12w-com-controle-bivolt-5-pas-branco-potente-13453",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Ventilador 80w de Teto Silencioso LED 3 Cores Bulbo 12w com Controle Bivolt 5 Pás Branco Potente",
+      "short_description": "",
+      "current_price": "41.65",
+      "original_price": "126.21",
+      "discount_pct": "67.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134201-820lc-mqxwzkyykv0nc7",
+      "affiliate_link": "https://s.shopee.com.br/AUuycOungt",
+      "detail_url": "/oferta?slug=ventilador-80w-de-teto-silencioso-led-3-cores-bulbo-12w-com-controle-bivolt-5-pas-branco-potente-13453",
+      "price_collected_at": "2026-10-22T23:00:04.869032+00:00"
+    },
+    {
+      "id": 17962,
+      "slug": "12-pecas-suporte-de-canto-e-reta-porta-shampoo-prateleira-para-banheiro-organizador-com-adesivo-17962",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "1/2 Peças Suporte de Canto e Reta Porta Shampoo Prateleira Para Banheiro Organizador com Adesivo",
+      "short_description": "",
+      "current_price": "11.45",
+      "original_price": "42.41",
+      "discount_pct": "73.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mfvb2gx4p34791",
+      "affiliate_link": "https://s.shopee.com.br/6Alzac058Z",
+      "detail_url": "/oferta?slug=12-pecas-suporte-de-canto-e-reta-porta-shampoo-prateleira-para-banheiro-organizador-com-adesivo-17962",
+      "price_collected_at": "2026-10-22T23:00:04.854743+00:00"
+    },
+    {
+      "id": 6804,
+      "slug": "percarbonato-de-sodio-100-puro-limpeza-em-geral-tira-manchas-roupas-brancas-500g1kg-2kg-6804",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Percarbonato de Sódio 100% Puro Limpeza Em Geral Tira Manchas Roupas Brancas 500g/1kg /2kg",
+      "short_description": "",
+      "current_price": "10.00",
+      "original_price": "14.93",
+      "discount_pct": "33.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824j0-medc35ydcm4m9c",
+      "affiliate_link": "https://s.shopee.com.br/1BNJVFPvmB",
+      "detail_url": "/oferta?slug=percarbonato-de-sodio-100-puro-limpeza-em-geral-tira-manchas-roupas-brancas-500g1kg-2kg-6804",
+      "price_collected_at": "2026-10-22T23:00:04.842178+00:00"
+    },
+    {
+      "id": 13770,
+      "slug": "mini-umidificador-difusor-aromatizador-egg-portatil-usb-led-aromatizador-de-ambiente-purificador-de-ar-casa-escritorio-13770",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Mini Umidificador Difusor Aromatizador Egg Portátil Usb Led Aromatizador De Ambiente Purificador De Ar Casa Escritório",
+      "short_description": "",
+      "current_price": "15.49",
+      "original_price": "39.72",
+      "discount_pct": "61.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-md3arzpv27sx24",
+      "affiliate_link": "https://s.shopee.com.br/113tIwQZ78",
+      "detail_url": "/oferta?slug=mini-umidificador-difusor-aromatizador-egg-portatil-usb-led-aromatizador-de-ambiente-purificador-de-ar-casa-escritorio-13770",
+      "price_collected_at": "2026-10-22T23:00:04.828866+00:00"
+    },
+    {
+      "id": 6805,
+      "slug": "percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6805",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Percarbonato 100% Puro Tira Manchas Roupas Brancas e Coloridas",
+      "short_description": "",
+      "current_price": "19.90",
+      "original_price": "29.70",
+      "discount_pct": "33.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lm-mohh8j4tjpc0e3",
+      "affiliate_link": "https://s.shopee.com.br/qkT6dRCS5",
+      "detail_url": "/oferta?slug=percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6805",
+      "price_collected_at": "2026-10-22T23:00:04.816277+00:00"
+    },
+    {
+      "id": 8463,
+      "slug": "sapateira-4-ou-5-andares-multiuso-desmontavel-organizadora-multiuso-sapatos-livros-brinquedos-8463",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Sapateira 4 ou 5 Andares Multiuso Desmontável Organizadora Multiuso Sapatos Livros Brinquedos",
+      "short_description": "",
+      "current_price": "18.98",
+      "original_price": "49.95",
+      "discount_pct": "62.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m275pnv5hbnq94",
+      "affiliate_link": "https://s.shopee.com.br/gR2uKRpn2",
+      "detail_url": "/oferta?slug=sapateira-4-ou-5-andares-multiuso-desmontavel-organizadora-multiuso-sapatos-livros-brinquedos-8463",
+      "price_collected_at": "2026-10-22T23:00:04.802994+00:00"
+    },
+    {
+      "id": 15449,
+      "slug": "lencol-queen-400-fios-micropercal-cama-casal-solteiro-tecido-super-macio-15449",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Lencol Queen 400 Fios Micropercal Cama Casal Solteiro Tecido Super Macio",
+      "short_description": "",
+      "current_price": "25.89",
+      "original_price": "58.84",
+      "discount_pct": "56.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m7s2u8qjaf841d",
+      "affiliate_link": "https://s.shopee.com.br/LoCViT6Sw",
+      "detail_url": "/oferta?slug=lencol-queen-400-fios-micropercal-cama-casal-solteiro-tecido-super-macio-15449",
+      "price_collected_at": "2026-10-22T23:00:04.788926+00:00"
+    },
+    {
+      "id": 6802,
+      "slug": "mesa-de-cabeceira-retro-compacta-com-nicho-para-quarto-sala-casal-ou-solteiro-palma-6802",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "Mesa de Cabeceira Retrô Compacta com Nicho para Quarto Sala Casal ou Solteiro Palma",
+      "short_description": "",
+      "current_price": "29.90",
+      "original_price": "49.83",
+      "discount_pct": "40.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd6x-luv5vclgwaxb45",
+      "affiliate_link": "https://s.shopee.com.br/BUmJPPCRk",
+      "detail_url": "/oferta?slug=mesa-de-cabeceira-retro-compacta-com-nicho-para-quarto-sala-casal-ou-solteiro-palma-6802",
+      "price_collected_at": "2026-10-22T23:00:04.772418+00:00"
+    },
+    {
+      "id": 11548,
+      "slug": "kit-de-100-a-300-tampas-de-plastico-descartavel-para-alimento-com-100-ate-300-unidades-11548",
+      "marketplace": {
+        "code": "shopee",
+        "name": "Shopee"
+      },
+      "title": "KIT De 100 á 300 Tampas De Plástico Descartável Para Alimento Com 100 Ate 300 Unidades",
+      "short_description": "",
+      "current_price": "7.99",
+      "original_price": "22.83",
+      "discount_pct": "65.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m9-mqxhlznhjvnq4b",
+      "affiliate_link": "https://s.shopee.com.br/4qGbrz7Qya",
+      "detail_url": "/oferta?slug=kit-de-100-a-300-tampas-de-plastico-descartavel-para-alimento-com-100-ate-300-unidades-11548",
+      "price_collected_at": "2026-10-22T23:00:04.738304+00:00"
+    },
     {
       "id": 9571,
       "slug": "creatina-monohidratada-pura-1kg-500g-600-300g-e-150g-dark-lab-9571",
@@ -260,754 +1671,6 @@
       "price_collected_at": "2026-10-22T20:20:34.753267+00:00"
     },
     {
-      "id": 9562,
-      "slug": "kit-com-2-pares-de-palmilha-ortopedica-em-gel-para-varias-horas-de-trabalho-alivia-dores-confortavel-9562",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit com 2 Pares de Palmilha Ortopédica em Gel Para Várias Horas de Trabalho Alivia Dores Confortável",
-      "short_description": "",
-      "current_price": "19.80",
-      "original_price": "44.00",
-      "discount_pct": "55.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m1y8c6hel0b5b0",
-      "affiliate_link": "https://s.shopee.com.br/2BFqh6hiYp",
-      "detail_url": "/oferta?slug=kit-com-2-pares-de-palmilha-ortopedica-em-gel-para-varias-horas-de-trabalho-alivia-dores-confortavel-9562",
-      "price_collected_at": "2026-10-22T20:20:34.739136+00:00"
-    },
-    {
-      "id": 9811,
-      "slug": "palmilha-ortopedica-em-gel-pu-anatomica-promocao-envio-imediato-9811",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Palmilha Ortopédica Em Gel PU Anatômica Promoção Envio Imediato",
-      "short_description": "",
-      "current_price": "12.89",
-      "original_price": "33.92",
-      "discount_pct": "62.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820me-mp7a5ik69wqr3d",
-      "affiliate_link": "https://s.shopee.com.br/20wQUniLtm",
-      "detail_url": "/oferta?slug=palmilha-ortopedica-em-gel-pu-anatomica-promocao-envio-imediato-9811",
-      "price_collected_at": "2026-10-22T20:20:34.724105+00:00"
-    },
-    {
-      "id": 17748,
-      "slug": "kit-de-6-pares-meias-cano-invisivel-lupo-sport-algodao-soquete-sapatilha-unissex-17748",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit De 6 Pares Meias Cano Invisível Lupo Sport Algodão Soquete Sapatilha Unissex",
-      "short_description": "",
-      "current_price": "46.77",
-      "original_price": "82.05",
-      "discount_pct": "43.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820l8-mseej1ezbjt320",
-      "affiliate_link": "https://s.shopee.com.br/8V9uVXcvr8",
-      "detail_url": "/oferta?slug=kit-de-6-pares-meias-cano-invisivel-lupo-sport-algodao-soquete-sapatilha-unissex-17748",
-      "price_collected_at": "2026-10-22T20:20:34.709037+00:00"
-    },
-    {
-      "id": 14509,
-      "slug": "kit-4-calca-masculina-jogger-academia-com-stylo-refletivo-promocao-2k26-14509",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "KIT 4 CALÇA MASCULINA JOGGER ACADEMIA COM STYLO REFLETIVO PROMOÇÃO 2K26",
-      "short_description": "",
-      "current_price": "79.98",
-      "original_price": "119.37",
-      "discount_pct": "33.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824h3-mfg7a26no0lp54",
-      "affiliate_link": "https://s.shopee.com.br/7KxwqbJVqY",
-      "detail_url": "/oferta?slug=kit-4-calca-masculina-jogger-academia-com-stylo-refletivo-promocao-2k26-14509",
-      "price_collected_at": "2026-10-22T20:20:34.695562+00:00"
-    },
-    {
-      "id": 16736,
-      "slug": "kit-com-3-e-2-calcas-jeans-masculinas-slim-fit-basicas-cores-variadas-dia-a-dia-16736",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit Com 3 e 2 Calças Jeans Masculinas Slim Fit Básicas Cores Variadas Dia a Dia",
-      "short_description": "",
-      "current_price": "92.99",
-      "original_price": "172.20",
-      "discount_pct": "46.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820me-mrhyfx2bi8sma8",
-      "affiliate_link": "https://s.shopee.com.br/7fanFDIFAa",
-      "detail_url": "/oferta?slug=kit-com-3-e-2-calcas-jeans-masculinas-slim-fit-basicas-cores-variadas-dia-a-dia-16736",
-      "price_collected_at": "2026-10-22T20:20:34.682335+00:00"
-    },
-    {
-      "id": 17462,
-      "slug": "camiseta-masculina-canelada-slim-fit-estilo-americana-ribana-justa-ao-corpo-streetwear-rapper-17462",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Camiseta Masculina Canelada Slim Fit Estilo Americana Ribana Justa ao Corpo Streetwear Rapper",
-      "short_description": "",
-      "current_price": "16.99",
-      "original_price": "34.67",
-      "discount_pct": "51.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lh-ms5jkzcv0wlgda",
-      "affiliate_link": "https://s.shopee.com.br/6fiG3NM3CM",
-      "detail_url": "/oferta?slug=camiseta-masculina-canelada-slim-fit-estilo-americana-ribana-justa-ao-corpo-streetwear-rapper-17462",
-      "price_collected_at": "2026-10-22T20:20:34.655932+00:00"
-    },
-    {
-      "id": 16932,
-      "slug": "meias-masculinas-cano-alto-macias-e-resistentes-16932",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Meias Masculinas Cano Alto Macias e Resistentes",
-      "short_description": "",
-      "current_price": "21.99",
-      "original_price": "30.12",
-      "discount_pct": "27.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820ll-mtippu71nkead9",
-      "affiliate_link": "https://s.shopee.com.br/7AeWeIK9BR",
-      "detail_url": "/oferta?slug=meias-masculinas-cano-alto-macias-e-resistentes-16932",
-      "price_collected_at": "2026-10-22T20:20:34.643011+00:00"
-    },
-    {
-      "id": 17407,
-      "slug": "kit-5-ou-10-cueca-boxer-men-cueca-masculina-microfibra-premium-cueca-men-box-conforto-e-qualidade-17407",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit 5 ou 10 Cueca Boxer men cueca Masculina Microfibra Premium cueca men box conforto e qualidade",
-      "short_description": "",
-      "current_price": "25.89",
-      "original_price": "57.53",
-      "discount_pct": "55.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lq-muamjw0jr4sge1",
-      "affiliate_link": "https://s.shopee.com.br/70L6RzKmWO",
-      "detail_url": "/oferta?slug=kit-5-ou-10-cueca-boxer-men-cueca-masculina-microfibra-premium-cueca-men-box-conforto-e-qualidade-17407",
-      "price_collected_at": "2026-10-22T20:20:34.630357+00:00"
-    },
-    {
-      "id": 16602,
-      "slug": "t-shirt-masculina-looney-tunes-modelo-novo-camiseta-versatil-camisa-tendencia-blusa-premium-crt-unissex-16602",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "T-shirt Masculina Looney Tunes modelo novo Camiseta Versátil Camisa Tendência Blusa Premium Crt Unissex",
-      "short_description": "",
-      "current_price": "23.90",
-      "original_price": "88.52",
-      "discount_pct": "73.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mg-mqxgrhjzl2px4a",
-      "affiliate_link": "https://s.shopee.com.br/6AlzSSNxDD",
-      "detail_url": "/oferta?slug=t-shirt-masculina-looney-tunes-modelo-novo-camiseta-versatil-camisa-tendencia-blusa-premium-crt-unissex-16602",
-      "price_collected_at": "2026-10-22T20:20:34.617255+00:00"
-    },
-    {
-      "id": 16719,
-      "slug": "camiseta-masculina-importada-boos-camisa-100-algodao-moda-verao-gola-reforcada-premium-16719",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Camiseta Masculina Importada Bo..os Camisa 100% Algodão Moda Verão Gola Reforçada Premium",
-      "short_description": "",
-      "current_price": "29.94",
-      "original_price": "49.90",
-      "discount_pct": "40.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82596-mt5fmnpo1c7ee3",
-      "affiliate_link": "https://s.shopee.com.br/60SZG9OaYA",
-      "detail_url": "/oferta?slug=camiseta-masculina-importada-boos-camisa-100-algodao-moda-verao-gola-reforcada-premium-16719",
-      "price_collected_at": "2026-10-22T20:20:34.603537+00:00"
-    },
-    {
-      "id": 15168,
-      "slug": "kit-5-ou-10-cuecas-boxer-masculinas-polo-wear-microfibra-leve-e-elastico-confortavel-15168",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit 5 ou 10 Cuecas Boxer Masculinas Polo Wear Microfibra Leve e Elástico Confortável",
-      "short_description": "",
-      "current_price": "57.90",
-      "original_price": "90.47",
-      "discount_pct": "36.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820l7-mogqop0wbp4z84",
-      "affiliate_link": "https://s.shopee.com.br/4VdlTOQ2GH",
-      "detail_url": "/oferta?slug=kit-5-ou-10-cuecas-boxer-masculinas-polo-wear-microfibra-leve-e-elastico-confortavel-15168",
-      "price_collected_at": "2026-10-22T20:20:34.590293+00:00"
-    },
-    {
-      "id": 17054,
-      "slug": "varios-modelos-com-24-meia-cano-alto-100-algodao-soquete-cano-curto-masculina-feminina-unissex-direto-da-fabrica-17054",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Vários modelos com 24 meia cano alto 100% algodão soquete Cano Curto Masculina Feminina Unissex direto da fabrica",
-      "short_description": "",
-      "current_price": "27.79",
-      "original_price": "49.62",
-      "discount_pct": "44.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-ms008boluiv9cf",
-      "affiliate_link": "https://s.shopee.com.br/40hUsTRwHC",
-      "detail_url": "/oferta?slug=varios-modelos-com-24-meia-cano-alto-100-algodao-soquete-cano-curto-masculina-feminina-unissex-direto-da-fabrica-17054",
-      "price_collected_at": "2026-10-22T20:20:34.576561+00:00"
-    },
-    {
-      "id": 15265,
-      "slug": "kit-3-bermuda-masculina-importada-seda-gelada-elastano-secagem-rapida-bolsos-com-ziper-15265",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "KIT 3 Bermuda Masculina Importada Seda Gelada Elastano Secagem Rápida Bolsos com Zíper",
-      "short_description": "",
-      "current_price": "94.69",
-      "original_price": "129.71",
-      "discount_pct": "27.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7renw-m24lcwj70m7p22",
-      "affiliate_link": "https://s.shopee.com.br/4LKLH5QfbE",
-      "detail_url": "/oferta?slug=kit-3-bermuda-masculina-importada-seda-gelada-elastano-secagem-rapida-bolsos-com-ziper-15265",
-      "price_collected_at": "2026-10-22T20:20:34.546250+00:00"
-    },
-    {
-      "id": 15167,
-      "slug": "kit-com-5-ate-10-cuecas-boxer-masculina-microfibra-15167",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit Com 5 Até 10 Cuecas Boxer Masculina Microfibra",
-      "short_description": "",
-      "current_price": "28.99",
-      "original_price": "46.76",
-      "discount_pct": "38.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820la-mrj5atc8p9fr1d",
-      "affiliate_link": "https://s.shopee.com.br/3LRo5FUTd0",
-      "detail_url": "/oferta?slug=kit-com-5-ate-10-cuecas-boxer-masculina-microfibra-15167",
-      "price_collected_at": "2026-10-22T20:20:34.526290+00:00"
-    },
-    {
-      "id": 9923,
-      "slug": "kit-3-4-ou-6-bermudas-masculinas-basicas-dryfit-malha-leve-e-confortavel-pronta-entrega-origins-9923",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit 3 4 ou 6 Bermudas Masculinas Básicas - DryFit - Malha Leve e Confortável - Pronta Entrega Origins",
-      "short_description": "",
-      "current_price": "44.95",
-      "original_price": "99.89",
-      "discount_pct": "55.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824gv-me9czhjwgqv8f9",
-      "affiliate_link": "https://s.shopee.com.br/3qO4gASZc5",
-      "detail_url": "/oferta?slug=kit-3-4-ou-6-bermudas-masculinas-basicas-dryfit-malha-leve-e-confortavel-pronta-entrega-origins-9923",
-      "price_collected_at": "2026-10-22T20:20:34.511198+00:00"
-    },
-    {
-      "id": 17111,
-      "slug": "camiseta-masculino-light-t-shirt-insider-17111",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Camiseta Masculino Light T-shirt Insider",
-      "short_description": "",
-      "current_price": "59.00",
-      "original_price": "190.32",
-      "discount_pct": "69.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-825ad-mslnrempg8i002",
-      "affiliate_link": "https://s.shopee.com.br/2qVXUKWNdr",
-      "detail_url": "/oferta?slug=camiseta-masculino-light-t-shirt-insider-17111",
-      "price_collected_at": "2026-10-22T20:20:34.496007+00:00"
-    },
-    {
-      "id": 11410,
-      "slug": "kit-com-10-ou-5-cuecas-boxer-premium-masculina-extremamente-confortavel-cueca-box-11410",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit com 10 ou 5 Cuecas Boxer Premium Masculina Extremamente Confortável Cueca Box",
-      "short_description": "",
-      "current_price": "23.89",
-      "original_price": "59.73",
-      "discount_pct": "60.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820md-mr93qaevk9hi01",
-      "affiliate_link": "https://s.shopee.com.br/2gC7I1X0yo",
-      "detail_url": "/oferta?slug=kit-com-10-ou-5-cuecas-boxer-premium-masculina-extremamente-confortavel-cueca-box-11410",
-      "price_collected_at": "2026-10-22T20:20:34.480925+00:00"
-    },
-    {
-      "id": 10115,
-      "slug": "daily-t-shirt-insider-10115",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Daily T-shirt Insider",
-      "short_description": "",
-      "current_price": "74.99",
-      "original_price": "138.87",
-      "discount_pct": "46.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-81zvs-mimqyela89hg71",
-      "affiliate_link": "https://s.shopee.com.br/3B8NswV6xt",
-      "detail_url": "/oferta?slug=daily-t-shirt-insider-10115",
-      "price_collected_at": "2026-10-22T20:20:34.464796+00:00"
-    },
-    {
-      "id": 6852,
-      "slug": "babuche-plataforma-alta-nuvem-macia-100-decorada-com-botons-pingentes-em-abs-confortavel-6852",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Chinelo BABUCHE PLATAFORMA ALTA NUVEM MACIA 100 % DECORADA COM BÓTONS PINGENTES EM ABS CONFORTÁVELSandália Confortável",
-      "short_description": "",
-      "current_price": "37.99",
-      "original_price": "80.83",
-      "discount_pct": "53.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81zu9-mkpc3fgyf0u9e5",
-      "affiliate_link": "https://s.shopee.com.br/3VlEHYL2i6",
-      "detail_url": "/oferta?slug=babuche-plataforma-alta-nuvem-macia-100-decorada-com-botons-pingentes-em-abs-confortavel-6852",
-      "price_collected_at": "2026-10-22T20:20:34.450092+00:00"
-    },
-    {
-      "id": 15455,
-      "slug": "chinelo-feminino-leve-e-pratico-para-uso-em-praia-e-lazer-15455",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Chinelo Feminino Leve e Prático Para Uso em Praia e Lazer",
-      "short_description": "",
-      "current_price": "14.97",
-      "original_price": "49.90",
-      "discount_pct": "70.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-825bb-mum5w17d61vrd7",
-      "affiliate_link": "https://s.shopee.com.br/3LRo5FLg35",
-      "detail_url": "/oferta?slug=chinelo-feminino-leve-e-pratico-para-uso-em-praia-e-lazer-15455",
-      "price_collected_at": "2026-10-22T20:20:34.436584+00:00"
-    },
-    {
-      "id": 6851,
-      "slug": "tenis-meia-feminino-calce-facil-botinha-ortopedico-esportivo-sneaker-slip-on-casual-confortavel-academia-6851",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Tênis Meia Feminino Calce Fácil Botinha Ortopédico Esportivo Sneaker Slip On Casual confortável Academia",
-      "short_description": "",
-      "current_price": "28.90",
-      "original_price": "60.21",
-      "discount_pct": "52.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820ma-mnx8czipq39ea6",
-      "affiliate_link": "https://s.shopee.com.br/3g4eTrKPN7",
-      "detail_url": "/oferta?slug=tenis-meia-feminino-calce-facil-botinha-ortopedico-esportivo-sneaker-slip-on-casual-confortavel-academia-6851",
-      "price_collected_at": "2026-10-22T20:20:34.422638+00:00"
-    },
-    {
-      "id": 11980,
-      "slug": "calca-cintura-media-versatil-perfeita-para-looks-casuais-e-elegantes-11980",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Calça Cintura média Versátil - Perfeita para Looks Casuais e Elegantes",
-      "short_description": "",
-      "current_price": "84.99",
-      "original_price": "160.36",
-      "discount_pct": "47.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-mt9wcdhx0s8x50",
-      "affiliate_link": "https://s.shopee.com.br/3LRoDQJKe7",
-      "detail_url": "/oferta?slug=calca-cintura-media-versatil-perfeita-para-looks-casuais-e-elegantes-11980",
-      "price_collected_at": "2026-10-22T20:20:34.408255+00:00"
-    },
-    {
-      "id": 7594,
-      "slug": "meias-lupo-original-femininas-para-homens-e-mulheres-pacote-de-3-pares-algodao-respiravel-com-padroes-delicados-preto-7594",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Meias Femininas Originais Para Homens E Mulheres-Pacote De 3 Pares | Algodão Respirável Com Padrões Delicados (Preto , B",
-      "short_description": "",
-      "current_price": "15.42",
-      "original_price": "81.16",
-      "discount_pct": "81.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134301-8258r-mqr0qmm26qz28d",
-      "affiliate_link": "https://s.shopee.com.br/9pfHpBsOZp",
-      "detail_url": "/oferta?slug=meias-lupo-original-femininas-para-homens-e-mulheres-pacote-de-3-pares-algodao-respiravel-com-padroes-delicados-preto-7594",
-      "price_collected_at": "2026-10-22T20:20:34.394918+00:00"
-    },
-    {
-      "id": 13105,
-      "slug": "calca-pantalona-feminina-cintura-alta-com-bolso-tecido-duna-13105",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Calça Pantalona Feminina Cintura Alta Com Bolso Tecido Duna",
-      "short_description": "",
-      "current_price": "29.90",
-      "original_price": "110.74",
-      "discount_pct": "73.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mg76rg2cd98ndb",
-      "affiliate_link": "https://s.shopee.com.br/6L5Pel5igC",
-      "detail_url": "/oferta?slug=calca-pantalona-feminina-cintura-alta-com-bolso-tecido-duna-13105",
-      "price_collected_at": "2026-10-22T20:20:34.381845+00:00"
-    },
-    {
-      "id": 8590,
-      "slug": "kit-5-calcinhas-sem-costura-tanga-corte-a-laser-nao-marca-na-roupa-invisivel-academia-justo-conforto-8590",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit Calcinhas Sem costura Tanga corte a Laser Não Marca na Roupa Invisível Academia Justo Conforto",
-      "short_description": "",
-      "current_price": "16.79",
-      "original_price": "49.38",
-      "discount_pct": "66.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7ratx-maaleuuypc3p1c",
-      "affiliate_link": "https://s.shopee.com.br/6VOpr455LF",
-      "detail_url": "/oferta?slug=kit-5-calcinhas-sem-costura-tanga-corte-a-laser-nao-marca-na-roupa-invisivel-academia-justo-conforto-8590",
-      "price_collected_at": "2026-10-22T20:20:34.368849+00:00"
-    },
-    {
-      "id": 9922,
-      "slug": "legging-suplex-fitness-pronta-entrega-zero-transparencia-9922",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Legging Suplex Fitness Pronta Entrega Zero Transparência",
-      "short_description": "",
-      "current_price": "21.99",
-      "original_price": "34.90",
-      "discount_pct": "37.00",
-      "image_url": "https://cf.shopee.com.br/file/f6f75b5192f765859036093f8c6086e8",
-      "affiliate_link": "https://s.shopee.com.br/9fLrcst1um",
-      "detail_url": "/oferta?slug=legging-suplex-fitness-pronta-entrega-zero-transparencia-9922",
-      "price_collected_at": "2026-10-22T20:20:34.327325+00:00"
-    },
-    {
-      "id": 10114,
-      "slug": "vestido-longo-casual-basico-feminino-ribana-canelada-manga-muscle-moda-gringa-preto-marrom-plus-size-10114",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Vestido longo casual basico feminino ribana canelada manga muscle moda gringa preto marrom plus size",
-      "short_description": "",
-      "current_price": "37.99",
-      "original_price": "90.45",
-      "discount_pct": "58.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mke9y8fknmyr42",
-      "affiliate_link": "https://s.shopee.com.br/9zyi1UrlEo",
-      "detail_url": "/oferta?slug=vestido-longo-casual-basico-feminino-ribana-canelada-manga-muscle-moda-gringa-preto-marrom-plus-size-10114",
-      "price_collected_at": "2026-10-22T20:20:34.293465+00:00"
-    },
-    {
-      "id": 17039,
-      "slug": "legging-suplex-fitness-pronta-entrega-zero-transparencia-17039",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Legging Suplex Fitness Pronta Entrega Zero Transparência",
-      "short_description": "",
-      "current_price": "21.99",
-      "original_price": "34.90",
-      "discount_pct": "37.00",
-      "image_url": "https://cf.shopee.com.br/file/f6f75b5192f765859036093f8c6086e8",
-      "affiliate_link": "https://s.shopee.com.br/AUuycPprDt",
-      "detail_url": "/oferta?slug=legging-suplex-fitness-pronta-entrega-zero-transparencia-17039",
-      "price_collected_at": "2026-10-22T20:20:34.277700+00:00"
-    },
-    {
-      "id": 13104,
-      "slug": "calca-jeans-feminina-wide-leg-cintura-alta-pantalona-marmorizada-cintura-alta-13104",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Calça Jeans Feminina Wide Leg Cintura Alta Pantalona MARMORIZADA CINTURA ALTA",
-      "short_description": "",
-      "current_price": "49.90",
-      "original_price": "89.11",
-      "discount_pct": "44.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mdxnurrbkiypff",
-      "affiliate_link": "https://s.shopee.com.br/50a24J247J",
-      "detail_url": "/oferta?slug=calca-jeans-feminina-wide-leg-cintura-alta-pantalona-marmorizada-cintura-alta-13104",
-      "price_collected_at": "2026-10-22T20:20:34.259183+00:00"
-    },
-    {
-      "id": 7346,
-      "slug": "calca-wide-leg-jeans-feminina-cintura-alta-pantalona-7346",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Calça Wide Leg Jeans Feminina Cintura Alta Pantalona",
-      "short_description": "",
-      "current_price": "59.99",
-      "original_price": "99.98",
-      "discount_pct": "40.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mftpfyzvikn40c",
-      "affiliate_link": "https://s.shopee.com.br/4LKLH54bT7",
-      "detail_url": "/oferta?slug=calca-wide-leg-jeans-feminina-cintura-alta-pantalona-7346",
-      "price_collected_at": "2026-10-22T20:20:34.220863+00:00"
-    },
-    {
-      "id": 9865,
-      "slug": "depilador-indolor-caneta-sobrancelha-removedor-instantaneo-a-pilha-9865",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Depilador Indolor Caneta Sobrancelha Removedor Instantâneo A Pilha",
-      "short_description": "",
-      "current_price": "13.99",
-      "original_price": "48.24",
-      "discount_pct": "71.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824h3-mfcqeo0mbguk87",
-      "affiliate_link": "https://s.shopee.com.br/9APbds509z",
-      "detail_url": "/oferta?slug=depilador-indolor-caneta-sobrancelha-removedor-instantaneo-a-pilha-9865",
-      "price_collected_at": "2026-10-22T20:20:34.114546+00:00"
-    },
-    {
-      "id": 17229,
-      "slug": "empurrador-de-cuticula-caneta-de-oleo-de-unha-portatil-ceramica-ferramentas-removedoras-de-pele-morta-17229",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Empurrador De Cutícula Caneta De Óleo De Unha Portátil Cerâmica Ferramentas Removedoras De Pele Morta",
-      "short_description": "",
-      "current_price": "10.00",
-      "original_price": "20.83",
-      "discount_pct": "52.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-821ga-mhbcnolwii2y9f",
-      "affiliate_link": "https://s.shopee.com.br/906BRZ5dUw",
-      "detail_url": "/oferta?slug=empurrador-de-cuticula-caneta-de-oleo-de-unha-portatil-ceramica-ferramentas-removedoras-de-pele-morta-17229",
-      "price_collected_at": "2026-10-22T20:20:34.100595+00:00"
-    },
-    {
-      "id": 17003,
-      "slug": "123-pcs-caneta-de-moagem-de-quartzo-portatil-tesoura-de-cuticula-unhas-removedor-de-pele-morta-vara-arquivos-de-unhas-17003",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "1/2/3 Pçs Caneta De Moagem De Quartzo Portátil Tesoura De Cutícula Unhas Removedor De Pele Morta Vara Arquivos De Unhas",
-      "short_description": "",
-      "current_price": "7.99",
-      "original_price": "14.53",
-      "discount_pct": "45.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134201-820mb-mqxms48y7dvq72",
-      "affiliate_link": "https://s.shopee.com.br/8fTL2x6uAq",
-      "detail_url": "/oferta?slug=123-pcs-caneta-de-moagem-de-quartzo-portatil-tesoura-de-cuticula-unhas-removedor-de-pele-morta-vara-arquivos-de-unhas-17003",
-      "price_collected_at": "2026-10-22T20:20:34.087411+00:00"
-    },
-    {
-      "id": 13619,
-      "slug": "kit-1x-a-3x-pomadas-cera-caramelito-80g-infinity-classe-a-modela-alta-fixacao-hidrata-os-fios-fox-13619",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit 1x à 3x Pomadas Cera Caramelito 80g Infinity Classe A - Antifrizz Penteados Modela Alta Fixação Hidrata os Fios Fox",
-      "short_description": "",
-      "current_price": "11.99",
-      "original_price": "26.64",
-      "discount_pct": "55.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m4-mq5gzlvr8kcj7a",
-      "affiliate_link": "https://s.shopee.com.br/1LgkJTYp3P",
-      "detail_url": "/oferta?slug=kit-1x-a-3x-pomadas-cera-caramelito-80g-infinity-classe-a-modela-alta-fixacao-hidrata-os-fios-fox-13619",
-      "price_collected_at": "2026-10-22T20:20:34.075022+00:00"
-    },
-    {
-      "id": 12481,
-      "slug": "lapis-de-sobrancelha-liquido-a-prova-dagua-de-longa-duracao-definicao-natural-maquiagem-acessivel-12481",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Lápis De Sobrancelha Líquido À Prova D'água, De Longa Duração , Definição Natural , Maquiagem Acessível",
-      "short_description": "",
-      "current_price": "11.99",
-      "original_price": "32.41",
-      "discount_pct": "63.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82620-mkjr5fqpg26e40",
-      "affiliate_link": "https://s.shopee.com.br/1gJai5XYNR",
-      "detail_url": "/oferta?slug=lapis-de-sobrancelha-liquido-a-prova-dagua-de-longa-duracao-definicao-natural-maquiagem-acessivel-12481",
-      "price_collected_at": "2026-10-22T20:20:34.061514+00:00"
-    },
-    {
-      "id": 15452,
-      "slug": "mega-hidratacao-ouro-marroquino-efeito-teia-antifrizz-oleos-milagrosos-fina-maria-professional-15452",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "MEGA HIDRATAÇÃO OURO MARROQUINO EFEITO TEIA | ANTIFRIZZ | ÓLEOS MILAGROSOS | FINA MARIA PROFESSIONAL",
-      "short_description": "",
-      "current_price": "38.90",
-      "original_price": "79.39",
-      "discount_pct": "51.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mgcvuf1960as06",
-      "affiliate_link": "https://s.shopee.com.br/20wR6hWHhT",
-      "detail_url": "/oferta?slug=mega-hidratacao-ouro-marroquino-efeito-teia-antifrizz-oleos-milagrosos-fina-maria-professional-15452",
-      "price_collected_at": "2026-10-22T20:20:34.048176+00:00"
-    },
-    {
-      "id": 8589,
-      "slug": "celimax-the-vita-a-retinal-shot-tightening-booster-15ml-8589",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Celimax The Vita A Retinal Shot Tightening Booster 15ml",
-      "short_description": "",
-      "current_price": "136.00",
-      "original_price": "219.35",
-      "discount_pct": "38.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134207-825ai-mr9pynhmd43k22",
-      "affiliate_link": "https://s.shopee.com.br/9V2S2TzCB7",
-      "detail_url": "/oferta?slug=celimax-the-vita-a-retinal-shot-tightening-booster-15ml-8589",
-      "price_collected_at": "2026-10-22T20:20:34.035029+00:00"
-    },
-    {
-      "id": 15777,
-      "slug": "alicate-de-cuticula-mundial-522c-precisao-e-durabilidade-15777",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Alicate de Cutícula Mundial 522C: Precisão e Durabilidade",
-      "short_description": "",
-      "current_price": "19.90",
-      "original_price": "32.62",
-      "discount_pct": "39.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rbk0-lktyq6753ip22a",
-      "affiliate_link": "https://s.shopee.com.br/9Kj1qAzpW4",
-      "detail_url": "/oferta?slug=alicate-de-cuticula-mundial-522c-precisao-e-durabilidade-15777",
-      "price_collected_at": "2026-10-22T20:20:34.018478+00:00"
-    },
-    {
-      "id": 6835,
-      "slug": "40-120-pcs-hidrocoloide-acne-remendos-rosto-espinha-adesivos-para-zits-tratamento-de-ponto-cuidados-com-a-pele-essencial-6835",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Adesivos hidrocolóides anti-acne para espinhas; cuidado inverno; presente ideal Natal/Ano Novo",
-      "short_description": "",
-      "current_price": "7.34",
-      "original_price": "11.12",
-      "discount_pct": "34.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823qq-mp4me4j9r9xq17",
-      "affiliate_link": "https://s.shopee.com.br/906BRZ16By",
-      "detail_url": "/oferta?slug=40-120-pcs-hidrocoloide-acne-remendos-rosto-espinha-adesivos-para-zits-tratamento-de-ponto-cuidados-com-a-pele-essencial-6835",
-      "price_collected_at": "2026-10-22T20:20:34.002549+00:00"
-    },
-    {
-      "id": 15164,
-      "slug": "kit-clareador-facial-sabonete-liquido-protetor-solar-clareador-70-fps-serum-multicorretivo-clareador-15164",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit Hidrabene Clareador Skincare Clareador Facial: Sabonete, Protetor 70 FPS e Sérum Multicorretivo",
-      "short_description": "",
-      "current_price": "79.90",
-      "original_price": "159.80",
-      "discount_pct": "50.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lx-mt45q21kcvt09d",
-      "affiliate_link": "https://s.shopee.com.br/8pmlFG1jWv",
-      "detail_url": "/oferta?slug=kit-clareador-facial-sabonete-liquido-protetor-solar-clareador-70-fps-serum-multicorretivo-clareador-15164",
-      "price_collected_at": "2026-10-22T20:20:33.988023+00:00"
-    },
-    {
-      "id": 6840,
-      "slug": "fadvan-5d-w-extensoes-de-cilios-em-forma-de-007-cd-faux-mink-natural-pestanas-profissionais-suaves-6840",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Fadvan 5D W Extensões De Cílios Em Forma De 0.07 C/D Faux Mink Natural Lashes Profissionais Suaves",
-      "short_description": "",
-      "current_price": "22.25",
-      "original_price": "58.55",
-      "discount_pct": "62.00",
-      "image_url": "https://cf.shopee.com.br/file/cn-11134207-820l4-mlr6x8dggpa8d1",
-      "affiliate_link": "https://s.shopee.com.br/8fTL2x2Mrs",
-      "detail_url": "/oferta?slug=fadvan-5d-w-extensoes-de-cilios-em-forma-de-007-cd-faux-mink-natural-pestanas-profissionais-suaves-6840",
-      "price_collected_at": "2026-10-22T20:20:33.973028+00:00"
-    },
-    {
-      "id": 16447,
-      "slug": "oleo-finalizador-oleo-extraordinario-anti-frizz-protetor-termico-loreal-paris-elseve-100ml-16447",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Óleo Finalizador Óleo Extraordinário, Anti Frizz, Protetor Térmico, L'Oréal Paris Elseve 100ml",
-      "short_description": "",
-      "current_price": "36.99",
-      "original_price": "60.64",
-      "discount_pct": "39.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lt-msof4dg2rnyc07",
-      "affiliate_link": "https://s.shopee.com.br/8V9uqe30Cp",
-      "detail_url": "/oferta?slug=oleo-finalizador-oleo-extraordinario-anti-frizz-protetor-termico-loreal-paris-elseve-100ml-16447",
-      "price_collected_at": "2026-10-22T20:20:33.957652+00:00"
-    },
-    {
-      "id": 15250,
-      "slug": "ultra-hidratacao-efeito-teia-com-oleos-marroquinos-ouro-marroquino-fina-maria-profissional-15250",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "ULTRA HIDRATAÇÃO EFEITO TEIA COM ÓLEOS MARROQUINOS - OURO MARROQUINO - FINA MARIA PROFISSIONAL",
-      "short_description": "",
-      "current_price": "38.90",
-      "original_price": "79.39",
-      "discount_pct": "51.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8258h-mr1ynaykoao016",
-      "affiliate_link": "https://s.shopee.com.br/113tIx8UhH",
-      "detail_url": "/oferta?slug=ultra-hidratacao-efeito-teia-com-oleos-marroquinos-ouro-marroquino-fina-maria-profissional-15250",
-      "price_collected_at": "2026-10-22T20:20:33.941507+00:00"
-    },
-    {
-      "id": 17318,
-      "slug": "jbsara-revive-spicule-shot-102-ampoule-serum-1g-1ea-17318",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "JBSARA Revive Spicule Shot 102 Ampoule Serum 1g 1ea",
-      "short_description": "",
-      "current_price": "3.49",
-      "original_price": "9.43",
-      "discount_pct": "63.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134207-8258w-mrv26l1j53igaa",
-      "affiliate_link": "https://s.shopee.com.br/gR2uL9lNB",
-      "detail_url": "/oferta?slug=jbsara-revive-spicule-shot-102-ampoule-serum-1g-1ea-17318",
-      "price_collected_at": "2026-10-22T20:20:33.926796+00:00"
-    },
-    {
       "id": 18091,
       "slug": "caixa-de-som-soundbar-gamer-knup-ro829-6w-rms-rgb-usb-entrada-p2-18091",
       "marketplace": {
@@ -1091,448 +1754,6 @@
       "affiliate_link": "https://s.shopee.com.br/9zyidObE4n",
       "detail_url": "/oferta?slug=fone-de-ouvido-original-ak6-para-exibicao-de-palco-de-retorno-dinamico-com-microfone-baixo-18086",
       "price_collected_at": "2026-10-22T20:20:33.804088+00:00"
-    },
-    {
-      "id": 17964,
-      "slug": "carregador-original-para-iphone-11-12-13-14-15-16-fonte-cabo-20w-pd-turbo-rapido-tipo-c-lightning-17964",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Carregador Original Para iPhone 11 12 13 14 15 16 Fonte + Cabo 20w PD Turbo Rapido Tipo C Lightning",
-      "short_description": "",
-      "current_price": "25.99",
-      "original_price": "59.07",
-      "discount_pct": "56.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mbd45zccr6of53",
-      "affiliate_link": "https://s.shopee.com.br/4qGc0AVcpA",
-      "detail_url": "/oferta?slug=carregador-original-para-iphone-11-12-13-14-15-16-fonte-cabo-20w-pd-turbo-rapido-tipo-c-lightning-17964",
-      "price_collected_at": "2026-10-22T20:20:33.789190+00:00"
-    },
-    {
-      "id": 16415,
-      "slug": "suporte-de-telefone-de-cabeca-alca-de-montagem-ajustavel-multifuncional-tiro-ao-vivo-com-clipe-16415",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Suporte De Telefone De Cabeça-Alça De Montagem Ajustável Multifuncional Tiro Ao Vivo Com Clipe",
-      "short_description": "",
-      "current_price": "24.00",
-      "original_price": "31.17",
-      "discount_pct": "23.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134301-7reo9-m8vck44ich0533",
-      "affiliate_link": "https://s.shopee.com.br/4VdlbYWtV4",
-      "detail_url": "/oferta?slug=suporte-de-telefone-de-cabeca-alca-de-montagem-ajustavel-multifuncional-tiro-ao-vivo-com-clipe-16415",
-      "price_collected_at": "2026-10-22T20:20:33.776155+00:00"
-    },
-    {
-      "id": 14370,
-      "slug": "kit-pilhas-clacier-recarregavel-4700mah-ou-2700mah-14370",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit Pilhas Clacier Recarregável 4700mAh ou 2700mAh",
-      "short_description": "",
-      "current_price": "18.88",
-      "original_price": "31.47",
-      "discount_pct": "40.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-ltvoxhgf5nq83e",
-      "affiliate_link": "https://s.shopee.com.br/40hV0dYnVx",
-      "detail_url": "/oferta?slug=kit-pilhas-clacier-recarregavel-4700mah-ou-2700mah-14370",
-      "price_collected_at": "2026-10-22T20:20:33.759123+00:00"
-    },
-    {
-      "id": 8415,
-      "slug": "capa-capinha-magnetica-space-transparente-anti-impacto-tpu-case-apple-iphone-11-12-13-14-15-16-17-pro-max-17-air-7-8-xr-8415",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Capa Capinha Magnética Space Transparente Anti Impacto TPU Case Apple IPhone 11 12 13 14 15 16 17 Pro Max 17 Air 7 8 XR",
-      "short_description": "",
-      "current_price": "9.99",
-      "original_price": "30.27",
-      "discount_pct": "67.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-mm9pu77ilgcmd7",
-      "affiliate_link": "https://s.shopee.com.br/6L5PmvPumN",
-      "detail_url": "/oferta?slug=capa-capinha-magnetica-space-transparente-anti-impacto-tpu-case-apple-iphone-11-12-13-14-15-16-17-pro-max-17-air-7-8-xr-8415",
-      "price_collected_at": "2026-10-22T20:20:33.742282+00:00"
-    },
-    {
-      "id": 15163,
-      "slug": "2510-pcs-capa-celular-bolsa-case-a-prova-dagua-transparente-cor-universal-praia-piscina-viajar-promocao-15163",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "2/5/10 Pcs Capa Celular Bolsa Case A Prova D'água Transparente Cor Universal Praia Piscina Viajar Promoção",
-      "short_description": "",
-      "current_price": "11.99",
-      "original_price": "29.97",
-      "discount_pct": "60.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-82598-mtbzagotnri807",
-      "affiliate_link": "https://s.shopee.com.br/60SZOJRBSH",
-      "detail_url": "/oferta?slug=2510-pcs-capa-celular-bolsa-case-a-prova-dagua-transparente-cor-universal-praia-piscina-viajar-promocao-15163",
-      "price_collected_at": "2026-10-22T20:20:33.726248+00:00"
-    },
-    {
-      "id": 6818,
-      "slug": "amplificador-de-imagem-da-tela-do-celular-lupa-3d-216cm166cm27cm-promocao-6818",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Amplificador De Imagem Da Tela Do Celular Lupa 3D 21,6CM*16,6CM*2,7CM Promoção",
-      "short_description": "",
-      "current_price": "16.99",
-      "original_price": "29.81",
-      "discount_pct": "43.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259l-mskzqxceqnm23c",
-      "affiliate_link": "https://s.shopee.com.br/8AX3q7Gk8a",
-      "detail_url": "/oferta?slug=amplificador-de-imagem-da-tela-do-celular-lupa-3d-216cm166cm27cm-promocao-6818",
-      "price_collected_at": "2026-10-22T20:20:33.694982+00:00"
-    },
-    {
-      "id": 16600,
-      "slug": "kit-carregador-67w-turbo-cabo-tipo-c-carga-rapida-universal-xiaomi-redmi-note-e-poco-x7-android-16600",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Kit Carregador 67W Turbo + Cabo Tipo-C Carga Rápida Universal Xiaomi Redmi Note E Poco X7 Android",
-      "short_description": "",
-      "current_price": "29.51",
-      "original_price": "50.02",
-      "discount_pct": "41.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8258n-mr8vmek85csha1",
-      "affiliate_link": "https://s.shopee.com.br/906ApeDZRj",
-      "detail_url": "/oferta?slug=kit-carregador-67w-turbo-cabo-tipo-c-carga-rapida-universal-xiaomi-redmi-note-e-poco-x7-android-16600",
-      "price_collected_at": "2026-10-22T20:20:33.678998+00:00"
-    },
-    {
-      "id": 6817,
-      "slug": "ampliadora-lente-de-aumento-tela-3d-suporte-tablet-zoom-celular-6817",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Ampliadora Lente De Aumento Tela 3d Suporte Tablet Zoom Celular",
-      "short_description": "",
-      "current_price": "16.99",
-      "original_price": "29.81",
-      "discount_pct": "43.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8257u-msgod13asrggd3",
-      "affiliate_link": "https://s.shopee.com.br/9APb1xCw6k",
-      "detail_url": "/oferta?slug=ampliadora-lente-de-aumento-tela-3d-suporte-tablet-zoom-celular-6817",
-      "price_collected_at": "2026-10-22T20:20:33.664096+00:00"
-    },
-    {
-      "id": 15326,
-      "slug": "carregador-portatil-inducao-para-sem-fio-bateria-carga-3000500010000mah-15326",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Carregador Portátil Indução para Sem fio Bateria Carga 3000/5000/10000mAh",
-      "short_description": "",
-      "current_price": "28.98",
-      "original_price": "69.00",
-      "discount_pct": "58.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mhpueqwbzs3me6",
-      "affiliate_link": "https://s.shopee.com.br/8pmkdLECme",
-      "detail_url": "/oferta?slug=carregador-portatil-inducao-para-sem-fio-bateria-carga-3000500010000mah-15326",
-      "price_collected_at": "2026-10-22T20:20:33.641239+00:00"
-    },
-    {
-      "id": 17274,
-      "slug": "1-conjuntos-tela-de-ampliacao-10-polegadas-lente-3d-com-base-estavel-perfeita-para-ver-melhor-details-sem-forcar-a-vista-17274",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "1 Conjuntos Tela De Ampliacao 10 Polegadas Lente 3D Com Base Estavel Perfeita Para Ver Melhor Details Sem Forcar A Vista",
-      "short_description": "",
-      "current_price": "16.99",
-      "original_price": "29.81",
-      "discount_pct": "43.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8257s-mtc4bhi6xlaa4f",
-      "affiliate_link": "https://s.shopee.com.br/8fTKR2Eq7d",
-      "detail_url": "/oferta?slug=1-conjuntos-tela-de-ampliacao-10-polegadas-lente-3d-com-base-estavel-perfeita-para-ver-melhor-details-sem-forcar-a-vista-17274",
-      "price_collected_at": "2026-10-22T20:20:33.367756+00:00"
-    },
-    {
-      "id": 8871,
-      "slug": "carregador-portatil-5000mah-sem-fio-para-iphone-inducao-bateria-carga-8871",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Carregador Sem Fio 5000/10000mAh iPhone",
-      "short_description": "",
-      "current_price": "28.88",
-      "original_price": "57.76",
-      "discount_pct": "50.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mavkx3k4v9n308",
-      "affiliate_link": "https://s.shopee.com.br/9fLrcsB25n",
-      "detail_url": "/oferta?slug=carregador-portatil-5000mah-sem-fio-para-iphone-inducao-bateria-carga-8871",
-      "price_collected_at": "2026-10-22T20:20:33.353043+00:00"
-    },
-    {
-      "id": 15249,
-      "slug": "suporte-para-telefone-principal-alca-de-montagem-ajustavel-multifuncional-tiro-ao-vivo-primeira-pessoa-com-clipe-15249",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Suporte Para Telefone Principal Alça De Montagem Ajustável Multifuncional Tiro Ao Vivo Primeira Pessoa Com Clipe",
-      "short_description": "",
-      "current_price": "32.24",
-      "original_price": "42.99",
-      "discount_pct": "25.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134301-7reo9-m8vck44ich0533",
-      "affiliate_link": "https://s.shopee.com.br/9Kj1EGCIlh",
-      "detail_url": "/oferta?slug=suporte-para-telefone-principal-alca-de-montagem-ajustavel-multifuncional-tiro-ao-vivo-primeira-pessoa-com-clipe-15249",
-      "price_collected_at": "2026-10-22T20:20:33.339726+00:00"
-    },
-    {
-      "id": 15450,
-      "slug": "cartao-de-memoria-128-gb-para-cameras-wi-fi-drones-micro-sd-sensacional-15450",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Cartão De Memória 128 Gb Para Câmeras Wi-fi Drones Micro Sd Sensacional",
-      "short_description": "",
-      "current_price": "26.90",
-      "original_price": "79.12",
-      "discount_pct": "66.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259f-mt139xe6qm15e0",
-      "affiliate_link": "https://s.shopee.com.br/9V2RQZBfQi",
-      "detail_url": "/oferta?slug=cartao-de-memoria-128-gb-para-cameras-wi-fi-drones-micro-sd-sensacional-15450",
-      "price_collected_at": "2026-10-22T20:20:33.323277+00:00"
-    },
-    {
-      "id": 16735,
-      "slug": "chaleira-jarra-eletrica-termica-bule-com-tampa-inox-prateada-18-litros-1000w-16735",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Chaleira Jarra Elétrica Térmica Bule Com Tampa Inox Prateada 1,8 Litros 1000W",
-      "short_description": "",
-      "current_price": "38.96",
-      "original_price": "99.90",
-      "discount_pct": "61.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m0-mswxz4hit81yf5",
-      "affiliate_link": "https://s.shopee.com.br/AAI8Dn0XKg",
-      "detail_url": "/oferta?slug=chaleira-jarra-eletrica-termica-bule-com-tampa-inox-prateada-18-litros-1000w-16735",
-      "price_collected_at": "2026-10-22T20:20:33.289287+00:00"
-    },
-    {
-      "id": 11265,
-      "slug": "cozedor-de-ovos-eletrico-portatil-cozinha-a-vapor-110v220v-cores-disponiveis-branco-azul-rosa-amarelo-11265",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Cozedor de Ovos Elétrico Portátil Cozinha à Vapor 110V/220V Cores disponíveis （Branco Azul Rosa Amarelo）",
-      "short_description": "",
-      "current_price": "29.98",
-      "original_price": "99.93",
-      "discount_pct": "70.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mfytb2po8gzk07",
-      "affiliate_link": "https://s.shopee.com.br/9V2RQZ34gU",
-      "detail_url": "/oferta?slug=cozedor-de-ovos-eletrico-portatil-cozinha-a-vapor-110v220v-cores-disponiveis-branco-azul-rosa-amarelo-11265",
-      "price_collected_at": "2026-10-22T20:20:33.274501+00:00"
-    },
-    {
-      "id": 6812,
-      "slug": "mini-aspirador-de-po-3-em-1-a-vacuo-usb-portatil-recarregavel-se8010-6812",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Mini Aspirador De Pó 3 em 1 a Vacuo Usb Portátil Recarregavel -SE8010",
-      "short_description": "",
-      "current_price": "21.99",
-      "original_price": "49.98",
-      "discount_pct": "56.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7renx-m8c8ne7qdez9a8",
-      "affiliate_link": "https://s.shopee.com.br/9fLrcs2RLV",
-      "detail_url": "/oferta?slug=mini-aspirador-de-po-3-em-1-a-vacuo-usb-portatil-recarregavel-se8010-6812",
-      "price_collected_at": "2026-10-22T20:20:33.259645+00:00"
-    },
-    {
-      "id": 8587,
-      "slug": "regua-filtro-de-linha-com-7-tomadas-extensao-eletrica-1-universal-4-usb-bivolt-10a-110v220v-cabo-de-2-metros-seguro-e-confiavel-8587",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Régua Filtro de Linha com 7 Tomadas Extensão Elétrica 1 Universal 4 USB Bivolt 10A 110v/220v Cabo de 2 Metros Seguro e confiável",
-      "short_description": "",
-      "current_price": "32.99",
-      "original_price": "49.98",
-      "discount_pct": "34.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-lo4mequ479gpff",
-      "affiliate_link": "https://s.shopee.com.br/9pfHpB1o0W",
-      "detail_url": "/oferta?slug=regua-filtro-de-linha-com-7-tomadas-extensao-eletrica-1-universal-4-usb-bivolt-10a-110v220v-cabo-de-2-metros-seguro-e-confiavel-8587",
-      "price_collected_at": "2026-10-22T20:20:33.244878+00:00"
-    },
-    {
-      "id": 6814,
-      "slug": "extensao-eletrica-2-metros-extensao-de-energia-3-tomadas-com-3-metros-5-metros-10-metros-6814",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Extensão elétrica 2 Metros Extensão de Energia 3 Tomadas com 3 metros 5 metros 10 metros",
-      "short_description": "",
-      "current_price": "12.88",
-      "original_price": "18.94",
-      "discount_pct": "32.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-lx021yat5mm7bb",
-      "affiliate_link": "https://s.shopee.com.br/60SZG8GOml",
-      "detail_url": "/oferta?slug=extensao-eletrica-2-metros-extensao-de-energia-3-tomadas-com-3-metros-5-metros-10-metros-6814",
-      "price_collected_at": "2026-10-22T20:20:33.230684+00:00"
-    },
-    {
-      "id": 14508,
-      "slug": "batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-taobiju-14508",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Batedor Misturador Mixer Elétrico para Bebidas Leite Café Clara de Ovo 2 em 1 taobiju",
-      "short_description": "",
-      "current_price": "16.99",
-      "original_price": "67.96",
-      "discount_pct": "75.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-me30svo6rzsz62",
-      "affiliate_link": "https://s.shopee.com.br/6AlzSRFlRm",
-      "detail_url": "/oferta?slug=batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-taobiju-14508",
-      "price_collected_at": "2026-10-22T20:20:33.217193+00:00"
-    },
-    {
-      "id": 7642,
-      "slug": "liquidificador-mondial-l99-turbo-550-w-3-velocidades-7642",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Liquidificador Mondial L‑99 Turbo 550 W 3 Velocidades",
-      "short_description": "",
-      "current_price": "112.99",
-      "original_price": "173.83",
-      "discount_pct": "35.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-mc83lzgst4gw71",
-      "affiliate_link": "https://s.shopee.com.br/9APb1wzsOl",
-      "detail_url": "/oferta?slug=liquidificador-mondial-l99-turbo-550-w-3-velocidades-7642",
-      "price_collected_at": "2026-10-22T20:20:33.203531+00:00"
-    },
-    {
-      "id": 15649,
-      "slug": "papa-bolinhas-eletrico-tira-pelos-de-roupas-removedor-aparador-sem-fio-recarregavel-marisa-15649",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Papa Bolinhas Eletrico Tira Pelos de Roupas Removedor Aparador Sem Fio Recarregável MARISA",
-      "short_description": "",
-      "current_price": "21.50",
-      "original_price": "27.92",
-      "discount_pct": "23.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-821fu-mgpih2ejj9562a",
-      "affiliate_link": "https://s.shopee.com.br/906Ape0Vji",
-      "detail_url": "/oferta?slug=papa-bolinhas-eletrico-tira-pelos-de-roupas-removedor-aparador-sem-fio-recarregavel-marisa-15649",
-      "price_collected_at": "2026-10-22T20:20:33.190243+00:00"
-    },
-    {
-      "id": 16829,
-      "slug": "moedor-de-especiarias-eletrico-110v220v-com-4-laminas-de-aco-inoxidavel-para-uso-domestico-16829",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Moedor de especiarias elétrico 110V/220V, com 4 lâminas de aço inoxidável, para uso doméstico.",
-      "short_description": "",
-      "current_price": "36.19",
-      "original_price": "69.60",
-      "discount_pct": "48.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820md-mq55654q4mbm4b",
-      "affiliate_link": "https://s.shopee.com.br/3B8O9ikZuZ",
-      "detail_url": "/oferta?slug=moedor-de-especiarias-eletrico-110v220v-com-4-laminas-de-aco-inoxidavel-para-uso-domestico-16829",
-      "price_collected_at": "2026-10-22T20:20:33.177249+00:00"
-    },
-    {
-      "id": 6806,
-      "slug": "batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-6806",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Batedor Misturador Mixer Elétrico para Bebidas Leite Café Clara de Ovo 2 em 1",
-      "short_description": "",
-      "current_price": "18.69",
-      "original_price": "89.00",
-      "discount_pct": "79.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd48-lupf3z3a40mxf1",
-      "affiliate_link": "https://s.shopee.com.br/8KqU2Q335W",
-      "detail_url": "/oferta?slug=batedor-misturador-mixer-eletrico-para-bebidas-leite-cafe-clara-de-ovo-2-em-1-6806",
-      "price_collected_at": "2026-10-22T20:20:33.164118+00:00"
-    },
-    {
-      "id": 17076,
-      "slug": "moedor-multifuncional-de-cafe-110v-com-design-em-aco-inoxidavel-4-laminas-17076",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Moedor Multifuncional de Café 110V com Design em Aço Inoxidável 4 Lâminas",
-      "short_description": "",
-      "current_price": "31.99",
-      "original_price": "88.86",
-      "discount_pct": "64.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-825a6-ms2w4rj3eg3q6b",
-      "affiliate_link": "https://s.shopee.com.br/8AX3q73gQT",
-      "detail_url": "/oferta?slug=moedor-multifuncional-de-cafe-110v-com-design-em-aco-inoxidavel-4-laminas-17076",
-      "price_collected_at": "2026-10-22T20:20:33.150353+00:00"
-    },
-    {
-      "id": 8016,
-      "slug": "picador-de-alimentos-moedor-de-carne-mixer-eletrica-processador-cozinha-casa-alho-110v-220v-8016",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "2L/3L Picador De Alimentos Moedor De Carne Mixer Elétrica Processador Cozinha Casa Alho - 110v-220v",
-      "short_description": "",
-      "current_price": "79.98",
-      "original_price": "186.00",
-      "discount_pct": "57.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8262e-mjejrub4w35z78",
-      "affiliate_link": "https://s.shopee.com.br/80Dddo4JlQ",
-      "detail_url": "/oferta?slug=picador-de-alimentos-moedor-de-carne-mixer-eletrica-processador-cozinha-casa-alho-110v-220v-8016",
-      "price_collected_at": "2026-10-22T20:20:33.136864+00:00"
-    },
-    {
-      "id": 13453,
-      "slug": "ventilador-80w-de-teto-silencioso-led-3-cores-bulbo-12w-com-controle-bivolt-5-pas-branco-potente-13453",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Ventilador 80w de Teto Silencioso LED 3 Cores Bulbo 12w com Controle Bivolt 5 Pás Branco Potente",
-      "short_description": "",
-      "current_price": "41.65",
-      "original_price": "126.21",
-      "discount_pct": "67.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134201-820lc-mqxwzkyykv0nc7",
-      "affiliate_link": "https://s.shopee.com.br/AUuycOungt",
-      "detail_url": "/oferta?slug=ventilador-80w-de-teto-silencioso-led-3-cores-bulbo-12w-com-controle-bivolt-5-pas-branco-potente-13453",
-      "price_collected_at": "2026-10-22T20:20:33.122907+00:00"
     },
     {
       "id": 18085,
@@ -1669,57 +1890,6 @@
       "affiliate_link": "https://s.shopee.com.br/9zyidOApIy",
       "detail_url": "/oferta?slug=varao-extensivel-de-pressao-sem-furar-paracortina-de-banheiro-e-janela-brancopreto-6tamanhos-18078",
       "price_collected_at": "2026-10-22T20:20:32.953014+00:00"
-    },
-    {
-      "id": 15449,
-      "slug": "lencol-queen-400-fios-micropercal-cama-casal-solteiro-tecido-super-macio-15449",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Lencol Queen 400 Fios Micropercal Cama Casal Solteiro Tecido Super Macio",
-      "short_description": "",
-      "current_price": "25.89",
-      "original_price": "58.84",
-      "discount_pct": "56.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m7s2u8qjaf841d",
-      "affiliate_link": "https://s.shopee.com.br/LoCViT6Sw",
-      "detail_url": "/oferta?slug=lencol-queen-400-fios-micropercal-cama-casal-solteiro-tecido-super-macio-15449",
-      "price_collected_at": "2026-10-22T20:20:32.938953+00:00"
-    },
-    {
-      "id": 6802,
-      "slug": "mesa-de-cabeceira-retro-compacta-com-nicho-para-quarto-sala-casal-ou-solteiro-palma-6802",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Mesa de Cabeceira Retrô Compacta com Nicho para Quarto Sala Casal ou Solteiro Palma",
-      "short_description": "",
-      "current_price": "29.90",
-      "original_price": "49.83",
-      "discount_pct": "40.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd6x-luv5vclgwaxb45",
-      "affiliate_link": "https://s.shopee.com.br/BUmJPPCRk",
-      "detail_url": "/oferta?slug=mesa-de-cabeceira-retro-compacta-com-nicho-para-quarto-sala-casal-ou-solteiro-palma-6802",
-      "price_collected_at": "2026-10-22T20:20:32.923167+00:00"
-    },
-    {
-      "id": 11548,
-      "slug": "kit-de-100-a-300-tampas-de-plastico-descartavel-para-alimento-com-100-ate-300-unidades-11548",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "KIT De 100 á 300 Tampas De Plástico Descartável Para Alimento Com 100 Ate 300 Unidades",
-      "short_description": "",
-      "current_price": "7.99",
-      "original_price": "22.83",
-      "discount_pct": "65.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m9-mqxhlznhjvnq4b",
-      "affiliate_link": "https://s.shopee.com.br/4qGbrz7Qya",
-      "detail_url": "/oferta?slug=kit-de-100-a-300-tampas-de-plastico-descartavel-para-alimento-com-100-ate-300-unidades-11548",
-      "price_collected_at": "2026-10-22T20:20:32.890698+00:00"
     },
     {
       "id": 6048,
@@ -5766,176 +5936,6 @@
       "affiliate_link": "https://s.shopee.com.br/40hUsTsGnh",
       "detail_url": "/oferta?slug=lanca-bolhas-sabao-automatico-brinquedo-infantil-menino-menina-festa-aniversario-presente-eletrico-16831",
       "price_collected_at": "2026-10-22T17:45:30.016205+00:00"
-    },
-    {
-      "id": 7761,
-      "slug": "fone-de-ouvido-bluetooth-50-sem-fio-headset-bateria-de-longa-duracao-fone-corrida-academia-7761",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Fone de Ouvido Bluetooth 5.0 Sem Fio Headset Bateria de Longa Duração Fone Corrida Academia",
-      "short_description": "",
-      "current_price": "40.99",
-      "original_price": "80.37",
-      "discount_pct": "49.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lw-mozd89yz0xdx96",
-      "affiliate_link": "https://s.shopee.com.br/20wQUmnE05",
-      "detail_url": "/oferta?slug=fone-de-ouvido-bluetooth-50-sem-fio-headset-bateria-de-longa-duracao-fone-corrida-academia-7761",
-      "price_collected_at": "2026-10-22T17:45:28.552929+00:00"
-    },
-    {
-      "id": 17109,
-      "slug": "fone-de-ouvido-estereo-sem-fio-a-prova-dagua-com-bluetooth-caixa-de-carregamento-longa-duracao-t70-17109",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Fone de ouvido estéreo sem fio à prova d'água com Bluetooth caixa de carregamento longa duração T70",
-      "short_description": "",
-      "current_price": "32.99",
-      "original_price": "106.42",
-      "discount_pct": "69.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lc-ms04vb3imy2vc7",
-      "affiliate_link": "https://s.shopee.com.br/2BFqh5maf6",
-      "detail_url": "/oferta?slug=fone-de-ouvido-estereo-sem-fio-a-prova-dagua-com-bluetooth-caixa-de-carregamento-longa-duracao-t70-17109",
-      "price_collected_at": "2026-10-22T17:45:28.539489+00:00"
-    },
-    {
-      "id": 15451,
-      "slug": "senbenbao-x55-fones-de-ouvido-tws-sono-sem-fio-bluetooth-display-led-alta-fidelidade-estereo-cancelamento-ruido-a-prova-15451",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Senbenbao X55 Fones De Ouvido TWS Sono Sem Fio Bluetooth Display Led Alta Fidelidade Estéreo Cancelamento Ruído À Prova",
-      "short_description": "",
-      "current_price": "17.19",
-      "original_price": "32.43",
-      "discount_pct": "47.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823ob-mp4layd5kxkw0c",
-      "affiliate_link": "https://s.shopee.com.br/1gJa6AoUfz",
-      "detail_url": "/oferta?slug=senbenbao-x55-fones-de-ouvido-tws-sono-sem-fio-bluetooth-display-led-alta-fidelidade-estereo-cancelamento-ruido-a-prova-15451",
-      "price_collected_at": "2026-10-22T17:45:28.522385+00:00"
-    },
-    {
-      "id": 6826,
-      "slug": "fone-de-ouvido-bluetooth-sem-fio-headphone-bluetooth-recarregavel-p9-air-top-casual-esportivo-6826",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Fone de ouvido Bluetooth Sem Fio Headphone Bluetooth Recarregável P9 Air Top Casual Esportivo",
-      "short_description": "",
-      "current_price": "24.87",
-      "original_price": "46.92",
-      "discount_pct": "47.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824gf-mf8cvs3kgwela4",
-      "affiliate_link": "https://s.shopee.com.br/1qd0ITnrL0",
-      "detail_url": "/oferta?slug=fone-de-ouvido-bluetooth-sem-fio-headphone-bluetooth-recarregavel-p9-air-top-casual-esportivo-6826",
-      "price_collected_at": "2026-10-22T17:45:28.510056+00:00"
-    },
-    {
-      "id": 14484,
-      "slug": "senbenbao-x55-fones-de-ouvido-tws-sono-sem-fio-bluetooth-display-led-alta-fidelidade-estereo-cancelamento-ruido-a-prova-14484",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Senbenbao X55 Fones De Ouvido TWS Sono Sem Fio Bluetooth Display Led Alta Fidelidade Estéreo Cancelamento Ruído À Prova",
-      "short_description": "",
-      "current_price": "17.72",
-      "original_price": "21.35",
-      "discount_pct": "17.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-823ob-mp7wv1fcnx8rc4",
-      "affiliate_link": "https://s.shopee.com.br/1LgjhYplLt",
-      "detail_url": "/oferta?slug=senbenbao-x55-fones-de-ouvido-tws-sono-sem-fio-bluetooth-display-led-alta-fidelidade-estereo-cancelamento-ruido-a-prova-14484",
-      "price_collected_at": "2026-10-22T17:45:28.489219+00:00"
-    },
-    {
-      "id": 17962,
-      "slug": "12-pecas-suporte-de-canto-e-reta-porta-shampoo-prateleira-para-banheiro-organizador-com-adesivo-17962",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "1/2 Peças Suporte de Canto e Reta Porta Shampoo Prateleira Para Banheiro Organizador com Adesivo",
-      "short_description": "",
-      "current_price": "11.45",
-      "original_price": "42.41",
-      "discount_pct": "73.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-mfvb2gx4p34791",
-      "affiliate_link": "https://s.shopee.com.br/6Alzac058Z",
-      "detail_url": "/oferta?slug=12-pecas-suporte-de-canto-e-reta-porta-shampoo-prateleira-para-banheiro-organizador-com-adesivo-17962",
-      "price_collected_at": "2026-10-22T17:45:27.983021+00:00"
-    },
-    {
-      "id": 6804,
-      "slug": "percarbonato-de-sodio-100-puro-limpeza-em-geral-tira-manchas-roupas-brancas-500g1kg-2kg-6804",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Percarbonato de Sódio 100% Puro Limpeza Em Geral Tira Manchas Roupas Brancas 500g/1kg /2kg",
-      "short_description": "",
-      "current_price": "10.00",
-      "original_price": "14.93",
-      "discount_pct": "33.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824j0-medc35ydcm4m9c",
-      "affiliate_link": "https://s.shopee.com.br/1BNJVFPvmB",
-      "detail_url": "/oferta?slug=percarbonato-de-sodio-100-puro-limpeza-em-geral-tira-manchas-roupas-brancas-500g1kg-2kg-6804",
-      "price_collected_at": "2026-10-22T17:45:27.969288+00:00"
-    },
-    {
-      "id": 13770,
-      "slug": "mini-umidificador-difusor-aromatizador-egg-portatil-usb-led-aromatizador-de-ambiente-purificador-de-ar-casa-escritorio-13770",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Mini Umidificador Difusor Aromatizador Egg Portátil Usb Led Aromatizador De Ambiente Purificador De Ar Casa Escritório",
-      "short_description": "",
-      "current_price": "15.49",
-      "original_price": "39.72",
-      "discount_pct": "61.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-md3arzpv27sx24",
-      "affiliate_link": "https://s.shopee.com.br/113tIwQZ78",
-      "detail_url": "/oferta?slug=mini-umidificador-difusor-aromatizador-egg-portatil-usb-led-aromatizador-de-ambiente-purificador-de-ar-casa-escritorio-13770",
-      "price_collected_at": "2026-10-22T17:45:27.948723+00:00"
-    },
-    {
-      "id": 6805,
-      "slug": "percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6805",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Percarbonato 100% Puro Tira Manchas Roupas Brancas e Coloridas",
-      "short_description": "",
-      "current_price": "19.90",
-      "original_price": "29.70",
-      "discount_pct": "33.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lm-mohh8j4tjpc0e3",
-      "affiliate_link": "https://s.shopee.com.br/qkT6dRCS5",
-      "detail_url": "/oferta?slug=percarbonato-100-puro-tira-manchas-roupas-brancas-e-coloridas-6805",
-      "price_collected_at": "2026-10-22T17:45:27.935735+00:00"
-    },
-    {
-      "id": 8463,
-      "slug": "sapateira-4-ou-5-andares-multiuso-desmontavel-organizadora-multiuso-sapatos-livros-brinquedos-8463",
-      "marketplace": {
-        "code": "shopee",
-        "name": "Shopee"
-      },
-      "title": "Sapateira 4 ou 5 Andares Multiuso Desmontável Organizadora Multiuso Sapatos Livros Brinquedos",
-      "short_description": "",
-      "current_price": "18.98",
-      "original_price": "49.95",
-      "discount_pct": "62.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m275pnv5hbnq94",
-      "affiliate_link": "https://s.shopee.com.br/gR2uKRpn2",
-      "detail_url": "/oferta?slug=sapateira-4-ou-5-andares-multiuso-desmontavel-organizadora-multiuso-sapatos-livros-brinquedos-8463",
-      "price_collected_at": "2026-10-22T17:45:27.915890+00:00"
     },
     {
       "id": 1222,

@@ -1,8 +1,28 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-24T11:06:54.895589+00:00",
+  "generated_at": "2026-10-24T14:37:25.719998+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 14437,
+      "title": "Regata Feminina Blusa Alça fina Poliamida Premium Fitness Casual com Bojo Removível",
+      "current_price": "49.95",
+      "original_price": "99.90",
+      "discount_pct": "50.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mjughleg1zwic3",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/2qVauTTmra?utm_source=instagram&utm_medium=bio&utm_campaign=offer_14437"
+    },
+    {
+      "id": 17859,
+      "title": "Calça Cargo Masculina Streetwear Preta Mescla Cinza Grafite 34 Ao 44",
+      "current_price": "54.99",
+      "original_price": "109.98",
+      "discount_pct": "50.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134201-820m3-muccjad1ezgi07",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/6VOtHDK9wK?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17859"
+    },
     {
       "id": 17749,
       "title": "Camisa Social Masculina Manga Longa Lisa Premium com Elastano Antiamaassante para Trabalho e Festas e LOVE INSIDE",
@@ -32,26 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-81zvq-mix4g1vowbuud0",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/8pmmWkv5Qf?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18183"
-    },
-    {
-      "id": 17965,
-      "title": "Blusa Regata Alcinha Casual Verão Confortável Suplex Poliamida Com Forro",
-      "current_price": "16.95",
-      "original_price": "33.90",
-      "discount_pct": "50.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lh-mrgp2tovku115a",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/2gC9BQMxgQ?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17965"
-    },
-    {
-      "id": 16736,
-      "title": "Kit Com 3 e 2 Calças Jeans Masculinas Slim Fit Básicas Cores Variadas Dia a Dia",
-      "current_price": "92.99",
-      "original_price": "172.20",
-      "discount_pct": "46.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820me-mrhyfx2bi8sma8",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/LoFhQMjCK?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16736"
     }
   ]
 }

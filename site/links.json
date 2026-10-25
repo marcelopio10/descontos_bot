@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-24T14:37:25.719998+00:00",
+  "generated_at": "2026-10-25T13:22:58.610057+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 18342,
+      "title": "Calça Jeans Feminina Wide Leg Cintura Alta Pantalona Tecido Leve 100% Algodão",
+      "current_price": "69.90",
+      "original_price": "148.72",
+      "discount_pct": "53.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-7r98o-m7tz7imdb29uf2",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/5q9DzlWSqS?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18342"
+    },
     {
       "id": 14437,
       "title": "Regata Feminina Blusa Alça fina Poliamida Premium Fitness Casual com Bojo Removível",
@@ -12,16 +22,6 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mjughleg1zwic3",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/2qVauTTmra?utm_source=instagram&utm_medium=bio&utm_campaign=offer_14437"
-    },
-    {
-      "id": 17859,
-      "title": "Calça Cargo Masculina Streetwear Preta Mescla Cinza Grafite 34 Ao 44",
-      "current_price": "54.99",
-      "original_price": "109.98",
-      "discount_pct": "50.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134201-820m3-muccjad1ezgi07",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/6VOtHDK9wK?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17859"
     },
     {
       "id": 17749,
@@ -41,7 +41,7 @@
       "discount_pct": "49.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-8259j-mqot6hdarvuqc0",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/3LRo5H3LCO?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16933"
+      "tracked_url": "https://s.shopee.com.br/4LKQD0kpw4?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16933"
     },
     {
       "id": 18183,
@@ -51,7 +51,7 @@
       "discount_pct": "62.00",
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-81zvq-mix4g1vowbuud0",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/8pmmWkv5Qf?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18183"
+      "tracked_url": "https://s.shopee.com.br/8fTPMyUTn1?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18183"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-25T19:10:13.469219+00:00",
+  "generated_at": "2026-10-26T01:49:17.702552+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -24,16 +24,6 @@
       "tracked_url": "https://s.shopee.com.br/7Aeby3xVxi?utm_source=instagram&utm_medium=bio&utm_campaign=offer_14437"
     },
     {
-      "id": 17749,
-      "title": "Camisa Social Masculina Manga Longa Lisa Premium com Elastano Antiamaassante para Trabalho e Festas e LOVE INSIDE",
-      "current_price": "39.90",
-      "original_price": "166.25",
-      "discount_pct": "76.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lt-msmt9v3ml5aded",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/gR84ovHRN?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17749"
-    },
-    {
       "id": 16933,
       "title": "Mini Geladeira com 2 Capsulas Mini Brands Surpresa Colecionável Rosa Azul ou Aleatória",
       "current_price": "44.99",
@@ -44,14 +34,24 @@
       "tracked_url": "https://s.shopee.com.br/4LKQD0kpw4?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16933"
     },
     {
-      "id": 18183,
-      "title": "Shorts Sauna Fitness Feminino Modelador Cintura Alta para Academia e Treino",
-      "current_price": "18.99",
-      "original_price": "49.97",
-      "discount_pct": "62.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-81zvq-mix4g1vowbuud0",
+      "id": 17965,
+      "title": "Blusa Regata Alcinha Casual Verão Confortável Suplex Poliamida Com Forro",
+      "current_price": "16.95",
+      "original_price": "33.90",
+      "discount_pct": "50.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lh-mrgp2tovku115a",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/8fTPMyUTn1?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18183"
+      "tracked_url": "https://s.shopee.com.br/20wWFyPpEx?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17965"
+    },
+    {
+      "id": 17054,
+      "title": "Vários modelos com 24 meia cano alto 100% algodão soquete Cano Curto Masculina Feminina Unissex direto da fabrica",
+      "current_price": "27.79",
+      "original_price": "49.62",
+      "discount_pct": "44.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-ms008boluiv9cf",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/gR8fWZRDh?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17054"
     }
   ]
 }

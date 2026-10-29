@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-10-29T01:37:56.237556+00:00",
+  "generated_at": "2026-10-29T11:04:52.718902+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 18537,
+      "title": "Kit 3 Camiseta Paris 100% Algodão Premium",
+      "current_price": "54.99",
+      "original_price": "119.54",
+      "discount_pct": "54.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-820o8-mo4vhpgfsuf989",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/8KqfCR6db6?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18537"
+    },
     {
       "id": 14437,
       "title": "Regata Feminina Blusa Alça fina Poliamida Premium Fitness Casual com Bojo Removível",
@@ -11,17 +21,27 @@
       "discount_pct": "50.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mjughleg1zwic3",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/8pmushp1L2?utm_source=instagram&utm_medium=bio&utm_campaign=offer_14437"
+      "tracked_url": "https://s.shopee.com.br/1LgurZXDg6?utm_source=instagram&utm_medium=bio&utm_campaign=offer_14437"
     },
     {
-      "id": 17859,
-      "title": "Calça Cargo Masculina Streetwear Preta Mescla Cinza Grafite 34 Ao 44",
-      "current_price": "54.99",
-      "original_price": "109.98",
-      "discount_pct": "50.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134201-820m3-muccjad1ezgi07",
+      "id": 18534,
+      "title": "KIT 3 CALÇAS MASCULINA COM ZÍPER NOS BOLSOS SLIM FIT LEVE CONFORTAVEL",
+      "current_price": "57.74",
+      "original_price": "131.23",
+      "discount_pct": "56.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81zua-mkyk34pt3vnmd7",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/8AXENCJ4Ji?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17859"
+      "tracked_url": "https://s.shopee.com.br/7fayPDDVT2?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18534"
+    },
+    {
+      "id": 18533,
+      "title": "Kit 2 Bermudas Shorts Masculino Tactel Mauricinho Praia Barato Esporte Secam Rápido P ao XG",
+      "current_price": "69.90",
+      "original_price": "170.49",
+      "discount_pct": "59.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lq-mrrbrtfgyt534f",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/qkeGedafX?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18533"
     },
     {
       "id": 17965,
@@ -31,27 +51,7 @@
       "discount_pct": "50.00",
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820lh-mrgp2tovku115a",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/20wWFyPpEx?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17965"
-    },
-    {
-      "id": 17054,
-      "title": "Vários modelos com 24 meia cano alto 100% algodão soquete Cano Curto Masculina Feminina Unissex direto da fabrica",
-      "current_price": "27.79",
-      "original_price": "49.62",
-      "discount_pct": "44.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820mb-ms008boluiv9cf",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/gR8fWZRDh?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17054"
-    },
-    {
-      "id": 16830,
-      "title": "Kit 6 Carrinhos Relampago MCqueen De Metal Carrinhos de Ferro Resistente Miniatura Coleção",
-      "current_price": "44.90",
-      "original_price": "80.18",
-      "discount_pct": "44.00",
-      "image_url": "https://cf.shopee.com.br/file/sg-11134201-8257u-mseaveuby39g6e",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/6Am7QjuiwT?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16830"
+      "tracked_url": "https://s.shopee.com.br/9KjCOHBYt7?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17965"
     }
   ]
 }

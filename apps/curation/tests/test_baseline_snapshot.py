@@ -80,6 +80,15 @@ class BaselineSnapshotTests(TestCase):
 
         self.assertIn('low_priority_book', payload['editorial_flags'])
 
+    def test_serialize_offer_does_not_treat_ambiguous_book_term_as_book(self):
+        self.offer.title = 'Notebook Samsung Book 2 NP550'
+        self.offer.normalized_title = 'notebook samsung book 2 np550'
+        self.offer.save(update_fields=['title', 'normalized_title'])
+
+        payload = serialize_offer_for_ai(self.offer)
+
+        self.assertNotIn('low_priority_book', payload['editorial_flags'])
+
     def test_build_baseline_snapshot_uses_selector_eligibility_and_counts(self):
         config = SelectionConfig(
             global_limit=20,

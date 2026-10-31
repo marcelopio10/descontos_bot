@@ -8,9 +8,9 @@ After=ingest-ml-afiliados.service
 
 [Service]
 Type=oneshot
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+WorkingDirectory=/home/marce/apps/descontos_bot
 # 8 semanas: janela larga o bastante para a comparação por faixa não virar ruído
 # com 10 vendas, e curta o bastante para uma quebra aparecer.
-ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py relatorio_receita_semanal --weeks 8 --alert
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/relatorio-receita-semanal.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/relatorio-receita-semanal.log
+ExecStart=/home/marce/apps/descontos_bot/.venv/bin/python3 manage.py relatorio_receita_semanal --weeks 8 --alert
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/relatorio-receita-semanal.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/relatorio-receita-semanal.log

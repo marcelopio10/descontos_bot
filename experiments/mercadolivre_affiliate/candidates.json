@@ -1,0 +1,20 @@
+{
+  "candidates": [
+    {
+      "name": "bot_do_afiliado",
+      "source": "https://botdoafiliado.com/blog/api-de-afiliados-mercado-livre/",
+      "auth": "não verificada publicamente",
+      "public_api": false,
+      "cost": "plano base anunciado a partir de R$ 99/mês; módulos sob demanda",
+      "production": false
+    },
+    {
+      "name": "afilitools",
+      "source": "https://afilitools.com.br/mercadolivre",
+      "auth": "sessão autenticada sincronizada por extensão",
+      "public_api": false,
+      "cost": "R$ 99/mês e teste de 7 dias anunciados",
+      "production": false
+    }
+  ]
+}

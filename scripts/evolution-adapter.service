@@ -5,14 +5,14 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/evolution_adapter
-# O adapter carrega /mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env sozinho (src/env.js), então não precisa de
+WorkingDirectory=/home/marce/apps/descontos_bot/evolution_adapter
+# O adapter carrega /home/marce/apps/descontos_bot/.env sozinho (src/env.js), então não precisa de
 # EnvironmentFile. Ajuste o caminho do node conforme a instalação (aqui: nvm).
-ExecStart=/home/marce/.nvm/versions/node/v24.15.0/bin/node src/server.js
+ExecStart=/usr/bin/node src/server.js
 Restart=always
 RestartSec=10
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/evolution_adapter.out
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/evolution_adapter.out
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/evolution_adapter.out
+StandardError=append:/home/marce/apps/descontos_bot/logs/evolution_adapter.out
 
 [Install]
 WantedBy=default.target

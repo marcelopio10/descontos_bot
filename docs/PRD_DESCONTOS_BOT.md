@@ -334,7 +334,12 @@ UNIQUE (offer_id, social_channel_id)
 
 ### Mercado Livre
 
-Usar `scrapers/mercado_livre.py` como ativo inicial. Deve extrair título, preço atual, preço original, desconto, link, imagem e identificador do produto quando possível.
+Usar a API pública do Mercado Livre como caminho padrão (`/sites/MLB/search`,
+`/items/bulk?ids=...`, preço contextual e reputação do vendedor). O scraper em
+`scrapers/mercado_livre.py` permanece preservado atrás da flag
+`mercadolivre_api_search_enabled=0` para rollback. A API deve extrair título,
+preço atual, preço original, desconto, permalink, imagem, vendedor, condição,
+status, moeda, disponibilidade e identificador do produto.
 
 ### Amazon
 

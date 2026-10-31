@@ -3,4 +3,4 @@ Description=descontos.bot - Rotação dos logs de redirecionamento de shell
 
 [Service]
 Type=oneshot
-ExecStart=/usr/sbin/logrotate --state /mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/.logrotate.state /mnt/c/Users/marce/Documents/Projetos/descontos.bot/scripts/logrotate.conf
+ExecStart=/usr/sbin/logrotate --state /home/marce/apps/descontos_bot/logs/.logrotate.state /home/marce/apps/descontos_bot/scripts/logrotate.conf

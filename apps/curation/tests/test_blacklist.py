@@ -5,6 +5,7 @@ from django.utils import timezone
 
 from apps.curation.models import CuratedBatch, CuratedBatchItem, CurationDecision, CurationRun
 from apps.curation.services.blacklist import get_blacklist_terms, is_blacklisted
+from apps.curation.services.book_detection import detect_book_offer
 from apps.curation.services.selector import SelectionConfig, select_offers_for_channel
 from apps.distribution.models import Delivery, SocialChannel
 from apps.marketplaces.models import Marketplace
@@ -27,7 +28,13 @@ class SafetyBlacklistTests(TestCase):
             link_strategy=SocialChannel.LinkStrategy.BRIDGE_ONLY,
         )
 
-    def _offer(self, title: str, discount: Decimal = Decimal('50.00')) -> Offer:
+    def _offer(
+        self,
+        title: str,
+        discount: Decimal = Decimal('50.00'),
+        *,
+        raw_payload: dict | None = None,
+    ) -> Offer:
         now = timezone.now()
         return Offer.objects.create(
             marketplace=self.marketplace,
@@ -43,6 +50,7 @@ class SafetyBlacklistTests(TestCase):
             affiliate_url='https://example.com/afiliado',
             image_url='https://example.com/img.jpg',
             is_active=True,
+            raw_payload=raw_payload or {},
             first_seen_at=now,
             last_seen_at=now,
             price_collected_at=now,
@@ -144,6 +152,176 @@ class SafetyBlacklistTests(TestCase):
 
         self.assertIn(allowed, selected)
         self.assertNotIn(blocked, selected)
+
+    def test_book_detector_accepts_explicit_product_metadata(self):
+        cases = (
+            ({'product_type': 'BOOK'}, 'metadata_product_type'),
+            ({'category_name': 'Livros, Revistas e Comics'}, 'metadata_category'),
+            ({'browse_node_name': 'Books'}, 'metadata_browse_node'),
+            ({'format': 'Hardcover'}, 'metadata_format'),
+            ({'api_item': {'category_id': 'MLB1196'}}, 'metadata_category'),
+        )
+
+        for raw_payload, signal in cases:
+            with self.subTest(raw_payload=raw_payload):
+                offer = self._offer(
+                    'Hábitos Atômicos James Clear',
+                    raw_payload=raw_payload,
+                )
+                result = detect_book_offer(offer)
+
+                self.assertTrue(result.is_book)
+                self.assertGreaterEqual(result.confidence, 0.95)
+                self.assertIn(signal, result.signals)
+
+    def test_book_detector_accepts_valid_isbn(self):
+        offer = self._offer(
+            'Uma Breve História do Tempo',
+            raw_payload={'isbn_13': '9780306406157'},
+        )
+
+        result = detect_book_offer(offer)
+
+        self.assertTrue(result.is_book)
+        self.assertEqual(result.confidence, 1.0)
+        self.assertIn('isbn', result.signals)
+
+    def test_book_detector_accepts_confirmed_print_and_kindle_titles(self):
+        titles = (
+            'Livro Hábitos Atômicos Capa Comum',
+            'Hábitos Atômicos - Edição Kindle',
+            'Box com 3 Livros da Coleção Fundação',
+            'Amor, teoricamente - Edição especial (livro + marcador exclusivo)',
+            'Meu Primeiro Livro de Pano - Vamos Passear no Mar',
+            'Minimus. Conhecendo o Latim - Livro do Professor',
+            'O diário de tarefas gnomosas: Livro de bolso com chaveiro',
+        )
+
+        for title in titles:
+            with self.subTest(title=title):
+                result = detect_book_offer(self._offer(title))
+                self.assertTrue(result.is_book)
+                self.assertIn('title_book', result.signals)
+
+    def test_book_detector_does_not_block_ambiguous_terms_in_isolation(self):
+        titles = (
+            'Perfume Romance Elegante Feminino',
+            'Camiseta Manga Longa Book Lovers',
+            'Manga Palmer Rosa 1kg',
+            'Notebook Samsung Book 2 NP550',
+            'Capa Protetora Para Kindle 11ª Geração',
+            'Kindle Paperwhite 16 GB com tela antirreflexo de 7 polegadas',
+        )
+
+        for title in titles:
+            with self.subTest(title=title):
+                result = detect_book_offer(self._offer(title))
+                self.assertFalse(result.is_book)
+                self.assertEqual(result.signals, ())
+
+    def test_book_detector_rejects_ambiguous_or_invalid_metadata(self):
+        payloads = (
+            {'product_type': 'notebook'},
+            {'product_type': 'eBook Reader'},
+            {'category_name': 'Book Accessories'},
+            {'category_name': 'Book Lights'},
+            {'category_name': 'Book Organizer'},
+            {'product_type': 'Book Stand'},
+            {'format': 'digital'},
+            {'isbn_13': '9780306406158'},
+        )
+
+        for raw_payload in payloads:
+            with self.subTest(raw_payload=raw_payload):
+                result = detect_book_offer(
+                    self._offer('Produto eletrônico', raw_payload=raw_payload),
+                )
+                self.assertFalse(result.is_book)
+                self.assertEqual(result.signals, ())
+
+    def test_book_detector_rejects_valid_ean_that_is_not_isbn(self):
+        result = detect_book_offer(
+            self._offer('Produto eletrônico ISBN 4006381333931'),
+        )
+
+        self.assertFalse(result.is_book)
+        self.assertEqual(result.signals, ())
+
+    def test_book_detector_rejects_products_that_only_store_or_bundle_books(self):
+        titles = (
+            'Box organizador para guardar livros',
+            'Estante Carrinho Móvel Prateleira Portátil Livros Multiuso',
+            (
+                'Fichário Álbum Para Cartas Pokémon - 360 Cartas Pasta Otug, '
+                'Livro de Coleção Cartas Jogo Pacote Organizador'
+            ),
+        )
+
+        for title in titles:
+            with self.subTest(title=title):
+                result = detect_book_offer(self._offer(title))
+                self.assertFalse(result.is_book)
+                self.assertEqual(result.signals, ())
+
+    def test_book_detector_reads_bounded_structured_metadata_lists(self):
+        cases = (
+            (
+                {'browse_path': [{'name': 'Books'}]},
+                'metadata_browse_node',
+            ),
+            (
+                {
+                    'attributes': [{
+                        'id': 'ISBN',
+                        'values': [{'name': '9780306406157'}],
+                    }],
+                },
+                'isbn',
+            ),
+            (
+                {
+                    'attributes': [{
+                        'id': 'EDITION_TYPE',
+                        'values': [{'name': 'Paperback'}],
+                    }],
+                },
+                'metadata_format',
+            ),
+            (
+                {
+                    'attributes': [{
+                        'id': 'BROWSE_NODE',
+                        'values': [{'name': 'Books'}],
+                    }],
+                },
+                'metadata_browse_node',
+            ),
+        )
+
+        for raw_payload, signal in cases:
+            with self.subTest(raw_payload=raw_payload):
+                result = detect_book_offer(
+                    self._offer('Produto com metadado editorial', raw_payload=raw_payload),
+                )
+                self.assertTrue(result.is_book)
+                self.assertIn(signal, result.signals)
+
+    def test_book_detector_returns_only_stable_non_sensitive_signals(self):
+        offer = self._offer(
+            'Livro Clean Code Capa Comum',
+            raw_payload={
+                'product_type': 'book',
+                'group_jid': 'private-group@g.us',
+                'raw_text': 'private-message',
+            },
+        )
+
+        result = detect_book_offer(offer)
+
+        self.assertTrue(result.is_book)
+        serialized_signals = ' '.join(result.signals)
+        self.assertNotIn('private-group', serialized_signals)
+        self.assertNotIn('private-message', serialized_signals)
 
     def test_selector_drops_near_duplicate_titles_with_reordered_tokens(self):
         first = self._offer('Camisa Torcedor 1.1 Tailand Masculina Amarela 2026', Decimal('66.00'))

@@ -143,8 +143,17 @@ def prepare_ai_curation_batch(
 
         run.status = CurationRun.Status.COMPLETED
         run.selected_count = len(optimized.selected)
+        run.ai_selected_count = len(optimized.selected)
+        run.deterministic_selected_count = 0
         run.actual_distribution_json = optimized.actual_distribution
-        run.save(update_fields=['status', 'selected_count', 'actual_distribution_json', 'updated_at'])
+        run.save(update_fields=[
+            'status',
+            'selected_count',
+            'ai_selected_count',
+            'deterministic_selected_count',
+            'actual_distribution_json',
+            'updated_at',
+        ])
 
     run.refresh_from_db()
     batch.refresh_from_db()
@@ -175,6 +184,7 @@ def _persist_decisions(
         decision = CurationDecision.objects.create(
             run=run,
             offer=offer,
+            decision_source=CurationDecision.DecisionSource.AI,
             marketplace_code=str(raw_decision.get('marketplace_code') or (offer.marketplace.code if offer.marketplace_id else '')),
             baseline_score=_decimal_or_none(baseline.get('score')),
             baseline_classification=str(baseline.get('classification') or ''),

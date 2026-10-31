@@ -4,8 +4,8 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
-EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
-ExecStart=/bin/bash /mnt/c/Users/marce/Documents/Projetos/descontos.bot/scripts/market_intel_daily.sh
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/market-intel.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/market-intel.log
+WorkingDirectory=/home/marce/apps/descontos_bot
+EnvironmentFile=/home/marce/apps/descontos_bot/.env
+ExecStart=/bin/bash /home/marce/apps/descontos_bot/scripts/market_intel_daily.sh
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/market-intel.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/market-intel.log

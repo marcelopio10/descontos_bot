@@ -16,6 +16,7 @@ data/*.db
 data/*.db-*
 data/*.sqlite3
 data/exports/
+docs/whatsapp_exports/
 data/logs/
 data/last_cycle.txt
 logs/
@@ -52,3 +53,4 @@ media/instagram/**
 .DS_Store
 ._*
 .worktrees/
+.vercel

@@ -4,8 +4,8 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
-EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
-ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py fetch_clicks --limit 500 --clear
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/fetch-clicks.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/fetch-clicks.log
+WorkingDirectory=/home/marce/apps/descontos_bot
+EnvironmentFile=/home/marce/apps/descontos_bot/.env
+ExecStart=/home/marce/apps/descontos_bot/.venv/bin/python3 manage.py fetch_clicks --limit 500 --clear
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/fetch-clicks.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/fetch-clicks.log

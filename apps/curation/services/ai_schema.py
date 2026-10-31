@@ -78,6 +78,7 @@ def validate_agent_output(payload: dict[str, Any], *, expected_offer_ids: set[in
         return ValidationResult(False, errors)
 
     selected_marketplaces: dict[str, int] = {}
+    seen_offer_ids: set[int] = set()
     for index, decision in enumerate(decisions):
         if not isinstance(decision, dict):
             errors.append(f'decisions[{index}] deve ser objeto')
@@ -90,6 +91,13 @@ def validate_agent_output(payload: dict[str, Any], *, expected_offer_ids: set[in
                 continue
 
         offer_id = decision.get('offer_id')
+        if isinstance(offer_id, bool) or not isinstance(offer_id, int):
+            errors.append(f'decisions[{index}].offer_id deve ser inteiro')
+            continue
+        if offer_id in seen_offer_ids:
+            errors.append(f'decisions[{index}].offer_id duplicado: {offer_id}')
+            continue
+        seen_offer_ids.add(offer_id)
         if expected_offer_ids is not None and offer_id not in expected_offer_ids:
             errors.append(f'decisions[{index}].offer_id inesperado: {offer_id}')
 

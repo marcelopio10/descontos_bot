@@ -13,7 +13,7 @@ MVP fechado em 2026-05-17. Operação real em produção desde 2026-05-15 (Whats
 | Backend | Python 3.11+ e Django 6.0.4 |
 | Banco | SQLite em `data/descontos_bot.db` |
 | WhatsApp | `wa_service/` com Node.js 20 LTS e Baileys |
-| Scraping | `requests.Session` e BeautifulSoup |
+| Coleta | API pública do Mercado Livre; scrapers legados para outros caminhos |
 | Operação | Scheduler local via `python3 manage.py run_bot` |
 
 Docker, FastAPI, Uvicorn, SQLAlchemy, Jinja2 e bancos externos não fazem parte do MVP.
@@ -21,7 +21,7 @@ Docker, FastAPI, Uvicorn, SQLAlchemy, Jinja2 e bancos externos não fazem parte 
 ## Fluxo Local
 
 ```text
-scrapers Mercado Livre/Amazon
+API pública Mercado Livre / scrapers Amazon
   -> normalização Django
   -> SQLite local
   -> publicação automática de site/offers.json quando houver diff real

@@ -31,6 +31,25 @@ def get_integer_setting(key: str, default: int) -> int:
         return default
 
 
+def get_positive_integer_setting(key: str, default: int) -> int:
+    raw_value = _get_setting_value(key)
+    try:
+        value = default if raw_value is None else int(raw_value)
+    except (TypeError, ValueError):
+        raise ValueError(f'{key} deve ser um inteiro maior ou igual a 1.') from None
+    if value < 1:
+        raise ValueError(f'{key} deve ser maior ou igual a 1.')
+    return value
+
+
+def get_string_setting(key: str, default: str) -> str:
+    value = _get_setting_value(key)
+    if value is None:
+        return default
+    value = value.strip()
+    return value if value else default
+
+
 def get_decimal_setting(key: str, default: Decimal) -> Decimal:
     value = _get_setting_value(key)
     if value is None:

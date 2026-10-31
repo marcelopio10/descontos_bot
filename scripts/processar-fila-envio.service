@@ -10,10 +10,10 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
-EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
+WorkingDirectory=/home/marce/apps/descontos_bot
+EnvironmentFile=/home/marce/apps/descontos_bot/.env
 # systemd --user usa um PATH mínimo que não inclui ~/.local/bin.
-Environment=PATH=/home/marce/.local/bin:/home/marce/.nvm/versions/node/v24.15.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=PATH=/home/marce/.local/bin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=PYTHONUNBUFFERED=1
 # --limit 5: teto de rajada. Auditoria de cadência de 2026-08-18 (volume real do
 # banco antes de ligar o timer): ~40-130 Delivery criadas/dia, 118 nas últimas
@@ -24,6 +24,6 @@ Environment=PYTHONUNBUFFERED=1
 # exatamente o incidente de 2026-07-21 do consumir-fila-whatsapp.timer. Com
 # `--limit 5` a cada ~30min, o pior caso sustentado é ~10 envios/hora, dentro da
 # mesma faixa do caminho normal de envio (teto de 25/ciclo a cada 90-240min).
-ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py processar_fila_envio --limit 5
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/processar-fila-envio.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/processar-fila-envio.log
+ExecStart=/home/marce/apps/descontos_bot/.venv/bin/python3 manage.py processar_fila_envio --limit 5
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/processar-fila-envio.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/processar-fila-envio.log

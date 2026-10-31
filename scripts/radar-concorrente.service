@@ -5,9 +5,9 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
-EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
+WorkingDirectory=/home/marce/apps/descontos_bot
+EnvironmentFile=/home/marce/apps/descontos_bot/.env
 Environment=PATH=/home/marce/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-ExecStart=/bin/bash /mnt/c/Users/marce/Documents/Projetos/descontos.bot/scripts/radar_concorrente.sh
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/radar-concorrente.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/radar-concorrente.log
+ExecStart=/bin/bash /home/marce/apps/descontos_bot/scripts/radar_concorrente.sh
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/radar-concorrente.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/radar-concorrente.log

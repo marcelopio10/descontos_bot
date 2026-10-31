@@ -3,7 +3,10 @@ import random
 import time
 from dataclasses import dataclass
 
-from apps.curation.services.settings import get_integer_setting
+from apps.curation.services.settings import (
+    get_integer_setting,
+    get_positive_integer_setting,
+)
 from apps.distribution.services.execution_window import (
     get_silence_error_message,
     is_distribution_silenced,
@@ -14,18 +17,17 @@ log = logging.getLogger(__name__)
 
 DEFAULT_CYCLE_MIN_MINUTES = 90
 DEFAULT_CYCLE_MAX_MINUTES = 180
+DEFAULT_OFFER_LIMIT_GLOBAL = 20
 
-# Teto/piso de itens por ciclo por canal (Tarefa 1.4 / achado C3, H3): evita
-# rajada (muitos itens de uma vez) e evita ciclo "zero" quando há itens
-# elegíveis. O piso é só informativo — não força itens inexistentes a existir.
+# Teto/piso de itens por ciclo por canal. O piso é validado aqui e aplicado
+# como hard gate pelo montador central do ciclo WhatsApp.
 # Teto calibrado contra o volume real observado em produção (canal WhatsApp
 # principal, últimos 7 dias): lotes de 15-20 itens são comuns em dias de pico
 # (maior lote observado: 20). Um teto de 8 cortaria ~metade dos lotes normais
-# e reduziria o volume diário atual — contrário ao objetivo da Sprint 1
-# ("parar a sangria de volume"). 25 dá margem sobre o pico observado mantendo
-# proteção contra rajada patológica (ex.: centenas de itens após uma queda
-# prolongada de canal).
-DEFAULT_CHANNEL_ITEMS_MIN_PER_CYCLE = 1
+# e reduziria o volume diário atual. O teto de 20 preserva o maior lote
+# observado e mantém proteção contra rajada patológica (por exemplo, centenas
+# de itens após uma queda prolongada de canal).
+DEFAULT_CHANNEL_ITEMS_MIN_PER_CYCLE = 5
 DEFAULT_CHANNEL_ITEMS_MAX_PER_CYCLE = 20
 
 
@@ -61,17 +63,28 @@ def get_scheduler_config() -> SchedulerConfig:
 
 
 def get_channel_cadence_config() -> ChannelCadenceConfig:
-    min_items = get_integer_setting(
+    min_items = get_positive_integer_setting(
         'channel_items_min_per_cycle',
         DEFAULT_CHANNEL_ITEMS_MIN_PER_CYCLE,
     )
-    max_items = get_integer_setting(
+    max_items = get_positive_integer_setting(
         'channel_items_max_per_cycle',
         DEFAULT_CHANNEL_ITEMS_MAX_PER_CYCLE,
     )
+    global_limit = get_positive_integer_setting(
+        'offer_limit_global',
+        DEFAULT_OFFER_LIMIT_GLOBAL,
+    )
 
-    min_items = max(0, min_items)
-    max_items = max(min_items, max_items, 1)
+    if min_items > max_items:
+        raise ValueError(
+            'channel_items_min_per_cycle não pode exceder '
+            'channel_items_max_per_cycle.',
+        )
+    if min_items > global_limit:
+        raise ValueError(
+            'channel_items_min_per_cycle não pode exceder offer_limit_global.',
+        )
 
     return ChannelCadenceConfig(
         min_items_per_cycle=min_items,

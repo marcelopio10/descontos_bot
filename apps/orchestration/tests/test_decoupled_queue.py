@@ -386,6 +386,7 @@ class ConsumirFilaWhatsappCommandTests(DecoupledQueueFlagTestsMixin, TestCase):
                 final_image_url='https://example.com/img-final.jpg',
             )
 
+        Setting.objects.create(key='channel_items_min_per_cycle', value='1')
         Setting.objects.create(key='channel_items_max_per_cycle', value='2')
         out = StringIO()
         call_command('consumir_fila_whatsapp', '--dry-run', '--channel', self.channel.code, stdout=out)

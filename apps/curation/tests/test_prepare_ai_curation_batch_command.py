@@ -441,6 +441,8 @@ class PrepareAICurationBatchCommandTests(TestCase):
                 current_price=Decimal('99.90'),
                 original_price=Decimal('199.80'),
                 discount_pct=Decimal('50.00'),
+                review_rating=Decimal('4.80'),
+                review_count=1000,
                 product_url='https://example.com/produto',
                 affiliate_url='https://example.com/afiliado',
                 image_url='https://example.com/img.jpg',
@@ -507,12 +509,13 @@ class PrepareAICurationBatchCommandTests(TestCase):
                 )
 
         marketplace_codes = [offer['marketplace_code'] for offer in RecordingRunner.payloads[0]['offers']]
-        # Sprint 6 / Tarefa 6.4: DEFAULT_TARGET_DISTRIBUTION reponderada por
-        # receita real (ml=0.55/amazon=0.35/shopee=0.10, era 0.4/0.3/0.3) —
-        # a cota justa da Shopee em candidate_limit=10 caiu de 3 para 1. O
-        # ponto do teste (Shopee não fica de fora só por ter desconto menor
-        # que ML/Amazon) continua válido com o novo número.
-        self.assertEqual(marketplace_codes.count('shopee'), 1)
+        # Cobertura mínima não força itens fracos. Se ML/Amazon falharem no
+        # gate de qualidade, ofertas boas da Shopee podem ocupar as vagas.
+        self.assertGreaterEqual(marketplace_codes.count('shopee'), 1)
+        self.assertTrue(all(
+            offer['baseline']['score'] >= 55
+            for offer in RecordingRunner.payloads[0]['offers']
+        ))
 
     def test_balanced_candidate_selection_fills_shortage_from_available_marketplaces(self):
         Offer.objects.all().delete()

@@ -10,7 +10,7 @@ avisar, porque o guard de produção só exige confirmação em canal de produç
 ## Convenção
 
 - **Caminhos absolutos, não `%h`.** É um deploy de máquina única
-  (`/mnt/c/Users/marce/Documents/Projetos/descontos.bot`), e `%h` deu a falsa
+  (`/home/marce/apps/descontos_bot`), e `%h` deu a falsa
   impressão de portabilidade enquanto escondia divergência.
 - **Comentário mora no lado versionado.** Produção manda em `ExecStart`,
   caminhos e agendamento; o repositório guarda o porquê. `check-units-drift.sh`

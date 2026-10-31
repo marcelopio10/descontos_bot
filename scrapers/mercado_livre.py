@@ -24,7 +24,10 @@ from apps.marketplaces.services.mercadolivre_affiliate_adapter import (
 from apps.marketplaces.services.mercadolivre_product_normalizer import (
     MercadoLivreProductNormalizer,
 )
-from apps.offers.services.normalizer import OfferNormalizationError
+from apps.offers.services.normalizer import (
+    OfferNormalizationError,
+    get_mercadolivre_path_item_id,
+)
 from scrapers.base import HTTP_EXCEPTIONS, BaseScraper, build_impersonated_session
 
 log = logging.getLogger(__name__)
@@ -43,6 +46,40 @@ _ALLOWED_FETCH_HOSTS = frozenset({
 })
 _REDIRECT_STATUS_CODES = frozenset({301, 302, 303, 307, 308})
 _MAX_REDIRECT_HOPS = 3
+# Domínio dos cookies da sessão autenticada usados na coleta. Fica restrito ao
+# mercadolivre.com.br: meli.la e outros hosts não recebem a sessão.
+_SESSION_COOKIE_DOMAIN = '.mercadolivre.com.br'
+# Desde 2026-10-16 o ML responde HTTP 200 sem cards para tráfego anônimo:
+# /ofertas traz um desafio antibot com prova de trabalho e as categorias pedem
+# login. Sem estes marcadores o runner registrava "verificar seletor".
+_ACCESS_WALL_MARKERS = (
+    ('desafio_antibot', '/security/bot_challenge'),
+    ('desafio_antibot', 'document.cookie=`_bmc='),
+    ('login_obrigatorio', 'para continuar, acesse sua conta'),
+    ('login_obrigatorio', '/gz/account-verification'),
+)
+
+
+# "Selecionados para você" do hub de afiliados (2026-10-22). Rota interna usada
+# pelo próprio portal: POST com filtros em lista [{id, value}]. Responde com a
+# sessão logada da conta de afiliado (ML_COOKIE) e não passa pelo desafio antibot
+# das páginas /ofertas.
+AFFILIATE_HUB_SEARCH_URL = 'https://www.mercadolivre.com.br/affiliate-program/api/hub/search'
+AFFILIATE_HUB_REFERER = 'https://www.mercadolivre.com.br/afiliados/hub'
+_HUB_IMAGE_TEMPLATE = 'https://http2.mlstatic.com/D_NQ_NP_{picture_id}-O.webp'
+_HUB_PICTURE_ID_RE = re.compile(r'^[0-9]+-ML[A-Z][0-9]+_[0-9]+$')
+_HUB_ITEM_ID_RE = re.compile(r'^MLB([0-9]+)$')
+
+
+def _parse_cookie_header(value: str) -> list[tuple[str, str]]:
+    pairs = []
+    for part in str(value or '').split(';'):
+        name, sep, cookie_value = part.strip().partition('=')
+        name = name.strip()
+        if not sep or not name or _contains_url_control(name + cookie_value):
+            continue
+        pairs.append((name, cookie_value.strip()))
+    return pairs
 
 
 def _normalize_for_match(value: str) -> str:
@@ -101,6 +138,42 @@ def _decode_fetch_path(path: str) -> str | None:
     return None
 
 
+def _hub_money(value) -> float:
+    """Valor de `current_price`/`previous_price` de um polycard do hub."""
+    raw = value.get('value') if isinstance(value, dict) else None
+    if isinstance(raw, bool) or not isinstance(raw, (int, float)):
+        return 0.0
+    if isinstance(value, dict) and value.get('currency') not in (None, 'BRL'):
+        return 0.0
+    return float(raw) if raw > 0 else 0.0
+
+
+def _hub_int(text) -> int:
+    match = re.search(r'(\d+)', str(text or ''))
+    return int(match.group(1)) if match else 0
+
+
+def _hub_rating(component) -> float:
+    values = ((component or {}).get('review_compacted') or {}).get('values') or []
+    for entry in values:
+        if isinstance(entry, dict) and entry.get('key') == 'label':
+            text = str(((entry.get('label') or {}).get('text')) or '').replace(',', '.')
+            try:
+                rating = float(text)
+            except ValueError:
+                return 0.0
+            return rating if 0 < rating <= 5 else 0.0
+    return 0.0
+
+
+def _hub_image_url(card: dict) -> str:
+    pictures = ((card.get('pictures') or {}).get('pictures')) or []
+    picture_id = pictures[0].get('id') if pictures and isinstance(pictures[0], dict) else ''
+    if isinstance(picture_id, str) and _HUB_PICTURE_ID_RE.fullmatch(picture_id):
+        return _HUB_IMAGE_TEMPLATE.format(picture_id=picture_id)
+    return ''
+
+
 @dataclass
 class MercadoLivreOffer:
     id: str
@@ -153,6 +226,7 @@ class MercadoLivreScraper(BaseScraper):
         self.pages_scraped = 0
         self.blocked = False
         self.error_message = ''
+        self.affiliate_hub_error = ''
         self.headers = {
             'User-Agent': (
                 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
@@ -174,6 +248,7 @@ class MercadoLivreScraper(BaseScraper):
         # anti-bot (mesma abordagem do scrapers/amazon.py); fallback gracioso
         # para requests puro se curl_cffi não estiver instalado.
         self.session = build_impersonated_session('chrome124')
+        self.session_cookie_count = self._load_session_cookies(self.ml_cookie)
         self._affiliate_adapter = ExistingAffiliateLinkEngineAdapter(
             affiliate_tag=self.affiliate_tag,
             ml_cookie=self.ml_cookie,
@@ -181,6 +256,58 @@ class MercadoLivreScraper(BaseScraper):
             session_factory=lambda: build_impersonated_session('chrome124'),
             alert_callback=self._exibir_alerta_cookie,
         )
+
+    def _load_session_cookies(self, cookie_header: str) -> int:
+        """Carrega ML_COOKIE no jar da sessão de coleta, só para mercadolivre.com.br.
+
+        O jar (e não um header fixo) mantém o escopo por domínio e aceita os
+        Set-Cookie de renovação que o ML devolver durante o ciclo.
+        """
+        cookies = getattr(self.session, 'cookies', None)
+        if cookies is None:
+            return 0
+        loaded = 0
+        for name, value in _parse_cookie_header(cookie_header):
+            try:
+                cookies.set(name, value, domain=_SESSION_COOKIE_DOMAIN, path='/')
+            except Exception as exc:  # noqa: BLE001 - nunca derrubar a coleta pelo jar
+                log.warning('ml_session_cookie_ignorado erro=%s', type(exc).__name__)
+                continue
+            loaded += 1
+        return loaded
+
+    @staticmethod
+    def detect_access_wall(html: str) -> str:
+        content = (html or '').lower()
+        # Página com cards é página útil, mesmo se o cabeçalho citar verificação.
+        if 'poly-card' in content or 'ui-search-result' in content:
+            return ''
+        for reason, marker in _ACCESS_WALL_MARKERS:
+            if marker.lower() in content:
+                return reason
+        return ''
+
+    def _check_blocked(self, html: str, where: str) -> bool:
+        if self.is_blocked(html):
+            self.blocked = True
+            self.error_message = f'CAPTCHA detectado em {where}'
+            log.error('CAPTCHA detectado em %s.', where)
+            return True
+        reason = self.detect_access_wall(html)
+        if not reason:
+            return False
+        self.blocked = True
+        session_state = 'com_sessao' if self.session_cookie_count else 'sem_sessao'
+        self.error_message = (
+            f'Mercado Livre exigiu login/desafio antibot ({reason}, {session_state}) '
+            f'em {where}; renove ML_COOKIE no .env com a sessão de um navegador logado.'
+        )
+        log.error(
+            'ml_access_wall motivo=%s sessao=%s cookies=%d em=%s',
+            reason, session_state, self.session_cookie_count, where,
+        )
+        self._exibir_alerta_cookie(motivo=f'coleta_{reason}')
+        return True
 
     def _fetch_ml_response(self, url: str):
         current_url = url
@@ -245,10 +372,7 @@ class MercadoLivreScraper(BaseScraper):
             if not html:
                 break
 
-            if self.is_blocked(html):
-                self.blocked = True
-                self.error_message = f'CAPTCHA detectado na página {page}'
-                log.error('CAPTCHA detectado na página %d.', page)
+            if self._check_blocked(html, f'página {page}'):
                 break
 
             self.pages_scraped = page
@@ -292,10 +416,7 @@ class MercadoLivreScraper(BaseScraper):
                 log.warning('[%s] sem HTML — categoria ignorada', label)
                 continue
 
-            if self.is_blocked(html):
-                self.blocked = True
-                self.error_message = f'CAPTCHA detectado em {url}'
-                log.error('CAPTCHA detectado em %s (categoria %s).', url, label)
+            if self._check_blocked(html, f'{url} (categoria {label})'):
                 break
 
             self.pages_scraped += 1
@@ -321,6 +442,216 @@ class MercadoLivreScraper(BaseScraper):
                 time.sleep(round(random.uniform(DELAY_MIN, DELAY_MAX), 2))
 
         return all_offers
+
+    def scrape_affiliate_hub(
+        self,
+        targets: list[tuple],
+        include_extra_commission: bool = True,
+    ) -> list[dict]:
+        """Coleta o "Selecionados para você" do hub de afiliados (2026-10-22).
+
+        targets: lista de (category_code, label, category_id, trust_hint,
+        min_discount, max_price). Para cada categoria busca a primeira página por
+        relevância e, opcionalmente, a primeira página só com comissão extra.
+
+        As regras de desconto mínimo e teto de preço da categoria são aplicadas
+        antes do motor afiliado, para não gerar link de item que seria descartado
+        logo depois por `_apply_category_filters`.
+        """
+        all_offers: list[dict] = []
+        seen_ids: set[str] = set()
+        stopped = False
+
+        for category_code, label, category_id, trust_hint, min_discount, max_price in targets:
+            filter_sets = [[{'id': 'category', 'value': category_id}]]
+            if include_extra_commission:
+                filter_sets.append([
+                    {'id': 'category', 'value': category_id},
+                    {'id': 'extra_commission', 'value': True},
+                ])
+            for filters in filter_sets:
+                if stopped:
+                    break
+                cards, stopped = self._fetch_affiliate_hub_cards(filters)
+                captured = 0
+                for card in cards:
+                    parsed = self._parse_affiliate_hub_card(card, min_discount, max_price, seen_ids)
+                    if parsed is None:
+                        continue
+                    offer, signals = parsed
+                    seen_ids.add(offer.id)
+                    data = offer.to_dict()
+                    data['source_label'] = f'hub:{label}'
+                    data['marketplace_code'] = 'mercadolivre'
+                    data['collection_source'] = 'affiliate_hub'
+                    data['search_provenance'] = {
+                        'source_kind': 'affiliate_hub',
+                        'category_code': category_code,
+                        'marketplace': 'mercadolivre',
+                    }
+                    data['affiliate_hub'] = signals
+                    if category_code and trust_hint:
+                        data['category_hint'] = category_code
+                    all_offers.append(data)
+                    captured += 1
+                extra = len(filters) > 1
+                log.info(
+                    'ml_affiliate_hub [%s] extra_commission=%s cards=%d aceitos=%d total=%d',
+                    label, extra, len(cards), captured, len(all_offers),
+                )
+                time.sleep(round(random.uniform(DELAY_MIN, DELAY_MAX), 2))
+            if stopped:
+                break
+
+        return all_offers
+
+    def _affiliate_hub_headers(self) -> dict:
+        headers = {
+            key: value for key, value in self.headers.items()
+            if key not in {'Upgrade-Insecure-Requests', 'Sec-Fetch-User'}
+        }
+        headers.update({
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Origin': 'https://www.mercadolivre.com.br',
+            'Referer': AFFILIATE_HUB_REFERER,
+            'x-custom-origin': 'https://www.mercadolivre.com.br',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'same-origin',
+        })
+        return headers
+
+    def _fetch_affiliate_hub_cards(self, filters: list[dict]) -> tuple[list[dict], bool]:
+        """Retorna (cards, parar). Sessão negada interrompe o restante do hub."""
+        try:
+            response = self.session.post(
+                AFFILIATE_HUB_SEARCH_URL,
+                params={'is_affiliate': 'true', 'device': 'desktop'},
+                json={'search': '', 'filters': filters, 'sort': 'relevance', 'offset': 0},
+                headers=self._affiliate_hub_headers(),
+                timeout=20,
+                allow_redirects=False,
+            )
+        except HTTP_EXCEPTIONS as exc:
+            self.affiliate_hub_error = 'Falha HTTP no hub de afiliados do Mercado Livre.'
+            log.warning('ml_affiliate_hub_falha_http erro=%s', type(exc).__name__)
+            return [], False
+
+        status = getattr(response, 'status_code', None)
+        if status in (401, 403) or (isinstance(status, int) and 300 <= status < 400):
+            self.affiliate_hub_error = (
+                f'Hub de afiliados recusou a sessão (HTTP {status}); renove ML_COOKIE no .env.'
+            )
+            log.error('ml_affiliate_hub_sessao_recusada status=%s', status)
+            self._exibir_alerta_cookie(motivo=f'hub_afiliados_http_{status}')
+            return [], True
+        if status != 200:
+            self.affiliate_hub_error = f'Hub de afiliados respondeu HTTP {status}.'
+            log.warning('ml_affiliate_hub_status status=%s', status)
+            return [], status == 429
+
+        try:
+            body = response.json()
+        except ValueError:
+            self.affiliate_hub_error = 'Hub de afiliados retornou resposta não JSON.'
+            log.warning('ml_affiliate_hub_resposta_invalida')
+            return [], True
+        model = body.get('polycard_client_model') if isinstance(body, dict) else None
+        cards = model.get('polycards') if isinstance(model, dict) else None
+        if not isinstance(cards, list):
+            self.affiliate_hub_error = 'Hub de afiliados retornou formato inesperado.'
+            log.warning('ml_affiliate_hub_schema_inesperado')
+            return [], True
+        self.pages_scraped += 1
+        return [card for card in cards if isinstance(card, dict)], False
+
+    def _parse_affiliate_hub_card(
+        self,
+        card: dict,
+        min_discount: float,
+        max_price: float | None,
+        seen_ids: set[str],
+    ) -> Optional[tuple[MercadoLivreOffer, dict]]:
+        try:
+            metadata = card.get('metadata') or {}
+            card_type = str(metadata.get('type') or '')
+            permalink = self._affiliate_hub_permalink(metadata, card_type)
+            if not permalink:
+                return None
+            item_id = get_mercadolivre_path_item_id(urllib.parse.urlsplit(permalink).path)
+            if not item_id or item_id in seen_ids:
+                return None
+            try:
+                permalink = MercadoLivreProductNormalizer._canonical_product_url(item_id, permalink)
+            except OfferNormalizationError:
+                return None
+
+            components = {
+                component.get('type'): component
+                for component in card.get('components') or []
+                if isinstance(component, dict)
+            }
+            title = str(((components.get('title') or {}).get('title') or {}).get('text') or '').strip()
+            price_block = (components.get('price') or {}).get('price') or {}
+            price = _hub_money(price_block.get('current_price'))
+            if not title or price <= 0:
+                return None
+            original_price = _hub_money(price_block.get('previous_price')) or price
+            discount_pct = _hub_int(((price_block.get('discount_label') or {}).get('text')))
+            if discount_pct == 0 and original_price > price:
+                discount_pct = round((original_price - price) / original_price * 100)
+            if discount_pct < max(MIN_DISCOUNT, float(min_discount or 0)):
+                return None
+            if max_price is not None and price > float(max_price):
+                return None
+
+            signals = {
+                'card_type': card_type,
+                'extra_commission': str(metadata.get('extra_commission') or '').lower() == 'true',
+                'commission_pct': _hub_int(
+                    (((components.get('chip') or {}).get('chip') or {}).get('label') or {}).get('text'),
+                ),
+                'highlight': re.sub(
+                    r'\{[^}]*\}\s*',
+                    '',
+                    str(((components.get('highlight') or {}).get('highlight') or {}).get('text') or ''),
+                ).strip()[:60],
+            }
+            offer = MercadoLivreOffer(
+                id=item_id,
+                nome=title,
+                preco=price,
+                preco_original=original_price,
+                desconto_pct=discount_pct,
+                link_direto=permalink,
+                link_afiliado=self._gerar_link_afiliado_oficial(permalink),
+                imagem=_hub_image_url(card),
+                vendedor='',
+                condicao='Novo',
+                frete_gratis=False,
+                data=datetime.now(timezone(BRT_OFFSET)).strftime('%Y-%m-%d'),
+                review_rating=_hub_rating(components.get('review_compacted')),
+                review_count=0,
+            )
+            return offer, signals
+        except Exception as exc:  # noqa: BLE001 - card externo isolado
+            log.debug('Erro ao parsear card do hub: %s', type(exc).__name__)
+            return None
+
+    @staticmethod
+    def _affiliate_hub_permalink(metadata: dict, card_type: str) -> str:
+        raw_id = str(metadata.get('id') or '').strip().upper()
+        if card_type == 'user_product':
+            # /up/MLBU... não tem identidade de anúncio no caminho; a página do
+            # anúncio (metadata.id) leva ao mesmo produto e tem identidade estável.
+            match = _HUB_ITEM_ID_RE.fullmatch(raw_id)
+            return f'https://produto.mercadolivre.com.br/MLB-{match.group(1)}' if match else ''
+        url = metadata.get('url')
+        if not isinstance(url, str) or not url or _contains_url_control(url):
+            return ''
+        url = url.split('#', 1)[0].split('?', 1)[0]
+        return url if url.startswith('https://') else f'https://{url}'
 
     def scrape_search_queries(self, queries) -> list[dict]:
         """Busca direcionada por texto livre está DESATIVADA no Mercado Livre.
@@ -398,10 +729,7 @@ class MercadoLivreScraper(BaseScraper):
         html = self.get_html(url)
         if not html:
             return None
-        if self.is_blocked(html):
-            self.blocked = True
-            self.error_message = f'CAPTCHA detectado em {url}'
-            log.error('CAPTCHA detectado ao resolver vitrine social %s.', url)
+        if self._check_blocked(html, f'vitrine social {url}'):
             return None
 
         soup = BeautifulSoup(html, 'html.parser')
@@ -494,16 +822,15 @@ class MercadoLivreScraper(BaseScraper):
                 if not isinstance(target, str) or not target or _contains_url_control(target):
                     return None
                 permalink = target
-            elif '?' in permalink or '#' in permalink:
-                return None
             if not permalink or not title:
                 return None
 
-            item_id = ''
-            match = re.search(r'(MLB[\-]?\d+)', permalink)
-            if match:
-                item_id = match.group(1).replace('-', '')
-            else:
+            # A identidade vem do caminho, nunca de pdp_filters/tracking.
+            # O normalizador valida a URL e remove query/fragmento depois.
+            item_id = get_mercadolivre_path_item_id(
+                urllib.parse.urlsplit(permalink).path,
+            )
+            if not item_id:
                 return None
 
             try:

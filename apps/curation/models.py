@@ -10,6 +10,7 @@ class CurationRun(TimestampedModel):
         PENDING = 'pending', 'Pendente'
         RUNNING = 'running', 'Em execução'
         COMPLETED = 'completed', 'Concluída'
+        BLOCKED = 'blocked', 'Bloqueada'
         FAILED = 'failed', 'Falhou'
         CANCELLED = 'cancelled', 'Cancelada'
 
@@ -32,6 +33,12 @@ class CurationRun(TimestampedModel):
     model_name = models.CharField('modelo', max_length=160, blank=True)
     candidate_count = models.PositiveIntegerField('candidatas', default=0)
     selected_count = models.PositiveIntegerField('selecionadas', default=0)
+    ai_selected_count = models.PositiveIntegerField('selecionadas pela IA', default=0)
+    deterministic_selected_count = models.PositiveIntegerField(
+        'selecionadas deterministicamente',
+        default=0,
+    )
+    blocked_reason = models.CharField('motivo do bloqueio', max_length=100, blank=True)
     target_distribution_json = models.JSONField('distribuição alvo', default=dict, blank=True)
     actual_distribution_json = models.JSONField('distribuição real', default=dict, blank=True)
     observer_context_json = models.JSONField('contexto observer', default=dict, blank=True)
@@ -56,6 +63,13 @@ class CurationRun(TimestampedModel):
 
 
 class CurationDecision(TimestampedModel):
+    class DecisionSource(models.TextChoices):
+        AI = 'ai', 'IA'
+        DETERMINISTIC_COMPLETION = (
+            'deterministic_completion',
+            'Complemento determinístico',
+        )
+
     class Classification(models.TextChoices):
         APPROVED = 'approved', 'Aprovada'
         REJECTED = 'rejected', 'Rejeitada'
@@ -75,6 +89,12 @@ class CurationDecision(TimestampedModel):
         related_name='curation_decisions',
     )
     marketplace_code = models.CharField('marketplace', max_length=64, blank=True)
+    decision_source = models.CharField(
+        'origem da decisão',
+        max_length=40,
+        choices=DecisionSource.choices,
+        default=DecisionSource.AI,
+    )
     baseline_score = models.DecimalField('score baseline', max_digits=6, decimal_places=2, null=True, blank=True)
     baseline_classification = models.CharField('classificação baseline', max_length=60, blank=True)
     baseline_decision = models.CharField('decisão baseline', max_length=60, blank=True)

@@ -11,6 +11,7 @@ from scrapers.base import build_impersonated_session
 
 log = logging.getLogger('apps.marketplaces.mercadolivre_affiliate')
 ALLOWED_SHORT_URL_HOSTS = frozenset({
+    'meli.la',
     'mercadolivre.com',
     'mercadolivre.com.br',
     'www.mercadolivre.com',
@@ -22,6 +23,7 @@ ALLOWED_PRODUCT_URL_HOSTS = frozenset({
     'produto.mercadolivre.com.br',
 })
 SHORT_SLUG_RE = re.compile(r'/sec/[A-Za-z0-9._~-]+')
+MELI_SHORT_SLUG_RE = re.compile(r'/[A-Za-z0-9]{1,64}')
 
 
 
@@ -153,7 +155,11 @@ class ExistingAffiliateLinkEngineAdapter:
             and port is None
             and parts.username is None
             and parts.password is None
-            and SHORT_SLUG_RE.fullmatch(decoded_path) is not None
+            and (
+                MELI_SHORT_SLUG_RE.fullmatch(decoded_path) is not None
+                if parts.hostname.lower() == 'meli.la'
+                else SHORT_SLUG_RE.fullmatch(decoded_path) is not None
+            )
             and decoded_path[5:] not in {'.', '..'}
             and '?' not in value
             and '#' not in value

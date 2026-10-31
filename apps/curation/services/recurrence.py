@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import re
-import unicodedata
 from dataclasses import dataclass
 from datetime import timedelta
 from decimal import Decimal
@@ -12,6 +10,7 @@ from django.utils import timezone
 from apps.curation.services.product_family import offer_family_key, product_family_key
 from apps.curation.services.settings import get_bool_setting, get_decimal_setting, get_integer_setting
 from apps.distribution.models import Delivery
+from apps.offers.services.title_identity import normalize_editorial_title
 
 DEFAULT_COOLDOWN_HOURS = 72
 DEFAULT_SATURATED_COOLDOWN_HOURS = 120
@@ -69,9 +68,12 @@ def normalize_family_key(offer) -> str:
     canonical = (getattr(offer, 'produto_canonico_id', '') or '').strip()
     if canonical:
         return f'canonical:{canonical}'
-    text = unicodedata.normalize('NFKD', getattr(offer, 'normalized_title', '') or getattr(offer, 'title', '') or '')
-    text = ''.join(char for char in text if not unicodedata.combining(char)).lower()
-    tokens = [token for token in re.findall(r'[a-z0-9]+', text) if len(token) >= 3]
+    text = normalize_editorial_title(
+        getattr(offer, 'normalized_title', '')
+        or getattr(offer, 'title', '')
+        or '',
+    )
+    tokens = [token for token in text.split() if len(token) >= 3]
     return 'title:' + ' '.join(tokens[:12])
 
 

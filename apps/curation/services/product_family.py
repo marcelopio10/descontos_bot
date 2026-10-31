@@ -1,8 +1,5 @@
 from __future__ import annotations
 
-import re
-import unicodedata
-
 """Família editorial de produto — chave de SIMILARIDADE, não de identidade.
 
 Motivação (achado 2026-08-21, "impressão de repetição"): o único dedup que
@@ -30,10 +27,7 @@ Também é mais grossa que `Category`: categoria responde "casa_cozinha"
 travesseiro. A família responde "jogo_de_panelas".
 """
 
-# `Anúncio patrocinado – ` precisa sair ANTES do dobramento de acentos: o travessão
-# é não-ASCII e some no encode('ascii', 'ignore'), o que quebraria um regex que
-# esperasse o separador.
-SPONSORED_PREFIX_RE = re.compile(r'^\s*an[uú]ncio\s+patrocinado\s*[\-–—:]?\s*', re.IGNORECASE)
+from apps.offers.services.title_identity import normalize_title_surface
 
 # Só procuramos o tipo de produto nas primeiras palavras do título. Títulos de
 # marketplace listam o produto primeiro e enchem o resto de atributos: sem essa
@@ -207,7 +201,4 @@ def _is_modifier_match(head_words: list[str], matched: str) -> bool:
 
 
 def _normalize(text: str) -> str:
-    without_prefix = SPONSORED_PREFIX_RE.sub('', text or '')
-    decomposed = unicodedata.normalize('NFKD', without_prefix)
-    ascii_text = decomposed.encode('ascii', 'ignore').decode('ascii')
-    return re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9 ]', ' ', ascii_text.lower())).strip()
+    return normalize_title_surface(text)

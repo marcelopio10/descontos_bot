@@ -4,6 +4,7 @@ import logging
 import os
 from dataclasses import dataclass
 from typing import Protocol
+from urllib.parse import parse_qs, urlsplit
 
 from apps.curation.services.settings import get_integer_setting
 from apps.panel.models import Setting
@@ -21,6 +22,8 @@ CATEGORY_SCRAPING_FLAG = 'category_scraping_enabled'
 DIRECTED_QUERY_FLAG = 'directed_search_enabled'
 DIRECTED_QUERY_LIMIT = 6
 MERCADOLIVRE_API_SEARCH_FLAG = 'mercadolivre_api_search_enabled'
+AFFILIATE_HUB_FLAG = 'affiliate_hub_enabled'
+AFFILIATE_HUB_EXTRA_COMMISSION_FLAG = 'affiliate_hub_extra_commission_enabled'
 
 # `DIRECTED_FALLBACK_CATEGORY_LIMIT = 2` foi removido no achado B1 (2026-08-18):
 # truncava `flatten_urls()` sempre nas 2 primeiras URLs, na mesma ordem, todo ciclo,
@@ -79,13 +82,16 @@ class ScraperAdapter:
                 ))
         category_count = len(payloads) - directed_count
 
+        payloads.extend(self._affiliate_hub_payloads())
+        hub_count = len(payloads) - directed_count - category_count
+
         payloads.extend(_competitor_radar_payloads(self.marketplace_code))
-        radar_count = len(payloads) - directed_count - category_count
+        radar_count = len(payloads) - directed_count - category_count - hub_count
 
         if payloads:
             log.info(
-                'collect_summary marketplace=%s directed=%d category=%d radar=%d total=%d',
-                self.marketplace_code, directed_count, category_count, radar_count, len(payloads),
+                'collect_summary marketplace=%s directed=%d category=%d hub=%d radar=%d total=%d',
+                self.marketplace_code, directed_count, category_count, hub_count, radar_count, len(payloads),
             )
             return _apply_category_filters(
                 self.marketplace_code,
@@ -100,12 +106,59 @@ class ScraperAdapter:
             radar = build_search_radar(lookback_hours=168, limit=30)
             plan = build_search_plan(radar, marketplaces=(self.marketplace_code,), max_queries=DIRECTED_QUERY_LIMIT)
             return plan.directed_queries
-        except Exception:
+        except Exception as exc:
             # Achado B3 (2026-08-18): esta exceção era engolida em silêncio. Uma falha
             # aqui desliga a busca direcionada e o sistema degrada para o fallback
             # genérico sem deixar rastro nenhum de por quê.
-            log.warning('directed_queries_failed marketplace=%s', self.marketplace_code, exc_info=True)
+            log.warning(
+                'directed_queries_failed marketplace=%s reason=%s',
+                self.marketplace_code,
+                type(exc).__name__,
+            )
             return ()
+
+    def _affiliate_hub_payloads(self) -> list[dict]:
+        """Quarto ramo da união: "Selecionados para você" do hub de afiliados.
+
+        Desligado por padrão (`affiliate_hub_enabled`). Usa os mesmos alvos de
+        `category_targets` e as mesmas regras de desconto mínimo e teto de preço;
+        os payloads seguem para dedup, filtros de categoria, normalização e
+        curadoria como qualquer outra coleta. Roda mesmo com `/ofertas` bloqueado:
+        o hub responde à sessão logada sem o desafio antibot das páginas HTML.
+        """
+        if (
+            self.marketplace_code != 'mercadolivre'
+            or not hasattr(self.scraper, 'scrape_affiliate_hub')
+            or not _affiliate_hub_enabled()
+        ):
+            return []
+        rules_by_category = get_targets(self.marketplace_code)
+        targets = []
+        for target in flatten_urls(self.marketplace_code):
+            category_id = _category_id_from_url(target.url)
+            if not category_id:
+                continue
+            rules = rules_by_category.get(target.category_code) or {}
+            targets.append((
+                target.category_code,
+                target.label,
+                category_id,
+                target.trust_hint,
+                rules.get('min_discount', 0),
+                rules.get('max_price'),
+            ))
+        try:
+            return self.scraper.scrape_affiliate_hub(
+                targets,
+                include_extra_commission=bool(get_integer_setting(AFFILIATE_HUB_EXTRA_COMMISSION_FLAG, 1)),
+            )
+        except Exception as exc:
+            log.warning(
+                'affiliate_hub_payloads_failed marketplace=%s reason=%s',
+                self.marketplace_code,
+                type(exc).__name__,
+            )
+            return []
 
     @property
     def blocked(self) -> bool:
@@ -126,6 +179,23 @@ def _category_scraping_enabled() -> bool:
 
 def _directed_search_enabled() -> bool:
     return bool(get_integer_setting(DIRECTED_QUERY_FLAG, 1))
+
+
+def _affiliate_hub_enabled() -> bool:
+    try:
+        return bool(get_integer_setting(AFFILIATE_HUB_FLAG, 0))
+    except Exception as exc:  # noqa: BLE001 - flag ilegível mantém o hub desligado
+        log.warning('affiliate_hub_flag_unreadable reason=%s', type(exc).__name__)
+        return False
+
+
+def _category_id_from_url(url: str) -> str:
+    """Extrai `category=MLB...` das URLs de `/ofertas` em `category_targets`."""
+    if not isinstance(url, str):
+        return ''
+    values = parse_qs(urlsplit(url).query).get('category') or ['']
+    value = values[0].strip().upper()
+    return value if value.startswith('MLB') and value[3:].isdigit() else ''
 
 
 def _mercadolivre_api_search_enabled() -> bool:
@@ -171,8 +241,12 @@ def _competitor_radar_payloads(marketplace_code: str) -> list[dict]:
         if not radar_enabled():
             return []
         return build_radar_payloads(marketplace_code)
-    except Exception:
-        log.warning('competitor_radar_payloads_failed marketplace=%s', marketplace_code, exc_info=True)
+    except Exception as exc:
+        log.warning(
+            'competitor_radar_payloads_failed marketplace=%s reason=%s',
+            marketplace_code,
+            type(exc).__name__,
+        )
         return []
 
 
@@ -192,7 +266,7 @@ def _deduplicate_payloads(payloads: list[dict]) -> list[dict]:
         key = str(payload.get('external_id') or payload.get('id') or payload.get('product_url') or payload.get('url') or payload.get('title') or '')
         kept = seen.get(key)
         if kept is not None:
-            for field in ('category_hint', 'search_provenance'):
+            for field in ('category_hint', 'search_provenance', 'affiliate_hub'):
                 if not kept.get(field) and payload.get(field):
                     kept[field] = payload[field]
             continue

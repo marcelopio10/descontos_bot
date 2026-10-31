@@ -18,6 +18,41 @@ PUBLISH_OFFERS_BRANCH=main
 OFFERS_JSON_OUTPUT_PATH=site/offers.json
 ```
 
+## Mercado Livre API pública
+
+A coleta padrão do Mercado Livre usa OAuth e a API `api.mercadolibre.com`, sem
+cookies de navegador. Cadastre uma aplicação no DevCenter, use escopo `read` e
+mantenha os tokens somente no `.env` local:
+
+```env
+ML_API_BASE_URL=https://api.mercadolibre.com
+ML_API_SITE_ID=MLB
+ML_API_ACCESS_TOKEN=
+ML_API_CLIENT_ID=
+ML_API_CLIENT_SECRET=
+ML_API_REFRESH_TOKEN=
+ML_API_REDIRECT_URI=
+ML_API_TIMEOUT_SECONDS=15
+ML_API_MAX_RETRIES=3
+ML_API_PAGE_SIZE=50
+ML_API_CONTEXT=channel_marketplace
+ML_API_CONTEXTUAL_PRICE_ENABLED=true
+ML_API_ITEM_CACHE_TTL_SECONDS=900
+ML_API_SELLER_CACHE_TTL_SECONDS=86400
+ML_API_ALLOWED_SELLER_LEVEL_IDS=
+MERCADOLIVRE_API_SEARCH_ENABLED=1
+```
+
+`MERCADOLIVRE_API_SEARCH_ENABLED=0` é o rollback explícito ao scraper legado.
+Sem `ML_API_ACCESS_TOKEN`, o caminho API falha fechado e não chama HTML.
+Use `python3 manage.py check_mercadolivre_api --limit 1` para um probe somente
+de leitura; o comando não imprime credenciais.
+
+As fontes oficiais consultadas não informam uma tarifa de conexão/API. Isso
+permanece como custo não confirmado até a validação dos termos atuais do
+DevCenter; mensalidades de terceiros e taxas do programa de afiliados são
+categorias separadas.
+
 ## Login do site privado (Vercel — Sprint 7A)
 
 Protege `/dashboard`, `/inteligencia` e os JSONs sensíveis. Operador único.

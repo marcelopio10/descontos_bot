@@ -135,6 +135,19 @@ def build_curation_prompt(payload: dict[str, Any]) -> str:
             'conversion_score, relevance_score, discount_quality_score, audience_fit_score, reason, '
             'rewritten_title, rewritten_caption_whatsapp, rewritten_caption_telegram, image_required, '
             'image_decision, blacklist_actions, risk_flags.\n'
+            'Retorne exatamente UMA decisão por offer_id, sem IDs duplicados. '
+            'Use rewritten_caption_whatsapp, nunca o alias rewritten_caption.\n'
+            'Os quatro scores devem usar a MESMA escala de 0 a 100: '
+            'conversion_score, relevance_score, discount_quality_score e audience_fit_score. '
+            'Avalie cada critério independentemente: não copie baseline.score para conversão, '
+            'peso de categoria para aderência, nem discount_pct para qualidade do desconto. '
+            'Nota 70 representa evidência boa; 55 é apenas mediana. '
+            'A porcentagem anunciada não comprova preço vantajoso ou desconto real. '
+            'Não chame um desconto de verificável sem evidência no payload. '
+            'Marca desconhecida, poucas avaliações, preço de referência suspeito ou '
+            'especificações exageradas exigem cautela, mesmo com preço baixo. '
+            'Selecione apenas ofertas com benefício claro para o público e qualidade boa; '
+            'é permitido retornar um lote menor ou vazio, sem preenchimento com ofertas fracas.\n'
         )
     return (
         'Você é o profile Hermes de curadoria IA do descontos.bot. '\
@@ -280,6 +293,12 @@ def sanitize_hermes_payload(payload: dict[str, Any]) -> dict[str, Any]:
         for decision in decisions:
             if not isinstance(decision, dict):
                 continue
+            # Older editorial responses use the generic caption key. Preserve
+            # the model's text without inventing a caption or relaxing gates.
+            if 'rewritten_caption_whatsapp' not in decision:
+                caption = decision.get('rewritten_caption')
+                if isinstance(caption, str):
+                    decision['rewritten_caption_whatsapp'] = caption
             for field in _HERMES_TEXT_FIELDS:
                 value = decision.get(field)
                 if isinstance(value, str):

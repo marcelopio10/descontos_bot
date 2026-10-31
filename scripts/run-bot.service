@@ -5,11 +5,12 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
-EnvironmentFile=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.env
+WorkingDirectory=/home/marce/apps/descontos_bot
+EnvironmentFile=/home/marce/apps/descontos_bot/.env
 # systemd --user usa um PATH mínimo que não inclui ~/.local/bin (CLI `hermes`)
 # nem o node do nvm.
-Environment=PATH=/home/marce/.local/bin:/home/marce/.nvm/versions/node/v24.15.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=PATH=/home/marce/.local/bin:/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=HERMES_HOME=/home/marce/.hermes_v2
 # --channel whatsapp_principal é obrigatório: sem ele o comando cai no default
 # `whatsapp_main`, que é HOMOLOGAÇÃO — e aí o guard de produção nem dispara,
 # porque ele só exige confirmação em canal de produção.
@@ -18,11 +19,11 @@ Environment=PATH=/home/marce/.local/bin:/home/marce/.nvm/versions/node/v24.15.0/
 # a curadoria IA falha, o ciclo aborta em vez de cair no selector legado. Com 99
 # membros no grupo, volume não é alavanca; o legado chegou a 30% dos envios numa
 # semana e não tem uma venda casada. Reverter = tirar a flag e reiniciar.
-ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py run_bot --channel whatsapp_principal --confirm-ai-production CONFIRM_AI_PRODUCTION --ai-curation-required
+ExecStart=/home/marce/apps/descontos_bot/.venv/bin/python3 manage.py run_bot --channel whatsapp_principal --confirm-ai-production CONFIRM_AI_PRODUCTION --ai-curation-required
 Restart=always
 RestartSec=30
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/run-bot.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/run-bot.log
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/run-bot.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/run-bot.log
 
 [Install]
 WantedBy=default.target

@@ -14,9 +14,16 @@ from apps.curation.models import (
 # Helpers / Actions compartilhadas
 # ===========================================================================
 
-def _mudar_status(modeladmin, request, queryset, novo_status, descricao):
+def _mudar_status(
+    modeladmin,
+    request,
+    queryset,
+    novo_status,
+    descricao,
+    **extra_updates,
+):
     """Atualiza o status dos registros selecionados em lote."""
-    updated = queryset.update(status=novo_status)
+    updated = queryset.update(status=novo_status, **extra_updates)
     modeladmin.message_user(request, f'{updated} registro(s) alterado(s) para "{descricao}".')
 
 
@@ -32,7 +39,7 @@ class CurationDecisionInline(admin.TabularInline):
     show_change_link = True
     fields = (
         'offer', 'marketplace_code', 'baseline_score', 'ai_score',
-        'ai_classification', 'is_selected_for_batch',
+        'ai_classification', 'decision_source', 'is_selected_for_batch',
     )
     readonly_fields = fields
     autocomplete_fields = ('offer',)
@@ -57,7 +64,8 @@ class CuratedBatchItemInline(admin.TabularInline):
 class CurationRunAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'channel', 'status', 'mode', 'candidate_count',
-        'selected_count', 'schema_version', 'created_at',
+        'selected_count', 'ai_selected_count', 'deterministic_selected_count',
+        'schema_version', 'created_at',
     )
     list_filter = ('status', 'mode', 'channel')
     search_fields = ('profile_name', 'model_name', 'error_message')
@@ -73,7 +81,10 @@ class CurationRunAdmin(admin.ModelAdmin):
             'fields': ('model_provider', 'model_name', 'schema_version'),
         }),
         (_('Resultados'), {
-            'fields': ('candidate_count', 'selected_count', 'error_message'),
+            'fields': (
+                'candidate_count', 'selected_count', 'ai_selected_count',
+                'deterministic_selected_count', 'blocked_reason', 'error_message',
+            ),
         }),
         (_('Distribuição e Contexto'), {
             'classes': ('collapse',),
@@ -92,8 +103,9 @@ class CurationRunAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = (
-        'created_at', 'updated_at',
-        'candidate_count', 'selected_count', 'schema_version',
+        'created_at', 'updated_at', 'status',
+        'candidate_count', 'selected_count', 'ai_selected_count',
+        'deterministic_selected_count', 'blocked_reason', 'schema_version',
     )
 
     actions = ('marcar_concluida', 'marcar_cancelada', 'marcar_falha')
@@ -101,17 +113,17 @@ class CurationRunAdmin(admin.ModelAdmin):
     @admin.action(description='Marcar execuções selecionadas como concluídas')
     def marcar_concluida(self, request, queryset):
         _mudar_status(self, request, queryset,
-                       CurationRun.Status.COMPLETED, 'concluída')
+                       CurationRun.Status.COMPLETED, 'concluída', blocked_reason='')
 
     @admin.action(description='Cancelar execuções selecionadas')
     def marcar_cancelada(self, request, queryset):
         _mudar_status(self, request, queryset,
-                       CurationRun.Status.CANCELLED, 'cancelada')
+                       CurationRun.Status.CANCELLED, 'cancelada', blocked_reason='')
 
     @admin.action(description='Marcar execuções selecionadas como falha')
     def marcar_falha(self, request, queryset):
         _mudar_status(self, request, queryset,
-                       CurationRun.Status.FAILED, 'falha')
+                       CurationRun.Status.FAILED, 'falha', blocked_reason='')
 
 
 # ===========================================================================
@@ -122,9 +134,13 @@ class CurationRunAdmin(admin.ModelAdmin):
 class CurationDecisionAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'run', 'offer', 'marketplace_code', 'baseline_score',
-        'ai_score', 'ai_classification', 'is_selected_for_batch',
+        'ai_score', 'ai_classification', 'decision_source',
+        'is_selected_for_batch',
     )
-    list_filter = ('ai_classification', 'is_selected_for_batch', 'marketplace_code')
+    list_filter = (
+        'ai_classification', 'decision_source', 'is_selected_for_batch',
+        'marketplace_code',
+    )
     search_fields = ('offer__title', 'title_original', 'title_rewritten', 'decision_reason')
     date_hierarchy = 'created_at'
     list_select_related = ('run', 'offer')
@@ -133,7 +149,10 @@ class CurationDecisionAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (_('Identificação'), {
-            'fields': ('run', 'offer', 'marketplace_code', 'is_selected_for_batch'),
+            'fields': (
+                'run', 'offer', 'marketplace_code', 'decision_source',
+                'is_selected_for_batch',
+            ),
         }),
         (_('Score — Baseline'), {
             'fields': ('baseline_score', 'baseline_classification', 'baseline_decision'),
@@ -172,6 +191,7 @@ class CurationDecisionAdmin(admin.ModelAdmin):
         'created_at', 'updated_at',
         'risk_flags_json', 'observer_signals_json',
         'image_analysis_json', 'blacklist_terms_json', 'raw_ai_json',
+        'decision_source', 'is_selected_for_batch',
     )
 
 

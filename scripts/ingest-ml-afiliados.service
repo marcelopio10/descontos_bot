@@ -3,11 +3,11 @@ Description=descontos.bot - Ingere vendas do painel de afiliados do Mercado Livr
 
 [Service]
 Type=oneshot
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+WorkingDirectory=/home/marce/apps/descontos_bot
 # Janela de 45 dias, propositalmente sobreposta entre execuções: venda entra no
 # painel como IN_REVIEW e só resolve para APPROVED/REJECTED semanas depois. Reler
 # o passado recente é o que mantém o status correto — e a ingestão é idempotente
 # por sale_id, então reler não duplica nada.
-ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py ingest_ml_affiliate_sales --days 45
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/ingest-ml-afiliados.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/ingest-ml-afiliados.log
+ExecStart=/home/marce/apps/descontos_bot/.venv/bin/python3 manage.py ingest_ml_affiliate_sales --days 45
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/ingest-ml-afiliados.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/ingest-ml-afiliados.log

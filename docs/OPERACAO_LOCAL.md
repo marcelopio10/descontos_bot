@@ -104,6 +104,38 @@ Use em cron externo ou monitor para receber alerta:
 */15 * * * * marce bash /home/marce/descontos.bot/scripts/healthcheck.sh || echo "descontos.bot parado" | mail -s "Alerta" voce@email.com
 ```
 
+## Supervisão de entregas do WhatsApp principal
+
+O `check-observer-health.timer` é independente do scheduler e executa a cada
+hora, das 09h às 23h BRT. O alerta de distribuição considera 6 horas de
+operação sem entrega `SENT`, descontando a janela de silêncio definida em
+`apps/distribution/services/execution_window.py`. O observer mantém o limiar
+separado de 24 horas. A supervisão de entregas monitora somente
+`whatsapp_principal`, evitando alertas de canais de homologação sem uso.
+
+Instalação/atualização:
+
+```bash
+cp scripts/check-observer-health.service ~/.config/systemd/user/
+cp scripts/check-observer-health.timer ~/.config/systemd/user/
+systemctl --user daemon-reload
+systemctl --user enable --now check-observer-health.timer
+systemctl --user restart check-observer-health.timer
+```
+
+Verificação sem enviar alertas:
+
+```bash
+.venv/bin/python3 manage.py check_observer_health --hours 24 --delivery-hours 6 --channel whatsapp_principal --active-delivery-hours --dry-run
+systemctl --user show check-observer-health.timer -p ActiveState -p NextElapseUSecRealtime
+```
+
+`enabled` sozinho não comprova monitoramento: exija `ActiveState=active` e
+uma próxima execução preenchida. `healthcheck.sh` comprova apenas ciclos
+recentes, não mensagens entregues. Alertas usam o Telegram configurado em
+`OPERATOR_ALERT_*`, com fallback para `INSTAGRAM_HANDOFF_*`; aceitação pela
+API não comprova leitura pelo operador.
+
 ## Operações comuns
 
 ```bash

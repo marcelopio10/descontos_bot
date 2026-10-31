@@ -3,7 +3,7 @@ Description=descontos.bot - Encerra CurationRun presas em `running`
 
 [Service]
 Type=oneshot
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
-ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py reap_stuck_curation_runs
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/reap-curation-runs.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/reap-curation-runs.log
+WorkingDirectory=/home/marce/apps/descontos_bot
+ExecStart=/home/marce/apps/descontos_bot/.venv/bin/python3 manage.py reap_stuck_curation_runs
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/reap-curation-runs.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/reap-curation-runs.log

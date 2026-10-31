@@ -1,5 +1,6 @@
 from datetime import timedelta
 from decimal import Decimal
+from types import SimpleNamespace
 
 from django.test import TestCase
 from django.utils import timezone
@@ -8,6 +9,7 @@ from apps.curation.services.recurrence import (
     FAMILY_SPACING_FLAG,
     family_spacing_signal,
     filter_saturated_families,
+    normalize_family_key,
     recurrence_score_multiplier,
     recurrence_signal,
 )
@@ -93,6 +95,21 @@ class RecurrencePolicyTests(TestCase):
         signal = recurrence_signal(self.offer, self.channel)
         self.assertEqual(signal.successful_sends, 0)
         self.assertFalse(signal.blocked)
+
+    def test_title_fallback_uses_shared_editorial_identity(self):
+        first = SimpleNamespace(
+            produto_canonico_id='',
+            title='The Perfect Top Feminino - Oferta',
+            normalized_title='',
+        )
+        second = SimpleNamespace(
+            produto_canonico_id='',
+            title='THE-PERFECT TOP feminina | promoção',
+            normalized_title='',
+        )
+
+        self.assertEqual(normalize_family_key(first), 'title:the perfect top')
+        self.assertEqual(normalize_family_key(first), normalize_family_key(second))
 
 
 class FamilySpacingTests(TestCase):

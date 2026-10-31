@@ -304,6 +304,13 @@ def get_mercadolivre_path_item_id(path: str) -> str:
             match = None
     elif len(segments) == 3 and segments[1] == 'p':
         match = _MERCADOLIVRE_DERIVED_SEGMENT_RE.fullmatch(segments[2])
+    elif (
+        len(segments) == 4
+        and segments[2] == 'p'
+        and re.fullmatch(r'[\w.-]+', segments[1])
+        and _is_safe_mercadolivre_slug(segments[1])
+    ):
+        match = _MERCADOLIVRE_DERIVED_SEGMENT_RE.fullmatch(segments[3])
     else:
         match = None
     return f'MLB{match.group(1)}'.upper() if match else ''

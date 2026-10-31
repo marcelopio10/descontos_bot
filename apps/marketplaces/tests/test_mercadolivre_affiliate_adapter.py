@@ -19,21 +19,25 @@ class Response:
 
 class MercadoLivreAffiliateAdapterTests(SimpleTestCase):
     def test_success_returns_generated_short_url(self):
-        session = Mock()
-        session.post.return_value = Response(200, {'short_url': 'https://mercadolivre.com/sec/abc'})
-        adapter = ExistingAffiliateLinkEngineAdapter(
-            affiliate_tag='tag',
-            ml_cookie='cookie',
-            ml_csrf='csrf',
-            session_factory=lambda: session,
-        )
+        for short_url in (
+            'https://mercadolivre.com/sec/abc', 'https://meli.la/Abc1234',
+        ):
+            with self.subTest(short_url=short_url):
+                session = Mock()
+                session.post.return_value = Response(200, {'short_url': short_url})
+                adapter = ExistingAffiliateLinkEngineAdapter(
+                    affiliate_tag='tag',
+                    ml_cookie='cookie',
+                    ml_csrf='csrf',
+                    session_factory=lambda: session,
+                )
 
-        result = adapter.generate_result('https://produto.mercadolivre.com.br/MLB-1')
+                result = adapter.generate_result('https://produto.mercadolivre.com.br/MLB-1')
 
-        self.assertTrue(result.generated)
-        self.assertEqual(result.url, 'https://mercadolivre.com/sec/abc')
-        self.assertEqual(session.post.call_args.kwargs['json']['url'], 'https://produto.mercadolivre.com.br/MLB-1')
-        self.assertFalse(session.post.call_args.kwargs['allow_redirects'])
+                self.assertTrue(result.generated)
+                self.assertEqual(result.url, short_url)
+                self.assertEqual(session.post.call_args.kwargs['json']['url'], 'https://produto.mercadolivre.com.br/MLB-1')
+                self.assertFalse(session.post.call_args.kwargs['allow_redirects'])
 
     def test_missing_credentials_returns_original_and_alerts_once(self):
         alert = Mock()
@@ -77,6 +81,14 @@ class MercadoLivreAffiliateAdapterTests(SimpleTestCase):
             'https://mercadolivre.com/sec/%2e%2e%2fevil',
             '\nhttps://mercadolivre.com/sec/abc',
             'https://mercadolivre.com/sec/abc\t',
+            'https://meli.la/',
+            'https://meli.la/..',
+            'https://meli.la/abc/extra',
+            'https://meli.la/abc?next=https://evil.example',
+            'https://meli.la/abc#fragment',
+            'https://evil.meli.la/abc',
+            'https://user:pass@meli.la/abc',
+            'https://meli.la:443/abc',
         ):
             with self.subTest(short_url=short_url):
                 session = Mock()

@@ -45,6 +45,13 @@ class ProductFamilyKeyTests(SimpleTestCase):
             product_family_key('Mochila Linear adidas'),
         )
 
+    def test_the_perfect_top_preserva_formato_atual_da_familia(self):
+        primeira = product_family_key('The Perfect Top Feminino - Oferta')
+        segunda = product_family_key('THE-PERFECT TOP feminina | promoção')
+
+        self.assertEqual(primeira, 'perfect')
+        self.assertEqual(primeira, segunda)
+
     def test_titulo_sem_tipo_identificavel_retorna_vazio(self):
         """Família vazia significa 'sem restrição'. Se retornasse uma família
         comum, títulos ilegíveis bloqueariam uns aos outros em cadeia."""

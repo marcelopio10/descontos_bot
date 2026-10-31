@@ -4,7 +4,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
-ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/scripts/backup_db.sh
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/backup-db.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/backup-db.log
+WorkingDirectory=/home/marce/apps/descontos_bot
+ExecStart=/home/marce/apps/descontos_bot/scripts/backup_db.sh
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/backup-db.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/backup-db.log

@@ -43,6 +43,7 @@ class Command(BaseCommand):
             'total_valid': 0,
             'total_created': 0,
             'total_updated': 0,
+            'total_discarded': 0,
         }
 
         self.stdout.write('Início da captura de ofertas nos marketplaces.')
@@ -55,6 +56,7 @@ class Command(BaseCommand):
             summary['total_valid'] += result.total_valid
             summary['total_created'] += result.total_created
             summary['total_updated'] += result.total_updated
+            summary['total_discarded'] += result.total_discarded
 
             if run.status in (ScrapingRun.RunStatus.FAILED, ScrapingRun.RunStatus.PARTIAL_FAILED):
                 has_failure = True
@@ -62,9 +64,10 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS(
                     (
-                        f'{marketplace.name}: {run.status}; '
+                        f'{marketplace.name}: provider={run.provider}; status={run.status}; '
                         f'coletadas={result.total_collected}; '
                         f'válidas={result.total_valid}; '
+                        f'descartadas={result.total_discarded}; '
                         f'criadas={result.total_created}; '
                         f'atualizadas={result.total_updated}'
                     ),
@@ -79,6 +82,7 @@ class Command(BaseCommand):
                 f'processadas={summary["total_valid"]}; '
                 f'novas={summary["total_created"]}; '
                 f'atualizadas={summary["total_updated"]}; '
+                f'descartadas={summary["total_discarded"]}; '
                 f'coletadas={summary["total_collected"]}'
             ),
         )

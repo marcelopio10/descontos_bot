@@ -124,21 +124,8 @@
   <script>
     (function () {
       var GROUP_URL = 'https://chat.whatsapp.com/EKf4vnNG8MdLurY9xKrqAm';
-      var DELAY_MS = 2500;
-
       var noteEl = document.getElementById('joinNote');
-      // ?stay=1 desliga o redirect automático — útil para revisão de anúncio
-      // e para conferir a página sem sair dela.
-      var stay = new URLSearchParams(window.location.search).get('stay');
-
-      if (stay === '1') {
-        if (noteEl) noteEl.textContent = 'Toque no botão acima para entrar no grupo.';
-        return;
-      }
-
-      window.setTimeout(function () {
-        window.location.href = GROUP_URL;
-      }, DELAY_MS);
+      if (noteEl) noteEl.textContent = 'Toque no botão acima para entrar no grupo.';
     })();
   </script>
 </body>

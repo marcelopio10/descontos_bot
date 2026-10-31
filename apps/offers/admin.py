@@ -44,6 +44,8 @@ class OfferAdmin(admin.ModelAdmin):
         'discount_pct',
         'review_rating',
         'review_count',
+        'collection_source',
+        'seller_name',
         'quality_score_column',
         'classification_column',
         'is_active',
@@ -60,6 +62,9 @@ class OfferAdmin(admin.ModelAdmin):
         'external_id',
         'offer_hash',
         'product_url',
+        'seller_id',
+        'seller_name',
+        'collection_source',
     )
     readonly_fields = (
         'created_at',

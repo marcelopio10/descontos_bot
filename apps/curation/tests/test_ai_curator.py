@@ -93,6 +93,16 @@ class AICuratorTests(TestCase):
         self.assertEqual(run.status, CurationRun.Status.COMPLETED)
         self.assertEqual(run.candidate_count, 9)
         self.assertEqual(run.selected_count, 6)
+        self.assertEqual(run.ai_selected_count, 6)
+        self.assertEqual(run.deterministic_selected_count, 0)
+        self.assertEqual(
+            CurationDecision.objects.filter(
+                run=run,
+                decision_source=CurationDecision.DecisionSource.AI,
+                is_selected_for_batch=True,
+            ).count(),
+            run.ai_selected_count,
+        )
         self.assertEqual(CurationDecision.objects.filter(run=run).count(), 9)
         self.assertIsNotNone(batch)
         self.assertEqual(batch.status, CuratedBatch.Status.READY)

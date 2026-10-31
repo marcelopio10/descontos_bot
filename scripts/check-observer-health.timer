@@ -2,12 +2,10 @@
 Description=descontos.bot - Disparo periódico do healthcheck do observer/canais
 
 [Timer]
-# Design escolhido: timer independente do market-intel.timer, rodando a cada
-# 6h. Isso garante que o alerta de "observer atrasado" ou "canal sem entrega"
-# dispara mesmo se o próprio market-intel.timer/.service estiver falhando
-# silenciosamente (não depende do sucesso do coletor para ser executado).
-OnBootSec=10min
-OnUnitActiveSec=6h
+# Supervisão independente do coletor e do scheduler. O calendário persistente
+# recupera uma execução perdida após desligamento. Fora do silêncio noturno,
+# checa a cada hora, com tempo para a retomada normal do primeiro ciclo.
+OnCalendar=*-*-* 09..23:00:00 America/Sao_Paulo
 Persistent=true
 Unit=check-observer-health.service
 

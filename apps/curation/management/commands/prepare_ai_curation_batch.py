@@ -13,6 +13,7 @@ from apps.curation.services.hermes_runner import HermesProfileRunner
 from apps.curation.services.image_processing import process_selected_batch_images
 from apps.curation.services.observer_context import assert_sanitized_context, build_observer_context
 from apps.curation.services.product_family import offer_family_key
+from apps.curation.services.quality_score import quality_score_breakdown
 from apps.curation.services.recurrence import filter_blocked_recurrence, filter_saturated_families
 from apps.curation.services.selector import _eligible_offers, get_selection_config
 from apps.distribution.models import SocialChannel
@@ -59,9 +60,6 @@ class Command(BaseCommand):
             mode = CurationRun.Mode.SHADOW
 
         channel = self._get_channel(options['channel'])
-        offers = self._get_candidates(channel=channel, limit=candidate_limit)
-        if not offers:
-            raise CommandError(f'Nenhuma oferta elegível encontrada para channel={channel.code}.')
 
         # Sprint 6 / Tarefa 6.2 (achado P3): antes disto era um dict estático
         # (nunca refletia o que o observer via de fato); agora é
@@ -92,6 +90,14 @@ class Command(BaseCommand):
         # pergunta de cadência de chamadas à API Shopee aqui — decisão futura
         # do dono, fora do escopo desta tarefa.
         market_radar = collect_radar_mercado().as_dict()
+        offers = self._get_candidates(
+            channel=channel,
+            limit=candidate_limit,
+            observer_context=observer_context,
+            market_radar=market_radar,
+        )
+        if not offers:
+            raise CommandError(f'Nenhuma oferta elegível encontrada para channel={channel.code}.')
 
         runner = None
         profile_name = 'mock'
@@ -157,12 +163,29 @@ class Command(BaseCommand):
         except SocialChannel.DoesNotExist as exc:
             raise CommandError(f'Canal não encontrado: {code}') from exc
 
-    def _get_candidates(self, *, channel: SocialChannel, limit: int):
+    def _get_candidates(
+        self, *, channel: SocialChannel, limit: int,
+        observer_context=None, market_radar=None,
+    ):
         config = get_selection_config()
         queryset = _eligible_offers(channel, config).select_related('marketplace', 'category')
         recent_ok = filter_blocked_recurrence(queryset, channel)
+        evaluated = []
+        for offer in filter_saturated_families(recent_ok, channel):
+            breakdown = quality_score_breakdown(
+                offer, observer_context=observer_context, market_radar=market_radar,
+            )
+            if breakdown.score >= config.min_quality_score:
+                evaluated.append((offer, breakdown.score))
+        # Desconto anunciado não deve ocupar o pool com itens de nota fraca.
+        # Avaliar antes do corte também preserva boas ofertas no fim da consulta.
+        evaluated.sort(
+            key=lambda item: (
+                -item[1], -float(item[0].discount_pct or 0), item[0].id,
+            ),
+        )
         return _balanced_marketplace_candidates(
-            filter_saturated_families(recent_ok, channel),
+            [offer for offer, _score in evaluated],
             limit=limit,
         )
 

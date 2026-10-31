@@ -53,6 +53,17 @@ O script sobe um servidor HTTP local temporário para validar as rotas públicas
 - [ ] `dry_run` não envia mensagens reais.
 - [ ] Credenciais continuam em `.env`, nunca em código ou banco em texto claro.
 - [ ] Scrapers preservam sessão HTTP persistente, headers realistas, delays conservadores e detecção de CAPTCHA.
+- [ ] A coleta padrão do Mercado Livre usa a API pública; o scraper legado continua disponível somente para rollback.
+- [ ] API ML usa `/items/bulk?ids=...` em lotes de até 20 e não depende de `/items?ids=...` em descontinuação.
+- [ ] 401/403 falham fechado; 429 respeita `Retry-After`; 5xx/timeout usam backoff com jitter.
+- [ ] `Offer.product_url` é persistido antes do motor afiliado e permanece separado de `affiliate_url`.
+- [ ] `ScrapingItemResult` registra descarte, falha de preço/vendedor e falha do motor por item.
+- [ ] Reprocessamento reconcilia permalink derivado com permalink canônico sem criar nova `Offer`.
+- [ ] Falha entre persistência e afiliado mantém `product_url`, `affiliate_failed` e `error_message` para retry.
+- [ ] `trust_hint=False` não força categoria no classificador; `cycle_limit` é aplicado no pipeline API.
+- [ ] 404 individual do bulk é auditado em `ScrapingItemResult`.
+- [ ] Gate externo registra HTTP 401 sem credencial e HTTP 200 com OAuth autorizado.
+- [ ] Nenhum token, cookie ou secret aparece em logs, fixtures ou Git.
 
 ## Amazon Associates
 

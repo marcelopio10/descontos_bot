@@ -1,10 +1,14 @@
-from django.test import TestCase
+from django.test import SimpleTestCase, TestCase
 
 from apps.marketplaces.models import Marketplace
 from apps.offers.services.normalizer import (
     OfferNormalizationError,
     build_produto_canonico_id,
     normalize_offer,
+)
+from apps.offers.services.title_identity import (
+    normalize_editorial_title,
+    strong_title_similarity,
 )
 
 
@@ -205,3 +209,69 @@ class ProdutoCanonicoIdTests(TestCase):
 
     def test_build_produto_canonico_id_returns_empty_without_any_identifier(self):
         self.assertEqual(build_produto_canonico_id('mercadolivre', '', ''), '')
+
+
+class EditorialTitleIdentityTests(SimpleTestCase):
+    def test_normalization_removes_formatting_and_promotional_noise(self):
+        self.assertEqual(
+            normalize_editorial_title(
+                '  OFERTA: Tênis—Feminino, com FRETE GRÁTIS!  ',
+            ),
+            'tenis',
+        )
+
+    def test_normalization_removes_invisible_soft_hyphen_without_splitting_word(self):
+        first = 'Micro\u00adondas Philco 20l Preto'
+        second = 'Microondas Philco 20l Preto'
+
+        self.assertEqual(
+            normalize_editorial_title(first),
+            'microondas philco 20l preto',
+        )
+        self.assertTrue(strong_title_similarity(first, second))
+
+    def test_the_perfect_top_collides_even_with_distinct_asins(self):
+        marketplace = Marketplace(
+            name='Amazon',
+            code='amazon',
+            base_url='https://www.amazon.com.br',
+        )
+        first = normalize_offer(marketplace, {
+            'asin': 'B0DZ34LZQB',
+            'nome': 'The Perfect Top Feminino - Oferta',
+            'preco': '99,90',
+            'link_direto': 'https://www.amazon.com.br/dp/B0DZ34LZQB',
+        })
+        second = normalize_offer(marketplace, {
+            'asin': 'B0DZ334MCH',
+            'nome': 'THE-PERFECT TOP feminina | promoção',
+            'preco': '89,90',
+            'link_direto': 'https://www.amazon.com.br/dp/B0DZ334MCH',
+        })
+
+        self.assertNotEqual(first.produto_canonico_id, second.produto_canonico_id)
+        self.assertTrue(strong_title_similarity(first.title, second.title))
+
+    def test_different_products_do_not_share_editorial_identity(self):
+        self.assertFalse(
+            strong_title_similarity(
+                'The Perfect Top Feminino - Oferta',
+                'Tênis Olympikus Corre Trilha 2 Masculino',
+            ),
+        )
+
+    def test_jaccard_similarity_keeps_existing_threshold_behavior(self):
+        self.assertTrue(
+            strong_title_similarity(
+                'Camisa Torcedor 1.1 Tailand Amarela 2026',
+                'Camisa Torcedor Tailand 1.1 Amarela 2026',
+            ),
+        )
+
+    def test_jaccard_requires_four_tokens_on_both_sides(self):
+        self.assertFalse(
+            strong_title_similarity(
+                'Fone Bluetooth JBL',
+                'Fone Bluetooth JBL Pro',
+            ),
+        )

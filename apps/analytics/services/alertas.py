@@ -86,10 +86,13 @@ def alertar_curadoria_falhas_consecutivas(channel_code: str, run_id: int | None,
     )
 
 
-def alertar_canal_sem_entrega(channel_code: str, horas: int) -> None:
+def alertar_canal_sem_entrega(
+    channel_code: str, horas: int, *, active_hours: bool = False,
+) -> None:
     """Dispara quando um canal habilitado fica mais de `horas`h sem nenhuma entrega enviada."""
+    period = 'h de operação (janela de silêncio descontada)' if active_hours else 'h'
     enviar_alerta_operador(
-        f'Canal "{channel_code}" está há mais de {horas}h sem nenhuma entrega enviada.',
+        f'Canal "{channel_code}" está há mais de {horas}{period} sem nenhuma entrega enviada.',
         categoria='canal_sem_entrega',
     )
 

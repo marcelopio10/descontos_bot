@@ -334,12 +334,33 @@ class SocialCardScrapingTests(SimpleTestCase):
 
         self.assertIsNone(scraper.scrape_social_card('https://meli.la/abc'))
 
-    def test_href_com_query_ou_controle_codificado_e_descartado_antes_do_motor(self):
+    def test_href_canonicaliza_tracking_mas_rejeita_controle_antes_do_motor(self):
+        for href in (
+            'https://produto.mercadolivre.com.br/MLB-5555555555?',
+            'https://produto.mercadolivre.com.br/MLB-5555555555#frag',
+            'https://produto.mercadolivre.com.br/MLB-5555555555?searchVariation=123#tracking',
+            'https://www.mercadolivre.com.br/produto-teste/p/MLB5555555555?pdp_filters=item_id:MLB9999999999',
+        ):
+            with self.subTest(href=href):
+                card = self._card('Produto teste', 'MLB-5555555555')
+                card['href'] = href
+                scraper = self._scraper(self._html('Produto teste', [card]))
+                payload = scraper.scrape_social_card('https://meli.la/abc')
+
+                self.assertIsNotNone(payload)
+                self.assertEqual(payload['id'], 'MLB5555555555')
+                self.assertNotIn('?', payload['link_direto'])
+                self.assertNotIn('#', payload['link_direto'])
+                scraper._gerar_link_afiliado_oficial.assert_called_once_with(
+                    payload['link_direto'],
+                )
+
         for href in (
             'https://produto.mercadolivre.com.br/MLB-5555555555?x=\n',
             'https://produto.mercadolivre.com.br/MLB-5555555555?x=%0A',
-            'https://produto.mercadolivre.com.br/MLB-5555555555?',
-            'https://produto.mercadolivre.com.br/MLB-5555555555#frag',
+            'https://www.mercadolivre.com.br/../p/MLB5555555555',
+            'https://www.mercadolivre.com.br/outro-MLB9999999999/p/MLB5555555555',
+            'https://evil.example/produto/p/MLB5555555555?tracking=1',
         ):
             with self.subTest(href=href):
                 card = self._card('Produto perigoso', 'MLB-5555555555')
@@ -347,3 +368,4 @@ class SocialCardScrapingTests(SimpleTestCase):
                 scraper = self._scraper(self._html('Produto perigoso', [card]))
 
                 self.assertIsNone(scraper.scrape_social_card('https://meli.la/abc'))
+                scraper._gerar_link_afiliado_oficial.assert_not_called()

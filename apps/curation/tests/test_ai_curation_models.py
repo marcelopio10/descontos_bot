@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.test import TestCase
 from django.utils import timezone
 
+from apps.curation.admin import CurationDecisionAdmin, CurationRunAdmin
 from apps.curation.models import (
     CuratedBatch,
     CuratedBatchItem,
@@ -127,3 +128,49 @@ class AICurationModelTests(TestCase):
 
         self.assertEqual(term.status, CurationBlacklistTerm.Status.ACTIVE)
         self.assertEqual(run.blacklist_terms.get(), term)
+
+    def test_run_persists_blocked_status_reason_and_selection_sources(self):
+        run = CurationRun.objects.create(
+            channel=self.channel,
+            status=CurationRun.Status.BLOCKED,
+            blocked_reason='minimum_not_met',
+            candidate_count=4,
+            selected_count=0,
+            ai_selected_count=0,
+            deterministic_selected_count=0,
+        )
+        decision = CurationDecision.objects.create(
+            run=run,
+            offer=self.offer,
+            decision_source=CurationDecision.DecisionSource.DETERMINISTIC_COMPLETION,
+        )
+
+        run.refresh_from_db()
+        decision.refresh_from_db()
+
+        self.assertEqual(run.status, CurationRun.Status.BLOCKED)
+        self.assertEqual(run.blocked_reason, 'minimum_not_met')
+        self.assertEqual(run.ai_selected_count, 0)
+        self.assertEqual(run.deterministic_selected_count, 0)
+        self.assertEqual(
+            decision.decision_source,
+            CurationDecision.DecisionSource.DETERMINISTIC_COMPLETION,
+        )
+
+    def test_new_run_and_decision_use_auditable_defaults(self):
+        run = CurationRun.objects.create(channel=self.channel)
+        decision = CurationDecision.objects.create(run=run, offer=self.offer)
+
+        self.assertEqual(run.blocked_reason, '')
+        self.assertEqual(run.ai_selected_count, 0)
+        self.assertEqual(run.deterministic_selected_count, 0)
+        self.assertEqual(decision.decision_source, CurationDecision.DecisionSource.AI)
+
+    def test_admin_keeps_audit_state_read_only(self):
+        self.assertIn('status', CurationRunAdmin.readonly_fields)
+        self.assertIn('blocked_reason', CurationRunAdmin.readonly_fields)
+        self.assertIn('decision_source', CurationDecisionAdmin.readonly_fields)
+        self.assertIn(
+            'is_selected_for_batch',
+            CurationDecisionAdmin.readonly_fields,
+        )

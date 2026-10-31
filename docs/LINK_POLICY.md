@@ -81,6 +81,12 @@ Registro da decisão (Sprint 4, Tarefa 4.3, `docs/PLANO_REFATORACAO_POS_DIAGNOST
 
 ## Onde está implementado
 
+Para Mercado Livre, `Offer.product_url` é sempre o permalink original persistido
+antes da chamada do motor afiliado. `Offer.affiliate_url` só recebe o resultado
+retornado pelo motor existente; fallback ao original não é armazenado como se
+fosse afiliado. O consumidor continua usando `Offer.affiliate_link` e as funções
+de `apps/analytics/services/link_builder.py`.
+
 | Função | Arquivo | Uso |
 |---|---|---|
 | `resolve_destination_url(offer)` | `apps/analytics/services/link_builder.py` | Função central. Retorna URL base por marketplace, sem UTMs |

@@ -4,6 +4,7 @@ from decimal import Decimal
 import re
 from typing import Any
 
+from apps.curation.services.book_detection import detect_book_offer
 from apps.curation.services.product_family import offer_family_key
 from apps.curation.services.quality_score import quality_score_breakdown
 from apps.curation.services.selector import SelectionConfig, _eligible_offers, get_selection_config
@@ -113,20 +114,7 @@ def _editorial_flags(offer: Offer) -> list[str]:
 
 
 def _is_low_priority_book(offer: Offer) -> bool:
-    text = ' '.join(
-        str(part or '')
-        for part in (
-            offer.title,
-            offer.normalized_title,
-            offer.category.code if offer.category_id else '',
-            offer.category.name if offer.category_id else '',
-            (offer.raw_payload or {}).get('source_label'),
-            (offer.raw_payload or {}).get('category_hint'),
-        )
-    ).lower()
-    return bool(
-        re.search(r'\b(livro|livros|capa comum|capa dura|kindle|ebook|e-book)\b', text)
-    )
+    return detect_book_offer(offer).is_book
 
 
 def _offer_text(offer: Offer) -> str:

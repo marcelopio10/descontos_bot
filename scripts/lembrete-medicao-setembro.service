@@ -8,10 +8,10 @@ After=ingest-ml-afiliados.service
 
 [Service]
 Type=oneshot
-WorkingDirectory=/mnt/c/Users/marce/Documents/Projetos/descontos.bot
+WorkingDirectory=/home/marce/apps/descontos_bot
 # Janela de 6 semanas cobre setembro inteiro mais folga de maturidade: venda
 # entra no painel como IN_REVIEW e leva semanas para resolver, então ler só o mês
 # corrido subestimaria setembro contra meses já fechados.
-ExecStart=/mnt/c/Users/marce/Documents/Projetos/descontos.bot/.venv/bin/python3 manage.py relatorio_receita_semanal --weeks 6 --alert --nota "Fechamento da Onda 1: comparar a comissão por mil envios abaixo com 14,09 (julho) e 31,79 (agosto). A faixa de preço reaberta entrou em producao em 23/08. Lembre da maturidade: o que estiver IN_REVIEW ainda vai virar aprovado."
-StandardOutput=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/lembrete-medicao-setembro.log
-StandardError=append:/mnt/c/Users/marce/Documents/Projetos/descontos.bot/logs/lembrete-medicao-setembro.log
+ExecStart=/home/marce/apps/descontos_bot/.venv/bin/python3 manage.py relatorio_receita_semanal --weeks 6 --alert --nota "Fechamento da Onda 1: comparar a comissão por mil envios abaixo com 14,09 (julho) e 31,79 (agosto). A faixa de preço reaberta entrou em producao em 23/08. Lembre da maturidade: o que estiver IN_REVIEW ainda vai virar aprovado."
+StandardOutput=append:/home/marce/apps/descontos_bot/logs/lembrete-medicao-setembro.log
+StandardError=append:/home/marce/apps/descontos_bot/logs/lembrete-medicao-setembro.log

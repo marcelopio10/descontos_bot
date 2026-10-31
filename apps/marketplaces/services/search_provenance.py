@@ -6,7 +6,7 @@ from typing import Any
 # concorrente e resolvido pelo radar. Como as demais, é só rótulo de origem —
 # nada aqui identifica grupo ou remetente, e os campos de identidade continuam
 # sendo removidos em `build_sanitized_raw_payload`.
-ALLOWED_SEARCH_SOURCES = frozenset({'radar_brand', 'radar_category', 'radar_price_band', 'radar_coupon_signal', 'priority_catalog', 'generic_fallback', 'competitor_radar', 'category_target', 'api_fallback'})
+ALLOWED_SEARCH_SOURCES = frozenset({'radar_brand', 'radar_category', 'radar_price_band', 'radar_coupon_signal', 'priority_catalog', 'generic_fallback', 'competitor_radar', 'category_target', 'api_fallback', 'affiliate_hub'})
 
 
 def sanitize_search_provenance(value: dict[str, Any] | None) -> dict[str, Any]:

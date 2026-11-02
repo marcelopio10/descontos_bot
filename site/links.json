@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-02T17:00:11.861342+00:00",
+  "generated_at": "2026-11-02T18:49:21.369150+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -34,16 +34,6 @@
       "tracked_url": "https://s.shopee.com.br/30pEfMv2Ib?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16830"
     },
     {
-      "id": 17544,
-      "title": "Kit 400 Toalhas Umedecidas Chameguinho Baby Lenço Umedecido para Bebê Higiene Infantil",
-      "current_price": "24.80",
-      "original_price": "49.60",
-      "discount_pct": "50.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lf-msihol3qbu9z7c",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/4Ve3PcyzGQ?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17544"
-    },
-    {
       "id": 17462,
       "title": "Camiseta Masculina Canelada Slim Fit Estilo Americana Ribana Justa ao Corpo Streetwear Rapper",
       "current_price": "16.99",
@@ -52,6 +42,16 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-820lh-ms5jkzcv0wlgda",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/1W0PqoihUs?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17462"
+    },
+    {
+      "id": 18184,
+      "title": "Barbante TETELEO Nº 6 600 Metros | 85% Algodão Premium | Antialérgico | Sem Poeira | Ideal para Crochê, Tricô, Tapeçaria",
+      "current_price": "22.90",
+      "original_price": "40.18",
+      "discount_pct": "43.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820m5-mr3cu08aqtxj78",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/3qOME6OhMS?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18184"
     }
   ]
 }

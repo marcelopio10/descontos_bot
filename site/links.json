@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-03T11:05:26.021793+00:00",
+  "generated_at": "2026-11-03T17:04:39.238469+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 18961,
+      "title": "Fantasia Infantil Masculina Herói com Máscara Roupa Curta para Festa",
+      "current_price": "35.99",
+      "original_price": "70.57",
+      "discount_pct": "49.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-81z1k-meeurxzmjl6oad",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/7KyGO1cZ2v?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18961"
+    },
     {
       "id": 17965,
       "title": "Blusa Regata Alcinha Casual Verão Confortável Suplex Poliamida Com Forro",
@@ -34,24 +44,14 @@
       "tracked_url": "https://s.shopee.com.br/8AXM5VOhSX?utm_source=instagram&utm_medium=bio&utm_campaign=offer_16830"
     },
     {
-      "id": 17462,
-      "title": "Camiseta Masculina Canelada Slim Fit Estilo Americana Ribana Justa ao Corpo Streetwear Rapper",
-      "current_price": "16.99",
-      "original_price": "34.67",
-      "discount_pct": "51.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lh-ms5jkzcv0wlgda",
+      "id": 18960,
+      "title": "KIT COM 10 Grampos Presilha de Patinhos Pato Clip AmareloL",
+      "current_price": "10.00",
+      "original_price": "20.00",
+      "discount_pct": "50.00",
+      "image_url": "https://cf.shopee.com.br/file/sg-11134201-824gm-meq18wrw29du45",
       "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/1W0PqoihUs?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17462"
-    },
-    {
-      "id": 17039,
-      "title": "Legging Suplex Fitness Pronta Entrega Zero Transparência",
-      "current_price": "21.99",
-      "original_price": "34.90",
-      "discount_pct": "37.00",
-      "image_url": "https://cf.shopee.com.br/file/f6f75b5192f765859036093f8c6086e8",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/7VHfIHW7RA?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17039"
+      "tracked_url": "https://s.shopee.com.br/50aLbjuB77?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18960"
     }
   ]
 }

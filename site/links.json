@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-04T20:37:16.505765+00:00",
+  "generated_at": "2026-11-04T22:53:21.624091+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,6 +12,16 @@
       "image_url": "https://cf.shopee.com.br/file/br-11134207-81ztc-mjj7whhr045f82",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/20wlfcVQ7j?utm_source=instagram&utm_medium=bio&utm_campaign=offer_18622"
+    },
+    {
+      "id": 19054,
+      "title": "Palmilha Ortopédica 4D Anatômica Alto Conforto Tênis Sapatos",
+      "current_price": "29.99",
+      "original_price": "49.98",
+      "discount_pct": "40.00",
+      "image_url": "https://cf.shopee.com.br/file/br-11134207-820l8-mp8rytlm90cl8c",
+      "marketplace_code": "shopee",
+      "tracked_url": "https://s.shopee.com.br/AKbsJQFgRT?utm_source=instagram&utm_medium=bio&utm_campaign=offer_19054"
     },
     {
       "id": 19053,
@@ -42,16 +52,6 @@
       "image_url": "https://cf.shopee.com.br/file/sg-11134201-7rd4b-lvcaur2vs57y97",
       "marketplace_code": "shopee",
       "tracked_url": "https://s.shopee.com.br/2gCRBKrjpt?utm_source=instagram&utm_medium=bio&utm_campaign=offer_12388"
-    },
-    {
-      "id": 17965,
-      "title": "Blusa Regata Alcinha Casual Verão Confortável Suplex Poliamida Com Forro",
-      "current_price": "16.95",
-      "original_price": "33.90",
-      "discount_pct": "50.00",
-      "image_url": "https://cf.shopee.com.br/file/br-11134207-820lh-mrgp2tovku115a",
-      "marketplace_code": "shopee",
-      "tracked_url": "https://s.shopee.com.br/9V2mnUm1nK?utm_source=instagram&utm_medium=bio&utm_campaign=offer_17965"
     }
   ]
 }

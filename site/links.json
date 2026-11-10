@@ -1,27 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-09T22:02:10.871313+00:00",
+  "generated_at": "2026-11-10T00:04:25.790793+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20228,
-      "title": "Tênis Puma Rebound V6 Low Bdp Moda Casual Masculino",
-      "current_price": "234.00",
-      "original_price": "399.00",
-      "discount_pct": "41.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_949728-MLB118566610273_102026-V-tnis-puma-rebound-v6-low-bdp-moda-casual-masculino.webp",
+      "id": 20245,
+      "title": "Auxiliar de Partida e Compressor de Ar Portátil Floots com Lanterna LED e Power Bank para Carro, Moto e Bicicleta",
+      "current_price": "132.00",
+      "original_price": "390.00",
+      "discount_pct": "65.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_850643-MLA118386869375_092026-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/322Wod4?matt_word=dbot_ig_bio_20228&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20228"
-    },
-    {
-      "id": 20223,
-      "title": "Fritadeira Air Fryer Dako 5 Litros Preto/inox Com Painel Analógico E Potência De 1700w",
-      "current_price": "199.00",
-      "original_price": "499.00",
-      "discount_pct": "59.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_772794-MLA100038572573_122025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1yzgBj3?matt_word=dbot_ig_bio_20223&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20223"
+      "tracked_url": "https://meli.la/2sc9Hyw?matt_word=dbot_ig_bio_20245&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20245"
     },
     {
       "id": 20219,
@@ -34,24 +24,34 @@
       "tracked_url": "https://meli.la/1aSeeUH?matt_word=dbot_ig_bio_20219&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20219"
     },
     {
-      "id": 20172,
-      "title": "Lanterna A Verdadeira Mais Forte Do Mundo Tática Alcance 3km Super Potente Recarregável Led Alta Potência Zoom Telescópico Usb-c Profissional Militar Camping Pesca Trilha Emergência",
-      "current_price": "59.00",
-      "original_price": "249.00",
-      "discount_pct": "76.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_711699-MLA111577220144_062026-AB.webp",
+      "id": 20250,
+      "title": "Conjunto Eudora Rouge - Mousse De Banho 150ml + Eau De Parfum 35ml",
+      "current_price": "90.00",
+      "original_price": "164.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_886336-MLA96997469180_112025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/23JR15N?matt_word=dbot_ig_bio_20172&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20172"
+      "tracked_url": "https://meli.la/13Gn2TW?matt_word=dbot_ig_bio_20250&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20250"
     },
     {
-      "id": 7933,
-      "title": "Máscara Wella Invigo Nutri-enrich 150ml",
-      "current_price": "84.00",
-      "original_price": "137.00",
-      "discount_pct": "38.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_893611-MLA108501099291_032026-AB.webp",
+      "id": 20243,
+      "title": "Camiseta Esportiva Solta Listras Reflexivas Estampadas",
+      "current_price": "33.00",
+      "original_price": "54.00",
+      "discount_pct": "39.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_967124-MLB91861712521_092025-AB-camiseta-esportiva-solta-listras-reflexivas-estampadas.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2wSau4p?matt_word=dbot_ig_bio_7933&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7933"
+      "tracked_url": "https://meli.la/1pGoEB3?matt_word=dbot_ig_bio_20243&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20243"
+    },
+    {
+      "id": 20249,
+      "title": "Wella Nutri Enrich Invigo Shampoo 1l",
+      "current_price": "176.00",
+      "original_price": "234.00",
+      "discount_pct": "24.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_676533-MLA99899884655_112025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/22nhnKz?matt_word=dbot_ig_bio_20249&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20249"
     }
   ]
 }

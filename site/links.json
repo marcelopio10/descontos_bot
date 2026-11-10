@@ -1,57 +1,47 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-10T11:06:12.919885+00:00",
+  "generated_at": "2026-11-10T13:28:37.942700+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20278,
-      "title": "Tênis Masculino Vs Pace 2.0 adidas Ftwwht/cblack/ftwwht Liso",
-      "current_price": "208.00",
-      "original_price": "349.00",
+      "id": 20306,
+      "title": "Perfume Masculino Nautica Voyage Eau de Toilette 100ml",
+      "current_price": "98.00",
+      "original_price": "199.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_805121-MLA116601953740_092026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1ReyaWG?matt_word=dbot_ig_bio_20306&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20306"
+    },
+    {
+      "id": 20274,
+      "title": "Kit Cronograma Capilar Wella Fios Perfeitos 3 Produtos",
+      "current_price": "278.00",
+      "original_price": "465.00",
       "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_797188-MLA99509506250_112025-O.webp",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_756359-MLA105269808213_012026-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1FznpjK?matt_word=dbot_ig_bio_20278&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20278"
+      "tracked_url": "https://meli.la/1VfnyBD?matt_word=dbot_ig_bio_20274&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20274"
     },
     {
-      "id": 20283,
-      "title": "Kit Shampoo + Condicionador 300ml + Másc 2x1 500 g - Arvensis",
-      "current_price": "150.00",
-      "original_price": "458.00",
-      "discount_pct": "67.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_867011-MLA99332816488_112025-O.webp",
+      "id": 20273,
+      "title": "Kit Nuti-enrich Duo - 2 L",
+      "current_price": "241.00",
+      "original_price": "446.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_949833-MLA113197262267_062026-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1pPstVF?matt_word=dbot_ig_bio_20283&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20283"
+      "tracked_url": "https://meli.la/2Qm13KC?matt_word=dbot_ig_bio_20273&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20273"
     },
     {
-      "id": 20281,
-      "title": "BULE TÉRMICO 1000 ML CASSELBECK OSTER - CORPO EM AÇO INOXIDÁVEL, ALÇA EM BAQUELITE ANTITÉRMICO, BICO DOSADOR COM GATILHO DE LIBERAÇÃO",
-      "current_price": "65.00",
-      "original_price": "233.00",
-      "discount_pct": "71.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_660324-MLA100005059671_112025-O.webp",
+      "id": 20305,
+      "title": "Camisa Térmica Voker Segunda Pele Proteção Solar Uv Dry Fit",
+      "current_price": "33.00",
+      "original_price": "59.00",
+      "discount_pct": "43.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_685443-MLB95950159286_102025-AB-camisa-termica-voker-segunda-pele-proteco-solar-uv-dry-fit.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/14dLUJ6?matt_word=dbot_ig_bio_20281&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20281"
-    },
-    {
-      "id": 20279,
-      "title": "Blusa Suéter Masculina Fio Casaco Gola Redonda Canelada",
-      "current_price": "14.00",
-      "original_price": "62.00",
-      "discount_pct": "76.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_980354-MLB112860028254_072026-V-blusa-sueter-masculina-fio-casaco-gola-redonda-canelada.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2AiWtfK?matt_word=dbot_ig_bio_20279&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20279"
-    },
-    {
-      "id": 19909,
-      "title": "Mala Duffel 4ATHLTS Pequena adidas",
-      "current_price": "177.00",
-      "original_price": "349.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_994961-MLA87794819028_072025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2LhaNbJ?matt_word=dbot_ig_bio_19909&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19909"
+      "tracked_url": "https://meli.la/19kdpMT?matt_word=dbot_ig_bio_20305&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20305"
     }
   ]
 }

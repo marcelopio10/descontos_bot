@@ -1,17 +1,47 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-10T22:44:43.024687+00:00",
+  "generated_at": "2026-11-11T01:09:41.271659+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20416,
-      "title": "Natura Kaiak Tradicional Masculino Miniatura 25ml",
-      "current_price": "26.00",
-      "original_price": "65.00",
-      "discount_pct": "60.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_674515-MLA81127683267_122024-O.webp",
+      "id": 20434,
+      "title": "Air Fryer Philco 6,5L Visor Glass e Redstone 1700W PAF65A",
+      "current_price": "283.00",
+      "original_price": "541.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_761173-MLA99475995202_112025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1iZtzA7?matt_word=dbot_ig_bio_20416&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20416"
+      "tracked_url": "https://meli.la/1ZH4oNN?matt_word=dbot_ig_bio_20434&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20434"
+    },
+    {
+      "id": 20427,
+      "title": "Kit 6 Pares Meia Puma Colors & Heart Cano Médio Feminino",
+      "current_price": "69.00",
+      "original_price": "165.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_796511-MLB118728559071_102026-V-kit-6-pares-meia-puma-colors-heart-cano-medio-feminino.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2sphVmG?matt_word=dbot_ig_bio_20427&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20427"
+    },
+    {
+      "id": 793,
+      "title": "Kit 10 Cuecas Boxer Infantil Mash Meninos Algodão.",
+      "current_price": "142.00",
+      "original_price": "226.00",
+      "discount_pct": "37.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_943638-MLB119102373682_112026-V-kit-10-cuecas-boxer-infantil-mash-meninos-algodo.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2d7pQ6x?matt_word=dbot_ig_bio_793&utm_source=instagram&utm_medium=bio&utm_campaign=offer_793"
+    },
+    {
+      "id": 20436,
+      "title": "Mixer 3 Em 1 Processador De Alimentos Multifuncional Para Processar E Bater Com Batedor Fouet",
+      "current_price": "128.00",
+      "original_price": "199.00",
+      "discount_pct": "35.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_678285-MLA116664631904_092026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2tGMTJK?matt_word=dbot_ig_bio_20436&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20436"
     },
     {
       "id": 20172,
@@ -22,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_711699-MLA111577220144_062026-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/23JR15N?matt_word=dbot_ig_bio_20172&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20172"
-    },
-    {
-      "id": 20413,
-      "title": "Bola de Futebol Society Penalty Se7E Pro Xxv",
-      "current_price": "246.00",
-      "original_price": "527.00",
-      "discount_pct": "53.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_615940-MLA99989577969_112025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1qeGWUK?matt_word=dbot_ig_bio_20413&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20413"
     }
   ]
 }

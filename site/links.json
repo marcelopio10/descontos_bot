@@ -1,17 +1,47 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-11T20:22:56.633542+00:00",
+  "generated_at": "2026-11-11T22:43:28.594921+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20579,
-      "title": "Kit Camiseta Tommy Hilfiger Masculino Preto/marinho 2un",
-      "current_price": "238.00",
-      "original_price": "450.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_821635-MLB99766757124_122025-V-kit-camiseta-tommy-hilfiger-masculino-pretomarinho-2un.webp",
+      "id": 8436,
+      "title": "Tênis Ultimashow 2.0 adidas",
+      "current_price": "196.00",
+      "original_price": "379.00",
+      "discount_pct": "48.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_987977-MLB114771288442_082026-V-tnis-ultimashow-20-adidas.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5181972148-kit-camiseta-tommy-hilfiger-masculino-pretomarinho-2un-_JM?matt_word=dbot_ig_bio_20579&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20579"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4799944762-tnis-ultimashow-20-adidas-_JM?matt_word=dbot_ig_bio_8436&utm_source=instagram&utm_medium=bio&utm_campaign=offer_8436"
+    },
+    {
+      "id": 2081,
+      "title": "Daily T-shirt Feminina Insider",
+      "current_price": "55.00",
+      "original_price": "149.00",
+      "discount_pct": "62.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_967236-MLB111239542509_052026-V-daily-t-shirt-feminina-insider.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-2222259769-daily-t-shirt-feminina-insider-_JM?matt_word=dbot_ig_bio_2081&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2081"
+    },
+    {
+      "id": 20600,
+      "title": "Kit Shampoo e Condicionador Wella Professionals Invigo Nutri-enrich Duo (2 Produtos)",
+      "current_price": "143.00",
+      "original_price": "318.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_818036-MLA99821516921_112025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7580502096?matt_word=dbot_ig_bio_20600&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20600"
+    },
+    {
+      "id": 20599,
+      "title": "Webcam Intelbras WCI-720p HD com Microfone e Tampa de Lente USB",
+      "current_price": "104.00",
+      "original_price": "199.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_864804-MLA100169344723_122025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6360203074?matt_word=dbot_ig_bio_20599&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20599"
     },
     {
       "id": 15498,
@@ -22,36 +52,6 @@
       "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
-    },
-    {
-      "id": 8639,
-      "title": "L'oréal Professionnel Inforcer Kit Shampoo 300ml e Máscara 250ml",
-      "current_price": "195.00",
-      "original_price": "360.00",
-      "discount_pct": "45.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_890250-MLA99419188412_112025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4732110023?matt_word=dbot_ig_bio_8639&utm_source=instagram&utm_medium=bio&utm_campaign=offer_8639"
-    },
-    {
-      "id": 20588,
-      "title": "Óculos De Sol Clássico Preto Hexagonal Harbor Black Uv400 Desenho Espelho",
-      "current_price": "57.00",
-      "original_price": "183.00",
-      "discount_pct": "68.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_728319-MLA92712461733_092025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5680754858?matt_word=dbot_ig_bio_20588&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20588"
-    },
-    {
-      "id": 172,
-      "title": "Creatina Soldiers Nutrition em pó Sem sabor x 1.2kg 2 un",
-      "current_price": "78.00",
-      "original_price": "229.00",
-      "discount_pct": "65.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_722829-MLA109681584581_032026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6538330654?matt_word=dbot_ig_bio_172&utm_source=instagram&utm_medium=bio&utm_campaign=offer_172"
     }
   ]
 }

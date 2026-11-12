@@ -1,47 +1,57 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-12T11:03:38.353062+00:00",
+  "generated_at": "2026-11-12T12:59:34.028770+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20228,
-      "title": "Tênis Puma Rebound V6 Low Bdp Moda Casual Masculino",
-      "current_price": "234.00",
+      "id": 20700,
+      "title": "Copo Térmico Gocase 880ml - Aço Inox Com Canudo E Tampa",
+      "current_price": "92.00",
       "original_price": "399.00",
-      "discount_pct": "41.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_949728-MLB118566610273_102026-V-tnis-puma-rebound-v6-low-bdp-moda-casual-masculino.webp",
+      "discount_pct": "76.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_773898-MLB89147874313_082025-V-copo-termico-gocase-880ml-aco-inox-com-canudo-e-tampa.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5352056568-tnis-puma-rebound-v6-low-bdp-moda-casual-masculino-_JM?matt_word=dbot_ig_bio_20228&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20228"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3953635097-copo-termico-gocase-880ml-aco-inox-com-canudo-e-tampa-_JM?matt_word=dbot_ig_bio_20700&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20700"
     },
     {
-      "id": 20483,
-      "title": "Kit Joico Defy Damage Protective Shampoo Mask (2 Produtos)",
-      "current_price": "156.00",
-      "original_price": "339.00",
-      "discount_pct": "53.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_948302-MLB84002621423_042025-O.webp",
+      "id": 11890,
+      "title": "Sandália Babuche Antiderrapante Leve Macia Confortável",
+      "current_price": "39.00",
+      "original_price": "74.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_830677-MLB107505825713_022026-V-sandalia-babuche-antiderrapante-leve-macia-confortavel.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5362488362?matt_word=dbot_ig_bio_20483&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20483"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5314583074-sandalia-babuche-antiderrapante-leve-macia-confortavel-_JM?matt_word=dbot_ig_bio_11890&utm_source=instagram&utm_medium=bio&utm_campaign=offer_11890"
     },
     {
-      "id": 20672,
-      "title": "Aquecedor Elétrico 2 Em 1 Kian Branco 1800w Aq100 2 Níveis De Aquecimento + Ventilação",
-      "current_price": "46.00",
-      "original_price": "179.00",
-      "discount_pct": "73.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_657629-MLA112943541875_062026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6926093152?matt_word=dbot_ig_bio_20672&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20672"
+      "id": 19512,
+      "title": "MONDIAL Ventilador de Mesa 40cm Super Power, Preto/Prata, 140W, 110V - VSP-40-B",
+      "current_price": "119.00",
+      "original_price": "189.90",
+      "discount_pct": "37.00",
+      "image_url": "https://m.media-amazon.com/images/I/81r2JL+Ru5L._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=mondial-ventilador-de-mesa-40cm-super-power-pretoprata-140w-110v-vsp-40-b-19512&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19512"
     },
     {
-      "id": 20670,
-      "title": "Polo Aramis Masculina Piquet Lisa Light Icon Preta Original",
-      "current_price": "142.00",
-      "original_price": "269.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_725089-MLB93535938632_102025-V-polo-aramis-masculina-piquet-lisa-light-icon-preta-original.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4232263351-polo-aramis-masculina-piquet-lisa-light-icon-preta-original-_JM?matt_word=dbot_ig_bio_20670&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20670"
+      "id": 15444,
+      "title": "Carregador Turbo 50W Porta Dupla (USB-A + USB-C) + Cabo Tipo C Ultra Rápido de 1M Premium® Compatível com Todos Dispositiv...",
+      "current_price": "33.85",
+      "original_price": "39.90",
+      "discount_pct": "15.00",
+      "image_url": "https://m.media-amazon.com/images/I/71kVeT2+ENL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-carregador-turbo-30w-porta-dupla-usb-a-usb-c-cabo-tipo-c-ultra-rapido-de-1m-premium-compative-15444&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15444"
+    },
+    {
+      "id": 20505,
+      "title": "Anúncio patrocinado – Hidratante Desodorante Corporal NIVEA Beleza Radiante, 200ml | Cuidado Intenso, Hidratação Profunda ...",
+      "current_price": "11.04",
+      "original_price": "14.49",
+      "discount_pct": "24.00",
+      "image_url": "https://m.media-amazon.com/images/I/61hm+yeM9CL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-hidratante-desodorante-corporal-nivea-beleza-radiante-200ml-cuidado-intenso-hidratacao-profunda-20505&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20505"
     }
   ]
 }

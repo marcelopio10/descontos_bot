@@ -1,17 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-13T00:16:39.084404+00:00",
+  "generated_at": "2026-11-13T11:03:37.595406+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20803,
-      "title": "Carregador Inteligente de Bateria Automotiva 12V 6A, Indobest Para Carro e Moto, Bivolt",
-      "current_price": "44.00",
-      "original_price": "99.00",
-      "discount_pct": "55.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_969241-MLA117707338351_092026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7359224392?matt_word=dbot_ig_bio_20803&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20803"
+      "id": 20405,
+      "title": "Oral-B Pasta de Dente 3D White Brilliant Fresh, 3 Unidades de 70 g",
+      "current_price": "12.99",
+      "original_price": "24.41",
+      "discount_pct": "47.00",
+      "image_url": "https://m.media-amazon.com/images/I/711PTsV+M1L._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=oral-b-pasta-de-dente-3d-white-brilliant-fresh-3-unidades-de-70-g-20405&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20405"
     },
     {
       "id": 15254,
@@ -24,34 +24,24 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creatina-monohidratada-1kg-100-pura-importada-soldiers-nutrition-15254&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15254"
     },
     {
-      "id": 20804,
-      "title": "Panela De Pressão Fechamento Externo Presscook Marmol 6,8l - Mimo Style",
-      "current_price": "179.00",
-      "original_price": "312.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_693483-MLA114827684976_082026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4278132359?matt_word=dbot_ig_bio_20804&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20804"
+      "id": 19708,
+      "title": "Pepinos em Conserva Agridoce Hemmer Vidro 440G",
+      "current_price": "16.39",
+      "original_price": "20.99",
+      "discount_pct": "22.00",
+      "image_url": "https://m.media-amazon.com/images/I/61jXgjCIHcL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=pepinos-em-conserva-agridoce-hemmer-vidro-440g-19708&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19708"
     },
     {
-      "id": 6062,
-      "title": "JMA Inox KL065-03-1 Rechaud 9 Litros 1/3 Panelas Banho Maria 3 Cubas Buffet",
-      "current_price": "148.00",
-      "original_price": "213.00",
-      "discount_pct": "30.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_999055-MLA95695376054_102025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3509746199?matt_word=dbot_ig_bio_6062&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6062"
-    },
-    {
-      "id": 20770,
-      "title": "Kit 3 Calças Legging Cintura Alta Grossa Academia Treino",
-      "current_price": "58.00",
-      "original_price": "119.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_732051-MLB116198765985_082026-V-kit-3-calcas-legging-cintura-alta-grossa-academia-treino.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4067115699-kit-3-calcas-legging-cintura-alta-grossa-academia-treino-_JM?matt_word=dbot_ig_bio_20770&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20770"
+      "id": 20665,
+      "title": "Anúncio patrocinado – Kit Médico Infantil Maleta com 14 Peças Brinquedo de Faz de Conta | 17cm",
+      "current_price": "44.41",
+      "original_price": "55.00",
+      "discount_pct": "19.00",
+      "image_url": "https://m.media-amazon.com/images/I/51oqLV8gSeL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-kit-medico-infantil-maleta-com-14-pecas-brinquedo-de-faz-de-conta-17cm-20665&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20665"
     }
   ]
 }

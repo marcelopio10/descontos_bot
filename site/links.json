@@ -1,27 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-13T13:47:30.903213+00:00",
+  "generated_at": "2026-11-13T15:29:48.330245+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 16217,
-      "title": "Palmilha De Altissimo Conforto 4d Tênis Sapatos Ortopédica",
-      "current_price": "24.00",
-      "original_price": "58.00",
-      "discount_pct": "57.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_812570-MLB120373308447_102026-V-palmilha-de-altissimo-conforto-4d-tnis-sapatos-ortopedica.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3751983147-palmilha-de-altissimo-conforto-4d-tnis-sapatos-ortopedica-_JM?matt_word=dbot_ig_bio_16217&utm_source=instagram&utm_medium=bio&utm_campaign=offer_16217"
-    },
-    {
-      "id": 20866,
-      "title": "Lixeira Inteligente Automática Branca Universal Com Sensor Lumi Recarregável Anti Odor 16L",
-      "current_price": "58.00",
-      "original_price": "157.00",
-      "discount_pct": "63.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_888622-MLA111459157156_052026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4719725923?matt_word=dbot_ig_bio_20866&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20866"
+      "id": 20505,
+      "title": "Hidratante Desodorante Corporal NIVEA Beleza Radiante, 200ml | Cuidado Intenso, Hidratação Profunda 48h, Pele Seca e Extra...",
+      "current_price": "11.04",
+      "original_price": "14.49",
+      "discount_pct": "24.00",
+      "image_url": "https://m.media-amazon.com/images/I/61hm+yeM9CL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-hidratante-desodorante-corporal-nivea-beleza-radiante-200ml-cuidado-intenso-hidratacao-profunda-20505&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20505"
     },
     {
       "id": 20865,
@@ -34,6 +24,26 @@
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-7741045436?matt_word=dbot_ig_bio_20865&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20865"
     },
     {
+      "id": 20879,
+      "title": "Garrafa Térmica Quick Flip Stanley Preto 710ml",
+      "current_price": "120.00",
+      "original_price": "289.00",
+      "discount_pct": "58.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_744777-MLA118142201652_102026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7842882630?matt_word=dbot_ig_bio_20879&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20879"
+    },
+    {
+      "id": 20863,
+      "title": "Tênis Nike Air Zoom Upturn Masculino",
+      "current_price": "409.00",
+      "original_price": "749.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_862649-MLB113101542451_062026-V-tnis-nike-air-zoom-upturn-masculino.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5377613184-tnis-nike-air-zoom-upturn-masculino-_JM?matt_word=dbot_ig_bio_20863&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20863"
+    },
+    {
       "id": 20862,
       "title": "Fone Headphone Basike Gamer Bluetooth 5.4 Com ANC e Microfone, Azul",
       "current_price": "158.00",
@@ -42,16 +52,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_607909-MLA116690635589_082026-O.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-4461413501?matt_word=dbot_ig_bio_20862&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20862"
-    },
-    {
-      "id": 20860,
-      "title": "Kit 5 Camisetas Básicas Masculina Dry Fit Premium Academia",
-      "current_price": "54.00",
-      "original_price": "76.00",
-      "discount_pct": "28.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_912036-MLB116362911657_082026-V-kit-5-camisetas-basicas-masculina-dry-fit-premium-academia.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4159343623-kit-5-camisetas-basicas-masculina-dry-fit-premium-academia-_JM?matt_word=dbot_ig_bio_20860&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20860"
     }
   ]
 }

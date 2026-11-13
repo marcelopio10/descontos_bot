@@ -1,47 +1,57 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-13T11:03:37.595406+00:00",
+  "generated_at": "2026-11-13T13:47:30.903213+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20405,
-      "title": "Oral-B Pasta de Dente 3D White Brilliant Fresh, 3 Unidades de 70 g",
-      "current_price": "12.99",
-      "original_price": "24.41",
-      "discount_pct": "47.00",
-      "image_url": "https://m.media-amazon.com/images/I/711PTsV+M1L._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=oral-b-pasta-de-dente-3d-white-brilliant-fresh-3-unidades-de-70-g-20405&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20405"
+      "id": 16217,
+      "title": "Palmilha De Altissimo Conforto 4d Tênis Sapatos Ortopédica",
+      "current_price": "24.00",
+      "original_price": "58.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_812570-MLB120373308447_102026-V-palmilha-de-altissimo-conforto-4d-tnis-sapatos-ortopedica.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3751983147-palmilha-de-altissimo-conforto-4d-tnis-sapatos-ortopedica-_JM?matt_word=dbot_ig_bio_16217&utm_source=instagram&utm_medium=bio&utm_campaign=offer_16217"
     },
     {
-      "id": 15254,
-      "title": "Creatina Monohidratada 1Kg - 100% Pura Importada - Soldiers Nutrition | Creatina",
-      "current_price": "68.90",
-      "original_price": "129.90",
-      "discount_pct": "47.00",
-      "image_url": "https://m.media-amazon.com/images/I/710vFtiFuWL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creatina-monohidratada-1kg-100-pura-importada-soldiers-nutrition-15254&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15254"
+      "id": 20866,
+      "title": "Lixeira Inteligente Automática Branca Universal Com Sensor Lumi Recarregável Anti Odor 16L",
+      "current_price": "58.00",
+      "original_price": "157.00",
+      "discount_pct": "63.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_888622-MLA111459157156_052026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4719725923?matt_word=dbot_ig_bio_20866&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20866"
     },
     {
-      "id": 19708,
-      "title": "Pepinos em Conserva Agridoce Hemmer Vidro 440G",
-      "current_price": "16.39",
-      "original_price": "20.99",
-      "discount_pct": "22.00",
-      "image_url": "https://m.media-amazon.com/images/I/61jXgjCIHcL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=pepinos-em-conserva-agridoce-hemmer-vidro-440g-19708&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19708"
+      "id": 20865,
+      "title": "Perfume Árabe Sakeena Edp Feminino 100ml",
+      "current_price": "169.00",
+      "original_price": "249.00",
+      "discount_pct": "32.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_755669-MLA117064266282_102026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7741045436?matt_word=dbot_ig_bio_20865&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20865"
     },
     {
-      "id": 20665,
-      "title": "Anúncio patrocinado – Kit Médico Infantil Maleta com 14 Peças Brinquedo de Faz de Conta | 17cm",
-      "current_price": "44.41",
-      "original_price": "55.00",
-      "discount_pct": "19.00",
-      "image_url": "https://m.media-amazon.com/images/I/51oqLV8gSeL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-kit-medico-infantil-maleta-com-14-pecas-brinquedo-de-faz-de-conta-17cm-20665&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20665"
+      "id": 20862,
+      "title": "Fone Headphone Basike Gamer Bluetooth 5.4 Com ANC e Microfone, Azul",
+      "current_price": "158.00",
+      "original_price": "290.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_607909-MLA116690635589_082026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4461413501?matt_word=dbot_ig_bio_20862&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20862"
+    },
+    {
+      "id": 20860,
+      "title": "Kit 5 Camisetas Básicas Masculina Dry Fit Premium Academia",
+      "current_price": "54.00",
+      "original_price": "76.00",
+      "discount_pct": "28.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_912036-MLB116362911657_082026-V-kit-5-camisetas-basicas-masculina-dry-fit-premium-academia.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4159343623-kit-5-camisetas-basicas-masculina-dry-fit-premium-academia-_JM?matt_word=dbot_ig_bio_20860&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20860"
     }
   ]
 }

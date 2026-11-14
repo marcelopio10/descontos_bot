@@ -1,37 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-14T00:47:23.135287+00:00",
+  "generated_at": "2026-11-14T11:03:52.214510+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20928,
-      "title": "Pisca Cortina 300 Leds 3x3m Usb Ip44 8 Modos Iluminação Luzes Fada Decoração De Natal Festa Branco Frio Luvinco",
-      "current_price": "27.00",
-      "original_price": "49.00",
-      "discount_pct": "43.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_720324-MLA118519912953_092026-O.webp",
+      "id": 20961,
+      "title": "Tênis Feminino Casual Lançamento Novo Plataforma Confortável",
+      "current_price": "69.00",
+      "original_price": "118.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_819053-MLB120012134427_102026-V-tnis-feminino-casual-lancamento-novo-plataforma-confortavel.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4482447119?matt_word=dbot_ig_bio_20928&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20928"
-    },
-    {
-      "id": 20926,
-      "title": "Conjunto Feminino Verão Cropped Short Saída De Praia Look",
-      "current_price": "88.00",
-      "original_price": "134.00",
-      "discount_pct": "34.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_875619-MLB119680599242_112026-V-conjunto-feminino-vero-cropped-short-saida-de-praia-look.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3846693337-conjunto-feminino-vero-cropped-short-saida-de-praia-look-_JM?matt_word=dbot_ig_bio_20926&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20926"
-    },
-    {
-      "id": 20924,
-      "title": "Bermuda Jeans Masculina Lycra Elastano Tradicional Premium",
-      "current_price": "45.00",
-      "original_price": "69.00",
-      "discount_pct": "34.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_740105-MLB91837979566_092025-V-bermuda-jeans-masculina-lycra-elastano-tradicional-premium.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4182356551-bermuda-jeans-masculina-lycra-elastano-tradicional-premium-_JM?matt_word=dbot_ig_bio_20924&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20924"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5350374760-tnis-feminino-casual-lancamento-novo-plataforma-confortavel-_JM?matt_word=dbot_ig_bio_20961&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20961"
     },
     {
       "id": 20922,
@@ -44,14 +24,34 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
-      "id": 20732,
-      "title": "Kit 10 Potes 1 Litro Transparente Marmita Fitness Bpa Free Tampa Hermética Reutilizável Micro E Freezer Mantimentos ponte lar utilidades",
-      "current_price": "28.00",
-      "original_price": "59.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_748154-MLA114700023633_072026-O.webp",
+      "id": 19844,
+      "title": "St Dalfour Geleia de Morango (Fraises), 284g",
+      "current_price": "32.00",
+      "original_price": "38.90",
+      "discount_pct": "18.00",
+      "image_url": "https://m.media-amazon.com/images/I/51b9tArEuOL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=st-dalfour-geleia-de-morango-fraises-284g-19844&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19844"
+    },
+    {
+      "id": 19708,
+      "title": "Pepinos em Conserva Agridoce Hemmer Vidro 440G",
+      "current_price": "16.39",
+      "original_price": "20.99",
+      "discount_pct": "22.00",
+      "image_url": "https://m.media-amazon.com/images/I/61jXgjCIHcL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=pepinos-em-conserva-agridoce-hemmer-vidro-440g-19708&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19708"
+    },
+    {
+      "id": 20963,
+      "title": "Chinelo Nike Victori One Feminino",
+      "current_price": "129.00",
+      "original_price": "249.00",
+      "discount_pct": "48.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_663319-MLB94495274667_102025-V-chinelo-nike-victori-one-feminino.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6824615010?matt_word=dbot_ig_bio_20732&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20732"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3142908462-chinelo-nike-victori-one-feminino-_JM?matt_word=dbot_ig_bio_20963&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20963"
     }
   ]
 }

@@ -1,17 +1,37 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-14T15:28:38.866904+00:00",
+  "generated_at": "2026-11-14T17:24:32.237787+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20922,
-      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
-      "current_price": "10.99",
+      "id": 20052,
+      "title": "Tênis Nike Sb Malor Masculino",
+      "current_price": "289.00",
+      "original_price": "549.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_826095-MLB111975736822_062026-V-tnis-nike-sb-malor-masculino.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4430312979-tnis-nike-sb-malor-masculino-_JM?matt_word=dbot_ig_bio_20052&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20052"
+    },
+    {
+      "id": 3213,
+      "title": "Paixão Óleo Corporal Tentadora 100 Ml | Tentadora em tamanho compacto",
+      "current_price": "10.90",
       "original_price": "14.69",
-      "discount_pct": "25.00",
-      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
+      "discount_pct": "26.00",
+      "image_url": "https://m.media-amazon.com/images/I/51addYZ0ziL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-tentadora-100-ml-3213&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3213"
+    },
+    {
+      "id": 187,
+      "title": "Camiseta Térmica Feminina Uv50+ Puma Manga Curta Original",
+      "current_price": "69.00",
+      "original_price": "225.00",
+      "discount_pct": "69.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_755485-MLB116714524527_082026-V-camiseta-termica-feminina-uv50-puma-manga-curta-original.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3734948407-camiseta-termica-feminina-uv50-puma-manga-curta-original-_JM?matt_word=dbot_ig_bio_187&utm_source=instagram&utm_medium=bio&utm_campaign=offer_187"
     },
     {
       "id": 15498,
@@ -24,14 +44,14 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
     },
     {
-      "id": 21021,
-      "title": "Power Bank Basike com Cabo Embutido de 22.5W e 20.000mAh para iPhone e Android",
-      "current_price": "139.00",
-      "original_price": "214.00",
-      "discount_pct": "35.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_758732-MLA103081906542_012026-O.webp",
+      "id": 21036,
+      "title": "Jogo de toalhas de banho Buddemeyer Brisa 4 Peças Cor Rosa/Bordô",
+      "current_price": "149.00",
+      "original_price": "229.00",
+      "discount_pct": "34.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_963775-MLA96433447094_102025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4407942173?matt_word=dbot_ig_bio_21021&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21021"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7727176192?matt_word=dbot_ig_bio_21036&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21036"
     }
   ]
 }

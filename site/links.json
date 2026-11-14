@@ -1,17 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-14T17:24:32.237787+00:00",
+  "generated_at": "2026-11-14T20:16:22.674556+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 20052,
-      "title": "Tênis Nike Sb Malor Masculino",
-      "current_price": "289.00",
-      "original_price": "549.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_826095-MLB111975736822_062026-V-tnis-nike-sb-malor-masculino.webp",
+      "id": 20388,
+      "title": "Tênis Kappa Pulse Masculino Academia Corrida Confortável",
+      "current_price": "109.00",
+      "original_price": "179.00",
+      "discount_pct": "38.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_722759-MLB110471292038_052026-V-tnis-kappa-pulse-masculino-academia-corrida-confortavel.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4430312979-tnis-nike-sb-malor-masculino-_JM?matt_word=dbot_ig_bio_20052&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20052"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5377957838-tnis-kappa-pulse-masculino-academia-corrida-confortavel-_JM?matt_word=dbot_ig_bio_20388&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20388"
     },
     {
       "id": 3213,
@@ -24,16 +24,6 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-tentadora-100-ml-3213&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3213"
     },
     {
-      "id": 187,
-      "title": "Camiseta Térmica Feminina Uv50+ Puma Manga Curta Original",
-      "current_price": "69.00",
-      "original_price": "225.00",
-      "discount_pct": "69.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_755485-MLB116714524527_082026-V-camiseta-termica-feminina-uv50-puma-manga-curta-original.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3734948407-camiseta-termica-feminina-uv50-puma-manga-curta-original-_JM?matt_word=dbot_ig_bio_187&utm_source=instagram&utm_medium=bio&utm_campaign=offer_187"
-    },
-    {
       "id": 15498,
       "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
       "current_price": "13.09",
@@ -44,14 +34,24 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
     },
     {
-      "id": 21036,
-      "title": "Jogo de toalhas de banho Buddemeyer Brisa 4 Peças Cor Rosa/Bordô",
-      "current_price": "149.00",
-      "original_price": "229.00",
-      "discount_pct": "34.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_963775-MLA96433447094_102025-O.webp",
+      "id": 21056,
+      "title": "Viseira Nike Dri-fit Ace Visor Cor Preto/branco Tamanho M/g",
+      "current_price": "79.00",
+      "original_price": "149.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_891587-MLA92442753015_092025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7727176192?matt_word=dbot_ig_bio_21036&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21036"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5698170370?matt_word=dbot_ig_bio_21056&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21056"
+    },
+    {
+      "id": 21050,
+      "title": "Perfume Versace Crystal Noir EDP 30ml Feminino Floral Italiano",
+      "current_price": "258.00",
+      "original_price": "488.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_773300-MLU75996177581_042024-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3715775911?matt_word=dbot_ig_bio_21050&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21050"
     }
   ]
 }

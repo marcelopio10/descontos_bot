@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-14T11:03:52.214510+00:00",
+  "generated_at": "2026-11-14T13:46:32.119387+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 20961,
-      "title": "Tênis Feminino Casual Lançamento Novo Plataforma Confortável",
-      "current_price": "69.00",
-      "original_price": "118.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_819053-MLB120012134427_102026-V-tnis-feminino-casual-lancamento-novo-plataforma-confortavel.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5350374760-tnis-feminino-casual-lancamento-novo-plataforma-confortavel-_JM?matt_word=dbot_ig_bio_20961&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20961"
-    },
     {
       "id": 20922,
       "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
@@ -24,34 +14,14 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
-      "id": 19844,
-      "title": "St Dalfour Geleia de Morango (Fraises), 284g",
-      "current_price": "32.00",
-      "original_price": "38.90",
-      "discount_pct": "18.00",
-      "image_url": "https://m.media-amazon.com/images/I/51b9tArEuOL._AC_UL320_.jpg",
+      "id": 15498,
+      "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
+      "current_price": "13.09",
+      "original_price": "16.51",
+      "discount_pct": "21.00",
+      "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=st-dalfour-geleia-de-morango-fraises-284g-19844&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19844"
-    },
-    {
-      "id": 19708,
-      "title": "Pepinos em Conserva Agridoce Hemmer Vidro 440G",
-      "current_price": "16.39",
-      "original_price": "20.99",
-      "discount_pct": "22.00",
-      "image_url": "https://m.media-amazon.com/images/I/61jXgjCIHcL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=pepinos-em-conserva-agridoce-hemmer-vidro-440g-19708&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19708"
-    },
-    {
-      "id": 20963,
-      "title": "Chinelo Nike Victori One Feminino",
-      "current_price": "129.00",
-      "original_price": "249.00",
-      "discount_pct": "48.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_663319-MLB94495274667_102025-V-chinelo-nike-victori-one-feminino.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3142908462-chinelo-nike-victori-one-feminino-_JM?matt_word=dbot_ig_bio_20963&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20963"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
     }
   ]
 }

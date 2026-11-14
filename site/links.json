@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-13T22:56:33.212732+00:00",
+  "generated_at": "2026-11-14T00:47:23.135287+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 20934,
-      "title": "Kit 3 Tapetes De Banheiro Microfibra Bolinha Antiderrepante Cor Sortido",
-      "current_price": "37.00",
-      "original_price": "64.00",
-      "discount_pct": "41.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_704987-MLA102011222686_122025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7564348002?matt_word=dbot_ig_bio_20934&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20934"
-    },
     {
       "id": 20928,
       "title": "Pisca Cortina 300 Leds 3x3m Usb Ip44 8 Modos Iluminação Luzes Fada Decoração De Natal Festa Branco Frio Luvinco",
@@ -52,6 +42,16 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+    },
+    {
+      "id": 20732,
+      "title": "Kit 10 Potes 1 Litro Transparente Marmita Fitness Bpa Free Tampa Hermética Reutilizável Micro E Freezer Mantimentos ponte lar utilidades",
+      "current_price": "28.00",
+      "original_price": "59.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_748154-MLA114700023633_072026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6824615010?matt_word=dbot_ig_bio_20732&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20732"
     }
   ]
 }

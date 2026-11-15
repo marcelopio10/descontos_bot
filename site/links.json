@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-15T15:47:34.811813+00:00",
+  "generated_at": "2026-11-15T18:03:25.628550+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 21130,
-      "title": "Anúncio patrocinado – NIVEA KIT Creme Facial Nutritivo Ultraleve 7 em 1 100g - 2 Unidades",
-      "current_price": "44.02",
-      "original_price": "75.98",
-      "discount_pct": "42.00",
-      "image_url": "https://m.media-amazon.com/images/I/71ZYzEQixLL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-nivea-kit-creme-facial-nutritivo-ultraleve-7-em-1-100g-2-unidades-21130&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21130"
-    },
     {
       "id": 3213,
       "title": "Paixão Óleo Corporal Tentadora 100 Ml | Tentadora em tamanho compacto",
@@ -24,26 +14,6 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-tentadora-100-ml-3213&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3213"
     },
     {
-      "id": 20920,
-      "title": "Hellmann's Pack Maionese Light 2 Unidades de 500g",
-      "current_price": "16.98",
-      "original_price": "22.99",
-      "discount_pct": "26.00",
-      "image_url": "https://m.media-amazon.com/images/I/61AX3rzyWTL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=hellmanns-pack-maionese-light-2-unidades-de-500g-20920&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20920"
-    },
-    {
-      "id": 19844,
-      "title": "St Dalfour Geleia de Morango (Fraises), 284g",
-      "current_price": "32.00",
-      "original_price": "38.90",
-      "discount_pct": "18.00",
-      "image_url": "https://m.media-amazon.com/images/I/51b9tArEuOL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=st-dalfour-geleia-de-morango-fraises-284g-19844&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19844"
-    },
-    {
       "id": 15498,
       "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
       "current_price": "13.09",
@@ -52,6 +22,36 @@
       "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
+    },
+    {
+      "id": 15988,
+      "title": "Conjunto Linho Feminino Camisa E Short Linha Premium",
+      "current_price": "59.00",
+      "original_price": "156.00",
+      "discount_pct": "61.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_837707-MLB89364631929_082025-V-conjunto-linho-feminino-camisa-e-short-linha-premium.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5538382542-conjunto-linho-feminino-camisa-e-short-linha-premium-_JM?matt_word=dbot_ig_bio_15988&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15988"
+    },
+    {
+      "id": 21152,
+      "title": "Potes Herméticos De 1 Litro - Oliplast Bowl 1l Cor Preto",
+      "current_price": "19.00",
+      "original_price": "40.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_807221-MLA116057000481_082026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5130661943?matt_word=dbot_ig_bio_21152&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21152"
+    },
+    {
+      "id": 21035,
+      "title": "Tênis Nike Winflo 11 Masculino",
+      "current_price": "369.00",
+      "original_price": "699.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_628465-MLB100878659269_122025-V-tnis-nike-winflo-11-masculino.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4979851666-tnis-nike-winflo-11-masculino-_JM?matt_word=dbot_ig_bio_21035&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21035"
     }
   ]
 }

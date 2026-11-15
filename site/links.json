@@ -1,17 +1,47 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-15T00:05:35.882650+00:00",
+  "generated_at": "2026-11-15T11:03:03.727376+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21074,
-      "title": "Tênis Go Trainer Fila Respirável Flexível Azul Estável",
-      "current_price": "211.00",
-      "original_price": "399.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_643679-MLB83235032201_032025-V-tnis-go-trainer-fila-respiravel-flexivel-azul-estavel.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5325494506-tnis-go-trainer-fila-respiravel-flexivel-azul-estavel-_JM?matt_word=dbot_ig_bio_21074&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21074"
+      "id": 21019,
+      "title": "Britânia Escova Secadora Soft 4 em 1 1300W BEC07R Bivolt Plástico Rosa",
+      "current_price": "81.90",
+      "original_price": "157.07",
+      "discount_pct": "48.00",
+      "image_url": "https://m.media-amazon.com/images/I/51KoGFYvmPL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=britania-escova-secadora-soft-4-em-1-1300w-bec07r-bivolt-plastico-rosa-21019&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21019"
+    },
+    {
+      "id": 21113,
+      "title": "Anúncio patrocinado – Protetor Solar Facial Minesol Oil Control, Sem Cor, FPS 70, 40g | Antioxidante, Controle da Oleosida...",
+      "current_price": "55.59",
+      "original_price": "123.99",
+      "discount_pct": "55.00",
+      "image_url": "https://m.media-amazon.com/images/I/51eH9ipBcXL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-protetor-solar-facial-minesol-oil-control-sem-cor-fps-70-40g-antioxidante-controle-da-oleosida-21113&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21113"
+    },
+    {
+      "id": 19512,
+      "title": "MONDIAL Ventilador de Mesa 40cm Super Power, Preto/Prata, 140W, 110V - VSP-40-B",
+      "current_price": "119.00",
+      "original_price": "189.90",
+      "discount_pct": "37.00",
+      "image_url": "https://m.media-amazon.com/images/I/81r2JL+Ru5L._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=mondial-ventilador-de-mesa-40cm-super-power-pretoprata-140w-110v-vsp-40-b-19512&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19512"
+    },
+    {
+      "id": 20920,
+      "title": "Hellmann's Pack Maionese Light 2 Unidades de 500g",
+      "current_price": "16.98",
+      "original_price": "22.99",
+      "discount_pct": "26.00",
+      "image_url": "https://m.media-amazon.com/images/I/61AX3rzyWTL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=hellmanns-pack-maionese-light-2-unidades-de-500g-20920&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20920"
     },
     {
       "id": 20922,
@@ -22,36 +52,6 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
-    },
-    {
-      "id": 15498,
-      "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
-      "current_price": "13.09",
-      "original_price": "16.51",
-      "discount_pct": "21.00",
-      "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
-    },
-    {
-      "id": 21061,
-      "title": "Kit 2 Óleos Capilares Açaí Oil 60ml - Cadiveu Professional",
-      "current_price": "59.00",
-      "original_price": "137.00",
-      "discount_pct": "56.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_916429-MLA99825476421_112025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3915403671?matt_word=dbot_ig_bio_21061&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21061"
-    },
-    {
-      "id": 21059,
-      "title": "Regata Básica Masculina Slim Em Malha Hering",
-      "current_price": "24.00",
-      "original_price": "59.00",
-      "discount_pct": "58.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_989083-MLB113949869273_062026-V-regata-basica-masculina-slim-em-malha-hering.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-1958977491-regata-basica-masculina-slim-em-malha-hering-_JM?matt_word=dbot_ig_bio_21059&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21059"
     }
   ]
 }

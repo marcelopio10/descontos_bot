@@ -1,27 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-16T13:34:00.384218+00:00",
+  "generated_at": "2026-11-16T16:28:51.843137+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21150,
-      "title": "NIVEA Luminous 630 Sérum Avançado Antimarcas Escurecidas 30ml, Reduz Marcas, Uniformiza o Tom, Ácido Hialurônico, Radiânci...",
-      "current_price": "64.88",
-      "original_price": "129.90",
-      "discount_pct": "50.00",
-      "image_url": "https://m.media-amazon.com/images/I/61Vx56uUT6L._AC_UL320_.jpg",
+      "id": 21180,
+      "title": "Creme Facial Antissinais Neutrogena Face Care Intensive, FPS 22, 100g | Hidratação Intensa, Textura Leve, Oil Free",
+      "current_price": "23.37",
+      "original_price": "48.99",
+      "discount_pct": "52.00",
+      "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-luminous-630-serum-avancado-antimarcas-escurecidas-30ml-reduz-marcas-uniformiza-o-tom-acido-hialuronico-radianci-21150&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21150"
-    },
-    {
-      "id": 15331,
-      "title": "Anúncio patrocinado – Colgate Luminous White Carvão Ativado Creme Dental Clareador, 3x70g | Dentes mais brancos com carvão",
-      "current_price": "16.48",
-      "original_price": "30.19",
-      "discount_pct": "45.00",
-      "image_url": "https://m.media-amazon.com/images/I/81nyYn4xYfL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-colgate-luminous-white-carvao-ativado-creme-dental-clareador-3x70g-15331&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15331"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
       "id": 21235,
@@ -34,24 +24,34 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=manteiga-de-cacau-bastao-fps-15-zanphy-neutro-21235&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21235"
     },
     {
-      "id": 19512,
-      "title": "MONDIAL Ventilador de Mesa 40cm Super Power, Preto/Prata, 140W, 110V - VSP-40-B",
-      "current_price": "119.00",
-      "original_price": "189.90",
-      "discount_pct": "37.00",
-      "image_url": "https://m.media-amazon.com/images/I/81r2JL+Ru5L._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=mondial-ventilador-de-mesa-40cm-super-power-pretoprata-140w-110v-vsp-40-b-19512&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19512"
+      "id": 19974,
+      "title": "Shorts Nike Dry-fit Academy Masculino",
+      "current_price": "73.00",
+      "original_price": "179.00",
+      "discount_pct": "59.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_697089-MLB100874974587_122025-V-shorts-nike-dry-fit-academy-masculino.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5282803090-shorts-nike-dry-fit-academy-masculino-_JM?matt_word=dbot_ig_bio_19974&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19974"
     },
     {
-      "id": 21258,
-      "title": "Anúncio patrocinado – Gino-Canesten Sabonete Íntimo Triplo Cuidado, Hipoalergênico, 200ml | Triplo Cuidado 200ml, Controle...",
-      "current_price": "19.90",
-      "original_price": "29.90",
-      "discount_pct": "33.00",
-      "image_url": "https://m.media-amazon.com/images/I/612q7SmPEzL._AC_UL320_.jpg",
+      "id": 20922,
+      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
+      "current_price": "10.99",
+      "original_price": "14.69",
+      "discount_pct": "25.00",
+      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-gino-canesten-sabonete-intimo-triplo-cuidado-hipoalergenico-200ml-triplo-cuidado-200ml-controle-21258&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21258"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+    },
+    {
+      "id": 15498,
+      "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
+      "current_price": "13.09",
+      "original_price": "16.51",
+      "discount_pct": "21.00",
+      "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
     }
   ]
 }

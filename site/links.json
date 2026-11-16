@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-15T22:05:24.853708+00:00",
+  "generated_at": "2026-11-16T00:51:40.302807+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 21180,
-      "title": "Creme Facial Antissinais Neutrogena Face Care Intensive, FPS 22, 100g | Hidratação Intensa, Textura Leve, Oil Free",
-      "current_price": "23.37",
-      "original_price": "48.99",
-      "discount_pct": "52.00",
-      "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
-    },
     {
       "id": 21182,
       "title": "Fralda Pampers Confort Sec Tamanho M, 108 Un",
@@ -24,14 +14,14 @@
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-6819547198?matt_word=dbot_ig_bio_21182&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21182"
     },
     {
-      "id": 3213,
-      "title": "Paixão Óleo Corporal Tentadora 100 Ml | Tentadora em tamanho compacto",
-      "current_price": "10.90",
+      "id": 20922,
+      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
+      "current_price": "10.99",
       "original_price": "14.69",
-      "discount_pct": "26.00",
-      "image_url": "https://m.media-amazon.com/images/I/51addYZ0ziL._AC_UL320_.jpg",
+      "discount_pct": "25.00",
+      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-tentadora-100-ml-3213&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3213"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
       "id": 15498,
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_861551-MLA108861039495_032026-O.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-7896581688?matt_word=dbot_ig_bio_7829&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7829"
+    },
+    {
+      "id": 21184,
+      "title": "Fralda Pampers Premium Care Pants Tamanho XXG 90 Unidades",
+      "current_price": "140.00",
+      "original_price": "204.00",
+      "discount_pct": "31.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_991271-MLA99934452103_112025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5659908354?matt_word=dbot_ig_bio_21184&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21184"
     }
   ]
 }

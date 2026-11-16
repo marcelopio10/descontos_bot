@@ -1,27 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-16T20:24:27.079400+00:00",
+  "generated_at": "2026-11-16T22:00:14.408400+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 18624,
-      "title": "Tênis Asics Gel Revelation Original Couro Academia Caminhada",
-      "current_price": "99.00",
-      "original_price": "333.00",
-      "discount_pct": "70.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_708752-MLB105969578030_022026-V-tnis-asics-gel-revelation-original-couro-academia-caminhada.webp",
+      "id": 21302,
+      "title": "Perfume Feminino Natura Luna Absoluta Deo Colônia 75ml",
+      "current_price": "85.00",
+      "original_price": "185.00",
+      "discount_pct": "53.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_848541-MLU77515249710_072024-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4690598815-tnis-asics-gel-revelation-original-couro-academia-caminhada-_JM?matt_word=dbot_ig_bio_18624&utm_source=instagram&utm_medium=bio&utm_campaign=offer_18624"
-    },
-    {
-      "id": 20909,
-      "title": "Fritadeira Elétrica Air Fryer Quad Fry Elgin 4,2 L, 1400w",
-      "current_price": "145.00",
-      "original_price": "299.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_927559-MLA99450788218_112025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4110427699?matt_word=dbot_ig_bio_20909&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20909"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5992138046?matt_word=dbot_ig_bio_21302&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21302"
     },
     {
       "id": 21235,
@@ -34,16 +24,6 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=manteiga-de-cacau-bastao-fps-15-zanphy-neutro-21235&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21235"
     },
     {
-      "id": 21277,
-      "title": "Aspirador de Pó Vertical Midea, 1350W, 2 em 1, cabo de 5M, Preto e Azul",
-      "current_price": "122.00",
-      "original_price": "499.00",
-      "discount_pct": "75.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_742597-MLA95523059142_102025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7697655240?matt_word=dbot_ig_bio_21277&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21277"
-    },
-    {
       "id": 3213,
       "title": "Paixão Óleo Corporal Tentadora 100 Ml | Tentadora em tamanho compacto",
       "current_price": "10.90",
@@ -52,6 +32,26 @@
       "image_url": "https://m.media-amazon.com/images/I/51addYZ0ziL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-tentadora-100-ml-3213&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3213"
+    },
+    {
+      "id": 15498,
+      "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
+      "current_price": "13.09",
+      "original_price": "16.51",
+      "discount_pct": "21.00",
+      "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
+    },
+    {
+      "id": 21300,
+      "title": "Delicious Mass Pouch 3kg Sabor Morango com Chantilly - FTW",
+      "current_price": "74.00",
+      "original_price": "129.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_927030-MLA99849861241_112025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5517661548?matt_word=dbot_ig_bio_21300&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21300"
     }
   ]
 }

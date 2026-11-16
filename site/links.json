@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-16T18:25:10.817038+00:00",
+  "generated_at": "2026-11-16T20:24:27.079400+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,14 +14,14 @@
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-4690598815-tnis-asics-gel-revelation-original-couro-academia-caminhada-_JM?matt_word=dbot_ig_bio_18624&utm_source=instagram&utm_medium=bio&utm_campaign=offer_18624"
     },
     {
-      "id": 21180,
-      "title": "Creme Facial Antissinais Neutrogena Face Care Intensive, FPS 22, 100g | Hidratação Intensa, Textura Leve, Oil Free",
-      "current_price": "23.37",
-      "original_price": "48.99",
-      "discount_pct": "52.00",
-      "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
+      "id": 20909,
+      "title": "Fritadeira Elétrica Air Fryer Quad Fry Elgin 4,2 L, 1400w",
+      "current_price": "145.00",
+      "original_price": "299.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_927559-MLA99450788218_112025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4110427699?matt_word=dbot_ig_bio_20909&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20909"
     },
     {
       "id": 21235,
@@ -44,14 +44,14 @@
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-7697655240?matt_word=dbot_ig_bio_21277&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21277"
     },
     {
-      "id": 20922,
-      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
-      "current_price": "10.99",
+      "id": 3213,
+      "title": "Paixão Óleo Corporal Tentadora 100 Ml | Tentadora em tamanho compacto",
+      "current_price": "10.90",
       "original_price": "14.69",
-      "discount_pct": "25.00",
-      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
+      "discount_pct": "26.00",
+      "image_url": "https://m.media-amazon.com/images/I/51addYZ0ziL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-tentadora-100-ml-3213&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3213"
     }
   ]
 }

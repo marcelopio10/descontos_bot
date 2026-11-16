@@ -1,17 +1,47 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-16T00:51:40.302807+00:00",
+  "generated_at": "2026-11-16T11:02:34.264484+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21182,
-      "title": "Fralda Pampers Confort Sec Tamanho M, 108 Un",
-      "current_price": "90.00",
-      "original_price": "133.00",
-      "discount_pct": "32.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_988581-MLA110683983180_052026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6819547198?matt_word=dbot_ig_bio_21182&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21182"
+      "id": 8548,
+      "title": "Gshield Carregador de Parede Universal 20W Ultra Rápido Tipo C + USB-A Power Delivery com Chip GaN, Compatível com iPhones...",
+      "current_price": "30.00",
+      "original_price": "69.99",
+      "discount_pct": "57.00",
+      "image_url": "https://m.media-amazon.com/images/I/410-DGOziRL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=gshield-carregador-de-parede-universal-20w-ultra-rapido-tipo-c-usb-a-power-delivery-com-chip-gan-compativel-com-iphones-8548&utm_source=instagram&utm_medium=bio&utm_campaign=offer_8548"
+    },
+    {
+      "id": 21235,
+      "title": "Manteiga de Cacau Bastão FPS 15, Zanphy, Neutro",
+      "current_price": "3.90",
+      "original_price": "6.10",
+      "discount_pct": "36.00",
+      "image_url": "https://m.media-amazon.com/images/I/51f0lfuQMzL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=manteiga-de-cacau-bastao-fps-15-zanphy-neutro-21235&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21235"
+    },
+    {
+      "id": 5582,
+      "title": "Anúncio patrocinado – Motorola, Carregador TurboPower 20W, Cabo 1 Metro, Porta USB-A, Cabo USB-C",
+      "current_price": "94.04",
+      "original_price": "115.99",
+      "discount_pct": "19.00",
+      "image_url": "https://m.media-amazon.com/images/I/413II6KruyL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=motorola-carregador-turbopower-20w-cabo-1-metro-porta-usb-a-cabo-usb-c-5582&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5582"
+    },
+    {
+      "id": 9818,
+      "title": "Geonav Carregador Universal Ultra Rápido, Power Delivery 25W, 1 Porta USB-C, CH25PDWT, Branco",
+      "current_price": "41.46",
+      "original_price": "52.90",
+      "discount_pct": "22.00",
+      "image_url": "https://m.media-amazon.com/images/I/51qPYez46wL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=geonav-carregador-universal-ultra-rapido-power-delivery-25w-1-porta-usb-c-ch25pdwt-branco-9818&utm_source=instagram&utm_medium=bio&utm_campaign=offer_9818"
     },
     {
       "id": 20922,
@@ -22,36 +52,6 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
-    },
-    {
-      "id": 15498,
-      "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
-      "current_price": "13.09",
-      "original_price": "16.51",
-      "discount_pct": "21.00",
-      "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
-    },
-    {
-      "id": 7829,
-      "title": "Melatonina Fini: Gomas Para Com Sabor Morango, Veganas e Sem Glúten - 120 Unidades",
-      "current_price": "75.00",
-      "original_price": "209.00",
-      "discount_pct": "64.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_861551-MLA108861039495_032026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7896581688?matt_word=dbot_ig_bio_7829&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7829"
-    },
-    {
-      "id": 21184,
-      "title": "Fralda Pampers Premium Care Pants Tamanho XXG 90 Unidades",
-      "current_price": "140.00",
-      "original_price": "204.00",
-      "discount_pct": "31.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_991271-MLA99934452103_112025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5659908354?matt_word=dbot_ig_bio_21184&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21184"
     }
   ]
 }

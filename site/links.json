@@ -1,57 +1,57 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-17T00:39:30.731187+00:00",
+  "generated_at": "2026-11-17T11:03:03.564816+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21235,
-      "title": "Manteiga de Cacau Bastão FPS 15, Zanphy, Neutro",
-      "current_price": "3.90",
-      "original_price": "6.10",
-      "discount_pct": "36.00",
-      "image_url": "https://m.media-amazon.com/images/I/51f0lfuQMzL._AC_UL320_.jpg",
+      "id": 21357,
+      "title": "Shorts Esportivo Insider Endorphine, Masculino",
+      "current_price": "89.90",
+      "original_price": "229.00",
+      "discount_pct": "61.00",
+      "image_url": "https://m.media-amazon.com/images/I/416NN84159L._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=manteiga-de-cacau-bastao-fps-15-zanphy-neutro-21235&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21235"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=shorts-esportivo-insider-endorphine-masculino-21357&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21357"
     },
     {
-      "id": 21318,
-      "title": "Kit Wella Professionals Blondorplex - Shampoo 1L",
-      "current_price": "138.00",
-      "original_price": "269.00",
-      "discount_pct": "48.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_972236-MLA113992427728_072026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7285924994?matt_word=dbot_ig_bio_21318&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21318"
-    },
-    {
-      "id": 21324,
-      "title": "Tênis Lacoste Masculino Backcourt",
-      "current_price": "179.00",
-      "original_price": "399.00",
-      "discount_pct": "55.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_622704-MLB119486488968_112026-V-tnis-lacoste-masculino-backcourt.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4286618047-tnis-lacoste-masculino-backcourt-_JM?matt_word=dbot_ig_bio_21324&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21324"
-    },
-    {
-      "id": 21323,
-      "title": "Mouse Gamer Redragon King Pro 1K Preto - M916-PRO-1K",
-      "current_price": "149.00",
-      "original_price": "336.00",
-      "discount_pct": "55.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_789229-MLA99454988196_112025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5290673052?matt_word=dbot_ig_bio_21323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21323"
-    },
-    {
-      "id": 20922,
-      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
-      "current_price": "10.99",
-      "original_price": "14.69",
-      "discount_pct": "25.00",
-      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
+      "id": 21332,
+      "title": "Bolsa Feminina Lorena Com Alça Removível",
+      "current_price": "33.90",
+      "original_price": "69.90",
+      "discount_pct": "52.00",
+      "image_url": "https://m.media-amazon.com/images/I/51cxvToSAaL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=bolsa-feminina-lorena-com-alca-removivel-21332&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21332"
+    },
+    {
+      "id": 21363,
+      "title": "Bermuda Térmica Microfibra Sem Costura Anti Assadura Usee Brasil P",
+      "current_price": "26.59",
+      "original_price": "69.90",
+      "discount_pct": "62.00",
+      "image_url": "https://m.media-amazon.com/images/I/61Xdrj7-h8L._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=bermuda-termica-microfibra-sem-costura-anti-assadura-usee-brasil-p-21363&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21363"
+    },
+    {
+      "id": 21329,
+      "title": "Anúncio patrocinado – IceSelect Mochila de Viagem Expansivel Grande Masculina Feminina,Mochila Avião Notebook Bolsa de Sap...",
+      "current_price": "94.98",
+      "original_price": "139.99",
+      "discount_pct": "32.00",
+      "image_url": "https://m.media-amazon.com/images/I/71ddqDaqLPL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-iceselect-mochila-de-viagem-expansivel-grande-masculina-femininamochila-aviao-notebook-bolsa-de-sap-21329&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21329"
+    },
+    {
+      "id": 21370,
+      "title": "Fritadeira sem óleo air fryer 4L Mondial 1500W AFN-40-BFT",
+      "current_price": "279.00",
+      "original_price": "716.00",
+      "discount_pct": "60.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_775407-MLA99776749612_122025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4671001438?matt_word=dbot_ig_bio_21370&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21370"
     }
   ]
 }

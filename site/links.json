@@ -1,47 +1,37 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-17T19:21:31.567792+00:00",
+  "generated_at": "2026-11-17T21:45:08.218695+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 7712,
-      "title": "Ilía Flor De Laranjeira 50ml Deo Parfum Feminino Natura",
-      "current_price": "99.00",
-      "original_price": "199.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_642201-MLU72605881861_102023-AB.webp",
+      "id": 21485,
+      "title": "Tênis New Balance Feminino Fresh Foam Corrida Caminhada",
+      "current_price": "296.00",
+      "original_price": "642.00",
+      "discount_pct": "53.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_739099-MLB119036033717_102026-V-tnis-new-balance-feminino-fresh-foam-corrida-caminhada.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2bU48KC?matt_word=dbot_ig_bio_7712&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7712"
+      "tracked_url": "https://meli.la/2P6U6oW?matt_word=dbot_ig_bio_21485&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21485"
     },
     {
-      "id": 21462,
-      "title": "Liquidificador portátil Oster, Gomax, capacidade de 590 ml",
-      "current_price": "189.00",
-      "original_price": "499.00",
-      "discount_pct": "62.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_969778-MLA113145793086_072026-O.webp",
+      "id": 21456,
+      "title": "Colgate Creme Dental Total Original Mint 6x90g, Prevenção Ativa com Flúor",
+      "current_price": "29.00",
+      "original_price": "62.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959675-MLA101805584842_122025-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2ckk8qv?matt_word=dbot_ig_bio_21462&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21462"
+      "tracked_url": "https://meli.la/1yfekQ6?matt_word=dbot_ig_bio_21456&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21456"
     },
     {
-      "id": 566,
-      "title": "Brinox - Jogo de Panelas Antiaderente Ceramic Life 6 Peças Easy - Carbono",
-      "current_price": "292.00",
-      "original_price": "899.00",
-      "discount_pct": "67.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_807896-MLA80650258181_112024-O.webp",
+      "id": 21480,
+      "title": "10 Copo Cuia Térmico Personalizado A Laser Logo/nome/brinde",
+      "current_price": "280.00",
+      "original_price": "400.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_761764-MLB117319675490_102026-AB-10-copo-cuia-termico-personalizado-a-laser-logonomebrinde.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1MktYV6?matt_word=dbot_ig_bio_566&utm_source=instagram&utm_medium=bio&utm_campaign=offer_566"
-    },
-    {
-      "id": 21463,
-      "title": "Conjunto de 6 Pratos Fundos Biona Donna Lírios Florido Verde, Laranja e Branco de 21,5\"",
-      "current_price": "99.00",
-      "original_price": "118.00",
-      "discount_pct": "15.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_621629-MLA99414386914_112025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/29itUtb?matt_word=dbot_ig_bio_21463&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21463"
+      "tracked_url": "https://meli.la/2tnskp2?matt_word=dbot_ig_bio_21480&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21480"
     },
     {
       "id": 7191,
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896791-MLA99513913400_112025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/1vnZkkd?matt_word=dbot_ig_bio_7191&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7191"
+    },
+    {
+      "id": 21132,
+      "title": "Perfume Árabe Club De Nuit Intense 105ml Edt Masculino Klassey",
+      "current_price": "209.00",
+      "original_price": "349.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_775100-MLA120971998895_112026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2M5HxiW?matt_word=dbot_ig_bio_21132&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21132"
     }
   ]
 }

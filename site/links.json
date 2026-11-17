@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-16T22:00:14.408400+00:00",
+  "generated_at": "2026-11-17T00:39:30.731187+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 21302,
-      "title": "Perfume Feminino Natura Luna Absoluta Deo Colônia 75ml",
-      "current_price": "85.00",
-      "original_price": "185.00",
-      "discount_pct": "53.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_848541-MLU77515249710_072024-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5992138046?matt_word=dbot_ig_bio_21302&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21302"
-    },
     {
       "id": 21235,
       "title": "Manteiga de Cacau Bastão FPS 15, Zanphy, Neutro",
@@ -24,34 +14,44 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=manteiga-de-cacau-bastao-fps-15-zanphy-neutro-21235&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21235"
     },
     {
-      "id": 3213,
-      "title": "Paixão Óleo Corporal Tentadora 100 Ml | Tentadora em tamanho compacto",
-      "current_price": "10.90",
-      "original_price": "14.69",
-      "discount_pct": "26.00",
-      "image_url": "https://m.media-amazon.com/images/I/51addYZ0ziL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-tentadora-100-ml-3213&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3213"
-    },
-    {
-      "id": 15498,
-      "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
-      "current_price": "13.09",
-      "original_price": "16.51",
-      "discount_pct": "21.00",
-      "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
-    },
-    {
-      "id": 21300,
-      "title": "Delicious Mass Pouch 3kg Sabor Morango com Chantilly - FTW",
-      "current_price": "74.00",
-      "original_price": "129.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_927030-MLA99849861241_112025-O.webp",
+      "id": 21318,
+      "title": "Kit Wella Professionals Blondorplex - Shampoo 1L",
+      "current_price": "138.00",
+      "original_price": "269.00",
+      "discount_pct": "48.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_972236-MLA113992427728_072026-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5517661548?matt_word=dbot_ig_bio_21300&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21300"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7285924994?matt_word=dbot_ig_bio_21318&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21318"
+    },
+    {
+      "id": 21324,
+      "title": "Tênis Lacoste Masculino Backcourt",
+      "current_price": "179.00",
+      "original_price": "399.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_622704-MLB119486488968_112026-V-tnis-lacoste-masculino-backcourt.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4286618047-tnis-lacoste-masculino-backcourt-_JM?matt_word=dbot_ig_bio_21324&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21324"
+    },
+    {
+      "id": 21323,
+      "title": "Mouse Gamer Redragon King Pro 1K Preto - M916-PRO-1K",
+      "current_price": "149.00",
+      "original_price": "336.00",
+      "discount_pct": "55.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_789229-MLA99454988196_112025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5290673052?matt_word=dbot_ig_bio_21323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21323"
+    },
+    {
+      "id": 20922,
+      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
+      "current_price": "10.99",
+      "original_price": "14.69",
+      "discount_pct": "25.00",
+      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     }
   ]
 }

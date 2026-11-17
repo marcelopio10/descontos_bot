@@ -1,37 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-17T21:45:08.218695+00:00",
+  "generated_at": "2026-11-17T23:51:20.325087+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21485,
-      "title": "Tênis New Balance Feminino Fresh Foam Corrida Caminhada",
-      "current_price": "296.00",
-      "original_price": "642.00",
-      "discount_pct": "53.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_739099-MLB119036033717_102026-V-tnis-new-balance-feminino-fresh-foam-corrida-caminhada.webp",
+      "id": 21506,
+      "title": "Perfume Versace Bright Crystal Absolu EDP 30ml Feminino Floral Frutado",
+      "current_price": "256.00",
+      "original_price": "489.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_997321-MLU78400131512_082024-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2P6U6oW?matt_word=dbot_ig_bio_21485&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21485"
-    },
-    {
-      "id": 21456,
-      "title": "Colgate Creme Dental Total Original Mint 6x90g, Prevenção Ativa com Flúor",
-      "current_price": "29.00",
-      "original_price": "62.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959675-MLA101805584842_122025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1yfekQ6?matt_word=dbot_ig_bio_21456&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21456"
-    },
-    {
-      "id": 21480,
-      "title": "10 Copo Cuia Térmico Personalizado A Laser Logo/nome/brinde",
-      "current_price": "280.00",
-      "original_price": "400.00",
-      "discount_pct": "30.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_761764-MLB117319675490_102026-AB-10-copo-cuia-termico-personalizado-a-laser-logonomebrinde.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2tnskp2?matt_word=dbot_ig_bio_21480&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21480"
+      "tracked_url": "https://meli.la/1zSYLCV?matt_word=dbot_ig_bio_21506&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21506"
     },
     {
       "id": 7191,
@@ -44,14 +24,34 @@
       "tracked_url": "https://meli.la/1vnZkkd?matt_word=dbot_ig_bio_7191&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7191"
     },
     {
-      "id": 21132,
-      "title": "Perfume Árabe Club De Nuit Intense 105ml Edt Masculino Klassey",
-      "current_price": "209.00",
-      "original_price": "349.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_775100-MLA120971998895_112026-AB.webp",
+      "id": 21510,
+      "title": "Eau de Parfum Jean Paul Gaultier Divine Feminino 30 mL",
+      "current_price": "289.00",
+      "original_price": "549.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_698840-MLA99902359374_122025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2M5HxiW?matt_word=dbot_ig_bio_21132&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21132"
+      "tracked_url": "https://meli.la/31dHD8r?matt_word=dbot_ig_bio_21510&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21510"
+    },
+    {
+      "id": 21429,
+      "title": "Kit Parafusadeira/Furadeira A Bateria 12V 3/8 Polegadas 10Mm + Jogo De Ferramentas 169 Peças Com Maleta The Black Tools",
+      "current_price": "246.00",
+      "original_price": "489.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_854053-MLA116500660104_092026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/21FPeaq?matt_word=dbot_ig_bio_21429&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21429"
+    },
+    {
+      "id": 21502,
+      "title": "Whey Protein Iso Triple Zero Baunilha 900g Integralmédica",
+      "current_price": "292.00",
+      "original_price": "625.00",
+      "discount_pct": "53.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_645191-MLA119102284218_112026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1JL6UJ6?matt_word=dbot_ig_bio_21502&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21502"
     }
   ]
 }

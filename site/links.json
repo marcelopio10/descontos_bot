@@ -1,18 +1,8 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-18T17:04:55.922200+00:00",
+  "generated_at": "2026-11-18T19:39:24.050877+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
-    {
-      "id": 20781,
-      "title": "Tênis Lacoste Masculino L004 De Couro",
-      "current_price": "296.00",
-      "original_price": "549.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_767070-MLB106437148181_022026-V-tnis-lacoste-masculino-l004-de-couro.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2kxkcmy?matt_word=dbot_ig_bio_20781&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20781"
-    },
     {
       "id": 5867,
       "title": "O Boticário Boticollection Connexion Desodorante Colônia 100ml",
@@ -22,16 +12,6 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677713-MLA102051132170_122025-AB.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://meli.la/2sKstek?matt_word=dbot_ig_bio_5867&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5867"
-    },
-    {
-      "id": 21587,
-      "title": "Sandália Feminina Salto Médio Taça Fino Agulha Festa Brilho",
-      "current_price": "87.00",
-      "original_price": "149.00",
-      "discount_pct": "41.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_857476-MLB108418795189_032026-V-sandalia-feminina-salto-medio-taca-fino-agulha-festa-brilho.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2tXvVd2?matt_word=dbot_ig_bio_21587&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21587"
     },
     {
       "id": 21625,
@@ -44,14 +24,34 @@
       "tracked_url": "https://meli.la/2VYxvCw?matt_word=dbot_ig_bio_21625&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21625"
     },
     {
-      "id": 3782,
-      "title": "Fone de Ouvido Sem Fio, HUAWEI FreeBuds SE 2, Até 40 Horas de Bateria, Compacto e Confortável, Até 3 Horas de Música com Uma Carga de 10 Minutos, Preto",
-      "current_price": "99.00",
-      "original_price": "146.00",
-      "discount_pct": "32.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_772560-MLA119425479482_112026-O.webp",
+      "id": 21422,
+      "title": "Perfume Mercedes-Benz Club Black Eau de Toilette Masculino 100 ml",
+      "current_price": "286.00",
+      "original_price": "799.00",
+      "discount_pct": "64.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_720915-MLA80300682687_102024-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1Q5Qx4U?matt_word=dbot_ig_bio_3782&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3782"
+      "tracked_url": "https://meli.la/1aASsKs?matt_word=dbot_ig_bio_21422&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21422"
+    },
+    {
+      "id": 21661,
+      "title": "Tenis Olympikus Acqua Feminino Esportivo Original",
+      "current_price": "208.00",
+      "original_price": "265.00",
+      "discount_pct": "21.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_971781-MLB112052327225_052026-V-tenis-olympikus-acqua-feminino-esportivo-original.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1eLnb16?matt_word=dbot_ig_bio_21661&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21661"
+    },
+    {
+      "id": 21660,
+      "title": "Alfajor Dr. Peanut 12un 420g Avelã Doce De Leite Brigadeiro",
+      "current_price": "78.00",
+      "original_price": "149.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_988697-MLA114052328175_072026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2GYVWRT?matt_word=dbot_ig_bio_21660&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21660"
     }
   ]
 }

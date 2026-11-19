@@ -1,57 +1,37 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-19T13:07:59.838946+00:00",
+  "generated_at": "2026-11-19T15:33:09.099762+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21836,
-      "title": "O Boticário Boticollection Connexion Desodorante Colônia Masculino 100ml",
-      "current_price": "84.00",
-      "original_price": "179.00",
+      "id": 21885,
+      "title": "Bolsa Termica Marmita Lancheira Grande Alça Ombro Trabalho Academia Passeio Azul",
+      "current_price": "33.00",
+      "original_price": "58.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_634436-MLA113723601824_072026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1jH9PBD?matt_word=dbot_ig_bio_21885&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21885"
+    },
+    {
+      "id": 21887,
+      "title": "Tinta Látex Anti Mofo Acrílica Parede Coral Coralar - Cores",
+      "current_price": "56.00",
+      "original_price": "129.00",
+      "discount_pct": "56.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_763295-MLB119581870374_112026-V-tinta-latex-anti-mofo-acrilica-parede-coral-coralar-cores.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2x5ad5S?matt_word=dbot_ig_bio_21887&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21887"
+    },
+    {
+      "id": 21695,
+      "title": "Whey 100% Pure 900g Pote Integralmedica GELATO DI LATTE",
+      "current_price": "146.00",
+      "original_price": "309.00",
       "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_653956-MLA84554574556_052025-AB.webp",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_827990-MLA99448338924_112025-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2E5S8tN?matt_word=dbot_ig_bio_21836&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21836"
-    },
-    {
-      "id": 21834,
-      "title": "Cetaphil Loção Hidratante Corporal e Facial para Pele Sensível, Normal a Seca 473ml - Hidratação 48h",
-      "current_price": "67.00",
-      "original_price": "134.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_624170-MLA116562708364_092026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1tah72y?matt_word=dbot_ig_bio_21834&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21834"
-    },
-    {
-      "id": 21835,
-      "title": "Protetor Solar Facial Neutrogena Sun Fresh FPS 70, 40g",
-      "current_price": "36.00",
-      "original_price": "66.00",
-      "discount_pct": "44.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_641747-MLA99450652452_112025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2G21ny6?matt_word=dbot_ig_bio_21835&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21835"
-    },
-    {
-      "id": 18909,
-      "title": "Máscara Keune Care Vital Nutrition 50ml Nutrição e Reparação para Cabelos Secos e Danificados",
-      "current_price": "19.00",
-      "original_price": "73.00",
-      "discount_pct": "73.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_899348-MLA99892745395_112025-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2t66poo?matt_word=dbot_ig_bio_18909&utm_source=instagram&utm_medium=bio&utm_campaign=offer_18909"
-    },
-    {
-      "id": 21798,
-      "title": "Relógio Smartwatch Redmiwatch 5 Active Prata Xiaomi Branco Preto Prateado",
-      "current_price": "262.00",
-      "original_price": "459.00",
-      "discount_pct": "43.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_676544-MLA110358386168_052026-AB.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/34fZBJC?matt_word=dbot_ig_bio_21798&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21798"
+      "tracked_url": "https://meli.la/1c5VwGA?matt_word=dbot_ig_bio_21695&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21695"
     }
   ]
 }

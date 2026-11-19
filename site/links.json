@@ -1,17 +1,27 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-19T17:27:19.677034+00:00",
+  "generated_at": "2026-11-19T19:56:12.388071+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21914,
-      "title": "Chinelo Sandália Havaianas Brasil Bandeirinha Original Cores",
-      "current_price": "49.00",
-      "original_price": "78.00",
-      "discount_pct": "36.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_674190-MLB95278350772_102025-V-chinelo-sandalia-havaianas-brasil-bandeirinha-original-cores.webp",
+      "id": 7712,
+      "title": "Ilía Flor De Laranjeira 50ml Deo Parfum Feminino Natura",
+      "current_price": "99.00",
+      "original_price": "199.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_642201-MLU72605881861_102023-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2i9smQv?matt_word=dbot_ig_bio_21914&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21914"
+      "tracked_url": "https://meli.la/2bU48KC?matt_word=dbot_ig_bio_7712&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7712"
+    },
+    {
+      "id": 21936,
+      "title": "Tênis Nike Flex Train Masculino",
+      "current_price": "294.00",
+      "original_price": "499.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_877068-MLB112363808996_062026-V-tnis-nike-flex-train-masculino.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1QNVS1w?matt_word=dbot_ig_bio_21936&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21936"
     },
     {
       "id": 21885,
@@ -24,34 +34,24 @@
       "tracked_url": "https://meli.la/1jH9PBD?matt_word=dbot_ig_bio_21885&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21885"
     },
     {
-      "id": 21835,
-      "title": "Protetor Solar Facial Neutrogena Sun Fresh FPS 70, 40g",
-      "current_price": "36.00",
-      "original_price": "66.00",
-      "discount_pct": "44.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_641747-MLA99450652452_112025-AB.webp",
+      "id": 21798,
+      "title": "Relógio Smartwatch Redmiwatch 5 Active Prata Xiaomi Branco Preto Prateado",
+      "current_price": "262.00",
+      "original_price": "459.00",
+      "discount_pct": "43.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_676544-MLA110358386168_052026-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2G21ny6?matt_word=dbot_ig_bio_21835&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21835"
+      "tracked_url": "https://meli.la/2455xqc?matt_word=dbot_ig_bio_21798&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21798"
     },
     {
-      "id": 21918,
-      "title": "Relógio Masculino Saint Germain Murray Caixa Prateada de 40mm",
-      "current_price": "91.00",
-      "original_price": "249.00",
-      "discount_pct": "63.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_756733-MLA119509254416_112026-O.webp",
+      "id": 21169,
+      "title": "Maquina Cortar Cabelo Kemei Km-032 Lâmina Titânio Acabamento Oxae",
+      "current_price": "35.00",
+      "original_price": "78.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_903895-MLA91824528856_092025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2AYjFxV?matt_word=dbot_ig_bio_21918&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21918"
-    },
-    {
-      "id": 21915,
-      "title": "Camiseta Masculina Básica Polo Wear Promoção",
-      "current_price": "46.00",
-      "original_price": "59.00",
-      "discount_pct": "23.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_704829-MLB112021684210_062026-V-camiseta-masculina-basica-polo-wear-promoco.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/22sjBXa?matt_word=dbot_ig_bio_21915&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21915"
+      "tracked_url": "https://meli.la/1ezMLBA?matt_word=dbot_ig_bio_21169&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21169"
     }
   ]
 }

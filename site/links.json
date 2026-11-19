@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-19T15:33:09.099762+00:00",
+  "generated_at": "2026-11-19T17:27:19.677034+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 21914,
+      "title": "Chinelo Sandália Havaianas Brasil Bandeirinha Original Cores",
+      "current_price": "49.00",
+      "original_price": "78.00",
+      "discount_pct": "36.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_674190-MLB95278350772_102025-V-chinelo-sandalia-havaianas-brasil-bandeirinha-original-cores.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2i9smQv?matt_word=dbot_ig_bio_21914&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21914"
+    },
     {
       "id": 21885,
       "title": "Bolsa Termica Marmita Lancheira Grande Alça Ombro Trabalho Academia Passeio Azul",
@@ -14,24 +24,34 @@
       "tracked_url": "https://meli.la/1jH9PBD?matt_word=dbot_ig_bio_21885&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21885"
     },
     {
-      "id": 21887,
-      "title": "Tinta Látex Anti Mofo Acrílica Parede Coral Coralar - Cores",
-      "current_price": "56.00",
-      "original_price": "129.00",
-      "discount_pct": "56.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_763295-MLB119581870374_112026-V-tinta-latex-anti-mofo-acrilica-parede-coral-coralar-cores.webp",
+      "id": 21835,
+      "title": "Protetor Solar Facial Neutrogena Sun Fresh FPS 70, 40g",
+      "current_price": "36.00",
+      "original_price": "66.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_641747-MLA99450652452_112025-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2x5ad5S?matt_word=dbot_ig_bio_21887&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21887"
+      "tracked_url": "https://meli.la/2G21ny6?matt_word=dbot_ig_bio_21835&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21835"
     },
     {
-      "id": 21695,
-      "title": "Whey 100% Pure 900g Pote Integralmedica GELATO DI LATTE",
-      "current_price": "146.00",
-      "original_price": "309.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_827990-MLA99448338924_112025-AB.webp",
+      "id": 21918,
+      "title": "Relógio Masculino Saint Germain Murray Caixa Prateada de 40mm",
+      "current_price": "91.00",
+      "original_price": "249.00",
+      "discount_pct": "63.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_756733-MLA119509254416_112026-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/1c5VwGA?matt_word=dbot_ig_bio_21695&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21695"
+      "tracked_url": "https://meli.la/2AYjFxV?matt_word=dbot_ig_bio_21918&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21918"
+    },
+    {
+      "id": 21915,
+      "title": "Camiseta Masculina Básica Polo Wear Promoção",
+      "current_price": "46.00",
+      "original_price": "59.00",
+      "discount_pct": "23.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_704829-MLB112021684210_062026-V-camiseta-masculina-basica-polo-wear-promoco.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/22sjBXa?matt_word=dbot_ig_bio_21915&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21915"
     }
   ]
 }

@@ -1,17 +1,37 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-19T11:06:17.247711+00:00",
+  "generated_at": "2026-11-19T13:07:59.838946+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 5867,
-      "title": "O Boticário Boticollection Connexion Desodorante Colônia 100ml",
+      "id": 21836,
+      "title": "O Boticário Boticollection Connexion Desodorante Colônia Masculino 100ml",
       "current_price": "84.00",
       "original_price": "179.00",
       "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677713-MLA102051132170_122025-AB.webp",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_653956-MLA84554574556_052025-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2sKstek?matt_word=dbot_ig_bio_5867&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5867"
+      "tracked_url": "https://meli.la/2E5S8tN?matt_word=dbot_ig_bio_21836&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21836"
+    },
+    {
+      "id": 21834,
+      "title": "Cetaphil Loção Hidratante Corporal e Facial para Pele Sensível, Normal a Seca 473ml - Hidratação 48h",
+      "current_price": "67.00",
+      "original_price": "134.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_624170-MLA116562708364_092026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/1tah72y?matt_word=dbot_ig_bio_21834&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21834"
+    },
+    {
+      "id": 21835,
+      "title": "Protetor Solar Facial Neutrogena Sun Fresh FPS 70, 40g",
+      "current_price": "36.00",
+      "original_price": "66.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_641747-MLA99450652452_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2G21ny6?matt_word=dbot_ig_bio_21835&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21835"
     },
     {
       "id": 18909,
@@ -24,16 +44,6 @@
       "tracked_url": "https://meli.la/2t66poo?matt_word=dbot_ig_bio_18909&utm_source=instagram&utm_medium=bio&utm_campaign=offer_18909"
     },
     {
-      "id": 21802,
-      "title": "Deo Colônia Natura Kaiak Ultra Feminino 100 Ml",
-      "current_price": "75.00",
-      "original_price": "189.00",
-      "discount_pct": "60.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_856187-MLA87241056810_072025-V-deo-colnia-natura-kaiak-ultra-feminino-100-ml.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5431590172-deo-colnia-natura-kaiak-ultra-feminino-100-ml-_JM?matt_word=dbot_ig_bio_21802&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21802"
-    },
-    {
       "id": 21798,
       "title": "Relógio Smartwatch Redmiwatch 5 Active Prata Xiaomi Branco Preto Prateado",
       "current_price": "262.00",
@@ -41,17 +51,7 @@
       "discount_pct": "43.00",
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_676544-MLA110358386168_052026-AB.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2455xqc?matt_word=dbot_ig_bio_21798&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21798"
-    },
-    {
-      "id": 16510,
-      "title": "Air Fryer Britânia 6,5L 1700W 8 Funções Painel Digital Redstone BAF65A",
-      "current_price": "296.00",
-      "original_price": "456.00",
-      "discount_pct": "35.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_606677-MLA115733886141_082026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://meli.la/2svULiB?matt_word=dbot_ig_bio_16510&utm_source=instagram&utm_medium=bio&utm_campaign=offer_16510"
+      "tracked_url": "https://meli.la/34fZBJC?matt_word=dbot_ig_bio_21798&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21798"
     }
   ]
 }

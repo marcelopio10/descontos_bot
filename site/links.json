@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-20T16:49:23.047020+00:00",
+  "generated_at": "2026-11-20T19:07:05.615639+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,34 +14,24 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
-      "id": 22059,
-      "title": "Camisa Gola Polo Masculina Piquet Casual Premium",
-      "current_price": "35.00",
-      "original_price": "78.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_846119-MLB115445549163_082026-V-camisa-gola-polo-masculina-piquet-casual-premium.webp",
+      "id": 22082,
+      "title": "Vestido Midi Modelador Elegante Vazado Moderno Festa",
+      "current_price": "62.00",
+      "original_price": "119.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_971829-MLB95236251679_102025-V-vestido-midi-modelador-elegante-vazado-moderno-festa.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4063539245-camisa-gola-polo-masculina-piquet-casual-premium-_JM?matt_word=dbot_ig_bio_22059&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22059"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4254490877-vestido-midi-modelador-elegante-vazado-moderno-festa-_JM?matt_word=dbot_ig_bio_22082&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22082"
     },
     {
-      "id": 22063,
-      "title": "Tênis Masculino Vs Pace 2.0 adidas Ftwwht/cblack/ftwwht Liso",
-      "current_price": "208.00",
-      "original_price": "349.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_764496-MLA81708528254_012025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3956719625?matt_word=dbot_ig_bio_22063&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22063"
-    },
-    {
-      "id": 22060,
-      "title": "NIVEA Creme Facial Antissinais Cellular Lift Noite 50ml, Fortalece a Pele, Reduz Rugas, Estimula Colágeno, Bakuchiol Puro, Cuidado Noturno",
-      "current_price": "37.00",
-      "original_price": "79.00",
+      "id": 22081,
+      "title": "Fone de Ouvido Dapon H02D Bluetooth 5.1, Sem Fio e P2, com Microfone Integrado e Almofadas Macias na Cor Bege",
+      "current_price": "70.00",
+      "original_price": "149.00",
       "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_899369-MLA91200643095_082025-O.webp",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_672724-MLA99248419824_112025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3318558233?matt_word=dbot_ig_bio_22060&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22060"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6575305046?matt_word=dbot_ig_bio_22081&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22081"
     },
     {
       "id": 20922,
@@ -52,6 +42,16 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+    },
+    {
+      "id": 22083,
+      "title": "Kit 2 Refletores LED 600W QuantaCore Branco Frio IP67 Alumínio",
+      "current_price": "57.00",
+      "original_price": "119.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_703362-MLA112276028083_052026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4722276191?matt_word=dbot_ig_bio_22083&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22083"
     }
   ]
 }

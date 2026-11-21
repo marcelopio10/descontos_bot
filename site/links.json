@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-20T23:07:01.785685+00:00",
+  "generated_at": "2026-11-21T01:28:15.282566+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,6 +12,16 @@
       "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
+    },
+    {
+      "id": 22125,
+      "title": "adidas Vibes Full Recharge Edp - Perfume Masculino 100ml",
+      "current_price": "84.00",
+      "original_price": "199.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802259-MLA81157110235_122024-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5551421496?matt_word=dbot_ig_bio_22125&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22125"
     },
     {
       "id": 22063,
@@ -34,24 +44,14 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
-      "id": 22101,
-      "title": "Jaqueta De Couro Ecológica Masculina Courino Resistente Durável Impermeável Motoqueiro Inverno Masculino",
-      "current_price": "75.00",
-      "original_price": "229.00",
-      "discount_pct": "66.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_763679-MLB121478799191_112026-V-jaqueta-de-couro-ecologica-masculina-courino-resistente-duravel-impermeavel-motoqueiro-inverno-masculino.webp",
+      "id": 22126,
+      "title": "Natura Deo Parfum Homem Sagaz 100ml",
+      "current_price": "151.00",
+      "original_price": "249.00",
+      "discount_pct": "39.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_887563-MLA101057817979_122025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4072926811-jaqueta-de-couro-ecologica-masculina-courino-resistente-duravel-impermeavel-motoqueiro-inverno-masculino-_JM?matt_word=dbot_ig_bio_22101&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22101"
-    },
-    {
-      "id": 21455,
-      "title": "O Boticário Quasar Deep Blue Desodorante Colônia 100ml",
-      "current_price": "99.00",
-      "original_price": "189.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_878157-MLA117333394916_102026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3892528343?matt_word=dbot_ig_bio_21455&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21455"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7827432824?matt_word=dbot_ig_bio_22126&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22126"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-21T13:47:15.366401+00:00",
+  "generated_at": "2026-11-21T15:33:44.668439+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -34,24 +34,24 @@
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-1774504462?matt_word=dbot_ig_bio_22156&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22156"
     },
     {
-      "id": 5582,
-      "title": "Anúncio patrocinado – Motorola, Carregador TurboPower 20W, Cabo 1 Metro, Porta USB-A, Cabo USB-C",
-      "current_price": "94.04",
-      "original_price": "115.99",
-      "discount_pct": "19.00",
-      "image_url": "https://m.media-amazon.com/images/I/413II6KruyL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=motorola-carregador-turbopower-20w-cabo-1-metro-porta-usb-a-cabo-usb-c-5582&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5582"
+      "id": 22161,
+      "title": "Tênis Nike Revolution 8 Masculino",
+      "current_price": "294.00",
+      "original_price": "399.00",
+      "discount_pct": "26.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_988693-MLB92694578553_092025-V-tnis-nike-revolution-8-masculino.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4209906299-tnis-nike-revolution-8-masculino-_JM?matt_word=dbot_ig_bio_22161&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22161"
     },
     {
-      "id": 22154,
-      "title": "Anúncio patrocinado – Geonav Power Bank, Carregador Portátil Universal 10.000mAh, Carga rápida, 2 saídas USB-A (até 18W qu...",
-      "current_price": "89.01",
-      "original_price": "109.90",
-      "discount_pct": "19.00",
-      "image_url": "https://m.media-amazon.com/images/I/71VoFVTnY8L._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-geonav-power-bank-carregador-portatil-universal-10000mah-carga-rapida-2-saidas-usb-a-ate-18w-qu-22154&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22154"
+      "id": 2497,
+      "title": "Boné Nike Club Unissex",
+      "current_price": "89.00",
+      "original_price": "179.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_782780-MLB100876708251_122025-V-bone-nike-club-unissex.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3797670936-bone-nike-club-unissex-_JM?matt_word=dbot_ig_bio_2497&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2497"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-22T11:03:31.629114+00:00",
+  "generated_at": "2026-11-22T12:47:41.989938+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,16 +12,6 @@
       "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
-    },
-    {
-      "id": 20763,
-      "title": "Camiseta Cropped Nike Sportswear Essential Feminina",
-      "current_price": "69.00",
-      "original_price": "129.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_848238-MLB100378256876_122025-V-camiseta-cropped-nike-sportswear-essential-feminina.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-2012175663-camiseta-cropped-nike-sportswear-essential-feminina-_JM?matt_word=dbot_ig_bio_20763&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20763"
     },
     {
       "id": 22266,
@@ -44,14 +34,24 @@
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-5874026738-kit-6-cuecas-boxer-box-classic-microfibra-original-reebok-_JM?matt_word=dbot_ig_bio_4172&utm_source=instagram&utm_medium=bio&utm_campaign=offer_4172"
     },
     {
-      "id": 22269,
-      "title": "Jogo 6 Taças de Champanhe 190ml Vidro Premium para Espumante Prosecco Festas Casamento e Brindes",
-      "current_price": "45.00",
-      "original_price": "89.00",
-      "discount_pct": "48.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_925792-MLA118816714434_102026-O.webp",
+      "id": 20922,
+      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
+      "current_price": "10.99",
+      "original_price": "14.69",
+      "discount_pct": "25.00",
+      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+    },
+    {
+      "id": 21836,
+      "title": "O Boticário Boticollection Connexion Desodorante Colônia Masculino 100ml",
+      "current_price": "84.00",
+      "original_price": "179.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_653956-MLA84554574556_052025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7924790572?matt_word=dbot_ig_bio_22269&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22269"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3684403824?matt_word=dbot_ig_bio_21836&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21836"
     }
   ]
 }

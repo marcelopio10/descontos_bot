@@ -1,37 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-22T20:49:55.717564+00:00",
+  "generated_at": "2026-11-22T22:55:08.989958+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 22323,
-      "title": "Creme Capilar Lola Cosmetics Bemdita Ghee Praia, Mini, 90g",
-      "current_price": "13.00",
-      "original_price": "29.90",
-      "discount_pct": "57.00",
-      "image_url": "https://m.media-amazon.com/images/I/517+HD-2ZuL._AC_UL320_.jpg",
+      "id": 21180,
+      "title": "Creme Facial Antissinais Neutrogena Face Care Intensive, FPS 22, 100g | Hidratação Intensa, Textura Leve, Oil Free",
+      "current_price": "23.37",
+      "original_price": "48.99",
+      "discount_pct": "52.00",
+      "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-capilar-lola-cosmetics-bemdita-ghee-praia-mini-90g-22323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22323"
-    },
-    {
-      "id": 22295,
-      "title": "Shampoo a Seco Ricca, Brisa Floral, 150ml",
-      "current_price": "18.89",
-      "original_price": "28.99",
-      "discount_pct": "35.00",
-      "image_url": "https://m.media-amazon.com/images/I/519XbD2x6mL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=shampoo-a-seco-ricca-brisa-floral-150ml-22295&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22295"
-    },
-    {
-      "id": 22330,
-      "title": "Tomada Inteligente Wi-Fi Kateluo 16A com Monitor de Consumo para Alexa e Google Home",
-      "current_price": "34.00",
-      "original_price": "65.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_829204-MLA111083065463_042026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5372250587?matt_word=dbot_ig_bio_22330&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22330"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
       "id": 22327,
@@ -52,6 +32,26 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+    },
+    {
+      "id": 22193,
+      "title": "Perfume Árabe Lattafa His Confession Masculino Eau de Parfum 100 ml",
+      "current_price": "210.00",
+      "original_price": "549.00",
+      "discount_pct": "61.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896263-MLA119238489287_102026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7076043722?matt_word=dbot_ig_bio_22193&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22193"
+    },
+    {
+      "id": 22324,
+      "title": "Placas Adesivas 3d Mármore Branco De Parede Kit C/ 10 Un",
+      "current_price": "19.00",
+      "original_price": "78.00",
+      "discount_pct": "75.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_982504-MLB71039893643_082023-V-placas-adesivas-3d-marmore-branco-de-parede-kit-c-10-un.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3381206749-placas-adesivas-3d-marmore-branco-de-parede-kit-c-10-un-_JM?matt_word=dbot_ig_bio_22324&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22324"
     }
   ]
 }

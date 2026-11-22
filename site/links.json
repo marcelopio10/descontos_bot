@@ -1,37 +1,47 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-22T17:50:14.008941+00:00",
+  "generated_at": "2026-11-22T20:49:55.717564+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21180,
-      "title": "Creme Facial Antissinais Neutrogena Face Care Intensive, FPS 22, 100g | Hidratação Intensa, Textura Leve, Oil Free",
-      "current_price": "23.37",
-      "original_price": "48.99",
-      "discount_pct": "52.00",
-      "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
+      "id": 22323,
+      "title": "Creme Capilar Lola Cosmetics Bemdita Ghee Praia, Mini, 90g",
+      "current_price": "13.00",
+      "original_price": "29.90",
+      "discount_pct": "57.00",
+      "image_url": "https://m.media-amazon.com/images/I/517+HD-2ZuL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-capilar-lola-cosmetics-bemdita-ghee-praia-mini-90g-22323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22323"
     },
     {
-      "id": 22309,
-      "title": "Shampoo Anticaspa Esfoliante Limpeza Profunda Ação Calmante com Ácido Salicílico e Piroctona Olamina Dercos Micro Peel Vichy, 150ml",
-      "current_price": "89.00",
-      "original_price": "147.00",
-      "discount_pct": "39.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_971175-MLA100095694203_122025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-2760313998?matt_word=dbot_ig_bio_22309&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22309"
-    },
-    {
-      "id": 22312,
-      "title": "Aspirador de Pó e Água Electrolux Acqua Power 1400W 11L com Função Sopro, Rodas 360°, Alta Sucção e Acessórios para Limpeza Residencial e Automotiva AQP20",
-      "current_price": "219.00",
-      "original_price": "339.00",
+      "id": 22295,
+      "title": "Shampoo a Seco Ricca, Brisa Floral, 150ml",
+      "current_price": "18.89",
+      "original_price": "28.99",
       "discount_pct": "35.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_653281-MLA117211961442_102026-O.webp",
+      "image_url": "https://m.media-amazon.com/images/I/519XbD2x6mL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=shampoo-a-seco-ricca-brisa-floral-150ml-22295&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22295"
+    },
+    {
+      "id": 22330,
+      "title": "Tomada Inteligente Wi-Fi Kateluo 16A com Monitor de Consumo para Alexa e Google Home",
+      "current_price": "34.00",
+      "original_price": "65.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_829204-MLA111083065463_042026-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-1620211578?matt_word=dbot_ig_bio_22312&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22312"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5372250587?matt_word=dbot_ig_bio_22330&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22330"
+    },
+    {
+      "id": 22327,
+      "title": "Tênis Wilson Ace 3.0 All Court Clay Saibro Original P/ Tenis",
+      "current_price": "266.00",
+      "original_price": "392.00",
+      "discount_pct": "32.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_973525-MLB93102860317_092025-V-tnis-wilson-ace-30-all-court-clay-saibro-original-p-tenis.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4188004609-tnis-wilson-ace-30-all-court-clay-saibro-original-p-tenis-_JM?matt_word=dbot_ig_bio_22327&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22327"
     },
     {
       "id": 20922,
@@ -42,16 +52,6 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
-    },
-    {
-      "id": 21422,
-      "title": "Perfume Mercedes-Benz Club Black Eau de Toilette Masculino 100 ml",
-      "current_price": "286.00",
-      "original_price": "799.00",
-      "discount_pct": "64.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_720915-MLA80300682687_102024-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3920976873?matt_word=dbot_ig_bio_21422&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21422"
     }
   ]
 }

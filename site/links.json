@@ -1,27 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-23T18:20:35.816663+00:00",
+  "generated_at": "2026-11-23T20:43:55.186485+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21180,
-      "title": "Creme Facial Antissinais Neutrogena Face Care Intensive, FPS 22, 100g | Hidratação Intensa, Textura Leve, Oil Free",
-      "current_price": "23.37",
-      "original_price": "48.99",
-      "discount_pct": "52.00",
-      "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
+      "id": 22323,
+      "title": "Creme Capilar Lola Cosmetics Bemdita Ghee Praia, Mini, 90g",
+      "current_price": "13.00",
+      "original_price": "29.90",
+      "discount_pct": "57.00",
+      "image_url": "https://m.media-amazon.com/images/I/517+HD-2ZuL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
-    },
-    {
-      "id": 22398,
-      "title": "Panela De Pressão Fechamento Externo Presscook Grafito 6,8l - Mimo Style",
-      "current_price": "158.00",
-      "original_price": "347.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_816315-MLA95220996890_102025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4278092815?matt_word=dbot_ig_bio_22398&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22398"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-capilar-lola-cosmetics-bemdita-ghee-praia-mini-90g-22323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22323"
     },
     {
       "id": 20922,
@@ -34,24 +24,34 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
-      "id": 5869,
-      "title": "O Boticário Egeo Bomb Black Masculino",
-      "current_price": "83.00",
-      "original_price": "164.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_725580-MLA84545221476_052025-O.webp",
+      "id": 22193,
+      "title": "Perfume Árabe Lattafa His Confession Masculino Eau de Parfum 100 ml",
+      "current_price": "210.00",
+      "original_price": "549.00",
+      "discount_pct": "61.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896263-MLA119238489287_102026-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5414752868?matt_word=dbot_ig_bio_5869&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5869"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7076043722?matt_word=dbot_ig_bio_22193&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22193"
     },
     {
-      "id": 22421,
-      "title": "Camiseta Malha Simples Essentials Três Listras adidas",
-      "current_price": "90.00",
-      "original_price": "149.00",
-      "discount_pct": "39.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_824532-MLB82240617524_022025-V-camiseta-malha-simples-essentials-trs-listras-adidas.webp",
+      "id": 22443,
+      "title": "Relógio Masculino Saint Germain SG Clássico de Couro Preto e Fundo Azul 42mm",
+      "current_price": "92.00",
+      "original_price": "229.00",
+      "discount_pct": "59.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_701037-MLA99938482621_112025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5207492742-camiseta-malha-simples-essentials-trs-listras-adidas-_JM?matt_word=dbot_ig_bio_22421&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22421"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5829274424?matt_word=dbot_ig_bio_22443&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22443"
+    },
+    {
+      "id": 5867,
+      "title": "O Boticário Boticollection Connexion Desodorante Colônia 100ml",
+      "current_price": "84.00",
+      "original_price": "179.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677713-MLA102051132170_122025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6096547070?matt_word=dbot_ig_bio_5867&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5867"
     }
   ]
 }

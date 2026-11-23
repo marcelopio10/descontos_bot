@@ -1,9 +1,502 @@
 {
   "version": "2.0",
-  "generated_at": "2026-11-23T20:43:55.004530+00:00",
+  "generated_at": "2026-11-23T22:52:03.151831+00:00",
   "site_base_url": "https://descontos-bot.vercel.app",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "offers": [
+    {
+      "id": 14449,
+      "slug": "perfume-arabe-sabah-al-ward-sugar-original-feminino-eau-de-parfum-14449",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume ÁRABE Sabah Al ward Sugar Original Feminino Eau de parfum",
+      "short_description": "",
+      "current_price": "110.00",
+      "original_price": "236.00",
+      "discount_pct": "53.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_694010-MLA120368074340_112026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-6986092542",
+      "detail_url": "/oferta?slug=perfume-arabe-sabah-al-ward-sugar-original-feminino-eau-de-parfum-14449",
+      "price_collected_at": "2026-11-23T22:51:59.014518+00:00"
+    },
+    {
+      "id": 15705,
+      "slug": "perfume-badee-al-oud-oud-for-glory-original-100ml-15705",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Bade'e Al Oud Oud For Glory Original 100Ml",
+      "short_description": "",
+      "current_price": "156.00",
+      "original_price": "308.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_724800-MLU72753843962_112023-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-6487720928",
+      "detail_url": "/oferta?slug=perfume-badee-al-oud-oud-for-glory-original-100ml-15705",
+      "price_collected_at": "2026-11-23T22:51:58.968181+00:00"
+    },
+    {
+      "id": 18142,
+      "slug": "philips-oneblade-qp142510-com-pente-aparador-5-em-1-18142",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Philips OneBlade Aparador e Barbeador Elétrico com Pente Ajustável 5 em 1 | Raspa, Apara e Contorna | Uso Seco e Molhado | 100% À Prova d'Água | Sem Fio | Bivolt | QP1425/10",
+      "short_description": "",
+      "current_price": "138.00",
+      "original_price": "212.00",
+      "discount_pct": "34.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_750670-MLA118429558724_102026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4208012055",
+      "detail_url": "/oferta?slug=philips-oneblade-qp142510-com-pente-aparador-5-em-1-18142",
+      "price_collected_at": "2026-11-23T22:51:58.937278+00:00"
+    },
+    {
+      "id": 22457,
+      "slug": "basike-caixa-de-som-portatil-com-bluetooth-boombox-80w-8000mah-10hrs-sem-fio-ipx6-a-prova-dagua-com-bateria-recarregavel-luz-rgb-hifi-tws-bass-forte-audio-de-alta-qualid-para-tv-festa-casa-subwoofer-22457",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Basike Caixa de Som Portátil Com Bluetooth Boombox 80W 8000Mah 10hrs Sem fio IPX6 À Prova D'água Com Bateria Recarregavel Luz RGB Hifi TWS Bass Forte Áudio de Alta Qualid Para TV Festa Casa Subwoofer",
+      "short_description": "",
+      "current_price": "349.00",
+      "original_price": "599.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_882229-MLA99999750765_112025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4229317295",
+      "detail_url": "/oferta?slug=basike-caixa-de-som-portatil-com-bluetooth-boombox-80w-8000mah-10hrs-sem-fio-ipx6-a-prova-dagua-com-bateria-recarregavel-luz-rgb-hifi-tws-bass-forte-audio-de-alta-qualid-para-tv-festa-casa-subwoofer-22457",
+      "price_collected_at": "2026-11-23T22:51:58.901490+00:00"
+    },
+    {
+      "id": 5867,
+      "slug": "o-boticario-boticollection-connexion-colonia-100ml-5867",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "O Boticário Boticollection Connexion Desodorante Colônia 100ml",
+      "short_description": "",
+      "current_price": "84.00",
+      "original_price": "179.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677713-MLA102051132170_122025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-6096547070",
+      "detail_url": "/oferta?slug=o-boticario-boticollection-connexion-colonia-100ml-5867",
+      "price_collected_at": "2026-11-23T22:51:58.883603+00:00"
+    },
+    {
+      "id": 21054,
+      "slug": "body-spray-carolina-herrera-212-vip-black-masculino-250-ml-21054",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Body Spray Carolina Herrera 212 VIP Black masculino 250 ml",
+      "short_description": "",
+      "current_price": "160.00",
+      "original_price": "278.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_713582-MLU75603019404_042024-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-7285009938",
+      "detail_url": "/oferta?slug=body-spray-carolina-herrera-212-vip-black-masculino-250-ml-21054",
+      "price_collected_at": "2026-11-23T22:51:58.869759+00:00"
+    },
+    {
+      "id": 22456,
+      "slug": "starlink-mini-x-com-roteador-wifi-6-branco-22456",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Starlink Mini X Com Roteador Wifi 6 Branco",
+      "short_description": "",
+      "current_price": "449.00",
+      "original_price": "799.00",
+      "discount_pct": "43.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_780068-MLB117865876686_102026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-7820982558",
+      "detail_url": "/oferta?slug=starlink-mini-x-com-roteador-wifi-6-branco-22456",
+      "price_collected_at": "2026-11-23T22:51:58.855491+00:00"
+    },
+    {
+      "id": 14829,
+      "slug": "lavadora-de-alta-pressao-karcher-compacta-1500-psilibras-1400w-300lh-com-aplicador-de-detergente-e-lanca-regulavel-220v-14829",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Lavadora de Alta Pressão Kärcher Compacta 1.500 PSI 1400W 300L/h com Aplicador de Detergente e Lança Regulável",
+      "short_description": "",
+      "current_price": "269.00",
+      "original_price": "499.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_681126-MLA115545993062_082026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-3393222713",
+      "detail_url": "/oferta?slug=lavadora-de-alta-pressao-karcher-compacta-1500-psilibras-1400w-300lh-com-aplicador-de-detergente-e-lanca-regulavel-220v-14829",
+      "price_collected_at": "2026-11-23T22:51:58.844696+00:00"
+    },
+    {
+      "id": 5402,
+      "slug": "cooktop-5-bocas-mesa-de-vidro-atlas-agile-up-bivolt-preto-5402",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cooktop 5 Bocas Atlas Agile Up com Mesa De Vidro A Gás Preto Bivolt",
+      "short_description": "",
+      "current_price": "347.00",
+      "original_price": "766.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_649393-MLA99898173151_112025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5528387668",
+      "detail_url": "/oferta?slug=cooktop-5-bocas-mesa-de-vidro-atlas-agile-up-bivolt-preto-5402",
+      "price_collected_at": "2026-11-23T22:51:58.835477+00:00"
+    },
+    {
+      "id": 22455,
+      "slug": "calca-jeans-feminina-flare-cos-alto-empina-bumbum-modeladora-22455",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Calça Jeans Feminina Flare Cós Alto Empina Bumbum Modeladora",
+      "short_description": "",
+      "current_price": "51.00",
+      "original_price": "107.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_642996-MLB117743987796_102026-V-calca-jeans-feminina-flare-cos-alto-empina-bumbum-modeladora.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-2182188042-calca-jeans-feminina-flare-cos-alto-empina-bumbum-modeladora-_JM",
+      "detail_url": "/oferta?slug=calca-jeans-feminina-flare-cos-alto-empina-bumbum-modeladora-22455",
+      "price_collected_at": "2026-11-23T22:51:58.825035+00:00"
+    },
+    {
+      "id": 12097,
+      "slug": "jean-paul-gaultier-le-beau-perfume-eau-de-parfum-intense-125-ml-12097",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Jean Paul Gaultier Le Beau Perfume Eau De Parfum Intense 125 ml",
+      "short_description": "",
+      "current_price": "640.00",
+      "original_price": "928.00",
+      "discount_pct": "31.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_739181-MLA93896048973_102025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5313679898",
+      "detail_url": "/oferta?slug=jean-paul-gaultier-le-beau-perfume-eau-de-parfum-intense-125-ml-12097",
+      "price_collected_at": "2026-11-23T22:51:58.816925+00:00"
+    },
+    {
+      "id": 16515,
+      "slug": "kit-2-camisetas-brasa-pica-pau-bordado-reserva-16515",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit 2 Camisetas Brasa Pica Pau Bordado Reserva",
+      "short_description": "",
+      "current_price": "118.00",
+      "original_price": "238.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_979770-MLB114759958418_082026-V-kit-2-camisetas-brasa-pica-pau-bordado-reserva.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5871604618-kit-2-camisetas-brasa-pica-pau-bordado-reserva-_JM",
+      "detail_url": "/oferta?slug=kit-2-camisetas-brasa-pica-pau-bordado-reserva-16515",
+      "price_collected_at": "2026-11-23T22:51:58.808182+00:00"
+    },
+    {
+      "id": 20414,
+      "slug": "perfume-yves-saint-laurent-ysl-masculino-edt-100ml-amadeirado-aromatico-20414",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Yves Saint Laurent YSL Masculino EDT 100ml Amadeirado Aromático",
+      "short_description": "",
+      "current_price": "549.00",
+      "original_price": "1199.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_975529-MLU72030573627_092023-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4745923203",
+      "detail_url": "/oferta?slug=perfume-yves-saint-laurent-ysl-masculino-edt-100ml-amadeirado-aromatico-20414",
+      "price_collected_at": "2026-11-23T22:51:58.798520+00:00"
+    },
+    {
+      "id": 22454,
+      "slug": "kit-antiacne-avancado-gl01al7nc10mix01-principia-22454",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit Antiacne Avançado Gl01+al7+nc10+mix01 Principia",
+      "short_description": "",
+      "current_price": "155.00",
+      "original_price": "216.00",
+      "discount_pct": "28.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_632178-MLA86410780269_062025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-6496434654",
+      "detail_url": "/oferta?slug=kit-antiacne-avancado-gl01al7nc10mix01-principia-22454",
+      "price_collected_at": "2026-11-23T22:51:58.785391+00:00"
+    },
+    {
+      "id": 21304,
+      "slug": "monitor-gamer-philips-evnia-27-ips-144hz-05ms-fhd27m2n3200nf-preto-21304",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Monitor Gamer Philips Evnia 27'' Ips 144Hz 0.5ms Fhd27m2n3200nf Preto",
+      "short_description": "",
+      "current_price": "590.00",
+      "original_price": "1090.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_997395-MLA114299889989_072026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5561915277",
+      "detail_url": "/oferta?slug=monitor-gamer-philips-evnia-27-ips-144hz-05ms-fhd27m2n3200nf-preto-21304",
+      "price_collected_at": "2026-11-23T22:51:58.776619+00:00"
+    },
+    {
+      "id": 21056,
+      "slug": "viseira-nike-dri-fit-ace-visor-cor-pretobranco-tamanho-mg-21056",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Viseira Nike Dri-fit Ace Visor Cor Preto/branco Tamanho M/g",
+      "short_description": "",
+      "current_price": "79.00",
+      "original_price": "149.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_891587-MLA92442753015_092025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5698170370",
+      "detail_url": "/oferta?slug=viseira-nike-dri-fit-ace-visor-cor-pretobranco-tamanho-mg-21056",
+      "price_collected_at": "2026-11-23T22:51:58.764390+00:00"
+    },
+    {
+      "id": 22453,
+      "slug": "kit-tratamento-completo-reparacao-molecular-com-acido-citrico-reconstroi-ligacoes-devolve-forca-aos-cabelos-danificados-pre-shampoo-shampoo-condicionador-elseve-bond-repair-loreal-paris-22453",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Kit Tratamento Completo Reparação Molecular com Ácido Cítrico Reconstrói Ligações Devolve Força aos Cabelos Danificados (Pré-Shampoo + Shampoo + Condicionador) Elseve Bond Repair L'Oréal Paris",
+      "short_description": "",
+      "current_price": "95.00",
+      "original_price": "145.00",
+      "discount_pct": "34.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802003-MLA85927904820_062025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5541145582",
+      "detail_url": "/oferta?slug=kit-tratamento-completo-reparacao-molecular-com-acido-citrico-reconstroi-ligacoes-devolve-forca-aos-cabelos-danificados-pre-shampoo-shampoo-condicionador-elseve-bond-repair-loreal-paris-22453",
+      "price_collected_at": "2026-11-23T22:51:58.745169+00:00"
+    },
+    {
+      "id": 22452,
+      "slug": "o-boticario-zaad-eau-de-parfum-50ml-22452",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "O Boticário Zaad Eau De Parfum 50ml",
+      "short_description": "",
+      "current_price": "202.00",
+      "original_price": "202.00",
+      "discount_pct": "0.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_951109-MLA84849001129_052025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4735805251",
+      "detail_url": "/oferta?slug=o-boticario-zaad-eau-de-parfum-50ml-22452",
+      "price_collected_at": "2026-11-23T22:51:58.731890+00:00"
+    },
+    {
+      "id": 17317,
+      "slug": "liquidificador-portatil-wap-blender-go-wbg600-700ml-com-4-laminas-em-inox-e-trava-de-seguranca-17317",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Liquidificador Portátil Wap Blender Go Wbg600 700ml Com 4 Lâminas Em Inox E Trava De Segurança",
+      "short_description": "",
+      "current_price": "161.00",
+      "original_price": "370.00",
+      "discount_pct": "56.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_996548-MLA115056591878_082026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4254617751",
+      "detail_url": "/oferta?slug=liquidificador-portatil-wap-blender-go-wbg600-700ml-com-4-laminas-em-inox-e-trava-de-seguranca-17317",
+      "price_collected_at": "2026-11-23T22:51:58.722602+00:00"
+    },
+    {
+      "id": 17138,
+      "slug": "relogio-technos-masculino-2115gu1a-45-milimetros-aco-inoxidavel-com-fundo-preto-e-azul-prova-d-agua-50m-17138",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Relógio Technos Masculino 2115GU/1A 45 Milímetros Aço Inoxidável com Fundo Preto e Azul Prova D´Agua 50m",
+      "short_description": "",
+      "current_price": "272.00",
+      "original_price": "499.00",
+      "discount_pct": "45.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_701578-MLA116268960097_082026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4321478596",
+      "detail_url": "/oferta?slug=relogio-technos-masculino-2115gu1a-45-milimetros-aco-inoxidavel-com-fundo-preto-e-azul-prova-d-agua-50m-17138",
+      "price_collected_at": "2026-11-23T22:51:58.713337+00:00"
+    },
+    {
+      "id": 4835,
+      "slug": "tenis-flyer-runner-mesh-bdp-puma-4835",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Tênis Flyer Runner Mesh Bdp Puma",
+      "short_description": "",
+      "current_price": "199.00",
+      "original_price": "349.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_931746-MLB121990592509_112026-V-tnis-flyer-runner-mesh-bdp-puma.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-3806655487-tnis-flyer-runner-mesh-bdp-puma-_JM",
+      "detail_url": "/oferta?slug=tenis-flyer-runner-mesh-bdp-puma-4835",
+      "price_collected_at": "2026-11-23T22:51:58.703973+00:00"
+    },
+    {
+      "id": 22451,
+      "slug": "perfume-arabe-rayhaan-amazonica-22451",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Perfume Árabe Rayhaan Amazonica",
+      "short_description": "",
+      "current_price": "250.00",
+      "original_price": "319.00",
+      "discount_pct": "21.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_789856-MLA117191503962_102026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-7769244536",
+      "detail_url": "/oferta?slug=perfume-arabe-rayhaan-amazonica-22451",
+      "price_collected_at": "2026-11-23T22:51:58.692572+00:00"
+    },
+    {
+      "id": 22450,
+      "slug": "furadeira-parafusadeira-vlx-48v-sem-fio-profissional-com-kit-2-baterias-e-maleta-22450",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Furadeira Parafusadeira VLX 48V Sem Fio Profissional Com Kit 2 Baterias e Maleta",
+      "short_description": "",
+      "current_price": "110.00",
+      "original_price": "189.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_829947-MLA118067884707_092026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-6549112228",
+      "detail_url": "/oferta?slug=furadeira-parafusadeira-vlx-48v-sem-fio-profissional-com-kit-2-baterias-e-maleta-22450",
+      "price_collected_at": "2026-11-23T22:51:58.677580+00:00"
+    },
+    {
+      "id": 11568,
+      "slug": "cetaphil-locao-hidratante-corporal-e-facial-para-pele-sensivel-normal-a-seca-1l-hidratacao-48h-11568",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Cetaphil Loção Hidratante Corporal e Facial para Pele Sensível, Normal a Seca 1L - Hidratação 48h",
+      "short_description": "",
+      "current_price": "114.00",
+      "original_price": "205.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_800625-MLA118013409895_092026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4199575191",
+      "detail_url": "/oferta?slug=cetaphil-locao-hidratante-corporal-e-facial-para-pele-sensivel-normal-a-seca-1l-hidratacao-48h-11568",
+      "price_collected_at": "2026-11-23T22:51:58.667917+00:00"
+    },
+    {
+      "id": 22449,
+      "slug": "parafusadeira-furadeira-sem-fio-a-bateria-12v-38-10mm-com-maleta-e-acessorios-cor-amarelo-the-black-tools-22449",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Parafusadeira Furadeira Sem Fio A Bateria 12v 3/8\" 10mm Com Maleta E Acessórios Cor Amarelo The Black Tools",
+      "short_description": "",
+      "current_price": "99.00",
+      "original_price": "209.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_695053-MLA99416648434_112025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-3371545077",
+      "detail_url": "/oferta?slug=parafusadeira-furadeira-sem-fio-a-bateria-12v-38-10mm-com-maleta-e-acessorios-cor-amarelo-the-black-tools-22449",
+      "price_collected_at": "2026-11-23T22:51:58.652112+00:00"
+    },
+    {
+      "id": 22448,
+      "slug": "perfume-arabe-afnan-turathi-blue-edp-90ml-22448",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "PERFUME ARABE AFNAN TURATHI BLUE EDP 90ML",
+      "short_description": "",
+      "current_price": "328.00",
+      "original_price": "328.00",
+      "discount_pct": "0.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_747112-MLA118591165179_102026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5397920889",
+      "detail_url": "/oferta?slug=perfume-arabe-afnan-turathi-blue-edp-90ml-22448",
+      "price_collected_at": "2026-11-23T22:51:58.638644+00:00"
+    },
+    {
+      "id": 18978,
+      "slug": "floratta-flores-secretas-75ml-o-boticario-feminino-18978",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Floratta Flores Secretas 75ml O Boticário Feminino",
+      "short_description": "",
+      "current_price": "86.00",
+      "original_price": "174.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_889465-MLA99767551238_122025-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5940016354",
+      "detail_url": "/oferta?slug=floratta-flores-secretas-75ml-o-boticario-feminino-18978",
+      "price_collected_at": "2026-11-23T22:51:58.632487+00:00"
+    },
+    {
+      "id": 647,
+      "slug": "armario-de-cozinha-modulada-completa-compacta-emilly-pop-com-armario-e-balcao-cor-rusticpreto-grem229002-rusticopreto-647",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Armário de cozinha modulada completa compacta Emilly pop com armário e balcão cor rustic/preto GREM229002",
+      "short_description": "",
+      "current_price": "597.00",
+      "original_price": "905.00",
+      "discount_pct": "33.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_944352-MLA117816977754_102026-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-3534874263",
+      "detail_url": "/oferta?slug=armario-de-cozinha-modulada-completa-compacta-emilly-pop-com-armario-e-balcao-cor-rusticpreto-grem229002-rusticopreto-647",
+      "price_collected_at": "2026-11-23T22:51:58.623323+00:00"
+    },
+    {
+      "id": 22444,
+      "slug": "deo-parfum-natura-homem-verse-100-ml-22444",
+      "marketplace": {
+        "code": "mercadolivre",
+        "name": "Mercado Livre"
+      },
+      "title": "Deo Parfum Natura Homem Verse 100 Ml",
+      "short_description": "",
+      "current_price": "143.00",
+      "original_price": "239.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_865854-MLU73208995613_122023-O.webp",
+      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4279066219",
+      "detail_url": "/oferta?slug=deo-parfum-natura-homem-verse-100-ml-22444",
+      "price_collected_at": "2026-11-23T22:51:58.614925+00:00"
+    },
     {
       "id": 19047,
       "slug": "o-boticario-quasar-blue-desodorante-colonia-100ml-19047",
@@ -37,23 +530,6 @@
       "affiliate_link": "https://produto.mercadolivre.com.br/MLB-7727171572",
       "detail_url": "/oferta?slug=perfume-212-vip-black-200-ml-carolina-herrera-edp-masculino-18315",
       "price_collected_at": "2026-11-23T20:43:52.970215+00:00"
-    },
-    {
-      "id": 12097,
-      "slug": "jean-paul-gaultier-le-beau-perfume-eau-de-parfum-intense-125-ml-12097",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Jean Paul Gaultier Le Beau Perfume Eau De Parfum Intense 125 ml",
-      "short_description": "",
-      "current_price": "640.00",
-      "original_price": "928.00",
-      "discount_pct": "31.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_739181-MLA93896048973_102025-O.webp",
-      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5313679898",
-      "detail_url": "/oferta?slug=jean-paul-gaultier-le-beau-perfume-eau-de-parfum-intense-125-ml-12097",
-      "price_collected_at": "2026-11-23T20:43:52.961955+00:00"
     },
     {
       "id": 22447,
@@ -105,23 +581,6 @@
       "affiliate_link": "https://produto.mercadolivre.com.br/MLB-6538545356",
       "detail_url": "/oferta?slug=principia-kit-praia-trio-lh-02-protetor-solar-22446",
       "price_collected_at": "2026-11-23T20:43:52.932209+00:00"
-    },
-    {
-      "id": 21054,
-      "slug": "body-spray-carolina-herrera-212-vip-black-masculino-250-ml-21054",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Body Spray Carolina Herrera 212 VIP Black masculino 250 ml",
-      "short_description": "",
-      "current_price": "160.00",
-      "original_price": "278.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_713582-MLU75603019404_042024-O.webp",
-      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-7285009938",
-      "detail_url": "/oferta?slug=body-spray-carolina-herrera-212-vip-black-masculino-250-ml-21054",
-      "price_collected_at": "2026-11-23T20:43:52.925399+00:00"
     },
     {
       "id": 22445,
@@ -192,23 +651,6 @@
       "price_collected_at": "2026-11-23T20:43:52.885465+00:00"
     },
     {
-      "id": 22444,
-      "slug": "deo-parfum-natura-homem-verse-100-ml-22444",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Deo Parfum Natura Homem Verse 100 Ml",
-      "short_description": "",
-      "current_price": "143.00",
-      "original_price": "239.00",
-      "discount_pct": "40.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_865854-MLU73208995613_122023-O.webp",
-      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4279066219",
-      "detail_url": "/oferta?slug=deo-parfum-natura-homem-verse-100-ml-22444",
-      "price_collected_at": "2026-11-23T20:43:52.873012+00:00"
-    },
-    {
       "id": 17069,
       "slug": "kit-6-regata-modelo-americano-canelada-premium-masculina-17069",
       "marketplace": {
@@ -258,23 +700,6 @@
       "affiliate_link": "https://produto.mercadolivre.com.br/MLB-1837525408-kit-com-10-cuecas-boxer-masculina-microfibra-original-_JM",
       "detail_url": "/oferta?slug=kit-com-10-cuecas-boxer-masculina-microfibra-original-1772",
       "price_collected_at": "2026-11-23T20:43:52.810709+00:00"
-    },
-    {
-      "id": 5867,
-      "slug": "o-boticario-boticollection-connexion-colonia-100ml-5867",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "O Boticário Boticollection Connexion Desodorante Colônia 100ml",
-      "short_description": "",
-      "current_price": "84.00",
-      "original_price": "179.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677713-MLA102051132170_122025-O.webp",
-      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-6096547070",
-      "detail_url": "/oferta?slug=o-boticario-boticollection-connexion-colonia-100ml-5867",
-      "price_collected_at": "2026-11-23T20:43:52.798690+00:00"
     },
     {
       "id": 22193,
@@ -462,40 +887,6 @@
       "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5554642493",
       "detail_url": "/oferta?slug=lavadora-lava-jato-portatil-de-alta-pressao-com-2-baterias-preto-127220v-50hz60hz-sensacional-22441",
       "price_collected_at": "2026-11-23T20:43:52.694327+00:00"
-    },
-    {
-      "id": 18142,
-      "slug": "philips-oneblade-qp142510-com-pente-aparador-5-em-1-18142",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Philips OneBlade Aparador e Barbeador Elétrico com Pente Ajustável 5 em 1 | Raspa, Apara e Contorna | Uso Seco e Molhado | 100% À Prova d'Água | Sem Fio | Bivolt | QP1425/10",
-      "short_description": "",
-      "current_price": "138.00",
-      "original_price": "212.00",
-      "discount_pct": "34.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_750670-MLA118429558724_102026-O.webp",
-      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4208012055",
-      "detail_url": "/oferta?slug=philips-oneblade-qp142510-com-pente-aparador-5-em-1-18142",
-      "price_collected_at": "2026-11-23T20:43:52.680685+00:00"
-    },
-    {
-      "id": 14449,
-      "slug": "perfume-arabe-sabah-al-ward-sugar-original-feminino-eau-de-parfum-14449",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Perfume ÁRABE Sabah Al ward Sugar Original Feminino Eau de parfum",
-      "short_description": "",
-      "current_price": "109.00",
-      "original_price": "369.00",
-      "discount_pct": "70.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_694010-MLA120368074340_112026-O.webp",
-      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5555770529",
-      "detail_url": "/oferta?slug=perfume-arabe-sabah-al-ward-sugar-original-feminino-eau-de-parfum-14449",
-      "price_collected_at": "2026-11-23T20:43:52.657491+00:00"
     },
     {
       "id": 2658,
@@ -8369,23 +8760,6 @@
       "price_collected_at": "2026-11-23T18:20:33.954246+00:00"
     },
     {
-      "id": 20414,
-      "slug": "perfume-yves-saint-laurent-ysl-masculino-edt-100ml-amadeirado-aromatico-20414",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Perfume Yves Saint Laurent YSL Masculino EDT 100ml Amadeirado Aromático",
-      "short_description": "",
-      "current_price": "549.00",
-      "original_price": "1199.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_975529-MLU72030573627_092023-O.webp",
-      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4745923203",
-      "detail_url": "/oferta?slug=perfume-yves-saint-laurent-ysl-masculino-edt-100ml-amadeirado-aromatico-20414",
-      "price_collected_at": "2026-11-23T18:20:33.946492+00:00"
-    },
-    {
       "id": 11839,
       "slug": "tenis-flyer-runner-mesh-feminino-puma-11839",
       "marketplace": {
@@ -10339,23 +10713,6 @@
       "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5732557274",
       "detail_url": "/oferta?slug=speaker-extreme-britania-flash-lights-tws-200w-bbs200bt-22402",
       "price_collected_at": "2026-11-23T15:39:22.749262+00:00"
-    },
-    {
-      "id": 4835,
-      "slug": "tenis-flyer-runner-mesh-bdp-puma-4835",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Tênis Flyer Runner Mesh Bdp Puma",
-      "short_description": "",
-      "current_price": "199.00",
-      "original_price": "349.00",
-      "discount_pct": "42.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_931746-MLB121990592509_112026-V-tnis-flyer-runner-mesh-bdp-puma.webp",
-      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-3806655487-tnis-flyer-runner-mesh-bdp-puma-_JM",
-      "detail_url": "/oferta?slug=tenis-flyer-runner-mesh-bdp-puma-4835",
-      "price_collected_at": "2026-11-23T15:39:22.726580+00:00"
     },
     {
       "id": 20360,
@@ -16459,23 +16816,6 @@
       "affiliate_link": "https://produto.mercadolivre.com.br/MLB-4812130742",
       "detail_url": "/oferta?slug=creatina-monohidratada-pura-1kg-dark-lab-unidade-sem-sabor-82",
       "price_collected_at": "2026-11-22T15:52:42.957223+00:00"
-    },
-    {
-      "id": 18978,
-      "slug": "floratta-flores-secretas-75ml-o-boticario-feminino-18978",
-      "marketplace": {
-        "code": "mercadolivre",
-        "name": "Mercado Livre"
-      },
-      "title": "Floratta Flores Secretas 75ml O Boticário Feminino",
-      "short_description": "",
-      "current_price": "86.00",
-      "original_price": "174.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_889465-MLA99767551238_122025-O.webp",
-      "affiliate_link": "https://produto.mercadolivre.com.br/MLB-5940016354",
-      "detail_url": "/oferta?slug=floratta-flores-secretas-75ml-o-boticario-feminino-18978",
-      "price_collected_at": "2026-11-22T15:52:42.950736+00:00"
     },
     {
       "id": 2601,

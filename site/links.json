@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-23T20:43:55.186485+00:00",
+  "generated_at": "2026-11-23T22:52:03.487924+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,34 +14,24 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-capilar-lola-cosmetics-bemdita-ghee-praia-mini-90g-22323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22323"
     },
     {
-      "id": 20922,
-      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
-      "current_price": "10.99",
-      "original_price": "14.69",
-      "discount_pct": "25.00",
-      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+      "id": 22453,
+      "title": "Kit Tratamento Completo Reparação Molecular com Ácido Cítrico Reconstrói Ligações Devolve Força aos Cabelos Danificados (Pré-Shampoo + Shampoo + Condicionador) Elseve Bond Repair L'Oréal Paris",
+      "current_price": "95.00",
+      "original_price": "145.00",
+      "discount_pct": "34.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802003-MLA85927904820_062025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5541145582?matt_word=dbot_ig_bio_22453&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22453"
     },
     {
-      "id": 22193,
-      "title": "Perfume Árabe Lattafa His Confession Masculino Eau de Parfum 100 ml",
-      "current_price": "210.00",
-      "original_price": "549.00",
-      "discount_pct": "61.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_896263-MLA119238489287_102026-O.webp",
+      "id": 21056,
+      "title": "Viseira Nike Dri-fit Ace Visor Cor Preto/branco Tamanho M/g",
+      "current_price": "79.00",
+      "original_price": "149.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_891587-MLA92442753015_092025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7076043722?matt_word=dbot_ig_bio_22193&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22193"
-    },
-    {
-      "id": 22443,
-      "title": "Relógio Masculino Saint Germain SG Clássico de Couro Preto e Fundo Azul 42mm",
-      "current_price": "92.00",
-      "original_price": "229.00",
-      "discount_pct": "59.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_701037-MLA99938482621_112025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5829274424?matt_word=dbot_ig_bio_22443&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22443"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5698170370?matt_word=dbot_ig_bio_21056&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21056"
     },
     {
       "id": 5867,
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677713-MLA102051132170_122025-O.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-6096547070?matt_word=dbot_ig_bio_5867&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5867"
+    },
+    {
+      "id": 22455,
+      "title": "Calça Jeans Feminina Flare Cós Alto Empina Bumbum Modeladora",
+      "current_price": "51.00",
+      "original_price": "107.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_642996-MLB117743987796_102026-V-calca-jeans-feminina-flare-cos-alto-empina-bumbum-modeladora.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-2182188042-calca-jeans-feminina-flare-cos-alto-empina-bumbum-modeladora-_JM?matt_word=dbot_ig_bio_22455&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22455"
     }
   ]
 }

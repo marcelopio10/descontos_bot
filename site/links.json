@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-23T13:49:23.084304+00:00",
+  "generated_at": "2026-11-23T15:39:24.820136+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,24 +14,34 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
-      "id": 22385,
-      "title": "Anúncio patrocinado – Carregador Sem Fio 3 em 1 - 25W Magnético Dobrável MagSafe Qi2 | Compatível com iPhone 12 ou superio...",
-      "current_price": "89.76",
-      "original_price": "139.90",
-      "discount_pct": "36.00",
-      "image_url": "https://m.media-amazon.com/images/I/51iDH8RmCYL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-carregador-sem-fio-3-em-1-25w-magnetico-dobravel-magsafe-qi2-compativel-com-iphone-12-ou-superio-22385&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22385"
+      "id": 22404,
+      "title": "Tênis Nike Flex Train Masculino Branco/vermelho 41 Br",
+      "current_price": "299.00",
+      "original_price": "499.00",
+      "discount_pct": "40.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_894652-MLB112769936900_062026-V-tnis-nike-flex-train-masculino-brancovermelho-41-br.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7069863854-tnis-nike-flex-train-masculino-brancovermelho-41-br-_JM?matt_word=dbot_ig_bio_22404&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22404"
     },
     {
-      "id": 187,
-      "title": "Camiseta Térmica Feminina Uv50+ Puma Manga Curta Original",
-      "current_price": "69.00",
-      "original_price": "225.00",
-      "discount_pct": "69.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_755485-MLB116714524527_082026-V-camiseta-termica-feminina-uv50-puma-manga-curta-original.webp",
+      "id": 22398,
+      "title": "Panela De Pressão Fechamento Externo Presscook Grafito 6,8l - Mimo Style",
+      "current_price": "158.00",
+      "original_price": "347.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_816315-MLA95220996890_102025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3734948407-camiseta-termica-feminina-uv50-puma-manga-curta-original-_JM?matt_word=dbot_ig_bio_187&utm_source=instagram&utm_medium=bio&utm_campaign=offer_187"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4278092815?matt_word=dbot_ig_bio_22398&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22398"
+    },
+    {
+      "id": 19974,
+      "title": "Shorts Nike Dry-fit Academy Masculino",
+      "current_price": "73.00",
+      "original_price": "179.00",
+      "discount_pct": "59.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_862727-MLB100881483013_122025-V-shorts-nike-dry-fit-academy-masculino.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5282803090-shorts-nike-dry-fit-academy-masculino-_JM?matt_word=dbot_ig_bio_19974&utm_source=instagram&utm_medium=bio&utm_campaign=offer_19974"
     },
     {
       "id": 20922,
@@ -42,16 +52,6 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
-    },
-    {
-      "id": 3907,
-      "title": "O Boticário Glamour Midnight Feminino Colônia desodorante Spray 75ml",
-      "current_price": "99.00",
-      "original_price": "199.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_803193-MLA84540272032_052025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5471457530?matt_word=dbot_ig_bio_3907&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3907"
     }
   ]
 }

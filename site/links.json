@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-24T20:23:30.613148+00:00",
+  "generated_at": "2026-11-24T22:51:06.546023+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,6 +14,16 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
+      "id": 22581,
+      "title": "Tapete Antiderrapante Lavável 2x1,4m para Sala e Quarto Marrom Artesanal",
+      "current_price": "69.00",
+      "original_price": "149.00",
+      "discount_pct": "53.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_717527-MLA120233820591_102026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4260429639?matt_word=dbot_ig_bio_22581&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22581"
+    },
+    {
       "id": 22564,
       "title": "Tênis Casual Masculino Break Start adidas Liso",
       "current_price": "218.00",
@@ -24,6 +34,16 @@
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-4982918130?matt_word=dbot_ig_bio_22564&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22564"
     },
     {
+      "id": 7709,
+      "title": "Jaqueta Masculina Bomber Chimpa Com Zíper E Bolsos",
+      "current_price": "57.00",
+      "original_price": "110.00",
+      "discount_pct": "47.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_963621-MLB106905856790_022026-V-jaqueta-masculina-bomber-chimpa-com-ziper-e-bolsos.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4153099051-jaqueta-masculina-bomber-chimpa-com-ziper-e-bolsos-_JM?matt_word=dbot_ig_bio_7709&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7709"
+    },
+    {
       "id": 20922,
       "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
       "current_price": "10.99",
@@ -32,26 +52,6 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
-    },
-    {
-      "id": 20506,
-      "title": "NIVEA Loção Deo-Hidratante Lotion Express 200ml, Hidratação 72h, Rápida Absorção, Hialurônico Puro, Corporal, Pele Normal ...",
-      "current_price": "11.04",
-      "original_price": "13.90",
-      "discount_pct": "21.00",
-      "image_url": "https://m.media-amazon.com/images/I/61v2OBdHhQL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-nivea-locao-deo-hidratante-lotion-express-200ml-hidratacao-72h-rapida-absorcao-hialuronico-puro-20506&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20506"
-    },
-    {
-      "id": 22102,
-      "title": "Sérum Kérastase Nutritive Magic Night Cabelo Seco 30ml",
-      "current_price": "135.00",
-      "original_price": "199.00",
-      "discount_pct": "32.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_978166-MLA116136617713_082026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7413457636?matt_word=dbot_ig_bio_22102&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22102"
     }
   ]
 }

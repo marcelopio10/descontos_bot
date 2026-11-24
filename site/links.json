@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-24T15:42:39.833811+00:00",
+  "generated_at": "2026-11-24T18:35:47.451307+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,24 +14,34 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
-      "id": 22538,
-      "title": "Caixa De Som Bluetooth 3 Angle Sound 12w Resistente À Água",
-      "current_price": "99.00",
-      "original_price": "199.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_761532-MLA96083081267_102025-O.webp",
+      "id": 22555,
+      "title": "Combo Teclado e Mouse sem fio Logitech MK235 Layout ABNT2",
+      "current_price": "98.00",
+      "original_price": "169.00",
+      "discount_pct": "41.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_865718-MLA99950871363_112025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7909198492?matt_word=dbot_ig_bio_22538&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22538"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3934657461?matt_word=dbot_ig_bio_22555&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22555"
     },
     {
-      "id": 22533,
-      "title": "Coleira Antiparasita Scalibor 65 cm Proteção 4 Meses Pulgas e Mosquitos",
-      "current_price": "42.00",
-      "original_price": "116.00",
-      "discount_pct": "63.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_908706-MLA118066167113_092026-O.webp",
+      "id": 4763,
+      "title": "Aspirador Vertical Britânia BAS1295P 1250W Preto",
+      "current_price": "125.00",
+      "original_price": "234.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_697821-MLA100079435211_122025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4548295287?matt_word=dbot_ig_bio_22533&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22533"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3568545033?matt_word=dbot_ig_bio_4763&utm_source=instagram&utm_medium=bio&utm_campaign=offer_4763"
+    },
+    {
+      "id": 22557,
+      "title": "Tênis Lite Racer 4.0 Cinza adidas",
+      "current_price": "208.00",
+      "original_price": "299.00",
+      "discount_pct": "30.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_744810-MLB82867459698_032025-V-tnis-lite-racer-40-cinza-adidas.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5321753604-tnis-lite-racer-40-cinza-adidas-_JM?matt_word=dbot_ig_bio_22557&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22557"
     },
     {
       "id": 20922,
@@ -42,16 +52,6 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
-    },
-    {
-      "id": 22310,
-      "title": "Perfume Masculino French Avenue Liquid Brun 100 mL Eau de Parfum",
-      "current_price": "299.00",
-      "original_price": "654.00",
-      "discount_pct": "54.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_812292-MLA116240716855_082026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4645980101?matt_word=dbot_ig_bio_22310&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22310"
     }
   ]
 }

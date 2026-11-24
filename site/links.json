@@ -1,57 +1,57 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-23T22:52:03.487924+00:00",
+  "generated_at": "2026-11-24T01:28:50.189201+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 22323,
-      "title": "Creme Capilar Lola Cosmetics Bemdita Ghee Praia, Mini, 90g",
-      "current_price": "13.00",
-      "original_price": "29.90",
-      "discount_pct": "57.00",
-      "image_url": "https://m.media-amazon.com/images/I/517+HD-2ZuL._AC_UL320_.jpg",
+      "id": 22483,
+      "title": "Tênis Masculino Courtblock adidas",
+      "current_price": "243.00",
+      "original_price": "479.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_780151-MLA109476187298_042026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4601645715?matt_word=dbot_ig_bio_22483&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22483"
+    },
+    {
+      "id": 18971,
+      "title": "Anúncio patrocinado – EUCERIN Creme de Mãos Clareador de Manchas FPS 30 75ml, Anti-Pigment, Antimanchas, Thiamidol",
+      "current_price": "99.80",
+      "original_price": "139.90",
+      "discount_pct": "29.00",
+      "image_url": "https://m.media-amazon.com/images/I/61JYiIfZfML._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-capilar-lola-cosmetics-bemdita-ghee-praia-mini-90g-22323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22323"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-eucerin-creme-de-maos-clareador-de-manchas-fps-30-75ml-anti-pigment-antimanchas-thiamidol-18971&utm_source=instagram&utm_medium=bio&utm_campaign=offer_18971"
     },
     {
-      "id": 22453,
-      "title": "Kit Tratamento Completo Reparação Molecular com Ácido Cítrico Reconstrói Ligações Devolve Força aos Cabelos Danificados (Pré-Shampoo + Shampoo + Condicionador) Elseve Bond Repair L'Oréal Paris",
-      "current_price": "95.00",
-      "original_price": "145.00",
-      "discount_pct": "34.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_802003-MLA85927904820_062025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5541145582?matt_word=dbot_ig_bio_22453&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22453"
+      "id": 5582,
+      "title": "Anúncio patrocinado – Motorola, Carregador TurboPower 20W, Cabo 1 Metro, Porta USB-A, Cabo USB-C",
+      "current_price": "94.04",
+      "original_price": "115.99",
+      "discount_pct": "19.00",
+      "image_url": "https://m.media-amazon.com/images/I/413II6KruyL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=motorola-carregador-turbopower-20w-cabo-1-metro-porta-usb-a-cabo-usb-c-5582&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5582"
     },
     {
-      "id": 21056,
-      "title": "Viseira Nike Dri-fit Ace Visor Cor Preto/branco Tamanho M/g",
-      "current_price": "79.00",
-      "original_price": "149.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_891587-MLA92442753015_092025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5698170370?matt_word=dbot_ig_bio_21056&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21056"
+      "id": 20922,
+      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
+      "current_price": "10.99",
+      "original_price": "14.69",
+      "discount_pct": "25.00",
+      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
-      "id": 5867,
-      "title": "O Boticário Boticollection Connexion Desodorante Colônia 100ml",
-      "current_price": "84.00",
-      "original_price": "179.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677713-MLA102051132170_122025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6096547070?matt_word=dbot_ig_bio_5867&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5867"
-    },
-    {
-      "id": 22455,
-      "title": "Calça Jeans Feminina Flare Cós Alto Empina Bumbum Modeladora",
-      "current_price": "51.00",
-      "original_price": "107.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_642996-MLB117743987796_102026-V-calca-jeans-feminina-flare-cos-alto-empina-bumbum-modeladora.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-2182188042-calca-jeans-feminina-flare-cos-alto-empina-bumbum-modeladora-_JM?matt_word=dbot_ig_bio_22455&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22455"
+      "id": 16350,
+      "title": "Anúncio patrocinado – Carregador GaN 40W 2 Portas Tipo-C PD 3.0 + USB-A QC 3.0 com Cabo USB-C 1m, Bivolt 100–240V, Fonte T...",
+      "current_price": "47.47",
+      "original_price": "59.90",
+      "discount_pct": "21.00",
+      "image_url": "https://m.media-amazon.com/images/I/51XtRGXm6aL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-carregador-gan-40w-2-portas-tipo-c-pd-30-usb-a-qc-30-com-cabo-usb-c-1m-bivolt-100240v-fonte-t-16350&utm_source=instagram&utm_medium=bio&utm_campaign=offer_16350"
     }
   ]
 }

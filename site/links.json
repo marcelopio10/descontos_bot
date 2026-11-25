@@ -1,27 +1,37 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-25T17:03:05.422850+00:00",
+  "generated_at": "2026-11-25T19:31:19.943492+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21180,
-      "title": "Creme Facial Antissinais Neutrogena Face Care Intensive, FPS 22, 100g | Hidratação Intensa, Textura Leve, Oil Free",
-      "current_price": "23.37",
-      "original_price": "48.99",
-      "discount_pct": "52.00",
-      "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
+      "id": 22323,
+      "title": "Creme Capilar Lola Cosmetics Bemdita Ghee Praia, Mini, 90g",
+      "current_price": "13.00",
+      "original_price": "29.90",
+      "discount_pct": "57.00",
+      "image_url": "https://m.media-amazon.com/images/I/517+HD-2ZuL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-capilar-lola-cosmetics-bemdita-ghee-praia-mini-90g-22323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22323"
     },
     {
-      "id": 4927,
-      "title": "Tênis Barreda adidas",
-      "current_price": "251.00",
+      "id": 22689,
+      "title": "Tênis Casual Masculino Break Start adidas Liso",
+      "current_price": "230.00",
       "original_price": "399.00",
-      "discount_pct": "37.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_885406-MLB120217726041_102026-V-tnis-barreda-adidas.webp",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_686855-MLA115954610522_092026-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5501110922-tnis-barreda-adidas-_JM?matt_word=dbot_ig_bio_4927&utm_source=instagram&utm_medium=bio&utm_campaign=offer_4927"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4982856308?matt_word=dbot_ig_bio_22689&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22689"
+    },
+    {
+      "id": 22686,
+      "title": "Short Bermuda Masculino Linho Mauricinho Casual Cós Elástico",
+      "current_price": "33.00",
+      "original_price": "78.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_922946-MLB114372814604_082026-V-short-bermuda-masculino-linho-mauricinho-casual-cos-elastico.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3446629053-short-bermuda-masculino-linho-mauricinho-casual-cos-elastico-_JM?matt_word=dbot_ig_bio_22686&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22686"
     },
     {
       "id": 20922,
@@ -34,24 +44,14 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
-      "id": 22656,
-      "title": "Adaptador Sem Fio Para Carplay E Android Auto, Bluetooth 5.1 Com Usb Plug And Play Para Ios 10+ E Android 11+",
-      "current_price": "66.00",
-      "original_price": "159.00",
-      "discount_pct": "58.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_790292-MLA117290687561_092026-V-adaptador-sem-fio-para-carplay-e-android-auto-bluetooth-51-com-usb-plug-and-play-para-ios-10-e-android-11.webp",
+      "id": 22684,
+      "title": "Perfume Duha Al Wataniah Edp 100ml feminino Árabe",
+      "current_price": "139.00",
+      "original_price": "254.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_914288-MLA84540602714_052025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5120194525-adaptador-sem-fio-para-carplay-e-android-auto-bluetooth-51-com-usb-plug-and-play-para-ios-10-e-android-11-_JM?matt_word=dbot_ig_bio_22656&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22656"
-    },
-    {
-      "id": 22673,
-      "title": "Kit 2 Camisetas Bolso Noturno E Paz Reserva",
-      "current_price": "99.00",
-      "original_price": "238.00",
-      "discount_pct": "57.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_652849-MLB96150970964_102025-V-kit-2-camisetas-bolso-noturno-e-paz-reserva.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4278066553-kit-2-camisetas-bolso-noturno-e-paz-reserva-_JM?matt_word=dbot_ig_bio_22673&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22673"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6708550452?matt_word=dbot_ig_bio_22684&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22684"
     }
   ]
 }

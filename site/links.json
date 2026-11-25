@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-25T14:59:00.351182+00:00",
+  "generated_at": "2026-11-25T17:03:05.422850+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,24 +14,14 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
-      "id": 3851,
-      "title": "Liquidificador RI2244 Série 5000 Com Jarra Inquebrável Inox 1400W Capacidade Útil 2L Philips Walita",
-      "current_price": "199.00",
-      "original_price": "450.00",
-      "discount_pct": "55.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_627428-MLA99989583243_112025-O.webp",
+      "id": 4927,
+      "title": "Tênis Barreda adidas",
+      "current_price": "251.00",
+      "original_price": "399.00",
+      "discount_pct": "37.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_885406-MLB120217726041_102026-V-tnis-barreda-adidas.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4786452797?matt_word=dbot_ig_bio_3851&utm_source=instagram&utm_medium=bio&utm_campaign=offer_3851"
-    },
-    {
-      "id": 22660,
-      "title": "Mala Olympikus Gym Bag SM 2.0 Preto 29L Bolsa de Academia Mochila Fitness",
-      "current_price": "135.00",
-      "original_price": "219.00",
-      "discount_pct": "38.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_654096-MLA121297965919_112026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5545160459?matt_word=dbot_ig_bio_22660&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22660"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5501110922-tnis-barreda-adidas-_JM?matt_word=dbot_ig_bio_4927&utm_source=instagram&utm_medium=bio&utm_campaign=offer_4927"
     },
     {
       "id": 20922,
@@ -52,6 +42,16 @@
       "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_790292-MLA117290687561_092026-V-adaptador-sem-fio-para-carplay-e-android-auto-bluetooth-51-com-usb-plug-and-play-para-ios-10-e-android-11.webp",
       "marketplace_code": "mercadolivre",
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-5120194525-adaptador-sem-fio-para-carplay-e-android-auto-bluetooth-51-com-usb-plug-and-play-para-ios-10-e-android-11-_JM?matt_word=dbot_ig_bio_22656&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22656"
+    },
+    {
+      "id": 22673,
+      "title": "Kit 2 Camisetas Bolso Noturno E Paz Reserva",
+      "current_price": "99.00",
+      "original_price": "238.00",
+      "discount_pct": "57.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_652849-MLB96150970964_102025-V-kit-2-camisetas-bolso-noturno-e-paz-reserva.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4278066553-kit-2-camisetas-bolso-noturno-e-paz-reserva-_JM?matt_word=dbot_ig_bio_22673&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22673"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-24T22:51:06.546023+00:00",
+  "generated_at": "2026-11-25T01:33:59.467230+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,34 +14,24 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
-      "id": 22581,
-      "title": "Tapete Antiderrapante Lavável 2x1,4m para Sala e Quarto Marrom Artesanal",
-      "current_price": "69.00",
-      "original_price": "149.00",
-      "discount_pct": "53.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_717527-MLA120233820591_102026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4260429639?matt_word=dbot_ig_bio_22581&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22581"
-    },
-    {
-      "id": 22564,
-      "title": "Tênis Casual Masculino Break Start adidas Liso",
-      "current_price": "218.00",
+      "id": 22590,
+      "title": "Tênis Masculino Barreda adidas",
+      "current_price": "217.00",
       "original_price": "399.00",
       "discount_pct": "45.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_601309-MLA114308919154_082026-O.webp",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_797274-MLA109667128104_042026-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4982918130?matt_word=dbot_ig_bio_22564&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22564"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4664540953?matt_word=dbot_ig_bio_22590&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22590"
     },
     {
-      "id": 7709,
-      "title": "Jaqueta Masculina Bomber Chimpa Com Zíper E Bolsos",
-      "current_price": "57.00",
-      "original_price": "110.00",
-      "discount_pct": "47.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_963621-MLB106905856790_022026-V-jaqueta-masculina-bomber-chimpa-com-ziper-e-bolsos.webp",
+      "id": 22592,
+      "title": "Jogo de Panelas Rochedo Stone Pro 5 peças",
+      "current_price": "228.00",
+      "original_price": "499.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_676665-MLA100571373948_122025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4153099051-jaqueta-masculina-bomber-chimpa-com-ziper-e-bolsos-_JM?matt_word=dbot_ig_bio_7709&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7709"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5150013817?matt_word=dbot_ig_bio_22592&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22592"
     },
     {
       "id": 20922,
@@ -52,6 +42,16 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+    },
+    {
+      "id": 21316,
+      "title": "Viseira Nike Dri-fit Ace Visor",
+      "current_price": "79.00",
+      "original_price": "149.00",
+      "discount_pct": "46.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_961500-MLB96788997384_112025-V-viseira-nike-dri-fit-ace-visor.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5157482830-viseira-nike-dri-fit-ace-visor-_JM?matt_word=dbot_ig_bio_21316&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21316"
     }
   ]
 }

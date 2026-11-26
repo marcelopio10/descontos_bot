@@ -1,57 +1,57 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-26T01:24:48.947661+00:00",
+  "generated_at": "2026-11-26T11:06:37.453066+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 22323,
-      "title": "Creme Capilar Lola Cosmetics Bemdita Ghee Praia, Mini, 90g",
-      "current_price": "13.00",
-      "original_price": "29.90",
-      "discount_pct": "57.00",
-      "image_url": "https://m.media-amazon.com/images/I/517+HD-2ZuL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-capilar-lola-cosmetics-bemdita-ghee-praia-mini-90g-22323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22323"
-    },
-    {
-      "id": 20922,
-      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
-      "current_price": "10.99",
-      "original_price": "14.69",
-      "discount_pct": "25.00",
-      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
-    },
-    {
-      "id": 15498,
-      "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
-      "current_price": "13.09",
-      "original_price": "16.51",
-      "discount_pct": "21.00",
-      "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
-    },
-    {
-      "id": 22754,
-      "title": "Tênis Nike Gamma Force Feminino",
-      "current_price": "365.00",
-      "original_price": "749.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959280-MLB100939758311_122025-V-tnis-nike-gamma-force-feminino.webp",
+      "id": 6085,
+      "title": "Tênis Nike Sb Malor Masculino",
+      "current_price": "252.00",
+      "original_price": "549.00",
+      "discount_pct": "54.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_667359-MLB96763028292_112025-V-tnis-nike-sb-malor-masculino.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5229114990-tnis-nike-gamma-force-feminino-_JM?matt_word=dbot_ig_bio_22754&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22754"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3799418417-tnis-nike-sb-malor-masculino-_JM?matt_word=dbot_ig_bio_6085&utm_source=instagram&utm_medium=bio&utm_campaign=offer_6085"
     },
     {
-      "id": 21425,
-      "title": "Calça Jeans Masculina Country Rodeio Reforçada Elastano",
-      "current_price": "55.00",
-      "original_price": "99.00",
-      "discount_pct": "44.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_989860-MLB118186877247_092026-V-calca-jeans-masculina-country-rodeio-reforcada-elastano.webp",
+      "id": 22808,
+      "title": "Perfume Vodka Man Paris Elysees Masculino Intense 100ml",
+      "current_price": "74.00",
+      "original_price": "117.00",
+      "discount_pct": "36.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_734920-MLA107812342530_032026-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4037767971-calca-jeans-masculina-country-rodeio-reforcada-elastano-_JM?matt_word=dbot_ig_bio_21425&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21425"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3427759320?matt_word=dbot_ig_bio_22808&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22808"
+    },
+    {
+      "id": 22804,
+      "title": "Creamass Hipercalórico Pouch Baunilha 3kg Integralmédica",
+      "current_price": "71.00",
+      "original_price": "176.00",
+      "discount_pct": "59.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_658800-MLA119099353094_112026-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/25WsfwH?matt_word=dbot_ig_bio_22804&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22804"
+    },
+    {
+      "id": 22800,
+      "title": "Protein Crisp Bar Creme de Coco 12 und Integralmédica",
+      "current_price": "60.00",
+      "original_price": "154.00",
+      "discount_pct": "60.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_792552-MLA99515059811_112025-AB.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://meli.la/2SyDspy?matt_word=dbot_ig_bio_22800&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22800"
+    },
+    {
+      "id": 22591,
+      "title": "Natura Kaiak K EDP 100ml para masculino",
+      "current_price": "149.00",
+      "original_price": "299.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_873255-MLA79849051972_102024-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5100852538?matt_word=dbot_ig_bio_22591&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22591"
     }
   ]
 }

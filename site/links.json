@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-26T15:23:59.894619+00:00",
+  "generated_at": "2026-11-26T17:55:31.192943+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,14 +14,14 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
-      "id": 22295,
-      "title": "Shampoo a Seco Ricca, Brisa Floral, 150ml",
-      "current_price": "18.89",
-      "original_price": "28.99",
-      "discount_pct": "35.00",
-      "image_url": "https://m.media-amazon.com/images/I/519XbD2x6mL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=shampoo-a-seco-ricca-brisa-floral-150ml-22295&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22295"
+      "id": 1071,
+      "title": "Power Bank Pro 20000mAH ELG PB200BK, Bateria Portátil Universal, Carga Rápida, Display Indicador, Entradas Micro USB e USB-C, 2 Portas USB-A, PD+QC3.0, Preto",
+      "current_price": "115.00",
+      "original_price": "345.00",
+      "discount_pct": "66.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_908785-MLA118983121535_102026-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7398252156?matt_word=dbot_ig_bio_1071&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1071"
     },
     {
       "id": 20922,
@@ -34,24 +34,14 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
-      "id": 22594,
-      "title": "Aparador de Grama Elétrico WAP WG AG01E Diâmetro de Corte de 280mm 1600W 11000 RPM 220V",
-      "current_price": "179.00",
-      "original_price": "381.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_950960-MLA92598224683_092025-O.webp",
+      "id": 22308,
+      "title": "Tênis Corrida Duramo Sl 2 adidas",
+      "current_price": "309.00",
+      "original_price": "499.00",
+      "discount_pct": "38.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_636939-MLB115605536825_082026-V-tnis-corrida-duramo-sl-2-adidas.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7469440110?matt_word=dbot_ig_bio_22594&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22594"
-    },
-    {
-      "id": 22847,
-      "title": "Parafusadeira Furadeira Impacto Sem Fio 2 Baterias Recarregável 21V Bivolt + Kit Acessórios 136 Peças The Black Tools",
-      "current_price": "259.00",
-      "original_price": "559.00",
-      "discount_pct": "53.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_976324-MLA110943153128_052026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5138994919?matt_word=dbot_ig_bio_22847&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22847"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5203216590-tnis-corrida-duramo-sl-2-adidas-_JM?matt_word=dbot_ig_bio_22308&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22308"
     }
   ]
 }

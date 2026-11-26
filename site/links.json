@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-26T20:57:24.408607+00:00",
+  "generated_at": "2026-11-26T23:11:45.596833+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,16 +14,6 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
-      "id": 1071,
-      "title": "Power Bank Pro 20000mAH ELG PB200BK, Bateria Portátil Universal, Carga Rápida, Display Indicador, Entradas Micro USB e USB-C, 2 Portas USB-A, PD+QC3.0, Preto",
-      "current_price": "115.00",
-      "original_price": "345.00",
-      "discount_pct": "66.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_908785-MLA118983121535_102026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7398252156?matt_word=dbot_ig_bio_1071&utm_source=instagram&utm_medium=bio&utm_campaign=offer_1071"
-    },
-    {
       "id": 20922,
       "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
       "current_price": "10.99",
@@ -34,24 +24,34 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
-      "id": 22876,
-      "title": "Philos Messenger Edp 100ml Perfume Árabe Maison Alhambra",
-      "current_price": "200.00",
-      "original_price": "399.00",
-      "discount_pct": "49.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_747059-MLA93662886366_102025-O.webp",
+      "id": 7610,
+      "title": "Relógio Smartwatch Bettdow Fb050 Gps Tela Amoled 1.43 Cinza",
+      "current_price": "287.00",
+      "original_price": "599.00",
+      "discount_pct": "52.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_732420-MLA111132950305_052026-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6784421402?matt_word=dbot_ig_bio_22876&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22876"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7680684264?matt_word=dbot_ig_bio_7610&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7610"
     },
     {
-      "id": 5867,
-      "title": "O Boticário Boticollection Connexion Desodorante Colônia 100ml",
-      "current_price": "84.00",
-      "original_price": "179.00",
+      "id": 22873,
+      "title": "Uomini Infinite Colônia 100ml (nova Embalagem)",
+      "current_price": "99.00",
+      "original_price": "209.00",
       "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_677713-MLA102051132170_122025-O.webp",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_885356-MLU73068439747_112023-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-6096547070?matt_word=dbot_ig_bio_5867&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5867"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4286378716?matt_word=dbot_ig_bio_22873&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22873"
+    },
+    {
+      "id": 22701,
+      "title": "Deo Parfum Natura Homem Nós 100 Ml",
+      "current_price": "122.00",
+      "original_price": "244.00",
+      "discount_pct": "50.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_824995-MLA84847085357_052025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5292957520?matt_word=dbot_ig_bio_22701&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22701"
     }
   ]
 }

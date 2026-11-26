@@ -1,27 +1,17 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-25T22:29:40.373596+00:00",
+  "generated_at": "2026-11-26T01:24:48.947661+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
-      "id": 21180,
-      "title": "Creme Facial Antissinais Neutrogena Face Care Intensive, FPS 22, 100g | Hidratação Intensa, Textura Leve, Oil Free",
-      "current_price": "23.37",
-      "original_price": "48.99",
-      "discount_pct": "52.00",
-      "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
+      "id": 22323,
+      "title": "Creme Capilar Lola Cosmetics Bemdita Ghee Praia, Mini, 90g",
+      "current_price": "13.00",
+      "original_price": "29.90",
+      "discount_pct": "57.00",
+      "image_url": "https://m.media-amazon.com/images/I/517+HD-2ZuL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
-    },
-    {
-      "id": 22703,
-      "title": "Forno Elétrico Black+decker 9 Litros Preto",
-      "current_price": "227.00",
-      "original_price": "406.00",
-      "discount_pct": "43.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_756394-MLA99447654260_112025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7301720410?matt_word=dbot_ig_bio_22703&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22703"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-capilar-lola-cosmetics-bemdita-ghee-praia-mini-90g-22323&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22323"
     },
     {
       "id": 20922,
@@ -34,24 +24,34 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
     },
     {
-      "id": 22706,
-      "title": "Soprador de Ar Portátil Woosh Recarregável, Para Limpeza e Acender Churrasqueira",
-      "current_price": "40.00",
-      "original_price": "99.00",
-      "discount_pct": "59.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_813790-MLA120083226718_112026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7938436408?matt_word=dbot_ig_bio_22706&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22706"
+      "id": 15498,
+      "title": "NIVEA Creme Hidratante Lata 29g, Hidratação Profunda 24h, Corporal, Uso Diário, Multibenefícios, Todas as Peles",
+      "current_price": "13.09",
+      "original_price": "16.51",
+      "discount_pct": "21.00",
+      "image_url": "https://m.media-amazon.com/images/I/61M2dXjeJfL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=nivea-creme-hidratante-lata-29g-hidratacao-profunda-24h-corporal-uso-diario-multibeneficios-todas-as-peles-15498&utm_source=instagram&utm_medium=bio&utm_campaign=offer_15498"
     },
     {
-      "id": 22701,
-      "title": "Deo Parfum Natura Homem Nós 100 Ml",
-      "current_price": "122.00",
-      "original_price": "244.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_824995-MLA84847085357_052025-O.webp",
+      "id": 22754,
+      "title": "Tênis Nike Gamma Force Feminino",
+      "current_price": "365.00",
+      "original_price": "749.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_959280-MLB100939758311_122025-V-tnis-nike-gamma-force-feminino.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5292957520?matt_word=dbot_ig_bio_22701&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22701"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5229114990-tnis-nike-gamma-force-feminino-_JM?matt_word=dbot_ig_bio_22754&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22754"
+    },
+    {
+      "id": 21425,
+      "title": "Calça Jeans Masculina Country Rodeio Reforçada Elastano",
+      "current_price": "55.00",
+      "original_price": "99.00",
+      "discount_pct": "44.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_989860-MLB118186877247_092026-V-calca-jeans-masculina-country-rodeio-reforcada-elastano.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4037767971-calca-jeans-masculina-country-rodeio-reforcada-elastano-_JM?matt_word=dbot_ig_bio_21425&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21425"
     }
   ]
 }

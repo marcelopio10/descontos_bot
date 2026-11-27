@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-27T00:57:01.783321+00:00",
+  "generated_at": "2026-11-27T11:03:44.172268+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,14 +14,34 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
-      "id": 2550,
-      "title": "EUCERIN Pomada Reparadora Aquaphor Duopack 10ml, Hidratação Intensiva, Hidratante Labial",
-      "current_price": "34.49",
-      "original_price": "42.90",
-      "discount_pct": "20.00",
-      "image_url": "https://m.media-amazon.com/images/I/71cXxSNnExL._AC_UL320_.jpg",
+      "id": 22964,
+      "title": "Polo Masculina Lacoste Ph1862 Algodão Curta Fit",
+      "current_price": "234.00",
+      "original_price": "488.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_916086-MLB98134820201_112025-V-polo-masculina-lacoste-ph1862-algodo-curta-fit.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5187160658-polo-masculina-lacoste-ph1862-algodo-curta-fit-_JM?matt_word=dbot_ig_bio_22964&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22964"
+    },
+    {
+      "id": 2607,
+      "title": "Revlon Profissional Uniq One - Leave-in 150ml",
+      "current_price": "52.40",
+      "original_price": "67.90",
+      "discount_pct": "23.00",
+      "image_url": "https://m.media-amazon.com/images/I/71PXeuNTL+L._AC_UL320_.jpg",
       "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=eucerin-pomada-reparadora-aquaphor-duopack-10ml-hidratacao-intensiva-hidratante-labial-2550&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2550"
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=revlon-profissional-uniq-one-leave-in-150ml-2607&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2607"
+    },
+    {
+      "id": 22963,
+      "title": "Boné Nike Club Swoosh Unissex Cor Preto Tamanho P/m",
+      "current_price": "66.00",
+      "original_price": "179.00",
+      "discount_pct": "63.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_712867-MLA92440448615_092025-O.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4205551961?matt_word=dbot_ig_bio_22963&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22963"
     },
     {
       "id": 20922,
@@ -32,26 +52,6 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
-    },
-    {
-      "id": 7610,
-      "title": "Relógio Smartwatch Bettdow Fb050 Gps Tela Amoled 1.43 Cinza",
-      "current_price": "287.00",
-      "original_price": "599.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_732420-MLA111132950305_052026-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7680684264?matt_word=dbot_ig_bio_7610&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7610"
-    },
-    {
-      "id": 22911,
-      "title": "Parafusadeira Furadeira Sem Fio 48v 2 Baterias 340w C/brocas Amarelo E Preto Indobest",
-      "current_price": "92.00",
-      "original_price": "189.00",
-      "discount_pct": "51.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_932776-MLA82649038600_032025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7973988872?matt_word=dbot_ig_bio_22911&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22911"
     }
   ]
 }

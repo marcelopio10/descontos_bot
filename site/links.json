@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-27T16:16:39.809841+00:00",
+  "generated_at": "2026-11-27T18:43:26.705209+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -14,14 +14,14 @@
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
     },
     {
-      "id": 22994,
-      "title": "Tênis Run 72 adidas",
-      "current_price": "240.00",
-      "original_price": "449.00",
-      "discount_pct": "46.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_610219-MLB115656839223_082026-V-tnis-run-72-adidas.webp",
+      "id": 23017,
+      "title": "Tênis Fila Masculino Speed Lite Esportivo Treino Original",
+      "current_price": "199.00",
+      "original_price": "399.00",
+      "discount_pct": "49.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_856279-MLB119772320731_102026-V-tnis-fila-masculino-speed-lite-esportivo-treino-original.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3723995745-tnis-run-72-adidas-_JM?matt_word=dbot_ig_bio_22994&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22994"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5937227400-tnis-fila-masculino-speed-lite-esportivo-treino-original-_JM?matt_word=dbot_ig_bio_23017&utm_source=instagram&utm_medium=bio&utm_campaign=offer_23017"
     },
     {
       "id": 2607,
@@ -42,6 +42,16 @@
       "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
+    },
+    {
+      "id": 23016,
+      "title": "Barreda adidas",
+      "current_price": "229.00",
+      "original_price": "399.00",
+      "discount_pct": "42.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_657387-MLB94808932566_102025-V-barreda-adidas.webp",
+      "marketplace_code": "mercadolivre",
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5501087334-barreda-adidas-_JM?matt_word=dbot_ig_bio_23016&utm_source=instagram&utm_medium=bio&utm_campaign=offer_23016"
     }
   ]
 }

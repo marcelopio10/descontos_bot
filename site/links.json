@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-26T23:11:45.596833+00:00",
+  "generated_at": "2026-11-27T00:57:01.783321+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
     {
@@ -12,6 +12,16 @@
       "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
+    },
+    {
+      "id": 2550,
+      "title": "EUCERIN Pomada Reparadora Aquaphor Duopack 10ml, Hidratação Intensiva, Hidratante Labial",
+      "current_price": "34.49",
+      "original_price": "42.90",
+      "discount_pct": "20.00",
+      "image_url": "https://m.media-amazon.com/images/I/71cXxSNnExL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=eucerin-pomada-reparadora-aquaphor-duopack-10ml-hidratacao-intensiva-hidratante-labial-2550&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2550"
     },
     {
       "id": 20922,
@@ -34,24 +44,14 @@
       "tracked_url": "https://produto.mercadolivre.com.br/MLB-7680684264?matt_word=dbot_ig_bio_7610&utm_source=instagram&utm_medium=bio&utm_campaign=offer_7610"
     },
     {
-      "id": 22873,
-      "title": "Uomini Infinite Colônia 100ml (nova Embalagem)",
-      "current_price": "99.00",
-      "original_price": "209.00",
-      "discount_pct": "52.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_885356-MLU73068439747_112023-O.webp",
+      "id": 22911,
+      "title": "Parafusadeira Furadeira Sem Fio 48v 2 Baterias 340w C/brocas Amarelo E Preto Indobest",
+      "current_price": "92.00",
+      "original_price": "189.00",
+      "discount_pct": "51.00",
+      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_932776-MLA82649038600_032025-O.webp",
       "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-4286378716?matt_word=dbot_ig_bio_22873&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22873"
-    },
-    {
-      "id": 22701,
-      "title": "Deo Parfum Natura Homem Nós 100 Ml",
-      "current_price": "122.00",
-      "original_price": "244.00",
-      "discount_pct": "50.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_824995-MLA84847085357_052025-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-5292957520?matt_word=dbot_ig_bio_22701&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22701"
+      "tracked_url": "https://produto.mercadolivre.com.br/MLB-7973988872?matt_word=dbot_ig_bio_22911&utm_source=instagram&utm_medium=bio&utm_campaign=offer_22911"
     }
   ]
 }

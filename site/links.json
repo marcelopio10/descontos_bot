@@ -1,8 +1,18 @@
 {
   "version": "1.1",
-  "generated_at": "2026-11-28T01:50:31.730213+00:00",
+  "generated_at": "2026-11-28T11:03:56.354310+00:00",
   "disclosure": "Como Associado da Amazon, ganho por compras qualificadas.",
   "items": [
+    {
+      "id": 23038,
+      "title": "Barbie Boneca Fashion Cabelo Loiro com Vestido Rosa e Estrelas",
+      "current_price": "19.88",
+      "original_price": "39.99",
+      "discount_pct": "50.00",
+      "image_url": "https://m.media-amazon.com/images/I/41bUaQUFSXL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=barbie-boneca-fashion-cabelo-loiro-com-vestido-rosa-e-estrelas-23038&utm_source=instagram&utm_medium=bio&utm_campaign=offer_23038"
+    },
     {
       "id": 21180,
       "title": "Creme Facial Antissinais Neutrogena Face Care Intensive, FPS 22, 100g | Hidratação Intensa, Textura Leve, Oil Free",
@@ -12,6 +22,16 @@
       "image_url": "https://m.media-amazon.com/images/I/71OpcvrIYoL._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=creme-facial-antissinais-neutrogena-face-care-intensive-fps-22-100g-hidratacao-intensa-textura-leve-oil-free-21180&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21180"
+    },
+    {
+      "id": 5451,
+      "title": "Anúncio patrocinado – Óleo Capilar Oil Reflections Wella Professionals 100 ml",
+      "current_price": "109.90",
+      "original_price": "209.00",
+      "discount_pct": "47.00",
+      "image_url": "https://m.media-amazon.com/images/I/51H5LeywBBL._AC_UL320_.jpg",
+      "marketplace_code": "amazon",
+      "tracked_url": "https://descontos-bot.vercel.app/r?slug=anuncio-patrocinado-wella-professionals-oil-reflections-oleo-capilar-100-ml-5451&utm_source=instagram&utm_medium=bio&utm_campaign=offer_5451"
     },
     {
       "id": 22295,
@@ -32,26 +52,6 @@
       "image_url": "https://m.media-amazon.com/images/I/71PXeuNTL+L._AC_UL320_.jpg",
       "marketplace_code": "amazon",
       "tracked_url": "https://descontos-bot.vercel.app/r?slug=revlon-profissional-uniq-one-leave-in-150ml-2607&utm_source=instagram&utm_medium=bio&utm_campaign=offer_2607"
-    },
-    {
-      "id": 20922,
-      "title": "Paixão Óleo Corporal Avelã 100 Ml | Pele nutrida com avelã",
-      "current_price": "10.99",
-      "original_price": "14.69",
-      "discount_pct": "25.00",
-      "image_url": "https://m.media-amazon.com/images/I/51NnsoadJVL._AC_UL320_.jpg",
-      "marketplace_code": "amazon",
-      "tracked_url": "https://descontos-bot.vercel.app/r?slug=paixao-oleo-corporal-avela-100-ml-pele-nutrida-com-avela-20922&utm_source=instagram&utm_medium=bio&utm_campaign=offer_20922"
-    },
-    {
-      "id": 21422,
-      "title": "Perfume Mercedes-Benz Club Black Eau de Toilette Masculino 100 ml",
-      "current_price": "286.00",
-      "original_price": "799.00",
-      "discount_pct": "64.00",
-      "image_url": "https://http2.mlstatic.com/D_Q_NP_2X_720915-MLA80300682687_102024-O.webp",
-      "marketplace_code": "mercadolivre",
-      "tracked_url": "https://produto.mercadolivre.com.br/MLB-3920976873?matt_word=dbot_ig_bio_21422&utm_source=instagram&utm_medium=bio&utm_campaign=offer_21422"
     }
   ]
 }
